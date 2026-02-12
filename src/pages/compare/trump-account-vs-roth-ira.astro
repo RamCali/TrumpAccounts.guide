@@ -1,0 +1,203 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import LastUpdated from '../../components/ui/LastUpdated.astro';
+import { breadcrumbSchema, faqSchema } from '../../lib/seo/schema';
+
+const siteUrl = 'https://trumpaccounts.guide';
+
+const schemas = [
+  breadcrumbSchema([
+    { name: 'Home', url: siteUrl },
+    { name: 'Compare', url: `${siteUrl}/compare` },
+    { name: 'Trump Account vs Roth IRA', url: `${siteUrl}/compare/trump-account-vs-roth-ira` },
+  ]),
+  faqSchema([
+    { question: 'Is a Trump Account like a Roth IRA for kids?', answer: 'Not exactly. A Trump Account grows tax-deferred and converts to a traditional IRA (not Roth) at age 18. Withdrawals are taxed as ordinary income. A custodial Roth IRA requires earned income but offers tax-free withdrawals in retirement.' },
+    { question: 'Can my child have both a Trump Account and a Roth IRA?', answer: 'Yes. At age 18, the Trump Account becomes a traditional IRA. Your child can also open a separate Roth IRA if they have earned income.' },
+    { question: 'Which grows more tax-efficiently?', answer: 'Roth IRA wins on tax efficiency — withdrawals in retirement are completely tax-free. Trump Account withdrawals are taxed as ordinary income (traditional IRA rules). But Trump Accounts don\'t require earned income and come with a $1,000 federal deposit.' },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Trump Account vs Roth IRA for Kids — Key Differences (2026)"
+  description="Trump Account vs custodial Roth IRA comparison. Tax treatment, contribution limits, earned income requirements, and which is better for your child in 2026."
+  schema={schemas}
+>
+  <article class="mx-auto max-w-4xl px-4 py-12">
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="no-underline hover:text-gold-400">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <a href="/compare" class="no-underline hover:text-gold-400">Compare</a>
+        </li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="font-medium text-white">Trump Account vs Roth IRA</span>
+        </li>
+      </ol>
+    </nav>
+
+    <div class="prose">
+      <h1>Trump Account vs Roth IRA for Kids: Which Is Better?</h1>
+
+      <LastUpdated date="2026-02-12" />
+
+      <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+        <h2 class="mb-3 text-lg font-bold text-gold-400">Bottom Line</h2>
+        <ul class="space-y-2 text-sm text-gray-300">
+          <li><strong class="text-white">Trump Account:</strong> No earned income needed, $1,000 free deposit, but taxed on withdrawal (traditional IRA at 18)</li>
+          <li><strong class="text-white">Roth IRA:</strong> Requires earned income, no free deposit, but tax-free withdrawals in retirement</li>
+          <li><strong class="text-white">For babies/toddlers:</strong> Trump Account wins (no earned income requirement)</li>
+          <li><strong class="text-white">For working teens:</strong> Both — Trump Account + Roth IRA is the power combo</li>
+        </ul>
+      </div>
+
+      <p>
+        People often confuse Trump Accounts with Roth IRAs for kids, but they work very differently.
+        The biggest difference: Trump Accounts don't require earned income and convert to a <strong>traditional</strong> IRA (not Roth) at 18.
+      </p>
+
+      <h2 id="comparison">Side-by-Side Comparison</h2>
+    </div>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600">
+            <th class="px-4 py-3 text-left font-semibold text-gray-400">Feature</th>
+            <th class="px-4 py-3 text-left font-semibold text-gold-400">Trump Account</th>
+            <th class="px-4 py-3 text-left font-semibold text-green-400">Custodial Roth IRA</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Earned income required?</td>
+            <td class="px-4 py-3 text-mint-400">No</td>
+            <td class="px-4 py-3 text-red-400">Yes — child must have earned income</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Federal deposit</td>
+            <td class="px-4 py-3 text-mint-400">$1,000 (2025–2028 births)</td>
+            <td class="px-4 py-3 text-gray-500">None</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Annual contribution limit</td>
+            <td class="px-4 py-3">$5,000/year</td>
+            <td class="px-4 py-3">$7,000/year or earned income (whichever is less)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Tax on contributions</td>
+            <td class="px-4 py-3">After-tax</td>
+            <td class="px-4 py-3">After-tax</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Tax on growth</td>
+            <td class="px-4 py-3">Tax-deferred</td>
+            <td class="px-4 py-3 text-mint-400">Tax-free</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Tax on retirement withdrawals</td>
+            <td class="px-4 py-3">Ordinary income tax</td>
+            <td class="px-4 py-3 text-mint-400">Tax-free (after 59½)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Investment options</td>
+            <td class="px-4 py-3">S&P 500 / U.S. equity index only</td>
+            <td class="px-4 py-3">Almost anything (stocks, bonds, ETFs, mutual funds)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Employer contributions</td>
+            <td class="px-4 py-3 text-mint-400">Up to $2,500/yr tax-free</td>
+            <td class="px-4 py-3 text-gray-500">Not available</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Early withdrawal (before 59½)</td>
+            <td class="px-4 py-3">Taxed as income + possible 10% penalty</td>
+            <td class="px-4 py-3">Contributions can be withdrawn anytime, tax-free</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-medium text-white">At age 18</td>
+            <td class="px-4 py-3">Converts to traditional IRA</td>
+            <td class="px-4 py-3">Ownership transfers to child (stays Roth)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="prose">
+      <h2 id="biggest-difference">The Biggest Difference: Earned Income</h2>
+
+      <p>
+        A custodial Roth IRA requires your child to have <strong>earned income</strong> — from a job, babysitting, lawn mowing, etc.
+        A 6-month-old baby has no earned income, so a Roth IRA is off the table.
+      </p>
+
+      <p>
+        A Trump Account has <strong>no earned income requirement</strong>.
+        You can open one for a newborn on day one and start contributing immediately (after July 4, 2026).
+      </p>
+
+      <CalloutBox type="tip" title="The power move for working teens">
+        <p>When your child starts earning money (part-time job, summer work), open a Roth IRA alongside the Trump Account. The Trump Account converts to a traditional IRA at 18, and the Roth provides tax-free retirement income. Having both types by age 18 is a massive head start.</p>
+      </CalloutBox>
+
+      <h2 id="tax-comparison">Tax Treatment: Traditional vs Roth</h2>
+
+      <p>
+        This is where many people get confused. A Trump Account is <strong>not</strong> a Roth account.
+        At 18, it converts to a <strong>traditional IRA</strong>:
+      </p>
+
+      <ul>
+        <li><strong>Trump Account (Traditional IRA at 18):</strong> Pay taxes when you withdraw. If your child withdraws $50,000 at age 25, they pay ordinary income tax on the full amount.</li>
+        <li><strong>Roth IRA:</strong> Pay no taxes when you withdraw in retirement. Contributions can be withdrawn anytime tax-free. Earnings are tax-free after age 59½.</li>
+      </ul>
+
+      <h2 id="strategy">Recommended Strategy by Age</h2>
+
+      <ul>
+        <li><strong>Birth to teen years:</strong> Trump Account only (no earned income = can't use Roth)</li>
+        <li><strong>Teen with first job:</strong> Trump Account + Roth IRA (fund both)</li>
+        <li><strong>Age 18+:</strong> Consider converting Trump Account traditional IRA to Roth IRA (pay taxes now, grow tax-free)</li>
+      </ul>
+
+      <h2 id="faq">Frequently Asked Questions</h2>
+
+      <h3>Is a Trump Account like a Roth IRA?</h3>
+      <p>
+        No. A Trump Account converts to a <strong>traditional</strong> IRA at 18, not a Roth.
+        Withdrawals are taxed as ordinary income. A Roth IRA offers tax-free withdrawals.
+      </p>
+
+      <h3>Can I convert the Trump Account to a Roth IRA later?</h3>
+      <p>
+        At 18, the Trump Account becomes a traditional IRA. Your child could then do a Roth conversion
+        (pay taxes on the balance now, then grow tax-free). This is a common strategy if they're in a low tax bracket at 18.
+      </p>
+
+      <h3>Which should I open first?</h3>
+      <p>
+        For babies and young children: Trump Account first (claim the $1,000 deposit, no earned income needed).
+        For teens with jobs: both.
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-3 sm:grid-cols-2">
+      <a href="/compare/trump-account-vs-529" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Trump Account vs 529 Plan</h3>
+        <p class="text-sm text-gray-400">Education savings comparison</p>
+      </a>
+      <a href="/calculators/withdrawal-simulator" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Withdrawal Simulator</h3>
+        <p class="text-sm text-gray-400">See tax impact at different ages</p>
+      </a>
+    </div>
+
+    <p class="mt-10 text-xs text-gray-600">
+      This is educational content, not tax or financial advice.
+      Sources: <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf" target="_blank" rel="noopener noreferrer" class="text-gray-500">IRS Notice 2025-68</a>,
+      <a href="https://www.bankrate.com/retirement/how-the-1000-trump-accounts-for-american-babies-compare-to-529s-and-custodial-roth-iras/" target="_blank" rel="noopener noreferrer" class="text-gray-500">Bankrate</a>.
+    </p>
+  </article>
+</BaseLayout>

@@ -49,6 +49,9 @@ export function faqPageSchema(faqs: { question: string; answer: string }[]) {
   };
 }
 
+/** Alias for faqPageSchema */
+export const faqSchema = faqPageSchema;
+
 export function howToSchema(params: {
   name: string;
   description: string;

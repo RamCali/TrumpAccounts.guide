@@ -1,0 +1,266 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import LastUpdated from '../../components/ui/LastUpdated.astro';
+import { breadcrumbSchema, faqSchema } from '../../lib/seo/schema';
+
+const siteUrl = 'https://trumpaccounts.guide';
+
+const schemas = [
+  breadcrumbSchema([
+    { name: 'Home', url: siteUrl },
+    { name: 'Compare', url: `${siteUrl}/compare` },
+    { name: 'Trump Account vs 529', url: `${siteUrl}/compare/trump-account-vs-529` },
+  ]),
+  faqSchema([
+    { question: 'Is a Trump Account better than a 529 plan?', answer: 'They serve different purposes. 529 plans are best for education expenses (tax-free withdrawals). Trump Accounts are investment accounts that convert to traditional IRAs at 18. Most families should use both.' },
+    { question: 'Can I have both a Trump Account and a 529?', answer: 'Yes. They are completely separate programs. You can contribute to both simultaneously with no conflicts.' },
+    { question: 'Which has higher contribution limits?', answer: '529 plans have much higher limits ($235,000–$600,000+ lifetime). Trump Accounts are limited to $5,000 per year.' },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Trump Account vs 529 Plan — Which Is Better for Your Child? (2026 Comparison)"
+  description="Side-by-side comparison of Trump Accounts vs 529 plans. Contribution limits, tax treatment, investment options, and when to use each. Updated for 2026."
+  schema={schemas}
+>
+  <article class="mx-auto max-w-4xl px-4 py-12">
+    <!-- Breadcrumb -->
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="no-underline hover:text-gold-400">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <a href="/compare" class="no-underline hover:text-gold-400">Compare</a>
+        </li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="font-medium text-white">Trump Account vs 529</span>
+        </li>
+      </ol>
+    </nav>
+
+    <div class="prose">
+      <h1>Trump Account vs 529 Plan: Which Should You Choose?</h1>
+
+      <LastUpdated date="2026-02-12" />
+
+      <!-- Key Takeaways -->
+      <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+        <h2 class="mb-3 text-lg font-bold text-gold-400">Bottom Line</h2>
+        <ul class="space-y-2 text-sm text-gray-300">
+          <li><strong class="text-white">For education:</strong> 529 wins — tax-free withdrawals for qualified education expenses</li>
+          <li><strong class="text-white">For flexibility:</strong> Trump Account wins — money can be used for anything at 18</li>
+          <li><strong class="text-white">For free money:</strong> Trump Account wins — $1,000 federal deposit (2025–2028 births)</li>
+          <li><strong class="text-white">For high savers:</strong> 529 wins — $235K–$600K+ lifetime limits vs $5K/year</li>
+          <li><strong class="text-white">Best answer:</strong> Use both. They complement each other perfectly.</li>
+        </ul>
+      </div>
+
+      <p>
+        The short answer: these aren't competing products. A 529 is best for education savings.
+        A Trump Account is best as a long-term investment account that your child controls at 18.
+        Most financial advisors recommend opening both.
+      </p>
+
+      <h2 id="comparison-table">Side-by-Side Comparison</h2>
+    </div>
+
+    <!-- Comparison Table -->
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600">
+            <th class="px-4 py-3 text-left font-semibold text-gray-400">Feature</th>
+            <th class="px-4 py-3 text-left font-semibold text-gold-400">Trump Account</th>
+            <th class="px-4 py-3 text-left font-semibold text-blue-400">529 Plan</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Legal basis</td>
+            <td class="px-4 py-3">IRC §530A (OBBBA)</td>
+            <td class="px-4 py-3">IRC §529</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Federal deposit</td>
+            <td class="px-4 py-3 text-mint-400">$1,000 (2025–2028 births)</td>
+            <td class="px-4 py-3 text-gray-500">None</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Annual contribution limit</td>
+            <td class="px-4 py-3">$5,000/year</td>
+            <td class="px-4 py-3">No annual limit (gift tax rules apply above $19K)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Lifetime limit</td>
+            <td class="px-4 py-3">$5,000 x years until 18</td>
+            <td class="px-4 py-3">$235,000–$600,000+ (varies by state)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Tax on contributions</td>
+            <td class="px-4 py-3">After-tax (no deduction)</td>
+            <td class="px-4 py-3">After-tax (state deduction in 30+ states)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Tax on growth</td>
+            <td class="px-4 py-3">Tax-deferred (taxed on withdrawal)</td>
+            <td class="px-4 py-3 text-mint-400">Tax-free (for qualified education expenses)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Tax on withdrawals</td>
+            <td class="px-4 py-3">Ordinary income tax (trad. IRA rules at 18)</td>
+            <td class="px-4 py-3">Tax-free for education; 10% penalty + tax otherwise</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Use of funds</td>
+            <td class="px-4 py-3 text-mint-400">Anything (at 18+)</td>
+            <td class="px-4 py-3">Education expenses (K-12 up to $20K/yr, college unlimited)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Investment options</td>
+            <td class="px-4 py-3">S&P 500 / broad U.S. equity index only</td>
+            <td class="px-4 py-3">Multiple options (varies by plan)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Employer contributions</td>
+            <td class="px-4 py-3 text-mint-400">Up to $2,500/yr tax-free (§128)</td>
+            <td class="px-4 py-3 text-gray-500">Not available</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Income restrictions</td>
+            <td class="px-4 py-3 text-mint-400">None</td>
+            <td class="px-4 py-3 text-mint-400">None</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">FAFSA impact</td>
+            <td class="px-4 py-3">TBD (IRS guidance pending)</td>
+            <td class="px-4 py-3">Parent-owned: minimal impact</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Account owner at 18</td>
+            <td class="px-4 py-3">Child (converts to their IRA)</td>
+            <td class="px-4 py-3">Parent (can change beneficiary)</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-medium text-white">Roth IRA rollover</td>
+            <td class="px-4 py-3 text-gray-500">No (already an IRA at 18)</td>
+            <td class="px-4 py-3 text-mint-400">Up to $35,000 after 15 years</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="prose">
+      <h2 id="when-trump-account">When to Choose a Trump Account</h2>
+
+      <ul>
+        <li><strong>Your child was born 2025–2028</strong> — claim the free $1,000 federal deposit</li>
+        <li><strong>Your employer offers matching</strong> — get up to $2,500/year tax-free</li>
+        <li><strong>You want flexibility</strong> — the money isn't restricted to education expenses</li>
+        <li><strong>You're already maxing out a 529</strong> — this is an additional savings vehicle</li>
+        <li><strong>You want your child to have retirement savings early</strong> — it converts to a traditional IRA at 18</li>
+      </ul>
+
+      <h2 id="when-529">When to Choose a 529 Plan</h2>
+
+      <ul>
+        <li><strong>Saving specifically for college or K-12</strong> — tax-free withdrawals for education</li>
+        <li><strong>You want to save large amounts</strong> — $235K–$600K+ lifetime limits</li>
+        <li><strong>Your state offers a tax deduction</strong> — 30+ states give deductions for 529 contributions</li>
+        <li><strong>You want to control the money</strong> — parent remains account owner (can change beneficiary)</li>
+        <li><strong>You want investment choice</strong> — 529s offer multiple fund options, not just index funds</li>
+      </ul>
+
+      <h2 id="use-both">Best Strategy: Use Both</h2>
+
+      <p>
+        As J.P. Morgan, Fidelity, and most financial advisors recommend: the answer for most families is both.
+        They serve different purposes and don't conflict with each other.
+      </p>
+
+      <CalloutBox type="tip" title="Recommended strategy for newborns (2025–2028)">
+        <p><strong>Step 1:</strong> Open a Trump Account to claim the $1,000 federal deposit.<br>
+        <strong>Step 2:</strong> Open a 529 in your state for education savings (get the state tax deduction if available).<br>
+        <strong>Step 3:</strong> Ask your employer about Trump Account matching ($2,500/yr tax-free).<br>
+        <strong>Step 4:</strong> Split additional contributions based on your goals — education (529) vs general wealth (Trump Account).</p>
+      </CalloutBox>
+
+      <h2 id="growth-comparison">Growth Comparison Example</h2>
+
+      <p>
+        Assuming 8% average annual return and $250/month contributions from birth:
+      </p>
+
+      <div class="not-prose my-6 overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-surface-600">
+              <th class="px-4 py-3 text-left font-semibold text-gray-400">At Age</th>
+              <th class="px-4 py-3 text-right font-semibold text-gold-400">Trump Account</th>
+              <th class="px-4 py-3 text-right font-semibold text-blue-400">529 Plan</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-300">
+            <tr class="border-b border-surface-700">
+              <td class="px-4 py-3">5</td>
+              <td class="px-4 py-3 text-right">~$19,800</td>
+              <td class="px-4 py-3 text-right">~$18,300</td>
+            </tr>
+            <tr class="border-b border-surface-700">
+              <td class="px-4 py-3">10</td>
+              <td class="px-4 py-3 text-right">~$46,500</td>
+              <td class="px-4 py-3 text-right">~$44,600</td>
+            </tr>
+            <tr class="border-b border-surface-700">
+              <td class="px-4 py-3">18</td>
+              <td class="px-4 py-3 text-right">~$108,000</td>
+              <td class="px-4 py-3 text-right">~$105,400</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="mt-2 text-xs text-gray-500">
+          *Trump Account starts with $1,000 federal deposit; 529 starts at $0. Both assume $250/mo contributions and 8% annual returns. These are estimates only.
+        </p>
+      </div>
+
+      <p>
+        Try our <a href="/calculators/growth-calculator">Growth Calculator</a> to model your own scenario.
+      </p>
+
+      <h2 id="faq">Frequently Asked Questions</h2>
+
+      <h3>Can I have both a Trump Account and a 529?</h3>
+      <p>Yes. They are completely separate programs with separate limits. You can contribute to both.</p>
+
+      <h3>Which is better for college savings?</h3>
+      <p>529 plans are better for college specifically because withdrawals for qualified education expenses are completely tax-free. Trump Account withdrawals (as a traditional IRA at 18) are taxed as ordinary income.</p>
+
+      <h3>What if my child doesn't go to college?</h3>
+      <p>
+        Trump Account: no problem — money can be used for anything at 18.<br>
+        529: unused funds can be rolled into a Roth IRA (up to $35,000 after 15 years), transferred to another family member, or withdrawn with a 10% penalty + taxes on earnings.
+      </p>
+
+      <h3>Does a Trump Account affect 529 contributions?</h3>
+      <p>No. The $5,000 Trump Account limit and 529 contribution limits are completely independent.</p>
+    </div>
+
+    <!-- Related Links -->
+    <div class="mt-10 grid gap-3 sm:grid-cols-2">
+      <a href="/compare/trump-account-vs-roth-ira" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Trump Account vs Roth IRA</h3>
+        <p class="text-sm text-gray-400">How the Roth option stacks up</p>
+      </a>
+      <a href="/calculators/growth-calculator" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Growth Calculator</h3>
+        <p class="text-sm text-gray-400">Model your own contribution scenario</p>
+      </a>
+    </div>
+
+    <p class="mt-10 text-xs text-gray-600">
+      This is educational content, not tax or financial advice.
+      Sources: <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf" target="_blank" rel="noopener noreferrer" class="text-gray-500">IRS Notice 2025-68</a>,
+      <a href="https://www.savingforcollege.com/article/trump-account-vs-529" target="_blank" rel="noopener noreferrer" class="text-gray-500">SavingForCollege.com</a>.
+    </p>
+  </article>
+</BaseLayout>

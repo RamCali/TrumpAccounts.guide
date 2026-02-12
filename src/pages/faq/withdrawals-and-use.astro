@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Accordion from '../../components/ui/Accordion.astro';
+import LastUpdated from '../../components/ui/LastUpdated.astro';
+import { breadcrumbSchema, faqSchema } from '../../lib/seo/schema';
+
+const siteUrl = 'https://trumpaccounts.guide';
+
+const questions = [
+  { q: 'Can I withdraw money before age 18?', a: 'No. During the growth phase (birth to 18), distributions are generally not allowed. Exceptions include: (1) qualified rollovers to another Trump Account, (2) return of excess contributions, and (3) distribution upon the death of the account beneficiary.' },
+  { q: 'What happens when my child turns 18?', a: 'The Trump Account automatically converts to a traditional IRA owned by your child. From that point, standard IRA rules apply. Your child can withdraw for any reason, but withdrawals are taxed as ordinary income and may incur a 10% early withdrawal penalty if before age 59½.' },
+  { q: 'Can my child use the money for college?', a: 'Yes, but there\'s a catch. After age 18, the money is in a traditional IRA. They can withdraw for any reason, but they\'ll pay income tax on the withdrawal. For education specifically, a 529 plan is more tax-efficient since qualified education withdrawals are tax-free.' },
+  { q: 'Can the money be used for a house?', a: 'After age 18, your child can withdraw up to $10,000 penalty-free for a first-time home purchase (standard IRA first-time homebuyer exception). They\'ll still pay ordinary income tax on the withdrawal, but the 10% early withdrawal penalty is waived.' },
+  { q: 'Can the money be used for anything?', a: 'After age 18, yes — but with tax consequences. Withdrawals are taxed as ordinary income. Before age 59½, there\'s also a 10% early withdrawal penalty (with some exceptions like first home, education, disability).' },
+  { q: 'What is the early withdrawal penalty?', a: 'If your child withdraws before age 59½, they pay a 10% penalty on top of ordinary income tax. For example, a $20,000 withdrawal at age 25 in the 22% tax bracket would cost $4,400 in income tax plus $2,000 penalty = $6,400 total.' },
+  { q: 'Are there penalty exceptions?', a: 'Yes, standard IRA early withdrawal exceptions apply: first-time home purchase (up to $10,000), qualified education expenses, birth or adoption (up to $5,000), disability, health insurance while unemployed, unreimbursed medical expenses, and substantially equal periodic payments (72(t)).' },
+  { q: 'Can the child leave the money invested?', a: 'Yes. After the account converts to a traditional IRA at 18, your child does not have to withdraw. They can leave it invested and let it continue to grow tax-deferred until retirement. Required Minimum Distributions (RMDs) don\'t begin until age 73 (under current law).' },
+  { q: 'Who controls the account before 18?', a: 'The parent or guardian who filed Form 4547 is the "authorized individual." They manage the account during the growth phase, but cannot withdraw the funds. At 18, full ownership and control transfers to the child.' },
+  { q: 'Can I prevent my child from spending it all at 18?', a: 'No. At age 18, the Trump Account becomes your child\'s traditional IRA, and they have full control. The parent no longer has authority over the account. The tax penalties on early withdrawals serve as a natural deterrent, but there\'s no legal mechanism to lock the funds.' },
+  { q: 'What happens if the child dies before 18?', a: 'Per IRS Notice 2025-68, funds can be distributed upon the death of the account beneficiary. The distribution goes to the estate or designated beneficiary per the account terms.' },
+  { q: 'Can the money be rolled into a Roth IRA?', a: 'At age 18, the Trump Account becomes a traditional IRA. Your child can then do a Roth conversion — paying income tax on the converted amount. After conversion, all future growth and qualified withdrawals are tax-free. This is often smart if they\'re in a low tax bracket at 18.' },
+];
+
+const schemas = [
+  breadcrumbSchema([
+    { name: 'Home', url: siteUrl },
+    { name: 'FAQ', url: `${siteUrl}/faq` },
+    { name: 'Withdrawals & Use', url: `${siteUrl}/faq/withdrawals-and-use` },
+  ]),
+  faqSchema(questions.map(q => ({ question: q.q, answer: q.a }))),
+];
+---
+
+<BaseLayout
+  title="Trump Account Withdrawals FAQ — When Can You Access the Money? (2026)"
+  description="Everything about Trump Account withdrawals: when you can access funds, early withdrawal penalties, college use, home buying, Roth conversion, and more."
+  schema={schemas}
+>
+  <article class="mx-auto max-w-4xl px-4 py-12">
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="no-underline hover:text-gold-400">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <a href="/faq" class="no-underline hover:text-gold-400">FAQ</a>
+        </li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="font-medium text-white">Withdrawals & Use</span>
+        </li>
+      </ol>
+    </nav>
+
+    <h1 class="mb-2 text-3xl font-extrabold text-white md:text-4xl">Trump Account Withdrawals & Use of Funds</h1>
+    <p class="mb-8 text-lg text-gray-400">When you can access the money, penalties, college use, home buying, and control questions.</p>
+
+    <LastUpdated date="2026-02-12" />
+
+    <div class="mt-8">
+      <Accordion items={questions.map(q => ({ question: q.q, answer: q.a }))} />
+    </div>
+
+    <div class="mt-10 grid gap-3 sm:grid-cols-2">
+      <a href="/calculators/withdrawal-simulator" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Withdrawal Simulator</h3>
+        <p class="text-sm text-gray-400">See exact tax and penalty impact at different ages</p>
+      </a>
+      <a href="/faq/taxes" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Tax Questions FAQ</h3>
+        <p class="text-sm text-gray-400">FAFSA, Medicaid, Roth conversion tax details</p>
+      </a>
+    </div>
+
+    <p class="mt-10 text-xs text-gray-600">
+      Educational content only, not tax or financial advice.
+      Source: <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf" target="_blank" rel="noopener noreferrer" class="text-gray-500">IRS Notice 2025-68</a>.
+    </p>
+  </article>
+</BaseLayout>

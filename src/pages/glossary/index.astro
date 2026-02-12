@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LastUpdated from '../../components/ui/LastUpdated.astro';
+import { breadcrumbSchema } from '../../lib/seo/schema';
+
+const siteUrl = 'https://trumpaccounts.guide';
+
+const schemas = [
+  breadcrumbSchema([
+    { name: 'Home', url: siteUrl },
+    { name: 'Glossary', url: `${siteUrl}/glossary` },
+  ]),
+];
+
+const terms = [
+  { term: 'Trump Account', slug: 'trump-account', definition: 'A tax-advantaged savings account for children under IRC §530A, created by the One Big Beautiful Bill Act. Provides a $1,000 federal deposit for 2025–2028 births and converts to a traditional IRA at age 18.' },
+  { term: 'IRC Section 530A', slug: 'section-530a', definition: 'The section of the Internal Revenue Code that establishes Trump Accounts. Created by the One Big Beautiful Bill Act (OBBBA), signed July 4, 2025.' },
+  { term: 'IRS Notice 2025-68', slug: 'irs-notice-2025-68', definition: 'The first official IRS guidance on Trump Accounts, published December 3, 2025. Covers eligibility, contributions, investments, and the pilot program.' },
+  { term: 'IRS Form 4547', slug: 'form-4547', definition: 'The IRS form used to elect (open) a Trump Account for a child. Filed with your federal tax return or through the trumpaccounts.gov portal.' },
+  { term: 'One Big Beautiful Bill Act (OBBBA)', slug: 'obbba', definition: 'The federal legislation signed on July 4, 2025 that created Trump Accounts under IRC §530A. Also known as OBBBA.' },
+  { term: 'Pilot Program', slug: 'pilot-program', definition: 'The federal program that deposits $1,000 into Trump Accounts for U.S. citizen children born between January 1, 2025 and December 31, 2028.' },
+  { term: 'Growth Phase', slug: 'growth-phase', definition: 'The period from account opening until the child turns 18. During this phase, funds are invested and grow tax-deferred. Withdrawals are generally not permitted.' },
+  { term: 'Traditional IRA Conversion', slug: 'traditional-ira-conversion', definition: 'At age 18, a Trump Account automatically converts to a traditional IRA. The child becomes the account owner with standard IRA rules for contributions, withdrawals, and taxes.' },
+  { term: 'Section 128 (IRC §128)', slug: 'section-128', definition: 'The tax code section allowing employers to contribute up to $2,500/year per employee to Trump Accounts, excluded from the employee\'s gross income (tax-free).' },
+  { term: 'Authorized Individual', slug: 'authorized-individual', definition: 'The parent or legal guardian who files Form 4547 to open a Trump Account. They manage the account during the growth phase until the child turns 18.' },
+  { term: 'Eligible Child', slug: 'eligible-child', definition: 'A U.S. citizen under age 18 with a valid Social Security number. There are no income restrictions.' },
+  { term: 'Annual Contribution Limit', slug: 'annual-contribution-limit', definition: 'The maximum amount that can be contributed to a Trump Account per year: $5,000 (indexed for inflation starting 2027). Includes all contributions from all sources.' },
+  { term: 'Expense Ratio', slug: 'expense-ratio', definition: 'The annual fee charged by a fund as a percentage of assets. Trump Account-eligible funds must have expense ratios capped at 0.1% (10 basis points).' },
+  { term: 'S&P 500 Index Fund', slug: 'sp500-index-fund', definition: 'A mutual fund or ETF that tracks the Standard & Poor\'s 500 index — the 500 largest U.S. public companies. One of the eligible investment types for Trump Accounts.' },
+  { term: 'Tax-Deferred Growth', slug: 'tax-deferred-growth', definition: 'Investment earnings (dividends, capital gains) that are not taxed while they remain in the account. Taxes are owed only upon withdrawal. Trump Accounts offer tax-deferred growth during the growth phase.' },
+  { term: 'Kiddie Tax', slug: 'kiddie-tax', definition: 'IRS rules that tax a child\'s unearned income above $2,600 at the parent\'s tax rate. Applies to UTMA/UGMA custodial accounts but NOT to Trump Accounts (which are tax-deferred).' },
+  { term: 'Early Withdrawal Penalty', slug: 'early-withdrawal-penalty', definition: 'A 10% penalty on traditional IRA withdrawals before age 59½. Applies to Trump Account withdrawals after the account converts to an IRA at 18. Some exceptions exist (first home, education, disability).' },
+  { term: 'Roth Conversion', slug: 'roth-conversion', definition: 'Converting a traditional IRA to a Roth IRA. At age 18, a Trump Account owner can convert their traditional IRA to a Roth, paying income tax now for tax-free growth and withdrawals later.' },
+  { term: 'Dell Foundation Pledge', slug: 'dell-foundation-pledge', definition: 'Michael and Susan Dell\'s $6.25 billion pledge to provide $250 per child under 10 in ZIP codes with median household income below $150,000. Separate from and in addition to the $1,000 federal deposit.' },
+  { term: 'trumpaccounts.gov', slug: 'trumpaccounts-gov', definition: 'The official U.S. government portal for Trump Accounts, expected to launch mid-2026. Will allow parents to submit Form 4547 online and manage their elections.' },
+];
+---
+
+<BaseLayout
+  title="Trump Account Glossary — Key Terms Defined Simply"
+  description="Plain-English definitions for every Trump Account term: IRC §530A, Form 4547, pilot program, growth phase, Section 128, and more."
+  schema={schemas}
+>
+  <article class="mx-auto max-w-4xl px-4 py-12">
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="no-underline hover:text-gold-400">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="font-medium text-white">Glossary</span>
+        </li>
+      </ol>
+    </nav>
+
+    <h1 class="mb-2 text-3xl font-extrabold text-white md:text-4xl">Trump Account Glossary</h1>
+    <p class="mb-4 text-lg text-gray-400">Every Trump Account term explained in plain English.</p>
+
+    <LastUpdated date="2026-02-12" />
+
+    <div class="mt-8 space-y-6">
+      {terms.map((item) => (
+        <div id={item.slug} class="scroll-mt-20 rounded-lg border border-surface-600 p-5">
+          <h2 class="text-lg font-bold text-white">{item.term}</h2>
+          <p class="mt-2 text-sm leading-relaxed text-gray-400">{item.definition}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-10 grid gap-3 sm:grid-cols-2">
+      <a href="/irs-notice-2025-68" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">IRS Notice 2025-68 Explained</h3>
+        <p class="text-sm text-gray-400">Full IRS guidance translated to plain English</p>
+      </a>
+      <a href="/faq" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Frequently Asked Questions</h3>
+        <p class="text-sm text-gray-400">Answers to the most common Trump Account questions</p>
+      </a>
+    </div>
+
+    <p class="mt-10 text-xs text-gray-600">
+      Educational content only, not tax or financial advice.
+      Source: <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf" target="_blank" rel="noopener noreferrer" class="text-gray-500">IRS Notice 2025-68</a>.
+    </p>
+  </article>
+</BaseLayout>

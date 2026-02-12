@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Accordion from '../../components/ui/Accordion.astro';
+import LastUpdated from '../../components/ui/LastUpdated.astro';
+import { breadcrumbSchema, faqSchema } from '../../lib/seo/schema';
+
+const siteUrl = 'https://trumpaccounts.guide';
+
+const questions = [
+  { q: 'Are gains in a Trump Account taxed?', a: 'Not while they grow. Trump Accounts are tax-deferred during the growth phase (birth to 18). Once the account converts to a traditional IRA at age 18, withdrawals are taxed as ordinary income — just like any traditional IRA.' },
+  { q: 'Is it tax-free growth like a Roth?', a: 'No. A Trump Account is NOT a Roth account. Growth is tax-deferred (like a traditional IRA), meaning you pay taxes when you withdraw. A Roth IRA offers tax-free growth and tax-free withdrawals. This is one of the most common misconceptions.' },
+  { q: 'Are withdrawals taxed?', a: 'Yes. After the account converts to a traditional IRA at age 18, withdrawals are taxed as ordinary income. If your child withdraws before age 59½, they may also owe a 10% early withdrawal penalty on top of income taxes.' },
+  { q: 'Are contributions tax-deductible?', a: 'No. Contributions to a Trump Account are made with after-tax dollars — you do not get a tax deduction. However, employer contributions (up to $2,500/year) are excluded from the employee\'s gross income under IRC §128.' },
+  { q: 'Does a Trump Account affect FAFSA?', a: 'The IRS has not yet issued specific guidance on how Trump Accounts interact with FAFSA. Since the account converts to a traditional IRA owned by the child at 18, it could potentially be counted as a student asset. Check with a financial aid advisor for the latest guidance.' },
+  { q: 'Does it affect Medicaid eligibility?', a: 'During the growth phase (before 18), the IRS guidance does not specifically address Medicaid impact. Once it becomes a traditional IRA at 18, standard IRA rules apply for Medicaid eligibility determinations, which vary by state.' },
+  { q: 'Does it count as income later?', a: 'The account balance itself is not income. Only withdrawals count as taxable income. If your child withdraws $10,000 at age 25, that $10,000 is added to their taxable income for that year.' },
+  { q: 'What is the tax rate on withdrawals?', a: 'Withdrawals are taxed at your child\'s ordinary income tax rate in the year they withdraw. An 18-year-old with no other income who withdraws $15,000 would pay very little tax (likely in the 10-12% bracket). Use our Withdrawal Simulator to model specific scenarios.' },
+  { q: 'Is there a penalty for withdrawing at 18?', a: 'At age 18, the account converts to a traditional IRA. Withdrawals before age 59½ are subject to a 10% early withdrawal penalty plus ordinary income tax. Some exceptions apply (first-time home purchase up to $10,000, qualified education expenses, etc.).' },
+  { q: 'Are employer contributions taxed?', a: 'No — that\'s the benefit. Under IRC §128, employer contributions to Trump Accounts (up to $2,500/year per employee) are excluded from the employee\'s gross income. You don\'t pay income tax or payroll tax on them.' },
+  { q: 'Can I do a Roth conversion at 18?', a: 'Yes. When the Trump Account converts to a traditional IRA at age 18, your child can convert it to a Roth IRA. They\'d pay income tax on the converted amount that year, but then all future growth and withdrawals would be tax-free. This is often a smart move if they\'re in a low tax bracket at 18.' },
+];
+
+const schemas = [
+  breadcrumbSchema([
+    { name: 'Home', url: siteUrl },
+    { name: 'FAQ', url: `${siteUrl}/faq` },
+    { name: 'Tax Questions', url: `${siteUrl}/faq/taxes` },
+  ]),
+  faqSchema(questions.map(q => ({ question: q.q, answer: q.a }))),
+];
+---
+
+<BaseLayout
+  title="Trump Account Tax FAQ — Are Gains Taxed? FAFSA? Withdrawals? (2026)"
+  description="Everything about Trump Account taxes: are gains taxed, FAFSA impact, Medicaid, withdrawal taxes, employer contributions, Roth conversions, and more."
+  schema={schemas}
+>
+  <article class="mx-auto max-w-4xl px-4 py-12">
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="no-underline hover:text-gold-400">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <a href="/faq" class="no-underline hover:text-gold-400">FAQ</a>
+        </li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="font-medium text-white">Tax Questions</span>
+        </li>
+      </ol>
+    </nav>
+
+    <h1 class="mb-2 text-3xl font-extrabold text-white md:text-4xl">Trump Account Tax Questions</h1>
+    <p class="mb-8 text-lg text-gray-400">Tax treatment, FAFSA impact, withdrawal penalties, and Roth conversions explained.</p>
+
+    <LastUpdated date="2026-02-12" />
+
+    <div class="mt-8">
+      <Accordion items={questions.map(q => ({ question: q.q, answer: q.a }))} />
+    </div>
+
+    <div class="mt-10 grid gap-3 sm:grid-cols-2">
+      <a href="/calculators/withdrawal-simulator" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Withdrawal Tax Simulator</h3>
+        <p class="text-sm text-gray-400">See exact tax impact at different withdrawal ages</p>
+      </a>
+      <a href="/faq/eligibility" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Eligibility FAQ</h3>
+        <p class="text-sm text-gray-400">Who qualifies, adopted children, income limits</p>
+      </a>
+    </div>
+
+    <p class="mt-10 text-xs text-gray-600">
+      Educational content only, not tax or financial advice.
+      Source: <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf" target="_blank" rel="noopener noreferrer" class="text-gray-500">IRS Notice 2025-68</a>.
+    </p>
+  </article>
+</BaseLayout>

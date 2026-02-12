@@ -42,7 +42,7 @@
 /* ─── Base ─── */
 html {
   font-family: var(--font-sans);
-  font-size: 16px; /* 1rem = 16px — all sizes are multiples of 4 */
+  font-size: 17px; /* 1rem = 17px — slightly larger for readability */
   scroll-behavior: smooth;
 }
 

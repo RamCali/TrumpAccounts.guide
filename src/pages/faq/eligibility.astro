@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Accordion from '../../components/ui/Accordion.astro';
+import LastUpdated from '../../components/ui/LastUpdated.astro';
+import { breadcrumbSchema, faqSchema } from '../../lib/seo/schema';
+
+const siteUrl = 'https://trumpaccounts.guide';
+
+const questions = [
+  { q: 'Do all babies get a Trump Account?', a: 'No. Parents must opt in by filing IRS Form 4547. It is not automatic. All U.S. citizen children under 18 with a valid SSN qualify, but the $1,000 pilot deposit is only for children born January 1, 2025 through December 31, 2028.' },
+  { q: 'Is this only for U.S. citizens?', a: 'Yes. The child must be a U.S. citizen with a valid Social Security number. Permanent residents (green card holders) and undocumented families do not qualify.' },
+  { q: 'What about children already born before 2025?', a: 'Children born before 2025 can still open a Trump Account (if under 18), but they will not receive the $1,000 federal pilot deposit. They can still receive family and employer contributions of up to $5,000/year.' },
+  { q: 'Do adopted children qualify?', a: 'Yes. Adopted children who are U.S. citizens with a valid SSN qualify on the same terms as biological children. The key requirements are citizenship, SSN, and age — not biological relationship.' },
+  { q: 'Would low-income families get more money?', a: 'No. Every qualifying child receives the same $1,000 pilot deposit regardless of family income. There are no income-based tiers. However, the Dell Foundation pledge targets children in ZIP codes with median income below $150,000 for an additional $250.' },
+  { q: 'Would wealthy families be excluded?', a: 'No. There are no income restrictions for Trump Accounts. Unlike Roth IRAs, there is no income phaseout. Families at any income level can open an account and contribute.' },
+  { q: 'What about undocumented families?', a: 'The child must be a U.S. citizen with a valid Social Security number (not an ITIN). If the child is a U.S. citizen but the parent is undocumented, the parent may still be able to file Form 4547 if they have a valid taxpayer identification number.' },
+  { q: 'What happens if a child dies?', a: 'Per IRS Notice 2025-68, funds can be distributed upon the death of the account beneficiary. The distribution would go to the estate or designated beneficiary per the account terms.' },
+  { q: 'What happens if a family moves abroad?', a: 'The account can remain open. The child must be a U.S. citizen — living abroad does not disqualify them. However, contributions and withdrawals may be subject to the tax laws of the country of residence.' },
+  { q: 'Can a grandparent open a Trump Account?', a: 'The IRS Form 4547 must be filed by an "authorized individual" — generally a parent or legal guardian. Grandparents can contribute to an existing Trump Account, but cannot open one unless they are the legal guardian.' },
+  { q: 'Is there an age cutoff for opening an account?', a: 'The child must be under 18 at the end of the calendar year in which the election is made. So a 17-year-old can still open one, but they won\'t have many years of growth before it converts to a traditional IRA at 18.' },
+  { q: 'Can I open a Trump Account for my unborn child?', a: 'No. The child must have a valid Social Security number before the election is made. You\'ll need to wait until after birth and after receiving the SSN.' },
+];
+
+const schemas = [
+  breadcrumbSchema([
+    { name: 'Home', url: siteUrl },
+    { name: 'FAQ', url: `${siteUrl}/faq` },
+    { name: 'Eligibility', url: `${siteUrl}/faq/eligibility` },
+  ]),
+  faqSchema(questions.map(q => ({ question: q.q, answer: q.a }))),
+];
+---
+
+<BaseLayout
+  title="Trump Account Eligibility FAQ — Who Qualifies? (2026)"
+  description="Answers to every eligibility question about Trump Accounts: citizenship, adopted children, income limits, age cutoffs, undocumented families, and more."
+  schema={schemas}
+>
+  <article class="mx-auto max-w-4xl px-4 py-12">
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="no-underline hover:text-gold-400">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <a href="/faq" class="no-underline hover:text-gold-400">FAQ</a>
+        </li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="font-medium text-white">Eligibility</span>
+        </li>
+      </ol>
+    </nav>
+
+    <h1 class="mb-2 text-3xl font-extrabold text-white md:text-4xl">Trump Account Eligibility: Who Qualifies?</h1>
+    <p class="mb-8 text-lg text-gray-400">Every eligibility question answered with sources from IRS Notice 2025-68.</p>
+
+    <LastUpdated date="2026-02-12" />
+
+    <div class="mt-8">
+      <Accordion items={questions.map(q => ({ question: q.q, answer: q.a }))} />
+    </div>
+
+    <div class="mt-10 grid gap-3 sm:grid-cols-2">
+      <a href="/calculators/eligibility-checker" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Eligibility Checker Tool</h3>
+        <p class="text-sm text-gray-400">Answer 3 questions to check if your child qualifies</p>
+      </a>
+      <a href="/faq/taxes" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Tax Questions FAQ</h3>
+        <p class="text-sm text-gray-400">FAFSA, Medicaid, gains, and withdrawal taxes</p>
+      </a>
+    </div>
+
+    <p class="mt-10 text-xs text-gray-600">
+      Educational content only, not tax or financial advice.
+      Source: <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf" target="_blank" rel="noopener noreferrer" class="text-gray-500">IRS Notice 2025-68</a>.
+    </p>
+  </article>
+</BaseLayout>

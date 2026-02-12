@@ -1,0 +1,200 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import LastUpdated from '../../components/ui/LastUpdated.astro';
+import { breadcrumbSchema, faqSchema } from '../../lib/seo/schema';
+
+const siteUrl = 'https://trumpaccounts.guide';
+
+const schemas = [
+  breadcrumbSchema([
+    { name: 'Home', url: siteUrl },
+    { name: 'Compare', url: `${siteUrl}/compare` },
+    { name: 'Trump Account vs Coverdell ESA', url: `${siteUrl}/compare/trump-account-vs-coverdell` },
+  ]),
+  faqSchema([
+    { question: 'Is a Trump Account replacing the Coverdell ESA?', answer: 'No. Trump Accounts and Coverdell ESAs are separate programs. Coverdell ESAs still exist and can be used alongside Trump Accounts. They serve different purposes — Coverdell for education, Trump Account for general long-term savings.' },
+    { question: 'Can I have both a Trump Account and a Coverdell ESA?', answer: 'Yes. They are completely independent programs with separate contribution limits and rules.' },
+    { question: 'Which is better for education savings?', answer: 'Coverdell ESAs are better for education specifically because withdrawals for qualified education expenses are tax-free. Trump Account withdrawals are taxed as ordinary income. However, for pure education savings, a 529 plan is usually better than either because of higher contribution limits.' },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Trump Account vs Coverdell ESA — Key Differences Explained (2026)"
+  description="Compare Trump Accounts and Coverdell Education Savings Accounts. Contribution limits, tax treatment, income restrictions, and which is best for your child."
+  schema={schemas}
+>
+  <article class="mx-auto max-w-4xl px-4 py-12">
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="no-underline hover:text-gold-400">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <a href="/compare" class="no-underline hover:text-gold-400">Compare</a>
+        </li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="font-medium text-white">Trump Account vs Coverdell ESA</span>
+        </li>
+      </ol>
+    </nav>
+
+    <div class="prose">
+      <h1>Trump Account vs Coverdell ESA: Which Is Right for You?</h1>
+
+      <LastUpdated date="2026-02-12" />
+
+      <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+        <h2 class="mb-3 text-lg font-bold text-gold-400">Bottom Line</h2>
+        <ul class="space-y-2 text-sm text-gray-300">
+          <li><strong class="text-white">For education (K-12 + college):</strong> Coverdell ESA wins — tax-free education withdrawals</li>
+          <li><strong class="text-white">For general savings:</strong> Trump Account wins — money can be used for anything at 18</li>
+          <li><strong class="text-white">For free money:</strong> Trump Account wins — $1,000 deposit + employer match</li>
+          <li><strong class="text-white">For high earners:</strong> Trump Account wins — no income restrictions (Coverdell phases out above $110K/$220K)</li>
+          <li><strong class="text-white">For pure education:</strong> 529 plan is usually better than either</li>
+        </ul>
+      </div>
+
+      <p>
+        The Coverdell ESA (Education Savings Account) has been around since 1998 and shares some similarities with Trump Accounts — both have low contribution limits and are designed for children. But they serve fundamentally different purposes.
+      </p>
+
+      <h2 id="comparison-table">Side-by-Side Comparison</h2>
+    </div>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600">
+            <th class="px-4 py-3 text-left font-semibold text-gray-400">Feature</th>
+            <th class="px-4 py-3 text-left font-semibold text-gold-400">Trump Account</th>
+            <th class="px-4 py-3 text-left font-semibold text-cyan-400">Coverdell ESA</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Legal basis</td>
+            <td class="px-4 py-3">IRC §530A (OBBBA 2025)</td>
+            <td class="px-4 py-3">IRC §530 (1998)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Purpose</td>
+            <td class="px-4 py-3">General long-term savings</td>
+            <td class="px-4 py-3">Education expenses (K-12 and college)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Federal deposit</td>
+            <td class="px-4 py-3 text-mint-400">$1,000 (2025–2028 births)</td>
+            <td class="px-4 py-3 text-gray-500">None</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Annual contribution limit</td>
+            <td class="px-4 py-3">$5,000/year</td>
+            <td class="px-4 py-3">$2,000/year</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Income restrictions</td>
+            <td class="px-4 py-3 text-mint-400">None</td>
+            <td class="px-4 py-3 text-red-400">Phases out: $110K single / $220K married</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Tax on growth</td>
+            <td class="px-4 py-3">Tax-deferred</td>
+            <td class="px-4 py-3">Tax-deferred</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Tax on withdrawals</td>
+            <td class="px-4 py-3">Ordinary income tax (IRA at 18)</td>
+            <td class="px-4 py-3 text-mint-400">Tax-free for education expenses</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Investment options</td>
+            <td class="px-4 py-3">S&P 500 / U.S. equity index only</td>
+            <td class="px-4 py-3 text-mint-400">Almost anything (stocks, bonds, mutual funds)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Employer contributions</td>
+            <td class="px-4 py-3 text-mint-400">Up to $2,500/yr tax-free (§128)</td>
+            <td class="px-4 py-3 text-gray-500">Not available</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Must be used by</td>
+            <td class="px-4 py-3">No deadline (IRA for life)</td>
+            <td class="px-4 py-3 text-red-400">Age 30 (or pay penalty + tax)</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-medium text-white">At age 18</td>
+            <td class="px-4 py-3">Converts to traditional IRA</td>
+            <td class="px-4 py-3">Stays as Coverdell (must use by 30)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="prose">
+      <h2 id="key-differences">Key Differences</h2>
+
+      <h3>1. Income Restrictions</h3>
+      <p>
+        Coverdell ESAs have income phaseouts — you can't contribute if your modified AGI exceeds $110,000 (single) or $220,000 (married filing jointly). Trump Accounts have <strong>no income restrictions at all</strong>.
+      </p>
+
+      <h3>2. Contribution Limits</h3>
+      <p>
+        Coverdell ESAs allow only $2,000 per year. Trump Accounts allow $5,000 per year — more than double. Plus, the Trump Account comes with a $1,000 federal deposit and up to $2,500 in employer contributions.
+      </p>
+
+      <h3>3. Use-by Deadline</h3>
+      <p>
+        Coverdell funds must be used for education expenses by age 30 or distributed (with a 10% penalty on earnings). Trump Account money has no deadline — it becomes a traditional IRA at 18 and can stay invested for life.
+      </p>
+
+      <CalloutBox type="warning" title="Coverdell is education-only">
+        <p>If your child decides not to pursue further education, Coverdell funds must still be used by age 30 or face penalties. A Trump Account has no such restriction — the money can be used for anything after 18.</p>
+      </CalloutBox>
+
+      <h2 id="when-trump-account">When to Choose a Trump Account</h2>
+      <ul>
+        <li><strong>Income above $110K/$220K</strong> — you can't contribute to a Coverdell</li>
+        <li><strong>Want free money</strong> — $1,000 federal deposit + employer match</li>
+        <li><strong>Don't know if child will attend college</strong> — no education requirement</li>
+        <li><strong>Want higher contribution limits</strong> — $5,000 vs $2,000</li>
+        <li><strong>Want long-term flexibility</strong> — IRA for life, no age-30 deadline</li>
+      </ul>
+
+      <h2 id="when-coverdell">When to Choose a Coverdell ESA</h2>
+      <ul>
+        <li><strong>Saving specifically for education</strong> — tax-free education withdrawals</li>
+        <li><strong>Want investment flexibility</strong> — can invest in anything</li>
+        <li><strong>K-12 expenses</strong> — covers private school, tutoring, special needs</li>
+        <li><strong>Income below phaseout</strong> — still eligible to contribute</li>
+      </ul>
+
+      <h2 id="faq">Frequently Asked Questions</h2>
+
+      <h3>Is the Coverdell ESA being phased out?</h3>
+      <p>No. Coverdell ESAs continue to exist alongside Trump Accounts. They serve different purposes.</p>
+
+      <h3>Can I have a Trump Account, Coverdell, and 529?</h3>
+      <p>Yes. All three are separate programs with separate limits. Many families use a combination.</p>
+
+      <h3>What's the difference between §530 and §530A?</h3>
+      <p>IRC §530 is the existing Coverdell ESA law (from 1998). IRC §530A is the new Trump Account law (from OBBBA 2025). They are separate sections of the tax code.</p>
+    </div>
+
+    <div class="mt-10 grid gap-3 sm:grid-cols-2">
+      <a href="/compare/trump-account-vs-529" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Trump Account vs 529 Plan</h3>
+        <p class="text-sm text-gray-400">The most common education savings comparison</p>
+      </a>
+      <a href="/compare/trump-account-vs-custodial-account" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Trump Account vs UTMA/UGMA</h3>
+        <p class="text-sm text-gray-400">Custodial account comparison</p>
+      </a>
+    </div>
+
+    <p class="mt-10 text-xs text-gray-600">
+      This is educational content, not tax or financial advice.
+      Source: <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf" target="_blank" rel="noopener noreferrer" class="text-gray-500">IRS Notice 2025-68</a>.
+    </p>
+  </article>
+</BaseLayout>

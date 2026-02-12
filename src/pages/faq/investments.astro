@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Accordion from '../../components/ui/Accordion.astro';
+import LastUpdated from '../../components/ui/LastUpdated.astro';
+import { breadcrumbSchema, faqSchema } from '../../lib/seo/schema';
+
+const siteUrl = 'https://trumpaccounts.guide';
+
+const questions = [
+  { q: 'What can Trump Account money be invested in?', a: 'Funds must be invested in mutual funds or ETFs that track the S&P 500 or a broad U.S. equity index. Think: VOO, VTI, IVV, FXAIX, SPY, SPLG, ITOT, or SWTSX. No individual stocks, crypto, bonds, or international funds.' },
+  { q: 'Can I pick individual stocks?', a: 'No. Trump Accounts are restricted to S&P 500 or broad U.S. equity index funds/ETFs only. You cannot invest in individual stocks, sector funds, or actively managed funds.' },
+  { q: 'Can I invest in crypto?', a: 'No. Cryptocurrency is not an eligible investment for Trump Accounts. The law requires investments in mutual funds or ETFs tracking the S&P 500 or a broad U.S. equity index.' },
+  { q: 'Can I invest in bonds?', a: 'No. Bond funds are not eligible. Trump Account investments are limited to equity index funds that track the S&P 500 or broad U.S. stock market.' },
+  { q: 'Can I invest in international stocks?', a: 'No. The investment must track a "primarily American equities" index. International stock funds, even broad ones like VXUS, are not eligible.' },
+  { q: 'What is the expense ratio cap?', a: 'Per IRS Notice 2025-68, eligible funds must have expense ratios capped at 0.1% (10 basis points). Most S&P 500 index funds already meet this threshold. Use our <a href="/calculators/fund-expense-tracker">Fund Expense Tracker</a> to compare eligible options.' },
+  { q: 'Which specific funds are eligible?', a: 'While the IRS hasn\'t published a definitive list, eligible funds include those tracking the S&P 500 (VOO, IVV, SPY, SPLG, FXAIX, SWPPX) and total U.S. stock market (VTI, ITOT, SWTSX, FSKAX). The key is: it must track a broad U.S. equity index with an expense ratio under 0.1%.' },
+  { q: 'Can I switch funds later?', a: 'Yes. You can change your fund selection within the eligible options without tax consequences, as it\'s still within the Trump Account. This is similar to rebalancing within an IRA.' },
+  { q: 'Who manages the investments?', a: 'You choose the fund, but it\'s managed by the fund provider (Vanguard, Fidelity, BlackRock, etc.). Since these are index funds, they passively track the market — there\'s no active management making buy/sell decisions.' },
+  { q: 'What returns should I expect?', a: 'The S&P 500 has historically returned approximately 10% per year on average (about 7-8% after inflation). Over an 18-year period, returns will vary significantly year to year. Past performance does not guarantee future results. Use our <a href="/calculators/growth-calculator">Growth Calculator</a> to model different scenarios.' },
+  { q: 'What if the stock market crashes?', a: 'Since Trump Accounts are long-term (18 years), short-term market downturns are expected and historically recover. Over any 18-year period in S&P 500 history, the market has always had positive returns. The locked-in period actually protects against panic selling.' },
+  { q: 'Can I use a target-date fund?', a: 'Only if it meets the investment requirements — tracking a broad U.S. equity index with an expense ratio under 0.1%. Most target-date funds include bonds and international stocks, which would make them ineligible.' },
+];
+
+const schemas = [
+  breadcrumbSchema([
+    { name: 'Home', url: siteUrl },
+    { name: 'FAQ', url: `${siteUrl}/faq` },
+    { name: 'Investments', url: `${siteUrl}/faq/investments` },
+  ]),
+  faqSchema(questions.map(q => ({ question: q.q, answer: q.a }))),
+];
+---
+
+<BaseLayout
+  title="Trump Account Investment FAQ — What Funds Are Eligible? S&P 500 Rules (2026)"
+  description="Trump Account investment rules explained: eligible funds, S&P 500 requirement, expense ratio cap, crypto restrictions, and which ETFs/mutual funds qualify."
+  schema={schemas}
+>
+  <article class="mx-auto max-w-4xl px-4 py-12">
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="no-underline hover:text-gold-400">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <a href="/faq" class="no-underline hover:text-gold-400">FAQ</a>
+        </li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="font-medium text-white">Investments</span>
+        </li>
+      </ol>
+    </nav>
+
+    <h1 class="mb-2 text-3xl font-extrabold text-white md:text-4xl">Trump Account Investment Questions</h1>
+    <p class="mb-8 text-lg text-gray-400">Eligible funds, expense ratios, S&P 500 rules, and what you can (and can't) invest in.</p>
+
+    <LastUpdated date="2026-02-12" />
+
+    <div class="mt-8">
+      <Accordion items={questions.map(q => ({ question: q.q, answer: q.a }))} />
+    </div>
+
+    <div class="mt-10 grid gap-3 sm:grid-cols-2">
+      <a href="/calculators/fund-expense-tracker" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Fund Expense Tracker</h3>
+        <p class="text-sm text-gray-400">Compare expense ratios of all eligible funds</p>
+      </a>
+      <a href="/calculators/growth-calculator" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Growth Calculator</h3>
+        <p class="text-sm text-gray-400">Model S&P 500 returns over 18 years</p>
+      </a>
+    </div>
+
+    <p class="mt-10 text-xs text-gray-600">
+      Educational content only, not tax or financial advice.
+      Source: <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf" target="_blank" rel="noopener noreferrer" class="text-gray-500">IRS Notice 2025-68</a>.
+    </p>
+  </article>
+</BaseLayout>

@@ -1,0 +1,191 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import LastUpdated from '../../components/ui/LastUpdated.astro';
+import { breadcrumbSchema, faqSchema } from '../../lib/seo/schema';
+
+const siteUrl = 'https://trumpaccounts.guide';
+
+const schemas = [
+  breadcrumbSchema([
+    { name: 'Home', url: siteUrl },
+    { name: 'Compare', url: `${siteUrl}/compare` },
+    { name: 'Trump Account vs Baby Bonds', url: `${siteUrl}/compare/trump-account-vs-baby-bonds` },
+  ]),
+  faqSchema([
+    { question: 'Are Trump Accounts the same as Baby Bonds?', answer: 'No. Trump Accounts are an opt-in, universal program with no income targeting. Baby bonds are a proposed policy (never passed into federal law) that would provide larger deposits to lower-income families. Some states like Connecticut have implemented their own baby bonds programs.' },
+    { question: 'Did Trump Accounts replace baby bonds?', answer: 'Trump Accounts are sometimes compared to baby bonds proposals, but they are a separate policy. Baby bonds proposals (like Senator Cory Booker\'s ASPIRE Act) were never passed at the federal level. Trump Accounts are the policy that became law under the OBBBA.' },
+    { question: 'Which gives more money to low-income families?', answer: 'Baby bonds proposals typically gave more to lower-income families (up to $2,000–$50,000 depending on the proposal). Trump Accounts give the same $1,000 to all qualifying children regardless of income. The Dell Foundation pledge adds $250 for children in lower-income ZIP codes.' },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Trump Accounts vs Baby Bonds — What's the Difference? (2026)"
+  description="Compare Trump Accounts and Baby Bonds proposals. How they differ on income targeting, deposit amounts, investment options, and which one became law."
+  schema={schemas}
+>
+  <article class="mx-auto max-w-4xl px-4 py-12">
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="no-underline hover:text-gold-400">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <a href="/compare" class="no-underline hover:text-gold-400">Compare</a>
+        </li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="font-medium text-white">Trump Account vs Baby Bonds</span>
+        </li>
+      </ol>
+    </nav>
+
+    <div class="prose">
+      <h1>Trump Accounts vs Baby Bonds: What's the Difference?</h1>
+
+      <LastUpdated date="2026-02-12" />
+
+      <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+        <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaway</h2>
+        <ul class="space-y-2 text-sm text-gray-300">
+          <li><strong class="text-white">Trump Accounts:</strong> Real, signed into law (OBBBA, July 4, 2025). Universal $1,000 deposit. Opt-in via Form 4547.</li>
+          <li><strong class="text-white">Baby Bonds:</strong> A policy concept proposed but never passed at the federal level. Some states have implemented versions.</li>
+          <li><strong class="text-white">Key difference:</strong> Trump Accounts treat all families the same. Baby bonds proposals targeted more money to lower-income families.</li>
+        </ul>
+      </div>
+
+      <p>
+        "Baby bonds" is a term for government-funded savings accounts given to children at birth. Several versions have been proposed over the years. Trump Accounts are sometimes called "baby bonds" in the media, but they're a distinct policy. Here's how they compare.
+      </p>
+
+      <h2 id="comparison-table">Policy Comparison</h2>
+    </div>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600">
+            <th class="px-4 py-3 text-left font-semibold text-gray-400">Feature</th>
+            <th class="px-4 py-3 text-left font-semibold text-gold-400">Trump Account</th>
+            <th class="px-4 py-3 text-left font-semibold text-orange-400">Baby Bonds (Proposals)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Status</td>
+            <td class="px-4 py-3 text-mint-400">Signed into law (OBBBA 2025)</td>
+            <td class="px-4 py-3 text-gray-500">Proposed (never passed federally)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Federal deposit</td>
+            <td class="px-4 py-3">$1,000 (same for all)</td>
+            <td class="px-4 py-3">$1,000–$50,000 (income-based)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Income targeting</td>
+            <td class="px-4 py-3">None — universal</td>
+            <td class="px-4 py-3">Yes — more money for lower-income families</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Opt-in required?</td>
+            <td class="px-4 py-3">Yes (File Form 4547)</td>
+            <td class="px-4 py-3">Most proposals: automatic at birth</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Annual government contributions?</td>
+            <td class="px-4 py-3">No (one-time $1,000 only)</td>
+            <td class="px-4 py-3">Some proposals: up to $2,000/year based on income</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Family can contribute?</td>
+            <td class="px-4 py-3 text-mint-400">Yes — up to $5,000/year</td>
+            <td class="px-4 py-3">Most proposals: No additional contributions</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Employer contributions</td>
+            <td class="px-4 py-3 text-mint-400">Up to $2,500/yr (§128)</td>
+            <td class="px-4 py-3 text-gray-500">Not included in proposals</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Investment options</td>
+            <td class="px-4 py-3">S&P 500 / U.S. equity index</td>
+            <td class="px-4 py-3">Varied by proposal (some: Treasury bonds only)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Access age</td>
+            <td class="px-4 py-3">18 (converts to IRA)</td>
+            <td class="px-4 py-3">Varied: 18, 21, or 25 depending on proposal</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-medium text-white">Use restrictions</td>
+            <td class="px-4 py-3">None at 18 (but IRA tax rules)</td>
+            <td class="px-4 py-3">Some proposals: education, homebuying, retirement only</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="prose">
+      <h2 id="key-policy-differences">Key Policy Differences</h2>
+
+      <h3>Universal vs Income-Targeted</h3>
+      <p>
+        Trump Accounts give every qualifying child the same $1,000. A billionaire's baby gets the same deposit as a minimum-wage worker's baby.
+      </p>
+      <p>
+        Baby bonds proposals (like Senator Cory Booker's ASPIRE Act or the American Opportunity Accounts Act) typically scaled deposits based on family income — giving significantly more money to children from lower-income households.
+      </p>
+
+      <h3>One-Time vs Annual</h3>
+      <p>
+        Trump Accounts provide a single $1,000 deposit. Families can then contribute up to $5,000/year on their own. Baby bonds proposals often included annual government contributions of $500–$2,000, funded entirely by the government.
+      </p>
+
+      <h3>Family Participation</h3>
+      <p>
+        Trump Accounts are designed for family and employer participation — you can add money and your employer can match. Most baby bonds proposals didn't allow private contributions, keeping the accounts purely government-funded.
+      </p>
+
+      <CalloutBox type="info" title="State-level baby bonds programs">
+        <p>While baby bonds never passed at the federal level, some states have implemented their own versions. Connecticut's CT Baby Bonds program (2021) provides $3,200 to children born on Medicaid. Washington, D.C. has a similar program. These state programs operate independently of Trump Accounts.</p>
+      </CalloutBox>
+
+      <h2 id="dell-bridge">The Dell Foundation: Bridging the Gap</h2>
+
+      <p>
+        Michael and Susan Dell pledged $6.25 billion — $250 per child under 10 in ZIP codes with median income below $150,000. While this doesn't fully replicate income-targeted baby bonds proposals, it does add a progressive element to Trump Accounts, giving more support to children in lower-income communities.
+      </p>
+
+      <h2 id="faq">Frequently Asked Questions</h2>
+
+      <h3>Are Trump Accounts "baby bonds"?</h3>
+      <p>
+        The media sometimes uses the term, but Trump Accounts are a distinct policy. True baby bonds proposals (ASPIRE Act, American Opportunity Accounts Act) had income-targeted deposits and government-funded annual contributions. Trump Accounts have a flat $1,000 deposit and rely on family/employer contributions.
+      </p>
+
+      <h3>Can I still get baby bonds from my state?</h3>
+      <p>
+        It depends on your state. Connecticut, Washington D.C., and a few other jurisdictions have their own baby bonds programs. These are separate from and in addition to federal Trump Accounts.
+      </p>
+
+      <h3>Which policy gives more to poor families?</h3>
+      <p>
+        Baby bonds proposals gave significantly more to lower-income families. The ASPIRE Act, for example, would have provided up to $2,000 per year for the lowest-income children. Trump Accounts give the same $1,000 to everyone, though the Dell pledge adds $250 in lower-income ZIP codes.
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-3 sm:grid-cols-2">
+      <a href="/what-are-trump-accounts" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">What Are Trump Accounts?</h3>
+        <p class="text-sm text-gray-400">Complete guide to the program that became law</p>
+      </a>
+      <a href="/compare/trump-account-vs-529" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Trump Account vs 529 Plan</h3>
+        <p class="text-sm text-gray-400">Education savings comparison</p>
+      </a>
+    </div>
+
+    <p class="mt-10 text-xs text-gray-600">
+      This is educational content, not political commentary.
+      Source: <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf" target="_blank" rel="noopener noreferrer" class="text-gray-500">IRS Notice 2025-68</a>.
+    </p>
+  </article>
+</BaseLayout>

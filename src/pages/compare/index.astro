@@ -125,15 +125,35 @@ const accounts = Object.values(accountTypes);
       </p>
     </div>
 
-    <div class="mt-8 grid gap-4 sm:grid-cols-2">
-      <a href="/calculators/growth-calculator" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
-        <h3 class="font-semibold text-white">Run the Numbers</h3>
-        <p class="text-sm text-gray-400">Use our Growth Calculator to see projected Trump Account returns</p>
-      </a>
-      <a href="/calculators/employer-match" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
-        <h3 class="font-semibold text-white">Employer Match Impact</h3>
-        <p class="text-sm text-gray-400">See how much the $2,500 employer match adds over time</p>
-      </a>
+    <!-- Detailed Comparisons -->
+    <div class="mt-10">
+      <h2 class="mb-4 text-xl font-bold text-white">Detailed Comparisons</h2>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <a href="/compare/trump-account-vs-529" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+          <h3 class="font-semibold text-white">Trump Account vs 529 Plan</h3>
+          <p class="text-sm text-gray-400">Education savings, tax treatment, contribution limits</p>
+        </a>
+        <a href="/compare/trump-account-vs-roth-ira" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+          <h3 class="font-semibold text-white">Trump Account vs Roth IRA</h3>
+          <p class="text-sm text-gray-400">Earned income, traditional vs Roth tax treatment</p>
+        </a>
+        <a href="/compare/trump-account-vs-custodial-account" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+          <h3 class="font-semibold text-white">Trump Account vs UTMA/UGMA</h3>
+          <p class="text-sm text-gray-400">Custodial accounts, kiddie tax, investment flexibility</p>
+        </a>
+        <a href="/compare/trump-account-vs-coverdell" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+          <h3 class="font-semibold text-white">Trump Account vs Coverdell ESA</h3>
+          <p class="text-sm text-gray-400">Education savings, income limits, age-30 deadline</p>
+        </a>
+        <a href="/compare/trump-account-vs-baby-bonds" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+          <h3 class="font-semibold text-white">Trump Account vs Baby Bonds</h3>
+          <p class="text-sm text-gray-400">Policy comparison: universal vs income-targeted</p>
+        </a>
+        <a href="/calculators/growth-calculator" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+          <h3 class="font-semibold text-white">Run the Numbers</h3>
+          <p class="text-sm text-gray-400">Growth Calculator for projected returns</p>
+        </a>
+      </div>
     </div>
   </div>
 </BaseLayout>

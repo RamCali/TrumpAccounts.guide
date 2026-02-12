@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Accordion from '../../components/ui/Accordion.astro';
+import LastUpdated from '../../components/ui/LastUpdated.astro';
+import { breadcrumbSchema, faqSchema } from '../../lib/seo/schema';
+
+const siteUrl = 'https://trumpaccounts.guide';
+
+const questions = [
+  { q: 'How much is the federal deposit?', a: 'The federal government deposits $1,000 into Trump Accounts for children born between January 1, 2025 and December 31, 2028. This is a one-time deposit through the pilot program. You must file IRS Form 4547 to claim it.' },
+  { q: 'Where does the $1,000 come from?', a: 'It comes from the U.S. Treasury as part of the pilot program established by the One Big Beautiful Bill Act (OBBBA). It is funded by taxpayer dollars — not a loan, grant, or private donation.' },
+  { q: 'How much can I contribute per year?', a: 'Up to $5,000 per year total (after-tax). This limit is indexed for inflation starting in 2027. The $5,000 cap includes all contributions — from parents, grandparents, friends, and employers.' },
+  { q: 'Can my employer contribute?', a: 'Yes. Under IRC §128, employers can contribute up to $2,500 per year per employee. These contributions are tax-free to the employee (excluded from gross income). The $2,500 counts toward the $5,000 annual cap.' },
+  { q: 'Is the employer limit per child or per employee?', a: 'Per employee. If you have 3 children with Trump Accounts, your employer can still only contribute $2,500 total — not $2,500 per child.' },
+  { q: 'Can grandparents contribute?', a: 'Yes. Anyone can contribute to a Trump Account — parents, grandparents, aunts, uncles, friends. All contributions from all sources count toward the single $5,000 annual limit.' },
+  { q: 'What is the Dell Foundation $250?', a: 'Michael and Susan Dell pledged $6.25 billion to provide an additional $250 per child under 10 in ZIP codes where the median household income is below $150,000. This is separate from and in addition to the $1,000 federal deposit.' },
+  { q: 'Can I contribute more than $5,000?', a: 'No. The $5,000 annual limit is a hard cap. Excess contributions must be removed and may be subject to a 6% excise tax if not corrected by the tax filing deadline.' },
+  { q: 'Are contributions tax-deductible?', a: 'No. Contributions are made with after-tax dollars. You do not get a tax deduction for contributing to a Trump Account. However, employer contributions under §128 are excluded from the employee\'s gross income.' },
+  { q: 'What if I can only afford $50/month?', a: 'That\'s perfectly fine. There is no minimum contribution. Even $50/month ($600/year) invested in an S&P 500 index fund could grow to roughly $18,000–$22,000 by age 18 (assuming ~8% average annual returns). Use our <a href="/calculators/growth-calculator">Growth Calculator</a> to model your own scenario.' },
+  { q: 'Does the $5,000 limit increase with inflation?', a: 'Yes. Starting in 2027, the $5,000 annual contribution limit is indexed for inflation. The IRS will announce adjusted limits each year.' },
+  { q: 'Can I contribute in a lump sum or does it have to be monthly?', a: 'Either way. You can contribute a lump sum, monthly, quarterly, or any schedule you prefer — as long as total contributions for the calendar year do not exceed $5,000.' },
+];
+
+const schemas = [
+  breadcrumbSchema([
+    { name: 'Home', url: siteUrl },
+    { name: 'FAQ', url: `${siteUrl}/faq` },
+    { name: 'Money & Funding', url: `${siteUrl}/faq/money-and-funding` },
+  ]),
+  faqSchema(questions.map(q => ({ question: q.q, answer: q.a }))),
+];
+---
+
+<BaseLayout
+  title="Trump Account Contributions & Funding FAQ — Limits, Employer Match (2026)"
+  description="Everything about Trump Account contributions: annual limits, employer match, grandparent contributions, the $1,000 deposit, Dell pledge, and more."
+  schema={schemas}
+>
+  <article class="mx-auto max-w-4xl px-4 py-12">
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="no-underline hover:text-gold-400">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <a href="/faq" class="no-underline hover:text-gold-400">FAQ</a>
+        </li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="font-medium text-white">Money & Funding</span>
+        </li>
+      </ol>
+    </nav>
+
+    <h1 class="mb-2 text-3xl font-extrabold text-white md:text-4xl">Trump Account Money & Funding Questions</h1>
+    <p class="mb-8 text-lg text-gray-400">Contribution limits, employer matching, the $1,000 deposit, and funding strategies.</p>
+
+    <LastUpdated date="2026-02-12" />
+
+    <div class="mt-8">
+      <Accordion items={questions.map(q => ({ question: q.q, answer: q.a }))} />
+    </div>
+
+    <div class="mt-10 grid gap-3 sm:grid-cols-2">
+      <a href="/calculators/growth-calculator" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Growth Calculator</h3>
+        <p class="text-sm text-gray-400">See how your contributions compound over 18 years</p>
+      </a>
+      <a href="/calculators/employer-match" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Employer Match Calculator</h3>
+        <p class="text-sm text-gray-400">Calculate the impact of employer contributions</p>
+      </a>
+    </div>
+
+    <p class="mt-10 text-xs text-gray-600">
+      Educational content only, not tax or financial advice.
+      Source: <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf" target="_blank" rel="noopener noreferrer" class="text-gray-500">IRS Notice 2025-68</a>.
+    </p>
+  </article>
+</BaseLayout>
