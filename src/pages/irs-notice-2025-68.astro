@@ -1,0 +1,246 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CalloutBox from '../components/ui/CalloutBox.astro';
+import LastUpdated from '../components/ui/LastUpdated.astro';
+import { breadcrumbSchema, faqSchema } from '../lib/seo/schema';
+
+const siteUrl = 'https://trumpaccounts.guide';
+
+const schemas = [
+  breadcrumbSchema([
+    { name: 'Home', url: siteUrl },
+    { name: 'IRS Notice 2025-68', url: `${siteUrl}/irs-notice-2025-68` },
+  ]),
+  faqSchema([
+    { question: 'What is IRS Notice 2025-68?', answer: 'It is the first official IRS guidance on Trump Accounts (IRC §530A), published December 3, 2025. It explains how to open an account, contribution limits, investment rules, and the $1,000 pilot program.' },
+    { question: 'What does IRS Notice 2025-68 cover?', answer: 'It covers eligibility requirements, the $1,000 pilot deposit, $5,000 annual contribution limits, $2,500 employer contributions, investment requirements (S&P 500 index funds), withdrawal rules, and the July 4, 2026 launch date.' },
+    { question: 'Where can I read the full IRS Notice 2025-68?', answer: 'The full text is available at irs.gov/pub/irs-drop/n-25-68.pdf. This page provides a section-by-section plain English translation.' },
+  ]),
+];
+---
+
+<BaseLayout
+  title="IRS Notice 2025-68 Explained in Plain English — Trump Account Rules"
+  description="Plain-English translation of IRS Notice 2025-68, the official guidance on Trump Accounts (IRC §530A). Every section explained simply for parents and employers."
+  schema={schemas}
+>
+  <article class="mx-auto max-w-4xl px-4 py-12">
+    <!-- Breadcrumb -->
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="no-underline hover:text-gold-400">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="font-medium text-white">IRS Notice 2025-68</span>
+        </li>
+      </ol>
+    </nav>
+
+    <div class="prose">
+      <h1>IRS Notice 2025-68: The Translation Layer</h1>
+
+      <LastUpdated date="2026-02-12" />
+
+      <p class="text-lg text-gray-300">
+        On December 3, 2025, the IRS published <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf" target="_blank" rel="noopener noreferrer">Notice 2025-68</a> — the first official guidance on how Trump Accounts work.
+        It's 30+ pages of legal language. Below, we translate every key section into plain English.
+      </p>
+
+      <!-- Key Takeaways -->
+      <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+        <h2 class="mb-3 text-lg font-bold text-gold-400">What You Need to Know</h2>
+        <ul class="space-y-2 text-sm text-gray-300">
+          <li><strong class="text-white">Legal basis:</strong> IRC Section 530A, created by the One Big Beautiful Bill Act</li>
+          <li><strong class="text-white">Who qualifies:</strong> U.S. citizen children under 18 with a valid SSN (no income limit)</li>
+          <li><strong class="text-white">Free money:</strong> $1,000 federal deposit for children born 2025–2028</li>
+          <li><strong class="text-white">You can add more:</strong> Up to $5,000/year (employers can add $2,500 tax-free)</li>
+          <li><strong class="text-white">Invested in:</strong> S&P 500 or broad U.S. equity index funds only</li>
+          <li><strong class="text-white">At age 18:</strong> Converts to a traditional IRA</li>
+          <li><strong class="text-white">How to sign up:</strong> File IRS Form 4547 with your 2025 tax return</li>
+        </ul>
+      </div>
+
+      <hr class="border-surface-700" />
+
+      <h2 id="section-1">Section 1: What Is a Trump Account?</h2>
+
+      <CalloutBox type="irs-quote" title="What the IRS says">
+        <p>"An initial Trump account is a trust created or organized in the United States for the exclusive benefit of an eligible child as designated beneficiary, the written governing instrument of which provides that contributions will not be accepted for the eligible child in excess of the annual limit."</p>
+      </CalloutBox>
+
+      <div class="rounded-lg border border-mint-400/30 bg-mint-400/10 p-4">
+        <p class="mb-1 font-semibold text-mint-300">In plain English:</p>
+        <p class="text-sm text-mint-200">
+          A Trump Account is an investment account your child owns. A bank or brokerage holds it.
+          You can put in up to $5,000 per year. The money is invested and grows until your child turns 18.
+        </p>
+      </div>
+
+      <h2 id="section-2">Section 2: Who Can Open One?</h2>
+
+      <CalloutBox type="irs-quote" title="What the IRS says">
+        <p>"An election can be made to establish an initial Trump account for a child if the child is under age 18 at the end of the year in which the election was made, has a valid social security number issued before the election is made, and has not had a Trump account election filed on their behalf."</p>
+      </CalloutBox>
+
+      <div class="rounded-lg border border-mint-400/30 bg-mint-400/10 p-4">
+        <p class="mb-1 font-semibold text-mint-300">In plain English:</p>
+        <p class="text-sm text-mint-200">
+          Your child qualifies if they are: (1) under 18, (2) a U.S. citizen, and (3) have a Social Security number.
+          That's it. No income requirements. No wealth tests. One account per child.
+        </p>
+      </div>
+
+      <h2 id="section-3">Section 3: The $1,000 Pilot Deposit</h2>
+
+      <CalloutBox type="irs-quote" title="What the IRS says">
+        <p>"The federal government will make a one-time $1,000 pilot program contribution to the Trump Account of each eligible child for whom an election is made, who is a U.S. citizen and who is born on or after Jan. 1, 2025, through Dec. 31, 2028."</p>
+      </CalloutBox>
+
+      <div class="rounded-lg border border-mint-400/30 bg-mint-400/10 p-4">
+        <p class="mb-1 font-semibold text-mint-300">In plain English:</p>
+        <p class="text-sm text-mint-200">
+          If your baby was born between January 1, 2025 and December 31, 2028, the government puts $1,000 into their account for free.
+          You just have to sign up. That's the "pilot program." Kids born outside this window can still open an account, but don't get the free $1,000.
+        </p>
+      </div>
+
+      <p>
+        Use our <a href="/calculators/eligibility-checker">Eligibility Checker</a> to see if your child qualifies for the $1,000 deposit.
+      </p>
+
+      <h2 id="section-4">Section 4: Contribution Limits</h2>
+
+      <CalloutBox type="irs-quote" title="What the IRS says">
+        <p>"Other persons are able to make contributions up to an aggregate limit of $5,000 per year. An employer may contribute to a Trump Account of the employee or the employee's dependent up to $2,500 per year under an employer's Trump Account contribution program, and the contribution will not count toward the employee's taxable income."</p>
+      </CalloutBox>
+
+      <div class="rounded-lg border border-mint-400/30 bg-mint-400/10 p-4">
+        <p class="mb-1 font-semibold text-mint-300">In plain English:</p>
+        <p class="text-sm text-mint-200">
+          You can put in up to $5,000 per year total. Your employer can chip in up to $2,500 of that — and their portion is
+          tax-free to you (you don't pay income tax on it). But it all counts toward the same $5,000 cap.
+        </p>
+      </div>
+
+      <CalloutBox type="warning" title="The employer limit is per employee, not per child">
+        <p>If you have 3 kids with Trump Accounts, your employer can still only contribute $2,500 total across all of them — not $2,500 each.</p>
+      </CalloutBox>
+
+      <h2 id="section-5">Section 5: Investment Rules</h2>
+
+      <CalloutBox type="irs-quote" title="What the IRS says">
+        <p>"The funds in Trump Accounts must be invested in certain mutual funds or exchange-traded funds that track the S&P 500 or another index of primarily American equities."</p>
+      </CalloutBox>
+
+      <div class="rounded-lg border border-mint-400/30 bg-mint-400/10 p-4">
+        <p class="mb-1 font-semibold text-mint-300">In plain English:</p>
+        <p class="text-sm text-mint-200">
+          You can only invest in S&P 500 index funds or total U.S. stock market funds.
+          No individual stocks. No crypto. No bonds. No international funds.
+          Think: VOO, VTI, IVV, FXAIX, SPY, SPLG, ITOT, or SWTSX.
+        </p>
+      </div>
+
+      <p>
+        Compare all eligible funds with our <a href="/calculators/fund-expense-tracker">Fund Expense Tracker</a>.
+      </p>
+
+      <h2 id="section-6">Section 6: The Growth Phase & Withdrawals</h2>
+
+      <CalloutBox type="irs-quote" title="What the IRS says">
+        <p>"During the growth period, distributions are generally not allowed, except for qualified rollovers, excess contributions or upon the death of the account beneficiary. Amounts in a Trump account can be withdrawn for any reason starting January 1 of the calendar year in which the child attains age 18."</p>
+      </CalloutBox>
+
+      <div class="rounded-lg border border-mint-400/30 bg-mint-400/10 p-4">
+        <p class="mb-1 font-semibold text-mint-300">In plain English:</p>
+        <p class="text-sm text-mint-200">
+          From birth to 18: the money is locked. You can't take it out (with very few exceptions).
+          At 18: the account becomes a traditional IRA. Your child can withdraw for any reason, but they'll pay income tax on withdrawals (just like any traditional IRA).
+        </p>
+      </div>
+
+      <p>
+        See the tax impact of withdrawals at different ages with our <a href="/calculators/withdrawal-simulator">Withdrawal Simulator</a>.
+      </p>
+
+      <h2 id="section-7">Section 7: How to Sign Up (Form 4547)</h2>
+
+      <CalloutBox type="irs-quote" title="What the IRS says">
+        <p>"The fastest, safest, and easiest way to make the election is to file Form 4547 with your current-year e-filed tax return."</p>
+      </CalloutBox>
+
+      <div class="rounded-lg border border-mint-400/30 bg-mint-400/10 p-4">
+        <p class="mb-1 font-semibold text-mint-300">In plain English:</p>
+        <p class="text-sm text-mint-200">
+          When you do your taxes this year (2025 return, due April 15, 2026), add Form 4547.
+          Your tax software should handle it. That's the easiest way.
+          You can also use trumpaccounts.gov starting mid-2026, or mail the form.
+        </p>
+      </div>
+
+      <p>
+        For a detailed walkthrough, see our <a href="/how-to-open-trump-account">How to Open a Trump Account</a> guide.
+      </p>
+
+      <h2 id="section-8">Section 8: Employer Contributions (§128)</h2>
+
+      <CalloutBox type="irs-quote" title="What the IRS says">
+        <p>"Under Section 128, employees may exclude up to $2,500 annually from gross income for employer contributions made to Trump accounts for themselves or their dependents. This exclusion is per employee, not per dependent."</p>
+      </CalloutBox>
+
+      <div class="rounded-lg border border-mint-400/30 bg-mint-400/10 p-4">
+        <p class="mb-1 font-semibold text-mint-300">In plain English:</p>
+        <p class="text-sm text-mint-200">
+          If your employer offers this benefit, they can put up to $2,500/year into your child's Trump Account.
+          That money doesn't count as taxable income for you — it's like getting a $2,500 tax-free bonus.
+          The $2,500 limit is per employee, not per child.
+        </p>
+      </div>
+
+      <p>
+        Employers: see our <a href="/for-employers">Employer Contribution Guide</a> for implementation steps.
+      </p>
+
+      <h2 id="full-document">Read the Full IRS Notice</h2>
+
+      <p>
+        The complete text of IRS Notice 2025-68 is available at:
+        <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf" target="_blank" rel="noopener noreferrer">
+          irs.gov/pub/irs-drop/n-25-68.pdf
+        </a>
+      </p>
+
+      <p>
+        For additional IRS guidance on Trump Accounts, visit:
+        <a href="https://www.irs.gov/trumpaccounts" target="_blank" rel="noopener noreferrer">
+          irs.gov/trumpaccounts
+        </a>
+      </p>
+    </div>
+
+    <!-- Related Links -->
+    <div class="mt-10 grid gap-3 sm:grid-cols-2">
+      <a href="/how-to-open-trump-account" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">How to Open a Trump Account</h3>
+        <p class="text-sm text-gray-400">Step-by-step Form 4547 walkthrough</p>
+      </a>
+      <a href="/what-are-trump-accounts" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">What Are Trump Accounts?</h3>
+        <p class="text-sm text-gray-400">The complete guide to eligibility and rules</p>
+      </a>
+      <a href="/for-employers" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">For Employers</h3>
+        <p class="text-sm text-gray-400">How to set up a §128 contribution program</p>
+      </a>
+      <a href="/compare" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Compare Account Types</h3>
+        <p class="text-sm text-gray-400">Trump Account vs 529 vs Roth IRA</p>
+      </a>
+    </div>
+
+    <p class="mt-10 text-xs text-gray-600">
+      This is educational content, not tax or financial advice.
+      Source: <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf" target="_blank" rel="noopener noreferrer" class="text-gray-500">IRS Notice 2025-68</a>,
+      <a href="https://www.irs.gov/trumpaccounts" target="_blank" rel="noopener noreferrer" class="text-gray-500">IRS.gov/trumpaccounts</a>.
+    </p>
+  </article>
+</BaseLayout>

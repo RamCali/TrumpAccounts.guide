@@ -68,8 +68,8 @@ export default function EmployerContributionCalc() {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-xl border border-slate-700 bg-slate-800 p-6 shadow-sm">
-        <h2 className="mb-4 text-lg font-bold text-slate-100">Your Employment Details</h2>
+      <div className="rounded-xl border border-surface-600 bg-surface-800 p-6 shadow-sm">
+        <h2 className="mb-4 text-lg font-bold text-white">Your Employment Details</h2>
 
         <SliderInput
           label="Annual Salary"
@@ -149,20 +149,20 @@ export default function EmployerContributionCalc() {
       </div>
 
       {/* Chart */}
-      <div className="rounded-xl border border-slate-700 bg-slate-800 p-4 shadow-sm">
-        <h3 className="mb-4 text-sm font-semibold text-slate-300">
+      <div className="rounded-xl border border-surface-600 bg-surface-800 p-4 shadow-sm">
+        <h3 className="mb-4 text-sm font-semibold text-gray-300">
           Growth: With vs Without Employer Contribution
         </h3>
         <ResponsiveContainer width="100%" height={350}>
           <BarChart data={result.projections} margin={{ top: 10, right: 10, left: 10, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+            <CartesianGrid strokeDasharray="3 3" stroke="#333333" />
             <XAxis
               dataKey="year"
-              tick={{ fontSize: 12 }}
-              label={{ value: 'Year', position: 'insideBottom', offset: -5, fontSize: 12 }}
+              tick={{ fontSize: 12, fill: '#9E9E9E' }}
+              label={{ value: 'Year', position: 'insideBottom', offset: -5, fontSize: 12, fill: '#9E9E9E' }}
             />
             <YAxis
-              tick={{ fontSize: 12 }}
+              tick={{ fontSize: 12, fill: '#9E9E9E' }}
               tickFormatter={(v: number) => `$${(v / 1000).toFixed(0)}k`}
             />
             <Tooltip
@@ -171,23 +171,23 @@ export default function EmployerContributionCalc() {
                 name === 'trumpAccountBalance' ? 'With Employer Match' : 'Without Employer Match',
               ]}
               labelFormatter={(label: number) => `Year ${label}`}
-              contentStyle={{ borderRadius: '8px', border: '1px solid #334155', backgroundColor: '#1e293b', color: '#e2e8f0' }}
+              contentStyle={{ borderRadius: '8px', border: '1px solid #333333', backgroundColor: '#1a1a1a', color: '#f5f5f5' }}
             />
             <Legend
               formatter={(value: string) =>
                 value === 'trumpAccountBalance' ? 'With Employer Match' : 'Without Match'
               }
             />
-            <Bar dataKey="trumpAccountBalance" fill="#3b82f6" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="without401kBalance" fill="#475569" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="trumpAccountBalance" fill="#C5A059" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="without401kBalance" fill="#444444" radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>
 
       {/* Key info box */}
-      <div className="rounded-lg border border-blue-500/30 bg-blue-500/10 p-4">
-        <h3 className="font-semibold text-blue-300">How Employer Contributions Work</h3>
-        <ul className="mt-2 space-y-1 text-sm text-blue-400">
+      <div className="rounded-lg border border-gold-400/30 bg-gold-400/10 p-4">
+        <h3 className="font-semibold text-gold-300">How Employer Contributions Work</h3>
+        <ul className="mt-2 space-y-1 text-sm text-gold-400">
           <li>&bull; Employers can contribute up to <strong>$2,500/year per employee</strong> (not per child)</li>
           <li>&bull; Employer contributions are <strong>tax-free</strong> under IRC §128</li>
           <li>&bull; Employer + personal contributions combined cannot exceed <strong>$5,000/year</strong></li>

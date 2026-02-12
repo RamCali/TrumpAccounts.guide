@@ -73,16 +73,16 @@ export default function FundExpenseTracker() {
   return (
     <div className="space-y-6">
       {/* Fund Comparison Table */}
-      <div className="rounded-xl border border-slate-700 bg-slate-800 shadow-sm overflow-x-auto">
-        <div className="px-6 py-4 border-b border-slate-700">
-          <h2 className="text-lg font-bold text-slate-100">Eligible Funds for Trump Accounts</h2>
-          <p className="text-sm text-slate-400 mt-1">
+      <div className="rounded-xl border border-surface-600 bg-surface-800 shadow-sm overflow-x-auto">
+        <div className="px-6 py-4 border-b border-surface-600">
+          <h2 className="text-lg font-bold text-white">Eligible Funds for Trump Accounts</h2>
+          <p className="text-sm text-gray-400 mt-1">
             Expense ratios capped at 0.1% (10 basis points). All funds below qualify.
           </p>
         </div>
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-slate-700 bg-slate-800/50 text-left text-slate-500">
+            <tr className="border-b border-surface-600 bg-surface-700 text-left text-gray-500">
               <th className="px-4 py-3">Fund</th>
               <th className="px-4 py-3">Ticker</th>
               <th className="px-4 py-3">Provider</th>
@@ -95,22 +95,22 @@ export default function FundExpenseTracker() {
             {funds.map((fund) => (
               <tr
                 key={fund.ticker}
-                className={`border-b border-slate-700/50 cursor-pointer hover:bg-blue-500/10 transition-colors ${
-                  selectedFund === fund.ticker ? 'bg-primary-500/10' : ''
+                className={`border-b border-surface-600/50 cursor-pointer hover:bg-gold-400/10 transition-colors ${
+                  selectedFund === fund.ticker ? 'bg-gold-400/10' : ''
                 }`}
                 onClick={() => setSelectedFund(fund.ticker)}
               >
-                <td className="px-4 py-3 font-medium text-slate-100">{fund.name}</td>
-                <td className="px-4 py-3 font-mono text-primary-400 font-semibold">{fund.ticker}</td>
-                <td className="px-4 py-3 text-slate-400">{fund.provider}</td>
-                <td className="px-4 py-3 text-slate-400">{fund.index}</td>
+                <td className="px-4 py-3 font-medium text-white">{fund.name}</td>
+                <td className="px-4 py-3 font-mono text-gold-400 font-semibold">{fund.ticker}</td>
+                <td className="px-4 py-3 text-gray-400">{fund.provider}</td>
+                <td className="px-4 py-3 text-gray-400">{fund.index}</td>
                 <td className="px-4 py-3 text-right tabular-nums font-medium">
                   {(fund.expenseRatio * 100).toFixed(4)}%
-                  <span className="text-slate-500 ml-1">({bps(fund.expenseRatio)})</span>
+                  <span className="text-gray-500 ml-1">({bps(fund.expenseRatio)})</span>
                 </td>
                 <td className="px-4 py-3 text-right">
                   {fund.expenseRatio <= maxExpenseRatio ? (
-                    <span className="inline-flex items-center rounded-full bg-green-500/20 px-2 py-1 text-xs font-medium text-green-400">
+                    <span className="inline-flex items-center rounded-full bg-mint-400/20 px-2 py-1 text-xs font-medium text-mint-400">
                       Yes
                     </span>
                   ) : (
@@ -126,9 +126,9 @@ export default function FundExpenseTracker() {
       </div>
 
       {/* Leakage Calculator */}
-      <div className="rounded-xl border border-slate-700 bg-slate-800 p-6 shadow-sm">
-        <h2 className="mb-4 text-lg font-bold text-slate-100">Expense Ratio Impact Calculator</h2>
-        <p className="mb-4 text-sm text-slate-400">
+      <div className="rounded-xl border border-surface-600 bg-surface-800 p-6 shadow-sm">
+        <h2 className="mb-4 text-lg font-bold text-white">Expense Ratio Impact Calculator</h2>
+        <p className="mb-4 text-sm text-gray-400">
           Compare {selected.ticker} ({bps(selected.expenseRatio)}) against a higher-fee fund to see how much fees "leak" over 18 years.
         </p>
 
@@ -186,20 +186,20 @@ export default function FundExpenseTracker() {
       </div>
 
       {/* Chart */}
-      <div className="rounded-xl border border-slate-700 bg-slate-800 p-4 shadow-sm">
-        <h3 className="mb-4 text-sm font-semibold text-slate-300">
+      <div className="rounded-xl border border-surface-600 bg-surface-800 p-4 shadow-sm">
+        <h3 className="mb-4 text-sm font-semibold text-gray-300">
           Balance Over 18 Years: Low-Cost vs High-Fee
         </h3>
         <ResponsiveContainer width="100%" height={350}>
           <LineChart data={chartData} margin={{ top: 10, right: 10, left: 10, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+            <CartesianGrid strokeDasharray="3 3" stroke="#333333" />
             <XAxis
               dataKey="year"
-              tick={{ fontSize: 12 }}
-              label={{ value: 'Year', position: 'insideBottom', offset: -5, fontSize: 12 }}
+              tick={{ fontSize: 12, fill: '#9E9E9E' }}
+              label={{ value: 'Year', position: 'insideBottom', offset: -5, fontSize: 12, fill: '#9E9E9E' }}
             />
             <YAxis
-              tick={{ fontSize: 12 }}
+              tick={{ fontSize: 12, fill: '#9E9E9E' }}
               tickFormatter={(v: number) => `$${(v / 1000).toFixed(0)}k`}
             />
             <Tooltip
@@ -212,7 +212,7 @@ export default function FundExpenseTracker() {
                 return [fmt(value), labels[name] || name];
               }}
               labelFormatter={(label: number) => `Year ${label}`}
-              contentStyle={{ borderRadius: '8px', border: '1px solid #334155', backgroundColor: '#1e293b', color: '#e2e8f0' }}
+              contentStyle={{ borderRadius: '8px', border: '1px solid #333333', backgroundColor: '#1a1a1a', color: '#f5f5f5' }}
             />
             <Legend
               formatter={(value: string) => {
@@ -224,8 +224,8 @@ export default function FundExpenseTracker() {
                 return labels[value] || value;
               }}
             />
-            <Line type="monotone" dataKey="noFees" stroke="#475569" strokeWidth={1} strokeDasharray="5 5" dot={false} />
-            <Line type="monotone" dataKey="lowCost" stroke="#22c55e" strokeWidth={2} dot={false} />
+            <Line type="monotone" dataKey="noFees" stroke="#444444" strokeWidth={1} strokeDasharray="5 5" dot={false} />
+            <Line type="monotone" dataKey="lowCost" stroke="#4CAF50" strokeWidth={2} dot={false} />
             <Line type="monotone" dataKey="highCost" stroke="#ef4444" strokeWidth={2} dot={false} />
           </LineChart>
         </ResponsiveContainer>

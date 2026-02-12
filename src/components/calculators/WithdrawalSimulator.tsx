@@ -55,8 +55,8 @@ export default function WithdrawalSimulator() {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-xl border border-slate-700 bg-slate-800 p-6 shadow-sm">
-        <h2 className="mb-4 text-lg font-bold text-slate-100">Configure Your Scenario</h2>
+      <div className="rounded-xl border border-surface-600 bg-surface-800 p-6 shadow-sm">
+        <h2 className="mb-4 text-lg font-bold text-white">Configure Your Scenario</h2>
 
         <SliderInput
           label="Projected Balance at Age 18"
@@ -101,12 +101,12 @@ export default function WithdrawalSimulator() {
         />
 
         <div className="mt-4">
-          <label className="block text-sm font-medium text-slate-300 mb-2">Filing Status</label>
+          <label className="block text-sm font-medium text-gray-300 mb-2">Filing Status</label>
           <div className="flex gap-3">
             <button
               onClick={() => setFilingStatus('single')}
               className={`rounded-lg border-2 px-4 py-2 text-sm font-medium transition-colors ${
-                filingStatus === 'single' ? 'border-primary-500 bg-primary-500/20 text-primary-400' : 'border-slate-700 text-slate-400 hover:border-slate-600'
+                filingStatus === 'single' ? 'border-gold-400 bg-gold-400/20 text-gold-400' : 'border-surface-600 text-gray-400 hover:border-surface-500'
               }`}
             >
               Single
@@ -114,7 +114,7 @@ export default function WithdrawalSimulator() {
             <button
               onClick={() => setFilingStatus('marriedFilingJointly')}
               className={`rounded-lg border-2 px-4 py-2 text-sm font-medium transition-colors ${
-                filingStatus === 'marriedFilingJointly' ? 'border-primary-500 bg-primary-500/20 text-primary-400' : 'border-slate-700 text-slate-400 hover:border-slate-600'
+                filingStatus === 'marriedFilingJointly' ? 'border-gold-400 bg-gold-400/20 text-gold-400' : 'border-surface-600 text-gray-400 hover:border-surface-500'
               }`}
             >
               Married Filing Jointly
@@ -144,20 +144,20 @@ export default function WithdrawalSimulator() {
       </div>
 
       {/* Chart */}
-      <div className="rounded-xl border border-slate-700 bg-slate-800 p-4 shadow-sm">
-        <h3 className="mb-4 text-sm font-semibold text-slate-300">
+      <div className="rounded-xl border border-surface-600 bg-surface-800 p-4 shadow-sm">
+        <h3 className="mb-4 text-sm font-semibold text-gray-300">
           Net Amount After Taxes & Penalties by Withdrawal Age
         </h3>
         <ResponsiveContainer width="100%" height={400}>
           <BarChart data={chartData} margin={{ top: 10, right: 10, left: 10, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+            <CartesianGrid strokeDasharray="3 3" stroke="#333333" />
             <XAxis
               dataKey="age"
-              tick={{ fontSize: 12 }}
-              label={{ value: 'Withdrawal Age', position: 'insideBottom', offset: -5, fontSize: 12 }}
+              tick={{ fontSize: 12, fill: '#9E9E9E' }}
+              label={{ value: 'Withdrawal Age', position: 'insideBottom', offset: -5, fontSize: 12, fill: '#9E9E9E' }}
             />
             <YAxis
-              tick={{ fontSize: 12 }}
+              tick={{ fontSize: 12, fill: '#9E9E9E' }}
               tickFormatter={(v: number) => `$${(v / 1000).toFixed(0)}k`}
             />
             <Tooltip
@@ -170,7 +170,7 @@ export default function WithdrawalSimulator() {
                 return [fmt(value), labels[name] || name];
               }}
               labelFormatter={(label: string) => `Age ${label}`}
-              contentStyle={{ borderRadius: '8px', border: '1px solid #334155', backgroundColor: '#1e293b', color: '#e2e8f0' }}
+              contentStyle={{ borderRadius: '8px', border: '1px solid #333333', backgroundColor: '#1a1a1a', color: '#f5f5f5' }}
             />
             <Legend
               formatter={(value: string) => {
@@ -182,7 +182,7 @@ export default function WithdrawalSimulator() {
                 return labels[value] || value;
               }}
             />
-            <Bar dataKey="netAmount" stackId="a" fill="#22c55e" radius={[0, 0, 0, 0]} />
+            <Bar dataKey="netAmount" stackId="a" fill="#4CAF50" radius={[0, 0, 0, 0]} />
             <Bar dataKey="taxes" stackId="a" fill="#f59e0b" radius={[0, 0, 0, 0]} />
             <Bar dataKey="penalty" stackId="a" fill="#ef4444" radius={[4, 4, 0, 0]} />
           </BarChart>
@@ -190,10 +190,10 @@ export default function WithdrawalSimulator() {
       </div>
 
       {/* Detailed table */}
-      <div className="rounded-xl border border-slate-700 bg-slate-800 shadow-sm overflow-x-auto">
+      <div className="rounded-xl border border-surface-600 bg-surface-800 shadow-sm overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-slate-700 bg-slate-800/50 text-left text-slate-500">
+            <tr className="border-b border-surface-600 bg-surface-700 text-left text-gray-500">
               <th className="px-4 py-3">Age</th>
               <th className="px-4 py-3 text-right">Balance</th>
               <th className="px-4 py-3 text-right">Withdrawal</th>
@@ -205,7 +205,7 @@ export default function WithdrawalSimulator() {
           </thead>
           <tbody>
             {scenarios.map((s) => (
-              <tr key={s.age} className={`border-b border-slate-700/50 ${s.age >= 59.5 ? 'bg-green-500/10' : ''}`}>
+              <tr key={s.age} className={`border-b border-surface-600/50 ${s.age >= 59.5 ? 'bg-mint-400/10' : ''}`}>
                 <td className="px-4 py-2 font-medium">{s.age === 59.5 ? '59½' : s.age}</td>
                 <td className="px-4 py-2 text-right tabular-nums">{fmt(s.balance)}</td>
                 <td className="px-4 py-2 text-right tabular-nums">{fmt(s.withdrawalAmount)}</td>
@@ -213,7 +213,7 @@ export default function WithdrawalSimulator() {
                 <td className="px-4 py-2 text-right tabular-nums text-red-400">
                   {s.earlyWithdrawalPenalty > 0 ? fmt(s.earlyWithdrawalPenalty) : '—'}
                 </td>
-                <td className="px-4 py-2 text-right font-semibold tabular-nums text-green-400">{fmt(s.netAmount)}</td>
+                <td className="px-4 py-2 text-right font-semibold tabular-nums text-mint-400">{fmt(s.netAmount)}</td>
                 <td className="px-4 py-2 text-right tabular-nums">{pct(s.effectiveTaxRate)}</td>
               </tr>
             ))}

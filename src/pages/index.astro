@@ -1,113 +1,221 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { organizationSchema } from '../lib/seo/schema';
+import CalloutBox from '../components/ui/CalloutBox.astro';
 import MiniGrowthCalc from '../components/calculators/MiniGrowthCalc';
 import MiniEligibilityChecker from '../components/calculators/MiniEligibilityChecker';
 import MiniEmployerMatch from '../components/calculators/MiniEmployerMatch';
+import { organizationSchema, faqSchema } from '../lib/seo/schema';
 
-const schema = organizationSchema();
-
-const faqs = [
-  {
-    question: 'What is a Trump Account?',
-    answer: 'A Trump Account is a tax-advantaged savings account created by IRC Section 530A under the One Big Beautiful Bill Act (OBBBA), with a $1,000 federal pilot deposit for children born 2025–2028.',
-  },
-  {
-    question: 'How much can I contribute?',
-    answer: 'Up to $5,000 per year (after-tax). Employers can also contribute up to $2,500/year per employee, tax-free.',
-  },
-  {
-    question: 'What happens at age 18?',
-    answer: 'The Trump Account converts to a traditional IRA with standard IRA rules for contributions and withdrawals.',
-  },
+const schemas = [
+  organizationSchema(),
+  faqSchema([
+    {
+      question: 'What are Trump Accounts?',
+      answer: 'Trump Accounts are tax-advantaged investment accounts created by the One Big Beautiful Bill Act (IRC §530A). Every eligible U.S. child born between 2025–2028 receives a $1,000 federal pilot deposit, invested in S&P 500 index funds until age 18, when the account converts to a traditional IRA.',
+    },
+    {
+      question: 'How do I open a Trump Account?',
+      answer: "File IRS Form 4547 with your 2025 tax return (due April 15, 2026), use the trumpaccounts.gov portal starting mid-2026, or mail the form to the IRS. You need your child's Social Security number.",
+    },
+    {
+      question: 'Who qualifies for a Trump Account?',
+      answer: 'Any U.S. citizen under 18 with a valid Social Security number. There are no income restrictions. The $1,000 pilot deposit is limited to children born January 1, 2025 through December 31, 2028.',
+    },
+    {
+      question: 'How much can I contribute to a Trump Account?',
+      answer: 'Up to $5,000 per year in after-tax contributions. Employers can contribute up to $2,500 per year per employee (tax-free under §128), which counts toward the $5,000 cap.',
+    },
+  ]),
 ];
 ---
 
 <BaseLayout
-  title="Trump Accounts Explained — Free Calculators & Guides"
-  description="The #1 plain-English guide to Trump Accounts (IRC §530A). Free calculators, eligibility checker, and everything parents need to know about the $1,000 federal grant."
-  schema={schema}
+  title="TrumpAccounts.guide — Your Plain-English Guide to Trump Accounts & Form 4547"
+  description="Free calculators, IRS Form 4547 walkthrough, and plain-English guide to Trump Accounts. See how $1,000 grows, check eligibility, and compare to 529 plans."
+  schema={schemas}
 >
-  <!-- Hero -->
-  <section class="px-4 pt-12 pb-6 md:pt-20 md:pb-10">
-    <div class="mx-auto max-w-5xl text-center">
-      <h1 class="text-3xl font-extrabold tracking-tight text-white md:text-5xl">
-        Unlock America's Newest Education Savings Plan
-      </h1>
-      <p class="mt-3 text-base text-gray-400 md:text-lg">
-        Guidance for <span class="font-semibold text-[#c5a059]">K-12 Families</span> on 530A Trump Accounts (One Big Beautiful Bill Act)
-      </p>
-    </div>
-  </section>
-
-  <!-- Three Calculator Mini-Widgets -->
-  <section class="px-4 pb-12">
-    <div class="mx-auto grid max-w-5xl gap-4 md:grid-cols-3">
-      <MiniGrowthCalc client:visible />
-      <MiniEligibilityChecker client:visible />
-      <MiniEmployerMatch client:visible />
-    </div>
-  </section>
-
-  <!-- Bottom Section: Image + Latest Articles + FAQs -->
-  <section class="border-t border-[#2a2a2a] px-4 py-12">
-    <div class="mx-auto grid max-w-5xl gap-8 md:grid-cols-3">
-      <!-- Family Image -->
-      <div class="flex items-start justify-center">
-        <div class="h-48 w-full overflow-hidden rounded-xl bg-surface-800">
-          <img
-            src="https://images.unsplash.com/photo-1609220136736-443140cffec6?w=400&h=300&fit=crop&auto=format"
-            alt="Family planning for their child's future"
-            class="h-full w-full object-cover"
-            loading="lazy"
-            width="400"
-            height="300"
-          />
+  <!-- Hero Section -->
+  <section class="relative border-b border-surface-700">
+    <div class="mx-auto max-w-6xl px-4 py-16 md:py-24">
+      <div class="max-w-3xl">
+        <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-gold-400">
+          IRS Notice 2025-68 &middot; IRC §530A &middot; Form 4547
+        </p>
+        <h1 class="text-4xl font-extrabold leading-tight text-white md:text-5xl">
+          Trump Accounts, Explained in Plain English
+        </h1>
+        <p class="mt-4 text-lg leading-relaxed text-gray-400 md:text-xl">
+          Your child may qualify for a <strong class="text-white">$1,000 federal investment account</strong>.
+          We translate IRS jargon into simple answers for exhausted parents, confused employers, and overwhelmed tax preparers.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/what-are-trump-accounts" class="inline-flex items-center rounded-lg bg-gold-500 px-5 py-3 font-semibold text-surface-900 no-underline transition-colors hover:bg-gold-400">
+            What Are Trump Accounts?
+          </a>
+          <a href="/calculators/eligibility-checker" class="inline-flex items-center rounded-lg border border-surface-600 bg-surface-800 px-5 py-3 font-semibold text-white no-underline transition-colors hover:border-gold-400/40 hover:bg-surface-700">
+            Check Eligibility
+          </a>
+          <a href="/calculators/growth-calculator" class="inline-flex items-center rounded-lg border border-surface-600 bg-surface-800 px-5 py-3 font-semibold text-white no-underline transition-colors hover:border-gold-400/40 hover:bg-surface-700">
+            Growth Calculator
+          </a>
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- Latest Articles -->
-      <div>
-        <h2 class="mb-4 text-lg font-bold text-white">Latest Articles</h2>
-        <ul class="space-y-3">
-          <li>
-            <a href="/what-are-trump-accounts" class="block text-sm text-gray-400 no-underline hover:text-[#c5a059] transition-colors">
-              <span class="font-medium text-gray-300">Trump Account Inc K-12 Families</span>
-              <br />
-              <span class="text-xs">United Trump Society's future for families &mdash; a comprehensive guide.</span>
-            </a>
-          </li>
-          <li>
-            <a href="/for-employers" class="block text-sm text-gray-400 no-underline hover:text-[#c5a059] transition-colors">
-              <span class="font-medium text-gray-300">Employer Contribution Guide</span>
-              <br />
-              <span class="text-xs">How employers can contribute up to $2,500/year tax-free.</span>
-            </a>
-          </li>
-          <li>
-            <a href="/calculators" class="block text-sm text-gray-400 no-underline hover:text-[#c5a059] transition-colors">
-              <span class="font-medium text-gray-300">All Calculators &amp; Tools</span>
-              <br />
-              <span class="text-xs">Growth projections, eligibility, withdrawal simulator &amp; more.</span>
-            </a>
-          </li>
-        </ul>
+  <!-- Key Facts Bar -->
+  <section class="border-b border-surface-700 bg-surface-800">
+    <div class="mx-auto grid max-w-6xl grid-cols-2 gap-4 px-4 py-8 md:grid-cols-4">
+      <div class="text-center">
+        <p class="text-2xl font-extrabold text-gold-400">$1,000</p>
+        <p class="mt-1 text-sm text-gray-400">Federal deposit per child</p>
       </div>
+      <div class="text-center">
+        <p class="text-2xl font-extrabold text-mint-400">$5,000/yr</p>
+        <p class="mt-1 text-sm text-gray-400">Annual contribution limit</p>
+      </div>
+      <div class="text-center">
+        <p class="text-2xl font-extrabold text-gold-400">$2,500/yr</p>
+        <p class="mt-1 text-sm text-gray-400">Employer match (tax-free)</p>
+      </div>
+      <div class="text-center">
+        <p class="text-2xl font-extrabold text-mint-400">Jul 4, 2026</p>
+        <p class="mt-1 text-sm text-gray-400">Accounts go live</p>
+      </div>
+    </div>
+  </section>
 
-      <!-- FAQs -->
-      <div>
-        <h2 class="mb-4 text-lg font-bold text-white">FAQs</h2>
-        <ul class="space-y-3">
-          {faqs.map((faq) => (
-            <li>
-              <p class="text-sm font-medium text-gray-300">{faq.question}</p>
-              <p class="mt-0.5 text-xs text-gray-500">{faq.answer}</p>
-            </li>
-          ))}
-        </ul>
-        <a href="/faq" class="mt-3 inline-block text-sm text-[#c5a059] no-underline hover:text-[#d4b06a]">
-          View all FAQs &rarr;
+  <!-- Mini Calculators Section -->
+  <section class="border-b border-surface-700">
+    <div class="mx-auto max-w-6xl px-4 py-16">
+      <h2 class="text-center text-2xl font-bold text-white md:text-3xl">Try Our Free Calculators</h2>
+      <p class="mx-auto mt-3 max-w-2xl text-center text-gray-400">
+        All tools run in your browser. We don't collect or store any personal data.
+      </p>
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        <div class="rounded-xl border border-surface-600 bg-surface-800 p-6">
+          <h3 class="mb-4 font-bold text-gold-400">Growth Calculator</h3>
+          <MiniGrowthCalc client:visible />
+          <a href="/calculators/growth-calculator" class="mt-4 inline-block text-sm font-medium text-gold-400 no-underline hover:text-gold-300">
+            Full calculator &rarr;
+          </a>
+        </div>
+        <div class="rounded-xl border border-surface-600 bg-surface-800 p-6">
+          <h3 class="mb-4 font-bold text-mint-400">Eligibility Checker</h3>
+          <MiniEligibilityChecker client:visible />
+          <a href="/calculators/eligibility-checker" class="mt-4 inline-block text-sm font-medium text-gold-400 no-underline hover:text-gold-300">
+            Full checker &rarr;
+          </a>
+        </div>
+        <div class="rounded-xl border border-surface-600 bg-surface-800 p-6">
+          <h3 class="mb-4 font-bold text-purple-400">Employer Match</h3>
+          <MiniEmployerMatch client:visible />
+          <a href="/calculators/employer-match" class="mt-4 inline-block text-sm font-medium text-gold-400 no-underline hover:text-gold-300">
+            Full calculator &rarr;
+          </a>
+        </div>
+      </div>
+      <div class="mt-6 text-center">
+        <a href="/calculators" class="text-sm text-gold-400 no-underline hover:text-gold-300">View all 5 calculators &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Hubs Section -->
+  <section class="border-b border-surface-700">
+    <div class="mx-auto max-w-6xl px-4 py-16">
+      <h2 class="text-center text-2xl font-bold text-white md:text-3xl">Everything You Need to Know</h2>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <a href="/what-are-trump-accounts" class="group rounded-xl border border-surface-600 bg-surface-800 p-6 no-underline transition-all hover:border-gold-400/40">
+          <h3 class="font-bold text-white group-hover:text-gold-400">What Are Trump Accounts?</h3>
+          <p class="mt-2 text-sm text-gray-400">The complete guide to IRC §530A — eligibility, contributions, investments, and what happens at age 18.</p>
         </a>
+        <a href="/how-to-open-trump-account" class="group rounded-xl border border-surface-600 bg-surface-800 p-6 no-underline transition-all hover:border-gold-400/40">
+          <h3 class="font-bold text-white group-hover:text-gold-400">How to Open a Trump Account</h3>
+          <p class="mt-2 text-sm text-gray-400">Step-by-step guide to IRS Form 4547, the trumpaccounts.gov portal, and filing with your 2025 tax return.</p>
+        </a>
+        <a href="/irs-notice-2025-68" class="group rounded-xl border border-surface-600 bg-surface-800 p-6 no-underline transition-all hover:border-gold-400/40">
+          <h3 class="font-bold text-white group-hover:text-gold-400">IRS Notice 2025-68 in Plain English</h3>
+          <p class="mt-2 text-sm text-gray-400">We translate the IRS's guidance document into language a tired parent can understand at 11pm.</p>
+        </a>
+        <a href="/compare" class="group rounded-xl border border-surface-600 bg-surface-800 p-6 no-underline transition-all hover:border-gold-400/40">
+          <h3 class="font-bold text-white group-hover:text-gold-400">Trump Account vs 529 vs Roth IRA</h3>
+          <p class="mt-2 text-sm text-gray-400">Side-by-side comparison of every children's savings option. Limits, tax treatment, flexibility.</p>
+        </a>
+        <a href="/for-employers" class="group rounded-xl border border-surface-600 bg-surface-800 p-6 no-underline transition-all hover:border-gold-400/40">
+          <h3 class="font-bold text-white group-hover:text-gold-400">For Employers: §128 Guide</h3>
+          <p class="mt-2 text-sm text-gray-400">How to set up a Trump Account contribution program. $2,500/yr per employee, tax-free.</p>
+        </a>
+        <a href="/faq" class="group rounded-xl border border-surface-600 bg-surface-800 p-6 no-underline transition-all hover:border-gold-400/40">
+          <h3 class="font-bold text-white group-hover:text-gold-400">FAQ: 80+ Questions Answered</h3>
+          <p class="mt-2 text-sm text-gray-400">Eligibility, taxes, divorce, disability, FAFSA, market crashes, and every edge case.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Translation Layer Section -->
+  <section class="border-b border-surface-700 bg-surface-800">
+    <div class="mx-auto max-w-4xl px-4 py-16">
+      <h2 class="text-center text-2xl font-bold text-white md:text-3xl">The Translation Layer</h2>
+      <p class="mx-auto mt-3 max-w-2xl text-center text-gray-400">
+        We read the IRS documents so you don't have to.
+      </p>
+      <div class="mt-8 space-y-6">
+        <CalloutBox type="irs-quote" title="What the IRS says (Notice 2025-68, Section 3.02)">
+          <p>"An initial Trump account is a trust created or organized in the United States for the exclusive benefit of an eligible child as designated beneficiary..."</p>
+        </CalloutBox>
+        <div class="rounded-lg border border-mint-400/30 bg-mint-400/10 p-4">
+          <p class="mb-1 font-semibold text-mint-300">In plain English:</p>
+          <p class="text-sm leading-relaxed text-mint-200">
+            It's an investment account opened for your kid. The money belongs to them. It's held by a financial institution (like Fidelity or Vanguard) and invested in S&P 500 index funds until they turn 18.
+          </p>
+        </div>
+        <div class="text-center">
+          <a href="/irs-notice-2025-68" class="inline-flex items-center rounded-lg border border-surface-600 bg-surface-700 px-5 py-3 font-semibold text-white no-underline transition-colors hover:bg-surface-600">
+            Read the Full Translation &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Preview -->
+  <section>
+    <div class="mx-auto max-w-4xl px-4 py-16">
+      <h2 class="text-center text-2xl font-bold text-white md:text-3xl">Frequently Asked Questions</h2>
+      <div class="mt-8 space-y-4">
+        <details class="group rounded-lg border border-surface-600 bg-surface-800">
+          <summary class="cursor-pointer px-6 py-4 font-semibold text-white">What are Trump Accounts?</summary>
+          <div class="border-t border-surface-700 px-6 py-4 text-sm text-gray-300">
+            Trump Accounts are tax-advantaged investment accounts created by the One Big Beautiful Bill Act under IRC §530A. Every eligible U.S. citizen child born between 2025–2028 can receive a $1,000 federal pilot deposit. The money is invested in S&P 500 index funds during the "growth phase" (birth to 18), then converts to a traditional IRA. Parents and employers can contribute up to $5,000/year.
+            <a href="/what-are-trump-accounts" class="mt-2 block font-medium text-gold-400 no-underline">Read the full guide &rarr;</a>
+          </div>
+        </details>
+        <details class="group rounded-lg border border-surface-600 bg-surface-800">
+          <summary class="cursor-pointer px-6 py-4 font-semibold text-white">How do I open a Trump Account for my child?</summary>
+          <div class="border-t border-surface-700 px-6 py-4 text-sm text-gray-300">
+            File IRS Form 4547 with your 2025 tax return (due April 15, 2026). You can also use the trumpaccounts.gov portal starting mid-2026, or mail the form. You'll need your child's Social Security number. The IRS will send activation info starting May 2026.
+            <a href="/how-to-open-trump-account" class="mt-2 block font-medium text-gold-400 no-underline">Step-by-step guide &rarr;</a>
+          </div>
+        </details>
+        <details class="group rounded-lg border border-surface-600 bg-surface-800">
+          <summary class="cursor-pointer px-6 py-4 font-semibold text-white">Who qualifies for the $1,000 federal deposit?</summary>
+          <div class="border-t border-surface-700 px-6 py-4 text-sm text-gray-300">
+            U.S. citizen children born between January 1, 2025 and December 31, 2028 who have a valid Social Security number. There are no income restrictions — every qualifying child gets the same $1,000. Children older than this can still open a Trump Account but won't receive the pilot deposit.
+            <a href="/calculators/eligibility-checker" class="mt-2 block font-medium text-gold-400 no-underline">Check your child's eligibility &rarr;</a>
+          </div>
+        </details>
+        <details class="group rounded-lg border border-surface-600 bg-surface-800">
+          <summary class="cursor-pointer px-6 py-4 font-semibold text-white">Is this different from a 529 plan?</summary>
+          <div class="border-t border-surface-700 px-6 py-4 text-sm text-gray-300">
+            Yes. A 529 is for education expenses with tax-free withdrawals. A Trump Account converts to a traditional IRA at 18 — the money can be used for anything. Different tax treatment, different limits, different investment options. Most families should use both.
+            <a href="/compare" class="mt-2 block font-medium text-gold-400 no-underline">See full comparison &rarr;</a>
+          </div>
+        </details>
+      </div>
+      <div class="mt-6 text-center">
+        <a href="/faq" class="text-gold-400 no-underline hover:text-gold-300">See all FAQs &rarr;</a>
       </div>
     </div>
   </section>
