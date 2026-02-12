@@ -1,0 +1,58 @@
+---
+import '../styles/global.css';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import OpenGraph from '../components/seo/OpenGraph.astro';
+import SchemaOrg from '../components/seo/SchemaOrg.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+  ogType?: string;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  schema,
+  ogType = 'website',
+} = Astro.props;
+
+const siteUrl = 'https://trumpaccounts.guide';
+const canonicalUrl = canonical || new URL(Astro.url.pathname, siteUrl).toString();
+const fullTitle = title.includes('TrumpAccounts') ? title : `${title} | TrumpAccounts.guide`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="/TrumpAccounts.guide_favicon.png" />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+
+    <OpenGraph
+      title={fullTitle}
+      description={description}
+      url={canonicalUrl}
+      type={ogType}
+    />
+
+    {schema && <SchemaOrg schema={schema} />}
+  </head>
+  <body class="flex min-h-screen flex-col bg-surface-900">
+    <a href="#main-content" class="skip-link">Skip to content</a>
+    <Header />
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,23 @@
+---
+interface Props {
+  items: { question: string; answer: string }[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="divide-y divide-surface-600 rounded-lg border border-surface-600">
+  {items.map((item, i) => (
+    <details class="group" name="faq-accordion">
+      <summary class="flex cursor-pointer items-center justify-between px-4 py-3 text-left font-medium text-gray-200 hover:bg-surface-700/50">
+        <span>{item.question}</span>
+        <svg class="h-5 w-5 shrink-0 text-gray-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </summary>
+      <div class="px-4 pb-4 text-sm text-gray-400 leading-relaxed">
+        <Fragment set:html={item.answer} />
+      </div>
+    </details>
+  ))}
+</div>

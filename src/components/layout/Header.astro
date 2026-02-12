@@ -1,0 +1,85 @@
+---
+const navItems = [
+  { label: 'Eligibility', href: '/calculators/eligibility-checker' },
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Employer Info', href: '/for-employers' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 border-b border-surface-700 bg-surface-800/95 backdrop-blur-sm">
+  <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3" aria-label="Main navigation">
+    <a href="/" class="flex items-center no-underline">
+      <img
+        src="/TrumpAccounts.guide.png"
+        alt="TrumpAccounts.guide — Form 4547 Trump Accounts"
+        class="h-8 w-auto md:h-10"
+        width="200"
+        height="40"
+      />
+    </a>
+
+    <!-- Desktop Nav -->
+    <ul class="hidden items-center gap-1 md:flex" role="list">
+      {navItems.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class:list={[
+              'rounded-lg px-3 py-2 text-sm font-medium no-underline transition-colors',
+              currentPath.startsWith(item.href)
+                ? 'bg-gold-400/15 text-gold-400'
+                : 'text-gray-400 hover:bg-surface-700 hover:text-gray-200',
+            ]}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- Mobile Menu Button -->
+    <button
+      id="mobile-menu-btn"
+      class="rounded-lg p-2 text-gray-400 hover:bg-surface-700 md:hidden"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+    >
+      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile Nav -->
+  <div id="mobile-menu" class="hidden border-t border-surface-700 bg-surface-800 md:hidden">
+    <ul class="space-y-1 px-4 py-3" role="list">
+      {navItems.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class:list={[
+              'block rounded-lg px-3 py-2 text-sm font-medium no-underline',
+              currentPath.startsWith(item.href)
+                ? 'bg-gold-400/15 text-gold-400'
+                : 'text-gray-400 hover:bg-surface-700',
+            ]}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn?.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    menu?.classList.toggle('hidden');
+  });
+</script>

@@ -1,0 +1,161 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CalloutBox from '../components/ui/CalloutBox.astro';
+import LastUpdated from '../components/ui/LastUpdated.astro';
+import Accordion from '../components/ui/Accordion.astro';
+import { articleSchema, breadcrumbSchema } from '../lib/seo/schema';
+
+const schemas = [
+  articleSchema({
+    title: 'What Are Trump Accounts? A Complete Guide for Parents',
+    description: 'Everything you need to know about Trump Accounts (IRC §530A) — the new tax-advantaged savings account with a $1,000 federal deposit for kids.',
+    url: 'https://trumpaccounts.guide/what-are-trump-accounts',
+    datePublished: '2025-12-03',
+    dateModified: '2026-02-01',
+    author: 'TrumpAccounts.guide Editorial Team',
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: 'https://trumpaccounts.guide' },
+    { name: 'What Are Trump Accounts?', url: 'https://trumpaccounts.guide/what-are-trump-accounts' },
+  ]),
+];
+
+const faqs = [
+  {
+    question: 'Is a Trump Account the same as a 529 plan?',
+    answer: 'No. While both help families save for children, a 529 is for education expenses with tax-free growth, while a Trump Account converts to a traditional IRA at age 18 with tax-deferred growth and a $1,000 federal seed deposit.',
+  },
+  {
+    question: 'Can I open a Trump Account for my existing child (born before 2025)?',
+    answer: 'Yes! Any U.S. citizen child under 18 can have a Trump Account opened for them. However, only children born between Jan 1, 2025 and Dec 31, 2028 receive the $1,000 federal pilot deposit.',
+  },
+  {
+    question: 'What if I make too much money?',
+    answer: 'There are <strong>no income restrictions</strong> for Trump Accounts. Unlike Roth IRAs, any family can open and contribute regardless of income.',
+  },
+  {
+    question: 'Can I withdraw the money before age 18?',
+    answer: 'No. Withdrawals before age 18 are not permitted except for rollovers to another Trump Account, return of excess contributions, or in the event of the child\'s death.',
+  },
+];
+---
+
+<BaseLayout
+  title="What Are Trump Accounts? Complete Guide (2026)"
+  description="Everything you need to know about Trump Accounts (IRC §530A) — the new tax-advantaged savings account with a $1,000 federal deposit for kids."
+  schema={schemas}
+  ogType="article"
+>
+  <article class="mx-auto max-w-3xl px-4 py-12">
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-slate-500">
+        <li><a href="/" class="hover:text-gold-400 no-underline">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="text-white font-medium">What Are Trump Accounts?</span>
+        </li>
+      </ol>
+    </nav>
+
+    <LastUpdated date="February 2026" />
+
+    <div class="prose mt-4">
+      <h1>What Are Trump Accounts? A Complete Guide for Parents</h1>
+
+      <p>
+        <strong>Trump Accounts</strong> are a new type of tax-advantaged savings account created by the
+        <strong>One Big Beautiful Bill Act (OBBBA)</strong>, signed into law on July 4, 2025.
+        Officially established under <strong>IRC Section 530A</strong>, they're designed to give every
+        American child a financial head start.
+      </p>
+
+      <CalloutBox type="tip" title="The short version">
+        <p>The government deposits $1,000 for every child born 2025–2028. Parents can add up to $5,000/year. It grows tax-deferred in S&P 500 funds until age 18, then converts to a traditional IRA.</p>
+      </CalloutBox>
+
+      <h2>How Trump Accounts Work</h2>
+
+      <ol>
+        <li><strong>Federal Seed Money:</strong> Children born January 1, 2025 through December 31, 2028 receive a one-time <strong>$1,000 pilot deposit</strong> from the federal government.</li>
+        <li><strong>Annual Contributions:</strong> Parents (or anyone) can contribute up to <strong>$5,000/year</strong> in after-tax dollars. This limit is indexed for inflation starting in 2027.</li>
+        <li><strong>Employer Contributions:</strong> Employers can contribute up to <strong>$2,500/year per employee</strong>, tax-free under IRC §128. This counts toward the $5,000 cap.</li>
+        <li><strong>Investment:</strong> All funds must be invested in mutual funds or ETFs tracking the <strong>S&P 500 or a broad U.S. equity index</strong>. Expense ratios are capped at 0.1%.</li>
+        <li><strong>Growth Phase:</strong> From birth to age 18, the account grows tax-deferred. No withdrawals are allowed.</li>
+        <li><strong>At Age 18:</strong> The Trump Account automatically converts to a <strong>traditional IRA</strong> with standard IRA rules.</li>
+      </ol>
+
+      <h2>Who Is Eligible?</h2>
+
+      <p>To open a Trump Account, the child must be:</p>
+      <ul>
+        <li>A <strong>U.S. citizen</strong></li>
+        <li>Have a valid <strong>Social Security Number (SSN)</strong></li>
+        <li><strong>Under 18</strong> at the end of the election year</li>
+      </ul>
+
+      <p>There are <strong>no income restrictions</strong> — any family can participate regardless of how much they earn.</p>
+
+      <CalloutBox type="info" title="$1,000 pilot deposit eligibility">
+        <p>Only children born between <strong>January 1, 2025</strong> and <strong>December 31, 2028</strong> qualify for the $1,000 federal pilot deposit. Children born outside this window can still open a Trump Account but won't receive the deposit.</p>
+      </CalloutBox>
+
+      <h2>How to Open a Trump Account</h2>
+
+      <p>There are three ways to establish a Trump Account:</p>
+      <ol>
+        <li><strong>With your tax return:</strong> Include <strong>IRS Form 4547</strong> (Trump Account Election(s)) with your 2025 tax return, due April 15, 2026.</li>
+        <li><strong>Online portal:</strong> Through <a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer">trumpaccounts.gov</a> (expected to launch mid-2026).</li>
+        <li><strong>By mail:</strong> Send Form 4547 to the IRS.</li>
+      </ol>
+
+      <h2>The Dell Foundation Pledge</h2>
+
+      <p>Michael and Susan Dell pledged <strong>$6.25 billion</strong> — $250 per child under 10 in ZIP codes where the median income is below $150,000. This is in addition to the $1,000 federal pilot deposit.</p>
+
+      <h2>Tax Treatment</h2>
+
+      <p>Trump Accounts use <strong>traditional (tax-deferred) treatment</strong>:</p>
+      <ul>
+        <li>Contributions are made with <strong>after-tax dollars</strong> (no tax deduction)</li>
+        <li>Earnings grow <strong>tax-deferred</strong> during the growth phase</li>
+        <li>Withdrawals after age 18 are taxed as <strong>ordinary income</strong></li>
+        <li>Before age 59½, a <strong>10% early withdrawal penalty</strong> applies (standard IRA rules)</li>
+      </ul>
+
+      <CalloutBox type="irs-quote" title="From IRS Notice 2025-68">
+        <p><em>"A Trump Account is a trust created or organized in the United States for the exclusive benefit of an eligible beneficiary..."</em></p>
+        <p class="mt-2"><strong>Plain English:</strong> It's a savings account your kid owns. You manage it until they turn 18, then it becomes their traditional IRA.</p>
+      </CalloutBox>
+
+      <h2>Frequently Asked Questions</h2>
+    </div>
+
+    <div class="mt-6">
+      <Accordion items={faqs} />
+    </div>
+
+    <div class="mt-8 prose">
+      <h2>Run the Numbers</h2>
+      <p>Use our free calculators to see how a Trump Account could work for your family:</p>
+    </div>
+
+    <div class="mt-4 grid gap-3 sm:grid-cols-2">
+      <a href="/calculators/eligibility-checker" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">Eligibility Checker</h3>
+        <p class="text-sm text-gray-400">See if your child qualifies</p>
+      </a>
+      <a href="/calculators/growth-calculator" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">Growth Calculator</h3>
+        <p class="text-sm text-gray-400">Project how much it could grow</p>
+      </a>
+    </div>
+
+    <div class="mt-8 rounded-lg border border-surface-600 bg-surface-800 p-4 text-xs text-gray-500">
+      <p><strong class="text-gray-300">Sources:</strong></p>
+      <ul class="mt-1 space-y-0.5">
+        <li><a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf" target="_blank" rel="noopener noreferrer" class="text-gold-400 hover:text-gold-300">IRS Notice 2025-68</a></li>
+        <li>One Big Beautiful Bill Act (OBBBA), IRC Section 530A</li>
+        <li><a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer" class="text-gold-400 hover:text-gold-300">trumpaccounts.gov</a></li>
+      </ul>
+    </div>
+  </article>
+</BaseLayout>

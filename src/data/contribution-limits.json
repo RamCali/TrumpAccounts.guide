@@ -1,0 +1,25 @@
+{
+  "pilotDeposit": 1000,
+  "pilotDepositStartYear": 2025,
+  "pilotDepositEndYear": 2028,
+  "annualContributionLimit": 5000,
+  "employerContributionLimit": 2500,
+  "inflationIndexStartYear": 2027,
+  "investmentRequirement": "Mutual funds or ETFs tracking S&P 500 or broad U.S. equity index",
+  "maxExpenseRatio": 0.001,
+  "growthPhaseEndAge": 18,
+  "iraConversionAge": 18,
+  "form": "IRS Form 4547",
+  "portal": "trumpaccounts.gov",
+  "legalBasis": "IRC Section 530A",
+  "legislation": "One Big Beautiful Bill Act (OBBBA)",
+  "signedDate": "2025-07-04",
+  "irsNotice": "Notice 2025-68",
+  "irsNoticeDate": "2025-12-03",
+  "dellPledge": {
+    "totalAmount": 6250000000,
+    "perChildAmount": 250,
+    "eligibleAge": "under 10",
+    "zipCodeMedianIncomeThreshold": 150000
+  }
+}

@@ -1,0 +1,13 @@
+---
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import GrowthCalculator from '../../components/calculators/GrowthCalculator';
+---
+
+<CalculatorLayout
+  title="Trump Account Growth Calculator"
+  description="See how the $1,000 federal deposit can grow over 18 years with compound interest. Adjust monthly contributions, expected returns, and birth year."
+  calculatorName="Growth Calculator"
+  slug="growth-calculator"
+>
+  <GrowthCalculator client:visible />
+</CalculatorLayout>

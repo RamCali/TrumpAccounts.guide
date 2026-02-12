@@ -1,0 +1,14 @@
+---
+interface Props {
+  date: string;
+}
+
+const { date } = Astro.props;
+---
+
+<span class="inline-flex items-center gap-1 rounded-full bg-mint-400/10 px-3 py-1 text-xs font-medium text-mint-400 ring-1 ring-mint-400/30 ring-inset">
+  <svg class="h-3 w-3" fill="currentColor" viewBox="0 0 20 20">
+    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+  </svg>
+  Last verified: {date}
+</span>

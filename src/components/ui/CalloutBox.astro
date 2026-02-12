@@ -1,0 +1,33 @@
+---
+interface Props {
+  type?: 'tip' | 'warning' | 'info' | 'irs-quote';
+  title?: string;
+}
+
+const { type = 'info', title } = Astro.props;
+
+const styles = {
+  tip: 'border-mint-400/50 bg-mint-400/10 text-mint-300',
+  warning: 'border-amber-500/50 bg-amber-500/10 text-amber-300',
+  info: 'border-gold-400/50 bg-gold-400/10 text-gold-300',
+  'irs-quote': 'border-surface-600 bg-surface-800 text-gray-300',
+};
+
+const icons = {
+  tip: '&#9989;',
+  warning: '&#9888;&#65039;',
+  info: '&#8505;&#65039;',
+  'irs-quote': '&#128220;',
+};
+---
+
+<div class:list={['my-4 rounded-lg border-l-4 p-4', styles[type]]}>
+  {title && (
+    <p class="mb-1 font-semibold">
+      <Fragment set:html={icons[type]} /> {title}
+    </p>
+  )}
+  <div class="text-sm leading-relaxed">
+    <slot />
+  </div>
+</div>

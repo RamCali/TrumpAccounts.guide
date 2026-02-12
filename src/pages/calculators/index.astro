@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { breadcrumbSchema } from '../../lib/seo/schema';
+
+const schema = breadcrumbSchema([
+  { name: 'Home', url: 'https://trumpaccounts.guide' },
+  { name: 'Calculators', url: 'https://trumpaccounts.guide/calculators' },
+]);
+
+const calculators = [
+  {
+    title: 'Growth Calculator',
+    description: 'See how the $1,000 federal deposit can grow over 18 years with compound interest. Adjust contributions, returns, and birth year.',
+    href: '/calculators/growth-calculator',
+    color: 'gold',
+    icon: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
+  },
+  {
+    title: 'Eligibility Checker',
+    description: 'Answer 3 quick questions to find out if your child qualifies for a Trump Account and the $1,000 federal pilot deposit.',
+    href: '/calculators/eligibility-checker',
+    color: 'mint',
+    icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+  },
+  {
+    title: 'Employer Match Calculator',
+    description: 'Calculate how much more your Trump Account grows with employer contributions of up to $2,500/year (tax-free under §128).',
+    href: '/calculators/employer-match',
+    color: 'purple',
+    icon: 'M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
+  },
+  {
+    title: 'Withdrawal & Tax Simulator',
+    description: 'See how much you lose to taxes and penalties at different withdrawal ages. Compare taking money at 18 vs 30 vs 59½ vs 65.',
+    href: '/calculators/withdrawal-simulator',
+    color: 'amber',
+    icon: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+  },
+  {
+    title: 'Fund Expense Tracker',
+    description: 'Compare eligible S&P 500 ETFs and mutual funds. See how even small fee differences cause "leakage" over 18 years.',
+    href: '/calculators/fund-expense-tracker',
+    color: 'red',
+    icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
+  },
+];
+
+const colorMap: Record<string, { bg: string; text: string; hover: string }> = {
+  gold: { bg: 'bg-gold-400/10', text: 'text-gold-400', hover: 'hover:border-gold-400/40' },
+  mint: { bg: 'bg-mint-400/10', text: 'text-mint-400', hover: 'hover:border-mint-400/40' },
+  purple: { bg: 'bg-purple-500/10', text: 'text-purple-400', hover: 'hover:border-purple-400/40' },
+  amber: { bg: 'bg-amber-500/10', text: 'text-amber-400', hover: 'hover:border-amber-400/40' },
+  red: { bg: 'bg-red-500/10', text: 'text-red-400', hover: 'hover:border-red-400/40' },
+};
+---
+
+<BaseLayout
+  title="Free Trump Account Calculators & Tools"
+  description="Interactive calculators for Trump Accounts: growth projections, eligibility checker, employer match calculator, withdrawal simulator, and fund expense tracker."
+  schema={schema}
+>
+  <div class="mx-auto max-w-4xl px-4 py-12">
+    <h1 class="text-3xl font-extrabold text-white md:text-4xl">
+      Trump Account Calculators & Tools
+    </h1>
+    <p class="mt-3 text-lg text-gray-400">
+      All calculators are free, run entirely in your browser, and don't store any personal data.
+    </p>
+
+    <div class="mt-8 space-y-4">
+      {calculators.map((calc) => {
+        const colors = colorMap[calc.color];
+        return (
+          <a
+            href={calc.href}
+            class:list={['group flex items-start gap-4 rounded-xl border border-surface-600 bg-surface-800 p-6 no-underline transition-all', colors.hover]}
+          >
+            <div class:list={['shrink-0 rounded-lg p-3', colors.bg, colors.text]}>
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={calc.icon} />
+              </svg>
+            </div>
+            <div>
+              <h2 class:list={['font-bold text-white group-hover:' + colors.text.replace('text-', '')]}>{calc.title}</h2>
+              <p class="mt-1 text-sm text-gray-400">{calc.description}</p>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</BaseLayout>

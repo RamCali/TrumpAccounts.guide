@@ -1,0 +1,97 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import SchemaOrg from '../components/seo/SchemaOrg.astro';
+import { webApplicationSchema, breadcrumbSchema } from '../lib/seo/schema';
+
+interface Props {
+  title: string;
+  description: string;
+  calculatorName: string;
+  slug: string;
+}
+
+const { title, description, calculatorName, slug } = Astro.props;
+
+const siteUrl = 'https://trumpaccounts.guide';
+
+const schemas = [
+  webApplicationSchema({
+    name: calculatorName,
+    description,
+    url: `${siteUrl}/calculators/${slug}`,
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: siteUrl },
+    { name: 'Calculators', url: `${siteUrl}/calculators` },
+    { name: calculatorName, url: `${siteUrl}/calculators/${slug}` },
+  ]),
+];
+---
+
+<BaseLayout title={title} description={description} schema={schemas}>
+  <div class="mx-auto max-w-4xl px-4 py-8">
+    <!-- Breadcrumb -->
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-gold-400 no-underline">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <a href="/calculators" class="hover:text-gold-400 no-underline">Calculators</a>
+        </li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="text-white font-medium">{calculatorName}</span>
+        </li>
+      </ol>
+    </nav>
+
+    <h1 class="mb-2 text-3xl font-extrabold text-white md:text-4xl">{title}</h1>
+    <p class="mb-8 text-lg text-gray-400">{description}</p>
+
+    <slot />
+
+    <!-- Disclaimer -->
+    <div class="mt-10 rounded-lg border border-amber-500/30 bg-amber-500/10 p-4">
+      <p class="text-sm text-amber-300">
+        <strong class="text-amber-200">Disclaimer:</strong> This calculator is for educational and illustrative purposes only.
+        It does not constitute tax or financial advice. Actual returns will vary.
+        Consult a qualified tax professional or financial advisor before making investment decisions.
+      </p>
+    </div>
+
+    <!-- Cross-links to other calculators -->
+    <div class="mt-8">
+      <h2 class="mb-4 text-lg font-bold text-white">More Calculators & Tools</h2>
+      <div class="grid gap-3 sm:grid-cols-2">
+        {slug !== 'growth-calculator' && (
+          <a href="/calculators/growth-calculator" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+            <h3 class="font-semibold text-white">Growth Calculator</h3>
+            <p class="text-sm text-gray-400">See how $1,000 can grow over 18+ years</p>
+          </a>
+        )}
+        {slug !== 'eligibility-checker' && (
+          <a href="/calculators/eligibility-checker" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+            <h3 class="font-semibold text-white">Eligibility Checker</h3>
+            <p class="text-sm text-gray-400">Does your child qualify for the $1,000 grant?</p>
+          </a>
+        )}
+        {slug !== 'employer-match' && (
+          <a href="/calculators/employer-match" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+            <h3 class="font-semibold text-white">Employer Match Calculator</h3>
+            <p class="text-sm text-gray-400">Calculate your employer contribution benefit</p>
+          </a>
+        )}
+        {slug !== 'withdrawal-simulator' && (
+          <a href="/calculators/withdrawal-simulator" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+            <h3 class="font-semibold text-white">Withdrawal Simulator</h3>
+            <p class="text-sm text-gray-400">See the tax impact of withdrawing at different ages</p>
+          </a>
+        )}
+        {slug !== 'fund-expense-tracker' && (
+          <a href="/calculators/fund-expense-tracker" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+            <h3 class="font-semibold text-white">Fund Expense Tracker</h3>
+            <p class="text-sm text-gray-400">Compare eligible ETFs and their expense ratios</p>
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+</BaseLayout>

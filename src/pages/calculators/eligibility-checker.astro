@@ -1,0 +1,13 @@
+---
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import EligibilityChecker from '../../components/calculators/EligibilityChecker';
+---
+
+<CalculatorLayout
+  title="Trump Account Eligibility Checker"
+  description="Answer 3 quick questions to find out if your child qualifies for a Trump Account and the $1,000 federal pilot deposit."
+  calculatorName="Eligibility Checker"
+  slug="eligibility-checker"
+>
+  <EligibilityChecker client:visible />
+</CalculatorLayout>

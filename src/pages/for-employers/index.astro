@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { breadcrumbSchema } from '../../lib/seo/schema';
+
+const schema = breadcrumbSchema([
+  { name: 'Home', url: 'https://trumpaccounts.guide' },
+  { name: 'For Employers', url: 'https://trumpaccounts.guide/for-employers' },
+]);
+---
+
+<BaseLayout
+  title="Trump Account Employer Contributions — Guide for HR & Employers"
+  description="How employers can contribute up to $2,500/year per employee to Trump Accounts, tax-free under IRC §128. A new employee benefit for recruitment and retention."
+  schema={schema}
+>
+  <article class="mx-auto max-w-3xl px-4 py-12">
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-gold-400 no-underline">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="text-white font-medium">For Employers</span>
+        </li>
+      </ol>
+    </nav>
+
+    <div class="prose">
+      <h1>Trump Account Employer Contributions: What HR Needs to Know</h1>
+
+      <p>
+        The One Big Beautiful Bill Act created a powerful new employee benefit: employers can contribute
+        up to <strong>$2,500 per year per employee</strong> to Trump Accounts, completely
+        <strong>tax-free</strong> under IRC §128.
+      </p>
+
+      <CalloutBox type="tip" title="Key point for employers">
+        <p>Employer contributions are <strong>per employee</strong>, not per dependent child. One employee with three children still receives up to $2,500 total.</p>
+      </CalloutBox>
+
+      <h2>How Employer Contributions Work</h2>
+
+      <ul>
+        <li><strong>Annual limit:</strong> $2,500/year per employee</li>
+        <li><strong>Tax treatment:</strong> Employer contributions are excluded from the employee's gross income under IRC §128</li>
+        <li><strong>Cap:</strong> Combined employer + employee contributions cannot exceed $5,000/year per account</li>
+        <li><strong>Per employee, not per child:</strong> The $2,500 limit is per employee, regardless of number of dependents</li>
+      </ul>
+
+      <h2>Why Offer This Benefit?</h2>
+
+      <ul>
+        <li><strong>Recruitment edge:</strong> A unique benefit that competitors may not yet offer</li>
+        <li><strong>Retention tool:</strong> Employees with children have a strong incentive to stay</li>
+        <li><strong>Tax advantage:</strong> Contributions are tax-deductible for the employer</li>
+        <li><strong>Simple administration:</strong> Similar to HSA or 401(k) contributions</li>
+        <li><strong>Family-friendly signal:</strong> Shows commitment to employees' families</li>
+      </ul>
+
+      <h2>Implementation Steps</h2>
+
+      <ol>
+        <li>Decide on a contribution amount (up to $2,500/year per employee)</li>
+        <li>Update payroll systems to track contributions</li>
+        <li>Communicate the benefit to employees</li>
+        <li>Coordinate with employees' Trump Account elections (Form 4547)</li>
+        <li>Report contributions per IRC §128 requirements</li>
+      </ol>
+
+      <CalloutBox type="warning" title="Consult a tax professional">
+        <p>The IRS is still issuing guidance on employer reporting requirements. Work with your tax advisor and payroll provider to implement correctly.</p>
+      </CalloutBox>
+
+      <h2>Employee Communication Template</h2>
+
+      <p>Here's a starting point for announcing this benefit to employees:</p>
+
+      <blockquote>
+        "Starting [date], [Company] will contribute up to $2,500 per year to eligible Trump Accounts for employees with qualifying children. This contribution is tax-free to you under IRC §128 and helps build your child's financial future. Contact HR to learn more."
+      </blockquote>
+    </div>
+
+    <div class="mt-8 grid gap-3 sm:grid-cols-2">
+      <a href="/calculators/employer-match" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">Employer Match Calculator</h3>
+        <p class="text-sm text-gray-400">Show employees the long-term impact of matching</p>
+      </a>
+      <a href="/compare" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">Compare Account Types</h3>
+        <p class="text-sm text-gray-400">Trump Account vs 529 vs other options</p>
+      </a>
+    </div>
+  </article>
+</BaseLayout>

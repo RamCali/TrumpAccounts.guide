@@ -1,0 +1,139 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { breadcrumbSchema } from '../../lib/seo/schema';
+import { accountTypes } from '../../lib/calculators/comparison';
+
+const schema = breadcrumbSchema([
+  { name: 'Home', url: 'https://trumpaccounts.guide' },
+  { name: 'Compare', url: 'https://trumpaccounts.guide/compare' },
+]);
+
+const accounts = Object.values(accountTypes);
+---
+
+<BaseLayout
+  title="Trump Account vs 529 vs Roth IRA vs UTMA — Comparison"
+  description="Side-by-side comparison of Trump Accounts, 529 plans, Roth IRAs, and UTMA custodial accounts. See contribution limits, tax treatment, and eligibility."
+  schema={schema}
+>
+  <div class="mx-auto max-w-6xl px-4 py-12">
+    <h1 class="text-3xl font-extrabold text-white md:text-4xl">
+      Trump Account vs Other Savings Accounts
+    </h1>
+    <p class="mt-3 text-lg text-gray-400">
+      How does the new Trump Account stack up against 529 plans, Roth IRAs, and custodial accounts?
+    </p>
+
+    <!-- Comparison Table -->
+    <div class="mt-8 overflow-x-auto rounded-xl border border-surface-600">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-surface-700">
+            <th class="sticky left-0 bg-surface-700 px-4 py-3 text-left font-semibold text-gray-200">Feature</th>
+            {accounts.map((a) => (
+              <th class="px-4 py-3 text-left font-semibold text-gray-200 min-w-[180px]">
+                {a.name}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-surface-700/50">
+          <tr>
+            <td class="sticky left-0 bg-surface-900 px-4 py-3 font-medium text-white">Annual Limit</td>
+            {accounts.map((a) => (
+              <td class="px-4 py-3 text-gray-300">${a.annualLimit.toLocaleString()}</td>
+            ))}
+          </tr>
+          <tr class="bg-surface-800">
+            <td class="sticky left-0 bg-surface-800 px-4 py-3 font-medium text-white">Tax on Contributions</td>
+            {accounts.map((a) => (
+              <td class="px-4 py-3 capitalize text-gray-300">{a.taxOnContributions}</td>
+            ))}
+          </tr>
+          <tr>
+            <td class="sticky left-0 bg-surface-900 px-4 py-3 font-medium text-white">Tax on Growth</td>
+            {accounts.map((a) => (
+              <td class="px-4 py-3 capitalize text-gray-300">{a.taxOnGrowth}</td>
+            ))}
+          </tr>
+          <tr class="bg-surface-800">
+            <td class="sticky left-0 bg-surface-800 px-4 py-3 font-medium text-white">Tax on Withdrawal</td>
+            {accounts.map((a) => (
+              <td class="px-4 py-3 text-xs leading-relaxed text-gray-300">{a.taxOnWithdrawal}</td>
+            ))}
+          </tr>
+          <tr>
+            <td class="sticky left-0 bg-surface-900 px-4 py-3 font-medium text-white">Investment Options</td>
+            {accounts.map((a) => (
+              <td class="px-4 py-3 text-xs leading-relaxed text-gray-300">{a.investmentOptions}</td>
+            ))}
+          </tr>
+          <tr class="bg-surface-800">
+            <td class="sticky left-0 bg-surface-800 px-4 py-3 font-medium text-white">Age Restriction</td>
+            {accounts.map((a) => (
+              <td class="px-4 py-3 text-xs leading-relaxed text-gray-300">{a.ageRestriction}</td>
+            ))}
+          </tr>
+          <tr>
+            <td class="sticky left-0 bg-surface-900 px-4 py-3 font-medium text-white">Income Restriction</td>
+            {accounts.map((a) => (
+              <td class="px-4 py-3 text-xs text-gray-300">{a.incomeRestriction}</td>
+            ))}
+          </tr>
+          <tr class="bg-surface-800">
+            <td class="sticky left-0 bg-surface-800 px-4 py-3 font-medium text-white">Usage Restrictions</td>
+            {accounts.map((a) => (
+              <td class="px-4 py-3 text-xs leading-relaxed text-gray-300">{a.usageRestriction}</td>
+            ))}
+          </tr>
+          <tr>
+            <td class="sticky left-0 bg-surface-900 px-4 py-3 font-medium text-white">Federal Seed Money</td>
+            {accounts.map((a) => (
+              <td class="px-4 py-3">
+                {a.federalSeedMoney > 0 ? (
+                  <span class="inline-flex items-center rounded-full bg-mint-400/15 px-2 py-1 text-xs font-medium text-mint-400">
+                    ${a.federalSeedMoney.toLocaleString()}
+                  </span>
+                ) : (
+                  <span class="text-gray-500">None</span>
+                )}
+              </td>
+            ))}
+          </tr>
+          <tr class="bg-surface-800">
+            <td class="sticky left-0 bg-surface-800 px-4 py-3 font-medium text-white">Employer Contribution</td>
+            {accounts.map((a) => (
+              <td class="px-4 py-3">
+                {a.employerContribution ? (
+                  <span class="inline-flex items-center rounded-full bg-mint-400/15 px-2 py-1 text-xs font-medium text-mint-400">
+                    Up to $2,500/yr
+                  </span>
+                ) : (
+                  <span class="text-gray-500">No</span>
+                )}
+              </td>
+            ))}
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mt-8 rounded-lg border border-amber-500/30 bg-amber-500/10 p-4">
+      <p class="text-sm text-amber-300">
+        <strong class="text-amber-200">Disclaimer:</strong> This comparison is for educational purposes only and not tax or financial advice.
+        Account features and limits may change. Consult a qualified professional before making investment decisions.
+      </p>
+    </div>
+
+    <div class="mt-8 grid gap-4 sm:grid-cols-2">
+      <a href="/calculators/growth-calculator" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">Run the Numbers</h3>
+        <p class="text-sm text-gray-400">Use our Growth Calculator to see projected Trump Account returns</p>
+      </a>
+      <a href="/calculators/employer-match" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">Employer Match Impact</h3>
+        <p class="text-sm text-gray-400">See how much the $2,500 employer match adds over time</p>
+      </a>
+    </div>
+  </div>
+</BaseLayout>

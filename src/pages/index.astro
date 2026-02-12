@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { organizationSchema } from '../lib/seo/schema';
+import MiniGrowthCalc from '../components/calculators/MiniGrowthCalc';
+import MiniEligibilityChecker from '../components/calculators/MiniEligibilityChecker';
+import MiniEmployerMatch from '../components/calculators/MiniEmployerMatch';
+
+const schema = organizationSchema();
+
+const faqs = [
+  {
+    question: 'What is a Trump Account?',
+    answer: 'A Trump Account is a tax-advantaged savings account created by IRC Section 530A under the One Big Beautiful Bill Act (OBBBA), with a $1,000 federal pilot deposit for children born 2025–2028.',
+  },
+  {
+    question: 'How much can I contribute?',
+    answer: 'Up to $5,000 per year (after-tax). Employers can also contribute up to $2,500/year per employee, tax-free.',
+  },
+  {
+    question: 'What happens at age 18?',
+    answer: 'The Trump Account converts to a traditional IRA with standard IRA rules for contributions and withdrawals.',
+  },
+];
+---
+
+<BaseLayout
+  title="Trump Accounts Explained — Free Calculators & Guides"
+  description="The #1 plain-English guide to Trump Accounts (IRC §530A). Free calculators, eligibility checker, and everything parents need to know about the $1,000 federal grant."
+  schema={schema}
+>
+  <!-- Hero -->
+  <section class="px-4 pt-12 pb-6 md:pt-20 md:pb-10">
+    <div class="mx-auto max-w-5xl text-center">
+      <h1 class="text-3xl font-extrabold tracking-tight text-white md:text-5xl">
+        Unlock America's Newest Education Savings Plan
+      </h1>
+      <p class="mt-3 text-base text-gray-400 md:text-lg">
+        Guidance for <span class="font-semibold text-[#c5a059]">K-12 Families</span> on 530A Trump Accounts (One Big Beautiful Bill Act)
+      </p>
+    </div>
+  </section>
+
+  <!-- Three Calculator Mini-Widgets -->
+  <section class="px-4 pb-12">
+    <div class="mx-auto grid max-w-5xl gap-4 md:grid-cols-3">
+      <MiniGrowthCalc client:visible />
+      <MiniEligibilityChecker client:visible />
+      <MiniEmployerMatch client:visible />
+    </div>
+  </section>
+
+  <!-- Bottom Section: Image + Latest Articles + FAQs -->
+  <section class="border-t border-[#2a2a2a] px-4 py-12">
+    <div class="mx-auto grid max-w-5xl gap-8 md:grid-cols-3">
+      <!-- Family Image -->
+      <div class="flex items-start justify-center">
+        <div class="h-48 w-full overflow-hidden rounded-xl bg-surface-800">
+          <img
+            src="https://images.unsplash.com/photo-1609220136736-443140cffec6?w=400&h=300&fit=crop&auto=format"
+            alt="Family planning for their child's future"
+            class="h-full w-full object-cover"
+            loading="lazy"
+            width="400"
+            height="300"
+          />
+        </div>
+      </div>
+
+      <!-- Latest Articles -->
+      <div>
+        <h2 class="mb-4 text-lg font-bold text-white">Latest Articles</h2>
+        <ul class="space-y-3">
+          <li>
+            <a href="/what-are-trump-accounts" class="block text-sm text-gray-400 no-underline hover:text-[#c5a059] transition-colors">
+              <span class="font-medium text-gray-300">Trump Account Inc K-12 Families</span>
+              <br />
+              <span class="text-xs">United Trump Society's future for families &mdash; a comprehensive guide.</span>
+            </a>
+          </li>
+          <li>
+            <a href="/for-employers" class="block text-sm text-gray-400 no-underline hover:text-[#c5a059] transition-colors">
+              <span class="font-medium text-gray-300">Employer Contribution Guide</span>
+              <br />
+              <span class="text-xs">How employers can contribute up to $2,500/year tax-free.</span>
+            </a>
+          </li>
+          <li>
+            <a href="/calculators" class="block text-sm text-gray-400 no-underline hover:text-[#c5a059] transition-colors">
+              <span class="font-medium text-gray-300">All Calculators &amp; Tools</span>
+              <br />
+              <span class="text-xs">Growth projections, eligibility, withdrawal simulator &amp; more.</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- FAQs -->
+      <div>
+        <h2 class="mb-4 text-lg font-bold text-white">FAQs</h2>
+        <ul class="space-y-3">
+          {faqs.map((faq) => (
+            <li>
+              <p class="text-sm font-medium text-gray-300">{faq.question}</p>
+              <p class="mt-0.5 text-xs text-gray-500">{faq.answer}</p>
+            </li>
+          ))}
+        </ul>
+        <a href="/faq" class="mt-3 inline-block text-sm text-[#c5a059] no-underline hover:text-[#d4b06a]">
+          View all FAQs &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

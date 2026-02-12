@@ -1,0 +1,13 @@
+---
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import FundExpenseTracker from '../../components/calculators/FundExpenseTracker';
+---
+
+<CalculatorLayout
+  title="Trump Account Fund Expense Ratio Tracker"
+  description="Compare eligible S&P 500 ETFs and mutual funds for Trump Accounts. See how expense ratios impact growth over 18 years."
+  calculatorName="Fund Expense Tracker"
+  slug="fund-expense-tracker"
+>
+  <FundExpenseTracker client:visible />
+</CalculatorLayout>

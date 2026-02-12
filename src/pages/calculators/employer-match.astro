@@ -1,0 +1,13 @@
+---
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import EmployerContributionCalc from '../../components/calculators/EmployerContributionCalc';
+---
+
+<CalculatorLayout
+  title="Employer Match Calculator for Trump Accounts"
+  description="Calculate the compensation lift from employer Trump Account contributions of up to $2,500/year. See how the match accelerates growth over time."
+  calculatorName="Employer Match Calculator"
+  slug="employer-match"
+>
+  <EmployerContributionCalc client:visible />
+</CalculatorLayout>

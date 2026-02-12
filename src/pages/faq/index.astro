@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Accordion from '../../components/ui/Accordion.astro';
+import { faqPageSchema, breadcrumbSchema } from '../../lib/seo/schema';
+
+const faqs = [
+  // Basics
+  { question: 'What is a Trump Account?', answer: 'A Trump Account is a tax-advantaged savings account created under IRC Section 530A by the One Big Beautiful Bill Act (OBBBA), signed July 4, 2025. It provides a $1,000 federal pilot deposit for children born 2025–2028 and allows tax-deferred growth until age 18, when it converts to a traditional IRA.' },
+  { question: 'Who created Trump Accounts?', answer: 'Trump Accounts were established by the One Big Beautiful Bill Act (OBBBA), signed into law on July 4, 2025. The IRS published guidance in Notice 2025-68 on December 3, 2025.' },
+  { question: 'Are Trump Accounts real?', answer: 'Yes. Trump Accounts are established in federal law under IRC Section 530A. The IRS has published formal guidance (Notice 2025-68), created Form 4547, and is building the trumpaccounts.gov portal.' },
+
+  // Eligibility
+  { question: 'Who qualifies for a Trump Account?', answer: 'Any U.S. citizen child under 18 with a valid Social Security Number. There are <strong>no income restrictions</strong>.' },
+  { question: 'Does my child qualify for the $1,000 deposit?', answer: 'Only children born between January 1, 2025 and December 31, 2028 qualify for the one-time $1,000 federal pilot deposit. Use our <a href="/calculators/eligibility-checker">Eligibility Checker</a> to confirm.' },
+  { question: 'Can I open a Trump Account for a child born before 2025?', answer: 'Yes — any U.S. citizen child under 18 can have a Trump Account. However, children born before 2025 do <strong>not</strong> receive the $1,000 pilot deposit.' },
+  { question: 'Is there an income limit?', answer: 'No. Unlike Roth IRAs, Trump Accounts have <strong>no income restrictions</strong>. Any family can participate.' },
+
+  // Contributions
+  { question: 'How much can I contribute?', answer: 'Up to <strong>$5,000 per year</strong> (after-tax). This limit is indexed for inflation starting in 2027.' },
+  { question: 'Can employers contribute?', answer: 'Yes. Employers can contribute up to <strong>$2,500/year per employee</strong>, tax-free under IRC §128. This counts toward the $5,000 annual cap and is per employee, not per dependent.' },
+  { question: 'Can grandparents contribute?', answer: 'Yes. Anyone can contribute to a Trump Account, including grandparents, relatives, or friends — as long as the total annual contributions don\'t exceed $5,000.' },
+
+  // Investments
+  { question: 'What can Trump Account money be invested in?', answer: 'Funds must be invested in mutual funds or ETFs that track the <strong>S&P 500 or a broad U.S. equity index</strong>. Expense ratios are capped at 0.1% (10 basis points). See our <a href="/calculators/fund-expense-tracker">Fund Expense Tracker</a> for eligible options.' },
+  { question: 'Can I pick individual stocks?', answer: 'No. Trump Accounts are restricted to S&P 500 or broad U.S. equity index funds/ETFs only.' },
+
+  // Withdrawals & Taxes
+  { question: 'Can I withdraw money before age 18?', answer: 'No. Withdrawals before age 18 are not permitted except for: (1) rollovers to another Trump Account, (2) return of excess contributions, or (3) the child\'s death.' },
+  { question: 'What happens at age 18?', answer: 'The Trump Account automatically converts to a <strong>traditional IRA</strong>. From that point, standard IRA rules apply for contributions, withdrawals, and required minimum distributions.' },
+  { question: 'How are withdrawals taxed?', answer: 'Withdrawals are taxed as <strong>ordinary income</strong> (traditional IRA treatment). Before age 59½, a 10% early withdrawal penalty also applies. Use our <a href="/calculators/withdrawal-simulator">Withdrawal Simulator</a> to see the impact.' },
+
+  // How to Open
+  { question: 'How do I open a Trump Account?', answer: 'Three ways: (1) Include IRS Form 4547 with your 2025 tax return (due April 15, 2026), (2) through the <a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer">trumpaccounts.gov</a> portal (launching mid-2026), or (3) by mailing Form 4547 to the IRS.' },
+  { question: 'What is Form 4547?', answer: 'IRS Form 4547 (Trump Account Election(s)) is the form you file to establish a Trump Account for your child. It\'s included with your federal tax return.' },
+
+  // Dell Pledge
+  { question: 'What is the Dell Foundation pledge?', answer: 'Michael and Susan Dell pledged <strong>$6.25 billion</strong> — $250 per child under 10 in ZIP codes where the median household income is below $150,000. This is in addition to the $1,000 federal pilot deposit.' },
+];
+
+const schemas = [
+  faqPageSchema(faqs),
+  breadcrumbSchema([
+    { name: 'Home', url: 'https://trumpaccounts.guide' },
+    { name: 'FAQ', url: 'https://trumpaccounts.guide/faq' },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Trump Account FAQ — Common Questions Answered"
+  description="Answers to the most common questions about Trump Accounts: eligibility, contributions, investments, taxes, withdrawals, and how to open one."
+  schema={schemas}
+>
+  <div class="mx-auto max-w-3xl px-4 py-12">
+    <h1 class="text-3xl font-extrabold text-white md:text-4xl">
+      Frequently Asked Questions
+    </h1>
+    <p class="mt-3 text-lg text-gray-400">
+      Everything you need to know about Trump Accounts, answered in plain English.
+    </p>
+
+    <div class="mt-8 space-y-8">
+      <section>
+        <h2 class="mb-4 text-xl font-bold text-white">Basics</h2>
+        <Accordion items={faqs.slice(0, 3)} />
+      </section>
+
+      <section>
+        <h2 class="mb-4 text-xl font-bold text-white">Eligibility</h2>
+        <Accordion items={faqs.slice(3, 7)} />
+      </section>
+
+      <section>
+        <h2 class="mb-4 text-xl font-bold text-white">Contributions</h2>
+        <Accordion items={faqs.slice(7, 10)} />
+      </section>
+
+      <section>
+        <h2 class="mb-4 text-xl font-bold text-white">Investments</h2>
+        <Accordion items={faqs.slice(10, 12)} />
+      </section>
+
+      <section>
+        <h2 class="mb-4 text-xl font-bold text-white">Withdrawals & Taxes</h2>
+        <Accordion items={faqs.slice(12, 15)} />
+      </section>
+
+      <section>
+        <h2 class="mb-4 text-xl font-bold text-white">How to Open</h2>
+        <Accordion items={faqs.slice(15, 17)} />
+      </section>
+
+      <section>
+        <h2 class="mb-4 text-xl font-bold text-white">Dell Foundation</h2>
+        <Accordion items={faqs.slice(17)} />
+      </section>
+    </div>
+
+    <div class="mt-10 rounded-lg border border-gold-400/30 bg-gold-400/10 p-6 text-center">
+      <h2 class="font-bold text-gold-300">Still have questions?</h2>
+      <p class="mt-2 text-sm text-gold-200/70">
+        Check our <a href="/what-are-trump-accounts" class="underline text-gold-400">complete guide</a> or use our
+        <a href="/calculators" class="underline text-gold-400">free calculators</a> to run your own numbers.
+      </p>
+    </div>
+  </div>
+</BaseLayout>

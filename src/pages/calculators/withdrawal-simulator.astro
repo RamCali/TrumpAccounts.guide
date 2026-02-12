@@ -1,0 +1,13 @@
+---
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import WithdrawalSimulator from '../../components/calculators/WithdrawalSimulator';
+---
+
+<CalculatorLayout
+  title="Trump Account Withdrawal & Tax Simulator"
+  description="See how much you keep after taxes and penalties when withdrawing from a Trump Account at different ages. Compare 18, 25, 30, 59½, and 65."
+  calculatorName="Withdrawal Simulator"
+  slug="withdrawal-simulator"
+>
+  <WithdrawalSimulator client:visible />
+</CalculatorLayout>
