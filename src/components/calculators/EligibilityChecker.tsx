@@ -18,7 +18,7 @@ export default function EligibilityChecker() {
   const [hasSSN, setHasSSN] = useState<boolean | null>(null);
   const [result, setResult] = useState<EligibilityResult | null>(null);
 
-  const checkEligibility = () => {
+  const checkEligibility = (ssnAnswer: boolean) => {
     const year = parseInt(birthYear);
     const details: string[] = [];
     let status: Eligibility = 'eligible';
@@ -30,8 +30,8 @@ export default function EligibilityChecker() {
       details.push('The child must be a U.S. citizen to qualify for a Trump Account.');
     }
 
-    // Check SSN
-    if (!hasSSN) {
+    // Check SSN — use the passed value, not stale state
+    if (!ssnAnswer) {
       status = 'ineligible';
       details.push('A valid Social Security Number (SSN) is required.');
     }
@@ -181,13 +181,13 @@ export default function EligibilityChecker() {
             </p>
             <div className="flex gap-3">
               <button
-                onClick={() => { setHasSSN(true); checkEligibility(); }}
+                onClick={() => { setHasSSN(true); checkEligibility(true); }}
                 className="flex-1 rounded-lg border-2 border-surface-600 px-6 py-4 text-center font-semibold hover:border-surface-500 transition-colors"
               >
                 Yes
               </button>
               <button
-                onClick={() => { setHasSSN(false); checkEligibility(); }}
+                onClick={() => { setHasSSN(false); checkEligibility(false); }}
                 className="flex-1 rounded-lg border-2 border-surface-600 px-6 py-4 text-center font-semibold hover:border-surface-500 transition-colors"
               >
                 No

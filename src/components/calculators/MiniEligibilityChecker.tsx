@@ -22,14 +22,15 @@ interface MiniEligibilityCheckerProps {
 }
 
 export default function MiniEligibilityChecker({ translations }: MiniEligibilityCheckerProps = {}) {
-  const t = { ...DEFAULT_T, ...translations };
+  const t = { ...DEFAULT_T, ...(translations || {}) };
   const [birthYear, setBirthYear] = useState(2025);
   const [isCitizen, setIsCitizen] = useState(true);
   const [hasSSN, setHasSSN] = useState(true);
 
   const result = useMemo(() => {
-    const eligible = isCitizen && hasSSN && birthYear >= 2025 && birthYear <= 2028;
-    const pilotEligible = birthYear >= 2025 && birthYear <= 2028;
+    const yearNum = Number(birthYear);
+    const eligible = isCitizen && hasSSN && yearNum >= 2025 && yearNum <= 2028;
+    const pilotEligible = yearNum >= 2025 && yearNum <= 2028;
     return { eligible, pilotEligible };
   }, [birthYear, isCitizen, hasSSN]);
 
