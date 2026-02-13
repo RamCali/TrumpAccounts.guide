@@ -1,0 +1,184 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+
+const article = getArticle('trump-account-vs-baby-bonds')!;
+const related = getRelatedArticles('trump-account-vs-baby-bonds');
+
+const faqs = [
+  {
+    question: 'What are baby bonds?',
+    answer: 'Baby bonds were a proposal by Senator Cory Booker (D-NJ) to create federally managed savings accounts for every child born in America. Unlike Trump Accounts, baby bonds would have been managed by the U.S. Treasury and would not have been invested in the stock market.',
+  },
+  {
+    question: 'Did baby bonds ever become law?',
+    answer: 'No. Baby bonds were proposed but never passed Congress. Trump Accounts, which share a similar concept, were signed into law on July 4, 2025 as part of the One Big Beautiful Bill Act.',
+  },
+  {
+    question: 'Are Trump Accounts the Republican version of baby bonds?',
+    answer: 'The concepts share the same core idea — give every child a financial head start at birth. However, Trump Accounts differ significantly: they are privately managed, invested in stock market index funds, allow family and employer contributions, and have no income-based contribution adjustments.',
+  },
+  {
+    question: 'Which is better, Trump Accounts or baby bonds?',
+    answer: 'Only Trump Accounts are law, so this is a moot comparison for practical purposes. Trump Accounts offer higher growth potential through stock market investing but carry market risk. Baby bonds would have offered more predictable, lower returns through Treasury management.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Both concepts aim to give every child a <strong class="text-white">financial head start at birth</strong>.</li>
+        <li>Trump Accounts are <strong class="text-white">privately managed</strong> and invest in the stock market. Baby bonds would have been <strong class="text-white">Treasury-managed</strong>.</li>
+        <li>Trump Accounts allow <strong class="text-white">family, employer, and charity contributions</strong>. Baby bonds were government-funded only.</li>
+        <li>Baby bonds included <strong class="text-white">income-based adjustments</strong> (more money for lower-income families). Trump Accounts treat all families equally.</li>
+        <li>Only Trump Accounts are law. Baby bonds were <strong class="text-white">proposed but never passed</strong>.</li>
+      </ul>
+    </div>
+
+    <p>
+      If the idea of a government-funded investment account for every child sounds familiar, it should. <strong>Senator Cory Booker</strong> (D-NJ) proposed something similar years before Trump Accounts existed. His "baby bonds" proposal shared the same core goal but took a very different approach. Here is how the two compare.
+    </p>
+
+    <h2>The Shared Goal</h2>
+    <p>
+      Both Trump Accounts and baby bonds start from the same premise: <strong>giving every child a financial foundation at birth reduces inequality and builds long-term wealth</strong>. The research behind this idea is well-established. Children who grow up knowing they have assets behave differently — they are more likely to pursue education, plan for the future, and build wealth as adults.
+    </p>
+    <p>
+      Senator Ted Cruz, the architect of Trump Accounts, and Senator Cory Booker both recognized this. They just disagreed on how to do it.
+    </p>
+
+    <h2>Side-by-Side Comparison</h2>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Feature</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Trump Accounts (IRC 530A)</th>
+            <th class="py-3 text-gray-400 font-medium">Baby Bonds (Booker Proposal)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Status</td>
+            <td class="py-3 pr-4 text-gold-400 font-medium">Signed into law (July 4, 2025)</td>
+            <td class="py-3">Proposed only — never passed</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Account management</td>
+            <td class="py-3 pr-4">Private brokerages (Fidelity, Schwab, etc.)</td>
+            <td class="py-3">U.S. Treasury</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Investments</td>
+            <td class="py-3 pr-4">S&P 500 / broad U.S. equity index funds</td>
+            <td class="py-3">Not invested in equities (Treasury-managed)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Government deposit</td>
+            <td class="py-3 pr-4">$1,000 (births 2025-2028)</td>
+            <td class="py-3">$1,000 at birth + annual deposits based on family income</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Family contributions</td>
+            <td class="py-3 pr-4">Yes — up to $5,000/year</td>
+            <td class="py-3">No private contributions</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Employer contributions</td>
+            <td class="py-3 pr-4">Yes — up to $2,500/year tax-free</td>
+            <td class="py-3">No</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Income adjustments</td>
+            <td class="py-3 pr-4">None — same for all income levels</td>
+            <td class="py-3">Lower-income families receive larger annual deposits</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Growth potential</td>
+            <td class="py-3 pr-4">Higher (stock market returns, ~10% historically)</td>
+            <td class="py-3">Lower (Treasury bond rates, ~3-5%)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Market risk</td>
+            <td class="py-3 pr-4">Yes — stock market can decline</td>
+            <td class="py-3">Minimal — government-backed</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">Access age</td>
+            <td class="py-3 pr-4">18 (converts to traditional IRA)</td>
+            <td class="py-3">18</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>The Philosophy Divide</h2>
+    <p>
+      The biggest difference is philosophical. Senator Cruz designed Trump Accounts to <strong>"help create new capitalists"</strong> — his goal was to give every American child a personal stake in the stock market so they benefit from long-term equity growth and compound interest.
+    </p>
+    <p>
+      Senator Booker's baby bonds took a more protective approach. By keeping the money out of the stock market and managed by the Treasury, baby bonds would have provided <strong>predictable, low-risk growth</strong> without exposing children's savings to market volatility.
+    </p>
+
+    <CalloutBox type="info" title="Different risk profiles">
+      <p>
+        Over 18 years, the S&P 500 has historically delivered far higher returns than Treasury bonds. But it comes with more volatility. Trump Accounts bet on the stock market's long-term upward trend. Baby bonds would have offered certainty at the cost of lower returns.
+      </p>
+    </CalloutBox>
+
+    <h2>The Equity Question</h2>
+    <p>
+      One important difference: baby bonds included <strong>income-based adjustments</strong>. Lower-income families would have received larger annual government deposits, directly targeting wealth inequality.
+    </p>
+    <p>
+      Trump Accounts treat all families equally — every qualifying child gets the same $1,000 deposit. But wealthier families can contribute the full $5,000/year, while lower-income families may not be able to contribute anything beyond the government deposit.
+    </p>
+    <p>
+      The <a href="/blog/dell-pledge-explained">Dell Foundation's $6.25 billion pledge</a> partially addresses this gap by targeting children in lower-income ZIP codes. But it is a private initiative, not a structural feature of the program.
+    </p>
+    <p>
+      For more on this topic, read our analysis of <a href="/blog/inequality-reduction">whether Trump Accounts can reduce inequality</a>.
+    </p>
+
+    <h2>Why Trump Accounts Passed and Baby Bonds Did Not</h2>
+    <p>
+      Several factors explain why Trump Accounts made it into law:
+    </p>
+    <ul>
+      <li><strong>Political alignment</strong> — The concept was championed by Senator Cruz and supported by President Trump, giving it momentum within the Republican majority.</li>
+      <li><strong>Private sector enthusiasm</strong> — Wall Street and tech companies saw new customers and investment funds. Companies like Dell, Nvidia, and Robinhood actively supported the initiative.</li>
+      <li><strong>The "ownership" angle</strong> — Framing the accounts as creating "new capitalists" resonated with Republican economic philosophy.</li>
+      <li><strong>Vehicle for passage</strong> — Trump Accounts were included in the OBBBA, a large reconciliation bill that combined many priorities, making it easier to pass as a package.</li>
+    </ul>
+    <p>
+      Baby bonds, by contrast, were a standalone proposal from a Democratic senator that never gained traction in a Republican-controlled Congress.
+    </p>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      Trump Accounts and baby bonds share a powerful core idea: <strong>every child deserves a financial head start</strong>. The differences are in execution — private vs. government management, stocks vs. bonds, universal vs. income-adjusted.
+    </p>
+    <p>
+      For practical purposes, only Trump Accounts matter today because they are the law. If your child qualifies, the debate is settled — <a href="/blog/how-to-open-step-by-step">here is how to open a Trump Account</a>.
+    </p>
+
+    <CalloutBox type="warning" title="Educational content only">
+      <p>
+        This article compares two policy approaches for educational purposes. It is not tax or financial advice. Consult a qualified professional before making decisions about your child's investments.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

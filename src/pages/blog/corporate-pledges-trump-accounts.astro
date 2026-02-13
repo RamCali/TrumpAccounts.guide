@@ -1,0 +1,182 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('corporate-pledges-trump-accounts')!;
+const related = getRelatedArticles('corporate-pledges-trump-accounts');
+
+const faqs = [
+  {
+    question: 'Which companies have pledged money to Trump Accounts?',
+    answer: 'Michael and Susan Dell pledged $6.25 billion for children in lower-income ZIP codes. Nvidia CEO Jensen Huang committed to contributing to accounts for Nvidia employees\' children. Robinhood offered technology and capital for the program. Dell Technologies pledged to match the government deposit for its employees.',
+  },
+  {
+    question: 'What is the Invest America Council?',
+    answer: 'The Invest America Council is a group of business executives who met at the White House in June 2025 to discuss corporate support for Trump Accounts. Several major companies pledged contributions and resources at this meeting.',
+  },
+  {
+    question: 'Do corporate pledges count against the $5,000 annual limit?',
+    answer: 'It depends on the source. Employer contributions (like Dell Technologies matching for employees) count toward the $5,000 cap under the $2,500 employer limit. Contributions from 501(c)(3) charities (like the Dell Foundation pledge) do not count against the $5,000 limit.',
+  },
+  {
+    question: 'Why is Wall Street supporting Trump Accounts?',
+    answer: 'Financial firms see Trump Accounts as a source of new customers and investment fund inflows. Millions of new accounts invested in index funds means billions in assets under management. The low 0.1% expense ratio cap limits per-account revenue but the volume makes up for it.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><strong class="text-white">Michael & Susan Dell</strong>: $6.25 billion — $250 per child under 10 in ZIP codes with median income below $150,000.</li>
+        <li><strong class="text-white">Dell Technologies</strong>: Pledged to match the government's $1,000 deposit for its employees' children.</li>
+        <li><strong class="text-white">Nvidia (Jensen Huang)</strong>: Committed to contributing to accounts managed by Nvidia employees.</li>
+        <li><strong class="text-white">Robinhood</strong>: Offered to provide technology and capital for the accounts.</li>
+        <li><strong class="text-white">Wall Street broadly</strong> supports the program because of new customers and investment fund inflows.</li>
+      </ul>
+    </div>
+
+    <p>
+      Trump Accounts are a government program, but some of the biggest commitments are coming from the private sector. From a $6.25 billion personal pledge to corporate employee benefits to technology platforms, major companies are lining up to support the initiative. Here is who has committed what.
+    </p>
+
+    <h2>The Dell Family: $6.25 Billion</h2>
+    <p>
+      The largest private commitment to Trump Accounts came from <strong>Michael and Susan Dell</strong> — the CEO of Dell Technologies and his wife. On December 2, 2025, the same day the IRS released its guidance on Trump Accounts, the Dells announced a <strong>$6.25 billion pledge</strong> through the Dell Foundation.
+    </p>
+    <p>
+      The details:
+    </p>
+    <ul>
+      <li><strong>$250 per qualifying child</strong></li>
+      <li>Children must be <strong>under age {limits.dellPledge.eligibleAge}</strong> (born before January 1, 2025)</li>
+      <li>Must live in a <strong>ZIP code where median family income is ${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()} or less</strong></li>
+      <li>Could reach up to <strong>25 million children</strong></li>
+    </ul>
+    <p>
+      Because the Dell pledge targets children born before 2025, it specifically covers children who <strong>do not receive the federal $1,000 pilot deposit</strong> (which is limited to 2025-2028 births). This was intentional — the Dells designed their pledge to complement, not duplicate, the government program.
+    </p>
+    <p>
+      As a 501(c)(3) charity contribution, the Dell Foundation deposits <strong>do not count against the $5,000 annual contribution limit</strong>.
+    </p>
+    <p>
+      For a deeper dive, see our full <a href="/blog/dell-pledge-explained">Dell pledge explainer</a>.
+    </p>
+
+    <h2>Dell Technologies: Employee Matching</h2>
+    <p>
+      Separate from the personal Dell family pledge, <strong>Dell Technologies the company</strong> pledged to match the government's $1,000 contribution for its employees' children. This is an employer contribution under IRC Section 128, which means:
+    </p>
+    <ul>
+      <li>It is <strong>tax-free</strong> for the employee (does not appear on their W-2)</li>
+      <li>It is <strong>tax-deductible</strong> for Dell Technologies</li>
+      <li>It <strong>counts toward the $2,500/year employer limit</strong> per employee</li>
+    </ul>
+    <p>
+      Dell Technologies employees with eligible children could receive: the $1,000 government deposit + the $1,000 Dell Technologies match + the $250 Dell Foundation pledge (if in a qualifying ZIP code) = up to <strong>$2,250 in free money</strong> before contributing a single dollar of their own.
+    </p>
+
+    <h2>Nvidia: Jensen Huang's Pledge</h2>
+    <p>
+      <strong>Jensen Huang</strong>, CEO of Nvidia, did not attend the June 2025 Invest America Council meeting at the White House but still made a commitment. Huang stated that <strong>Nvidia would contribute to Trump Accounts managed by its employees</strong>.
+    </p>
+    <p>
+      Nvidia has not publicly detailed the exact amounts or structure, but as an employer contribution, it would follow the same IRC Section 128 rules — tax-free for employees, capped at $2,500/year per employee.
+    </p>
+
+    <CalloutBox type="info" title="A trend, not an exception">
+      <p>
+        Dell, Nvidia, and Robinhood were among the first to announce support, but employer contributions to Trump Accounts are expected to become a standard employee benefit — similar to 401(k) matching. Ask your HR department if your company plans to offer Trump Account contributions.
+      </p>
+    </CalloutBox>
+
+    <h2>Robinhood: Technology and Capital</h2>
+    <p>
+      <strong>Robinhood Markets</strong> took a different approach. Rather than pledging a specific dollar amount, Robinhood offered to provide <strong>technology and capital</strong> for the Trump Account program.
+    </p>
+    <p>
+      This makes strategic sense for Robinhood. As a brokerage platform that already serves millions of retail investors, Robinhood could become one of the custodians where families open and manage their Trump Accounts. Providing the technology infrastructure positions Robinhood to onboard millions of new account holders.
+    </p>
+    <p>
+      For details on how Robinhood might handle Trump Accounts, see our <a href="/blog/trump-accounts-at-robinhood">Robinhood Trump Account guide</a>.
+    </p>
+
+    <h2>The Invest America Council</h2>
+    <p>
+      In June 2025, ahead of the bill's passage by the Senate, <strong>President Trump held a roundtable at the White House</strong> to promote Trump Accounts. This event, organized through the <strong>Invest America Council</strong>, brought together business executives to discuss corporate support.
+    </p>
+    <p>
+      <strong>Brad Gerstner</strong>, CEO of Altimeter Capital, worked directly with Senator Ted Cruz on the Trump Account concept and helped coordinate corporate interest. According to Gerstner, companies were eager to support the initiative because they see it as both good policy and good business.
+    </p>
+
+    <h2>Why Wall Street Supports Trump Accounts</h2>
+    <p>
+      The financial industry's enthusiasm is not purely philanthropic. Trump Accounts represent a <strong>massive new source of customers and assets</strong>:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Metric</th>
+            <th class="py-3 text-gray-400 font-medium">Estimate</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">U.S. births per year</td>
+            <td class="py-3">~3.6 million</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Children under 18</td>
+            <td class="py-3">~73 million</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Potential new accounts</td>
+            <td class="py-3">Tens of millions</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">Potential new assets (at scale)</td>
+            <td class="py-3">Hundreds of billions over time</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Even with the {limits.maxExpenseRatio * 100}% expense ratio cap, managing millions of accounts invested in index funds adds up. And when those children turn 18 and the accounts convert to traditional IRAs, brokerages gain lifelong customers who may invest in other products.
+    </p>
+
+    <h2>What This Means for Families</h2>
+    <p>
+      Corporate support for Trump Accounts is good news for families:
+    </p>
+    <ul>
+      <li><strong>More free money</strong> — employer contributions and charity donations add to your child's account at no cost to you.</li>
+      <li><strong>Better technology</strong> — companies like Robinhood building Trump Account platforms means user-friendly tools for managing accounts.</li>
+      <li><strong>Competitive fees</strong> — with major brokerages competing for Trump Account customers, expect the lowest possible costs within the 0.1% cap.</li>
+      <li><strong>Employer benefits</strong> — as more companies offer Trump Account matching, it becomes another factor in choosing where to work.</li>
+    </ul>
+    <p>
+      If your employer has not announced a Trump Account program, ask HR about it. The <a href="/blog/employer-match-trump-account">employer matching benefit</a> is one of the most valuable features of the program.
+    </p>
+
+    <CalloutBox type="warning" title="Educational content only">
+      <p>
+        Corporate pledges and programs may evolve as Trump Accounts launch. This article reflects publicly announced commitments as of early 2026. Check with your employer and official sources for the latest details.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

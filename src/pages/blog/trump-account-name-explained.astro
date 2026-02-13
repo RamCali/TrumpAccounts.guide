@@ -1,0 +1,150 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+
+const article = getArticle('trump-account-name-explained')!;
+const related = getRelatedArticles('trump-account-name-explained');
+
+const faqs = [
+  {
+    question: 'Why is it called a Trump Account?',
+    answer: 'The name "Trump Account" is the official legal name in the Internal Revenue Code (Section 530A). It was changed from "MAGA Account" at the last minute as the One Big Beautiful Bill Act was being finalized by House Republicans.',
+  },
+  {
+    question: 'What is a 530A account?',
+    answer: 'A 530A account is another name for a Trump Account. It refers to Section 530A of the Internal Revenue Code, which defines these accounts. Some people use "530A account" to avoid the political overtones of the official name.',
+  },
+  {
+    question: 'What does MAGA stand for in MAGA Accounts?',
+    answer: '"MAGA Accounts" stood for "Money Accounts for Growth and Advancement." This was the name used during the committee stage of the legislation before it was changed to "Trump Accounts" in the final bill.',
+  },
+  {
+    question: 'Does the name affect who can open one?',
+    answer: 'No. The name does not affect eligibility or how the accounts work. Any U.S. citizen child with an SSN who is under 18 qualifies, regardless of political affiliation. The account rules are the same whether you call it a Trump Account or a 530A account.',
+  },
+  {
+    question: 'Could the name discourage participation?',
+    answer: 'According to The Wall Street Journal, President Trump\'s association with the name may dissuade some families from participating. Researchers have also warned that without automatic enrollment, many eligible families may miss out regardless of the name.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><strong class="text-white">"Trump Account"</strong> is the official legal name in IRC Section 530A.</li>
+        <li>The accounts went through three names: <strong class="text-white">Invest America → MAGA Accounts → Trump Accounts</strong>.</li>
+        <li>Some use <strong class="text-white">"530A account"</strong> as a politically neutral alternative name.</li>
+        <li>Researchers warn the name <strong class="text-white">may reduce participation</strong> among some families.</li>
+        <li>The name does <strong class="text-white">not affect eligibility or how the accounts work</strong>.</li>
+      </ul>
+    </div>
+
+    <p>
+      If you have heard about the new child investment accounts and wondered why a government financial program bears the name of a president, you are not alone. The naming of Trump Accounts has been one of the most discussed aspects of the program — separate from the actual financial benefits. Here is the full story.
+    </p>
+
+    <h2>The Official Name Is in the Law</h2>
+    <p>
+      "Trump Account" is not a nickname or media shorthand. It is the <strong>official name written into the Internal Revenue Code</strong>. Section 530A of the IRC, created by the One Big Beautiful Bill Act, specifically uses the term "Trump Accounts" to describe these investment accounts.
+    </p>
+    <p>
+      This means every IRS form, every official document, and every financial institution offering these accounts uses the name "Trump Account." The IRS's own guidance — <strong>Notice 2025-68</strong> — refers to them as Trump Accounts throughout.
+    </p>
+
+    <h2>Three Names Before the Final Version</h2>
+    <p>
+      The accounts did not start with this name. They went through <strong>three name changes</strong> during the legislative process:
+    </p>
+
+    <div class="not-prose my-6 space-y-4">
+      <div class="rounded-lg border border-surface-600 p-4">
+        <div class="text-sm text-gray-400 mb-1">Stage 1: Original concept</div>
+        <div class="text-lg font-bold text-white">Invest America Accounts</div>
+        <p class="text-sm text-gray-300 mt-2">Senator Ted Cruz's original name for the child investment accounts he conceived. Neutral, descriptive, focused on the investment aspect.</p>
+      </div>
+      <div class="rounded-lg border border-surface-600 p-4">
+        <div class="text-sm text-gray-400 mb-1">Stage 2: Committee stage</div>
+        <div class="text-lg font-bold text-white">MAGA Accounts</div>
+        <p class="text-sm text-gray-300 mt-2">Renamed on the way to the House Ways and Means committee. MAGA was reframed as an acronym for <strong>"Money Accounts for Growth and Advancement"</strong> — not the political slogan.</p>
+      </div>
+      <div class="rounded-lg border border-surface-600 p-4">
+        <div class="text-sm text-gray-400 mb-1">Stage 3: Final law</div>
+        <div class="text-lg font-bold text-white">Trump Accounts</div>
+        <p class="text-sm text-gray-300 mt-2">Changed at the last minute as the bill was finalized by Republicans in the House of Representatives. This is the name that was signed into law on July 4, 2025.</p>
+      </div>
+    </div>
+
+    <h2>The 530A Alternative</h2>
+    <p>
+      To avoid the political overtones of the official name, many financial professionals and media outlets have begun referring to the accounts as <strong>"530A accounts"</strong> — a reference to the IRC section number that defines them.
+    </p>
+    <p>
+      According to <a href="https://www.axios.com/2025/11/26/trump-accounts-530a" target="_blank" rel="noopener">Axios</a>, the rebranding effort aims to make the accounts feel <strong>politically neutral</strong> so that families across the political spectrum feel comfortable participating. Financial advisors, in particular, have adopted the 530A terminology when discussing the accounts with clients.
+    </p>
+
+    <CalloutBox type="info" title="Same account, different names">
+      <p>
+        Whether you call it a "Trump Account" or a "530A account," you are talking about the exact same thing. The eligibility rules, contribution limits, investment options, and tax treatment are identical. The name is a branding choice, not a functional difference.
+      </p>
+    </CalloutBox>
+
+    <h2>Does the Name Affect Participation?</h2>
+    <p>
+      This is the critical question. According to <em>The Wall Street Journal</em>, President Trump's association with the name <strong>may dissuade some families from participating</strong>. In a politically divided country, some parents may skip the program simply because of the name — even though it offers free money for their children.
+    </p>
+    <p>
+      <strong>Professor Jin Huang</strong>, co-director of the Center for Social Development at Washington University in St. Louis, has raised a related concern: without <strong>automatic enrollment</strong>, millions of eligible children will likely miss out regardless of the name. The opt-in requirement (filing IRS Form 4547) creates a participation barrier that disproportionately affects lower-income families.
+    </p>
+    <p>
+      The naming concern and the enrollment concern compound each other. Families who are already less likely to file tax returns may also be less likely to participate in a program that carries political branding.
+    </p>
+
+    <h2>How Financial Institutions Handle It</h2>
+    <p>
+      Brokerages and financial advisors have taken different approaches:
+    </p>
+    <ul>
+      <li><strong>Official documents</strong> use "Trump Account" because it is the legal name required by the IRS.</li>
+      <li><strong>Marketing materials</strong> from some firms emphasize "Section 530A accounts" or "child investment accounts" in their descriptions.</li>
+      <li><strong>Financial advisors</strong> often use "530A accounts" in client conversations to keep the focus on the financial benefits.</li>
+    </ul>
+    <p>
+      Regardless of what a brokerage calls them in marketing, the account type on official paperwork is "Trump Account" as defined by IRC Section 530A.
+    </p>
+
+    <h2>The Bigger Picture</h2>
+    <p>
+      The naming debate is worth acknowledging, but it should not distract from the substance. Trump Accounts offer:
+    </p>
+    <ul>
+      <li>A <strong>free $1,000 federal deposit</strong> for children born 2025-2028</li>
+      <li><strong>Tax-deferred growth</strong> in low-cost index funds for up to 18 years</li>
+      <li><strong>Employer contributions</strong> up to $2,500/year tax-free</li>
+      <li><strong>No income restrictions</strong></li>
+    </ul>
+    <p>
+      These benefits are the same whether you call it a Trump Account, a 530A account, or anything else. If your child qualifies, the name should not be the reason they miss out on free money and 18 years of compound growth.
+    </p>
+    <p>
+      For the full story on how these accounts came to be, see our <a href="/blog/trump-account-history">history of Trump Accounts</a>. To get started, follow our <a href="/blog/how-to-open-step-by-step">step-by-step guide to opening an account</a>.
+    </p>
+
+    <CalloutBox type="warning" title="Educational content only">
+      <p>
+        This article discusses the naming and political context of Trump Accounts for informational purposes. It is not tax, financial, or political advice. Consult a qualified professional for guidance on your specific situation.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

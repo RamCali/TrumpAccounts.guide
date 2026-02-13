@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { breadcrumbSchema } from '../../lib/seo/schema';
+
+const siteUrl = 'https://trumpaccounts.guide';
+
+const schema = breadcrumbSchema([
+  { name: 'Home', url: siteUrl },
+  { name: 'Tools', url: `${siteUrl}/tools` },
+]);
+
+const tools = [
+  {
+    href: '/tools/wealth-report',
+    title: 'Wealth Report Generator',
+    description: 'Create a personalized "Wealth Map" showing your child\'s projected balance at age 18, 30, and 65. Download and share with family.',
+    badge: 'Popular',
+  },
+  {
+    href: '/tools/gift-card',
+    title: 'Gift-This-Instead Card',
+    description: 'Create a digital card asking grandparents and family to contribute to your child\'s Trump Account instead of buying toys.',
+    badge: 'Shareable',
+  },
+  {
+    href: '/tools/hr-email',
+    title: 'HR Email Generator',
+    description: 'Generate a professional email asking your employer to start offering $2,500/yr Trump Account contributions as a benefit.',
+    badge: 'Template',
+  },
+];
+---
+
+<BaseLayout
+  title="Free Trump Account Tools — Shareable Reports, Gift Cards, HR Templates"
+  description="Free tools to help you make the most of Trump Accounts. Generate wealth projections, family gift cards, and employer request emails. All free, no data collected."
+  schema={schema}
+>
+  <div class="mx-auto max-w-4xl px-4 py-12">
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-gold-400 no-underline">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="text-white font-medium">Tools</span>
+        </li>
+      </ol>
+    </nav>
+
+    <h1 class="text-3xl font-extrabold text-white md:text-4xl">Free Trump Account Tools</h1>
+    <p class="mt-3 text-lg text-gray-400">
+      Shareable tools to help you plan, share, and advocate for Trump Accounts.
+      Everything runs in your browser — we don't collect or store any data.
+    </p>
+
+    <div class="mt-8 grid gap-4">
+      {tools.map((tool) => (
+        <a href={tool.href} class="group rounded-xl border border-surface-600 bg-surface-800 p-6 no-underline transition-all hover:border-gold-400/40">
+          <div class="flex items-start justify-between">
+            <div>
+              <h2 class="text-xl font-bold text-white group-hover:text-gold-400">{tool.title}</h2>
+              <p class="mt-2 text-gray-400">{tool.description}</p>
+            </div>
+            <span class="ml-4 shrink-0 rounded-full border border-gold-400/30 bg-gold-400/10 px-3 py-1 text-xs font-medium text-gold-400">
+              {tool.badge}
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="mt-8 rounded-lg border border-surface-600 bg-surface-800 p-6">
+      <h2 class="text-lg font-bold text-white">Looking for Calculators?</h2>
+      <p class="mt-2 text-gray-400">
+        We also have 6 free calculators for growth projections, eligibility checking,
+        employer matching, withdrawal simulations, and more.
+      </p>
+      <a href="/calculators" class="mt-3 inline-block text-gold-400 no-underline hover:text-gold-300">
+        View all calculators &rarr;
+      </a>
+    </div>
+  </div>
+</BaseLayout>

@@ -193,3 +193,188 @@ export function calculateLifetimeGrowth(input: GrowthInput & {
     retirementAge,
   });
 }
+
+// ─── Cost of Waiting ─────────────────────────────────────────
+
+export interface CostOfWaitingInput {
+  startAge1: number;
+  startAge2: number;
+  monthlyContribution: number;
+  annualReturn: number;
+  pilotDeposit: number;
+  birthYear: number;
+}
+
+export interface CostOfWaitingResult {
+  scenario1: GrowthResult;
+  scenario2: GrowthResult;
+  difference: number;
+  percentageLost: number;
+}
+
+/**
+ * Compare two start-age scenarios side by side.
+ * Pilot deposit only applies if birthYear is 2025-2028.
+ */
+export function calculateCostOfWaiting(input: CostOfWaitingInput): CostOfWaitingResult {
+  const { startAge1, startAge2, monthlyContribution, annualReturn, pilotDeposit, birthYear } = input;
+  const hasPilot = birthYear >= 2025 && birthYear <= 2028;
+
+  const scenario1 = calculateGrowth({
+    birthYear,
+    pilotDeposit: hasPilot ? pilotDeposit : 0,
+    monthlyContribution,
+    annualReturn,
+    startAge: startAge1,
+    endAge: 18,
+  });
+
+  const scenario2 = calculateGrowth({
+    birthYear,
+    pilotDeposit: hasPilot ? pilotDeposit : 0,
+    monthlyContribution,
+    annualReturn,
+    startAge: startAge2,
+    endAge: 18,
+  });
+
+  const difference = scenario1.finalBalance - scenario2.finalBalance;
+  const percentageLost = scenario1.finalBalance > 0
+    ? (difference / scenario1.finalBalance) * 100
+    : 0;
+
+  return { scenario1, scenario2, difference, percentageLost };
+}
+
+// ─── Milestones ──────────────────────────────────────────────
+
+export interface MilestoneTarget {
+  amount: number;
+  label: string;
+  ageReached: number | null;
+  yearReached: number | null;
+}
+
+export interface MilestonesResult {
+  milestones: MilestoneTarget[];
+  growthData: GrowthResult;
+}
+
+const MILESTONE_TARGETS = [
+  { amount: 10_000, label: '$10K' },
+  { amount: 25_000, label: '$25K' },
+  { amount: 50_000, label: '$50K' },
+  { amount: 100_000, label: '$100K' },
+  { amount: 250_000, label: '$250K' },
+  { amount: 500_000, label: '$500K' },
+  { amount: 1_000_000, label: '$1M' },
+];
+
+/**
+ * Find the age at which the account crosses each milestone.
+ * Projects to age 65 (lifetime growth through IRA conversion).
+ */
+export function calculateMilestones(input: {
+  monthlyContribution: number;
+  annualReturn: number;
+  pilotDeposit: number;
+  birthYear: number;
+  showLifetime?: boolean;
+}): MilestonesResult {
+  const { monthlyContribution, annualReturn, pilotDeposit, birthYear, showLifetime = true } = input;
+  const hasPilot = birthYear >= 2025 && birthYear <= 2028;
+
+  const growthData = showLifetime
+    ? calculateLifetimeGrowth({
+        birthYear,
+        pilotDeposit: hasPilot ? pilotDeposit : 0,
+        monthlyContribution,
+        annualReturn,
+        retirementAge: 65,
+        postIRAContribution: 0,
+      })
+    : calculateGrowth({
+        birthYear,
+        pilotDeposit: hasPilot ? pilotDeposit : 0,
+        monthlyContribution,
+        annualReturn,
+        endAge: 18,
+      });
+
+  const milestones: MilestoneTarget[] = MILESTONE_TARGETS.map(({ amount, label }) => {
+    const snapshot = growthData.snapshots.find((s) => s.endBalance >= amount);
+    return {
+      amount,
+      label,
+      ageReached: snapshot ? snapshot.age : null,
+      yearReached: snapshot ? snapshot.year : null,
+    };
+  });
+
+  return { milestones, growthData };
+}
+
+// ─── Inflation Comparison ────────────────────────────────────
+
+export interface InflationComparisonYear {
+  year: number;
+  savingsBalance: number;
+  savingsPurchasingPower: number;
+  investmentBalance: number;
+  investmentPurchasingPower: number;
+}
+
+export interface InflationComparisonResult {
+  years: InflationComparisonYear[];
+  savingsFinalBalance: number;
+  savingsFinalPurchasingPower: number;
+  investmentFinalBalance: number;
+  investmentFinalPurchasingPower: number;
+  purchasingPowerLostInSavings: number;
+  investmentAdvantage: number;
+}
+
+/**
+ * Compare a savings account vs a Trump Account (index fund)
+ * over time, adjusted for inflation purchasing power.
+ */
+export function calculateInflationComparison(input: {
+  initialAmount: number;
+  years: number;
+  inflationRate: number;
+  savingsAPY: number;
+  investmentReturn: number;
+}): InflationComparisonResult {
+  const { initialAmount, years, inflationRate, savingsAPY, investmentReturn } = input;
+
+  let savingsBalance = initialAmount;
+  let investmentBalance = initialAmount;
+  const yearData: InflationComparisonYear[] = [];
+
+  for (let y = 1; y <= years; y++) {
+    savingsBalance = savingsBalance * (1 + savingsAPY);
+    investmentBalance = investmentBalance * (1 + investmentReturn);
+
+    const inflationFactor = Math.pow(1 + inflationRate, y);
+
+    yearData.push({
+      year: y,
+      savingsBalance: Math.round(savingsBalance * 100) / 100,
+      savingsPurchasingPower: Math.round((savingsBalance / inflationFactor) * 100) / 100,
+      investmentBalance: Math.round(investmentBalance * 100) / 100,
+      investmentPurchasingPower: Math.round((investmentBalance / inflationFactor) * 100) / 100,
+    });
+  }
+
+  const last = yearData[yearData.length - 1];
+
+  return {
+    years: yearData,
+    savingsFinalBalance: last.savingsBalance,
+    savingsFinalPurchasingPower: last.savingsPurchasingPower,
+    investmentFinalBalance: last.investmentBalance,
+    investmentFinalPurchasingPower: last.investmentPurchasingPower,
+    purchasingPowerLostInSavings: Math.round((initialAmount - last.savingsPurchasingPower) * 100) / 100,
+    investmentAdvantage: Math.round((last.investmentPurchasingPower - last.savingsPurchasingPower) * 100) / 100,
+  };
+}

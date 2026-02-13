@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HREmailGenerator from '../../components/HREmailGenerator';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { breadcrumbSchema, webApplicationSchema } from '../../lib/seo/schema';
+
+const siteUrl = 'https://trumpaccounts.guide';
+
+const schemas = [
+  breadcrumbSchema([
+    { name: 'Home', url: siteUrl },
+    { name: 'Tools', url: `${siteUrl}/tools` },
+    { name: 'HR Email Generator', url: `${siteUrl}/tools/hr-email` },
+  ]),
+  webApplicationSchema({
+    name: 'Trump Account HR Email Generator',
+    description: 'Generate a professional email to ask your employer about offering Trump Account contributions as an employee benefit.',
+    url: `${siteUrl}/tools/hr-email`,
+  }),
+];
+---
+
+<BaseLayout
+  title="Ask Your Employer for Trump Account Matching — HR Email Generator"
+  description="Generate a professional email to ask your employer about offering $2,500/yr in Trump Account contributions. Tax-free for you, tax-deductible for them."
+  schema={schemas}
+>
+  <article class="mx-auto max-w-3xl px-4 py-12">
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-gold-400 no-underline">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <a href="/for-employers" class="hover:text-gold-400 no-underline">For Employers</a>
+        </li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="text-white font-medium">HR Email Generator</span>
+        </li>
+      </ol>
+    </nav>
+
+    <h1 class="text-3xl font-extrabold text-white md:text-4xl">Ask Your Employer for Trump Account Matching</h1>
+    <p class="mt-3 text-lg text-gray-400">
+      Most HR departments haven't set this up yet. Be the one who tells them about it.
+      Generate a professional email in 30 seconds.
+    </p>
+
+    <CalloutBox type="info" title="Why this works">
+      <p>
+        Under IRC §128, employers can contribute <strong>up to $2,500/year per employee</strong> to Trump Accounts.
+        It's <strong>tax-deductible for the company</strong> and <strong>tax-free for you</strong>.
+        When one employee asks, others join in — creating momentum for HR to act.
+      </p>
+    </CalloutBox>
+
+    <div class="mt-8">
+      <HREmailGenerator client:visible />
+    </div>
+
+    <div class="mt-8 grid gap-3 sm:grid-cols-2">
+      <a href="/for-employers" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">Full Employer Guide</h3>
+        <p class="text-sm text-gray-400">Detailed guide HR can use to implement the benefit</p>
+      </a>
+      <a href="/calculators/employer-match" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">Employer Match Calculator</h3>
+        <p class="text-sm text-gray-400">Show the long-term impact of employer matching</p>
+      </a>
+    </div>
+
+    <div class="mt-10 rounded-lg border border-amber-500/30 bg-amber-500/10 p-4">
+      <p class="text-sm text-amber-300">
+        <strong class="text-amber-200">Disclaimer:</strong> This is a template for educational purposes.
+        Employer contribution programs require proper setup and compliance with IRC §128. Companies should consult
+        a tax professional before implementing.
+      </p>
+    </div>
+  </article>
+</BaseLayout>

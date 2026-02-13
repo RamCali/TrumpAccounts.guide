@@ -91,6 +91,30 @@ const schemas = [
             <p class="text-sm text-gray-400">Compare eligible ETFs and their expense ratios</p>
           </a>
         )}
+        {slug !== 'legacy-calculator' && (
+          <a href="/calculators/legacy-calculator" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+            <h3 class="font-semibold text-white">Legacy Calculator</h3>
+            <p class="text-sm text-gray-400">See the value at age 18, 30, and 65</p>
+          </a>
+        )}
+        {slug !== 'cost-of-waiting' && (
+          <a href="/calculators/cost-of-waiting" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+            <h3 class="font-semibold text-white">Cost of Waiting Calculator</h3>
+            <p class="text-sm text-gray-400">See how much delay costs your child</p>
+          </a>
+        )}
+        {slug !== 'milestones' && (
+          <a href="/calculators/milestones" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+            <h3 class="font-semibold text-white">Milestone Calculator</h3>
+            <p class="text-sm text-gray-400">When will the account hit $100K or $1M?</p>
+          </a>
+        )}
+        {slug !== 'inflation-comparison' && (
+          <a href="/calculators/inflation-comparison" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+            <h3 class="font-semibold text-white">Inflation Comparison</h3>
+            <p class="text-sm text-gray-400">Savings account vs Trump Account over time</p>
+          </a>
+        )}
       </div>
     </div>
   </div>

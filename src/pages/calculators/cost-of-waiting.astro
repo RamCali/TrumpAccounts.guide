@@ -1,0 +1,13 @@
+---
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import CostOfWaitingCalculator from '../../components/calculators/CostOfWaitingCalculator';
+---
+
+<CalculatorLayout
+  title="Cost of Waiting Calculator — Trump Account"
+  description="See how much your child loses by waiting to open a Trump Account. Compare starting at birth vs any age with side-by-side growth projections."
+  calculatorName="Cost of Waiting Calculator"
+  slug="cost-of-waiting"
+>
+  <CostOfWaitingCalculator client:visible />
+</CalculatorLayout>

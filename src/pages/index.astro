@@ -4,6 +4,7 @@ import CalloutBox from '../components/ui/CalloutBox.astro';
 import MiniGrowthCalc from '../components/calculators/MiniGrowthCalc';
 import MiniEligibilityChecker from '../components/calculators/MiniEligibilityChecker';
 import MiniEmployerMatch from '../components/calculators/MiniEmployerMatch';
+import CountdownTimer from '../components/CountdownTimer';
 import { organizationSchema, webSiteSchema, faqSchema } from '../lib/seo/schema';
 
 const schemas = [
@@ -61,6 +62,13 @@ const schemas = [
           </a>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Countdown Timer -->
+  <section class="border-b border-surface-700">
+    <div class="mx-auto max-w-2xl px-4 py-8">
+      <CountdownTimer client:visible />
     </div>
   </section>
 
@@ -172,7 +180,34 @@ const schemas = [
         </div>
       </div>
       <div class="mt-6 text-center">
-        <a href="/calculators" class="text-sm text-gold-400 no-underline hover:text-gold-300">View all 5 calculators &rarr;</a>
+        <a href="/calculators" class="text-sm text-gold-400 no-underline hover:text-gold-300">View all 6 calculators &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Viral Tools Section -->
+  <section class="border-b border-surface-700 bg-surface-800">
+    <div class="mx-auto max-w-6xl px-4 py-16">
+      <h2 class="text-center text-2xl font-bold text-white md:text-3xl">Share With Family & Employers</h2>
+      <p class="mx-auto mt-3 max-w-2xl text-center text-gray-400">
+        Tools designed to help you spread the word about Trump Accounts.
+      </p>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <a href="/tools/wealth-report" class="group rounded-xl border border-surface-600 bg-surface-900 p-6 no-underline transition-all hover:border-gold-400/40">
+          <h3 class="font-bold text-gold-400">Wealth Report Generator</h3>
+          <p class="mt-2 text-sm text-gray-400">Create a personalized "Wealth Map" for your child showing projected balances at 18, 30, and 65. Download and share.</p>
+        </a>
+        <a href="/tools/gift-card" class="group rounded-xl border border-surface-600 bg-surface-900 p-6 no-underline transition-all hover:border-gold-400/40">
+          <h3 class="font-bold text-mint-400">Gift-This-Instead Card</h3>
+          <p class="mt-2 text-sm text-gray-400">Ask grandparents to invest in your child's future instead of buying another toy. Shareable digital card generator.</p>
+        </a>
+        <a href="/tools/hr-email" class="group rounded-xl border border-surface-600 bg-surface-900 p-6 no-underline transition-all hover:border-gold-400/40">
+          <h3 class="font-bold text-purple-400">HR Email Generator</h3>
+          <p class="mt-2 text-sm text-gray-400">Generate a professional email to ask your employer about offering $2,500/yr Trump Account matching.</p>
+        </a>
+      </div>
+      <div class="mt-6 text-center">
+        <a href="/tools" class="text-sm text-gold-400 no-underline hover:text-gold-300">View all tools &rarr;</a>
       </div>
     </div>
   </section>

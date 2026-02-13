@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CalloutBox from '../../components/ui/CalloutBox.astro';
 import LastUpdated from '../../components/ui/LastUpdated.astro';
+import ComparisonCheatSheet from '../../components/ComparisonCheatSheet';
 import { breadcrumbSchema, faqSchema } from '../../lib/seo/schema';
 
 const siteUrl = 'https://trumpaccounts.guide';
@@ -243,6 +244,11 @@ const schemas = [
 
       <h3>Does a Trump Account affect 529 contributions?</h3>
       <p>No. The $5,000 Trump Account limit and 529 contribution limits are completely independent.</p>
+    </div>
+
+    <!-- Shareable Cheat Sheet -->
+    <div class="mt-10">
+      <ComparisonCheatSheet client:visible />
     </div>
 
     <!-- Related Links -->

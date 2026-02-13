@@ -1,0 +1,13 @@
+---
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import InflationComparisonCalc from '../../components/calculators/InflationComparisonCalc';
+---
+
+<CalculatorLayout
+  title="Inflation Comparison — Trump Account vs Savings Account"
+  description="See how inflation erodes a savings account while a Trump Account grows. Compare purchasing power over 5 to 30 years."
+  calculatorName="Inflation Comparison"
+  slug="inflation-comparison"
+>
+  <InflationComparisonCalc client:visible />
+</CalculatorLayout>

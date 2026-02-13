@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import WealthReport from '../../components/calculators/WealthReport';
+import { breadcrumbSchema, webApplicationSchema } from '../../lib/seo/schema';
+
+const siteUrl = 'https://trumpaccounts.guide';
+
+const schemas = [
+  breadcrumbSchema([
+    { name: 'Home', url: siteUrl },
+    { name: 'Tools', url: `${siteUrl}/tools` },
+    { name: 'Wealth Report', url: `${siteUrl}/tools/wealth-report` },
+  ]),
+  webApplicationSchema({
+    name: 'Trump Account Wealth Report Generator',
+    description: 'Generate a personalized wealth projection for your child\'s Trump Account. See projected values at age 18, 30, and 65. Download and share.',
+    url: `${siteUrl}/tools/wealth-report`,
+  }),
+];
+---
+
+<BaseLayout
+  title="Trump Account Wealth Report — See Your Child's Projected Future"
+  description="Generate a personalized Trump Account wealth projection showing your child's projected balance at age 18, 30, and 65. Download and share with family."
+  schema={schemas}
+>
+  <article class="mx-auto max-w-3xl px-4 py-12">
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-gold-400 no-underline">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="text-white font-medium">Wealth Report</span>
+        </li>
+      </ol>
+    </nav>
+
+    <h1 class="text-3xl font-extrabold text-white md:text-4xl">Your Child's Wealth Map</h1>
+    <p class="mt-3 text-lg text-gray-400">
+      See how a Trump Account could grow from a $1,000 federal deposit into
+      generational wealth. Download your personalized projection and share it with family.
+    </p>
+
+    <div class="mt-8">
+      <WealthReport client:visible />
+    </div>
+
+    <div class="mt-10 rounded-lg border border-amber-500/30 bg-amber-500/10 p-4">
+      <p class="text-sm text-amber-300">
+        <strong class="text-amber-200">Disclaimer:</strong> This is a hypothetical projection for educational purposes only.
+        It is not financial advice. Actual investment returns will vary. Past performance does not guarantee future results.
+        Consult a qualified financial advisor.
+      </p>
+    </div>
+  </article>
+</BaseLayout>

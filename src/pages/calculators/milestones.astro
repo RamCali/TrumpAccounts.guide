@@ -1,0 +1,13 @@
+---
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import MilestonesCalculator from '../../components/calculators/MilestonesCalculator';
+---
+
+<CalculatorLayout
+  title="Milestone Calculator — Trump Account"
+  description="See when your child's Trump Account hits $10K, $50K, $100K, or $1 million. Track milestone ages based on your contributions and expected returns."
+  calculatorName="Milestone Calculator"
+  slug="milestones"
+>
+  <MilestonesCalculator client:visible />
+</CalculatorLayout>

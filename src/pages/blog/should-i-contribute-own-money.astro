@@ -1,0 +1,202 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('should-i-contribute-own-money')!;
+const related = getRelatedArticles('should-i-contribute-own-money');
+
+const faqs = [
+  {
+    question: 'Should I put my own money into a Trump Account?',
+    answer: 'Most financial experts say no — not as a first choice. Other accounts like 529 plans, Roth IRAs, and custodial brokerage accounts offer more flexibility and better tax treatment for personal contributions. However, you should open a Trump Account to receive free deposits from the government, employer, and charities.',
+  },
+  {
+    question: 'What is the main benefit of a Trump Account?',
+    answer: `The primary benefit is receiving free money. The $${limits.pilotDeposit.toLocaleString()} federal deposit (for ${limits.pilotDepositStartYear}-${limits.pilotDepositEndYear} births), employer contributions up to $${limits.employerContributionLimit.toLocaleString()}/year, the Dell Foundation's $${limits.dellPledge.perChildAmount} pledge, and other charity contributions are all free money that only goes into a Trump Account.`,
+  },
+  {
+    question: 'Why do experts caution against contributing to a Trump Account?',
+    answer: 'Trump Accounts have more restrictions and fewer tax benefits than alternatives. Contributions are after-tax (no deduction), withdrawals are taxed as ordinary income (not capital gains), funds are locked until age 18, and investment options are limited to broad index funds only.',
+  },
+  {
+    question: 'When does it make sense to contribute personal money?',
+    answer: `It may make sense after you have maxed out better options. If you have already contributed to a 529, a Roth IRA for your child (if they have earned income), and a custodial account, additional funds in a Trump Account benefit from ${limits.growthPhaseEndAge} years of tax-deferred growth in low-cost index funds.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Financial experts generally say <strong class="text-white">parents should not put their own money into a Trump Account as a first choice</strong>.</li>
+        <li>The primary use case is to <strong class="text-white">receive free money</strong> — the $1,000 federal deposit, employer contributions, and charity donations.</li>
+        <li>Other accounts (529s, Roth IRAs, custodial accounts) offer <strong class="text-white">better tax treatment</strong> for personal contributions.</li>
+        <li>Trump Accounts have <strong class="text-white">more restrictions</strong>: no withdrawals before 18, ordinary income tax on withdrawals, limited investment choices.</li>
+        <li>If you have maxed out better options, <strong class="text-white">then a Trump Account can be a reasonable choice</strong> for additional savings.</li>
+      </ul>
+    </div>
+
+    <p>
+      Every parent wants to do the best thing for their child's financial future. So when you hear about Trump Accounts, the natural question is: <strong>should I contribute my own money?</strong> The answer from financial experts might surprise you.
+    </p>
+
+    <h2>What the Experts Say</h2>
+    <p>
+      <strong>Adam Michael</strong>, a director of tax policy studies at the <strong>Cato Institute</strong>, put it bluntly: <em>"Generally speaking, parents should not put their own money into a Trump account."</em> He explained that Trump Accounts have <em>"many more strings attached and complicated rules that make it not an attractive overall investment vehicle"</em> compared to alternatives.
+    </p>
+    <p>
+      However, Michael also acknowledged the key value proposition: <em>"The primary use case for the accounts is to receive free money from sources like the government or private donations."</em>
+    </p>
+    <p>
+      <strong>Madeline Brown</strong>, a wealth and financial policy expert at the <strong>Urban Institute</strong>, agreed: <em>"The gift is the biggest part of this. It really is free money."</em>
+    </p>
+
+    <CalloutBox type="info" title="The expert consensus">
+      <p>
+        Open a Trump Account to collect the free deposits. Think carefully before contributing your own money — better options exist for most families.
+      </p>
+    </CalloutBox>
+
+    <h2>Why Other Accounts May Be Better for Personal Money</h2>
+    <p>
+      Trump Accounts have <strong>more restrictions and fewer tax benefits</strong> than several other investment accounts available to families. Here is how they compare for personal contributions:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Feature</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Trump Account</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">529 Plan</th>
+            <th class="py-3 text-gray-400 font-medium">Custodial Account</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Tax on contributions</td>
+            <td class="py-3 pr-4">After-tax (no deduction)</td>
+            <td class="py-3 pr-4">State deduction in many states</td>
+            <td class="py-3">After-tax</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Tax on growth</td>
+            <td class="py-3 pr-4">Tax-deferred</td>
+            <td class="py-3 pr-4 text-gold-400 font-medium">Tax-free (for education)</td>
+            <td class="py-3">Taxed annually</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Tax on withdrawals</td>
+            <td class="py-3 pr-4">Ordinary income tax</td>
+            <td class="py-3 pr-4 text-gold-400 font-medium">Tax-free (for education)</td>
+            <td class="py-3">Capital gains rates</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Withdrawal restrictions</td>
+            <td class="py-3 pr-4">No access before 18</td>
+            <td class="py-3 pr-4">Penalty for non-education use</td>
+            <td class="py-3 text-gold-400 font-medium">Flexible (child's age of majority)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Investment choices</td>
+            <td class="py-3 pr-4">S&P 500 / broad index only</td>
+            <td class="py-3 pr-4">Varies by state plan</td>
+            <td class="py-3 text-gold-400 font-medium">Any stocks, bonds, ETFs</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">Free money available</td>
+            <td class="py-3 pr-4 text-gold-400 font-medium">Yes ($1K gov + employer + Dell)</td>
+            <td class="py-3 pr-4">No</td>
+            <td class="py-3">No</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      The table tells the story. For <strong>education savings</strong>, a 529 plan offers tax-free growth and tax-free withdrawals — far better than Trump Account's taxable withdrawals. For <strong>general investing</strong>, a custodial brokerage account gives you full investment flexibility and capital gains tax rates (lower than ordinary income rates).
+    </p>
+
+    <h2>The Free Money Advantage</h2>
+    <p>
+      Where Trump Accounts stand alone is <strong>free money</strong>. No other account gives your child:
+    </p>
+    <ul>
+      <li><strong>${limits.pilotDeposit.toLocaleString()} federal deposit</strong> (for births {limits.pilotDepositStartYear}-{limits.pilotDepositEndYear})</li>
+      <li><strong>Up to ${limits.employerContributionLimit.toLocaleString()}/year in employer contributions</strong> (tax-free under IRC Section 128)</li>
+      <li><strong>${limits.dellPledge.perChildAmount} Dell Foundation pledge</strong> (for qualifying children)</li>
+      <li><strong>Charity and 501(c)(3) contributions</strong> (which do not count against the $5,000 annual cap)</li>
+    </ul>
+    <p>
+      This is money your child cannot get any other way. Even if you never contribute a dollar of your own, you should open a Trump Account to collect these deposits.
+    </p>
+
+    <h2>When Contributing Your Own Money Makes Sense</h2>
+    <p>
+      There are situations where adding personal funds to a Trump Account is reasonable:
+    </p>
+
+    <h3>1. You have maxed out better options</h3>
+    <p>
+      If you have already contributed to a 529 plan, a Roth IRA (if your child has earned income), and a custodial account, a Trump Account gives you another $5,000/year of tax-deferred growth in low-cost index funds.
+    </p>
+
+    <h3>2. You want maximum simplicity</h3>
+    <p>
+      Trump Accounts are dead simple: money goes into S&P 500 index funds with fees capped at {limits.maxExpenseRatio * 100}%. No decisions about asset allocation, no temptation to pick stocks. For parents who want a "set it and forget it" investment, that simplicity has value.
+    </p>
+
+    <h3>3. You want to lock the money away</h3>
+    <p>
+      The no-withdrawal-before-18 rule is a restriction, but some parents see it as a feature. If you want to guarantee the money stays invested for 18 years without anyone tapping it, a Trump Account enforces that discipline.
+    </p>
+
+    <h3>4. Your employer matches contributions</h3>
+    <p>
+      If your employer contributes to Trump Accounts, your personal contributions may be needed to <strong>maximize the total amount reaching the $5,000 cap</strong>. In this case, you are not just contributing — you are unlocking additional tax-free employer money.
+    </p>
+
+    <h2>A Practical Strategy</h2>
+    <p>
+      Here is what many financial planners suggest for families with the budget to save for their children:
+    </p>
+    <ol>
+      <li><strong>Open a Trump Account</strong> — collect the free $1,000 deposit, employer contributions, and Dell pledge. This costs you nothing.</li>
+      <li><strong>Fund a 529 plan</strong> — for education savings, the tax-free growth is hard to beat. Many states offer tax deductions too.</li>
+      <li><strong>Open a custodial account</strong> — for flexible, no-restrictions investing in a broader range of assets.</li>
+      <li><strong>Then consider contributing to the Trump Account</strong> — if you still have money to invest, the tax-deferred growth in low-cost index funds is a solid option.</li>
+    </ol>
+
+    <CalloutBox type="tip" title="The Roth conversion opportunity">
+      <p>
+        One reason personal contributions to a Trump Account can work out well: at age 18, your child can <a href="/blog/trump-account-roth-conversion-strategy">convert the account to a Roth IRA</a> while in a low tax bracket. This turns tax-deferred growth into tax-free growth for the rest of their life. The math can be compelling.
+      </p>
+    </CalloutBox>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      <strong>Always open a Trump Account</strong> for your eligible child — the free money is too good to pass up. But for your own contributions, consider 529 plans and custodial accounts first. Trump Accounts are a great vehicle for receiving free deposits, not necessarily the best vehicle for your personal savings.
+    </p>
+    <p>
+      For a complete comparison of all child investment accounts, see our guide to the <a href="/blog/best-accounts-for-kids-today">best investment accounts for kids</a>.
+    </p>
+
+    <CalloutBox type="warning" title="Not financial advice">
+      <p>
+        This article summarizes expert opinions for educational purposes. It is not financial advice. Every family's situation is different. Consult a qualified financial advisor or tax professional before making investment decisions.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>
