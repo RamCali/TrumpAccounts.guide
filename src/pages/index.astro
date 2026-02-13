@@ -4,10 +4,11 @@ import CalloutBox from '../components/ui/CalloutBox.astro';
 import MiniGrowthCalc from '../components/calculators/MiniGrowthCalc';
 import MiniEligibilityChecker from '../components/calculators/MiniEligibilityChecker';
 import MiniEmployerMatch from '../components/calculators/MiniEmployerMatch';
-import { organizationSchema, faqSchema } from '../lib/seo/schema';
+import { organizationSchema, webSiteSchema, faqSchema } from '../lib/seo/schema';
 
 const schemas = [
   organizationSchema(),
+  webSiteSchema(),
   faqSchema([
     {
       question: 'What are Trump Accounts?',

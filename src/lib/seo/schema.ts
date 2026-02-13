@@ -107,6 +107,41 @@ export function breadcrumbSchema(
   };
 }
 
+export function webSiteSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'TrumpAccounts.guide',
+    url: 'https://trumpaccounts.guide',
+    description:
+      'The #1 plain-English resource for Trump Accounts (IRC §530A). Free calculators, IRS Form 4547 walkthrough, and authoritative guides.',
+    publisher: {
+      '@type': 'Organization',
+      name: 'TrumpAccounts.guide',
+      url: 'https://trumpaccounts.guide',
+    },
+  };
+}
+
+export function definedTermSetSchema(
+  terms: { term: string; definition: string; url: string }[],
+) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'DefinedTermSet',
+    name: 'Trump Account Glossary',
+    description:
+      'Plain-English definitions for every Trump Account term: IRC §530A, Form 4547, pilot program, and more.',
+    url: 'https://trumpaccounts.guide/glossary',
+    hasDefinedTerm: terms.map((t) => ({
+      '@type': 'DefinedTerm',
+      name: t.term,
+      description: t.definition,
+      url: t.url,
+    })),
+  };
+}
+
 export function articleSchema(params: {
   title: string;
   description: string;

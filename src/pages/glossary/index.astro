@@ -1,16 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import LastUpdated from '../../components/ui/LastUpdated.astro';
-import { breadcrumbSchema } from '../../lib/seo/schema';
+import { breadcrumbSchema, definedTermSetSchema } from '../../lib/seo/schema';
 
 const siteUrl = 'https://trumpaccounts.guide';
-
-const schemas = [
-  breadcrumbSchema([
-    { name: 'Home', url: siteUrl },
-    { name: 'Glossary', url: `${siteUrl}/glossary` },
-  ]),
-];
 
 const terms = [
   { term: 'Trump Account', slug: 'trump-account', definition: 'A tax-advantaged savings account for children under IRC §530A, created by the One Big Beautiful Bill Act. Provides a $1,000 federal deposit for 2025–2028 births and converts to a traditional IRA at age 18.' },
@@ -33,6 +26,20 @@ const terms = [
   { term: 'Roth Conversion', slug: 'roth-conversion', definition: 'Converting a traditional IRA to a Roth IRA. At age 18, a Trump Account owner can convert their traditional IRA to a Roth, paying income tax now for tax-free growth and withdrawals later.' },
   { term: 'Dell Foundation Pledge', slug: 'dell-foundation-pledge', definition: 'Michael and Susan Dell\'s $6.25 billion pledge to provide $250 per child under 10 in ZIP codes with median household income below $150,000. Separate from and in addition to the $1,000 federal deposit.' },
   { term: 'trumpaccounts.gov', slug: 'trumpaccounts-gov', definition: 'The official U.S. government portal for Trump Accounts, expected to launch mid-2026. Will allow parents to submit Form 4547 online and manage their elections.' },
+];
+
+const schemas = [
+  breadcrumbSchema([
+    { name: 'Home', url: siteUrl },
+    { name: 'Glossary', url: `${siteUrl}/glossary` },
+  ]),
+  definedTermSetSchema(
+    terms.map((t) => ({
+      term: t.term,
+      definition: t.definition,
+      url: `${siteUrl}/glossary#${t.slug}`,
+    })),
+  ),
 ];
 ---
 

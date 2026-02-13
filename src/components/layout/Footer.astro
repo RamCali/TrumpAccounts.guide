@@ -1,10 +1,70 @@
 ---
 const currentYear = new Date().getFullYear();
+
+const footerNav = [
+  {
+    heading: 'Guides',
+    links: [
+      { label: 'What Are Trump Accounts?', href: '/what-are-trump-accounts' },
+      { label: 'How to Open', href: '/how-to-open-trump-account' },
+      { label: 'IRS Notice 2025-68', href: '/irs-notice-2025-68' },
+      { label: 'For Employers', href: '/for-employers' },
+      { label: 'Blog', href: '/blog' },
+    ],
+  },
+  {
+    heading: 'Calculators',
+    links: [
+      { label: 'Growth Calculator', href: '/calculators/growth-calculator' },
+      { label: 'Eligibility Checker', href: '/calculators/eligibility-checker' },
+      { label: 'Employer Match', href: '/calculators/employer-match' },
+      { label: 'Withdrawal Simulator', href: '/calculators/withdrawal-simulator' },
+      { label: 'Fund Expense Tracker', href: '/calculators/fund-expense-tracker' },
+    ],
+  },
+  {
+    heading: 'Compare',
+    links: [
+      { label: 'vs 529 Plan', href: '/compare/trump-account-vs-529' },
+      { label: 'vs Roth IRA', href: '/compare/trump-account-vs-roth-ira' },
+      { label: 'vs Custodial (UTMA)', href: '/compare/trump-account-vs-custodial-account' },
+      { label: 'vs Coverdell ESA', href: '/compare/trump-account-vs-coverdell' },
+      { label: 'vs Baby Bonds', href: '/compare/trump-account-vs-baby-bonds' },
+    ],
+  },
+  {
+    heading: 'Resources',
+    links: [
+      { label: 'FAQ', href: '/faq' },
+      { label: 'Glossary', href: '/glossary' },
+      { label: 'About', href: '/about' },
+    ],
+  },
+];
 ---
 
 <footer class="mt-16 border-t border-surface-700 bg-surface-800">
-  <div class="mx-auto max-w-6xl px-4 py-6">
-    <div class="flex flex-col items-center justify-between gap-4 md:flex-row">
+  <div class="mx-auto max-w-6xl px-4 py-10">
+    <!-- Footer navigation grid -->
+    <nav aria-label="Footer navigation" class="grid grid-cols-2 gap-8 md:grid-cols-4">
+      {footerNav.map((section) => (
+        <div>
+          <h3 class="mb-3 text-sm font-semibold text-gray-300">{section.heading}</h3>
+          <ul class="space-y-2" role="list">
+            {section.links.map((link) => (
+              <li>
+                <a href={link.href} class="text-sm text-gray-500 no-underline transition-colors hover:text-gold-400">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </nav>
+
+    <!-- Bottom bar -->
+    <div class="mt-8 flex flex-col items-center justify-between gap-4 border-t border-surface-700 pt-6 md:flex-row">
       <!-- Left: Site info -->
       <p class="text-sm text-gray-500">
         <span class="font-semibold text-gray-300">TrumpAccounts.guide</span>

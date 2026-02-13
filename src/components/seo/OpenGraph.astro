@@ -7,15 +7,21 @@ interface Props {
   type?: string;
 }
 
+const siteUrl = 'https://trumpaccounts.guide';
+
 const {
   title,
   description,
   url,
-  image = '/og-default.png',
+  image,
   type = 'website',
 } = Astro.props;
 
 const siteName = 'TrumpAccounts.guide';
+// OG images must be absolute URLs
+const ogImage = image
+  ? (image.startsWith('http') ? image : `${siteUrl}${image}`)
+  : `${siteUrl}/TrumpAccounts.guide.png`;
 ---
 
 <!-- Open Graph -->
@@ -24,10 +30,11 @@ const siteName = 'TrumpAccounts.guide';
 <meta property="og:description" content={description} />
 <meta property="og:url" content={url} />
 <meta property="og:site_name" content={siteName} />
-<meta property="og:image" content={image} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:locale" content="en_US" />
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
-<meta name="twitter:image" content={image} />
+<meta name="twitter:image" content={ogImage} />

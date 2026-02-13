@@ -1,0 +1,170 @@
+# TrumpAccounts.guide — Complete Reference
+
+> The #1 plain-English resource for Trump Accounts (IRC Section 530A). Free calculators, IRS Form 4547 walkthrough, and authoritative guides for parents, employers, and tax preparers.
+
+## About
+
+TrumpAccounts.guide translates IRS guidance (Notice 2025-68) into simple language for exhausted parents, employers, and tax preparers. We provide interactive calculators, comparison tools, and authoritative guides about Trump Accounts — the tax-advantaged savings accounts created by the One Big Beautiful Bill Act (OBBBA), signed July 4, 2025.
+
+This is an independent educational website. We are not affiliated with the IRS, U.S. Treasury, or any government agency. Nothing on this site constitutes tax, financial, or legal advice.
+
+---
+
+## What Are Trump Accounts?
+
+Trump Accounts are a new type of tax-advantaged savings account created by the One Big Beautiful Bill Act (OBBBA), signed into law on July 4, 2025. Officially established under IRC Section 530A, they are designed to give every American child a financial head start.
+
+### How They Work
+
+1. **Federal Seed Money:** Children born January 1, 2025 through December 31, 2028 receive a one-time $1,000 pilot deposit from the federal government.
+2. **Annual Contributions:** Parents (or anyone) can contribute up to $5,000/year in after-tax dollars. This limit is indexed for inflation starting in 2027.
+3. **Employer Contributions:** Employers can contribute up to $2,500/year per employee (not per dependent), tax-free under IRC §128. This counts toward the $5,000 cap.
+4. **Investment Requirement:** All funds must be invested in mutual funds or ETFs tracking the S&P 500 or a broad U.S. equity index. Expense ratios are capped at 0.1%.
+5. **Growth Phase:** From birth to age 18, the account grows tax-deferred. No withdrawals are allowed (except rollovers, excess contributions, or death of the child).
+6. **At Age 18:** The Trump Account automatically converts to a traditional IRA with standard IRA rules.
+
+### Eligibility
+
+To open a Trump Account, the child must be:
+- A U.S. citizen
+- Have a valid Social Security Number (SSN)
+- Under 18 at the end of the election year
+
+There are NO income restrictions — any family can participate regardless of how much they earn.
+
+### How to Open
+
+There are three ways to establish a Trump Account:
+1. **With your tax return:** Include IRS Form 4547 (Trump Account Election(s)) with your 2025 tax return, due April 15, 2026.
+2. **Online portal:** Through trumpaccounts.gov (expected to launch mid-2026).
+3. **By mail:** Send Form 4547 to the IRS.
+
+### Tax Treatment
+
+- Contributions are made with after-tax dollars (no tax deduction)
+- Earnings grow tax-deferred during the growth phase
+- Withdrawals after age 18 are taxed as ordinary income
+- Before age 59½, a 10% early withdrawal penalty applies (standard IRA rules)
+- Exceptions to the early withdrawal penalty include: first home purchase ($10,000 lifetime), qualified education expenses, disability, and certain medical expenses
+
+### The Dell Foundation Pledge
+
+Michael and Susan Dell pledged $6.25 billion — $250 per child under 10 in ZIP codes where the median household income is below $150,000. This is in addition to the $1,000 federal pilot deposit.
+
+---
+
+## Trump Account vs Other Savings Accounts
+
+### Trump Account vs 529 Plan
+- Trump Account: $5,000/year limit, S&P 500 only, converts to traditional IRA at 18, can be used for anything
+- 529 Plan: Higher limits ($16,000+ gift tax exclusion), flexible investment options, tax-free for education, 10% penalty on non-education withdrawals
+- Key difference: Trump Accounts have no usage restrictions after 18; 529s must be used for education
+
+### Trump Account vs Roth IRA
+- Trump Account: No income limit, no earned income needed, $5,000/year, S&P 500 only, traditional IRA tax treatment
+- Roth IRA: Income limits apply, requires earned income, $7,000/year (2025), any investment, tax-free withdrawals
+- Key difference: Trump Accounts are for children with no earned income requirement; Roth IRAs require earned income
+
+### Trump Account vs Custodial Account (UTMA/UGMA)
+- Trump Account: Tax-deferred, S&P 500 only, locked until 18, no kiddie tax
+- UTMA/UGMA: Taxed annually (kiddie tax), any investment, no restrictions on use at age of majority
+- Key difference: Trump Accounts avoid kiddie tax; custodial accounts offer more investment flexibility
+
+### Trump Account vs Coverdell ESA
+- Trump Account: $5,000/year, no income limit, S&P 500 only, converts to IRA at 18
+- Coverdell ESA: $2,000/year, income limits ($110K single/$220K joint), any investment, education expenses only, must be used by age 30
+- Key difference: Trump Accounts have higher limits and no income restrictions
+
+---
+
+## Key Facts (Source of Truth)
+
+- Legal basis: IRC Section 530A, created by the One Big Beautiful Bill Act (OBBBA), signed July 4, 2025
+- IRS guidance: Notice 2025-68 (published December 3, 2025)
+- Election form: IRS Form 4547 (Trump Account Election(s))
+- Official portal: trumpaccounts.gov
+- Pilot deposit: $1,000 one-time federal deposit for U.S. citizen children born Jan 1, 2025 - Dec 31, 2028
+- Annual contribution limit: $5,000 (after-tax, indexed for inflation after 2027)
+- Employer contribution: Up to $2,500/year per employee (tax-free under §128, counts toward $5,000 cap). Limit is per employee, NOT per dependent.
+- Investment requirement: Must invest in mutual funds or ETFs tracking S&P 500 or broad U.S. equity index
+- Expense ratio cap: 0.1% (10 basis points)
+- Growth phase: Birth through age 18 (no withdrawals except rollovers, excess contributions, or death)
+- At age 18: Converts to a traditional IRA with standard IRA rules
+- Eligibility: U.S. citizen, valid SSN, under 18 at end of election year. NO income restrictions
+- How to file: Include Form 4547 with 2025 tax return (due April 15, 2026), or via trumpaccounts.gov portal (mid-2026), or by mail
+- Dell pledge: Michael & Susan Dell pledged $6.25 billion — $250 per child under 10 in ZIP codes with median income < $150,000
+- Tax treatment: Earnings taxed as ordinary income on qualified withdrawals (traditional IRA treatment at 18)
+
+---
+
+## Glossary of Key Terms
+
+- **Trump Account**: A tax-advantaged savings account for children under IRC §530A, created by the One Big Beautiful Bill Act. Provides a $1,000 federal deposit for 2025-2028 births and converts to a traditional IRA at age 18.
+- **IRC Section 530A**: The section of the Internal Revenue Code that establishes Trump Accounts.
+- **IRS Notice 2025-68**: The first official IRS guidance on Trump Accounts, published December 3, 2025.
+- **IRS Form 4547**: The IRS form used to elect (open) a Trump Account for a child.
+- **One Big Beautiful Bill Act (OBBBA)**: The federal legislation signed on July 4, 2025 that created Trump Accounts.
+- **Pilot Program**: The federal program that deposits $1,000 into Trump Accounts for children born 2025-2028.
+- **Growth Phase**: The period from account opening until the child turns 18. Funds grow tax-deferred; withdrawals are generally not permitted.
+- **Traditional IRA Conversion**: At age 18, a Trump Account automatically converts to a traditional IRA.
+- **Section 128 (IRC §128)**: The tax code section allowing employers to contribute up to $2,500/year per employee to Trump Accounts, excluded from gross income.
+- **Authorized Individual**: The parent or legal guardian who files Form 4547 to open and manage a Trump Account.
+- **Eligible Child**: A U.S. citizen under age 18 with a valid Social Security number. No income restrictions.
+- **Expense Ratio**: The annual fund fee. Trump Account-eligible funds must have expense ratios capped at 0.1%.
+- **Tax-Deferred Growth**: Investment earnings not taxed while in the account. Taxes owed only upon withdrawal.
+
+---
+
+## Site Map
+
+### Core Content
+- Homepage: https://trumpaccounts.guide/
+- What Are Trump Accounts?: https://trumpaccounts.guide/what-are-trump-accounts
+- How to Open: https://trumpaccounts.guide/how-to-open-trump-account
+- IRS Notice 2025-68: https://trumpaccounts.guide/irs-notice-2025-68
+- About: https://trumpaccounts.guide/about
+
+### Calculators
+- All Calculators: https://trumpaccounts.guide/calculators
+- Growth Calculator: https://trumpaccounts.guide/calculators/growth-calculator
+- Eligibility Checker: https://trumpaccounts.guide/calculators/eligibility-checker
+- Employer Match: https://trumpaccounts.guide/calculators/employer-match
+- Withdrawal Simulator: https://trumpaccounts.guide/calculators/withdrawal-simulator
+- Fund Expense Tracker: https://trumpaccounts.guide/calculators/fund-expense-tracker
+
+### Comparisons
+- All Comparisons: https://trumpaccounts.guide/compare
+- vs 529 Plan: https://trumpaccounts.guide/compare/trump-account-vs-529
+- vs Roth IRA: https://trumpaccounts.guide/compare/trump-account-vs-roth-ira
+- vs Custodial Account: https://trumpaccounts.guide/compare/trump-account-vs-custodial-account
+- vs Coverdell ESA: https://trumpaccounts.guide/compare/trump-account-vs-coverdell
+- vs Baby Bonds: https://trumpaccounts.guide/compare/trump-account-vs-baby-bonds
+
+### FAQs
+- FAQ Hub: https://trumpaccounts.guide/faq
+- Eligibility: https://trumpaccounts.guide/faq/eligibility
+- Taxes: https://trumpaccounts.guide/faq/taxes
+- Money & Funding: https://trumpaccounts.guide/faq/money-and-funding
+- Investments: https://trumpaccounts.guide/faq/investments
+- Withdrawals: https://trumpaccounts.guide/faq/withdrawals-and-use
+
+### For Employers
+- Employer Guide: https://trumpaccounts.guide/for-employers
+
+### Glossary
+- Glossary: https://trumpaccounts.guide/glossary
+
+### Blog
+- Blog Hub: https://trumpaccounts.guide/blog
+
+---
+
+## Sources
+
+- IRS Notice 2025-68: https://www.irs.gov/pub/irs-drop/n-25-68.pdf
+- Official portal: https://trumpaccounts.gov
+- One Big Beautiful Bill Act (OBBBA), IRC Section 530A
+
+## Disclaimer
+
+This website provides educational content only. Nothing on this site constitutes tax advice, financial advice, or legal advice. Always consult a qualified tax professional or financial advisor before making investment decisions. TrumpAccounts.guide is an independent website and is not affiliated with, endorsed by, or operated by the IRS, U.S. Department of the Treasury, or any U.S. government agency.

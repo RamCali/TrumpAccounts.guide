@@ -36,6 +36,21 @@ const fullTitle = title.includes('TrumpAccounts') ? title : `${title} | TrumpAcc
     <link rel="canonical" href={canonicalUrl} />
     <meta name="generator" content={Astro.generator} />
 
+    <!-- Performance hints -->
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+
+    <!-- LLMs discovery — see https://llmstxt.org -->
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-readable site summary" />
+
+    <!-- Google Tag Manager -->
+    <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PZG237LN');</script>
+    <!-- End Google Tag Manager -->
+
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
 
@@ -49,6 +64,10 @@ const fullTitle = title.includes('TrumpAccounts') ? title : `${title} | TrumpAcc
     {schema && <SchemaOrg schema={schema} />}
   </head>
   <body class="flex min-h-screen flex-col bg-surface-900">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZG237LN"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <a href="#main-content" class="skip-link">Skip to content</a>
     <DisclosureBanner />
     <Header />

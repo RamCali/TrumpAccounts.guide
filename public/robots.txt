@@ -1,4 +1,13 @@
+# TrumpAccounts.guide — robots.txt
+
 User-agent: *
 Allow: /
+Disallow: /_astro/
 
+# Sitemap
 Sitemap: https://trumpaccounts.guide/sitemap-index.xml
+
+# LLMs
+# See https://llmstxt.org for spec
+# llms.txt — concise site overview for LLMs
+# llms-full.txt — detailed reference with all content and facts

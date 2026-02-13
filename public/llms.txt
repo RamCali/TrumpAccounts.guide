@@ -1,0 +1,71 @@
+# TrumpAccounts.guide
+
+> The #1 plain-English resource for Trump Accounts (IRC Section 530A). Free calculators, IRS Form 4547 walkthrough, and authoritative guides for parents, employers, and tax preparers.
+
+## About
+
+TrumpAccounts.guide translates IRS guidance (Notice 2025-68) into simple language for exhausted parents, employers, and tax preparers. We provide interactive calculators, comparison tools, and authoritative guides about Trump Accounts — the tax-advantaged savings accounts created by the One Big Beautiful Bill Act (OBBBA), signed July 4, 2025.
+
+This is an independent educational website. We are not affiliated with the IRS, U.S. Treasury, or any government agency. Nothing on this site constitutes tax, financial, or legal advice.
+
+## Core Pages
+
+- [What Are Trump Accounts?](https://trumpaccounts.guide/what-are-trump-accounts): Complete guide to IRC §530A — eligibility, contributions, investments, and what happens at age 18.
+- [How to Open a Trump Account](https://trumpaccounts.guide/how-to-open-trump-account): Step-by-step guide to filing IRS Form 4547 with your 2025 tax return.
+- [IRS Notice 2025-68 in Plain English](https://trumpaccounts.guide/irs-notice-2025-68): Full IRS guidance translated into simple language.
+- [FAQ Hub](https://trumpaccounts.guide/faq): 80+ questions answered about eligibility, taxes, investments, and edge cases.
+- [Glossary](https://trumpaccounts.guide/glossary): Plain-English definitions for every Trump Account term.
+
+## Calculators
+
+- [Growth Calculator](https://trumpaccounts.guide/calculators/growth-calculator): Project how much a Trump Account could be worth at age 18.
+- [Eligibility Checker](https://trumpaccounts.guide/calculators/eligibility-checker): Check if your child qualifies for a Trump Account and the $1,000 deposit.
+- [Employer Match Calculator](https://trumpaccounts.guide/calculators/employer-match): Calculate the impact of employer contributions under IRC §128.
+- [Withdrawal Simulator](https://trumpaccounts.guide/calculators/withdrawal-simulator): Model post-18 withdrawal scenarios and tax implications.
+- [Fund Expense Tracker](https://trumpaccounts.guide/calculators/fund-expense-tracker): Compare eligible S&P 500 and broad index fund expenses.
+
+## Comparisons
+
+- [Trump Account vs 529 Plan](https://trumpaccounts.guide/compare/trump-account-vs-529): Education savings, tax treatment, and contribution limits compared.
+- [Trump Account vs Roth IRA](https://trumpaccounts.guide/compare/trump-account-vs-roth-ira): Earned income requirements, traditional vs Roth tax treatment.
+- [Trump Account vs Custodial Account](https://trumpaccounts.guide/compare/trump-account-vs-custodial-account): UTMA/UGMA, kiddie tax, and investment flexibility.
+- [Trump Account vs Coverdell ESA](https://trumpaccounts.guide/compare/trump-account-vs-coverdell): Income limits, age-30 deadline, and education savings.
+- [Trump Account vs Baby Bonds](https://trumpaccounts.guide/compare/trump-account-vs-baby-bonds): Universal vs income-targeted policy comparison.
+- [All Comparisons](https://trumpaccounts.guide/compare): Side-by-side comparison hub.
+
+## For Employers
+
+- [Employer Contribution Guide](https://trumpaccounts.guide/for-employers): How to set up a Trump Account contribution program under IRC §128 — $2,500/year per employee, tax-free.
+
+## FAQ Categories
+
+- [Eligibility FAQs](https://trumpaccounts.guide/faq/eligibility): Who qualifies, age cutoffs, citizenship requirements.
+- [Tax FAQs](https://trumpaccounts.guide/faq/taxes): Tax treatment, deductions, withdrawals after 18.
+- [Money & Funding FAQs](https://trumpaccounts.guide/faq/money-and-funding): Contribution limits, employer match, the $1,000 deposit.
+- [Investment FAQs](https://trumpaccounts.guide/faq/investments): Eligible funds, S&P 500 requirement, expense ratios.
+- [Withdrawal FAQs](https://trumpaccounts.guide/faq/withdrawals-and-use): What happens at 18, early withdrawal rules, IRA conversion.
+
+## Blog
+
+- [Blog Hub](https://trumpaccounts.guide/blog): 60+ in-depth articles on Trump Accounts.
+
+## Key Facts (Source of Truth)
+
+- Legal basis: IRC Section 530A, created by the One Big Beautiful Bill Act (OBBBA), signed July 4, 2025
+- IRS guidance: Notice 2025-68 (published December 3, 2025)
+- Election form: IRS Form 4547 (Trump Account Election(s))
+- Official portal: trumpaccounts.gov
+- Pilot deposit: $1,000 one-time federal deposit for U.S. citizen children born Jan 1, 2025 - Dec 31, 2028
+- Annual contribution limit: $5,000 (after-tax, indexed for inflation after 2027)
+- Employer contribution: Up to $2,500/year per employee (tax-free under §128, counts toward $5,000 cap)
+- Investment requirement: Must invest in mutual funds or ETFs tracking S&P 500 or broad U.S. equity index
+- Growth phase: Birth through age 18 (no withdrawals except rollovers, excess contributions, or death)
+- At age 18: Converts to a traditional IRA with standard IRA rules
+- Eligibility: U.S. citizen, valid SSN, under 18 at end of election year. NO income restrictions
+- Tax treatment: Earnings taxed as ordinary income on qualified withdrawals (traditional IRA treatment at 18)
+
+## Sources
+
+- [IRS Notice 2025-68 (PDF)](https://www.irs.gov/pub/irs-drop/n-25-68.pdf)
+- [trumpaccounts.gov](https://trumpaccounts.gov)
+- One Big Beautiful Bill Act (OBBBA), IRC Section 530A
