@@ -1,0 +1,126 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('already-born-children')!;
+const related = getRelatedArticles('already-born-children');
+
+const faqs = [
+  {
+    question: 'Can my 10-year-old open a Trump Account?',
+    answer: `Yes. Any U.S. citizen child under 18 with a valid SSN can open a Trump Account. A 10-year-old would have 8 years of tax-deferred growth before the account converts to an IRA at ${limits.iraConversionAge}. They will not receive the $${limits.pilotDeposit.toLocaleString()} pilot deposit since they were born before ${limits.pilotDepositStartYear}.`,
+  },
+  {
+    question: 'Why don\'t already-born children get the $1,000 deposit?',
+    answer: `The $${limits.pilotDeposit.toLocaleString()} pilot deposit was designed for newborns. Congress limited it to children born between ${limits.pilotDepositStartYear} and ${limits.pilotDepositEndYear} to manage the program's cost. Older children can still benefit from family and employer contributions.`,
+  },
+  {
+    question: 'Is it worth opening a Trump Account for a teenager?',
+    answer: `It depends on your situation. Even a few years of tax-deferred growth in S&P 500 index funds has value. Plus, the account converts to an IRA at ${limits.iraConversionAge}, giving your teen a head start on retirement savings. A 15-year-old would get about 3 years of growth.`,
+  },
+  {
+    question: 'Does my already-born child qualify for the Dell pledge?',
+    answer: `If your child is ${limits.dellPledge.eligibleAge} and lives in a ZIP code with a median income below $${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}, they may qualify for $${limits.dellPledge.perChildAmount} from the Dell pledge. This is separate from the federal pilot deposit.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Children born before {limits.pilotDepositStartYear} <strong class="text-white">can</strong> open a Trump Account.</li>
+        <li>They will <strong class="text-white">not</strong> receive the ${limits.pilotDeposit.toLocaleString()} federal pilot deposit.</li>
+        <li>They <strong class="text-white">can</strong> receive up to ${limits.annualContributionLimit.toLocaleString()}/year in family contributions.</li>
+        <li>Employers can add up to <strong class="text-white">${limits.employerContributionLimit.toLocaleString()}/year</strong> tax-free.</li>
+        <li>The Dell pledge may add <strong class="text-white">${limits.dellPledge.perChildAmount}</strong> for children {limits.dellPledge.eligibleAge} in qualifying ZIP codes.</li>
+      </ul>
+    </div>
+
+    <h2>Yes, Your Child Can Open One</h2>
+    <p>
+      If your child was born before {limits.pilotDepositStartYear}, you might think Trump Accounts are not for you. <strong>That is not true.</strong> Any U.S. citizen child with a valid SSN who is under 18 at the end of the election year can open a Trump Account.
+    </p>
+    <p>
+      The three requirements are the same for every child: U.S. citizenship, a valid Social Security number, and being under 18. Your child's birth year does not change whether they can participate. It only changes whether they get the government deposit.
+    </p>
+
+    <h2>The One Difference: No ${limits.pilotDeposit.toLocaleString()} Deposit</h2>
+    <p>
+      The <strong>${limits.pilotDeposit.toLocaleString()} pilot deposit</strong> is reserved for children born between January 1, {limits.pilotDepositStartYear} and December 31, {limits.pilotDepositEndYear}. Children born outside that window do not receive it. That is the only difference.
+    </p>
+    <p>
+      Everything else about the account works the same way. Same investment rules. Same contribution limits. Same tax-deferred growth. Same conversion to an IRA at {limits.iraConversionAge}.
+    </p>
+
+    <CalloutBox type="info" title="Think of it this way">
+      <p>
+        The ${limits.pilotDeposit.toLocaleString()} deposit is like a bonus for new babies. If your child missed that bonus, they still get access to everything else the program offers.
+      </p>
+    </CalloutBox>
+
+    <h2>What Your Child Still Gets</h2>
+    <p>
+      Even without the ${limits.pilotDeposit.toLocaleString()} deposit, there are strong reasons to open a Trump Account for an older child:
+    </p>
+    <ul>
+      <li><strong>Family contributions up to ${limits.annualContributionLimit.toLocaleString()}/year.</strong> Parents, grandparents, aunts, uncles — anyone can contribute to the account. The combined total from all sources is capped at ${limits.annualContributionLimit.toLocaleString()} per year.</li>
+      <li><strong>Employer contributions up to ${limits.employerContributionLimit.toLocaleString()}/year.</strong> If a parent's employer offers Trump Account contributions under IRC Section 128, those are tax-free. This counts toward the ${limits.annualContributionLimit.toLocaleString()} cap.</li>
+      <li><strong>Tax-deferred growth.</strong> All investment gains grow without being taxed until your child withdraws money after turning {limits.iraConversionAge}. This is a real advantage compared to a regular brokerage account.</li>
+      <li><strong>Dell pledge.</strong> Michael and Susan Dell pledged ${limits.dellPledge.perChildAmount} per child {limits.dellPledge.eligibleAge} in ZIP codes where the median income is below ${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}. This applies to already-born children too.</li>
+      <li><strong>IRA at {limits.iraConversionAge}.</strong> The account converts to a traditional IRA when your child turns {limits.iraConversionAge}. They get a head start on retirement savings that most people do not get until their 20s or 30s.</li>
+    </ul>
+
+    <h2>Example: A 5-Year-Old Opens an Account</h2>
+    <p>
+      Say you open a Trump Account for your 5-year-old today. Here is what happens:
+    </p>
+    <ul>
+      <li>They have <strong>13 years</strong> of growth before the account converts to an IRA at 18.</li>
+      <li>If you contribute <strong>$250 per month</strong> (${(250 * 12).toLocaleString()}/year), with an average annual return of 8%, the account could grow to <strong>roughly $70,000</strong> by age 18.</li>
+      <li>All of that growth is <strong>tax-deferred</strong>. No capital gains taxes along the way.</li>
+      <li>At 18, your child has an IRA worth tens of thousands of dollars — a huge financial head start.</li>
+    </ul>
+
+    <CalloutBox type="tip" title="Run your own numbers">
+      <p>
+        Use our <a href="/calculators/growth-calculator">growth calculator</a> to see exactly how much your child's account could grow based on their age and your planned contributions.
+      </p>
+    </CalloutBox>
+
+    <h2>Why It Is Still Worth It</h2>
+    <p>
+      Some parents wonder if it is worth opening an account without the ${limits.pilotDeposit.toLocaleString()} deposit. The answer is almost always <strong>yes</strong>. Here is why:
+    </p>
+    <p>
+      The ${limits.pilotDeposit.toLocaleString()} deposit is a nice bonus, but it is small compared to what a family can contribute over time. Even one year of maxing out the ${limits.annualContributionLimit.toLocaleString()} contribution limit puts five times more money into the account than the government deposit.
+    </p>
+    <p>
+      The real value of a Trump Account is the <strong>tax-deferred compounding</strong> in index funds. That benefit applies to every child, regardless of birth year. And the earlier you start, the more compounding time your child has.
+    </p>
+
+    <h2>How to Open the Account</h2>
+    <p>
+      The process is the same for already-born children:
+    </p>
+    <ol>
+      <li>Confirm your child has a <strong>valid SSN</strong>.</li>
+      <li>File <strong>{limits.form}</strong> with your 2025 tax return (due April 15, 2026) or through {limits.portal} when it launches.</li>
+      <li>Start contributing. You can put in up to <strong>${limits.annualContributionLimit.toLocaleString()} per year</strong>.</li>
+    </ol>
+    <p>
+      For the full walkthrough, see <a href="/blog/how-to-open-step-by-step">How to Open a Trump Account</a>. To check if your child qualifies, visit our <a href="/faq/eligibility">eligibility FAQ</a> or read <a href="/blog/do-all-babies-qualify">Do All Babies Qualify?</a>
+    </p>
+  </div>
+</BlogLayout>

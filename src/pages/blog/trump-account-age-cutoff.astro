@@ -1,0 +1,185 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-age-cutoff')!;
+const related = getRelatedArticles('trump-account-age-cutoff');
+
+const faqs = [
+  {
+    question: 'Can a 17-year-old open a Trump Account?',
+    answer: `Yes. As long as the child is under 18 at the end of the election year (December 31), they are eligible. A 17-year-old would have limited growth time before the account converts to an IRA at ${limits.iraConversionAge}, but they can still open one.`,
+  },
+  {
+    question: 'My child turns 18 in March. Can they still open one this year?',
+    answer: 'No. The rule is that the child must be under 18 at the end of the election year — meaning December 31. If your child turns 18 at any point during the year, they will be 18 on December 31, so they do not qualify for that year. They needed to have the election filed in a prior year.',
+  },
+  {
+    question: 'Is there a minimum age?',
+    answer: `There is no minimum age. A newborn can have a Trump Account as soon as they have a Social Security number. In fact, newborns get the most benefit because they have the full ${limits.growthPhaseEndAge} years of compounding.`,
+  },
+  {
+    question: 'Does a 17-year-old get the $1,000 deposit?',
+    answer: `Only if they were born between ${limits.pilotDepositStartYear} and ${limits.pilotDepositEndYear}. Since the current year is 2026, a 17-year-old was born around 2008-2009 — well before the deposit window. So no, today's 17-year-olds do not get the $${limits.pilotDeposit.toLocaleString()} deposit.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Children must be <strong class="text-white">under 18 on December 31</strong> of the election year.</li>
+        <li>A 17-year-old <strong class="text-white">can</strong> open one, but has limited time before IRA conversion.</li>
+        <li>Children turning 18 during the year are <strong class="text-white">still eligible</strong> if they are 17 on December 31.</li>
+        <li><strong class="text-white">Newborns</strong> get the most benefit — a full {limits.growthPhaseEndAge} years of compounding.</li>
+        <li>There is <strong class="text-white">no minimum age</strong>. A baby qualifies as soon as they have an SSN.</li>
+      </ul>
+    </div>
+
+    <h2>The Rule: Under 18 at Year-End</h2>
+    <p>
+      The age cutoff for Trump Accounts is straightforward. Your child must be <strong>under 18 years old at the end of the election year</strong>. The election year is the tax year for which you file {limits.form}.
+    </p>
+    <p>
+      "End of the election year" means <strong>December 31</strong>. So if your child is 17 on December 31, 2025, they qualify for the 2025 election. If they turn 18 at any point during 2025 — even on December 30 — they are 18 on December 31 and do not qualify.
+    </p>
+
+    <CalloutBox type="irs-quote" title="From IRS Notice 2025-68">
+      <p>
+        "An eligible child is any individual who is a citizen of the United States who has not attained 18 years of age as of the close of the taxable year and who has a valid Social Security number."
+      </p>
+    </CalloutBox>
+
+    <p>
+      In plain English: on the last day of the year, your child must still be 17 or younger.
+    </p>
+
+    <h2>Age vs. Growth Time</h2>
+    <p>
+      While any child under 18 can open a Trump Account, the <strong>younger the child, the more time compounding has to work</strong>. Here is a quick comparison of how age affects potential growth:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto rounded-xl border border-surface-600">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 bg-surface-800">
+            <th class="px-4 py-3 text-left font-semibold text-gold-400">Age at Opening</th>
+            <th class="px-4 py-3 text-left font-semibold text-gold-400">Years of Growth</th>
+            <th class="px-4 py-3 text-left font-semibold text-gold-400">$200/mo at 8% Return</th>
+            <th class="px-4 py-3 text-left font-semibold text-gold-400">$400/mo at 8% Return</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-2">Newborn</td>
+            <td class="px-4 py-2">18 years</td>
+            <td class="px-4 py-2 text-mint-400">~$96,000</td>
+            <td class="px-4 py-2 text-mint-400">~$192,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-2">5 years old</td>
+            <td class="px-4 py-2">13 years</td>
+            <td class="px-4 py-2 text-mint-400">~$58,000</td>
+            <td class="px-4 py-2 text-mint-400">~$116,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-2">10 years old</td>
+            <td class="px-4 py-2">8 years</td>
+            <td class="px-4 py-2 text-mint-400">~$28,000</td>
+            <td class="px-4 py-2 text-mint-400">~$56,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-2">14 years old</td>
+            <td class="px-4 py-2">4 years</td>
+            <td class="px-4 py-2 text-mint-400">~$12,000</td>
+            <td class="px-4 py-2 text-mint-400">~$24,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-2">16 years old</td>
+            <td class="px-4 py-2">2 years</td>
+            <td class="px-4 py-2 text-mint-400">~$5,500</td>
+            <td class="px-4 py-2 text-mint-400">~$11,000</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">17 years old</td>
+            <td class="px-4 py-2">~1 year</td>
+            <td class="px-4 py-2 text-mint-400">~$2,600</td>
+            <td class="px-4 py-2 text-mint-400">~$5,200</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="text-sm text-gray-400">
+      <em>Figures are approximate and assume an 8% average annual return. Actual returns will vary. This is not a guarantee of future results.</em>
+    </p>
+
+    <h2>Older Children (16-17): Is It Worth It?</h2>
+    <p>
+      If your child is 16 or 17, you might wonder if it is worth the effort. The growth period is short — just one or two years. But there are still reasons to consider it:
+    </p>
+    <ul>
+      <li><strong>It converts to an IRA at {limits.iraConversionAge}.</strong> Even a small amount in an IRA at 18 is a head start on retirement savings. Most people do not start an IRA until their mid-20s or later.</li>
+      <li><strong>Tax-deferred growth continues.</strong> Once the account becomes an IRA, it keeps growing tax-deferred. Two years of contributions could compound for decades in the IRA.</li>
+      <li><strong>Maxing out contributions helps.</strong> If you contribute the full ${limits.annualContributionLimit.toLocaleString()} per year for two years, your teen starts adult life with ${(limits.annualContributionLimit * 2).toLocaleString()} plus growth in a tax-advantaged account.</li>
+    </ul>
+
+    <CalloutBox type="tip" title="Think long-term">
+      <p>
+        A Trump Account is not just about the growth phase. It is also about giving your child an IRA at {limits.iraConversionAge}. Even a small IRA at that age has decades to compound. Starting at 18 instead of 30 can mean hundreds of thousands more at retirement.
+      </p>
+    </CalloutBox>
+
+    <h2>Newborns Get the Most Benefit</h2>
+    <p>
+      The math is clear: <strong>newborns have the most to gain</strong>. With a full {limits.growthPhaseEndAge} years of compounding, even modest monthly contributions can grow substantially.
+    </p>
+    <p>
+      A newborn born in the {limits.pilotDepositStartYear}–{limits.pilotDepositEndYear} window also receives the ${limits.pilotDeposit.toLocaleString()} federal pilot deposit. Combined with family contributions, this can build a significant nest egg by age {limits.iraConversionAge}.
+    </p>
+    <p>
+      If you just had a baby, the best time to file {limits.form} is as soon as you have your child's Social Security number. Every month of delay is a month of lost compounding.
+    </p>
+
+    <h2>Children Turning 18: A Common Confusion</h2>
+    <p>
+      This trips people up. Here is how it works:
+    </p>
+    <ul>
+      <li><strong>Child turns 18 on June 15, 2026:</strong> They are 18 on December 31, 2026. They are <strong>not eligible</strong> for a 2026 election. They would have needed to be elected in 2025 or earlier.</li>
+      <li><strong>Child turns 17 on June 15, 2026:</strong> They are 17 on December 31, 2026. They <strong>are eligible</strong> for a 2026 election.</li>
+      <li><strong>Child turns 18 on January 1, 2027:</strong> They are 17 on December 31, 2026. They <strong>are eligible</strong> for a 2026 election.</li>
+    </ul>
+    <p>
+      The key date is always December 31 of the election year. If your child is 17 on that date, they qualify.
+    </p>
+
+    <CalloutBox type="warning" title="Don't miss the window">
+      <p>
+        If your child is 16 or 17, act now. Once they turn 18, the window closes permanently. File {limits.form} while they are still eligible.
+      </p>
+    </CalloutBox>
+
+    <h2>Next Steps</h2>
+    <p>
+      No matter your child's age, if they are under 18 and meet the other requirements, they can open a Trump Account. The sooner you start, the more time compounding has to work.
+    </p>
+    <ol>
+      <li>Check eligibility with our <a href="/calculators/eligibility-checker">eligibility checker</a>.</li>
+      <li>Read <a href="/blog/already-born-children">Trump Accounts for Already-Born Children</a> if your child was born before {limits.pilotDepositStartYear}.</li>
+      <li>File <strong>{limits.form}</strong> with your tax return to get started.</li>
+    </ol>
+  </div>
+</BlogLayout>

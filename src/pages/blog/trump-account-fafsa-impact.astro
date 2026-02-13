@@ -1,0 +1,204 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-fafsa-impact')!;
+const related = getRelatedArticles('trump-account-fafsa-impact');
+
+const faqs = [
+  {
+    question: 'Is a Trump Account reported on the FAFSA?',
+    answer: 'Official IRS and Department of Education guidance is still pending. However, because the Trump Account converts to a child-owned traditional IRA at age 18, it will likely be reported as a student asset on the FAFSA, which is assessed at a higher rate than parent assets.',
+  },
+  {
+    question: 'How much does a student asset reduce financial aid?',
+    answer: 'Student assets on the FAFSA are assessed at up to 20% of their value. This means a $100,000 IRA could increase the Expected Family Contribution (EFC) by up to $20,000. Parent assets, by contrast, are assessed at a maximum of 5.64%.',
+  },
+  {
+    question: 'Is a 529 plan better for financial aid than a Trump Account?',
+    answer: 'For FAFSA purposes, yes. A parent-owned 529 plan is reported as a parent asset, assessed at only 5.64%. A Trump Account (as a child-owned IRA at 18) could be assessed at up to 20%. However, 529 funds must be used for education, while Trump Account funds have no use restrictions.',
+  },
+  {
+    question: 'Can I convert to a Roth IRA to avoid FAFSA impact?',
+    answer: 'Converting to a Roth IRA does not change the FAFSA classification. Both traditional and Roth IRAs owned by the student are reported as student assets. However, the timing of the conversion and withdrawals can affect FAFSA reporting in specific filing years.',
+  },
+  {
+    question: 'Will the Department of Education create special FAFSA rules for Trump Accounts?',
+    answer: 'This is possible but not confirmed. The Department of Education could issue guidance treating Trump Accounts differently from standard IRAs on the FAFSA. No such guidance has been published as of early 2026. We will update this page when new guidance is available.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>At 18, the Trump Account becomes a <strong class="text-white">child-owned traditional IRA</strong>.</li>
+        <li>On FAFSA, student assets are assessed at up to <strong class="text-white">20%</strong> vs. parent assets at <strong class="text-white">5.64%</strong>.</li>
+        <li>A <strong class="text-white">$100,000 IRA</strong> could reduce financial aid eligibility by up to <strong class="text-white">$20,000</strong>.</li>
+        <li>Official IRS/Department of Education guidance is <strong class="text-white">still pending</strong>.</li>
+        <li>529 plans have a <strong class="text-white">lower FAFSA impact</strong> because they are reported as parent assets.</li>
+      </ul>
+    </div>
+
+    <p>
+      If you are saving for your child's future through a Trump Account and also planning for college, you need to understand how this account could affect financial aid. The short version: it could reduce aid eligibility. Here is the full picture and what you can do about it.
+    </p>
+
+    <CalloutBox type="warning" title="Guidance is still pending">
+      <p>
+        As of early 2026, neither the IRS nor the Department of Education has issued specific guidance on how Trump Accounts should be reported on the FAFSA. The analysis below is based on how existing IRA rules apply to the FAFSA. This page will be updated as soon as official guidance is published.
+      </p>
+    </CalloutBox>
+
+    <h2>Why Trump Accounts May Affect FAFSA</h2>
+    <p>
+      When your child turns {limits.iraConversionAge}, the Trump Account automatically converts to a <strong>traditional IRA in the child's name</strong>. On the FAFSA (Free Application for Federal Student Aid), assets are classified by who owns them:
+    </p>
+    <ul>
+      <li><strong>Parent assets:</strong> Assessed at a maximum of <strong>5.64%</strong> of their value</li>
+      <li><strong>Student assets:</strong> Assessed at up to <strong>20%</strong> of their value</li>
+    </ul>
+    <p>
+      Because the IRA is in the child's name, it would likely be classified as a <strong>student asset</strong>. That means a much higher percentage of the account's value could count against financial aid eligibility.
+    </p>
+
+    <h2>The Dollar Impact</h2>
+    <p>
+      Here is what the FAFSA impact could look like at different account balances:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Account Balance at 18</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">As Student Asset (20%)</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">If It Were Parent Asset (5.64%)</th>
+            <th class="py-3 text-gray-400 font-medium">Additional Aid Reduction</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">$25,000</td>
+            <td class="py-3 pr-4">$5,000</td>
+            <td class="py-3 pr-4">$1,410</td>
+            <td class="py-3 text-red-400">$3,590</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">$50,000</td>
+            <td class="py-3 pr-4">$10,000</td>
+            <td class="py-3 pr-4">$2,820</td>
+            <td class="py-3 text-red-400">$7,180</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">$100,000</td>
+            <td class="py-3 pr-4">$20,000</td>
+            <td class="py-3 pr-4">$5,640</td>
+            <td class="py-3 text-red-400">$14,360</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">$150,000</td>
+            <td class="py-3 pr-4">$30,000</td>
+            <td class="py-3 pr-4">$8,460</td>
+            <td class="py-3 text-red-400">$21,540</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      A family with a <strong>$100,000 Trump Account</strong> at the child's 18th birthday could see their Expected Family Contribution increase by up to <strong>$20,000</strong>. That could mean $20,000 less in need-based grants and subsidized loans.
+    </p>
+
+    <CalloutBox type="info" title="FAFSA assessment is per year, not total">
+      <p>
+        The 20% assessment applies to the asset balance reported <strong>each year</strong> the student files the FAFSA. If your child applies for aid over four years of college, the account balance is assessed each time. As the balance decreases (due to withdrawals or market changes), the FAFSA impact decreases too.
+      </p>
+    </CalloutBox>
+
+    <h2>How 529 Plans Compare</h2>
+    <p>
+      If your primary goal is paying for college, a 529 plan has a <strong>significant FAFSA advantage</strong> over a Trump Account:
+    </p>
+    <ul>
+      <li><strong>Parent-owned 529:</strong> Reported as a parent asset (5.64% assessment rate)</li>
+      <li><strong>Trump Account / child-owned IRA:</strong> Likely reported as a student asset (up to 20% assessment rate)</li>
+    </ul>
+    <p>
+      A $100,000 parent-owned 529 would increase the EFC by about <strong>$5,640</strong>. The same amount in a Trump Account could increase it by <strong>$20,000</strong>. That is a <strong>$14,360 difference in potential financial aid</strong>.
+    </p>
+    <p>
+      However, 529 money must be used for qualified education expenses. Trump Account money (as an IRA) can be used for anything. Each account serves a different purpose.
+    </p>
+
+    <h2>Strategies to Minimize FAFSA Impact</h2>
+    <p>
+      If your family expects to apply for need-based financial aid, consider these approaches:
+    </p>
+
+    <h3>1. Use Both Accounts</h3>
+    <p>
+      Open a <strong>529 plan for education costs</strong> and a <strong>Trump Account for everything else</strong>. The 529 will have lower FAFSA impact for college, while the Trump Account provides flexible funds for housing, a car, starting a business, or long-term retirement savings.
+    </p>
+
+    <h3>2. Time Your Roth Conversion Carefully</h3>
+    <p>
+      Converting the traditional IRA to a Roth IRA at age 18 does not change its FAFSA classification (it is still a student asset). However, the <strong>income from the conversion</strong> could also affect FAFSA reporting in the year it occurs. Work with a financial advisor to time conversions strategically around FAFSA filing years.
+    </p>
+
+    <h3>3. Consider Withdrawal Timing</h3>
+    <p>
+      Withdrawals from the child's IRA count as student income on the FAFSA, which can also reduce aid. Timing large withdrawals for after the last FAFSA is filed (typically junior year of college) can minimize the impact.
+    </p>
+
+    <h3>4. Wait for Official Guidance</h3>
+    <p>
+      The Department of Education may issue special rules for Trump Accounts. Given that millions of children will have these accounts, there is a reasonable chance that the FAFSA treatment will be addressed in future guidance.
+    </p>
+
+    <CalloutBox type="tip" title="The bigger picture">
+      <p>
+        Even if a $100,000 Trump Account reduces financial aid by $20,000 over four years, your child still has <strong>$80,000+ more</strong> than they would have had with no account. The FAFSA impact is a factor to plan around, not a reason to skip opening the account.
+      </p>
+    </CalloutBox>
+
+    <h2>Who Is Most Affected?</h2>
+    <p>
+      The FAFSA impact matters most for families who:
+    </p>
+    <ul>
+      <li>Expect to qualify for <strong>need-based financial aid</strong> (grants, subsidized loans)</li>
+      <li>Have children heading to <strong>schools that use FAFSA</strong> for aid decisions</li>
+      <li>Are building <strong>large Trump Account balances</strong> ($50,000+)</li>
+    </ul>
+    <p>
+      Families with higher incomes who would not qualify for need-based aid regardless do not need to worry about this issue. The FAFSA impact is only relevant if you would otherwise receive need-based grants or subsidized loans.
+    </p>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      Trump Accounts <strong>could reduce FAFSA-based financial aid</strong> because they become child-owned IRAs at age 18, classified as student assets at up to 20%. Official guidance is still pending, and the rules may change. In the meantime, the smartest approach for college-bound families is to <strong>use a 529 for education costs</strong> and a <strong>Trump Account for flexible long-term savings</strong>.
+    </p>
+    <p>
+      For more on using Trump Accounts for college, see <a href="/blog/trump-account-for-college">Can You Use a Trump Account for College?</a> For the full tax picture, read our <a href="/faq/taxes">tax FAQ</a>.
+    </p>
+
+    <CalloutBox type="warning" title="Not financial or tax advice">
+      <p>
+        This article is for educational purposes only. FAFSA rules change regularly, and individual circumstances vary. Consult a financial aid advisor or qualified financial planner before making decisions based on FAFSA impact.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

@@ -1,0 +1,198 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-for-college')!;
+const related = getRelatedArticles('trump-account-for-college');
+
+const faqs = [
+  {
+    question: 'Can I use a Trump Account to pay for college?',
+    answer: 'Yes. At age 18, the Trump Account converts to a traditional IRA, and your child can withdraw funds for any purpose including college. However, the withdrawal is taxed as ordinary income. Qualified education expenses may avoid the 10% early withdrawal penalty, but you still owe income tax.',
+  },
+  {
+    question: 'Is a 529 better than a Trump Account for college savings?',
+    answer: 'For college specifically, a 529 is usually more tax-efficient because qualified education withdrawals are completely tax-free. A Trump Account taxes all withdrawals as ordinary income. The best strategy for many families is to use both: a 529 for tuition and a Trump Account for non-education expenses or as a backup.',
+  },
+  {
+    question: 'Does a Trump Account affect FAFSA and financial aid?',
+    answer: 'Potentially, yes. At age 18, the Trump Account becomes a traditional IRA owned by the student. Student-owned assets may be assessed at up to 20% on the FAFSA, which could reduce financial aid eligibility. A parent-owned 529, by contrast, is assessed at a maximum of 5.64%.',
+  },
+  {
+    question: 'What is the tax cost of using a Trump Account for college?',
+    answer: 'The withdrawal is taxed as ordinary income. If your child qualifies for the education expense exception, the 10% early withdrawal penalty is waived. For example, a $20,000 withdrawal at a 12% tax rate would cost $2,400 in taxes. Without the education exception, you would also owe a $2,000 penalty.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><strong class="text-white">Yes</strong>, you can use Trump Account money for college — but withdrawals are <strong class="text-white">taxed as ordinary income</strong>.</li>
+        <li>A <strong class="text-white">529 plan</strong> is more tax-efficient for education because withdrawals are <strong class="text-white">tax-free</strong>.</li>
+        <li>Qualified education expenses may <strong class="text-white">avoid the 10% penalty</strong> — but you still owe income tax.</li>
+        <li>The Trump Account may <strong class="text-white">affect FAFSA</strong> as a student-owned asset at age 18.</li>
+        <li>Best strategy: use a <strong class="text-white">529 for tuition</strong> and the Trump Account for everything else.</li>
+      </ul>
+    </div>
+
+    <p>
+      Parents want to know: <strong>Can a Trump Account pay for college?</strong> Yes, it can. But it is not the most tax-efficient way to save for education. Here is why, and how to use it wisely alongside other accounts.
+    </p>
+
+    <h2>How It Works: Trump Account for College</h2>
+    <p>
+      At age {limits.iraConversionAge}, the Trump Account converts to a <strong>traditional IRA</strong>. Your child can withdraw money for any purpose, including college tuition, room and board, textbooks, and fees.
+    </p>
+    <p>
+      The catch: <strong>every dollar withdrawn is taxed as ordinary income.</strong> This is different from a 529 plan, which allows tax-free withdrawals for qualified education expenses.
+    </p>
+
+    <CalloutBox type="info" title="Education expense exception">
+      <p>
+        The IRS allows an exception to the <strong>10% early withdrawal penalty</strong> for qualified higher education expenses at an eligible institution. This includes tuition, fees, books, supplies, and room and board (if enrolled at least half-time). But you still owe <strong>ordinary income tax</strong> on the withdrawal.
+      </p>
+    </CalloutBox>
+
+    <h2>The Tax Cost: A Real Example</h2>
+    <p>
+      Let's say your child's Trump Account is worth <strong>$80,000</strong> at age 18. They withdraw <strong>$20,000</strong> for freshman year college costs. Here is what they owe:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Item</th>
+            <th class="py-3 text-gray-400 font-medium">Amount</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Withdrawal amount</td>
+            <td class="py-3 font-medium text-white">$20,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Federal income tax (12% bracket)</td>
+            <td class="py-3 font-medium text-amber-300">$2,400</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">10% early withdrawal penalty</td>
+            <td class="py-3 font-medium text-mint-300">$0 (education exception)</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium">Total tax cost</td>
+            <td class="py-3 font-bold text-amber-300">$2,400</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Without the education exception, the penalty would add <strong>$2,000</strong> — bringing the total to <strong>$4,400</strong>. The education exception saves real money.
+    </p>
+
+    <CalloutBox type="warning" title="Eligible institution requirement">
+      <p>
+        The education expense exception only applies to schools that participate in federal student aid programs. Most accredited colleges and universities qualify. Check with the school's financial aid office to confirm eligibility.
+      </p>
+    </CalloutBox>
+
+    <h2>Trump Account vs 529 for College</h2>
+    <p>
+      This is the comparison every parent needs to understand:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Feature</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Trump Account</th>
+            <th class="py-3 text-gray-400 font-medium">529 Plan</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Tax on education withdrawals</td>
+            <td class="py-3 pr-4 text-amber-300">Ordinary income tax</td>
+            <td class="py-3 text-mint-300">Tax-free</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">10% penalty for education</td>
+            <td class="py-3 pr-4 text-mint-300">Waived</td>
+            <td class="py-3 text-mint-300">N/A (no penalty)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Can use for non-education</td>
+            <td class="py-3 pr-4 text-mint-300">Yes (taxed)</td>
+            <td class="py-3 text-amber-300">Penalty + tax on earnings</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">FAFSA treatment</td>
+            <td class="py-3 pr-4 text-amber-300">Student asset (up to 20%)</td>
+            <td class="py-3 text-mint-300">Parent asset (up to 5.64%)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      For pure college savings, the <a href="/compare/trump-account-vs-529">529 wins on tax efficiency</a>. For flexibility, the Trump Account wins.
+    </p>
+
+    <h2>FAFSA Impact: What to Watch For</h2>
+    <p>
+      At age 18, the Trump Account becomes a <strong>student-owned traditional IRA</strong>. On the FAFSA (Free Application for Federal Student Aid), student assets are assessed at up to <strong>20%</strong>. That means an $80,000 account could reduce financial aid eligibility by up to <strong>$16,000</strong>.
+    </p>
+    <p>
+      By comparison, a parent-owned 529 is assessed at a maximum of <strong>5.64%</strong>. The same $80,000 in a 529 would reduce aid by only about <strong>$4,500</strong>.
+    </p>
+    <p>
+      Read our full <a href="/blog/trump-account-fafsa-impact">FAFSA impact guide</a> for strategies to minimize the effect on financial aid.
+    </p>
+
+    <CalloutBox type="tip" title="The best strategy: use both">
+      <p>
+        Open a <strong>529 plan</strong> for tuition, room, and board — these withdrawals are tax-free. Keep the <strong>Trump Account</strong> for non-education expenses like a car, apartment deposit, or a <a href="/blog/trump-account-for-first-home">first home down payment</a> after graduation. This gives you the best tax treatment for each dollar.
+      </p>
+    </CalloutBox>
+
+    <h2>What Counts as Qualified Education Expenses?</h2>
+    <p>
+      To avoid the 10% early withdrawal penalty from the traditional IRA, expenses must qualify under IRS rules. These include:
+    </p>
+    <ul>
+      <li><strong>Tuition and fees</strong> at an eligible institution</li>
+      <li><strong>Room and board</strong> (if enrolled at least half-time)</li>
+      <li><strong>Books, supplies, and equipment</strong> required for courses</li>
+      <li><strong>Special needs services</strong> for students with disabilities</li>
+    </ul>
+    <p>
+      These rules also apply to <a href="/blog/trump-account-for-trade-school">trade schools and vocational programs</a> at eligible institutions.
+    </p>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      A Trump Account <strong>can</strong> pay for college. It just costs more in taxes than a 529. The smart play for most families is to use both accounts together — the 529 for education expenses and the Trump Account as a flexible financial foundation for whatever comes next.
+    </p>
+
+    <CalloutBox type="warning" title="Not financial advice">
+      <p>
+        This is educational content, not tax or financial advice. Tax rules are complex and depend on individual circumstances. Consult a qualified tax professional before making withdrawal decisions.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

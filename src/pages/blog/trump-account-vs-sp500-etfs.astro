@@ -1,0 +1,249 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-vs-sp500-etfs')!;
+const related = getRelatedArticles('trump-account-vs-sp500-etfs');
+
+const faqs = [
+  {
+    question: 'Which ETF is best for a Trump Account?',
+    answer: 'SPLG (0.02% expense ratio) or VOO (0.03%) are the best choices for most families. Both track the S&P 500 with extremely low fees. The difference between them is minimal — pick whichever your custodian offers.',
+  },
+  {
+    question: 'Why is SPY more expensive than VOO and SPLG?',
+    answer: 'SPY was the first S&P 500 ETF (launched in 1993) and has a different legal structure (unit investment trust) that makes it harder to lower its expense ratio. Newer ETFs like VOO and SPLG were designed with lower-cost structures from the start.',
+  },
+  {
+    question: 'Do all four ETFs hold the same stocks?',
+    answer: 'Yes. VOO, IVV, SPY, and SPLG all track the S&P 500 index, which means they hold shares in the same 500 companies in nearly identical proportions. The returns before fees are virtually identical.',
+  },
+  {
+    question: 'Can I use a total stock market ETF instead of an S&P 500 ETF?',
+    answer: 'Yes, if the total stock market ETF tracks a broad U.S. equity index and has an expense ratio at or below 0.1%. Funds like VTI (Vanguard Total Stock Market, 0.03%) may qualify. Check with your custodian to confirm eligibility.',
+  },
+  {
+    question: 'Does it matter which brokerage I use?',
+    answer: 'Not much. Most major brokerages (Fidelity, Schwab, Vanguard) offer commission-free trading on all four ETFs. Choose a reputable brokerage that supports Trump Accounts and offers the lowest-cost fund you want.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>All four major S&P 500 ETFs are eligible for Trump Accounts and <strong class="text-white">track the same 500 companies</strong>.</li>
+        <li><strong class="text-white">SPLG (0.02%)</strong> is the cheapest. <strong class="text-white">VOO and IVV (0.03%)</strong> are close behind. <strong class="text-white">SPY (0.09%)</strong> costs the most.</li>
+        <li>Over 18 years, the fee difference between SPLG and SPY can cost <strong class="text-white">hundreds of dollars</strong> in lost growth.</li>
+        <li>Performance differences are <strong class="text-white">negligible</strong> — the expense ratio is the main differentiator.</li>
+        <li>Our recommendation: <strong class="text-white">SPLG or VOO</strong> for the lowest long-term cost.</li>
+      </ul>
+    </div>
+
+    <h2>The Four Main S&P 500 ETFs</h2>
+    <p>
+      When you open a Trump Account, you need to choose a fund. Most families will pick one of the four major S&P 500 ETFs. They all hold the same 500 companies. They all meet the Trump Account eligibility requirements. The main difference? <strong>Cost</strong>.
+    </p>
+    <p>
+      Let us compare them head to head.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm text-left text-gray-300">
+        <thead class="text-xs uppercase text-gold-400 border-b border-surface-600">
+          <tr>
+            <th class="px-4 py-3">Feature</th>
+            <th class="px-4 py-3">SPLG</th>
+            <th class="px-4 py-3">VOO</th>
+            <th class="px-4 py-3">IVV</th>
+            <th class="px-4 py-3">SPY</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-surface-700">
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">Full Name</td>
+            <td class="px-4 py-3">SPDR Portfolio S&P 500</td>
+            <td class="px-4 py-3">Vanguard S&P 500</td>
+            <td class="px-4 py-3">iShares Core S&P 500</td>
+            <td class="px-4 py-3">SPDR S&P 500</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">Provider</td>
+            <td class="px-4 py-3">State Street</td>
+            <td class="px-4 py-3">Vanguard</td>
+            <td class="px-4 py-3">BlackRock</td>
+            <td class="px-4 py-3">State Street</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">Expense Ratio</td>
+            <td class="px-4 py-3 text-mint-400 font-bold">0.02%</td>
+            <td class="px-4 py-3 text-mint-400">0.03%</td>
+            <td class="px-4 py-3 text-mint-400">0.03%</td>
+            <td class="px-4 py-3 text-gold-400">0.09%</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">Assets Under Mgmt</td>
+            <td class="px-4 py-3">$40B+</td>
+            <td class="px-4 py-3">$500B+</td>
+            <td class="px-4 py-3">$400B+</td>
+            <td class="px-4 py-3">$500B+</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">Launch Year</td>
+            <td class="px-4 py-3">2005</td>
+            <td class="px-4 py-3">2010</td>
+            <td class="px-4 py-3">2000</td>
+            <td class="px-4 py-3">1993</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">Index Tracked</td>
+            <td class="px-4 py-3">S&P 500</td>
+            <td class="px-4 py-3">S&P 500</td>
+            <td class="px-4 py-3">S&P 500</td>
+            <td class="px-4 py-3">S&P 500</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>SPLG: The Lowest Cost</h2>
+    <p>
+      <strong>SPDR Portfolio S&P 500 (SPLG)</strong> has the lowest expense ratio of the four at <strong>0.02%</strong>. That is just $2 per year on a $10,000 balance. It tracks the exact same S&P 500 index as the other three.
+    </p>
+    <p>
+      SPLG is smaller than VOO and SPY in terms of total assets, but with over $40 billion under management, it is plenty large and liquid for a Trump Account. State Street created SPLG specifically as a low-cost alternative to their original SPY fund.
+    </p>
+
+    <CalloutBox type="tip" title="Best Value Pick">
+      <p>
+        If your custodian offers SPLG, it is hard to argue against it. At 0.02%, you are paying the absolute minimum in fees while getting the exact same S&P 500 exposure as the other funds.
+      </p>
+    </CalloutBox>
+
+    <h2>VOO: The Most Popular</h2>
+    <p>
+      <strong>Vanguard S&P 500 ETF (VOO)</strong> is the most widely held S&P 500 ETF with over <strong>$500 billion in assets</strong>. Its expense ratio is <strong>0.03%</strong> — just one basis point more than SPLG.
+    </p>
+    <p>
+      Vanguard is known for its investor-first philosophy. VOO benefits from Vanguard's unique ownership structure, where the fund company is owned by its fund holders. This alignment of interests has helped keep fees low.
+    </p>
+    <p>
+      The difference between VOO at 0.03% and SPLG at 0.02% is $1 per year on $10,000. Over 18 years, that adds up to a very small amount. Either is an excellent choice.
+    </p>
+
+    <h2>IVV: The BlackRock Option</h2>
+    <p>
+      <strong>iShares Core S&P 500 (IVV)</strong> is BlackRock's S&P 500 ETF. It charges the same <strong>0.03%</strong> as VOO and has over <strong>$400 billion in assets</strong>. For practical purposes, IVV and VOO are interchangeable.
+    </p>
+    <p>
+      Some brokerages may offer IVV more prominently than VOO, or vice versa. If your custodian defaults to IVV, that is perfectly fine. You are getting the same index at the same cost.
+    </p>
+
+    <h2>SPY: The Original (and Most Expensive)</h2>
+    <p>
+      <strong>SPDR S&P 500 (SPY)</strong> was the first S&P 500 ETF, launched in <strong>1993</strong>. It is the most heavily traded ETF in the world. But for Trump Account purposes, it has one drawback: a higher expense ratio of <strong>0.09%</strong>.
+    </p>
+    <p>
+      SPY costs <strong>three times more</strong> than VOO and <strong>four-and-a-half times more</strong> than SPLG. The reason is its legal structure as a unit investment trust, which limits how much State Street can reduce the fee.
+    </p>
+    <p>
+      SPY is still eligible for a Trump Account — it falls well below the 0.1% cap. But when cheaper alternatives exist that track the same index, there is no reason to pay more.
+    </p>
+
+    <CalloutBox type="info" title="SPY's Advantage: Liquidity">
+      <p>
+        SPY is the most liquid ETF in the world, which matters for large institutional traders. But for a Trump Account with monthly contributions of a few hundred dollars, liquidity differences between these ETFs are irrelevant. VOO, IVV, and SPLG are all liquid enough.
+      </p>
+    </CalloutBox>
+
+    <h2>Fee Impact Over 18 Years</h2>
+    <p>
+      Let us put real numbers to the fee difference. Assume you invest the ${limits.pilotDeposit.toLocaleString()} deposit plus <strong>$250/month</strong> for 18 years at an <strong>8% average return</strong>. Here is the approximate final balance for each ETF after fees:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm text-left text-gray-300">
+        <thead class="text-xs uppercase text-gold-400 border-b border-surface-600">
+          <tr>
+            <th class="px-4 py-3">ETF</th>
+            <th class="px-4 py-3">Expense Ratio</th>
+            <th class="px-4 py-3">Effective Return</th>
+            <th class="px-4 py-3">Balance at 18</th>
+            <th class="px-4 py-3">Lost to Fees</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-surface-700">
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">SPLG</td>
+            <td class="px-4 py-3 text-mint-400 font-bold">0.02%</td>
+            <td class="px-4 py-3">7.98%</td>
+            <td class="px-4 py-3 text-mint-400">$121,540</td>
+            <td class="px-4 py-3">~$150</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">VOO / IVV</td>
+            <td class="px-4 py-3 text-mint-400">0.03%</td>
+            <td class="px-4 py-3">7.97%</td>
+            <td class="px-4 py-3 text-mint-400">$121,460</td>
+            <td class="px-4 py-3">~$230</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">SPY</td>
+            <td class="px-4 py-3 text-gold-400">0.09%</td>
+            <td class="px-4 py-3">7.91%</td>
+            <td class="px-4 py-3 text-gold-400">$120,960</td>
+            <td class="px-4 py-3">~$730</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      The difference between SPLG and SPY is roughly <strong>$580 over 18 years</strong>. Not a fortune, but it is free money your child keeps by simply choosing the cheaper fund. And this gap grows wider with larger contributions.
+    </p>
+
+    <h2>Which One Should You Pick?</h2>
+    <p>
+      Here is our straightforward recommendation:
+    </p>
+    <ol>
+      <li><strong>First choice: SPLG (0.02%)</strong> — The lowest cost. Same S&P 500 exposure. If your custodian offers it, this is the best option.</li>
+      <li><strong>Second choice: VOO or IVV (0.03%)</strong> — Just one basis point more. An excellent option, especially if your custodian is Vanguard (VOO) or uses BlackRock products (IVV).</li>
+      <li><strong>Acceptable: SPY (0.09%)</strong> — It works and is well below the 0.1% cap. But if you have access to the cheaper options, there is no reason to pick SPY.</li>
+    </ol>
+
+    <CalloutBox type="tip" title="Do Not Overthink This">
+      <p>
+        All four funds hold the same 500 stocks. The return differences are fractions of a percent. Picking any of these is a good decision. The most important thing is to <strong>open the account and start contributing</strong> — not to agonize over 0.01% fee differences.
+      </p>
+    </CalloutBox>
+
+    <h2>What About Total Stock Market ETFs?</h2>
+    <p>
+      The law allows funds tracking a "broad U.S. equity index," not just the S&P 500. Total U.S. stock market funds — like VTI (Vanguard Total Stock Market, 0.03%) or ITOT (iShares Core Total U.S. Stock Market, 0.03%) — may also qualify.
+    </p>
+    <p>
+      Total stock market funds include the same S&P 500 companies plus thousands of smaller U.S. stocks. Historically, their returns are very similar to the S&P 500. If your custodian confirms these are eligible, they are a fine alternative.
+    </p>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      All four major S&P 500 ETFs are good choices for a Trump Account. They track the same index, they all fall below the 0.1% fee cap, and their long-term returns will be nearly identical. The only meaningful difference is cost.
+    </p>
+    <p>
+      Go with <strong>SPLG or VOO</strong> for the lowest fees. Use the <a href="/calculators/fund-expense-tracker">fund expense tracker</a> to see exactly how fees affect your child's balance. For the full list of eligible fund rules, see our <a href="/blog/trump-account-fees-explained">Trump Account fees guide</a> and <a href="/blog/index-fund-requirements">index fund requirements</a>.
+    </p>
+  </div>
+</BlogLayout>

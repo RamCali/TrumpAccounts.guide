@@ -1,0 +1,187 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('homeownership-impact')!;
+const related = getRelatedArticles('homeownership-impact');
+
+const faqs = [
+  {
+    question: 'Can Trump Account money be used for a down payment?',
+    answer: `Yes. At age ${limits.iraConversionAge}, the Trump Account converts to a traditional IRA. The first-time homebuyer exception allows up to $10,000 in penalty-free withdrawals. The withdrawal is still taxed as ordinary income.`,
+  },
+  {
+    question: 'How much can I withdraw penalty-free for a first home?',
+    answer: 'The IRA first-time homebuyer exception allows up to $10,000 in penalty-free withdrawals. You avoid the 10% early withdrawal penalty, but you still owe ordinary income tax on the amount.',
+  },
+  {
+    question: 'What if I need more than $10,000 for a down payment?',
+    answer: 'You can withdraw more than $10,000, but amounts above $10,000 will face both ordinary income tax AND the 10% early withdrawal penalty (if you are under 59.5). Combining Trump Account funds with personal savings is a smart strategy.',
+  },
+  {
+    question: 'Could Trump Accounts increase the national homeownership rate?',
+    answer: 'Potentially. If millions of young adults reach 18 with $50,000+ in their IRA, more of them could afford down payments in their early 20s. The national homeownership rate is about 65%. Even a small increase would represent hundreds of thousands of new homeowners.',
+  },
+  {
+    question: 'What is the biggest barrier to homeownership for young adults?',
+    answer: 'The down payment. According to the National Association of Realtors, saving for a down payment is the #1 obstacle for first-time buyers. A Trump Account that grows for 18 years could help overcome this barrier.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>The <strong class="text-white">#1 barrier to homeownership</strong> for young adults is saving for a down payment.</li>
+        <li>A Trump Account with moderate contributions could reach <strong class="text-white">$50,000-$100,000+</strong> by age 18.</li>
+        <li>The <strong class="text-white">first-time homebuyer IRA exception</strong> allows up to <strong class="text-white">$10,000 penalty-free</strong> (still taxed as income).</li>
+        <li>The national homeownership rate is about <strong class="text-white">65%</strong> — Trump Accounts could help push it higher.</li>
+        <li>Combining the $10,000 exception with additional savings could mean a <strong class="text-white">strong down payment by the early 20s</strong>.</li>
+      </ul>
+    </div>
+
+    <p>
+      For most young Americans, buying a first home feels impossible. The median home price is over <strong>$400,000</strong>. A 10% down payment is $40,000. Where does that money come from when you are 22 and just starting out?
+    </p>
+    <p>
+      Trump Accounts could change that math. Here is how.
+    </p>
+
+    <h2>The Down Payment Problem</h2>
+    <p>
+      According to the National Association of Realtors, the <strong>down payment is the #1 obstacle</strong> for first-time homebuyers. Many young adults have student loans, entry-level salaries, and little savings. Without help from family, saving $20,000-$40,000 for a down payment can take <strong>years</strong>.
+    </p>
+    <p>
+      The national homeownership rate sits at about <strong>65%</strong>. For adults under 35, it is significantly lower — around <strong>39%</strong>. The gap between wanting a home and being able to afford one is wider than ever.
+    </p>
+
+    <h2>How a Trump Account Changes the Equation</h2>
+    <p>
+      A child born in {limits.pilotDepositStartYear} receives the <strong>${limits.pilotDeposit.toLocaleString()} federal deposit</strong>. If the family contributes even modest amounts, the account could be worth <strong>five or six figures</strong> by age 18:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Monthly Contribution</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Value at 18 (8%)</th>
+            <th class="py-3 text-gray-400 font-medium">Value at 18 (10%)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white">$0 (deposit only)</td>
+            <td class="py-3 pr-4">~$4,000</td>
+            <td class="py-3">~$5,560</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white">$100/mo</td>
+            <td class="py-3 pr-4">~$52,000</td>
+            <td class="py-3">~$56,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white">$200/mo</td>
+            <td class="py-3 pr-4">~$80,000</td>
+            <td class="py-3">~$90,000</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 text-white">$416/mo (max)</td>
+            <td class="py-3 pr-4">~$207,000</td>
+            <td class="py-3">~$175,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      At 18, the Trump Account <strong>converts to a traditional IRA</strong>. The young adult now has a real financial asset they can use toward homeownership.
+    </p>
+
+    <h2>The First-Time Homebuyer Exception</h2>
+    <p>
+      Traditional IRAs normally charge a <strong>10% early withdrawal penalty</strong> if you take money out before age 59 and a half. But there is an important exception: first-time homebuyers can withdraw up to <strong>$10,000 penalty-free</strong>.
+    </p>
+
+    <CalloutBox type="info" title="Penalty-free does not mean tax-free">
+      <p>
+        The $10,000 first-time homebuyer exception waives the 10% early withdrawal penalty. You still owe <strong>ordinary income tax</strong> on the withdrawal. If you are in the 12% tax bracket, $10,000 withdrawn means roughly $1,200 in federal tax.
+      </p>
+    </CalloutBox>
+
+    <p>
+      For a young adult with an $80,000 Trump Account (now IRA), the path to homeownership could look like this:
+    </p>
+    <ul>
+      <li>Withdraw <strong>$10,000 penalty-free</strong> using the first-time homebuyer exception</li>
+      <li>Save an additional <strong>$10,000-$20,000</strong> from working after age 18</li>
+      <li>Total down payment fund: <strong>$20,000-$30,000</strong> by the early 20s</li>
+      <li>That is enough for a 5-10% down payment on a home in many markets</li>
+    </ul>
+    <p>
+      The remaining balance stays invested in the IRA, continuing to grow for retirement or other future needs.
+    </p>
+
+    <h2>A Realistic Example</h2>
+    <p>
+      Meet a hypothetical 22-year-old who was born in 2025. Their parents contributed <strong>$150/month</strong> to their Trump Account from birth. At age 18, the account is worth about <strong>$68,000</strong> (at 8% returns). By 22, it has grown to roughly <strong>$92,000</strong>.
+    </p>
+    <p>
+      They withdraw <strong>$10,000</strong> using the homebuyer exception and combine it with <strong>$15,000</strong> they saved from working. That gives them a <strong>$25,000 down payment</strong> — enough for a 5% down payment on a $500,000 home, or 10% on a $250,000 home.
+    </p>
+    <p>
+      The remaining <strong>$82,000</strong> stays in the IRA, compounding toward retirement. This young adult is a homeowner at 22 with a six-figure retirement account. That is a very different starting point than most young adults have today.
+    </p>
+
+    <CalloutBox type="tip" title="Keep the rest invested">
+      <p>
+        Withdrawing the entire Trump Account for a home purchase means losing decades of future compound growth. Using the $10,000 exception and supplementing with savings preserves most of the account for long-term growth.
+      </p>
+    </CalloutBox>
+
+    <h2>Could This Move the Homeownership Rate?</h2>
+    <p>
+      If <strong>3.6 million children per year</strong> reach 18 with meaningful financial assets, a significant number of them could buy homes sooner than previous generations. Even if Trump Accounts help <strong>5-10%</strong> of a birth cohort buy a home earlier, that represents <strong>180,000-360,000 additional young homeowners</strong> per year.
+    </p>
+    <p>
+      Homeownership has ripple effects beyond the individual:
+    </p>
+    <ul>
+      <li><strong>Community stability</strong> — Homeowners tend to stay longer and invest in their neighborhoods</li>
+      <li><strong>Wealth building</strong> — Home equity is the largest source of wealth for most American families</li>
+      <li><strong>Economic activity</strong> — Home purchases drive spending on furniture, renovations, and services</li>
+    </ul>
+
+    <h2>Limitations to Consider</h2>
+    <p>
+      Trump Accounts are not a complete solution to the housing affordability crisis. Several factors matter:
+    </p>
+    <ul>
+      <li><strong>Housing supply</strong> — If demand increases but supply does not, prices rise and the advantage shrinks</li>
+      <li><strong>The $10,000 cap</strong> — In expensive markets, $10,000 penalty-free is not enough for a meaningful down payment on its own</li>
+      <li><strong>Tax cost</strong> — Withdrawals are taxed as ordinary income, reducing the effective amount available</li>
+      <li><strong>Opportunity cost</strong> — Money withdrawn for a home stops compounding for retirement</li>
+    </ul>
+    <p>
+      For a deeper look at using Trump Account funds for a home purchase, see our <a href="/blog/trump-account-for-first-home">detailed guide on Trump Accounts and first homes</a>. For growth projections, try the <a href="/calculators/growth-calculator">Growth Calculator</a>.
+    </p>
+
+    <CalloutBox type="warning" title="Educational content only">
+      <p>
+        This article is for informational purposes. It is not financial or real estate advice. Housing markets vary by location. Consult a qualified professional before making major financial decisions.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

@@ -1,0 +1,301 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('best-accounts-for-kids-today')!;
+const related = getRelatedArticles('best-accounts-for-kids-today');
+
+const faqs = [
+  {
+    question: 'Can I open all five account types for my child?',
+    answer: 'In theory, yes, but most families do not need all five. A Trump Account plus a 529 covers most needs. Add a custodial Roth IRA if your child has earned income. A UTMA/UGMA or Coverdell is optional depending on your situation.',
+  },
+  {
+    question: 'Which account should I open first?',
+    answer: 'If your child qualifies, open the Trump Account first to claim the $1,000 federal deposit and start compounding. Then open a 529 if education savings is a priority. Both can be opened in the same day.',
+  },
+  {
+    question: 'Does my child need earned income for a Trump Account?',
+    answer: 'No. Unlike a custodial Roth IRA, a Trump Account has no earned income requirement. Any U.S. citizen child under 18 with an SSN qualifies, regardless of whether they have a job.',
+  },
+  {
+    question: 'What if I can only afford to fund one account?',
+    answer: 'Start with the Trump Account if your child qualifies for the $1,000 deposit. The tax-deferred growth and government deposit make it the strongest single option for general-purpose wealth building. Add a 529 later if education is the priority.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>There are <strong class="text-white">5 main account types</strong> for investing on behalf of children in 2026.</li>
+        <li><strong class="text-white">Trump Account</strong> &mdash; best for general long-term wealth building (birth to 18).</li>
+        <li><strong class="text-white">529 Plan</strong> &mdash; best for education savings with tax-free growth on qualified expenses.</li>
+        <li><strong class="text-white">Custodial Roth IRA</strong> &mdash; best for tax-free growth if your child has earned income.</li>
+        <li>Our recommendation: most families should open <strong class="text-white">both a Trump Account and a 529</strong>.</li>
+      </ul>
+    </div>
+
+    <p>
+      Parents today have more options than ever to invest for their children. But more options means more confusion. Which accounts should you open? How many do you actually need?
+    </p>
+
+    <p>
+      This guide covers the <strong>five main investment accounts for kids</strong> available in 2026. We will explain what each one does, who it is best for, and our recommendation for most families.
+    </p>
+
+    <h2>1. Trump Account &mdash; Best for Long-Term Wealth Building</h2>
+
+    <p>
+      Created by the One Big Beautiful Bill Act (OBBBA) under <strong>IRC Section 530A</strong>, the Trump Account is the newest option. It is designed to give every American child a financial head start.
+    </p>
+
+    <p><strong>How it works:</strong></p>
+    <ul>
+      <li>Children born {limits.pilotDepositStartYear}-{limits.pilotDepositEndYear} receive a <strong>${limits.pilotDeposit.toLocaleString()} federal deposit</strong></li>
+      <li>Anyone can contribute up to <strong>${limits.annualContributionLimit.toLocaleString()}/year</strong></li>
+      <li>Employers can add up to <strong>${limits.employerContributionLimit.toLocaleString()}/year</strong> tax-free</li>
+      <li>Money must be invested in S&P 500 or broad U.S. equity index funds</li>
+      <li>No withdrawals before age 18 (with limited exceptions)</li>
+      <li>At 18, it <strong>converts to a traditional IRA</strong></li>
+    </ul>
+
+    <p><strong>Tax treatment:</strong> After-tax contributions, tax-deferred growth, ordinary income tax on withdrawals after 18.</p>
+
+    <p><strong>Best for:</strong> Every eligible child. No income restrictions. No earned income required. Universal eligibility for U.S. citizen children under 18 with an SSN.</p>
+
+    <CalloutBox type="tip" title="The standout feature">
+      The Trump Account is the only child investment account that comes with a government deposit and forces S&P 500 investing. The 18-year lock-in prevents emotional selling during downturns, which historically improves long-term returns.
+    </CalloutBox>
+
+    <h2>2. 529 Plan &mdash; Best for Education Savings</h2>
+
+    <p>
+      The 529 plan has been around for decades. It is specifically designed for <strong>education expenses</strong>: college tuition, K-12 tuition (up to $10,000/year), apprenticeship programs, and student loan repayment (up to $10,000 lifetime).
+    </p>
+
+    <p><strong>How it works:</strong></p>
+    <ul>
+      <li>No federal contribution limit (state limits typically $300,000-$500,000 total)</li>
+      <li>Wide investment options (age-based portfolios, stock funds, bond funds)</li>
+      <li>Parent retains control; can change beneficiary</li>
+      <li>Many states offer state income tax deductions for contributions</li>
+      <li>Unused funds can roll over to a Roth IRA (up to $35,000 lifetime, with conditions)</li>
+    </ul>
+
+    <p><strong>Tax treatment:</strong> After-tax contributions, <strong>tax-free growth</strong>, tax-free withdrawals for qualified education expenses. Non-qualified withdrawals face income tax plus a 10% penalty on earnings.</p>
+
+    <p><strong>Best for:</strong> Families planning for college or private K-12 education. The tax-free growth on qualified expenses is unbeatable for education costs.</p>
+
+    <h2>3. Custodial Roth IRA &mdash; Best for Tax-Free Growth</h2>
+
+    <p>
+      A custodial Roth IRA is a Roth IRA opened in a child's name. The catch: <strong>the child must have earned income</strong>. This means a W-2 job, self-employment income, or other documented compensation.
+    </p>
+
+    <p><strong>How it works:</strong></p>
+    <ul>
+      <li>Contribution limit: the <strong>lesser of $7,000/year or the child's earned income</strong> (2025 limit)</li>
+      <li>Any investment is allowed (stocks, bonds, ETFs, mutual funds)</li>
+      <li>Contributions can be withdrawn at any time, tax-free and penalty-free</li>
+      <li>Full control passes to the child at age of majority (18 or 21 depending on state)</li>
+    </ul>
+
+    <p><strong>Tax treatment:</strong> After-tax contributions, <strong>tax-free growth</strong>, <strong>tax-free qualified withdrawals</strong> after age 59.5. This is the gold standard for tax treatment.</p>
+
+    <p><strong>Best for:</strong> Children who have a part-time job, babysitting income, acting/modeling work, or a family business that pays them. Even a teenager earning $2,000/summer can benefit enormously from decades of tax-free compounding.</p>
+
+    <CalloutBox type="info" title="The earned income requirement">
+      The child must have legitimate earned income. Parents cannot simply gift money and call it a contribution. The IRS can challenge contributions that exceed the child's documented earnings. Keep records.
+    </CalloutBox>
+
+    <h2>4. UTMA/UGMA &mdash; Most Flexible</h2>
+
+    <p>
+      Custodial accounts under the Uniform Transfers to Minors Act (UTMA) or Uniform Gifts to Minors Act (UGMA) are the most flexible option. There are no restrictions on how the money is invested or used.
+    </p>
+
+    <p><strong>How it works:</strong></p>
+    <ul>
+      <li>No contribution limit (gift tax rules apply above $18,000/year per giver)</li>
+      <li>Invest in anything: stocks, bonds, ETFs, mutual funds, real estate (UTMA only)</li>
+      <li>Custodian manages the account until child reaches age of majority</li>
+      <li>Withdrawals allowed at any time for the child's benefit</li>
+      <li>Once transferred, the gift is <strong>irrevocable</strong> &mdash; it belongs to the child</li>
+    </ul>
+
+    <p><strong>Tax treatment:</strong> Kiddie tax rules apply. For 2025, the first $1,300 of unearned income is tax-free, the next $1,300 is taxed at the child's rate, and anything above $2,600 is taxed at the parent's rate.</p>
+
+    <p><strong>Best for:</strong> Families who want maximum flexibility, plan to gift assets beyond what other accounts allow, or whose children do not qualify for other accounts.</p>
+
+    <h2>5. Coverdell ESA &mdash; Education-Focused but Limited</h2>
+
+    <p>
+      The Coverdell Education Savings Account is similar to a 529 but with lower limits and more investment flexibility. It covers K-12 and higher education expenses.
+    </p>
+
+    <p><strong>How it works:</strong></p>
+    <ul>
+      <li>Contribution limit: <strong>$2,000/year</strong> per beneficiary</li>
+      <li>Income phase-out: MAGI above $110,000 (single) or $220,000 (married filing jointly)</li>
+      <li>Must be used by age 30 or rolled to another family member's Coverdell</li>
+      <li>Self-directed investments (more control than most 529 plans)</li>
+    </ul>
+
+    <p><strong>Tax treatment:</strong> After-tax contributions, tax-free growth, tax-free withdrawals for qualified education expenses. Similar to a 529 but with lower limits.</p>
+
+    <p><strong>Best for:</strong> Families under the income limit who want more investment control than a 529 and are saving specifically for K-12 or college expenses. The $2,000 annual limit makes this a supplement, not a primary savings vehicle.</p>
+
+    <h2>The Full Comparison</h2>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-xs sm:text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-3">Feature</th>
+            <th class="pb-2 pr-3">Trump Acct</th>
+            <th class="pb-2 pr-3">529</th>
+            <th class="pb-2 pr-3">Roth IRA</th>
+            <th class="pb-2 pr-3">UTMA/UGMA</th>
+            <th class="pb-2">Coverdell</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-3 font-medium text-white">Annual limit</td>
+            <td class="py-2 pr-3">$5,000</td>
+            <td class="py-2 pr-3">No federal limit</td>
+            <td class="py-2 pr-3">$7,000</td>
+            <td class="py-2 pr-3">No limit*</td>
+            <td class="py-2">$2,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-3 font-medium text-white">Gov. deposit</td>
+            <td class="py-2 pr-3 text-mint-400">$1,000</td>
+            <td class="py-2 pr-3">No</td>
+            <td class="py-2 pr-3">No</td>
+            <td class="py-2 pr-3">No</td>
+            <td class="py-2">No</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-3 font-medium text-white">Income limit</td>
+            <td class="py-2 pr-3 text-mint-400">None</td>
+            <td class="py-2 pr-3">None</td>
+            <td class="py-2 pr-3">None**</td>
+            <td class="py-2 pr-3">None</td>
+            <td class="py-2">$220K MFJ</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-3 font-medium text-white">Earned income req.</td>
+            <td class="py-2 pr-3 text-mint-400">No</td>
+            <td class="py-2 pr-3">No</td>
+            <td class="py-2 pr-3 text-amber-400">Yes</td>
+            <td class="py-2 pr-3">No</td>
+            <td class="py-2">No</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-3 font-medium text-white">Tax on growth</td>
+            <td class="py-2 pr-3">Deferred</td>
+            <td class="py-2 pr-3 text-mint-400">Free***</td>
+            <td class="py-2 pr-3 text-mint-400">Free****</td>
+            <td class="py-2 pr-3">Kiddie tax</td>
+            <td class="py-2">Free***</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-3 font-medium text-white">Use restrictions</td>
+            <td class="py-2 pr-3">None (after 18)</td>
+            <td class="py-2 pr-3">Education</td>
+            <td class="py-2 pr-3">Retirement</td>
+            <td class="py-2 pr-3 text-mint-400">None</td>
+            <td class="py-2">Education</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-3 font-medium text-white">Investment options</td>
+            <td class="py-2 pr-3">S&P 500 index</td>
+            <td class="py-2 pr-3">Plan-specific</td>
+            <td class="py-2 pr-3 text-mint-400">Anything</td>
+            <td class="py-2 pr-3 text-mint-400">Anything</td>
+            <td class="py-2">Self-directed</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-3 font-medium text-white">Employer contrib.</td>
+            <td class="py-2 pr-3 text-mint-400">$2,500/yr</td>
+            <td class="py-2 pr-3">No</td>
+            <td class="py-2 pr-3">No</td>
+            <td class="py-2 pr-3">No</td>
+            <td class="py-2">No</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="mt-2 text-xs text-gray-500">
+        * Gift tax rules apply above $18,000/year per giver. ** No income limit for contributions, but child must have earned income. *** On qualified education withdrawals. **** On qualified withdrawals after age 59.5.
+      </p>
+    </div>
+
+    <h2>Our Recommendation: Trump Account + 529</h2>
+
+    <p>
+      For most families with eligible children, the best combination is:
+    </p>
+
+    <p>
+      <strong>1. Open a Trump Account first.</strong> Claim the ${limits.pilotDeposit.toLocaleString()} federal deposit (if eligible). Start contributing to S&P 500 index funds. This is your child's <strong>general-purpose wealth-building account</strong>. It covers everything: a first home, starting a business, or long-term retirement savings.
+    </p>
+
+    <p>
+      <strong>2. Open a 529 for education.</strong> If college or private school is in the plan, a 529's tax-free growth on education expenses is hard to beat. Many states also offer a state income tax deduction for 529 contributions. This is your child's <strong>education-specific account</strong>.
+    </p>
+
+    <p>
+      <strong>3. Add a custodial Roth IRA if your child has earned income.</strong> A teenager with a summer job can contribute up to $7,000/year. Tax-free growth from age 16 to age 65 is an extraordinary advantage. This is your child's <strong>retirement power-up account</strong>.
+    </p>
+
+    <CalloutBox type="tip" title="The two-account strategy">
+      A Trump Account + 529 covers both major needs: general wealth building and education savings. The Trump Account handles everything a 529 cannot (homes, businesses, emergencies), while the 529 provides tax-free growth specifically for education costs.
+    </CalloutBox>
+
+    <h2>What About UTMA/UGMA and Coverdell?</h2>
+
+    <p>
+      A <strong>UTMA/UGMA</strong> makes sense if you want to give your child assets beyond the ${limits.annualContributionLimit.toLocaleString()} Trump Account limit and do not want education restrictions. It is also the go-to option if your child does not qualify for a Trump Account.
+    </p>
+
+    <p>
+      A <strong>Coverdell ESA</strong> is useful if you want more investment control than a 529 offers and your income is under the phase-out threshold. But the $2,000 annual limit makes it a supplement rather than a primary account.
+    </p>
+
+    <h2>One Account vs. Multiple Accounts</h2>
+
+    <p>
+      You do not need to open all five. Here is a simple decision framework:
+    </p>
+
+    <ul>
+      <li><strong>Everyone:</strong> Trump Account (if eligible)</li>
+      <li><strong>Planning for college:</strong> Add a 529</li>
+      <li><strong>Child has a job:</strong> Add a custodial Roth IRA</li>
+      <li><strong>Want more flexibility:</strong> Add a UTMA/UGMA</li>
+      <li><strong>Want education control:</strong> Consider a Coverdell</li>
+    </ul>
+
+    <p>
+      Start with one or two. You can always add more later. The most important thing is to start investing early. Compounding does not care how many accounts you have. It cares how soon you begin.
+    </p>
+
+    <p>
+      For detailed side-by-side comparisons, visit our <a href="/compare">comparison hub</a>. And if your child does not qualify for a Trump Account, see our guide on how to <a href="/blog/replicate-trump-account-yourself">replicate the strategy with a custodial account</a>.
+    </p>
+  </div>
+</BlogLayout>

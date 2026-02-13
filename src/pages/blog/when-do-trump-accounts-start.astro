@@ -1,0 +1,175 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('when-do-trump-accounts-start')!;
+const related = getRelatedArticles('when-do-trump-accounts-start');
+
+const faqs = [
+  {
+    question: 'When can I file Form 4547?',
+    answer: `You can file ${limits.form} with your 2025 federal tax return. The 2025 tax filing season opens in early 2026, with a deadline of April 15, 2026. If you file an extension, you have until October 15, 2026.`,
+  },
+  {
+    question: 'When does the trumpaccounts.gov portal launch?',
+    answer: `The ${limits.portal} online portal is expected to launch in mid-2026. The exact date has not been announced. Until then, you can file through your tax return or by mail.`,
+  },
+  {
+    question: 'Can I open a Trump Account right now?',
+    answer: `Not yet as a standalone action. The first opportunity to open a Trump Account is when you file your 2025 tax return (starting early 2026). Include ${limits.form} with your return. The online portal will follow in mid-2026.`,
+  },
+  {
+    question: 'What if I miss the April 15, 2026 deadline?',
+    answer: `If you file a tax extension, you have until October 15, 2026. You can also open an account through the ${limits.portal} portal when it launches mid-2026. The key is to opt in as soon as possible so your child's money starts compounding.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <!-- Key Takeaways -->
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>The law (<strong class="text-white">OBBBA</strong>) was signed on <strong class="text-white">July 4, 2025</strong>.</li>
+        <li>IRS guidance (<strong class="text-white">{limits.irsNotice}</strong>) was published on <strong class="text-white">December 3, 2025</strong>.</li>
+        <li>File <strong class="text-white">{limits.form}</strong> with your 2025 tax return by <strong class="text-white">April 15, 2026</strong>.</li>
+        <li>The <strong class="text-white">{limits.portal}</strong> online portal launches <strong class="text-white">mid-2026</strong>.</li>
+        <li>Filing early means more compounding time for your child's money.</li>
+      </ul>
+    </div>
+
+    <h2>The Full Timeline</h2>
+    <p>
+      Trump Accounts did not appear overnight. Here is the complete timeline from law to launch, so you know exactly when each piece fell into place and what comes next.
+    </p>
+
+    <h3>July 4, 2025 — Law Signed</h3>
+    <p>
+      The <strong>One Big Beautiful Bill Act (OBBBA)</strong> was signed into law on July 4, 2025. This legislation created <strong>IRC Section 530A</strong>, which is the legal foundation for Trump Accounts.
+    </p>
+    <p>
+      The law established the core rules: the ${limits.pilotDeposit.toLocaleString()} pilot deposit for children born {limits.pilotDepositStartYear}-{limits.pilotDepositEndYear}, the ${limits.annualContributionLimit.toLocaleString()} annual contribution limit, the S&P 500 index fund investment requirement, and the conversion to a traditional IRA at age {limits.iraConversionAge}.
+    </p>
+
+    <h3>December 3, 2025 — IRS Issues Guidance</h3>
+    <p>
+      The IRS published <strong>{limits.irsNotice}</strong> on December 3, 2025. This notice provides the official rules and procedures for Trump Accounts. It covers how to file, what forms to use, eligible investments, contribution limits, and more.
+    </p>
+
+    <CalloutBox type="irs-quote" title="From IRS Notice 2025-68">
+      <p>
+        "This notice provides initial guidance on the establishment and administration of Trump Accounts under section 530A of the Internal Revenue Code."
+      </p>
+    </CalloutBox>
+
+    <p>
+      In plain English: this is the IRS instruction manual for Trump Accounts. It translates the law into specific steps parents, employers, and financial institutions need to follow.
+    </p>
+
+    <h3>Early 2026 — Tax Filing Season Opens</h3>
+    <p>
+      The 2025 tax filing season begins in early 2026 (the IRS typically opens e-filing in late January). This is your <strong>first opportunity to open a Trump Account</strong>.
+    </p>
+    <p>
+      When you file your 2025 federal tax return, you include <strong>{limits.form} (Trump Account Election(s))</strong>. This form tells the IRS you want to open an account for your child.
+    </p>
+
+    <CalloutBox type="tip" title="File Your Taxes Early">
+      <p>
+        If you are ready, file your 2025 taxes as early as possible. The sooner the account is opened, the sooner the ${limits.pilotDeposit.toLocaleString()} deposit and any contributions start compounding. Over 18 years, even a few months of extra growth adds up.
+      </p>
+    </CalloutBox>
+
+    <h3>April 15, 2026 — Tax Filing Deadline</h3>
+    <p>
+      Your 2025 tax return (with {limits.form} attached) is due by <strong>April 15, 2026</strong>. This is the standard tax deadline.
+    </p>
+    <p>
+      If you need more time to file your taxes, you can request an extension. With an extension, your deadline moves to <strong>October 15, 2026</strong>. But remember: an extension to file is not an extension to pay. And more importantly, every month you wait is a month your child's money is not growing.
+    </p>
+
+    <h3>Mid-2026 — Online Portal Launches</h3>
+    <p>
+      The <strong><a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer">{limits.portal}</a></strong> online portal is expected to launch in mid-2026. The exact date has not been announced yet.
+    </p>
+    <p>
+      Once the portal is live, you will be able to:
+    </p>
+    <ul>
+      <li>Open a Trump Account online (without waiting for tax season)</li>
+      <li>Make contributions directly</li>
+      <li>Check your child's account balance and investment performance</li>
+      <li>Manage account settings</li>
+    </ul>
+    <p>
+      The portal will be a second path to open an account, alongside filing {limits.form} with your tax return. <a href="/how-to-open-trump-account">See the full step-by-step opening guide</a>.
+    </p>
+
+    <h3>2027 and Beyond — Inflation Adjustments Begin</h3>
+    <p>
+      Starting after {limits.inflationIndexStartYear}, the <strong>${limits.annualContributionLimit.toLocaleString()} annual contribution limit will be indexed for inflation</strong>. This means the limit will gradually increase over time to keep pace with rising costs.
+    </p>
+    <p>
+      The pilot deposit program ($1,000 for newborns) is currently set for births through {limits.pilotDepositEndYear}. Whether it continues beyond that window depends on future legislation.
+    </p>
+
+    <h2>Why Filing Early Matters</h2>
+    <p>
+      This is not just about meeting a deadline. There is a real financial reason to act quickly.
+    </p>
+    <p>
+      <strong>Compounding rewards time.</strong> The earlier money goes into the account, the more years it has to grow. Consider the difference:
+    </p>
+    <ul>
+      <li>Filing in <strong>February 2026</strong> gives the money about 17.5 years to grow before age 18.</li>
+      <li>Filing in <strong>October 2026</strong> (with an extension) gives the money about 17 years to grow.</li>
+      <li>Waiting until <strong>2027</strong> drops it to about 16 years.</li>
+    </ul>
+    <p>
+      At a 10% average annual return, ${limits.pilotDeposit.toLocaleString()} over 17.5 years grows to roughly <strong>$5,560</strong>. Over 16 years, it grows to about <strong>$4,595</strong>. That is nearly $1,000 in lost growth just from waiting one year.
+    </p>
+
+    <CalloutBox type="info" title="Every Month Counts">
+      <p>
+        Over 18 years of compounding, early months matter more than you might think. Filing your taxes in February instead of April could mean hundreds of extra dollars in your child's account by the time they turn 18.
+      </p>
+    </CalloutBox>
+
+    <h2>What to Do Right Now</h2>
+    <p>
+      Here is your action plan based on where we are in the timeline:
+    </p>
+    <ol>
+      <li><strong>Get your child's SSN</strong> if you do not have one yet. You need it for {limits.form}.</li>
+      <li><strong>Prepare your 2025 tax documents</strong>. Gather W-2s, 1099s, and other tax forms.</li>
+      <li><strong>Download {limits.form}</strong> from the IRS website when it becomes available.</li>
+      <li><strong>File your 2025 tax return early</strong> with {limits.form} included.</li>
+      <li><strong>Bookmark <a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer">{limits.portal}</a></strong> for when the portal launches in mid-2026.</li>
+    </ol>
+
+    <CalloutBox type="warning" title="Do Not Assume It Is Automatic">
+      <p>
+        Trump Accounts are <strong>not automatic</strong>. The government will not open one for your child unless you file {limits.form}. <a href="/blog/is-trump-account-automatic">Learn more about the opt-in requirement</a>.
+      </p>
+    </CalloutBox>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      The law is signed. The IRS has published its guidance. The form is ready. The only thing left is <strong>you filing {limits.form}</strong> with your 2025 tax return by April 15, 2026.
+    </p>
+    <p>
+      Do not wait for the {limits.portal} portal if you can file with your tax return sooner. Your child's 18-year compounding clock starts the moment you opt in.
+    </p>
+  </div>
+</BlogLayout>

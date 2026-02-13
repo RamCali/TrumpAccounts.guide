@@ -1,0 +1,197 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-like-baby-savings')!;
+const related = getRelatedArticles('trump-account-like-baby-savings');
+
+const faqs = [
+  {
+    question: 'Is the money in a Trump Account guaranteed like a savings account?',
+    answer: 'No. Trump Account funds are invested in the stock market (S&P 500 or broad U.S. equity index funds). Returns are not guaranteed, and the value can go down in any given year. There is no FDIC insurance. However, over long periods (like 18 years), the S&P 500 has historically produced strong positive returns.',
+  },
+  {
+    question: 'Can I lose money in a Trump Account?',
+    answer: 'Yes, in the short term. The stock market goes up and down. In a bad year, your account balance could drop. But because the money is locked until age 18, your child has a long time horizon. Historically, every 18-year period in the S&P 500 has ended with positive returns.',
+  },
+  {
+    question: 'Why not just put the money in a savings account instead?',
+    answer: 'You can, but the growth potential is much lower. A high-yield savings account might earn 4-5% per year. The S&P 500 has averaged roughly 10% per year over the long term. Over 18 years, that difference is enormous due to compound growth.',
+  },
+  {
+    question: 'Can I choose to put Trump Account money in a savings account or CD?',
+    answer: 'No. The law requires Trump Account funds to be invested in mutual funds or ETFs that track the S&P 500 or a broad U.S. equity index. You cannot put the money in a bank savings account, CD, or money market fund.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>A Trump Account is an <strong>investment account</strong>, not a savings account.</li>
+        <li>Money goes into <strong>S&P 500 or broad U.S. equity index funds</strong>, not a bank.</li>
+        <li>There is <strong>no FDIC insurance</strong>. The value can go up or down with the market.</li>
+        <li>But over 18 years, the growth potential is <strong>much higher</strong> than a savings account.</li>
+        <li>Historical S&P 500 average: <strong>~10% per year</strong> vs. 4-5% for a high-yield savings account.</li>
+      </ul>
+    </div>
+
+    <h2>Similar Idea, Different Tool</h2>
+    <p>
+      When people hear "the government puts money aside for your baby," many picture a savings account at a bank.
+      That is a reasonable assumption. But a Trump Account works differently.
+    </p>
+    <p>
+      A Trump Account is an <strong>investment account</strong>. The money is not sitting in a bank earning
+      a fixed interest rate. It is invested in the stock market -- specifically in mutual funds or ETFs that
+      track the <strong>S&P 500 or a broad U.S. equity index</strong>.
+    </p>
+    <p>
+      Think of it this way: a savings account is like a parking lot. Your money sits there safely.
+      A Trump Account is more like planting a tree. It takes time to grow, and some years the weather
+      is rough. But after 18 years, you usually end up with something much bigger.
+    </p>
+
+    <CalloutBox type="info" title="What the law requires">
+      Under {limits.legalBasis}, Trump Account funds must be invested in {limits.investmentRequirement.toLowerCase()}.
+      You cannot put the money in a bank savings account, CD, bonds, individual stocks, or cryptocurrency.
+    </CalloutBox>
+
+    <h2>Savings Account vs. Trump Account: The Numbers</h2>
+    <p>
+      Let's compare what happens to <strong>${limits.pilotDeposit.toLocaleString()}</strong> over 18 years in each type
+      of account, with no additional contributions:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm text-left">
+        <thead>
+          <tr class="border-b border-surface-600">
+            <th class="py-3 pr-4 text-gold-400 font-semibold">Feature</th>
+            <th class="py-3 pr-4 text-gold-400 font-semibold">High-Yield Savings</th>
+            <th class="py-3 text-gold-400 font-semibold">Trump Account (Index Fund)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Typical annual return</td>
+            <td class="py-3 pr-4">4-5%</td>
+            <td class="py-3">~10% (S&P 500 historical average)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">$1,000 after 18 years</td>
+            <td class="py-3 pr-4">~$2,000 - $2,400</td>
+            <td class="py-3">~$5,600</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">FDIC insured?</td>
+            <td class="py-3 pr-4">Yes (up to $250K)</td>
+            <td class="py-3">No</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Can value go down?</td>
+            <td class="py-3 pr-4">No</td>
+            <td class="py-3">Yes, in the short term</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Locked until 18?</td>
+            <td class="py-3 pr-4">No (withdraw anytime)</td>
+            <td class="py-3">Yes (with limited exceptions)</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">Tax treatment</td>
+            <td class="py-3 pr-4">Interest taxed annually</td>
+            <td class="py-3">Tax-deferred until withdrawal</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      The difference gets even bigger with regular contributions. If a family contributes
+      <strong>$250 per month</strong> for 18 years:
+    </p>
+    <ul>
+      <li><strong>Savings account at 4.5%:</strong> roughly $78,000</li>
+      <li><strong>Trump Account at 10%:</strong> roughly $152,000</li>
+    </ul>
+    <p>
+      That is nearly <strong>double</strong> the money with index fund investing. Try the numbers yourself on
+      our <a href="/calculators/growth-calculator">growth calculator</a>.
+    </p>
+
+    <h2>The Trade-Off: Risk vs. Growth</h2>
+    <p>
+      With a savings account, you know exactly what you will earn. The rate might change, but your balance
+      never drops. That is the safety of FDIC insurance.
+    </p>
+    <p>
+      With a Trump Account, the market sets the pace. In a good year, you might earn 20% or more. In a bad
+      year, your balance might drop 20%. That can be stressful -- but here is the key:
+    </p>
+
+    <CalloutBox type="tip" title="Time is on your side">
+      Your child's Trump Account has an 18-year time horizon. Historically, every rolling 18-year period in the
+      S&P 500 has produced a positive total return. Short-term dips have always been recovered over this kind
+      of time frame.
+    </CalloutBox>
+
+    <p>
+      This is exactly why the law locks the money until age 18. It prevents panic selling during a downturn
+      and gives the investment the full time it needs to grow.
+    </p>
+
+    <h2>What About the $1,000 Pilot Deposit?</h2>
+    <p>
+      The federal government deposits <strong>${limits.pilotDeposit.toLocaleString()}</strong> for eligible children born
+      between {limits.pilotDepositStartYear} and {limits.pilotDepositEndYear}. This deposit goes directly into the
+      Trump Account and is invested in index funds. It is <strong>not</strong> deposited into a bank account.
+    </p>
+    <p>
+      You cannot redirect this money to a savings account. The law requires it to be invested in qualifying
+      index funds. The same applies to all family contributions up to the
+      <strong>${limits.annualContributionLimit.toLocaleString()}/year</strong> limit.
+    </p>
+
+    <h2>Can You Do Both?</h2>
+    <p>
+      Yes. Nothing stops you from having <strong>both</strong> a Trump Account and a savings account for your child.
+      Some parents use a savings account for short-term goals (like a first car) and the Trump Account for
+      long-term wealth building.
+    </p>
+    <p>
+      The Trump Account is designed for long-term growth. A savings account is designed for safe, accessible cash.
+      They serve different purposes.
+    </p>
+
+    <CalloutBox type="warning" title="Important distinction">
+      Because Trump Account money is in the stock market, it is not suitable for money you might need in the
+      next few years. The lock-up period until age 18 reinforces that this is a long-term investment.
+    </CalloutBox>
+
+    <h2>Bottom Line</h2>
+    <p>
+      A Trump Account is <strong>not</strong> a savings account. It is an investment account that puts your child's money
+      into the stock market through low-cost index funds. That comes with more risk than a bank account, but
+      it also comes with much higher growth potential over 18 years.
+    </p>
+    <p>
+      To learn exactly what investments are allowed, see our guide on
+      <a href="/faq/investments">Trump Account investment rules</a>. For details on eligible funds, read
+      <a href="/blog/index-fund-requirements">index fund requirements</a>. And to see projected growth at different
+      contribution levels, try our <a href="/calculators/growth-calculator">growth calculator</a>.
+    </p>
+  </div>
+</BlogLayout>

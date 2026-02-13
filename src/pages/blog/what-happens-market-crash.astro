@@ -1,0 +1,169 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('what-happens-market-crash')!;
+const related = getRelatedArticles('what-happens-market-crash');
+
+const faqs = [
+  {
+    question: 'Will my child lose all their money in a crash?',
+    answer: 'No. Market crashes are temporary declines, not permanent losses. The S&P 500 has recovered from every crash in history. Since your child cannot withdraw before age 18, they are forced to ride out the recovery — which historically has always come.',
+  },
+  {
+    question: 'Can I move my Trump Account to cash during a crash?',
+    answer: 'No. Trump Account money must stay invested in eligible S&P 500 or broad U.S. equity index funds. You cannot move to cash, bonds, or money market funds. This restriction actually protects your child by preventing panic selling.',
+  },
+  {
+    question: 'What if the market crashes right before my child turns 18?',
+    answer: 'At age 18, the Trump Account converts to a traditional IRA. Your child does not have to withdraw immediately. They can keep the money invested and wait for a recovery. There is no requirement to sell at 18.',
+  },
+  {
+    question: 'Has the S&P 500 ever lost money over an 18-year period?',
+    answer: 'No. There has never been an 18-year period where the S&P 500 delivered a negative total return, including dividends. Even the worst 18-year periods produced positive annualized returns of roughly 3-4%.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Market crashes are <strong class="text-white">temporary</strong>. The S&P 500 has recovered from every one in history.</li>
+        <li>No 18-year period in S&P 500 history has produced <strong class="text-white">negative total returns</strong>.</li>
+        <li>The no-withdrawal rule before age 18 is <strong class="text-white">actually protective</strong> — it prevents panic selling.</li>
+        <li>Regular contributions during a downturn mean you are <strong class="text-white">buying at lower prices</strong> (dollar-cost averaging).</li>
+        <li>At 18, the account converts to an IRA. Your child does <strong class="text-white">not have to sell</strong> right away.</li>
+      </ul>
+    </div>
+
+    <h2>Yes, Market Crashes Happen</h2>
+    <p>
+      Let us not sugarcoat it. The stock market crashes sometimes. It has happened before and it will happen again. Here are some of the biggest drops in recent history:
+    </p>
+    <ul>
+      <li><strong>2008 Financial Crisis:</strong> The S&P 500 dropped roughly 57% from peak to bottom.</li>
+      <li><strong>2000-2002 Dot-Com Bust:</strong> The S&P 500 fell about 49% over nearly three years.</li>
+      <li><strong>2020 COVID Crash:</strong> The S&P 500 dropped 34% in just five weeks.</li>
+    </ul>
+    <p>
+      If you are a parent with a newborn's Trump Account, these numbers might scare you. That is completely understandable. Nobody likes watching their child's money shrink on a screen.
+    </p>
+    <p>
+      But here is the rest of the story.
+    </p>
+
+    <h2>Every Crash Has Recovered</h2>
+    <p>
+      Every single one of those crashes was followed by a recovery. Not eventually. <strong>Fully</strong>.
+    </p>
+    <ul>
+      <li><strong>After 2008:</strong> The S&P 500 fully recovered by early 2013 — about four years. Then it kept climbing.</li>
+      <li><strong>After the Dot-Com Bust:</strong> It took until 2007 to recover. Then 2008 hit. But by 2013, investors who held through both crashes were in the green.</li>
+      <li><strong>After COVID:</strong> The S&P 500 recovered all losses in <strong>five months</strong>. It hit new highs by August 2020.</li>
+    </ul>
+
+    <CalloutBox type="info" title="The Key Number: 18 Years">
+      <p>
+        Your child's Trump Account has an 18-year time horizon. That is enough time to weather any crash in S&P 500 history — including the Great Depression. No 18-year period has ever ended with negative total returns.
+      </p>
+    </CalloutBox>
+
+    <h2>Why the No-Withdrawal Rule Protects Your Child</h2>
+    <p>
+      One feature of Trump Accounts that parents sometimes complain about is the <strong>no-withdrawal rule before age {limits.growthPhaseEndAge}</strong>. You cannot pull money out during the growth phase (except for rollovers, excess contributions, or death).
+    </p>
+    <p>
+      But this restriction is actually one of the account's <strong>biggest advantages</strong>. Here is why:
+    </p>
+    <p>
+      The single biggest mistake investors make during a crash is <strong>selling in a panic</strong>. They see their account drop 30% and pull everything out. Then the market recovers, and they miss the rebound. Studies show that missing just the 10 best days in the market over a 20-year period cuts your returns roughly in half.
+    </p>
+    <p>
+      With a Trump Account, you <strong>cannot</strong> make that mistake. The money stays invested through the crash, through the recovery, and through the next bull market. Forced patience is a feature, not a bug.
+    </p>
+
+    <CalloutBox type="tip" title="Think of It Like a Time Lock">
+      <p>
+        A Trump Account is like a safe with an 18-year time lock. You put money in, it grows, and you cannot touch it until the timer runs out. That time lock means you ride through every crash and every recovery automatically.
+      </p>
+    </CalloutBox>
+
+    <h2>Dollar-Cost Averaging Works in Your Favor</h2>
+    <p>
+      If you contribute to your child's Trump Account every month, you are practicing <strong>dollar-cost averaging</strong>. This is one of the most reliable investing strategies, and it actually benefits from market dips.
+    </p>
+    <p>
+      Here is how it works:
+    </p>
+    <ul>
+      <li>When the market is <strong>high</strong>, your $250 monthly contribution buys fewer shares.</li>
+      <li>When the market is <strong>low</strong> (during a crash), your $250 buys more shares.</li>
+      <li>Over time, you end up with a <strong>lower average cost per share</strong> than if you tried to time the market.</li>
+    </ul>
+    <p>
+      A market crash actually lets you buy more of the S&P 500 at a discount. Those cheap shares then benefit from the recovery. This is why regular contributions through good times and bad produce strong long-term results.
+    </p>
+
+    <h2>What the Historical Data Shows</h2>
+    <p>
+      Let us look at what happened to a hypothetical child investor in the worst recent scenario. Imagine a Trump Account started in <strong>January 2000</strong> — right before the dot-com crash:
+    </p>
+    <ul>
+      <li>The market crashes in 2000-2002 (dot-com bust).</li>
+      <li>It recovers, then crashes again in 2008 (financial crisis).</li>
+      <li>It recovers again by 2013.</li>
+      <li>By January 2018 (18 years later), the S&P 500 had still delivered <strong>positive total returns</strong>.</li>
+    </ul>
+    <p>
+      That child lived through <strong>two</strong> of the worst market crashes in modern history — and still came out ahead. Now add monthly contributions throughout those 18 years (buying cheap during both crashes), and the outcome improves significantly.
+    </p>
+
+    <CalloutBox type="warning" title="This Is Not a Guarantee">
+      <p>
+        Historical data shows that 18-year periods have always been positive. But the past does not guarantee the future. The stock market carries real risk. However, the combination of broad diversification, low costs, and a long time horizon puts the odds strongly in your child's favor.
+      </p>
+    </CalloutBox>
+
+    <h2>What Happens at Age 18 During a Crash?</h2>
+    <p>
+      Some parents worry: what if the market crashes right when my child turns 18?
+    </p>
+    <p>
+      Good news: your child does <strong>not</strong> have to sell at 18. At age {limits.iraConversionAge}, the Trump Account converts to a <strong>traditional IRA</strong>. The money stays invested. Your child can leave it in the same index fund as long as they want. There is no forced liquidation date.
+    </p>
+    <p>
+      If the market is down when they turn 18, they have several options:
+    </p>
+    <ul>
+      <li><strong>Leave it invested</strong> and wait for a recovery.</li>
+      <li><strong>Continue contributing</strong> to the IRA on their own.</li>
+      <li><strong>Convert to a Roth IRA</strong> — a down market actually makes this cheaper tax-wise.</li>
+    </ul>
+    <p>
+      The worst thing to do would be to panic-sell at the bottom. And since the money is now in an IRA with no mandatory distribution until age 73, there is no pressure to sell.
+    </p>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      Crashes are scary. They are also normal and temporary. The S&P 500 has survived world wars, financial crises, pandemics, and recessions — and it has always reached new highs eventually.
+    </p>
+    <p>
+      Your child's Trump Account has three powerful defenses against crashes: <strong>18 years of time</strong>, <strong>broad diversification</strong> across 500 companies, and <strong>forced patience</strong> through the no-withdrawal rule. Together, these make market crashes a speed bump, not a dead end.
+    </p>
+    <p>
+      To see historical return projections, read <a href="/blog/expected-returns-trump-account">Expected Returns for Trump Accounts</a>. To understand whether the government guarantees your returns, see <a href="/blog/government-guarantee-returns">Does the Government Guarantee Returns?</a>
+    </p>
+  </div>
+</BlogLayout>

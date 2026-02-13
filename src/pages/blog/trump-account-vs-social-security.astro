@@ -1,0 +1,192 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-vs-social-security')!;
+const related = getRelatedArticles('trump-account-vs-social-security');
+
+const faqs = [
+  {
+    question: 'Does a Trump Account replace Social Security?',
+    answer: 'No. Trump Accounts and Social Security are completely separate programs with different purposes. Social Security provides retirement and disability insurance funded by payroll taxes. A Trump Account is a child investment account. Your child will still pay into and receive Social Security benefits as an adult.',
+  },
+  {
+    question: 'Do payroll taxes fund Trump Accounts?',
+    answer: `No. The $${limits.pilotDeposit.toLocaleString()} pilot deposit comes from general federal revenue, not from Social Security payroll taxes (FICA). Social Security is funded separately through the 6.2% employee and 6.2% employer payroll tax.`,
+  },
+  {
+    question: 'Will having a Trump Account reduce my child\'s Social Security benefits?',
+    answer: 'No. Social Security benefits are based on work history and earnings. Having a Trump Account (or the traditional IRA it converts to at 18) does not reduce Social Security benefits.',
+  },
+  {
+    question: 'Can a Trump Account provide retirement income like Social Security?',
+    answer: 'Yes, in a different way. At age 18, the Trump Account becomes a traditional IRA. If your child leaves the money invested, it can grow for decades and provide retirement income. But unlike Social Security, it is not guaranteed -- it depends on market returns and contributions.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Trump Accounts and Social Security are <strong>completely different programs</strong>.</li>
+        <li>Social Security is <strong>retirement and disability insurance</strong> funded by payroll taxes.</li>
+        <li>A Trump Account is a <strong>child investment account</strong> that converts to an IRA at 18.</li>
+        <li>Trump Accounts do <strong>not replace, reduce, or affect</strong> Social Security benefits.</li>
+        <li>They are funded differently: payroll taxes (SS) vs. general revenue and family contributions (Trump Account).</li>
+      </ul>
+    </div>
+
+    <h2>Two Very Different Programs</h2>
+    <p>
+      Some people wonder if Trump Accounts are related to Social Security or if one replaces the other.
+      The short answer: <strong>they have nothing to do with each other</strong>.
+    </p>
+    <p>
+      Social Security has been around since 1935. It is a social insurance program that provides income
+      to retirees, disabled workers, and survivors. You pay into it through payroll taxes your entire
+      working life, and you collect benefits when you retire (or if you become disabled).
+    </p>
+    <p>
+      A Trump Account is brand new. Created by {limits.legalBasis} in July 2025, it is an investment
+      account for children. The government deposits <strong>${limits.pilotDeposit.toLocaleString()}</strong>
+      for eligible newborns, families can contribute up to
+      <strong>${limits.annualContributionLimit.toLocaleString()}/year</strong>, and the money grows in index
+      funds until the child turns {limits.growthPhaseEndAge}.
+    </p>
+
+    <CalloutBox type="info" title="The simple version">
+      Social Security pays out when you are old. A Trump Account gives your child a financial head start
+      when they are young. They solve different problems at different stages of life.
+    </CalloutBox>
+
+    <h2>Key Differences at a Glance</h2>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm text-left">
+        <thead>
+          <tr class="border-b border-surface-600">
+            <th class="py-3 pr-4 text-gold-400 font-semibold">Feature</th>
+            <th class="py-3 pr-4 text-gold-400 font-semibold">Trump Account</th>
+            <th class="py-3 text-gold-400 font-semibold">Social Security</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Purpose</td>
+            <td class="py-3 pr-4">Build wealth for children</td>
+            <td class="py-3">Retirement & disability insurance</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Created</td>
+            <td class="py-3 pr-4">2025 (OBBBA)</td>
+            <td class="py-3">1935 (Social Security Act)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Who it's for</td>
+            <td class="py-3 pr-4">U.S. citizen children under 18</td>
+            <td class="py-3">Workers, retirees, disabled, survivors</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Funded by</td>
+            <td class="py-3 pr-4">Federal deposit + family contributions</td>
+            <td class="py-3">Payroll taxes (FICA: 6.2% employee + 6.2% employer)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Participation</td>
+            <td class="py-3 pr-4">Opt-in (file {limits.form})</td>
+            <td class="py-3">Mandatory for most workers</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">How money grows</td>
+            <td class="py-3 pr-4">Invested in S&P 500 index funds</td>
+            <td class="py-3">No individual account; benefits based on earnings record</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">When you access it</td>
+            <td class="py-3 pr-4">Age 18 (converts to IRA)</td>
+            <td class="py-3">Age 62+ (full benefits at 67)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Guaranteed returns?</td>
+            <td class="py-3 pr-4">No (market-based)</td>
+            <td class="py-3">Benefits guaranteed by law (subject to Congressional changes)</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">Inheritable?</td>
+            <td class="py-3 pr-4">Yes (IRA rules apply)</td>
+            <td class="py-3">Limited survivor benefits only</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Different Funding, Different Structure</h2>
+    <p>
+      Social Security is funded by <strong>payroll taxes</strong>. Every paycheck, 6.2% of your wages goes
+      to Social Security (your employer pays another 6.2%). That money funds current retirees' benefits.
+      There is no individual investment account with your name on it.
+    </p>
+    <p>
+      A Trump Account is the opposite. It is a <strong>real account in your child's name</strong>. The
+      ${limits.pilotDeposit.toLocaleString()} federal deposit comes from general government revenue, not
+      from payroll taxes. Family contributions come from after-tax income. The money is invested in actual
+      index funds, and the balance belongs to your child.
+    </p>
+
+    <CalloutBox type="tip" title="Your child gets both">
+      Having a Trump Account does not change anything about Social Security. When your child grows up
+      and starts working, they will pay payroll taxes and earn Social Security credits just like everyone
+      else. The Trump Account is an extra benefit on top of that.
+    </CalloutBox>
+
+    <h2>Can a Trump Account Help with Retirement?</h2>
+    <p>
+      Yes -- but in a very different way than Social Security. At age {limits.growthPhaseEndAge}, the Trump
+      Account converts to a <strong>traditional IRA</strong>. If your child does not withdraw the money right
+      away and keeps it invested, it can continue growing for decades.
+    </p>
+    <p>
+      For example, if a child's Trump Account holds $50,000 at age 18 and they leave it invested at an
+      average 10% return, it could grow to roughly:
+    </p>
+    <ul>
+      <li><strong>$336,000</strong> by age 38 (20 more years)</li>
+      <li><strong>$2.2 million</strong> by age 58 (40 more years)</li>
+      <li><strong>$5.7 million</strong> by age 65 (47 more years)</li>
+    </ul>
+    <p>
+      That is the power of compound growth over a long time. Social Security provides a guaranteed monthly
+      check. A Trump Account provides a pool of invested money. Together, they can give your child a much
+      stronger financial foundation in retirement.
+    </p>
+    <p>
+      For more on this strategy, read our guide on
+      <a href="/blog/trump-account-retirement-conversion">Trump Account to retirement conversion at 18</a>.
+    </p>
+
+    <h2>Bottom Line</h2>
+    <p>
+      Trump Accounts and Social Security are <strong>completely separate programs</strong>. They are funded
+      differently, serve different purposes, and operate at different stages of life. One does not replace
+      or reduce the other. Your child will benefit from both.
+    </p>
+    <p>
+      To learn the basics of how Trump Accounts work, read our
+      <a href="/what-are-trump-accounts">complete guide to Trump Accounts</a>. And for more on what happens
+      when the account converts at age 18, see
+      <a href="/blog/trump-account-retirement-conversion">Trump Account to retirement account at 18</a>.
+    </p>
+  </div>
+</BlogLayout>

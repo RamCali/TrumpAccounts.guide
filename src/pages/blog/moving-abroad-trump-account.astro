@@ -1,0 +1,145 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('moving-abroad-trump-account')!;
+const related = getRelatedArticles('moving-abroad-trump-account');
+
+const faqs = [
+  {
+    question: 'Does my child lose their Trump Account if we move to another country?',
+    answer: `No. The account stays open as long as your child remains a U.S. citizen. Citizenship is the requirement, not where you live. You can continue making contributions from abroad.`,
+  },
+  {
+    question: 'Do I need to report the Trump Account to my new country of residence?',
+    answer: 'Possibly. Many countries require residents to report foreign financial accounts. Tax treaties between the U.S. and your country of residence may affect how the account is treated. Consult a tax professional with international expertise.',
+  },
+  {
+    question: 'Can I still contribute to a Trump Account from overseas?',
+    answer: `Yes. As long as the child is a U.S. citizen with a valid SSN and is under ${limits.iraConversionAge}, contributions of up to $${limits.annualContributionLimit.toLocaleString()}/year can continue. You will still need to file a U.S. tax return to make the election if you have not already.`,
+  },
+  {
+    question: 'What happens to the account if my child renounces U.S. citizenship?',
+    answer: 'This is a complex legal and tax question. Renouncing citizenship may trigger an "exit tax" and could affect the account. This situation requires a tax advisor experienced in expatriation. We cannot provide guidance on this scenario.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>The Trump Account <strong class="text-white">stays open</strong> if you move abroad.</li>
+        <li>U.S. <strong class="text-white">citizenship</strong> is the requirement, not where you live.</li>
+        <li>Contributions can <strong class="text-white">continue from overseas</strong>.</li>
+        <li>You may have <strong class="text-white">foreign reporting obligations</strong> (FBAR, FATCA, local tax laws).</li>
+        <li>At {limits.iraConversionAge}, standard <strong class="text-white">IRA rules</strong> still apply to the child as a U.S. citizen.</li>
+      </ul>
+    </div>
+
+    <h2>Your Account Stays Open</h2>
+    <p>
+      If your family moves to another country, your child's Trump Account is <strong>not affected</strong>. The account stays open. The investments keep growing. Nothing changes on the U.S. side.
+    </p>
+    <p>
+      Why? Because the eligibility requirement is <strong>U.S. citizenship</strong>, not U.S. residence. As long as your child remains a U.S. citizen, they remain eligible. It does not matter if you live in London, Tokyo, Dubai, or anywhere else.
+    </p>
+
+    <CalloutBox type="tip" title="Citizenship is what counts">
+      <p>
+        The IRS looks at citizenship, not your mailing address. A U.S. citizen child living in Germany is just as eligible as one living in Ohio.
+      </p>
+    </CalloutBox>
+
+    <h2>Contributions Continue as Normal</h2>
+    <p>
+      You can keep contributing to your child's Trump Account from abroad. The <strong>${limits.annualContributionLimit.toLocaleString()} annual limit</strong> does not change based on where you live. Employer contributions of up to <strong>${limits.employerContributionLimit.toLocaleString()}/year</strong> can also continue if your U.S. employer offers them.
+    </p>
+    <p>
+      To make contributions, you may need to file a U.S. tax return. U.S. citizens are required to file federal taxes regardless of where they live, so most expatriate families are already doing this.
+    </p>
+
+    <h2>Foreign Tax Implications</h2>
+    <p>
+      Here is where things get more complicated. While the U.S. side of the Trump Account does not change, your <strong>new country of residence</strong> may have its own rules about foreign financial accounts.
+    </p>
+
+    <h3>Reporting to Your Country of Residence</h3>
+    <p>
+      Many countries require residents to report foreign investment accounts. Your child's Trump Account may need to be disclosed on local tax returns. Some countries may tax the investment growth annually, even if no withdrawals are made.
+    </p>
+    <p>
+      The treatment varies widely. Some countries with U.S. tax treaties may offer more favorable treatment. Others may not recognize the tax-deferred status of the account at all.
+    </p>
+
+    <h3>U.S. Reporting: FBAR and FATCA</h3>
+    <p>
+      If you are a U.S. citizen living abroad, you already know about FBAR (Foreign Bank Account Report) and FATCA (Foreign Account Tax Compliance Act). These typically apply to <strong>foreign</strong> accounts held by U.S. persons. Since a Trump Account is a <strong>U.S.-based account</strong>, it generally would not trigger FBAR or FATCA reporting for you.
+    </p>
+    <p>
+      However, if your country of residence considers the account a "foreign" account from their perspective, their own reporting rules may apply.
+    </p>
+
+    <CalloutBox type="warning" title="Get professional advice">
+      <p>
+        International tax situations are complicated. If you are moving abroad or already live overseas, consult a tax professional who specializes in expatriate taxation. They can help you understand how the Trump Account fits into both your U.S. and foreign tax obligations.
+      </p>
+    </CalloutBox>
+
+    <h2>Tax Treaty Considerations</h2>
+    <p>
+      The U.S. has tax treaties with dozens of countries. These treaties can affect how investment accounts are treated. For example:
+    </p>
+    <ul>
+      <li>Some treaties may <strong>preserve the tax-deferred status</strong> of the account in your country of residence.</li>
+      <li>Others may <strong>not recognize</strong> the deferral, meaning your country could tax gains annually.</li>
+      <li>Treaty provisions on <strong>IRAs</strong> may apply once the account converts at age {limits.iraConversionAge}.</li>
+    </ul>
+    <p>
+      The specifics depend entirely on which country you live in and the terms of its treaty with the United States.
+    </p>
+
+    <h2>What Happens at Age {limits.iraConversionAge}</h2>
+    <p>
+      When your child turns {limits.iraConversionAge}, the Trump Account converts to a traditional IRA. Standard IRA rules apply. As a U.S. citizen, your child is subject to U.S. tax law on the IRA regardless of where they live.
+    </p>
+    <p>
+      If your child is living abroad at {limits.iraConversionAge}, they will need to:
+    </p>
+    <ul>
+      <li>File U.S. taxes as a citizen (if they have income above the filing threshold).</li>
+      <li>Follow IRA distribution rules for any withdrawals.</li>
+      <li>Potentially report the IRA to their country of residence.</li>
+    </ul>
+
+    <h2>What About Renouncing Citizenship?</h2>
+    <p>
+      If a child eventually renounces U.S. citizenship, the tax implications are significant and complex. This is known as <strong>expatriation</strong>, and it can trigger an "exit tax" on unrealized gains. The Trump Account or resulting IRA would be affected.
+    </p>
+    <p>
+      This scenario requires professional guidance from a tax advisor experienced in expatriation law. We cannot provide specific advice on this topic.
+    </p>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      Moving abroad does not end your child's Trump Account. <strong>Citizenship is what matters, not residence.</strong> The account keeps working the same way it would if you stayed in the U.S.
+    </p>
+    <p>
+      The main thing to watch out for is the <strong>tax treatment in your new country</strong>. Get professional advice on the foreign side, and the U.S. side will take care of itself.
+    </p>
+    <p>
+      For general eligibility questions, see <a href="/blog/who-qualifies-for-trump-account">Who Qualifies for a Trump Account?</a> To understand how the account is managed, read <a href="/blog/who-controls-trump-account">Who Controls a Trump Account?</a>
+    </p>
+  </div>
+</BlogLayout>

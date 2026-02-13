@@ -1,0 +1,198 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('wealth-creation-potential')!;
+const related = getRelatedArticles('wealth-creation-potential');
+
+const faqs = [
+  {
+    question: 'How much can the $1,000 deposit grow to without any extra contributions?',
+    answer: 'At the S&P 500 historical average of about 10% per year, $1,000 grows to roughly $5,560 over 18 years. At a more conservative 7% (inflation-adjusted), it reaches about $3,380.',
+  },
+  {
+    question: 'What if I contribute $100 per month on top of the deposit?',
+    answer: `With the $${limits.pilotDeposit.toLocaleString()} deposit plus $100/month at 10% average returns, the account could reach roughly $56,000 by age 18. At 8%, it would be about $52,000.`,
+  },
+  {
+    question: 'How much wealth could one generation of Trump Account children create?',
+    answer: 'With 3.6 million births per year and an average account value of $50,000 at age 18, a single birth cohort could hold $180 billion in total wealth. That number grows significantly if families contribute more.',
+  },
+  {
+    question: 'Is this the first investment account for most American families?',
+    answer: 'For many families, yes. About 40% of American adults do not own any stocks or stock funds. A Trump Account may be the first time millions of families have money invested in the market.',
+  },
+  {
+    question: 'Can the money keep growing after age 18?',
+    answer: 'Yes. At 18, the Trump Account converts to a traditional IRA. If the child leaves the money invested, it keeps compounding. The $1,000 deposit alone, left untouched until age 65, could reach over $490,000 at 10% returns.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>The <strong class="text-white">${limits.pilotDeposit.toLocaleString()} deposit alone</strong> at 10% returns grows to roughly <strong class="text-white">$5,560</strong> by age 18.</li>
+        <li>Adding <strong class="text-white">$100/month</strong> brings the total to about <strong class="text-white">$56,000</strong>. Adding <strong class="text-white">$250/month</strong> reaches roughly <strong class="text-white">$108,000</strong>.</li>
+        <li>Maxing out at <strong class="text-white">$416/month</strong> could produce about <strong class="text-white">$175,000</strong> by age 18.</li>
+        <li>At the generational level, <strong class="text-white">3.6 million children</strong> per cohort could hold <strong class="text-white">$180+ billion</strong> in collective wealth.</li>
+        <li>For many families, this will be their <strong class="text-white">first investment account</strong>.</li>
+      </ul>
+    </div>
+
+    <p>
+      The real power of Trump Accounts is not the $1,000 deposit. It is <strong>compound growth over 18 years</strong>. Even small amounts, invested consistently in the stock market, can grow into serious money. Let's walk through the math.
+    </p>
+
+    <h2>The Math of Compounding</h2>
+    <p>
+      Compounding means your returns earn their own returns. The longer money stays invested, the faster it grows. Over 18 years in S&P 500 index funds, even modest amounts can snowball.
+    </p>
+    <p>
+      Here is what different contribution levels look like at a <strong>10% average annual return</strong> (the S&P 500's historical nominal average):
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Starting Deposit</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Monthly Addition</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Total Contributed</th>
+            <th class="py-3 text-gray-400 font-medium">Value at 18 (10%)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white">$1,000</td>
+            <td class="py-3 pr-4">$0</td>
+            <td class="py-3 pr-4">$1,000</td>
+            <td class="py-3 font-bold text-gold-400">~$5,560</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white">$1,000</td>
+            <td class="py-3 pr-4">$50/mo</td>
+            <td class="py-3 pr-4">$11,800</td>
+            <td class="py-3 font-bold text-gold-400">~$34,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white">$1,000</td>
+            <td class="py-3 pr-4">$100/mo</td>
+            <td class="py-3 pr-4">$22,600</td>
+            <td class="py-3 font-bold text-gold-400">~$56,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white">$1,000</td>
+            <td class="py-3 pr-4">$250/mo</td>
+            <td class="py-3 pr-4">$55,000</td>
+            <td class="py-3 font-bold text-gold-400">~$108,000</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 text-white">$1,000</td>
+            <td class="py-3 pr-4">$416/mo (max)</td>
+            <td class="py-3 pr-4">$90,856</td>
+            <td class="py-3 font-bold text-gold-400">~$175,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <CalloutBox type="info" title="About 10% returns">
+      <p>
+        The S&P 500 has historically averaged about 10% per year before inflation (roughly 7% after inflation). Actual returns will vary year to year. Some 18-year periods have delivered more, some less. These projections assume a consistent average for illustration.
+      </p>
+    </CalloutBox>
+
+    <h2>The Deposit-Only Scenario</h2>
+    <p>
+      Not every family can contribute extra — and that is okay. The <strong>${limits.pilotDeposit.toLocaleString()} federal deposit</strong> works on its own. At 10% average returns, it grows to about <strong>$5,560</strong> by age 18.
+    </p>
+    <p>
+      That may sound modest. But consider two things:
+    </p>
+    <ul>
+      <li>It cost the family <strong>nothing</strong>.</li>
+      <li>At 18, it converts to a traditional IRA and keeps compounding. Left untouched until age 65, that $5,560 could grow to over <strong>$490,000</strong>.</li>
+    </ul>
+    <p>
+      The deposit is a seed. Time is the sunlight.
+    </p>
+
+    <h2>The Power of $100 Per Month</h2>
+    <p>
+      One hundred dollars per month is about <strong>$3.33 per day</strong>. Many families spend more than that on streaming subscriptions. Yet $100/month, starting at birth with the $1,000 deposit, could grow to about <strong>$56,000 by age 18</strong>.
+    </p>
+    <p>
+      That is $56,000 from contributing $22,600 over 18 years. The other $33,400? <strong>Pure compound growth</strong>. The market did the heavy lifting.
+    </p>
+
+    <h2>The Sweet Spot: $250 Per Month</h2>
+    <p>
+      Contributing <strong>$250/month</strong> ($3,000/year, well within the <a href="/blog/contribution-limits-explained">${limits.annualContributionLimit.toLocaleString()} annual limit</a>) could build a six-figure account. At 10% returns, the projection reaches about <strong>$108,000</strong> by age 18.
+    </p>
+    <p>
+      Remember, <a href="/blog/can-parents-grandparents-contribute">anyone can contribute</a> — grandparents, aunts, uncles, friends. Splitting $250 across multiple family members makes this target more achievable.
+    </p>
+
+    <h2>Maxing Out: $416 Per Month</h2>
+    <p>
+      Families who can afford the full <strong>${limits.annualContributionLimit.toLocaleString()}/year</strong> (about $416/month) could see roughly <strong>$175,000</strong> at 10% returns. That is a transformative amount of money for an 18-year-old — enough to fund college, start a business, or make a serious down payment on a home.
+    </p>
+
+    <CalloutBox type="tip" title="Run your own numbers">
+      <p>
+        Every family's situation is different. Use the <a href="/calculators/growth-calculator">Growth Calculator</a> to see projections based on your specific monthly contribution and expected return rate.
+      </p>
+    </CalloutBox>
+
+    <h2>Generational Wealth at Scale</h2>
+    <p>
+      The individual numbers are compelling. The generational numbers are staggering. Consider what happens across an entire birth cohort:
+    </p>
+    <ul>
+      <li><strong>3.6 million children</strong> born per year</li>
+      <li>If the average account reaches <strong>$50,000</strong> by age 18 (a moderate assumption)</li>
+      <li>That is <strong>$180 billion in new wealth</strong> per birth cohort</li>
+      <li>Over four pilot cohorts: potentially <strong>$720 billion</strong></li>
+    </ul>
+    <p>
+      No single government program has ever created this much <strong>broadly distributed, individually owned wealth</strong> for young adults.
+    </p>
+
+    <h2>First-Generation Wealth Effect</h2>
+    <p>
+      About <strong>40% of American adults</strong> do not own any stocks or stock funds. For many families, a Trump Account will be their <strong>first-ever investment account</strong>. This matters because:
+    </p>
+    <ul>
+      <li>Families who own investments tend to build more wealth over time</li>
+      <li>Children who grow up seeing an investment account understand compounding</li>
+      <li>Having assets changes how families approach financial decisions</li>
+    </ul>
+    <p>
+      Economists call this the <strong>"first-generation wealth effect"</strong> — the idea that owning even a small amount of wealth changes behavior and creates a foundation for more.
+    </p>
+
+    <h2>What Happens After 18</h2>
+    <p>
+      At age {limits.iraConversionAge}, the Trump Account converts to a traditional IRA. The young adult can keep it invested, withdraw funds (subject to <a href="/blog/gains-taxation-explained">income tax and potential penalties</a>), or convert it to a <a href="/blog/trump-account-roth-conversion-strategy">Roth IRA</a>. The wealth creation does not stop at 18 — it can continue for decades.
+    </p>
+
+    <CalloutBox type="warning" title="Projections, not guarantees">
+      <p>
+        All growth estimates are based on historical S&P 500 returns. The stock market can go down. Past performance does not guarantee future results. These projections illustrate the power of compounding, not promised outcomes.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

@@ -1,0 +1,273 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-penalties')!;
+const related = getRelatedArticles('trump-account-penalties');
+
+const faqs = [
+  {
+    question: 'Can I withdraw from a Trump Account before age 18?',
+    answer: 'No. During the growth phase (birth through age 18), no withdrawals are allowed except for three narrow exceptions: rollovers to another Trump Account, return of excess contributions that exceeded the $5,000 annual limit, and distribution upon death of the beneficiary.',
+  },
+  {
+    question: 'What is the penalty for withdrawing from a Trump Account before 59.5?',
+    answer: 'After the account converts to a traditional IRA at age 18, withdrawals before age 59.5 face ordinary income tax plus a 10% early withdrawal penalty. For example, a $10,000 withdrawal at a 12% tax rate costs $1,200 in taxes plus a $1,000 penalty — totaling $2,200.',
+  },
+  {
+    question: 'What are the exceptions to the 10% early withdrawal penalty?',
+    answer: 'The main exceptions include: first-time home purchase (up to $10,000), qualified education expenses, total and permanent disability, death, unreimbursed medical expenses exceeding 7.5% of AGI, substantially equal periodic payments (SEPP/72t), and health insurance premiums while unemployed.',
+  },
+  {
+    question: 'When can I withdraw from a Trump Account without any penalty?',
+    answer: 'After age 59.5, you can withdraw from the traditional IRA without the 10% early withdrawal penalty. You still owe ordinary income tax on all withdrawals. Required minimum distributions (RMDs) begin at age 73.',
+  },
+  {
+    question: 'What happens if I contribute more than $5,000 in a year?',
+    answer: `Excess contributions must be removed before the tax filing deadline (including extensions) to avoid a 6% excise tax on the excess amount for each year it remains in the account. The return of excess contributions is one of the few allowed "withdrawals" before age 18.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><strong class="text-white">Before age 18:</strong> No withdrawals allowed (except rollovers, excess contributions, or death).</li>
+        <li><strong class="text-white">Age 18 to 59.5:</strong> Ordinary income tax + 10% early withdrawal penalty (with exceptions).</li>
+        <li><strong class="text-white">After age 59.5:</strong> Ordinary income tax only — no penalty.</li>
+        <li><strong class="text-white">After age 73:</strong> Required minimum distributions (RMDs) begin.</li>
+        <li>Key penalty exceptions include <strong class="text-white">first-time home ($10K), education, disability, and SEPP</strong>.</li>
+      </ul>
+    </div>
+
+    <p>
+      Understanding Trump Account penalties is essential for planning. The rules change at different ages, and the exceptions to the 10% penalty can save thousands of dollars. Here is the complete breakdown.
+    </p>
+
+    <h2>Phase 1: Before Age 18 — The Lock-Up Period</h2>
+    <p>
+      During the growth phase (birth through age {limits.growthPhaseEndAge}), the Trump Account is <strong>locked</strong>. This is not like a savings account. You cannot withdraw money for emergencies, expenses, or any other reason.
+    </p>
+    <p>
+      There are only <strong>three exceptions</strong>:
+    </p>
+    <ul>
+      <li><strong>Rollovers</strong> — transferring to another Trump Account (like switching custodians). Not a true withdrawal.</li>
+      <li><strong>Excess contributions</strong> — getting back money that went over the ${limits.annualContributionLimit.toLocaleString()}/year annual limit. Must be removed before the tax filing deadline to avoid a 6% excise tax.</li>
+      <li><strong>Death of the beneficiary</strong> — funds are distributed to the estate or designated beneficiary.</li>
+    </ul>
+
+    <CalloutBox type="warning" title="No hardship exceptions before 18">
+      <p>
+        Unlike a 401(k) or some other accounts, there are <strong>no hardship withdrawals</strong> from a Trump Account before age 18. Financial emergency, medical bills, job loss — none of these allow early access. The money stays invested no matter what.
+      </p>
+    </CalloutBox>
+
+    <h2>Phase 2: Age 18 to 59.5 — Tax + Penalty</h2>
+    <p>
+      At age {limits.iraConversionAge}, the Trump Account <strong>converts to a traditional IRA</strong>. Your child takes full control and can withdraw funds for <a href="/blog/what-can-money-be-used-for">any purpose</a>. But every withdrawal faces two costs:
+    </p>
+    <ol>
+      <li><strong>Ordinary income tax</strong> — the withdrawal is added to your child's taxable income for the year</li>
+      <li><strong>10% early withdrawal penalty</strong> — an additional tax on top of the income tax</li>
+    </ol>
+
+    <h3>What this costs in real numbers</h3>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Withdrawal</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Income Tax (12%)</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">10% Penalty</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Total Cost</th>
+            <th class="py-3 text-gray-400 font-medium">You Keep</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">$5,000</td>
+            <td class="py-3 pr-4">$600</td>
+            <td class="py-3 pr-4">$500</td>
+            <td class="py-3 pr-4 text-amber-300">$1,100</td>
+            <td class="py-3">$3,900</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">$10,000</td>
+            <td class="py-3 pr-4">$1,200</td>
+            <td class="py-3 pr-4">$1,000</td>
+            <td class="py-3 pr-4 text-amber-300">$2,200</td>
+            <td class="py-3">$7,800</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">$25,000</td>
+            <td class="py-3 pr-4">$3,000</td>
+            <td class="py-3 pr-4">$2,500</td>
+            <td class="py-3 pr-4 text-amber-300">$5,500</td>
+            <td class="py-3">$19,500</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">$50,000</td>
+            <td class="py-3 pr-4">$6,000</td>
+            <td class="py-3 pr-4">$5,000</td>
+            <td class="py-3 pr-4 text-amber-300">$11,000</td>
+            <td class="py-3">$39,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Note: large withdrawals may push your child into a higher tax bracket, increasing the effective rate above 12%.
+    </p>
+
+    <h2>Exceptions to the 10% Early Withdrawal Penalty</h2>
+    <p>
+      The IRS provides several exceptions where the <strong>10% penalty is waived</strong>. You still owe ordinary income tax, but you avoid the extra 10%. Here is every exception that applies to traditional IRA withdrawals:
+    </p>
+
+    <h3>First-time home purchase</h3>
+    <p>
+      Withdraw up to <strong>$10,000 lifetime</strong> for a first-time home purchase. "First-time" means no home ownership in the past two years. Both spouses can each use $10,000 for a combined $20,000. Funds must be used within 120 days. <a href="/blog/trump-account-for-first-home">Full home purchase guide</a>.
+    </p>
+
+    <h3>Qualified education expenses</h3>
+    <p>
+      Tuition, fees, books, supplies, and room and board (if at least half-time) at an eligible institution. Covers both <a href="/blog/trump-account-for-college">colleges</a> and <a href="/blog/trump-account-for-trade-school">trade schools</a> that participate in federal student aid programs.
+    </p>
+
+    <h3>Total and permanent disability</h3>
+    <p>
+      If the account holder becomes totally and permanently disabled as defined by the IRS, all withdrawals are penalty-free. You must be able to provide documentation from a physician.
+    </p>
+
+    <h3>Death</h3>
+    <p>
+      If the account holder dies, the beneficiary or estate can receive the funds without the 10% penalty. Income tax still applies.
+    </p>
+
+    <h3>Unreimbursed medical expenses</h3>
+    <p>
+      Withdrawals to pay medical expenses that exceed <strong>7.5% of adjusted gross income (AGI)</strong> are penalty-free. Only the amount above the 7.5% threshold qualifies.
+    </p>
+
+    <h3>Substantially equal periodic payments (SEPP / 72t)</h3>
+    <p>
+      Under IRC Section 72(t), you can set up a series of <strong>substantially equal periodic payments</strong> based on your life expectancy. Once started, you must continue for at least 5 years or until age 59.5 (whichever is later). This is complex and modifications trigger retroactive penalties.
+    </p>
+
+    <h3>Health insurance while unemployed</h3>
+    <p>
+      If you lose your job and have been unemployed for <strong>12 or more consecutive weeks</strong>, you can withdraw penalty-free to pay for health insurance premiums. This exception ends 60 days after you are re-employed.
+    </p>
+
+    <h3>IRS levy</h3>
+    <p>
+      If the IRS seizes IRA funds to pay unpaid federal taxes, the 10% penalty does not apply to the seized amount.
+    </p>
+
+    <CalloutBox type="info" title="Penalty-free is not tax-free">
+      <p>
+        Every exception on this list waives the <strong>10% penalty only</strong>. The withdrawal is still taxed as <strong>ordinary income</strong>. The only way to avoid income tax entirely is to <a href="/blog/trump-account-retirement-conversion">convert to a Roth IRA</a> first, pay taxes on the conversion, and then make qualified Roth withdrawals later.
+      </p>
+    </CalloutBox>
+
+    <h2>Phase 3: After Age 59.5 — Income Tax Only</h2>
+    <p>
+      Once your child reaches age <strong>59.5</strong>, the 10% early withdrawal penalty disappears permanently. Withdrawals are taxed as ordinary income, but there is no additional penalty.
+    </p>
+    <p>
+      If the account has been growing since birth, this is potentially <strong>41+ years of compound growth</strong>. The balance could be substantial.
+    </p>
+
+    <h2>Phase 4: After Age 73 — Required Minimum Distributions</h2>
+    <p>
+      Starting at age <strong>73</strong>, the IRS requires annual withdrawals from traditional IRAs called <strong>required minimum distributions (RMDs)</strong>. The amount is based on the account balance and life expectancy tables published by the IRS.
+    </p>
+    <p>
+      Failure to take an RMD results in a penalty of <strong>25%</strong> of the amount that should have been withdrawn (reduced to 10% if corrected promptly). RMDs are taxed as ordinary income.
+    </p>
+
+    <CalloutBox type="tip" title="Roth conversion avoids RMDs">
+      <p>
+        Roth IRAs have <strong>no required minimum distributions</strong> during the owner's lifetime. If your child <a href="/blog/trump-account-retirement-conversion">converts to a Roth IRA</a> at age 18 while in a low tax bracket, they can avoid RMDs entirely and let the money grow tax-free for as long as they live.
+      </p>
+    </CalloutBox>
+
+    <h2>Excess Contribution Penalties</h2>
+    <p>
+      If more than <strong>${limits.annualContributionLimit.toLocaleString()}</strong> is contributed in a single year (from all sources combined), the excess must be removed before the tax filing deadline. If not removed in time, the excess amount faces a <strong>6% excise tax for each year</strong> it stays in the account.
+    </p>
+    <p>
+      Removing excess contributions is one of the three allowed "withdrawals" before age 18. The returned amount includes any earnings attributable to the excess, which are taxed as income.
+    </p>
+
+    <h2>Summary: Penalty Rules by Age</h2>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Age</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Withdrawals Allowed?</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Income Tax</th>
+            <th class="py-3 text-gray-400 font-medium">10% Penalty</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Under 18</td>
+            <td class="py-3 pr-4 text-amber-300">No (3 narrow exceptions)</td>
+            <td class="py-3 pr-4">N/A</td>
+            <td class="py-3">N/A</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">18 – 59.5</td>
+            <td class="py-3 pr-4 text-mint-300">Yes</td>
+            <td class="py-3 pr-4 text-amber-300">Yes</td>
+            <td class="py-3 text-amber-300">Yes (with exceptions)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">59.5+</td>
+            <td class="py-3 pr-4 text-mint-300">Yes</td>
+            <td class="py-3 pr-4 text-amber-300">Yes</td>
+            <td class="py-3 text-mint-300">No</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">73+</td>
+            <td class="py-3 pr-4 text-mint-300">Required (RMDs)</td>
+            <td class="py-3 pr-4 text-amber-300">Yes</td>
+            <td class="py-3 text-mint-300">No</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      The penalty rules are straightforward once you understand the three phases. Before 18: locked. Age 18-59.5: taxed plus penalized (with exceptions). After 59.5: taxed only. Knowing the exceptions — especially for a <a href="/blog/trump-account-for-first-home">first home</a> and <a href="/blog/trump-account-for-college">education</a> — can save your child thousands.
+    </p>
+    <p>
+      Use our <a href="/calculators/withdrawal-simulator"><strong>Withdrawal Simulator</strong></a> to model different withdrawal scenarios, or visit the <a href="/faq/withdrawals-and-use">withdrawals FAQ</a> for quick answers.
+    </p>
+
+    <CalloutBox type="warning" title="Not financial advice">
+      <p>
+        This is educational content, not tax or financial advice. Tax rules are complex and depend on individual circumstances. Consult a qualified tax professional before making withdrawal decisions.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

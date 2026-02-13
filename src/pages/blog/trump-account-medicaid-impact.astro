@@ -1,0 +1,183 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-medicaid-impact')!;
+const related = getRelatedArticles('trump-account-medicaid-impact');
+
+const faqs = [
+  {
+    question: 'Does a Trump Account count as an asset for Medicaid?',
+    answer: 'During the growth phase (before age 18), the Trump Account is held in trust and may not count as an available asset for Medicaid purposes. After age 18, the account becomes a traditional IRA, and Medicaid asset rules vary by state. Some states exempt retirement accounts; others count them.',
+  },
+  {
+    question: 'Can a Trump Account affect Supplemental Security Income (SSI)?',
+    answer: 'Potentially yes. SSI has a $2,000 individual asset limit ($3,000 for couples). After age 18, the traditional IRA would likely count toward this limit in most cases. Before 18, the trust-held account may be treated differently. Consult a benefits attorney for your specific situation.',
+  },
+  {
+    question: 'Should I skip a Trump Account if my child receives Medicaid?',
+    answer: 'Not necessarily. During the growth phase (under 18), the account may not affect Medicaid. After 18, the impact depends on your state and the child\'s specific benefits. The long-term wealth-building potential may outweigh the benefits impact. Consult a benefits advisor before deciding.',
+  },
+  {
+    question: 'Can an ABLE account help protect benefits?',
+    answer: 'Yes. ABLE (Achieving a Better Life Experience) accounts allow individuals with disabilities to save up to $100,000 without affecting SSI eligibility, and potentially more without affecting Medicaid. If your child qualifies, an ABLE account may be a useful complement to a Trump Account.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>During the <strong class="text-white">growth phase (under 18)</strong>: held in trust, may not count as an available asset for Medicaid.</li>
+        <li>After age 18 <strong class="text-white">(as an IRA)</strong>: Medicaid asset rules vary by state. Some exempt retirement accounts; others do not.</li>
+        <li>SSI has a <strong class="text-white">$2,000 asset limit</strong> — a traditional IRA would likely count toward this limit.</li>
+        <li><strong class="text-white">ABLE accounts</strong> may help individuals with disabilities save without losing benefits.</li>
+        <li><strong class="text-white">Consult a local benefits advisor</strong> — rules vary significantly by state and program.</li>
+      </ul>
+    </div>
+
+    <p>
+      For families who rely on Medicaid, SSI, or other needs-based benefits, a Trump Account raises an important question: <strong>will this money count against us?</strong> The answer depends on your child's age, your state, and the specific program. Here is what we know.
+    </p>
+
+    <CalloutBox type="warning" title="Benefits rules are complex and state-specific">
+      <p>
+        Medicaid, SSI, and other needs-based programs have different asset rules in every state. This article provides a general overview, <strong>not</strong> benefits advice. Consult a local benefits attorney or advisor before making decisions that could affect your family's eligibility.
+      </p>
+    </CalloutBox>
+
+    <h2>Before Age 18: The Growth Phase</h2>
+    <p>
+      During the growth phase, Trump Account funds are <strong>held in trust</strong> under the control of the authorized individual (parent or legal guardian). The child cannot access the money. No withdrawals are allowed except in limited circumstances (rollovers, excess contribution corrections, or death).
+    </p>
+    <p>
+      Because the money is <strong>not accessible</strong> to the child, it may not count as an "available resource" for Medicaid or other means-tested programs. Many states define countable assets as resources the applicant can access and use. A locked trust account may not meet that definition.
+    </p>
+
+    <CalloutBox type="info" title="No official guidance yet">
+      <p>
+        As of early 2026, neither the IRS nor the Centers for Medicare and Medicaid Services (CMS) has issued specific guidance on how Trump Accounts are treated for Medicaid eligibility during the growth phase. The analysis above is based on general Medicaid asset rules. This page will be updated when official guidance is published.
+      </p>
+    </CalloutBox>
+
+    <h2>After Age 18: Standard IRA Rules Apply</h2>
+    <p>
+      At age {limits.iraConversionAge}, the Trump Account converts to a <strong>traditional IRA in the child's name</strong>. At this point, the money is accessible (with taxes and potential penalties). How this IRA affects benefits depends on the program:
+    </p>
+
+    <h3>Medicaid</h3>
+    <p>
+      Medicaid asset rules vary significantly by state. Key considerations:
+    </p>
+    <ul>
+      <li><strong>Some states exempt retirement accounts</strong> (IRAs, 401(k)s) from Medicaid asset calculations entirely.</li>
+      <li><strong>Other states count IRAs</strong> as available assets, especially if the owner is not yet taking regular distributions.</li>
+      <li><strong>Medicaid expansion</strong> (under the ACA) uses income-based eligibility with no asset test for most adults under 65. In these states, the IRA balance may not matter.</li>
+      <li><strong>Traditional Medicaid</strong> (for aged, blind, and disabled) often has asset limits where IRAs could count.</li>
+    </ul>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Medicaid Type</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Asset Test?</th>
+            <th class="py-3 text-gray-400 font-medium">IRA Impact</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Expansion Medicaid (most adults)</td>
+            <td class="py-3 pr-4">No asset test</td>
+            <td class="py-3 text-mint-400">No impact</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Traditional Medicaid (aged/blind/disabled)</td>
+            <td class="py-3 pr-4">Yes — varies by state</td>
+            <td class="py-3 text-amber-400">May count as asset</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 text-white font-medium">Children's Medicaid / CHIP</td>
+            <td class="py-3 pr-4">Usually no asset test</td>
+            <td class="py-3 text-mint-400">Typically no impact</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Supplemental Security Income (SSI)</h3>
+    <p>
+      SSI has strict asset limits that apply nationally:
+    </p>
+    <ul>
+      <li><strong>Individual limit:</strong> $2,000 in countable assets</li>
+      <li><strong>Couple limit:</strong> $3,000 in countable assets</li>
+    </ul>
+    <p>
+      A traditional IRA <strong>generally counts as a resource</strong> for SSI purposes, especially if the owner can access the funds. After age 18, the Trump Account (now an IRA) could push someone over the $2,000 limit, potentially disqualifying them from SSI.
+    </p>
+
+    <CalloutBox type="warning" title="SSI has very low asset limits">
+      <p>
+        Even a small Trump Account could exceed the <strong>$2,000 SSI asset limit</strong> after conversion at age 18. If your child receives or may need SSI, consult a benefits attorney before opening a Trump Account. There may be better options like ABLE accounts.
+      </p>
+    </CalloutBox>
+
+    <h2>ABLE Accounts: A Possible Alternative</h2>
+    <p>
+      For children with disabilities, <strong>ABLE (Achieving a Better Life Experience) accounts</strong> offer a way to save without jeopardizing benefits:
+    </p>
+    <ul>
+      <li>Up to <strong>$100,000</strong> in an ABLE account does not count against SSI's $2,000 asset limit.</li>
+      <li>ABLE account balances <strong>do not affect Medicaid</strong> eligibility regardless of amount.</li>
+      <li>Funds can be used for <strong>disability-related expenses</strong> including housing, education, transportation, and health care.</li>
+      <li>Eligibility: the disability must have begun before age 26.</li>
+    </ul>
+    <p>
+      If your child qualifies for an ABLE account, it may be a valuable complement to or alternative for a Trump Account, depending on your benefits situation.
+    </p>
+
+    <h2>Strategies for Families on Benefits</h2>
+
+    <h3>1. Open the Trump Account Anyway (Under 18)</h3>
+    <p>
+      During the growth phase, the locked account likely will not affect Medicaid or SSI. The 18-year compounding opportunity is significant. You can address the post-18 situation as guidance develops.
+    </p>
+
+    <h3>2. Plan for the Conversion at 18</h3>
+    <p>
+      Before the account converts to an IRA, work with a benefits advisor to understand your state's rules. Options may include spending down the IRA on allowable expenses, converting to a Roth IRA, or using ABLE account provisions.
+    </p>
+
+    <h3>3. Stay Informed as Guidance Develops</h3>
+    <p>
+      Given that millions of children will have Trump Accounts, there is a reasonable chance that federal or state agencies will issue specific guidance on how these accounts interact with benefits programs. We will update this page as new rules are published.
+    </p>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      During the growth phase (under 18), Trump Accounts are <strong>unlikely to affect Medicaid</strong> because the funds are held in trust and not accessible. After age 18, the impact depends on your state and the specific benefits program. SSI is the most restrictive, with a <strong>$2,000 asset limit</strong> that a traditional IRA could easily exceed.
+    </p>
+    <p>
+      For families with children who have disabilities, <a href="/blog/trump-account-disability">ABLE accounts</a> may offer a better path. For the full picture on how the account is taxed, see our <a href="/blog/trump-account-fafsa-impact">FAFSA impact guide</a> and <a href="/blog/gains-taxation-explained">gains taxation guide</a>.
+    </p>
+
+    <CalloutBox type="warning" title="Not benefits, tax, or financial advice">
+      <p>
+        This article is for educational purposes only. Benefits rules are complex and vary by state. Consult a qualified benefits attorney or financial advisor before making decisions about Trump Accounts if your family relies on Medicaid, SSI, or other needs-based programs.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

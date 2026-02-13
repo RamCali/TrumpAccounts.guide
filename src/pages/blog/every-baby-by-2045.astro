@@ -1,0 +1,268 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('every-baby-by-2045')!;
+const related = getRelatedArticles('every-baby-by-2045');
+
+const faqs = [
+  {
+    question: 'How much will a Trump Account be worth by 2045?',
+    answer: 'It depends on contributions and market returns. With just the $1,000 deposit and no additional contributions, roughly $6,700 at 10% returns by 2045 (age 20). With $250/month contributions, roughly $117,000. With max contributions of $416/month, roughly $190,000. These are projections based on historical averages, not guarantees.',
+  },
+  {
+    question: 'How many children will have Trump Accounts?',
+    answer: 'With roughly 3.6 million births per year in the U.S. and the pilot deposit covering births from 2025 through 2028, up to 14.4 million children could receive the $1,000 federal deposit. Additional children under 18 can open accounts without the deposit.',
+  },
+  {
+    question: 'What if the stock market performs below average?',
+    answer: 'At a conservative 6% return instead of 10%, the numbers are lower but still meaningful. The $1,000 deposit alone would reach about $3,200 by 2045. With $250/month contributions, roughly $79,000. No 18-year period in S&P 500 history has produced negative total returns.',
+  },
+  {
+    question: 'Could Congress cancel Trump Accounts before 2045?',
+    answer: 'Future Congresses could modify or repeal the program. However, accounts already opened would likely be grandfathered. The IRA conversion at age 18 creates a permanent retirement account regardless of future policy changes.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>A child born in 2025 will be <strong class="text-white">20 years old in 2045</strong>.</li>
+        <li>With just the $1,000 deposit (no contributions), they could have roughly <strong class="text-white">$6,700</strong> at 10% returns.</li>
+        <li>With $250/month contributions for 18 years, roughly <strong class="text-white">$117,000</strong> by 2045.</li>
+        <li>Up to <strong class="text-white">14.4 million children</strong> could have accounts from the pilot program alone.</li>
+        <li>Total wealth created across all accounts could reach <strong class="text-white">hundreds of billions of dollars</strong>.</li>
+      </ul>
+    </div>
+
+    <h2>The Year Is 2045</h2>
+    <p>
+      Imagine it is 2045. The first Trump Account babies — born in 2025 — are now 20 years old. They have had investment accounts since the day they were born. Their money has been compounding in the stock market for two decades.
+    </p>
+    <p>
+      What do their accounts look like? It depends on two things: <strong>how much their families contributed</strong> and <strong>what the market returned</strong>. Let's project every scenario.
+    </p>
+
+    <h2>Scenario 1: The $1,000 Deposit Only</h2>
+    <p>
+      Not every family can contribute extra. Some parents opened the account, received the ${limits.pilotDeposit.toLocaleString()} federal deposit, and left it alone. Here is what that single deposit could become by 2045 (20 years of growth).
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Annual Return</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Value by 2045</th>
+            <th class="py-3 text-gray-400 font-medium">Total Growth</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">6% (conservative)</td>
+            <td class="py-3 pr-4 text-mint-400">$3,207</td>
+            <td class="py-3">+$2,207</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">8% (moderate)</td>
+            <td class="py-3 pr-4 text-mint-400">$4,661</td>
+            <td class="py-3">+$3,661</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">10% (historical avg)</td>
+            <td class="py-3 pr-4 text-mint-400">$6,727</td>
+            <td class="py-3">+$5,727</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Not millions, but remember — this money cost the family nothing. And at 20, the child's IRA has decades of compounding still ahead.
+    </p>
+
+    <h2>Scenario 2: $100/Month Contributions</h2>
+    <p>
+      One hundred dollars a month is achievable for many families. About $3.33 a day. Combined with the ${limits.pilotDeposit.toLocaleString()} deposit and 18 years of contributions (the account converts to an IRA at 18, so we assume contributions stop there and it grows for 2 more years untouched):
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Annual Return</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Value at 18</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Value by 2045 (age 20)</th>
+            <th class="py-3 text-gray-400 font-medium">Total Contributed</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">6%</td>
+            <td class="py-3 pr-4">$38,500</td>
+            <td class="py-3 pr-4 text-mint-400">$43,300</td>
+            <td class="py-3">$22,600</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">8%</td>
+            <td class="py-3 pr-4">$48,900</td>
+            <td class="py-3 pr-4 text-mint-400">$57,000</td>
+            <td class="py-3">$22,600</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">10%</td>
+            <td class="py-3 pr-4">$62,500</td>
+            <td class="py-3 pr-4 text-mint-400">$75,600</td>
+            <td class="py-3">$22,600</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Scenario 3: $250/Month Contributions</h2>
+    <p>
+      This is the sweet spot for many families, especially when <a href="/blog/can-parents-grandparents-contribute">grandparents and relatives chip in</a>. The numbers start to get exciting here.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Annual Return</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Value at 18</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Value by 2045 (age 20)</th>
+            <th class="py-3 text-gray-400 font-medium">Total Contributed</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">6%</td>
+            <td class="py-3 pr-4">$88,800</td>
+            <td class="py-3 pr-4 text-mint-400">$99,800</td>
+            <td class="py-3">$55,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">8%</td>
+            <td class="py-3 pr-4">$108,000</td>
+            <td class="py-3 pr-4 text-mint-400">$126,000</td>
+            <td class="py-3">$55,000</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">10%</td>
+            <td class="py-3 pr-4">$108,000</td>
+            <td class="py-3 pr-4 text-mint-400">$130,700</td>
+            <td class="py-3">$55,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      At moderate returns, a 20-year-old in 2045 could be sitting on <strong>over $100,000</strong>. That is more than many Americans have saved by age 40.
+    </p>
+
+    <h2>Scenario 4: $416/Month (Maxing Out)</h2>
+    <p>
+      The ${limits.annualContributionLimit.toLocaleString()}/year maximum works out to about $416/month. For families who can swing it, the results are remarkable.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Annual Return</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Value at 18</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Value by 2045 (age 20)</th>
+            <th class="py-3 text-gray-400 font-medium">Total Contributed</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">6%</td>
+            <td class="py-3 pr-4">$143,000</td>
+            <td class="py-3 pr-4 text-mint-400">$160,700</td>
+            <td class="py-3">$90,900</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">8%</td>
+            <td class="py-3 pr-4">$172,000</td>
+            <td class="py-3 pr-4 text-mint-400">$200,600</td>
+            <td class="py-3">$90,900</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">10%</td>
+            <td class="py-3 pr-4">$163,000</td>
+            <td class="py-3 pr-4 text-mint-400">$197,200</td>
+            <td class="py-3">$90,900</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <CalloutBox type="info" title="Dell Pledge Kids Start Higher">
+      <p>
+        Children who qualify for the <a href="/blog/dell-pledge-explained">Dell pledge</a> receive an additional $250 on top of the ${limits.pilotDeposit.toLocaleString()} federal deposit — a ${limits.dellPledge.perChildAmount + limits.pilotDeposit} starting balance. That extra $250 adds roughly $1,700 by age 20 at 10% returns. Small at the start, but compounding makes it meaningful over a lifetime.
+      </p>
+    </CalloutBox>
+
+    <h2>The Generation-Wide Impact</h2>
+    <p>
+      Now zoom out. This is not just one child's story. It is a generation.
+    </p>
+    <p>
+      The U.S. sees roughly <strong>3.6 million births per year</strong>. The pilot deposit covers 2025 through 2028 — four birth cohorts. That is potentially <strong>14.4 million children</strong> starting life with an investment account.
+    </p>
+    <p>
+      Even if only the ${limits.pilotDeposit.toLocaleString()} deposits grow with no family contributions, the total wealth created across all accounts by 2045 is staggering:
+    </p>
+    <ul>
+      <li><strong>14.4 million accounts x $6,700 each (at 10%)</strong> = roughly <strong>$96 billion</strong> in total account value</li>
+      <li>If the average family contributes $100/month, the total could exceed <strong>$850 billion</strong></li>
+      <li>With an average of $250/month contributions, the total approaches <strong>$1.7 trillion</strong></li>
+    </ul>
+    <p>
+      That is wealth distributed across an entire generation, regardless of family background.
+    </p>
+
+    <h2>What Could Go Wrong</h2>
+    <p>
+      Projections are not predictions. Here is what could reduce these numbers:
+    </p>
+    <ul>
+      <li><strong>Lower-than-average market returns.</strong> If the next 20 years average 6% instead of 10%, every projection drops by roughly 30-40%.</li>
+      <li><strong>Policy changes.</strong> A future Congress could modify contribution limits, change the IRA conversion rules, or alter the tax treatment.</li>
+      <li><strong>Low participation.</strong> If parents do not opt in by filing {limits.form}, their children miss the deposit entirely. Outreach and awareness matter.</li>
+      <li><strong>Early withdrawals at 18.</strong> Young adults may cash out for short-term needs instead of letting the money compound for decades.</li>
+    </ul>
+
+    <CalloutBox type="warning" title="These Are Projections, Not Guarantees">
+      <p>
+        All numbers in this article are based on hypothetical rates of return using historical S&P 500 data. Actual results will vary. Past performance does not guarantee future results. This is educational content, not financial advice.
+      </p>
+    </CalloutBox>
+
+    <h2>What This Means for a Generation</h2>
+    <p>
+      No program in U.S. history has given every newborn a funded investment account. If Trump Accounts achieve even modest participation, millions of young adults will enter adulthood with something previous generations did not have: <strong>a financial head start</strong>.
+    </p>
+    <p>
+      By 2045, we will know the answer. The first Trump Account babies will be 20, their accounts will have real balances, and we will see whether the math held up.
+    </p>
+    <p>
+      Want to see projections for your own child? Use the <a href="/calculators/growth-calculator"><strong>Growth Calculator</strong></a>. For the long-term wealth story, read <a href="/blog/could-create-millionaires">Could Trump Accounts Create Millionaires?</a> And for detailed breakdowns at age 18, see <a href="/blog/how-much-at-age-18">How Much at Age 18?</a>
+    </p>
+  </div>
+</BlogLayout>

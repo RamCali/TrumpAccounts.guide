@@ -1,0 +1,118 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-divorce')!;
+const related = getRelatedArticles('trump-account-divorce');
+
+const faqs = [
+  {
+    question: 'Is a Trump Account divided in a divorce?',
+    answer: 'No. The Trump Account belongs to the child, not the parents. It is not a marital asset and should not be divided in divorce proceedings. The account stays intact in the child\'s name.',
+  },
+  {
+    question: 'Who controls the Trump Account after a divorce?',
+    answer: 'The custody arrangement typically determines who serves as the authorized individual. A court may designate which parent manages the account as part of the custody agreement.',
+  },
+  {
+    question: 'Can both parents still contribute after a divorce?',
+    answer: `Yes. Both parents can continue contributing to the child's Trump Account. The combined total from all sources still cannot exceed $${limits.annualContributionLimit.toLocaleString()} per year.`,
+  },
+  {
+    question: 'Can a spouse use the Trump Account balance in settlement negotiations?',
+    answer: 'No. Since the account is the child\'s property, not the parent\'s, it should not be part of any marital property settlement. An attorney can help protect the account during proceedings.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>The Trump Account belongs to the <strong class="text-white">child, not either parent</strong>. It is not a marital asset.</li>
+        <li>The account should <strong class="text-white">not be divided</strong> in divorce proceedings.</li>
+        <li>Custody or guardianship changes may affect <strong class="text-white">who serves as the authorized individual</strong>.</li>
+        <li><strong class="text-white">Both parents can still contribute</strong> after a divorce, up to the combined ${limits.annualContributionLimit.toLocaleString()}/year cap.</li>
+        <li>The account itself — funds, balance, investments — <strong class="text-white">stays completely untouched</strong>.</li>
+      </ul>
+    </div>
+
+    <p>
+      Divorce is stressful enough without worrying about your child's financial future. If you and your spouse have a Trump Account for your child, here is the good news: <strong>the account is protected</strong>.
+    </p>
+
+    <h2>The Account Belongs to the Child</h2>
+    <p>
+      This is the most important thing to understand. A Trump Account is <strong>the child's property</strong>. It is not your asset. It is not your spouse's asset. It is your child's.
+    </p>
+    <p>
+      Under IRC Section 530A, the account is established for the benefit of the child. The <a href="/blog/who-controls-trump-account">authorized individual</a> (parent or guardian) manages it, but they do not own it.
+    </p>
+
+    <CalloutBox type="warning" title="Not a marital asset">
+      <p>
+        A Trump Account should <strong>not</strong> be included in the division of marital property. If your divorce attorney or your spouse's attorney tries to include it, make sure they understand this is the child's account, not yours.
+      </p>
+    </CalloutBox>
+
+    <h2>What Changes in a Divorce</h2>
+    <p>
+      While the account itself stays untouched, the <strong>management structure</strong> may change:
+    </p>
+    <ul>
+      <li><strong>The authorized individual may change.</strong> If custody shifts, the court may designate the custodial parent as the new authorized individual who manages the account.</li>
+      <li><strong>Court orders may specify management.</strong> A divorce decree or custody agreement can include language about who manages the Trump Account going forward.</li>
+    </ul>
+    <p>
+      The key point is that <strong>only the manager changes — not the account</strong>. The child's balance, investments, and growth continue exactly as before.
+    </p>
+
+    <h2>Both Parents Can Still Contribute</h2>
+    <p>
+      Divorce does not change the contribution rules. Both parents — and grandparents, relatives, or anyone else — can continue to contribute to the child's Trump Account.
+    </p>
+    <p>
+      The <strong>combined annual limit of ${limits.annualContributionLimit.toLocaleString()}</strong> still applies across all contributors. If Mom contributes $3,000 and Dad contributes $2,000, the cap is reached for that year.
+    </p>
+
+    <CalloutBox type="tip" title="Coordinate contributions">
+      <p>
+        After a divorce, communication about contributions can be harder. Consider agreeing in the divorce settlement on how much each parent will contribute annually, so you do not accidentally exceed the ${limits.annualContributionLimit.toLocaleString()} limit.
+      </p>
+    </CalloutBox>
+
+    <h2>Protecting the Account During Divorce</h2>
+    <p>
+      Here are practical steps to make sure your child's Trump Account is handled correctly:
+    </p>
+    <ul>
+      <li><strong>Tell your attorney it is a child's account.</strong> Make sure your lawyer understands that this is not a 401(k) or IRA that belongs to a spouse. It is the child's property under IRC Section 530A.</li>
+      <li><strong>Include management terms in the decree.</strong> Specify which parent will be the authorized individual. This prevents future disputes.</li>
+      <li><strong>Set contribution agreements in writing.</strong> Decide how much each parent will contribute so the total stays within limits.</li>
+      <li><strong>Keep the account out of settlement math.</strong> The Trump Account balance should not be used as leverage in negotiating the division of assets.</li>
+    </ul>
+
+    <h2>What About Creditors in a Divorce?</h2>
+    <p>
+      If one parent has debts that come up during divorce, those debts <strong>cannot be satisfied from the child's Trump Account</strong>. The account belongs to the child. Creditors of the parents have no claim to it.
+    </p>
+    <p>
+      For more on creditor protections, read our guide on <a href="/blog/trump-account-debt-seizure">whether creditors can seize a Trump Account</a>.
+    </p>
+
+    <p>
+      Want to understand more about who manages the account and what they can do? Start with our guide on <a href="/blog/who-controls-trump-account">who controls a Trump Account before 18</a>.
+    </p>
+  </div>
+</BlogLayout>

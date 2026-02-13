@@ -1,0 +1,155 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('is-trump-account-automatic')!;
+const related = getRelatedArticles('is-trump-account-automatic');
+
+const faqs = [
+  {
+    question: 'Do I have to do anything to get a Trump Account for my child?',
+    answer: `Yes. You must opt in by filing ${limits.form} (Trump Account Election). It is not automatic. You can file it with your 2025 tax return, through the ${limits.portal} portal (launching mid-2026), or by mail.`,
+  },
+  {
+    question: 'What happens if I miss the April 15, 2026 deadline?',
+    answer: 'You can still elect a Trump Account for your child in future tax years, as long as the child is under 18 at the end of the election year. However, the $1,000 pilot deposit is only available for children born between 2025 and 2028, and delaying means less time for compound growth.',
+  },
+  {
+    question: 'Can my tax preparer file Form 4547 for me?',
+    answer: `Yes. Your tax preparer can include ${limits.form} when they file your 2025 tax return. Just let them know you want to elect a Trump Account for your eligible child.`,
+  },
+  {
+    question: 'Is there a fee to open a Trump Account?',
+    answer: 'There is no government fee to open a Trump Account. You simply file the election form. Investment expense ratios are capped at 0.1% by law.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Trump Accounts are <strong>not automatic</strong>. Parents must opt in.</li>
+        <li>You opt in by filing <strong>{limits.form}</strong> (Trump Account Election).</li>
+        <li>There are <strong>three ways to file</strong>: with your tax return, online at {limits.portal}, or by mail.</li>
+        <li>The first deadline is <strong>April 15, 2026</strong> (with your 2025 tax return).</li>
+        <li>If you do not file, your child <strong>will not receive</strong> the ${limits.pilotDeposit.toLocaleString()} pilot deposit or any account benefits.</li>
+      </ul>
+    </div>
+
+    <h2>No, Trump Accounts Are Not Automatic</h2>
+    <p>
+      One of the most common questions parents ask is whether every child automatically gets a Trump Account.
+      The answer is <strong>no</strong>. Unlike Social Security numbers, which are assigned at birth, Trump Accounts
+      require a parent or legal guardian to actively opt in.
+    </p>
+    <p>
+      The account is established under <strong>{limits.legalBasis}</strong>, created by the One Big Beautiful Bill Act.
+      The IRS published detailed guidance in <strong>{limits.irsNotice}</strong> on December 3, 2025. That guidance
+      makes clear: no election, no account.
+    </p>
+
+    <CalloutBox type="warning" title="Don't miss out">
+      If you do not file {limits.form}, your child will not receive the ${limits.pilotDeposit.toLocaleString()} federal
+      pilot deposit -- even if they are otherwise eligible. The government will not create the account for you.
+    </CalloutBox>
+
+    <h2>How to Opt In: Three Ways to File</h2>
+    <p>
+      The IRS gives you three methods to elect a Trump Account for your child. All three use <strong>{limits.form}</strong>.
+    </p>
+
+    <h3>1. File with Your 2025 Tax Return</h3>
+    <p>
+      The fastest option for most families. Include {limits.form} when you file your 2025 federal tax return.
+      The deadline is <strong>April 15, 2026</strong>. If you use a tax preparer or software like TurboTax or H&R Block,
+      they will likely add support for this form. Just make sure you ask about it.
+    </p>
+
+    <h3>2. Use the Online Portal</h3>
+    <p>
+      The IRS is launching an online portal at <strong>{limits.portal}</strong>, expected in mid-2026. This will let you
+      file your election online without waiting for tax season. This is a good option if you missed the tax-filing deadline
+      or if your child is born after you already filed.
+    </p>
+
+    <h3>3. File by Mail</h3>
+    <p>
+      You can also mail a completed {limits.form} directly to the IRS. This is the slowest method, but it works for
+      anyone who prefers paper filing. The IRS will process your election and establish the account.
+    </p>
+
+    <CalloutBox type="tip" title="Pro tip">
+      Filing with your tax return is the easiest path. If you are already filing for 2025 taxes, just add the form.
+      No extra trip, no extra steps.
+    </CalloutBox>
+
+    <h2>What You Need to File</h2>
+    <p>
+      To complete {limits.form}, you will need:
+    </p>
+    <ul>
+      <li>Your child's <strong>Social Security number</strong> (SSN)</li>
+      <li>Your child's <strong>date of birth</strong></li>
+      <li>Proof of <strong>U.S. citizenship</strong> for the child</li>
+      <li>Your own taxpayer identification (SSN or ITIN)</li>
+    </ul>
+    <p>
+      There are no income restrictions. It does not matter how much you earn. Every U.S. citizen child under 18
+      with a valid SSN is eligible.
+    </p>
+
+    <h2>Why Isn't It Automatic?</h2>
+    <p>
+      Congress designed Trump Accounts as an opt-in program. There are a few reasons for this:
+    </p>
+    <ul>
+      <li><strong>Parental choice.</strong> Not every family may want to participate. The opt-in model respects that decision.</li>
+      <li><strong>Investment requirement.</strong> Trump Account funds must go into S&P 500 or broad U.S. equity index funds. Since these carry market risk, a parent must consciously agree to that.</li>
+      <li><strong>Tax implications.</strong> The account has specific tax treatment (after-tax contributions, tax-deferred growth, ordinary income on withdrawals). Families should understand this before enrolling.</li>
+    </ul>
+
+    <h2>What Happens If You Don't File?</h2>
+    <p>
+      If you never file {limits.form}, your child simply does not get a Trump Account. There is no penalty for
+      not participating. But you miss out on:
+    </p>
+    <ul>
+      <li>The <strong>${limits.pilotDeposit.toLocaleString()} federal pilot deposit</strong> (for children born {limits.pilotDepositStartYear}--{limits.pilotDepositEndYear})</li>
+      <li>Up to <strong>${limits.annualContributionLimit.toLocaleString()}/year</strong> in tax-deferred growth</li>
+      <li>Potential employer contributions of up to <strong>${limits.employerContributionLimit.toLocaleString()}/year</strong></li>
+      <li>Up to <strong>18 years of compound growth</strong> in index funds</li>
+    </ul>
+
+    <CalloutBox type="info" title="You can still open one later">
+      Even if you miss the 2025 tax filing deadline, you can elect a Trump Account in a future tax year.
+      The child just needs to be under 18 at the end of that year. But every year of delay is a year of
+      lost compound growth.
+    </CalloutBox>
+
+    <h2>Next Steps</h2>
+    <p>
+      Ready to get started? Here is what to do:
+    </p>
+    <ol>
+      <li>Make sure your child has a <strong>Social Security number</strong>. If not, <a href="https://www.ssa.gov/ssnumber/" target="_blank" rel="noopener noreferrer">apply at SSA.gov</a>.</li>
+      <li>Download or request <strong>{limits.form}</strong> from the IRS.</li>
+      <li>File it with your <a href="/how-to-open-trump-account">2025 tax return</a> before April 15, 2026.</li>
+    </ol>
+    <p>
+      For a full step-by-step walkthrough, see our <a href="/how-to-open-trump-account">How to Open a Trump Account</a> guide.
+      For key dates and timeline details, visit <a href="/blog/when-do-trump-accounts-start">When Do Trump Accounts Start?</a>
+    </p>
+  </div>
+</BlogLayout>

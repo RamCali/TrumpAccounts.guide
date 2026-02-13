@@ -1,0 +1,231 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('dell-pledge-explained')!;
+const related = getRelatedArticles('dell-pledge-explained');
+
+const faqs = [
+  {
+    question: 'How much did Michael and Susan Dell pledge?',
+    answer: `$6.25 billion total. Each qualifying child receives $${limits.dellPledge.perChildAmount} deposited into their Trump Account.`,
+  },
+  {
+    question: 'Who qualifies for the Dell pledge?',
+    answer: `Children under age ${limits.dellPledge.eligibleAge} who live in ZIP codes where the median household income is below $${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}. This covers the vast majority of ZIP codes in America.`,
+  },
+  {
+    question: 'Is the Dell pledge taxpayer money?',
+    answer: 'No. This is entirely private money from Michael and Susan Dell, administered through the Dell Foundation. It does not come from the federal budget or tax revenue.',
+  },
+  {
+    question: 'How much will a qualifying child receive in total?',
+    answer: `A child born between ${limits.pilotDepositStartYear} and ${limits.pilotDepositEndYear} in a qualifying ZIP code could receive $${limits.pilotDeposit.toLocaleString()} (federal deposit) plus $${limits.dellPledge.perChildAmount} (Dell pledge) = $1,250 total before any family contributions.`,
+  },
+  {
+    question: 'How much can $1,250 grow to over 18 years?',
+    answer: 'At the S&P 500 historical average of about 10% per year, $1,250 grows to roughly $6,950 over 18 years without any additional contributions.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Michael and Susan Dell pledged <strong class="text-white">$6.25 billion total</strong> — the largest private pledge tied to Trump Accounts.</li>
+        <li>Each qualifying child receives <strong class="text-white">${limits.dellPledge.perChildAmount}</strong> in their Trump Account.</li>
+        <li>Eligibility: children <strong class="text-white">under age {limits.dellPledge.eligibleAge}</strong> in ZIP codes with median income <strong class="text-white">below $${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}</strong>.</li>
+        <li>This is <strong class="text-white">private money</strong>, not government funds.</li>
+        <li>Combined with the federal deposit: qualifying children start with <strong class="text-white">$1,250</strong>, which could grow to roughly <strong class="text-white">$6,950</strong> by age 18.</li>
+      </ul>
+    </div>
+
+    <p>
+      When Trump Accounts were signed into law, one of the biggest headlines was not about the government program itself. It was about a private pledge: <strong>Michael and Susan Dell committed $6.25 billion</strong> to help fund accounts for children in lower-income communities. Here is exactly how it works.
+    </p>
+
+    <h2>The Pledge: $6.25 Billion</h2>
+    <p>
+      Michael Dell, founder of Dell Technologies, and his wife Susan announced a pledge of <strong>$6.25 billion</strong> through the Dell Foundation. The money goes directly into Trump Accounts for qualifying children. It is the <strong>largest known private commitment</strong> tied to the program.
+    </p>
+    <p>
+      Key details:
+    </p>
+    <ul>
+      <li><strong>Amount per child</strong>: ${limits.dellPledge.perChildAmount}</li>
+      <li><strong>Eligible age</strong>: Children under age {limits.dellPledge.eligibleAge}</li>
+      <li><strong>Income threshold</strong>: Child must live in a ZIP code where median household income is below $${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}</li>
+      <li><strong>Source</strong>: Entirely private — Dell Foundation funds, not taxpayer money</li>
+    </ul>
+
+    <CalloutBox type="info" title="Private money, not public">
+      <p>
+        The Dell pledge is funded entirely by the Dell Foundation. It is not part of the federal budget and does not add to the national debt. When calculating the <a href="/blog/cost-to-taxpayers">cost to taxpayers</a>, the Dell pledge should not be included.
+      </p>
+    </CalloutBox>
+
+    <h2>Who Qualifies?</h2>
+    <p>
+      The Dell pledge targets children in <strong>lower-income communities</strong> using ZIP code-level income data. To qualify, a child must:
+    </p>
+    <ul>
+      <li>Be <strong>under age {limits.dellPledge.eligibleAge}</strong></li>
+      <li>Live in a ZIP code where the <strong>median household income is below $${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}</strong></li>
+    </ul>
+    <p>
+      The $${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()} threshold is important. The median household income in the United States is roughly $75,000. A $${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()} ZIP code threshold covers the <strong>vast majority of American ZIP codes</strong>. Only the wealthiest neighborhoods are excluded.
+    </p>
+    <p>
+      This means most American children — not just those in poverty — qualify for the Dell contribution.
+    </p>
+
+    <h2>How the Money Works</h2>
+    <p>
+      The $${limits.dellPledge.perChildAmount} Dell pledge is deposited directly into the child's Trump Account, alongside the <strong>$${limits.pilotDeposit.toLocaleString()} federal deposit</strong> (for children born {limits.pilotDepositStartYear}-{limits.pilotDepositEndYear}). For a qualifying newborn:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Source</th>
+            <th class="py-3 text-gray-400 font-medium">Amount</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Federal pilot deposit</td>
+            <td class="py-3 font-medium text-white">$1,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Dell Foundation pledge</td>
+            <td class="py-3 font-medium text-white">$250</td>
+          </tr>
+          <tr class="border-t border-surface-500">
+            <td class="py-3 pr-4 font-bold text-white">Total starting balance</td>
+            <td class="py-3 font-bold text-gold-400">$1,250</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      That $1,250 starting balance is <strong>25% more</strong> than the federal deposit alone. Over 18 years of compound growth, the difference adds up.
+    </p>
+
+    <h2>Growth Projections: $1,250 Over 18 Years</h2>
+    <p>
+      How much can $1,250 grow to over 18 years with no additional contributions? Here are projections at different return rates:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Annual Return</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">$1,000 Only</th>
+            <th class="py-3 text-gray-400 font-medium">$1,250 (With Dell)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">6%</td>
+            <td class="py-3 pr-4">$2,854</td>
+            <td class="py-3 font-medium text-gold-400">$3,568</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">8%</td>
+            <td class="py-3 pr-4">$3,996</td>
+            <td class="py-3 font-medium text-gold-400">$4,995</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">10%</td>
+            <td class="py-3 pr-4">$5,560</td>
+            <td class="py-3 font-medium text-gold-400">$6,950</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      At the S&P 500's historical average of about <strong>10% per year</strong>, the Dell pledge turns $1,000 into $1,250 — and $5,560 into <strong>$6,950</strong> by age 18. That is an extra <strong>$1,390</strong> from a single $250 contribution. The power of compounding makes even small additions meaningful over time.
+    </p>
+
+    <CalloutBox type="tip" title="Add family contributions for bigger growth">
+      <p>
+        The Dell pledge is on top of whatever families contribute. A qualifying child who also receives $100/month in family contributions could have over <strong>$57,000</strong> by age 18 (at 10% returns). Use the <a href="/calculators/growth-calculator">Growth Calculator</a> to see projections for your situation.
+      </p>
+    </CalloutBox>
+
+    <h2>Why the Dell Pledge Matters for Equity</h2>
+    <p>
+      One of the <a href="/blog/inequality-reduction">concerns about Trump Accounts</a> is that wealthier families benefit more because they can contribute the full <strong>${limits.annualContributionLimit.toLocaleString()}/year</strong>. Low-income families may not be able to contribute anything beyond the government deposit.
+    </p>
+    <p>
+      The Dell pledge partially addresses this by <strong>targeting lower-income ZIP codes</strong>. Families who cannot afford extra contributions still get a $250 boost. It does not fully close the gap between a $5,560 deposit-only account and a $175,000 maxed-out account, but it moves in the right direction.
+    </p>
+
+    <h2>Scale of the Pledge</h2>
+    <p>
+      At <strong>$6.25 billion total</strong>, the Dell pledge could reach roughly <strong>25 million children</strong> ($6.25B / $250 per child). That is a significant share of America's child population (there are about 73 million children under 18 in the U.S.).
+    </p>
+    <p>
+      The pledge is expected to be distributed alongside the government's pilot deposits. For newborns in qualifying ZIP codes, the Dell contribution and the federal deposit arrive together — giving the account a <strong>$1,250 starting balance</strong> from day one.
+    </p>
+
+    <h2>Key Facts at a Glance</h2>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-gray-400 font-medium">Total pledge</td>
+            <td class="py-3 text-white font-medium">$6.25 billion</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-gray-400 font-medium">Per child amount</td>
+            <td class="py-3 text-white font-medium">$250</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-gray-400 font-medium">Child age requirement</td>
+            <td class="py-3 text-white font-medium">Under 10</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-gray-400 font-medium">ZIP code threshold</td>
+            <td class="py-3 text-white font-medium">Median income below $150,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-gray-400 font-medium">Source of funds</td>
+            <td class="py-3 text-white font-medium">Dell Foundation (private)</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 text-gray-400 font-medium">Est. children reached</td>
+            <td class="py-3 text-white font-medium">~25 million</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      For more on how this fits into the overall program costs, see <a href="/blog/how-much-money-trump-account">how much money is in a Trump Account</a>. For the equity implications, read our <a href="/blog/inequality-reduction">analysis of Trump Accounts and inequality</a>.
+    </p>
+
+    <CalloutBox type="warning" title="Educational content only">
+      <p>
+        This article is based on publicly announced details of the Dell Foundation's pledge. Distribution timelines and exact mechanics may evolve. Check official sources for the latest information.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

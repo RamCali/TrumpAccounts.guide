@@ -1,0 +1,225 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('employer-match-trump-account')!;
+const related = getRelatedArticles('employer-match-trump-account');
+
+const faqs = [
+  {
+    question: 'How much can an employer contribute to a Trump Account?',
+    answer: `Employers can contribute up to $${limits.employerContributionLimit.toLocaleString()} per year per employee under IRC Section 128. This contribution is tax-free to the employee and counts toward the $${limits.annualContributionLimit.toLocaleString()} annual cap on the child's account.`,
+  },
+  {
+    question: 'Is the employer contribution limit per child or per employee?',
+    answer: `The $${limits.employerContributionLimit.toLocaleString()} limit is per employee, NOT per dependent child. If an employee has three children with Trump Accounts, the employer's total contribution is still capped at $${limits.employerContributionLimit.toLocaleString()} for that employee across all their children's accounts.`,
+  },
+  {
+    question: 'Are employer contributions mandatory?',
+    answer: 'No. Employer contributions to Trump Accounts are completely voluntary. There is no federal requirement for employers to participate. Companies choose whether to offer this benefit.',
+  },
+  {
+    question: 'Does the employer contribution show up on my W-2?',
+    answer: `No. Employer contributions under IRC Section 128 are excluded from the employee's gross income. The contribution does not appear as taxable wages on your W-2, similar to how employer 401(k) contributions are handled.`,
+  },
+  {
+    question: 'Can both parents\' employers contribute?',
+    answer: `Yes, but the combined total from both employers plus all family contributions cannot exceed $${limits.annualContributionLimit.toLocaleString()} per child per year. If each employer contributes $${limits.employerContributionLimit.toLocaleString()}, that alone reaches the cap with no room for family contributions.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Employers can contribute up to <strong class="text-white">${limits.employerContributionLimit.toLocaleString()}/year per employee</strong> — tax-free under IRC Section 128.</li>
+        <li>The limit is <strong class="text-white">per employee</strong>, not per dependent child.</li>
+        <li>Employer contributions <strong class="text-white">count toward the ${limits.annualContributionLimit.toLocaleString()} annual cap</strong> on the child's account.</li>
+        <li>Employer participation is <strong class="text-white">voluntary</strong> — not mandatory.</li>
+        <li>This is essentially <strong class="text-white">tax-free money</strong> that goes directly to your child's future.</li>
+      </ul>
+    </div>
+
+    <p>
+      If your employer offers Trump Account contributions, it is one of the best financial benefits you can receive as a parent. The money is <strong>tax-free to you</strong>, goes directly into your child's account, and compounds for up to 18 years.
+    </p>
+    <p>
+      Here is everything you need to know about how employer contributions work.
+    </p>
+
+    <h2>The Basics: $2,500/Year Per Employee</h2>
+    <p>
+      Under <strong>IRC Section 128</strong>, employers can contribute up to <strong>${limits.employerContributionLimit.toLocaleString()} per year per employee</strong> toward the employee's child's Trump Account. This contribution is:
+    </p>
+    <ul>
+      <li><strong>Tax-free to the employee</strong> — not reported as taxable income on your W-2</li>
+      <li><strong>Tax-deductible for the employer</strong> — treated as a business expense</li>
+      <li><strong>Subject to the ${limits.annualContributionLimit.toLocaleString()} total cap</strong> — it counts toward the child's annual contribution limit</li>
+    </ul>
+
+    <CalloutBox type="tip" title="Think of it like a 401(k) match for your kid">
+      <p>
+        Employer Trump Account contributions work similarly to a 401(k) employer match. The employer puts money in, it does not count as your taxable income, and it grows tax-deferred. The main difference is that the money goes to your child's account instead of your retirement account.
+      </p>
+    </CalloutBox>
+
+    <h2>Per Employee, Not Per Child</h2>
+    <p>
+      This is a critical detail that many parents miss. The <strong>${limits.employerContributionLimit.toLocaleString()} limit is per employee</strong>, not per dependent child.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Scenario</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Children</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Employer Max</th>
+            <th class="py-3 text-gray-400 font-medium">Per Child</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Employee A</td>
+            <td class="py-3 pr-4">1 child</td>
+            <td class="py-3 pr-4">$2,500</td>
+            <td class="py-3">$2,500</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Employee B</td>
+            <td class="py-3 pr-4">2 children</td>
+            <td class="py-3 pr-4">$2,500</td>
+            <td class="py-3">$1,250 each</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">Employee C</td>
+            <td class="py-3 pr-4">4 children</td>
+            <td class="py-3 pr-4">$2,500</td>
+            <td class="py-3">$625 each</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      If you have multiple children, the employer's $2,500 is split among them — it does not multiply. The employer decides how to allocate it, typically based on the employee's direction.
+    </p>
+
+    <CalloutBox type="warning" title="Two working parents?">
+      <p>
+        If both parents work for employers that offer Trump Account contributions, each parent can receive up to $2,500 from their respective employer. But remember: the <strong>total annual cap per child is still ${limits.annualContributionLimit.toLocaleString()}</strong>. Two employer contributions of $2,500 each would hit the cap with no room for family contributions.
+      </p>
+    </CalloutBox>
+
+    <h2>How Employer Contributions Work in Practice</h2>
+    <p>
+      Here is the typical process for employer Trump Account contributions:
+    </p>
+    <ol>
+      <li><strong>Employer sets up a program.</strong> The company works with a Trump Account custodian to establish contribution capabilities.</li>
+      <li><strong>Employee enrolls.</strong> You provide your child's Trump Account details to your employer's HR or benefits department.</li>
+      <li><strong>Employer contributes directly.</strong> The employer sends the contribution directly to the child's Trump Account — it never passes through your paycheck.</li>
+      <li><strong>No tax impact to you.</strong> The contribution does not appear as taxable income on your W-2.</li>
+    </ol>
+
+    <h2>The Tax Benefit for Employees</h2>
+    <p>
+      The employer contribution is <strong>excluded from your gross income</strong> under IRC Section 128. This is a real tax savings.
+    </p>
+    <p>
+      Here is what that means in dollar terms:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Your Tax Bracket</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Employer Contribution</th>
+            <th class="py-3 text-gray-400 font-medium">Tax You Save</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">12%</td>
+            <td class="py-3 pr-4">$2,500</td>
+            <td class="py-3">$300</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">22%</td>
+            <td class="py-3 pr-4">$2,500</td>
+            <td class="py-3">$550</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">24%</td>
+            <td class="py-3 pr-4">$2,500</td>
+            <td class="py-3">$600</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">32%</td>
+            <td class="py-3 pr-4">$2,500</td>
+            <td class="py-3">$800</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      These savings are on top of the $2,500 contribution itself. You get $2,500 into your child's account <strong>and</strong> save hundreds in taxes you would have owed if that amount were paid as regular wages.
+    </p>
+
+    <h2>Why Employers Offer This Benefit</h2>
+    <p>
+      Employer Trump Account contributions are <strong>not mandatory</strong>. Companies choose to offer them for several reasons:
+    </p>
+    <ul>
+      <li><strong>Recruiting advantage.</strong> Parents actively seek employers that support their children's financial futures.</li>
+      <li><strong>Retention tool.</strong> Employees are less likely to leave a company that invests in their children.</li>
+      <li><strong>Tax deduction.</strong> The employer can deduct contributions as a business expense.</li>
+      <li><strong>Relatively low cost.</strong> At $2,500 per employee, this benefit is affordable compared to other benefits like health insurance.</li>
+      <li><strong>Positive public perception.</strong> Companies that support family financial wellness attract positive attention.</li>
+    </ul>
+
+    <CalloutBox type="info" title="For employers">
+      <p>
+        If you are an employer considering this program, visit our <a href="/for-employers">employer guide</a> for setup details, tax implications, and best practices. You can also use our <a href="/calculators/employer-match">employer contribution calculator</a> to model the costs for your organization.
+      </p>
+    </CalloutBox>
+
+    <h2>Coordinating With Family Contributions</h2>
+    <p>
+      Since employer contributions count toward the <strong><a href="/blog/contribution-limits-explained">${limits.annualContributionLimit.toLocaleString()} annual cap</a></strong>, you need to coordinate with family members who also contribute.
+    </p>
+    <p>
+      If your employer contributes the full $2,500, you and your family can add up to <strong>$2,500 more</strong> from all other sources combined. If both parents' employers contribute $2,500 each to the same child's account, the cap is reached and no additional family contributions are allowed for that year.
+    </p>
+    <p>
+      For tips on managing contributions from multiple sources, see our guide: <a href="/blog/can-parents-grandparents-contribute"><strong>Can Parents and Grandparents Contribute?</strong></a>
+    </p>
+
+    <h2>What to Ask Your Employer</h2>
+    <p>
+      If your employer has not announced a Trump Account contribution program, consider asking HR these questions:
+    </p>
+    <ul>
+      <li>Is the company considering offering Trump Account contributions as a benefit?</li>
+      <li>If not, would they be open to evaluating it? (Point them to our <a href="/for-employers">employer guide</a>.)</li>
+      <li>If yes, when will enrollment begin, and how much will the company contribute?</li>
+    </ul>
+    <p>
+      To see how employer contributions affect your child's account growth, try the <a href="/calculators/growth-calculator"><strong>Growth Calculator</strong></a>.
+    </p>
+  </div>
+</BlogLayout>

@@ -1,0 +1,227 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('how-to-open-step-by-step')!;
+const related = getRelatedArticles('how-to-open-step-by-step');
+
+const faqs = [
+  {
+    question: 'Can I open a Trump Account without an SSN for my child?',
+    answer: 'No. Your child must have a valid Social Security Number (SSN) to open a Trump Account. If your baby was born recently, you can apply for an SSN at the hospital or your local Social Security office.',
+  },
+  {
+    question: 'What if I miss the April 15, 2026 tax filing deadline?',
+    answer: 'You can still file Form 4547 with an extension or through the trumpaccounts.gov portal when it launches in mid-2026. You can also mail the form directly to the IRS.',
+  },
+  {
+    question: 'Can I open a Trump Account for more than one child?',
+    answer: 'Yes. File a separate Form 4547 for each eligible child. Each child gets their own account with their own contribution limit.',
+  },
+  {
+    question: 'Do I need a brokerage account to open a Trump Account?',
+    answer: 'The Trump Account is opened through the IRS via Form 4547. The IRS designates approved custodians to hold the funds. You choose your index fund, but the account structure is managed through the federal program.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Your child needs a <strong class="text-white">valid SSN</strong> before you can open a Trump Account.</li>
+        <li>File <strong class="text-white">{limits.form}</strong> with your 2025 tax return (due April 15, 2026), through <strong class="text-white">{limits.portal}</strong>, or by mail.</li>
+        <li>Children born between 2025 and {limits.pilotDepositEndYear} receive a <strong class="text-white">${limits.pilotDeposit.toLocaleString()} federal deposit</strong>.</li>
+        <li>You can contribute up to <strong class="text-white">${limits.annualContributionLimit.toLocaleString()}/year</strong> into S&P 500 or broad U.S. equity index funds.</li>
+        <li>The whole process takes about 30 minutes if you have your documents ready.</li>
+      </ul>
+    </div>
+
+    <p>
+      Opening a Trump Account is one of the best financial moves you can make for your child. But it is <strong>not automatic</strong>. You have to opt in. This guide walks you through every step so you can get it done quickly and correctly.
+    </p>
+
+    <h2>Step 1: Get Your Child's Social Security Number</h2>
+
+    <p>
+      Your child must be a <strong>U.S. citizen with a valid SSN</strong> to qualify. There are no income restrictions. If your child is under 18 at the end of the election year, they are eligible.
+    </p>
+
+    <p>
+      <strong>If your baby was just born:</strong> You can apply for an SSN at the hospital when you fill out the birth certificate paperwork. Most hospitals offer this. The card arrives by mail in 2 to 4 weeks.
+    </p>
+
+    <p>
+      <strong>If your child does not have an SSN yet:</strong> Visit your local Social Security Administration office with the child's birth certificate, proof of citizenship, and your ID. You can find your nearest office at <a href="https://www.ssa.gov/locator/">ssa.gov/locator</a>.
+    </p>
+
+    <CalloutBox type="tip" title="Pro tip">
+      Apply for the SSN as early as possible. You cannot file {limits.form} without it, and delays could mean missing out on months of compounding growth.
+    </CalloutBox>
+
+    <h2>Step 2: Download IRS Form 4547</h2>
+
+    <p>
+      <strong>{limits.form}</strong> is the official "Trump Account Election(s)" form. Download it from <a href="https://www.irs.gov">IRS.gov</a> or the <a href="https://trumpaccounts.gov">{limits.portal}</a> website.
+    </p>
+
+    <p>
+      The form is straightforward. It is similar in complexity to claiming a tax credit. You will need:
+    </p>
+
+    <ul>
+      <li>Your child's full legal name and SSN</li>
+      <li>Your name and taxpayer identification number (SSN or ITIN)</li>
+      <li>Custodian designation (the parent or legal guardian who will manage the account)</li>
+      <li>Your chosen eligible index fund</li>
+    </ul>
+
+    <h2>Step 3: Fill Out the Form</h2>
+
+    <p>
+      The form has a few sections. Here is what each one asks for:
+    </p>
+
+    <p>
+      <strong>Child information:</strong> Name, SSN, and date of birth. The child must be under 18 at the end of the election year.
+    </p>
+
+    <p>
+      <strong>Parent/guardian information:</strong> Your name, SSN or ITIN, and address. This is the person making the election.
+    </p>
+
+    <p>
+      <strong>Custodian designation:</strong> The authorized individual who will manage investments and contributions until the child turns 18. This is usually a parent or legal guardian.
+    </p>
+
+    <p>
+      <strong>Investment election:</strong> Choose from eligible mutual funds or ETFs that track the S&P 500 or a broad U.S. equity index. Popular options include VOO (0.03% expense ratio), IVV (0.03%), SPY (0.09%), and SPLG (0.02%).
+    </p>
+
+    <CalloutBox type="tip" title="Pro tip">
+      Double-check every SSN digit. A typo can delay processing by weeks. If you are filing for multiple children, use a separate Form 4547 for each one.
+    </CalloutBox>
+
+    <h2>Step 4: File Your Form</h2>
+
+    <p>
+      You have <strong>three ways</strong> to submit {limits.form}:
+    </p>
+
+    <p>
+      <strong>Option A: With your 2025 tax return.</strong> Attach Form 4547 when you file your 2025 taxes. The deadline is <strong>April 15, 2026</strong>. This is the simplest option if you are already filing taxes. Works with both paper and electronic filing.
+    </p>
+
+    <p>
+      <strong>Option B: Through {limits.portal}.</strong> The online portal is expected to launch in <strong>mid-2026</strong>. This will let you file the election directly without waiting for tax season. Good if you want to file outside of tax season.
+    </p>
+
+    <p>
+      <strong>Option C: By mail.</strong> Print and mail {limits.form} to the IRS address listed on the form. This works year-round but is the slowest option.
+    </p>
+
+    <CalloutBox type="info" title="Don't wait for the portal">
+      Filing with your 2025 tax return is the fastest way to activate the account. If your child was born in 2025-{limits.pilotDepositEndYear}, the <strong>${limits.pilotDeposit.toLocaleString()} federal deposit</strong> starts growing sooner when you file sooner. See our guide on <a href="/blog/should-i-wait-or-invest-now" class="text-gold-400 hover:text-gold-300">whether to wait or invest now</a>.
+    </CalloutBox>
+
+    <h2>Step 5: Choose an Eligible Index Fund</h2>
+
+    <p>
+      Trump Accounts require investments in <strong>mutual funds or ETFs that track the S&P 500 or a broad U.S. equity index</strong>. You cannot pick individual stocks, bonds, or crypto.
+    </p>
+
+    <p>
+      Here are some of the most popular eligible options:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Fund</th>
+            <th class="pb-2 pr-4">Ticker</th>
+            <th class="pb-2 pr-4">Expense Ratio</th>
+            <th class="pb-2">Index</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">Vanguard S&P 500 ETF</td>
+            <td class="py-2 pr-4 font-mono text-gold-400">VOO</td>
+            <td class="py-2 pr-4">0.03%</td>
+            <td class="py-2">S&P 500</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">iShares Core S&P 500 ETF</td>
+            <td class="py-2 pr-4 font-mono text-gold-400">IVV</td>
+            <td class="py-2 pr-4">0.03%</td>
+            <td class="py-2">S&P 500</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">SPDR Portfolio S&P 500 ETF</td>
+            <td class="py-2 pr-4 font-mono text-gold-400">SPLG</td>
+            <td class="py-2 pr-4">0.02%</td>
+            <td class="py-2">S&P 500</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4">SPDR S&P 500 ETF Trust</td>
+            <td class="py-2 pr-4 font-mono text-gold-400">SPY</td>
+            <td class="py-2 pr-4">0.09%</td>
+            <td class="py-2">S&P 500</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Lower expense ratios mean more of your money stays invested. Over 18 years, even a small difference in fees adds up. SPLG and VOO are the cheapest options.
+    </p>
+
+    <h2>Step 6: Set Up Contributions</h2>
+
+    <p>
+      After the account is open, you can contribute up to <strong>${limits.annualContributionLimit.toLocaleString()} per year</strong>. This is after-tax money. Contributions are not tax-deductible.
+    </p>
+
+    <p>
+      Anyone can contribute: parents, grandparents, aunts, uncles, friends. The total from all sources cannot exceed the ${limits.annualContributionLimit.toLocaleString()} annual cap.
+    </p>
+
+    <p>
+      If your employer offers it, they can contribute up to <strong>${limits.employerContributionLimit.toLocaleString()}/year</strong> tax-free under IRC Section 128. This counts toward the ${limits.annualContributionLimit.toLocaleString()} cap.
+    </p>
+
+    <CalloutBox type="tip" title="Pro tip">
+      Set up automatic monthly contributions. Contributing about $417/month maxes out the ${limits.annualContributionLimit.toLocaleString()} annual limit. Even $100 or $200/month makes a big difference over 18 years thanks to compounding.
+    </CalloutBox>
+
+    <h2>What Happens Next?</h2>
+
+    <p>
+      Once your Form 4547 is processed, the account is active. If your child was born between {limits.pilotDepositStartYear} and {limits.pilotDepositEndYear}, the <strong>${limits.pilotDeposit.toLocaleString()} federal deposit</strong> is added. Your contributions go into the index fund you chose. The money grows tax-deferred until your child turns 18.
+    </p>
+
+    <p>
+      At age {limits.growthPhaseEndAge}, the Trump Account <strong>automatically converts to a traditional IRA</strong>. Your child then has full control and can use the money for anything: college, a first home, starting a business, or long-term retirement savings.
+    </p>
+
+    <p>
+      The hardest part is getting started. Once the account is open, compounding does the heavy lifting. See our <a href="/calculators/growth-calculator">growth calculator</a> to project how much your child could have at 18.
+    </p>
+
+    <p>
+      Ready to learn more? Check out our guides on <a href="/how-to-open-trump-account">how to open a Trump Account</a> and <a href="/blog/when-do-trump-accounts-start">key dates and deadlines</a>.
+    </p>
+  </div>
+</BlogLayout>

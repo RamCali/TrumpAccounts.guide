@@ -114,6 +114,8 @@ export function articleSchema(params: {
   datePublished: string;
   dateModified: string;
   author: string;
+  articleSection?: string;
+  wordCount?: number;
 }) {
   return {
     '@context': 'https://schema.org',
@@ -123,6 +125,8 @@ export function articleSchema(params: {
     url: params.url,
     datePublished: params.datePublished,
     dateModified: params.dateModified,
+    ...(params.articleSection && { articleSection: params.articleSection }),
+    ...(params.wordCount && { wordCount: params.wordCount }),
     author: {
       '@type': 'Person',
       name: params.author,

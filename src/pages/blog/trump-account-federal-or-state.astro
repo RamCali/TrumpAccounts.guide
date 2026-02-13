@@ -1,0 +1,172 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-federal-or-state')!;
+const related = getRelatedArticles('trump-account-federal-or-state');
+
+const faqs = [
+  {
+    question: 'Are Trump Accounts run by my state?',
+    answer: `No. Trump Accounts are a federal program created by ${limits.legalBasis} and administered by the IRS. Unlike 529 plans, your state government has no role in running them.`,
+  },
+  {
+    question: 'Do state taxes apply to Trump Account withdrawals?',
+    answer: 'It depends on your state. Since Trump Account withdrawals are taxed as ordinary income at the federal level (traditional IRA rules after age 18), most states that have an income tax will also tax those withdrawals. Check your state tax code or ask a tax professional.',
+  },
+  {
+    question: 'Can I have both a Trump Account and a 529 plan?',
+    answer: 'Yes. They are completely separate programs. A Trump Account is federal and invests in index funds. A 529 is state-administered and designed for education expenses. Many families will benefit from having both.',
+  },
+  {
+    question: 'Do the rules change depending on what state I live in?',
+    answer: 'No. The federal rules are the same in all 50 states, Washington D.C., and U.S. territories. The $5,000 annual limit, the $1,000 pilot deposit, the investment requirements, and the age-18 conversion are identical everywhere.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Trump Accounts are a <strong>federal program</strong>, not a state program.</li>
+        <li>They are created by <strong>{limits.legalBasis}</strong> and administered by the <strong>IRS</strong>.</li>
+        <li>The rules are <strong>the same in all 50 states</strong>.</li>
+        <li>This is different from 529 plans, which are <strong>state-administered</strong>.</li>
+        <li>You do not need to shop around for a state plan. There is <strong>one program for everyone</strong>.</li>
+      </ul>
+    </div>
+
+    <h2>Trump Accounts Are Federal</h2>
+    <p>
+      Trump Accounts are a <strong>federal program</strong>. They were created by the One Big Beautiful Bill Act
+      (OBBBA), signed into law on July 4, 2025. The legal basis is <strong>{limits.legalBasis}</strong> of the
+      Internal Revenue Code. The program is administered by the <strong>IRS</strong>, not by any state agency.
+    </p>
+    <p>
+      That means the rules are identical whether you live in Texas, California, New York, or any other state.
+      There is one set of contribution limits, one set of investment rules, and one set of tax rules for the
+      entire country.
+    </p>
+
+    <CalloutBox type="info" title="One program, every state">
+      Unlike 529 plans, you do not need to compare state options. There is one federal Trump Account program.
+      Your state of residence does not change the rules.
+    </CalloutBox>
+
+    <h2>How This Differs from 529 Plans</h2>
+    <p>
+      If you are familiar with 529 college savings plans, you might expect Trump Accounts to work the same way.
+      They do not. Here is how they compare:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm text-left">
+        <thead>
+          <tr class="border-b border-surface-600">
+            <th class="py-3 pr-4 text-gold-400 font-semibold">Feature</th>
+            <th class="py-3 pr-4 text-gold-400 font-semibold">Trump Account</th>
+            <th class="py-3 text-gold-400 font-semibold">529 Plan</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Level</td>
+            <td class="py-3 pr-4">Federal</td>
+            <td class="py-3">State</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Administered by</td>
+            <td class="py-3 pr-4">IRS</td>
+            <td class="py-3">State agencies</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Rules vary by state?</td>
+            <td class="py-3 pr-4">No</td>
+            <td class="py-3">Yes</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Investment options</td>
+            <td class="py-3 pr-4">S&P 500 / broad U.S. index only</td>
+            <td class="py-3">Varies by state plan</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Use restrictions</td>
+            <td class="py-3 pr-4">None after age 18 (becomes IRA)</td>
+            <td class="py-3">Education expenses</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">State tax deduction</td>
+            <td class="py-3 pr-4">No</td>
+            <td class="py-3">Many states offer one</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">Annual limit</td>
+            <td class="py-3 pr-4">${limits.annualContributionLimit.toLocaleString()}</td>
+            <td class="py-3">Varies ($300K+ lifetime in some states)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      For a deeper side-by-side breakdown, see our full
+      <a href="/compare/trump-account-vs-529">Trump Account vs. 529 Plan comparison</a>.
+    </p>
+
+    <h2>What the IRS Controls</h2>
+    <p>
+      Because Trump Accounts are federal, the IRS sets and enforces every rule. Here is what that covers:
+    </p>
+    <ul>
+      <li><strong>Eligibility:</strong> U.S. citizen, valid SSN, under 18 at end of election year. No income limits.</li>
+      <li><strong>Contribution limits:</strong> ${limits.annualContributionLimit.toLocaleString()}/year total, with up to ${limits.employerContributionLimit.toLocaleString()} from employers.</li>
+      <li><strong>Investment rules:</strong> {limits.investmentRequirement}.</li>
+      <li><strong>Tax treatment:</strong> After-tax contributions, tax-deferred growth, ordinary income on withdrawals after age 18.</li>
+      <li><strong>Pilot deposit:</strong> ${limits.pilotDeposit.toLocaleString()} for children born {limits.pilotDepositStartYear}--{limits.pilotDepositEndYear}.</li>
+      <li><strong>Conversion:</strong> Automatic conversion to a traditional IRA at age {limits.growthPhaseEndAge}.</li>
+    </ul>
+
+    <CalloutBox type="tip" title="Simplicity is a feature">
+      One of the advantages of a federal program is simplicity. You do not need to research which state has
+      the best plan, compare fee structures across states, or worry about transferring if you move. The rules
+      follow your child, not your zip code.
+    </CalloutBox>
+
+    <h2>What About State Taxes?</h2>
+    <p>
+      While the Trump Account itself is a federal program, <strong>state income taxes may still apply</strong>
+      when your child withdraws money after age 18. At that point the account is a traditional IRA, and most
+      states that have an income tax will tax IRA withdrawals as ordinary income.
+    </p>
+    <p>
+      States without an income tax (like Texas, Florida, and Nevada) will not tax withdrawals at all. States with
+      an income tax will generally follow their normal IRA taxation rules. This is no different from how any
+      traditional IRA is treated at the state level.
+    </p>
+
+    <h2>Bottom Line</h2>
+    <p>
+      Trump Accounts are a single, national program. The IRS runs it. The rules are the same everywhere. You do not
+      need to pick a state plan or worry about moving across state lines. Just file
+      <strong>{limits.form}</strong> and you are in.
+    </p>
+    <p>
+      For more on what Trump Accounts are and how they work, read our
+      <a href="/what-are-trump-accounts">complete guide</a>. To see how they stack up against state-level 529 plans,
+      visit our <a href="/compare/trump-account-vs-529">comparison page</a>. And for a full list of key terms,
+      check our <a href="/glossary">glossary</a>.
+    </p>
+  </div>
+</BlogLayout>

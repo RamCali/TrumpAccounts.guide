@@ -1,0 +1,310 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('build-50k-by-18')!;
+const related = getRelatedArticles('build-50k-by-18');
+
+const faqs = [
+  {
+    question: 'Is 8% a realistic average return?',
+    answer: 'The S&P 500 has averaged about 10% nominal returns over the past 100 years. Using 8% is a conservative estimate that accounts for periods of lower-than-average performance. Actual results will vary year to year.',
+  },
+  {
+    question: 'What if the market underperforms for the next 18 years?',
+    answer: 'Even in the worst 18-year periods in S&P 500 history, the market still produced positive returns. At a lower rate like 6%, you would need to contribute more per month to reach $50,000. The table in this article shows projections at different rates.',
+  },
+  {
+    question: 'Can I contribute more than $5,000 per year?',
+    answer: 'No. The annual contribution limit is $5,000 from all sources combined. This includes family contributions and employer contributions. The limit is indexed for inflation starting after 2027.',
+  },
+  {
+    question: 'Does the $1,000 federal deposit count toward the $5,000 limit?',
+    answer: 'No. The $1,000 pilot deposit from the government is separate from the $5,000 annual contribution limit. You can still contribute the full $5,000 in the year you receive the deposit.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><strong class="text-white">$200/month</strong> plus the $1,000 deposit at 8% returns reaches roughly <strong class="text-white">$50,000 by age 18</strong>.</li>
+        <li>Total contributions: about $44,200. Investment growth adds the rest.</li>
+        <li>At <strong class="text-white">$100/month</strong> you reach ~$27,000. At <strong class="text-white">$416/month (max)</strong> you reach ~$100,000.</li>
+        <li>Starting early is the most important factor. The first dollars contribute the most growth.</li>
+        <li>You do not need to max out to build meaningful wealth for your child.</li>
+      </ul>
+    </div>
+
+    <p>
+      $50,000 by age 18. It sounds like a lot. But with a Trump Account, the math is surprisingly straightforward. You do not need a huge income. You do not need to max out contributions. You just need to <strong>start early and stay consistent</strong>.
+    </p>
+
+    <p>
+      Let's break down the exact numbers.
+    </p>
+
+    <h2>The Formula</h2>
+
+    <p>
+      A Trump Account has three sources of growth:
+    </p>
+
+    <ol>
+      <li><strong>The ${limits.pilotDeposit.toLocaleString()} federal deposit</strong> (for children born {limits.pilotDepositStartYear}-{limits.pilotDepositEndYear})</li>
+      <li><strong>Your monthly contributions</strong> (up to ${limits.annualContributionLimit.toLocaleString()}/year total)</li>
+      <li><strong>Compound investment returns</strong> from S&P 500 index funds</li>
+    </ol>
+
+    <p>
+      We will use <strong>8% average annual returns</strong> as our baseline. This is conservative. The S&P 500 has historically averaged about 10% nominal returns. But using 8% gives us a realistic, slightly cautious projection.
+    </p>
+
+    <h2>The $50K Path: $200/Month</h2>
+
+    <p>
+      Here is the scenario that reaches roughly $50,000 by age 18:
+    </p>
+
+    <ul>
+      <li><strong>Starting balance:</strong> $1,000 (federal deposit)</li>
+      <li><strong>Monthly contribution:</strong> $200</li>
+      <li><strong>Average annual return:</strong> 8%</li>
+      <li><strong>Time horizon:</strong> 18 years</li>
+    </ul>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Age</th>
+            <th class="pb-2 pr-4">Year</th>
+            <th class="pb-2 pr-4">Total Contributed</th>
+            <th class="pb-2 pr-4">Account Value</th>
+            <th class="pb-2">Growth Earned</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">0</td>
+            <td class="py-2 pr-4">Start</td>
+            <td class="py-2 pr-4">$1,000</td>
+            <td class="py-2 pr-4">$1,000</td>
+            <td class="py-2">$0</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">1</td>
+            <td class="py-2 pr-4">Year 1</td>
+            <td class="py-2 pr-4">$3,400</td>
+            <td class="py-2 pr-4">$3,580</td>
+            <td class="py-2 text-mint-400">$180</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">3</td>
+            <td class="py-2 pr-4">Year 3</td>
+            <td class="py-2 pr-4">$8,200</td>
+            <td class="py-2 pr-4">$9,145</td>
+            <td class="py-2 text-mint-400">$945</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">5</td>
+            <td class="py-2 pr-4">Year 5</td>
+            <td class="py-2 pr-4">$13,000</td>
+            <td class="py-2 pr-4">$15,431</td>
+            <td class="py-2 text-mint-400">$2,431</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">10</td>
+            <td class="py-2 pr-4">Year 10</td>
+            <td class="py-2 pr-4">$25,000</td>
+            <td class="py-2 pr-4">$35,657</td>
+            <td class="py-2 text-mint-400">$10,657</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">15</td>
+            <td class="py-2 pr-4">Year 15</td>
+            <td class="py-2 pr-4">$37,000</td>
+            <td class="py-2 pr-4">$64,354</td>
+            <td class="py-2 text-mint-400">$27,354</td>
+          </tr>
+          <tr class="bg-gold-400/5">
+            <td class="py-2 pr-4 font-bold text-white">18</td>
+            <td class="py-2 pr-4 font-bold text-white">Year 18</td>
+            <td class="py-2 pr-4">$44,200</td>
+            <td class="py-2 pr-4 font-bold text-gold-400">~$50,423</td>
+            <td class="py-2 text-mint-400">~$6,223</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      You contribute <strong>$44,200 total</strong> over 18 years. Compound growth adds roughly <strong>$6,200 or more</strong> on top. That is free money from the market doing its job.
+    </p>
+
+    <CalloutBox type="info" title="Why the growth looks small at first">
+      Compounding is back-loaded. In the first few years, your contributions are doing most of the work. By years 15-18, growth accelerates dramatically. This is exactly why starting early matters so much.
+    </CalloutBox>
+
+    <h2>What If I Can Contribute More or Less?</h2>
+
+    <p>
+      Not everyone can do $200/month. And some families can do more. Here is what different contribution levels produce at <strong>8% average returns</strong> with the <strong>${limits.pilotDeposit.toLocaleString()} deposit</strong>:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Monthly Amount</th>
+            <th class="pb-2 pr-4">Annual Amount</th>
+            <th class="pb-2 pr-4">Total Contributed</th>
+            <th class="pb-2 pr-4">Value at 18</th>
+            <th class="pb-2">Growth Earned</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">$50/mo</td>
+            <td class="py-2 pr-4">$600</td>
+            <td class="py-2 pr-4">$11,800</td>
+            <td class="py-2 pr-4 text-white">$15,748</td>
+            <td class="py-2 text-mint-400">$3,948</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">$100/mo</td>
+            <td class="py-2 pr-4">$1,200</td>
+            <td class="py-2 pr-4">$22,600</td>
+            <td class="py-2 pr-4 text-white">$27,085</td>
+            <td class="py-2 text-mint-400">$4,485</td>
+          </tr>
+          <tr class="border-b border-surface-700 bg-gold-400/5">
+            <td class="py-2 pr-4 font-medium text-gold-400">$200/mo</td>
+            <td class="py-2 pr-4">$2,400</td>
+            <td class="py-2 pr-4">$44,200</td>
+            <td class="py-2 pr-4 font-bold text-gold-400">~$50,423</td>
+            <td class="py-2 text-mint-400">~$6,223</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">$300/mo</td>
+            <td class="py-2 pr-4">$3,600</td>
+            <td class="py-2 pr-4">$65,800</td>
+            <td class="py-2 pr-4 text-white">$73,761</td>
+            <td class="py-2 text-mint-400">$7,961</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4">$416/mo (max)</td>
+            <td class="py-2 pr-4">$5,000</td>
+            <td class="py-2 pr-4">$91,000</td>
+            <td class="py-2 pr-4 text-white">$100,544</td>
+            <td class="py-2 text-mint-400">$9,544</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Even <strong>$50/month</strong> builds nearly $16,000 by age 18. That is a meaningful head start for any young adult.
+    </p>
+
+    <h2>What About Different Return Rates?</h2>
+
+    <p>
+      No one can predict exact market returns. Here is how the $200/month scenario looks at different average annual return rates:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Average Return</th>
+            <th class="pb-2 pr-4">Value at 18</th>
+            <th class="pb-2">Description</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">6%</td>
+            <td class="py-2 pr-4">$44,950</td>
+            <td class="py-2">Conservative (below historical average)</td>
+          </tr>
+          <tr class="border-b border-surface-700 bg-gold-400/5">
+            <td class="py-2 pr-4 font-medium text-gold-400">8%</td>
+            <td class="py-2 pr-4 font-bold text-gold-400">~$50,423</td>
+            <td class="py-2">Moderate (our baseline)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">10%</td>
+            <td class="py-2 pr-4">$56,870</td>
+            <td class="py-2">Historical S&P 500 average</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4">12%</td>
+            <td class="py-2 pr-4">$64,600</td>
+            <td class="py-2">Optimistic (above average periods)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Even at a conservative <strong>6% return</strong>, you still build close to $45,000. The strategy works across a wide range of market conditions because of the long time horizon.
+    </p>
+
+    <CalloutBox type="tip" title="The power of starting early">
+      A dollar invested at birth has 18 full years to compound. A dollar invested at age 10 has only 8. That first dollar is worth roughly 4 times more than the later one at 8% returns. Front-load your contributions if possible.
+    </CalloutBox>
+
+    <h2>Breaking Down the Growth</h2>
+
+    <p>
+      Where does the $50,000 actually come from? At $200/month and 8% returns:
+    </p>
+
+    <ul>
+      <li><strong>${limits.pilotDeposit.toLocaleString()} federal deposit</strong> &mdash; grows to roughly $4,000 on its own</li>
+      <li><strong>$43,200 in your contributions</strong> ($200 x 12 months x 18 years)</li>
+      <li><strong>~$3,200 in compound growth</strong> on your contributions</li>
+    </ul>
+
+    <p>
+      The growth percentage increases over time. In the first year, growth is just a few percent of your total. By year 18, compound returns are adding thousands per year. This is the classic "hockey stick" curve of compound interest.
+    </p>
+
+    <h2>Can Employer Contributions Help?</h2>
+
+    <p>
+      Yes. If your employer participates, they can contribute up to <strong>${limits.employerContributionLimit.toLocaleString()}/year</strong> per employee, tax-free under IRC Section 128. This counts toward the ${limits.annualContributionLimit.toLocaleString()} annual cap.
+    </p>
+
+    <p>
+      If your employer contributes $2,500 and you contribute $2,500, you hit the max without paying the full amount yourself. That is like getting a 50% match on your child's future.
+    </p>
+
+    <h2>The Bottom Line</h2>
+
+    <p>
+      Building $50,000 by age 18 does not require a big salary or risky bets. It requires <strong>$200/month, 18 years, and patience</strong>. The S&P 500 does the rest.
+    </p>
+
+    <p>
+      If $200 is too much right now, start with what you can. Even $50/month builds a real financial foundation. You can always increase later.
+    </p>
+
+    <p>
+      Use our <a href="/calculators/growth-calculator">growth calculator</a> to run your own scenarios. And see our projection of <a href="/blog/how-much-at-age-18">how much a Trump Account could be worth at age 18</a> at different contribution levels.
+    </p>
+  </div>
+</BlogLayout>

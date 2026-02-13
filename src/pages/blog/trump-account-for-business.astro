@@ -1,0 +1,150 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-for-business')!;
+const related = getRelatedArticles('trump-account-for-business');
+
+const faqs = [
+  {
+    question: 'Can I use a Trump Account to start a business?',
+    answer: 'Yes. At age 18, the Trump Account converts to a traditional IRA, and you can withdraw funds for any purpose including starting a business. However, there is no special business exception — withdrawals are taxed as ordinary income plus a 10% early withdrawal penalty if you are under 59.5.',
+  },
+  {
+    question: 'Is there an IRA penalty exception for starting a business?',
+    answer: 'No. Unlike education expenses or a first-time home purchase, there is no special IRA penalty exception for business startups. You will pay ordinary income tax plus the 10% early withdrawal penalty on any withdrawal used for a business before age 59.5.',
+  },
+  {
+    question: 'What is a ROBS (Rollover for Business Startups)?',
+    answer: 'A ROBS is a legal structure where you roll your IRA into a new 401(k) plan, which then invests in your own business by purchasing stock in a C-corporation you create. This avoids taxes and penalties on the rollover itself. It is complex and requires professional guidance, but it is IRS-approved.',
+  },
+  {
+    question: 'Should I withdraw from my Trump Account for a business or keep it invested?',
+    answer: 'It depends on the opportunity. The tax and penalty cost of early withdrawal is roughly 22% (12% tax + 10% penalty). If your business can generate returns well above 22%, it may be worth it. But the lost compound growth over decades is also significant. Consider partial withdrawals or alternative funding sources first.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>There is <strong class="text-white">no special business exception</strong> for IRA early withdrawals.</li>
+        <li>Withdrawals are taxed as <strong class="text-white">ordinary income + 10% penalty</strong> before age 59.5.</li>
+        <li>There are <strong class="text-white">no restrictions on use</strong> — you can spend the money on a business.</li>
+        <li>A <strong class="text-white">ROBS (Rollover for Business Startups)</strong> may let you invest IRA funds in your own business without taxes or penalties.</li>
+        <li>Consider whether <strong class="text-white">keeping the money invested</strong> would generate better long-term returns.</li>
+      </ul>
+    </div>
+
+    <p>
+      Your child turns 18 and wants to start a business. Can they use the Trump Account? <strong>Yes</strong> — but there are no special tax breaks for it. Here is what you need to know before tapping retirement funds for a startup.
+    </p>
+
+    <h2>No Business Exception for IRA Withdrawals</h2>
+    <p>
+      The IRS offers penalty exceptions for things like <a href="/blog/trump-account-for-first-home">a first home</a>, <a href="/blog/trump-account-for-college">education</a>, disability, and medical expenses. But there is <strong>no exception for starting or funding a business</strong>.
+    </p>
+    <p>
+      That means any withdrawal used for a business before age 59.5 faces:
+    </p>
+    <ul>
+      <li><strong>Ordinary income tax</strong> — at your child's marginal rate</li>
+      <li><strong>10% early withdrawal penalty</strong> — on top of the income tax</li>
+    </ul>
+
+    <CalloutBox type="warning" title="The tax cost is steep">
+      <p>
+        For a young adult in the 12% tax bracket, withdrawing <strong>$25,000</strong> for a business costs <strong>$3,000 in income tax</strong> plus <strong>$2,500 in penalties</strong> — a total of <strong>$5,500</strong>. That is 22% gone before a single dollar goes into the business.
+      </p>
+    </CalloutBox>
+
+    <h2>The Real Cost: Tax + Lost Growth</h2>
+    <p>
+      The 22% immediate cost is just the beginning. Money withdrawn from an IRA stops compounding. Here is what <strong>$25,000 left invested</strong> at 8% returns could become:
+    </p>
+    <ul>
+      <li><strong>$54,000</strong> in 10 years</li>
+      <li><strong>$117,000</strong> in 20 years</li>
+      <li><strong>$540,000+</strong> by age 59.5 (from age 18)</li>
+    </ul>
+    <p>
+      That is the true "cost" of the withdrawal — not just the taxes, but the hundreds of thousands in lost compound growth over a lifetime.
+    </p>
+
+    <h2>Alternative: ROBS (Rollover for Business Startups)</h2>
+    <p>
+      There is a legal strategy called <strong>ROBS — Rollover for Business Startups</strong> — that lets you use IRA funds for a business <strong>without paying taxes or penalties</strong>. Here is how it works:
+    </p>
+    <ol>
+      <li>Create a new <strong>C-corporation</strong> for your business.</li>
+      <li>Set up a <strong>401(k) plan</strong> within that corporation.</li>
+      <li><strong>Roll over</strong> your traditional IRA into the new 401(k).</li>
+      <li>The 401(k) uses the funds to <strong>buy stock</strong> in your C-corporation.</li>
+      <li>The corporation now has capital to fund the business.</li>
+    </ol>
+
+    <CalloutBox type="info" title="ROBS is IRS-approved but complex">
+      <p>
+        The IRS has confirmed that ROBS is a legitimate strategy, but it is under scrutiny and has strict compliance requirements. You must operate as a real C-corporation, pay yourself a reasonable salary, and follow all 401(k) rules. <strong>Professional guidance from a tax attorney or CPA is essential.</strong>
+      </p>
+    </CalloutBox>
+
+    <h2>When Withdrawal Might Make Sense</h2>
+    <p>
+      Despite the costs, sometimes withdrawing for a business is the right move. Consider it if:
+    </p>
+    <ul>
+      <li>The business opportunity has <strong>strong expected returns</strong> that far exceed the 22% tax cost</li>
+      <li>You need a <strong>small amount</strong> relative to the total account balance</li>
+      <li>Other funding sources (loans, investors, savings) are not available</li>
+      <li>The business will generate income quickly, allowing you to <strong>replenish retirement savings</strong></li>
+    </ul>
+
+    <CalloutBox type="tip" title="Consider a partial withdrawal">
+      <p>
+        Instead of emptying the account, withdraw only what you need to get started. Keep the majority invested for long-term growth. A <strong>$10,000 withdrawal</strong> from an $80,000 account costs about $2,200 in taxes and penalties — while the remaining $70,000 continues compounding for decades.
+      </p>
+    </CalloutBox>
+
+    <h2>Better Alternatives to Consider</h2>
+    <p>
+      Before tapping retirement funds, your child should explore other options:
+    </p>
+    <ul>
+      <li><strong>Small business loans</strong> — SBA loans offer favorable terms for startups</li>
+      <li><strong>Business credit cards</strong> — for smaller capital needs</li>
+      <li><strong>Angel investors or crowdfunding</strong> — bring in outside capital without personal risk</li>
+      <li><strong>Part-time start</strong> — build the business slowly while keeping a day job, then scale</li>
+      <li><strong>Grants</strong> — many programs offer free startup funding for young entrepreneurs</li>
+    </ul>
+    <p>
+      Each of these preserves the <a href="/blog/what-can-money-be-used-for">Trump Account's long-term growth potential</a>.
+    </p>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      You <strong>can</strong> use Trump Account funds for a business. There is no rule against it. But there is no tax break for it either. The 10% penalty plus income tax takes a big bite, and the lost compound growth over decades is even bigger.
+    </p>
+    <p>
+      If the business opportunity is truly exceptional, a partial withdrawal may be worth it. For most young adults, exploring other funding sources first — and keeping the IRA invested — is the smarter play.
+    </p>
+
+    <CalloutBox type="warning" title="Not financial advice">
+      <p>
+        This is educational content, not tax or financial advice. Tax rules are complex and depend on individual circumstances. Consult a qualified tax professional before making withdrawal decisions. ROBS structures require specialized legal and tax guidance.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

@@ -1,0 +1,205 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-for-first-home')!;
+const related = getRelatedArticles('trump-account-for-first-home');
+
+const faqs = [
+  {
+    question: 'Can I use a Trump Account for a house down payment?',
+    answer: `Yes. At age 18, the Trump Account converts to a traditional IRA. The IRS allows up to $10,000 in penalty-free withdrawals for a first-time home purchase. You still owe ordinary income tax on the withdrawal, but the 10% early withdrawal penalty is waived on the first $10,000.`,
+  },
+  {
+    question: 'What is the first-time homebuyer exception for IRAs?',
+    answer: 'The IRS allows a lifetime maximum of $10,000 in penalty-free IRA withdrawals for a first-time home purchase. "First-time" means you (or your spouse) have not owned a home in the previous two years. The withdrawal is still taxed as ordinary income.',
+  },
+  {
+    question: 'Can both spouses use the $10,000 homebuyer exception?',
+    answer: 'Yes. If both spouses qualify as first-time homebuyers and each has an IRA (including a converted Trump Account), they can each withdraw up to $10,000 penalty-free — for a combined $20,000 toward the home purchase.',
+  },
+  {
+    question: 'What if I need more than $10,000 from my Trump Account for a home?',
+    answer: 'Any withdrawal beyond $10,000 faces the standard 10% early withdrawal penalty (in addition to ordinary income tax) if you are under age 59.5. For example, withdrawing $30,000 would mean $10,000 is penalty-free and $20,000 faces the 10% penalty ($2,000).',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>The IRS <strong class="text-white">first-time homebuyer exception</strong> allows up to <strong class="text-white">$10,000</strong> in penalty-free IRA withdrawals.</li>
+        <li>You still pay <strong class="text-white">ordinary income tax</strong> on the withdrawal — only the 10% penalty is waived.</li>
+        <li>Both spouses can each withdraw $10,000 — up to <strong class="text-white">$20,000 combined</strong>.</li>
+        <li>"First-time" means <strong class="text-white">no home ownership in the past 2 years</strong>.</li>
+        <li>Any withdrawal beyond $10,000 faces the <strong class="text-white">10% penalty</strong> if under age 59.5.</li>
+      </ul>
+    </div>
+
+    <p>
+      Buying a first home is one of the most practical uses of Trump Account funds. Thanks to the <strong>first-time homebuyer IRA exception</strong>, your child can pull out up to $10,000 without the usual 10% penalty. Here is exactly how it works.
+    </p>
+
+    <h2>The First-Time Homebuyer Exception</h2>
+    <p>
+      At age {limits.iraConversionAge}, the Trump Account becomes a traditional IRA. The IRS has a special rule for traditional IRAs: you can withdraw up to <strong>$10,000 in your lifetime</strong> for a first-time home purchase without paying the 10% early withdrawal penalty.
+    </p>
+    <p>
+      This is a <strong>lifetime limit</strong>, not an annual limit. Once you use it, it is gone.
+    </p>
+
+    <CalloutBox type="info" title="What counts as 'first-time'?">
+      <p>
+        The IRS defines a "first-time homebuyer" as someone who has <strong>not owned a principal residence in the previous two years</strong>. This means someone who owned a home years ago but has been renting recently could still qualify. It does not have to be your very first home ever.
+      </p>
+    </CalloutBox>
+
+    <h2>What You Pay: A Real Example</h2>
+    <p>
+      Let's say your child's Trump Account is worth <strong>$80,000</strong> at age 18. They want to use <strong>$10,000</strong> as a down payment on their first home at age 22. Here is the cost:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Item</th>
+            <th class="py-3 text-gray-400 font-medium">Amount</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Withdrawal for down payment</td>
+            <td class="py-3 font-medium text-white">$10,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Federal income tax (12% bracket)</td>
+            <td class="py-3 font-medium text-amber-300">$1,200</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">10% early withdrawal penalty</td>
+            <td class="py-3 font-medium text-mint-300">$0 (homebuyer exception)</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium">Net cash for down payment</td>
+            <td class="py-3 font-bold text-white">$8,800</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Your child gets <strong>$8,800</strong> toward their home after taxes. Without the homebuyer exception, the 10% penalty would take another $1,000, leaving only $7,800.
+    </p>
+
+    <h2>What If You Need More Than $10,000?</h2>
+    <p>
+      The $10,000 limit only applies to the penalty exemption. Your child can withdraw more, but anything above $10,000 faces the <strong>10% early withdrawal penalty</strong> plus ordinary income tax.
+    </p>
+    <p>
+      Here is what a <strong>$30,000 withdrawal</strong> looks like (at a 12% tax bracket):
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Portion</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Income Tax</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">10% Penalty</th>
+            <th class="py-3 text-gray-400 font-medium">Total Cost</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">First $10,000</td>
+            <td class="py-3 pr-4">$1,200</td>
+            <td class="py-3 pr-4 text-mint-300">$0 (exempt)</td>
+            <td class="py-3">$1,200</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Next $20,000</td>
+            <td class="py-3 pr-4">$2,400</td>
+            <td class="py-3 pr-4 text-amber-300">$2,000</td>
+            <td class="py-3">$4,400</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">Total $30,000</td>
+            <td class="py-3 pr-4">$3,600</td>
+            <td class="py-3 pr-4">$2,000</td>
+            <td class="py-3 font-bold text-amber-300">$5,600</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Out of a $30,000 withdrawal, your child keeps <strong>$24,400</strong> after taxes and penalties.
+    </p>
+
+    <CalloutBox type="warning" title="The 10% penalty adds up fast">
+      <p>
+        On amounts above $10,000, the combined cost of income tax plus the 10% penalty can eat nearly a quarter of the withdrawal. Think carefully about how much to take out versus how much to leave invested.
+      </p>
+    </CalloutBox>
+
+    <h2>Combining With a Spouse</h2>
+    <p>
+      If your child marries someone who also has a traditional IRA (including a converted Trump Account), <strong>both spouses can each use the $10,000 exception</strong>. That means up to <strong>$20,000 combined</strong> in penalty-free home purchase withdrawals.
+    </p>
+    <p>
+      Both spouses must qualify as first-time homebuyers (no home ownership in the past two years). The funds must be used within <strong>120 days</strong> of withdrawal for the home purchase.
+    </p>
+
+    <h2>Strategy: Keep Most of It Invested</h2>
+    <p>
+      An $80,000 account at age 18 is a powerful asset. Withdrawing $10,000 for a home still leaves <strong>$70,000 growing</strong> in the IRA. At 8% average returns, that $70,000 could grow to:
+    </p>
+    <ul>
+      <li><strong>$151,000</strong> by age 28 (10 more years)</li>
+      <li><strong>$325,000</strong> by age 38 (20 more years)</li>
+      <li><strong>$1,500,000+</strong> by age 59.5 (penalty-free withdrawals)</li>
+    </ul>
+
+    <CalloutBox type="tip" title="Take only what you need">
+      <p>
+        The $10,000 penalty-free exception is valuable, but the <strong>money left invested is even more valuable</strong> over time. Consider using the $10,000 exception for a down payment and finding other sources for closing costs and moving expenses.
+      </p>
+    </CalloutBox>
+
+    <h2>Important Rules to Remember</h2>
+    <ul>
+      <li>The <strong>$10,000 is a lifetime limit</strong>, not per-purchase.</li>
+      <li>Funds must be used within <strong>120 days</strong> of withdrawal.</li>
+      <li>The home must be a <strong>principal residence</strong> — not an investment property.</li>
+      <li>You (or your spouse) must not have owned a home in the <strong>past 2 years</strong>.</li>
+      <li>The withdrawal is still <strong>taxed as ordinary income</strong> — only the penalty is waived.</li>
+    </ul>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      The first-time homebuyer exception makes Trump Accounts a legitimate tool for helping your child buy their first home. The $10,000 penalty-free withdrawal — or $20,000 combined with a spouse — can make a real difference in a down payment.
+    </p>
+    <p>
+      But weigh the tax cost against the benefit of keeping the money invested. Use our <a href="/calculators/withdrawal-simulator"><strong>Withdrawal Simulator</strong></a> to model different scenarios and find the right balance.
+    </p>
+
+    <CalloutBox type="warning" title="Not financial advice">
+      <p>
+        This is educational content, not tax or financial advice. Tax rules are complex and depend on individual circumstances. Consult a qualified tax professional before making withdrawal decisions.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

@@ -1,0 +1,118 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-death-of-child')!;
+const related = getRelatedArticles('trump-account-death-of-child');
+
+const faqs = [
+  {
+    question: 'What happens to a Trump Account if the child passes away?',
+    answer: 'The funds can be distributed to the child\'s estate or to a designated beneficiary, as outlined in IRS Notice 2025-68. The death of the beneficiary is one of the three exceptions that allows funds to leave a Trump Account before age 18.',
+  },
+  {
+    question: 'Is there a penalty on death distributions from a Trump Account?',
+    answer: 'No. There is no 10% early withdrawal penalty on distributions made due to the death of the beneficiary. This applies whether the child is under or over age 18.',
+  },
+  {
+    question: 'How are death distributions taxed?',
+    answer: 'The tax treatment depends on the specifics. Distributions are typically included in the deceased child\'s final tax return or the beneficiary\'s tax return as ordinary income. Consult a tax professional for your specific situation.',
+  },
+  {
+    question: 'Should I name a beneficiary when opening the account?',
+    answer: 'Yes. Designating a beneficiary when you open the Trump Account ensures that funds are distributed according to your wishes if the unthinkable happens. Without a beneficiary designation, funds go to the child\'s estate, which may require probate.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><strong class="text-white">IRS Notice 2025-68</strong> specifically addresses the death of a Trump Account beneficiary.</li>
+        <li>Funds can be distributed to the <strong class="text-white">estate or a designated beneficiary</strong>.</li>
+        <li>There is <strong class="text-white">no 10% early withdrawal penalty</strong> on death distributions.</li>
+        <li>Distributions are generally <strong class="text-white">taxed as ordinary income</strong> on the applicable tax return.</li>
+        <li><strong class="text-white">Designating a beneficiary</strong> when opening the account is strongly recommended.</li>
+      </ul>
+    </div>
+
+    <p>
+      No parent wants to think about this. But knowing how a Trump Account is handled in this situation can provide a small measure of peace of mind. IRS Notice 2025-68 addresses this topic directly, and we want to make sure you have clear, factual information.
+    </p>
+
+    <h2>How the Rules Work</h2>
+    <p>
+      The death of the beneficiary child is one of only three exceptions that allow funds to leave a Trump Account before age {limits.growthPhaseEndAge}. The other two are rollovers and return of excess contributions. You can read about all three in our <a href="/blog/early-withdrawal-before-18">early withdrawal guide</a>.
+    </p>
+    <p>
+      When a child who holds a Trump Account passes away, the account funds <strong>can be distributed</strong>. The money does not disappear or revert to the government. It goes to the people the child's family has designated.
+    </p>
+
+    <h2>Where the Funds Go</h2>
+    <p>
+      The distribution depends on whether a beneficiary has been named on the account:
+    </p>
+    <ul>
+      <li><strong>If a beneficiary is designated:</strong> The funds go directly to that person. This avoids probate and is typically the fastest and simplest path.</li>
+      <li><strong>If no beneficiary is designated:</strong> The funds go to the child's estate. This may require probate proceedings, which can take time and involve legal costs.</li>
+    </ul>
+
+    <CalloutBox type="tip" title="Designate a beneficiary when you open the account">
+      <p>
+        When you file <a href="/blog/how-to-open-step-by-step">IRS Form 4547</a> or open the account through trumpaccounts.gov, take the time to name a beneficiary. This ensures the funds are handled according to your family's wishes and avoids unnecessary legal complexity during an already difficult time.
+      </p>
+    </CalloutBox>
+
+    <h2>Tax Treatment</h2>
+    <p>
+      Death distributions from a Trump Account are handled as follows:
+    </p>
+    <ul>
+      <li><strong>No 10% early withdrawal penalty.</strong> The penalty that normally applies to IRA withdrawals before age 59 1/2 does not apply to distributions caused by death. This is true regardless of the child's age.</li>
+      <li><strong>Taxed as ordinary income.</strong> The distributed funds are generally included as ordinary income on the applicable tax return. Depending on the circumstances, this may be the child's final tax return or the beneficiary's return.</li>
+    </ul>
+
+    <CalloutBox type="info" title="Consult a tax professional">
+      <p>
+        The tax treatment of death distributions can vary based on your specific situation — the size of the account, the beneficiary's tax bracket, and state tax laws all play a role. A qualified tax professional can help navigate the details.
+      </p>
+    </CalloutBox>
+
+    <h2>Practical Steps for Parents</h2>
+    <p>
+      While no one expects to need this information, here are steps you can take now to make sure the account is handled properly if the worst were to happen:
+    </p>
+    <ul>
+      <li><strong>Name a beneficiary.</strong> Do this when you open the account. You can usually update it later if your wishes change.</li>
+      <li><strong>Keep the designation current.</strong> Review the beneficiary designation if family circumstances change — for example, after a divorce, remarriage, or the birth of other children.</li>
+      <li><strong>Inform your family.</strong> Make sure your spouse, partner, or other family members know the account exists and who the designated beneficiary is.</li>
+      <li><strong>Keep account documents accessible.</strong> Store Trump Account paperwork with other important financial documents so that a family member or executor can find it if needed.</li>
+    </ul>
+
+    <h2>Getting Help</h2>
+    <p>
+      If you are dealing with this situation now, we are sorry for your loss. Here are resources that may help:
+    </p>
+    <ul>
+      <li><strong>Contact the account custodian.</strong> The brokerage or institution holding the Trump Account can walk you through the distribution process.</li>
+      <li><strong>Work with a tax professional.</strong> They can help with the tax return and ensure distributions are reported correctly.</li>
+      <li><strong>Consult an estate attorney.</strong> If no beneficiary was designated and probate is needed, an attorney can guide you through the process.</li>
+    </ul>
+
+    <p>
+      For more information on how Trump Accounts are managed and who controls them, visit our guide on <a href="/blog/who-controls-trump-account">who controls a Trump Account</a>.
+    </p>
+  </div>
+</BlogLayout>

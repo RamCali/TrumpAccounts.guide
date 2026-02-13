@@ -1,0 +1,133 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('adopted-children-trump-account')!;
+const related = getRelatedArticles('adopted-children-trump-account');
+
+const faqs = [
+  {
+    question: 'Do adopted children get the $1,000 pilot deposit?',
+    answer: `Yes, if the adopted child was born between January 1, ${limits.pilotDepositStartYear} and December 31, ${limits.pilotDepositEndYear}, is a U.S. citizen, and has a valid SSN. The deposit is based on birth year and citizenship, not whether the child is biological or adopted.`,
+  },
+  {
+    question: 'Can I open a Trump Account before the adoption is finalized?',
+    answer: `No. You need to be the authorized individual (parent or legal guardian) to file ${limits.form}. You also need the child's SSN, which for international adoptees typically comes after citizenship is finalized. Wait until the adoption is complete.`,
+  },
+  {
+    question: 'Do children adopted from other countries qualify?',
+    answer: 'Only if they become U.S. citizens. Many internationally adopted children receive U.S. citizenship automatically under the Child Citizenship Act once the adoption is finalized and they enter the U.S. Once citizenship and an SSN are in place, they qualify.',
+  },
+  {
+    question: 'What if my adopted child already had a Trump Account with their birth parents?',
+    answer: `A child can only have one Trump Account. If the birth parents already filed ${limits.form}, the account transfers with the child. The adoptive parent becomes the new authorized individual. Consult a tax professional for the transfer process.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Adopted children qualify for Trump Accounts on <strong class="text-white">identical terms</strong> as biological children.</li>
+        <li>What matters is <strong class="text-white">U.S. citizenship + SSN + under 18</strong>, not biological relationship.</li>
+        <li>Both domestic and international adoptees qualify <strong class="text-white">if they are U.S. citizens</strong>.</li>
+        <li>File {limits.form} <strong class="text-white">after</strong> adoption is finalized and SSN is issued.</li>
+        <li>The ${limits.pilotDeposit.toLocaleString()} deposit applies if the child was born <strong class="text-white">{limits.pilotDepositStartYear}–{limits.pilotDepositEndYear}</strong>.</li>
+      </ul>
+    </div>
+
+    <h2>Yes, Adopted Children Qualify</h2>
+    <p>
+      If you have adopted a child, the answer is simple: <strong>adopted children qualify for a Trump Account on the exact same terms as any other child.</strong>
+    </p>
+    <p>
+      The eligibility rules look at the child, not the relationship between parent and child. The three requirements are:
+    </p>
+    <ol>
+      <li>The child is a <strong>U.S. citizen</strong>.</li>
+      <li>The child has a <strong>valid Social Security number</strong> (not an ITIN).</li>
+      <li>The child is <strong>under 18</strong> at the end of the election year.</li>
+    </ol>
+    <p>
+      That is it. The IRS does not distinguish between biological children, adopted children, stepchildren, or any other relationship. Citizenship and SSN are what matter.
+    </p>
+
+    <CalloutBox type="tip" title="Same rules, same benefits">
+      <p>
+        Your adopted child gets access to the same ${limits.annualContributionLimit.toLocaleString()}/year contribution limit, the same employer contributions, the same tax-deferred growth, and the same IRA conversion at {limits.iraConversionAge}.
+      </p>
+    </CalloutBox>
+
+    <h2>Domestic Adoptions</h2>
+    <p>
+      For domestically adopted children, the process is straightforward. If the child was born in the United States, they are almost certainly a U.S. citizen. Once the adoption is finalized and you have the child's SSN, you can file {limits.form}.
+    </p>
+    <p>
+      If the child already has an SSN from before the adoption, that same number carries over. You do not need a new one.
+    </p>
+
+    <h2>International Adoptions</h2>
+    <p>
+      For internationally adopted children, there is one extra step: <strong>U.S. citizenship must be finalized</strong> before the child qualifies.
+    </p>
+    <p>
+      Many children adopted from abroad receive U.S. citizenship automatically under the Child Citizenship Act of 2000. This typically happens when:
+    </p>
+    <ul>
+      <li>The adoption is finalized (in the foreign country or in a U.S. court).</li>
+      <li>The child enters the United States as a lawful permanent resident.</li>
+      <li>At least one adoptive parent is a U.S. citizen.</li>
+    </ul>
+    <p>
+      Once citizenship is established and the child has an SSN, they meet all three requirements. You can then file {limits.form} with your tax return or through {limits.portal}.
+    </p>
+
+    <CalloutBox type="info" title="Timing matters">
+      <p>
+        You cannot file {limits.form} until your child is a U.S. citizen with a Social Security number. If the adoption and citizenship process takes time, that is okay. File the election as soon as everything is in place. The account can be opened in any year as long as the child is still under 18.
+      </p>
+    </CalloutBox>
+
+    <h2>The ${limits.pilotDeposit.toLocaleString()} Pilot Deposit</h2>
+    <p>
+      The federal <strong>${limits.pilotDeposit.toLocaleString()} pilot deposit</strong> is available to adopted children on the same basis as everyone else. The only question is birth year:
+    </p>
+    <ul>
+      <li><strong>Born {limits.pilotDepositStartYear}–{limits.pilotDepositEndYear}:</strong> Eligible for the ${limits.pilotDeposit.toLocaleString()} deposit.</li>
+      <li><strong>Born before {limits.pilotDepositStartYear} or after {limits.pilotDepositEndYear}:</strong> Not eligible for the deposit, but can still open the account.</li>
+    </ul>
+    <p>
+      If you adopt a baby born in {limits.pilotDepositStartYear} and finalize the adoption and SSN within the filing window, your child qualifies for the deposit. The deposit is based on the child's birth year, not the date of adoption.
+    </p>
+
+    <h2>Who Files the Form?</h2>
+    <p>
+      {limits.form} must be filed by an <strong>"authorized individual"</strong> — generally a parent or legal guardian. As the adoptive parent, you are the authorized individual once the adoption is finalized.
+    </p>
+    <p>
+      If the adoption is not yet final, you may not be able to file the form. Talk to your adoption attorney or tax professional about the timing.
+    </p>
+
+    <h2>Next Steps</h2>
+    <ol>
+      <li>Confirm that your adopted child is a <strong>U.S. citizen</strong> and has a <strong>valid SSN</strong>.</li>
+      <li>File <strong>{limits.form}</strong> with your tax return or through {limits.portal}.</li>
+      <li>Start contributing up to <strong>${limits.annualContributionLimit.toLocaleString()}/year</strong>.</li>
+    </ol>
+    <p>
+      For general eligibility details, see <a href="/blog/who-qualifies-for-trump-account">Who Qualifies for a Trump Account?</a> For step-by-step instructions, visit <a href="/blog/how-to-open-step-by-step">How to Open a Trump Account</a>. To learn more about eligibility basics, check our <a href="/faq/eligibility">eligibility FAQ</a>.
+    </p>
+  </div>
+</BlogLayout>

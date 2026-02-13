@@ -1,0 +1,173 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-debt-seizure')!;
+const related = getRelatedArticles('trump-account-debt-seizure');
+
+const faqs = [
+  {
+    question: 'Can creditors take money from a Trump Account before age 18?',
+    answer: 'During the growth phase, the account has strong protections because the child cannot access the funds and the account is held in trust for the child\'s benefit. This makes it very difficult for creditors to reach. Similar protections apply to UTMA accounts.',
+  },
+  {
+    question: 'Can the IRS seize a Trump Account after it becomes an IRA?',
+    answer: 'Yes. Federal tax liens are an exception to IRA protections. If the account holder (the child at age 18+) owes unpaid federal taxes, the IRS can levy the IRA to satisfy the debt.',
+  },
+  {
+    question: 'Can student loans garnish a Trump Account IRA?',
+    answer: 'Federal student loans generally cannot garnish IRA funds. However, private student loan lenders may be able to pursue IRA assets through a court judgment in some states. State laws vary widely on this.',
+  },
+  {
+    question: 'How much IRA protection is there in bankruptcy?',
+    answer: 'Under federal bankruptcy law, traditional IRAs are protected up to approximately $1.5 million (adjusted periodically for inflation). This means Trump Account funds that converted to an IRA at 18 would be protected up to that amount in bankruptcy.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><strong class="text-white">Before age {limits.growthPhaseEndAge}</strong>: strong protections. The account is held for the child's benefit and funds are inaccessible.</li>
+        <li><strong class="text-white">After age {limits.growthPhaseEndAge}</strong> (as an IRA): federal bankruptcy protection covers IRAs up to approximately <strong class="text-white">$1.5 million</strong>.</li>
+        <li><strong class="text-white">State creditor protections vary widely</strong> — some states offer unlimited IRA protection, others have limits.</li>
+        <li>The <strong class="text-white">IRS can seize</strong> IRA funds for unpaid federal taxes. This is an exception to most protections.</li>
+        <li><strong class="text-white">Consult a local attorney</strong> for your state's specific rules.</li>
+      </ul>
+    </div>
+
+    <p>
+      Parents and young adults often worry about whether creditors, lawsuits, or government agencies can take money from a Trump Account. The answer depends on <strong>two things</strong>: the child's age and your state's laws.
+    </p>
+
+    <h2>During the Growth Phase (Under Age {limits.growthPhaseEndAge})</h2>
+    <p>
+      While the child is under {limits.growthPhaseEndAge}, the Trump Account has <strong>strong built-in protections</strong>. Here is why:
+    </p>
+    <ul>
+      <li>The account is held <strong>for the child's benefit</strong> — it functions like a trust.</li>
+      <li>The child cannot access the funds (no withdrawals before {limits.growthPhaseEndAge}).</li>
+      <li>The <a href="/blog/who-controls-trump-account">authorized individual</a> manages the account but does not own it.</li>
+    </ul>
+    <p>
+      Because no one can withdraw the money, creditors of the parents <strong>generally cannot reach it</strong>. The account belongs to the child, so a parent's debts, lawsuits, or bankruptcy should not affect it.
+    </p>
+
+    <CalloutBox type="info" title="Similar to UTMA protections">
+      <p>
+        Trump Account protections during the growth phase are similar to how custodial (UTMA/UGMA) accounts are treated. The assets belong to the minor, not the custodian, and are generally shielded from the custodian's creditors.
+      </p>
+    </CalloutBox>
+
+    <h2>After Age {limits.growthPhaseEndAge} (As a Traditional IRA)</h2>
+    <p>
+      When the account converts to a traditional IRA at age {limits.growthPhaseEndAge}, <strong>the protections change</strong>. IRA creditor protections are a mix of federal and state law.
+    </p>
+
+    <h3>Federal Bankruptcy Protection</h3>
+    <p>
+      Under federal bankruptcy law, traditional IRAs are protected up to approximately <strong>$1.5 million</strong> (this amount is adjusted periodically for inflation). If the child files for bankruptcy later in life, their Trump Account IRA would be shielded up to this amount.
+    </p>
+
+    <CalloutBox type="tip" title="Good news for most accounts">
+      <p>
+        Even an aggressively funded Trump Account is unlikely to exceed $1.5 million by age 18. The federal bankruptcy protection should cover the full balance for the vast majority of account holders.
+      </p>
+    </CalloutBox>
+
+    <h3>State Creditor Protections</h3>
+    <p>
+      Outside of bankruptcy, creditor protection for IRAs is determined by <strong>state law</strong>. This is where things get complicated:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Protection Level</th>
+            <th class="py-3 text-gray-400 font-medium">Examples</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-semibold text-white">Unlimited protection</td>
+            <td class="py-3">Some states protect IRAs fully from all creditors</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-semibold text-white">Partial protection</td>
+            <td class="py-3">Some states protect only amounts "reasonably necessary" for retirement</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-semibold text-white">Limited protection</td>
+            <td class="py-3">A few states offer minimal or no IRA creditor protection outside bankruptcy</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <CalloutBox type="warning" title="State laws vary widely">
+      <p>
+        There is no one-size-fits-all answer for IRA creditor protection. What applies in Texas may be completely different from New York or California. <strong>Consult a local attorney</strong> if you have specific concerns about creditor exposure.
+      </p>
+    </CalloutBox>
+
+    <h2>Federal Tax Liens</h2>
+    <p>
+      This is the big exception. The IRS has broad powers to collect unpaid federal taxes. If the child (at age 18 or older) owes back taxes, the IRS <strong>can levy the traditional IRA</strong> to satisfy the debt.
+    </p>
+    <p>
+      Federal tax liens override most other creditor protections. This applies to all IRAs, not just those that started as Trump Accounts.
+    </p>
+
+    <h2>Student Loans</h2>
+    <p>
+      Student loan debt is a common concern for 18-year-olds. Here is how it breaks down:
+    </p>
+    <ul>
+      <li><strong>Federal student loans:</strong> The Department of Education generally <strong>cannot garnish IRA funds</strong>. They can garnish wages, tax refunds, and Social Security — but not retirement accounts.</li>
+      <li><strong>Private student loans:</strong> If a private lender gets a court judgment, they <strong>may be able to pursue IRA assets</strong> depending on your state's creditor protection laws. Some states protect IRAs from all creditors; others do not.</li>
+    </ul>
+
+    <h2>Child Support and Court Judgments</h2>
+    <p>
+      If the child (as an adult) owes child support or is the subject of a court judgment:
+    </p>
+    <ul>
+      <li><strong>Child support:</strong> Courts <strong>may consider IRA assets</strong> when determining ability to pay. In some states, a court can order IRA funds to satisfy child support obligations.</li>
+      <li><strong>Lawsuit judgments:</strong> Whether a creditor can reach IRA funds depends on state law. Some states fully protect IRAs from judgment creditors; others do not.</li>
+    </ul>
+
+    <CalloutBox type="warning" title="Always consult an attorney">
+      <p>
+        Creditor and asset protection law is complex and state-specific. If you are concerned about protecting your child's future IRA from creditors, lawsuits, or government claims, speak with an attorney licensed in your state.
+      </p>
+    </CalloutBox>
+
+    <h2>How to Protect the Account</h2>
+    <p>
+      While parents cannot control what happens after age {limits.growthPhaseEndAge}, there are some practical steps:
+    </p>
+    <ul>
+      <li><strong>Teach financial responsibility early.</strong> Avoiding debt problems in the first place is the best protection.</li>
+      <li><strong>Understand your state's IRA laws.</strong> Know what protections exist where your child lives.</li>
+      <li><strong>Consider a Roth conversion strategy.</strong> Roth IRAs may have different creditor treatment in some states. Consult an advisor.</li>
+      <li><strong>Keep good records.</strong> Document that the IRA originated as a Trump Account — this may be relevant in certain legal situations.</li>
+    </ul>
+
+    <p>
+      For more on who manages the account and what powers they have, see our guide on <a href="/blog/who-controls-trump-account">who controls a Trump Account</a>. And for how the account is treated in divorce, read our <a href="/blog/trump-account-divorce">Trump Account and divorce guide</a>.
+    </p>
+  </div>
+</BlogLayout>

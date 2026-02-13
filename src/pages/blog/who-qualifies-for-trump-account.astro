@@ -1,0 +1,185 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('who-qualifies-for-trump-account')!;
+const related = getRelatedArticles('who-qualifies-for-trump-account');
+
+const faqs = [
+  {
+    question: 'Is there an income limit for Trump Accounts?',
+    answer: 'No. There are no income restrictions whatsoever. Every U.S. citizen child with a valid SSN who is under 18 qualifies, regardless of family income. A family earning $25,000 per year and a family earning $2 million per year have equal access.',
+  },
+  {
+    question: 'Do adopted children qualify for a Trump Account?',
+    answer: 'Yes. Adopted children qualify as long as they are U.S. citizens with a valid Social Security number and are under 18. Citizenship and SSN are what matter, not biological relationship. Children adopted from abroad must have U.S. citizenship finalized first.',
+  },
+  {
+    question: 'Can my 16-year-old get a Trump Account?',
+    answer: `Yes. Any child under 18 at the end of the election year can open a Trump Account. However, a 16-year-old will only have about two years of growth before the account converts to an IRA at age 18. They also will not receive the $${limits.pilotDeposit.toLocaleString()} deposit unless they were born between ${limits.pilotDepositStartYear} and ${limits.pilotDepositEndYear}.`,
+  },
+  {
+    question: 'What if my baby does not have an SSN yet?',
+    answer: 'You need a valid Social Security number to open a Trump Account. If your baby was recently born, apply for an SSN through the Social Security Administration as soon as possible. You can apply at the hospital when you complete the birth certificate paperwork. Once you have the SSN, you can file Form 4547.',
+  },
+  {
+    question: 'Do twins each get their own Trump Account?',
+    answer: `Yes. Each qualifying child gets their own separate Trump Account. If both twins are U.S. citizens with SSNs and were born between ${limits.pilotDepositStartYear} and ${limits.pilotDepositEndYear}, each one receives their own $${limits.pilotDeposit.toLocaleString()} deposit and their own $${limits.annualContributionLimit.toLocaleString()} annual contribution limit.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <!-- Key Takeaways -->
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Your child must meet <strong class="text-white">3 requirements</strong>: U.S. citizen, valid SSN, and under 18 at the end of the election year.</li>
+        <li>There are <strong class="text-white">no income limits</strong> for families. Everyone qualifies equally.</li>
+        <li>The <strong class="text-white">${limits.pilotDeposit.toLocaleString()} federal deposit</strong> is only for children born {limits.pilotDepositStartYear}-{limits.pilotDepositEndYear}.</li>
+        <li>Children born before {limits.pilotDepositStartYear} still qualify for the account — just not the deposit.</li>
+        <li>Adopted children, twins, and children in mixed-status families can all qualify.</li>
+      </ul>
+    </div>
+
+    <h2>The 3 Requirements</h2>
+    <p>
+      Eligibility for a Trump Account is simple. Your child must meet <strong>all three</strong> of the following requirements:
+    </p>
+
+    <h3>1. U.S. Citizenship</h3>
+    <p>
+      The child must be a <strong>citizen of the United States</strong>. This includes children born in the U.S., children born abroad to U.S. citizen parents, and children who have obtained citizenship through naturalization or adoption.
+    </p>
+    <p>
+      Permanent residents (green card holders) who are not U.S. citizens do <strong>not</strong> qualify. The requirement is citizenship, not residency.
+    </p>
+
+    <h3>2. Valid Social Security Number</h3>
+    <p>
+      The child must have a <strong>valid Social Security number (SSN)</strong>. An Individual Taxpayer Identification Number (ITIN) does not qualify.
+    </p>
+    <p>
+      If your child was just born, you can apply for an SSN at the hospital when filling out the birth certificate paperwork. It typically arrives by mail within 2-4 weeks. You need the SSN before you can file {limits.form}.
+    </p>
+
+    <CalloutBox type="tip" title="Apply for Your Baby's SSN Right Away">
+      <p>
+        Do not wait. Apply for your newborn's Social Security number at the hospital. The sooner you have it, the sooner you can file {limits.form} and get the account opened. Every day of compounding counts over 18 years.
+      </p>
+    </CalloutBox>
+
+    <h3>3. Under Age 18</h3>
+    <p>
+      The child must be <strong>under 18 years old at the end of the election year</strong>. The election year is the year you file {limits.form} to open the account. For 2025 tax returns, this means your child must have been under 18 on December 31, 2025.
+    </p>
+    <p>
+      A 17-year-old can open an account, but they will only have about one year of growth before the account converts to an IRA at {limits.iraConversionAge}. The younger the child, the more time compounding has to work.
+    </p>
+
+    <h2>No Income Restrictions</h2>
+    <p>
+      This is one of the most important things to understand about Trump Accounts: <strong>there are no income limits</strong>.
+    </p>
+    <p>
+      Unlike Roth IRAs (which phase out at higher incomes) or certain tax credits (which reduce as income rises), Trump Accounts are open to every qualifying child regardless of how much the family earns.
+    </p>
+
+    <CalloutBox type="irs-quote" title="From IRS Notice 2025-68">
+      <p>
+        "An eligible child is any individual who is a citizen of the United States who has not attained 18 years of age as of the close of the taxable year and who has a valid Social Security number."
+      </p>
+    </CalloutBox>
+
+    <p>
+      In plain English: if your kid is a U.S. citizen, has an SSN, and is under 18, they qualify. Period. The IRS does not ask about family income, net worth, or anything else. Use the <a href="/calculators/eligibility-checker">eligibility checker</a> to confirm your child's status.
+    </p>
+
+    <h2>Who Gets the ${limits.pilotDeposit.toLocaleString()} Federal Deposit?</h2>
+    <p>
+      The <strong>${limits.pilotDeposit.toLocaleString()} pilot deposit</strong> is a separate question from basic eligibility. While any qualifying child under 18 can open a Trump Account, the federal deposit has a narrower window:
+    </p>
+    <ul>
+      <li>The child must be born between <strong>January 1, {limits.pilotDepositStartYear}</strong> and <strong>December 31, {limits.pilotDepositEndYear}</strong>.</li>
+      <li>The parent or guardian must <strong>opt in</strong> by filing {limits.form}.</li>
+    </ul>
+
+    <CalloutBox type="warning" title="The Deposit Is Not Automatic">
+      <p>
+        Even if your child was born in the {limits.pilotDepositStartYear}-{limits.pilotDepositEndYear} window, you must file {limits.form} to receive the ${limits.pilotDeposit.toLocaleString()} deposit. The government will not send it unless you opt in. <a href="/faq/eligibility">Learn more about the opt-in process</a>.
+      </p>
+    </CalloutBox>
+
+    <h2>Already-Born Children (Before {limits.pilotDepositStartYear})</h2>
+    <p>
+      If your child was born <strong>before {limits.pilotDepositStartYear}</strong>, they can still open a Trump Account — as long as they meet the three basic requirements (U.S. citizen, SSN, under 18).
+    </p>
+    <p>
+      The key difference: they will <strong>not receive the ${limits.pilotDeposit.toLocaleString()} federal deposit</strong>. The pilot deposit is only for {limits.pilotDepositStartYear}-{limits.pilotDepositEndYear} births.
+    </p>
+    <p>
+      However, these children can still benefit from:
+    </p>
+    <ul>
+      <li>Family contributions of up to <strong>${limits.annualContributionLimit.toLocaleString()} per year</strong></li>
+      <li>Employer contributions of up to <strong>${limits.employerContributionLimit.toLocaleString()} per year</strong></li>
+      <li><strong>Tax-deferred growth</strong> on all investments</li>
+      <li>The <strong>Dell pledge</strong> ($250 per child under 10 in qualifying ZIP codes)</li>
+    </ul>
+    <p>
+      For a 10-year-old, that is still 8 years of tax-deferred compounding — a meaningful head start.
+    </p>
+
+    <h2>Adopted Children</h2>
+    <p>
+      <strong>Yes, adopted children qualify.</strong> The requirements are citizenship and an SSN, not a biological relationship. If your adopted child is a U.S. citizen with a valid Social Security number and is under 18, they are eligible on exactly the same terms as any other child.
+    </p>
+    <p>
+      For children adopted from abroad, they must have <strong>U.S. citizenship finalized</strong> before you can file {limits.form}. Once citizenship is official and they have an SSN, they qualify.
+    </p>
+    <p>
+      If the adopted child was born between {limits.pilotDepositStartYear} and {limits.pilotDepositEndYear} and meets all requirements, they are also eligible for the ${limits.pilotDeposit.toLocaleString()} pilot deposit.
+    </p>
+
+    <h2>Edge Cases and Special Situations</h2>
+
+    <h3>Twins and Multiples</h3>
+    <p>
+      Each child gets their own Trump Account. Twins each get a separate ${limits.pilotDeposit.toLocaleString()} deposit (if born in the window) and a separate ${limits.annualContributionLimit.toLocaleString()} annual contribution limit. The accounts are per child, not per family.
+    </p>
+
+    <h3>Mixed-Status Families</h3>
+    <p>
+      The eligibility requirements apply to <strong>the child</strong>, not the parent. If your child is a U.S. citizen with an SSN, they qualify even if one or both parents are not citizens. Filing may require a parent to have a tax ID (SSN or ITIN) to submit the tax return that includes {limits.form}.
+    </p>
+
+    <h3>Children Living Abroad</h3>
+    <p>
+      U.S. citizen children living abroad still qualify. Citizenship is what matters, not where the child lives. Parents who file U.S. tax returns from abroad can include {limits.form} with their return.
+    </p>
+
+    <h3>Foster Children</h3>
+    <p>
+      Foster children who are U.S. citizens with a valid SSN meet the basic requirements. The legal guardian or authorized individual would file {limits.form} on their behalf. Eligibility for the ${limits.pilotDeposit.toLocaleString()} deposit depends on birth year.
+    </p>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      Qualifying for a Trump Account is intentionally simple. <strong>U.S. citizen + SSN + under 18 = eligible.</strong> No income tests. No asset tests. No complicated paperwork beyond {limits.form}.
+    </p>
+    <p>
+      The biggest risk is not checking eligibility — it is <strong>forgetting to opt in</strong>. The government will not open an account for your child automatically. File {limits.form} with your 2025 tax return to make sure your child does not miss out.
+    </p>
+  </div>
+</BlogLayout>

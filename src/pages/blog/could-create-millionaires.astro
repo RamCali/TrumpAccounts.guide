@@ -1,0 +1,178 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('could-create-millionaires')!;
+const related = getRelatedArticles('could-create-millionaires');
+
+const faqs = [
+  {
+    question: 'Can a Trump Account really make my child a millionaire?',
+    answer: 'It is mathematically possible but not guaranteed. If the $1,000 deposit grows untouched at the S&P 500 historical average of 10% per year for 65 years (birth to age 65), it would reach roughly $490,000. With regular contributions during the first 18 years, the numbers can exceed $1 million in nominal terms. However, inflation, taxes, and variable market returns all affect the real outcome.',
+  },
+  {
+    question: 'Are these projections adjusted for inflation?',
+    answer: 'The 10% return projections are in nominal (future) dollars. After adjusting for historical average inflation of about 3%, the real return is closer to 7%. At 7% for 65 years, $1,000 grows to roughly $87,000 in today\'s purchasing power — still significant, but not a million dollars from the deposit alone.',
+  },
+  {
+    question: 'What is the Rule of 72?',
+    answer: 'The Rule of 72 is a shortcut for estimating how long it takes money to double. Divide 72 by the annual return rate. At 10%, money doubles every 7.2 years. Over 65 years, that is roughly 9 doublings — which is how $1,000 can become nearly $500,000.',
+  },
+  {
+    question: 'Does the child have to leave the money untouched until 65?',
+    answer: 'No. At age 18, the Trump Account converts to a traditional IRA and the child has full control. They can withdraw at any time (subject to income tax and potential early withdrawal penalties). The millionaire projections assume the money stays invested for decades, which is a choice, not a requirement.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>The ${limits.pilotDeposit.toLocaleString()} deposit alone, growing at 10% for 65 years, reaches roughly <strong class="text-white">$490,000</strong> in nominal terms.</li>
+        <li>Add $250/month for 18 years and the account hits ~$108,000 at age 18. Left untouched for 47 more years at 10%, that becomes over <strong class="text-white">$9 million</strong> (nominal).</li>
+        <li>Even at a conservative 7% (inflation-adjusted), the numbers are still <strong class="text-white">life-changing</strong>.</li>
+        <li>The secret ingredient is <strong class="text-white">time</strong> — starting at birth gives 65+ years of compounding.</li>
+        <li>These are projections, not promises. Inflation, taxes, and market volatility all matter.</li>
+      </ul>
+    </div>
+
+    <h2>The $1,000 That Could Become Half a Million</h2>
+    <p>
+      Here is a number that stops people mid-scroll: <strong>${limits.pilotDeposit.toLocaleString()} invested at birth could grow to roughly $490,000 by age 65.</strong>
+    </p>
+    <p>
+      No additional contributions. No tricks. Just the federal pilot deposit sitting in an S&P 500 index fund for 65 years at the historical average return of 10% per year.
+    </p>
+    <p>
+      How? The <strong>Rule of 72</strong>. At 10% annual returns, money doubles every 7.2 years. Over 65 years, that is about 9 doublings. And $1,000 doubled 9 times is $512,000. The actual compound math lands at roughly <strong>$490,370</strong>.
+    </p>
+
+    <CalloutBox type="info" title="Why 65 Years?">
+      <p>
+        A child born in 2025 gets the ${limits.pilotDeposit.toLocaleString()} deposit at birth. At age {limits.iraConversionAge}, the Trump Account converts to a traditional IRA. If the money stays invested until age 65 — a reasonable retirement target — that is 65 years of compound growth. Required minimum distributions (RMDs) start at age 73 under current law.
+      </p>
+    </CalloutBox>
+
+    <h2>Now Add Family Contributions</h2>
+    <p>
+      The deposit alone tells a compelling story. But most families will contribute monthly. That is where the math gets truly remarkable.
+    </p>
+    <p>
+      If a family contributes <strong>$250 per month</strong> ($3,000/year) from birth to age 18, on top of the ${limits.pilotDeposit.toLocaleString()} deposit, the account could reach roughly <strong>$108,000 at age 18</strong> at 10% average returns.
+    </p>
+    <p>
+      Now here is the key question: what happens if that 18-year-old leaves the money invested?
+    </p>
+    <p>
+      At 10% for another 47 years (age 18 to age 65), that $108,000 grows to over <strong>$9.3 million</strong> in nominal dollars. Even at 8%, it reaches over <strong>$3.5 million</strong>.
+    </p>
+
+    <h2>Projections: From Deposit to Retirement</h2>
+    <p>
+      This table shows what happens at different contribution levels, assuming 10% nominal returns and money left invested until age 65.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Monthly Contribution</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Value at 18</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Value at 65 (10%)</th>
+            <th class="py-3 text-gray-400 font-medium">Value at 65 (7%)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">$0 (deposit only)</td>
+            <td class="py-3 pr-4">$5,560</td>
+            <td class="py-3 pr-4 text-mint-400">$490,370</td>
+            <td class="py-3">$87,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">$100/month</td>
+            <td class="py-3 pr-4">$61,000</td>
+            <td class="py-3 pr-4 text-mint-400">$5.3M</td>
+            <td class="py-3">$940,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">$250/month</td>
+            <td class="py-3 pr-4">$108,000</td>
+            <td class="py-3 pr-4 text-mint-400">$9.3M</td>
+            <td class="py-3">$1.7M</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">$416/month (max)</td>
+            <td class="py-3 pr-4">$163,000</td>
+            <td class="py-3 pr-4 text-mint-400">$14.1M</td>
+            <td class="py-3">$2.5M</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Even in the inflation-adjusted column (7%), a family contributing $250/month creates a <strong>millionaire</strong> in real purchasing power. The deposit-only scenario still produces $87,000 in today's dollars — from a single government deposit that cost the family nothing.
+    </p>
+
+    <h2>The Secret: Time Is Everything</h2>
+    <p>
+      No other investment account in America gives a child <strong>65 years of compounding from day one</strong>. That is what makes Trump Accounts unique.
+    </p>
+    <p>
+      A 30-year-old opening an IRA has 35 years until retirement. A newborn with a Trump Account has nearly <strong>twice that runway</strong>. Compound growth is exponential — the last 10 years produce more wealth than the first 30 combined.
+    </p>
+    <p>
+      Consider this: at 10% returns, a $108,000 balance at age 18 becomes $1 million by roughly age 42. It crosses $5 million around age 59. The growth accelerates as the base gets larger.
+    </p>
+
+    <CalloutBox type="tip" title="The Compounding Curve">
+      <p>
+        In the first 18 years, you contribute $55,000 and the account grows to $108,000. In the next 47 years with zero new contributions, it grows from $108,000 to $9.3 million at 10%. That is the power of leaving compound growth alone.
+      </p>
+    </CalloutBox>
+
+    <h2>The Important Caveats</h2>
+    <p>
+      These numbers are real math, but they come with real caveats. Honesty matters more than hype.
+    </p>
+    <ul>
+      <li><strong>Inflation erodes purchasing power.</strong> $9.3 million in 65 years buys far less than $9.3 million today. At 3% average inflation, $9.3M in 2090 has roughly the purchasing power of $1.4M in today's dollars. Still life-changing — but not what "$9 million" sounds like today.</li>
+      <li><strong>Taxes apply on withdrawal.</strong> Trump Account funds are taxed as ordinary income when withdrawn (traditional IRA treatment). Depending on tax brackets at retirement, 20-30% could go to taxes.</li>
+      <li><strong>Past performance does not guarantee future results.</strong> The S&P 500 has averaged 10% historically, but future decades could be higher or lower. The 7% column is a more conservative planning number.</li>
+      <li><strong>The child controls the money at 18.</strong> These projections assume the money stays invested for decades. An 18-year-old could withdraw it all for college, a car, or anything else. That is their right.</li>
+    </ul>
+
+    <CalloutBox type="warning" title="Not Financial Advice">
+      <p>
+        This article is educational content based on historical data and compound interest math. It is not financial advice or a guarantee of future returns. The stock market involves risk. Consult a qualified financial professional for personal guidance.
+      </p>
+    </CalloutBox>
+
+    <h2>But the Math Is Real</h2>
+    <p>
+      Strip away the hype, and here is what remains: <strong>giving a child a head start in the stock market at birth, with decades of compounding ahead, creates extraordinary potential</strong>.
+    </p>
+    <p>
+      Even the most conservative scenario — ${limits.pilotDeposit.toLocaleString()} deposit only, 7% real returns, no additional contributions — produces $87,000 in today's purchasing power by age 65. That is $87,000 from a program that costs the family zero dollars.
+    </p>
+    <p>
+      For families who can contribute regularly, the potential is staggering. And it all starts with filing <a href="/blog/how-to-open-step-by-step">{limits.form}</a>.
+    </p>
+    <p>
+      Want to run your own projections? Try the <a href="/calculators/growth-calculator"><strong>Trump Account Growth Calculator</strong></a>. For a deeper look at return assumptions, read <a href="/blog/expected-returns-trump-account">Expected Returns for Trump Accounts</a>. And for what all this wealth creation means at a macro level, see <a href="/blog/wealth-creation-potential">Trump Accounts and Wealth Creation</a>.
+    </p>
+  </div>
+</BlogLayout>

@@ -1,0 +1,227 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('replicate-trump-account-yourself')!;
+const related = getRelatedArticles('replicate-trump-account-yourself');
+
+const faqs = [
+  {
+    question: 'Can I open both a Trump Account and a custodial account for my child?',
+    answer: 'Yes. If your child qualifies for a Trump Account, you can also open a custodial UTMA/UGMA account. They are separate accounts with separate rules. Many families use both.',
+  },
+  {
+    question: 'Is a custodial account as good as a Trump Account?',
+    answer: 'A custodial account does not come with the $1,000 government deposit, and the tax treatment is different (kiddie tax rules apply). But it offers more flexibility — you can invest in anything, withdraw at any time, and there is no age-18 lock-in.',
+  },
+  {
+    question: 'What is the kiddie tax?',
+    answer: 'The kiddie tax means that unearned income (like investment gains) above a certain threshold in a child\'s custodial account is taxed at the parent\'s marginal tax rate. For 2025, the first $1,300 is tax-free, the next $1,300 is taxed at the child\'s rate, and anything above that is taxed at the parent\'s rate.',
+  },
+  {
+    question: 'Can my child born in 2020 get the $1,000 federal deposit?',
+    answer: 'No. The $1,000 pilot deposit is only for children born between January 1, 2025 and December 31, 2028. Children born before 2025 can still open a Trump Account and receive family contributions, but there is no government deposit.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>If your child was <strong class="text-white">born before 2025</strong> or is <strong class="text-white">already over 18</strong>, they do not get the $1,000 deposit.</li>
+        <li>You can replicate the Trump Account strategy with a <strong class="text-white">custodial brokerage account (UTMA/UGMA)</strong>.</li>
+        <li>Invest in the same S&P 500 index funds: <strong class="text-white">VOO, IVV, SPLG, or SPY</strong>.</li>
+        <li>Key differences: no government deposit, different tax rules (kiddie tax), no age-18 lock-in, and more investment flexibility.</li>
+        <li>Children born before 2025 but under 18 can <strong class="text-white">still open a Trump Account</strong> &mdash; just without the $1,000 deposit.</li>
+      </ul>
+    </div>
+
+    <p>
+      Not every child qualifies for the <strong>${limits.pilotDeposit.toLocaleString()} federal deposit</strong>. That deposit is only for children born between {limits.pilotDepositStartYear} and {limits.pilotDepositEndYear}. If your child was born before 2025, is already 18, or does not have U.S. citizenship, they miss the deposit.
+    </p>
+
+    <p>
+      But the <em>strategy</em> behind a Trump Account is not new. You can replicate it yourself using a custodial brokerage account and the same index funds. Here is how.
+    </p>
+
+    <h2>Option 1: Open a Trump Account Without the Deposit</h2>
+
+    <p>
+      This is the first thing to check. Children born <strong>before 2025 but still under 18</strong> can open a Trump Account. They will not receive the ${limits.pilotDeposit.toLocaleString()} government deposit, but they can still receive up to <strong>${limits.annualContributionLimit.toLocaleString()}/year</strong> in family contributions and up to <strong>${limits.employerContributionLimit.toLocaleString()}</strong> from an employer.
+    </p>
+
+    <p>
+      The account works the same way: money goes into eligible S&P 500 index funds, grows tax-deferred, and converts to a traditional IRA at age 18. The only difference is the missing deposit.
+    </p>
+
+    <CalloutBox type="tip" title="Check eligibility first">
+      If your child is a U.S. citizen, has an SSN, and is under 18, they can open a Trump Account even without the $1,000 deposit. File {limits.form} and start contributing. See our <a href="/blog/how-to-open-step-by-step" class="text-mint-300 hover:text-mint-200">step-by-step guide</a>.
+    </CalloutBox>
+
+    <h2>Option 2: Open a Custodial Brokerage Account</h2>
+
+    <p>
+      If your child is over 18 or does not qualify for a Trump Account, a <strong>custodial brokerage account</strong> is the next best thing. These come in two types:
+    </p>
+
+    <ul>
+      <li><strong>UTMA (Uniform Transfers to Minors Act)</strong> &mdash; available in all 50 states, can hold any type of asset.</li>
+      <li><strong>UGMA (Uniform Gifts to Minors Act)</strong> &mdash; more limited in what it can hold, but available everywhere.</li>
+    </ul>
+
+    <p>
+      You can open a UTMA/UGMA at any major brokerage: Fidelity, Vanguard, Charles Schwab, or others. The process takes about 15 minutes online.
+    </p>
+
+    <h2>Step-by-Step: Replicate the Strategy</h2>
+
+    <p>
+      Here is how to mirror the Trump Account approach:
+    </p>
+
+    <p>
+      <strong>Step 1: Open a custodial account.</strong> Choose a brokerage with low fees. Fidelity and Schwab both offer custodial accounts with no account minimums and no maintenance fees.
+    </p>
+
+    <p>
+      <strong>Step 2: Buy the same index funds.</strong> Invest in S&P 500 index funds or ETFs. The same ones eligible for Trump Accounts work perfectly:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Fund</th>
+            <th class="pb-2 pr-4">Ticker</th>
+            <th class="pb-2">Expense Ratio</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">Vanguard S&P 500 ETF</td>
+            <td class="py-2 pr-4 font-mono text-gold-400">VOO</td>
+            <td class="py-2">0.03%</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">iShares Core S&P 500 ETF</td>
+            <td class="py-2 pr-4 font-mono text-gold-400">IVV</td>
+            <td class="py-2">0.03%</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">SPDR Portfolio S&P 500 ETF</td>
+            <td class="py-2 pr-4 font-mono text-gold-400">SPLG</td>
+            <td class="py-2">0.02%</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4">SPDR S&P 500 ETF Trust</td>
+            <td class="py-2 pr-4 font-mono text-gold-400">SPY</td>
+            <td class="py-2">0.09%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      <strong>Step 3: Contribute regularly.</strong> Set up automatic monthly contributions. Aim for $200-$417/month to mirror the Trump Account contribution pace.
+    </p>
+
+    <p>
+      <strong>Step 4: Leave it alone.</strong> Do not sell during downturns. The whole point is long-term compounding. A Trump Account forces this by locking funds until 18. With a custodial account, you have to enforce this discipline yourself.
+    </p>
+
+    <h2>Key Differences You Need to Know</h2>
+
+    <p>
+      A custodial account is not a perfect clone of a Trump Account. Here are the important differences:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Feature</th>
+            <th class="pb-2 pr-4">Trump Account</th>
+            <th class="pb-2">Custodial (UTMA/UGMA)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-medium text-white">Government deposit</td>
+            <td class="py-2 pr-4">$1,000 (2025-2028 births)</td>
+            <td class="py-2">None</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-medium text-white">Annual limit</td>
+            <td class="py-2 pr-4">$5,000</td>
+            <td class="py-2">No limit (gift tax rules apply above $18,000)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-medium text-white">Tax treatment</td>
+            <td class="py-2 pr-4">Tax-deferred growth, ordinary income on withdrawal</td>
+            <td class="py-2">Kiddie tax on gains above threshold</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-medium text-white">Withdrawals before 18</td>
+            <td class="py-2 pr-4">Not allowed (with limited exceptions)</td>
+            <td class="py-2">Allowed for child's benefit</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-medium text-white">Investment options</td>
+            <td class="py-2 pr-4">S&P 500 / broad U.S. equity index only</td>
+            <td class="py-2">Any stock, bond, ETF, or mutual fund</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-medium text-white">At age 18</td>
+            <td class="py-2 pr-4">Converts to traditional IRA</td>
+            <td class="py-2">Transfers to child as a regular brokerage account</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4 font-medium text-white">Employer contribution</td>
+            <td class="py-2 pr-4">Up to $2,500 tax-free</td>
+            <td class="py-2">Not available</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <CalloutBox type="warning" title="The kiddie tax matters">
+      In a custodial account, your child's investment gains above a certain threshold are taxed at the parent's tax rate. This can be a significant difference compared to the Trump Account's tax-deferred growth. For 2025, the threshold is $2,600 in unearned income.
+    </CalloutBox>
+
+    <h2>The Biggest Advantage: Flexibility</h2>
+
+    <p>
+      A custodial account has one major advantage over a Trump Account: <strong>flexibility</strong>. You can invest in anything, not just S&P 500 index funds. You can withdraw for the child's benefit at any time. And there is no annual contribution cap (though gift tax rules apply above $18,000/year per giver).
+    </p>
+
+    <p>
+      That flexibility is also the biggest risk. Without the forced lock-in, it is tempting to withdraw during emergencies or sell during market downturns. The Trump Account's restrictions protect the investment. A custodial account requires more discipline.
+    </p>
+
+    <h2>Our Recommendation</h2>
+
+    <p>
+      If your child qualifies for a Trump Account, <strong>open one first</strong>. The tax-deferred growth and potential government deposit make it the better vehicle for long-term wealth building.
+    </p>
+
+    <p>
+      If your child does not qualify &mdash; or if you want to save beyond the ${limits.annualContributionLimit.toLocaleString()} annual cap &mdash; a custodial brokerage account is an excellent supplement. Buy the same low-cost S&P 500 index funds, contribute regularly, and resist the urge to touch it.
+    </p>
+
+    <p>
+      For a deeper comparison, see our <a href="/compare/trump-account-vs-custodial-account">Trump Account vs. custodial account comparison</a>. And check out our guide to the <a href="/blog/index-fund-requirements">index fund requirements</a> to make sure you are picking the right funds.
+    </p>
+  </div>
+</BlogLayout>

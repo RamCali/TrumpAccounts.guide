@@ -1,0 +1,227 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('what-can-money-be-used-for')!;
+const related = getRelatedArticles('what-can-money-be-used-for');
+
+const faqs = [
+  {
+    question: 'Can I use Trump Account money for anything I want?',
+    answer: 'Yes. Once the account converts to a traditional IRA at age 18, there are no restrictions on what you spend withdrawn funds on. You can use it for college, a home, a business, or anything else. However, all withdrawals are taxed as ordinary income, and withdrawals before age 59.5 face an additional 10% early withdrawal penalty (with some exceptions).',
+  },
+  {
+    question: 'What are the exceptions to the 10% early withdrawal penalty?',
+    answer: 'The main exceptions include: first-time home purchase (up to $10,000), qualified education expenses, total and permanent disability, death of the account holder, unreimbursed medical expenses exceeding 7.5% of AGI, and substantially equal periodic payments (SEPP/72t). Even with these exceptions, the withdrawal is still taxed as ordinary income.',
+  },
+  {
+    question: 'Can I withdraw from a Trump Account before age 18?',
+    answer: 'No. Before age 18, withdrawals are not allowed except in three narrow situations: rollovers to another Trump Account, return of excess contributions, or death of the beneficiary.',
+  },
+  {
+    question: 'Is a Trump Account better than a 529 for college?',
+    answer: 'It depends. A 529 offers tax-free withdrawals for qualified education expenses, which is a significant advantage for college savings. A Trump Account (traditional IRA at 18) taxes all withdrawals as ordinary income. However, the Trump Account has no restrictions on use, while 529 money must go to education. Many families use both.',
+  },
+  {
+    question: 'Do I pay taxes on Trump Account withdrawals?',
+    answer: 'Yes. All withdrawals after age 18 are taxed as ordinary income, regardless of what you use the money for. This is because the Trump Account converts to a traditional IRA, where contributions were made with after-tax dollars but growth was tax-deferred.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>At age <strong class="text-white">{limits.iraConversionAge}</strong>, the Trump Account converts to a <strong class="text-white">traditional IRA</strong>. Your child takes full control.</li>
+        <li>There are <strong class="text-white">no restrictions</strong> on what the money can be used for — college, a home, a business, or anything else.</li>
+        <li>All withdrawals are taxed as <strong class="text-white">ordinary income</strong>.</li>
+        <li>Before age 59.5, there is an extra <strong class="text-white">10% early withdrawal penalty</strong> — with important exceptions.</li>
+        <li>Before age 18, <strong class="text-white">no withdrawals are allowed</strong> (except rollovers, excess contributions, or death).</li>
+      </ul>
+    </div>
+
+    <p>
+      One of the biggest questions parents ask: <strong>What can my child actually do with the money in a Trump Account?</strong>
+    </p>
+    <p>
+      The short answer is <strong>anything</strong>. But the tax rules matter. Here is exactly how it works, what it costs, and the smartest ways to use these funds.
+    </p>
+
+    <h2>Before Age 18: The Money Is Locked</h2>
+    <p>
+      During the growth phase (birth through age {limits.growthPhaseEndAge}), Trump Account funds are invested in S&P 500 or broad U.S. equity index funds. <strong>No withdrawals are allowed</strong> during this period.
+    </p>
+    <p>
+      There are only three exceptions:
+    </p>
+    <ul>
+      <li><strong>Rollovers</strong> — moving to another Trump Account (like changing custodians)</li>
+      <li><strong>Excess contributions</strong> — getting back money that exceeded the ${limits.annualContributionLimit.toLocaleString()}/year limit</li>
+      <li><strong>Death of the beneficiary</strong> — funds go to the estate or designated beneficiary</li>
+    </ul>
+    <p>
+      That is it. No hardship exceptions. No emergency access. The money stays invested. This is by design — it forces <a href="/blog/how-much-at-age-18">18 years of uninterrupted compounding</a>.
+    </p>
+
+    <h2>At Age 18: It Becomes a Traditional IRA</h2>
+    <p>
+      On your child's 18th birthday, the Trump Account <strong>automatically converts to a traditional IRA</strong>. Your child takes full control. From that point forward, standard IRA rules apply.
+    </p>
+    <p>
+      Here is the critical part: <strong>there are zero restrictions on what the money can be used for.</strong> Your child can withdraw funds for:
+    </p>
+    <ul>
+      <li><a href="/blog/trump-account-for-college">College tuition and education</a></li>
+      <li><a href="/blog/trump-account-for-first-home">A first home down payment</a></li>
+      <li><a href="/blog/trump-account-for-business">Starting a business</a></li>
+      <li><a href="/blog/trump-account-for-trade-school">Trade school or vocational training</a></li>
+      <li>A car, travel, or living expenses</li>
+      <li>Keeping it invested for <a href="/blog/trump-account-retirement-conversion">retirement</a></li>
+    </ul>
+    <p>
+      The IRS does not care what you spend it on. It is your money. But every dollar you take out has tax consequences.
+    </p>
+
+    <h2>The Tax Cost of Withdrawals</h2>
+    <p>
+      Every withdrawal from a traditional IRA is taxed as <strong>ordinary income</strong>. That means the money gets added to your child's income for the year and taxed at their marginal rate.
+    </p>
+
+    <CalloutBox type="warning" title="Tax + penalty before 59.5">
+      <p>
+        If your child withdraws before age 59.5, they pay <strong>ordinary income tax PLUS a 10% early withdrawal penalty</strong>. For example, a $20,000 withdrawal in the 12% tax bracket costs $2,400 in taxes plus $2,000 in penalties — a total of <strong>$4,400</strong>.
+      </p>
+    </CalloutBox>
+
+    <p>
+      Here is how the math works at different withdrawal amounts (assuming a 12% tax bracket):
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Withdrawal</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Income Tax (12%)</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">10% Penalty</th>
+            <th class="py-3 text-gray-400 font-medium">Total Cost</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">$10,000</td>
+            <td class="py-3 pr-4">$1,200</td>
+            <td class="py-3 pr-4">$1,000</td>
+            <td class="py-3 font-medium text-amber-300">$2,200</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">$25,000</td>
+            <td class="py-3 pr-4">$3,000</td>
+            <td class="py-3 pr-4">$2,500</td>
+            <td class="py-3 font-medium text-amber-300">$5,500</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">$50,000</td>
+            <td class="py-3 pr-4">$6,000</td>
+            <td class="py-3 pr-4">$5,000</td>
+            <td class="py-3 font-medium text-amber-300">$11,000</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">$100,000</td>
+            <td class="py-3 pr-4">$12,000</td>
+            <td class="py-3 pr-4">$10,000</td>
+            <td class="py-3 font-medium text-amber-300">$22,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Note: larger withdrawals may push your child into a higher tax bracket, making the effective rate higher than 12%.
+    </p>
+
+    <h2>Exceptions to the 10% Early Withdrawal Penalty</h2>
+    <p>
+      The IRS allows several exceptions where the <strong>10% penalty is waived</strong>. You still pay ordinary income tax on the withdrawal, but you avoid the extra 10%. These exceptions include:
+    </p>
+    <ul>
+      <li><strong>First-time home purchase</strong> — up to <strong>$10,000</strong> lifetime (<a href="/blog/trump-account-for-first-home">full guide</a>)</li>
+      <li><strong>Qualified education expenses</strong> — tuition, fees, books at eligible institutions</li>
+      <li><strong>Total and permanent disability</strong></li>
+      <li><strong>Death</strong> — funds go to beneficiary or estate</li>
+      <li><strong>Unreimbursed medical expenses</strong> — amounts exceeding 7.5% of adjusted gross income</li>
+      <li><strong>Substantially equal periodic payments (SEPP)</strong> — also called 72(t) distributions, which require a structured withdrawal plan</li>
+      <li><strong>Health insurance premiums</strong> — if unemployed for 12+ consecutive weeks</li>
+      <li><strong>IRS levy</strong> — if the IRS seizes the funds for unpaid taxes</li>
+    </ul>
+
+    <CalloutBox type="info" title="Penalty-free does not mean tax-free">
+      <p>
+        Even when the 10% penalty is waived, the withdrawal is <strong>still taxed as ordinary income</strong>. The only exception to paying taxes entirely would be if your child <a href="/blog/trump-account-retirement-conversion">converts to a Roth IRA</a> first, pays taxes on the conversion, then makes qualified Roth withdrawals later.
+      </p>
+    </CalloutBox>
+
+    <h2>How Does This Compare to a 529?</h2>
+    <p>
+      Parents often ask whether a Trump Account or a <a href="/compare/trump-account-vs-529">529 plan</a> is better. The key difference is tax treatment:
+    </p>
+    <ul>
+      <li><strong>529 plan:</strong> Withdrawals are <strong>tax-free</strong> for qualified education expenses (tuition, room, board, books). But money used for non-education purposes faces income tax plus a 10% penalty on earnings.</li>
+      <li><strong>Trump Account:</strong> Withdrawals are <strong>taxed as ordinary income</strong> no matter what you use them for. More flexible, but less tax-efficient for education.</li>
+    </ul>
+
+    <CalloutBox type="tip" title="Use both accounts together">
+      <p>
+        The smartest strategy for many families is to use a <strong>529 for education expenses</strong> (tax-free withdrawals) and the <strong>Trump Account for everything else</strong> — a first home, a business, or long-term retirement savings. This way you get the best tax treatment for each purpose.
+      </p>
+    </CalloutBox>
+
+    <h2>How Does This Compare to a Roth IRA?</h2>
+    <p>
+      A Roth IRA is funded with after-tax dollars, and qualified withdrawals after age 59.5 are completely <strong>tax-free</strong>. Your child can also withdraw Roth <em>contributions</em> (not earnings) at any time with no tax or penalty.
+    </p>
+    <p>
+      At age 18, your child could <a href="/blog/trump-account-retirement-conversion">convert the Trump Account to a Roth IRA</a>. They would pay income tax on the conversion amount, but all future growth and qualified withdrawals would be tax-free. If your child has low income at 18, this can be a powerful strategy.
+    </p>
+
+    <h2>After Age 59.5: No More Penalty</h2>
+    <p>
+      Once your child reaches age 59.5, the 10% early withdrawal penalty disappears. Withdrawals are still taxed as ordinary income, but there is no extra penalty. And starting at age 73, <strong>required minimum distributions (RMDs)</strong> kick in — the IRS requires annual withdrawals from traditional IRAs.
+    </p>
+    <p>
+      If your child keeps the money invested from age 18 to 59.5, that is <strong>41 additional years of compound growth</strong>. The <a href="/blog/could-create-millionaires">potential for the account to grow into seven figures</a> is very real.
+    </p>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      A Trump Account gives your child <strong>total flexibility</strong> at age 18. There are no restrictions on use — just tax consequences. The smartest approach depends on your child's goals:
+    </p>
+    <ul>
+      <li><strong>College?</strong> Consider pairing with a 529 for tax-free education withdrawals.</li>
+      <li><strong>First home?</strong> Use the $10,000 penalty-free exception.</li>
+      <li><strong>Business?</strong> Weigh the tax cost against the opportunity.</li>
+      <li><strong>Retirement?</strong> Keep it invested or convert to Roth for tax-free growth.</li>
+    </ul>
+    <p>
+      Use our <a href="/calculators/withdrawal-simulator"><strong>Withdrawal Simulator</strong></a> to model different scenarios, or visit the <a href="/faq/withdrawals-and-use">withdrawals FAQ</a> for more details.
+    </p>
+
+    <CalloutBox type="warning" title="Not financial advice">
+      <p>
+        This is educational content, not tax or financial advice. Tax rules are complex and depend on individual circumstances. Consult a qualified tax professional before making withdrawal decisions.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

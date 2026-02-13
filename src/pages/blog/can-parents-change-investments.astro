@@ -1,0 +1,149 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('can-parents-change-investments')!;
+const related = getRelatedArticles('can-parents-change-investments');
+
+const faqs = [
+  {
+    question: 'Can I switch from VOO to SPLG in my child\'s Trump Account?',
+    answer: 'Yes. Both are eligible S&P 500 index funds with expense ratios below the 0.1% cap. The parent (authorized individual) can switch between any eligible funds during the growth phase.',
+  },
+  {
+    question: 'Is there a fee to switch funds?',
+    answer: 'Most brokerages charge zero commissions on ETF trades. Check with your specific custodian, but switching between eligible ETFs is typically free.',
+  },
+  {
+    question: 'How often can I switch funds?',
+    answer: 'The law does not set a specific limit on how often you can switch. However, your custodian may have policies around frequent trading. In practice, there is rarely a good reason to switch often — eligible funds all track the same index.',
+  },
+  {
+    question: 'Can I split the account between two eligible funds?',
+    answer: 'This depends on the custodian. Some may allow you to hold multiple eligible funds within one Trump Account. Check with your brokerage for their specific rules.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Yes, parents can <strong class="text-white">switch between eligible funds</strong> during the growth phase.</li>
+        <li>You can move from VOO to SPLG, IVV, or any other <strong class="text-white">qualifying index fund</strong>.</li>
+        <li>You <strong class="text-white">cannot switch to</strong> individual stocks, bonds, crypto, or non-eligible funds.</li>
+        <li>Switching is usually <strong class="text-white">commission-free</strong> at major brokerages.</li>
+        <li>In most cases, you <strong class="text-white">should not switch often</strong> — pick the lowest-cost fund and stick with it.</li>
+      </ul>
+    </div>
+
+    <h2>Yes, You Can Change Funds</h2>
+    <p>
+      As the parent or legal guardian (called the "authorized individual" under IRC Section 530A), you manage your child's Trump Account during the growth phase. This includes the ability to <strong>choose and change which eligible fund</strong> the money is invested in.
+    </p>
+    <p>
+      You can switch between any funds that meet the Trump Account requirements:
+    </p>
+    <ul>
+      <li>The fund must track the <strong>S&P 500 or a broad U.S. equity index</strong>.</li>
+      <li>The fund must have an <strong>expense ratio at or below 0.1%</strong>.</li>
+    </ul>
+    <p>
+      So if you started with VOO and later decide SPLG offers a lower expense ratio, you can make that switch. If your custodian adds a new eligible fund, you can move to it.
+    </p>
+
+    <h2>What You CAN Switch Between</h2>
+    <p>
+      Here are examples of eligible swaps:
+    </p>
+    <ul>
+      <li><strong>VOO to SPLG</strong> — moving to a lower-cost S&P 500 ETF</li>
+      <li><strong>SPY to VOO</strong> — reducing expense ratio from 0.09% to 0.03%</li>
+      <li><strong>IVV to SPLG</strong> — switching providers while staying in the S&P 500</li>
+      <li><strong>An eligible mutual fund to an eligible ETF</strong> — or vice versa</li>
+    </ul>
+    <p>
+      All of these are fine because both the source and destination funds meet the Trump Account eligibility criteria.
+    </p>
+
+    <h2>What You CANNOT Switch To</h2>
+    <p>
+      The law is clear about what is off-limits. You cannot move Trump Account money into any of the following — even temporarily:
+    </p>
+    <ul>
+      <li><strong>Individual stocks</strong> — Not even shares of S&P 500 companies</li>
+      <li><strong>Bonds or bond funds</strong> — Including Treasury bonds</li>
+      <li><strong>Crypto or crypto ETFs</strong> — No exceptions</li>
+      <li><strong>Real estate or REITs</strong></li>
+      <li><strong>Cash or money market funds</strong> — The money must stay invested in equities</li>
+      <li><strong>International-only funds</strong> — Must be U.S. equity focused</li>
+      <li><strong>Sector or thematic funds</strong> — No tech-only or healthcare-only funds</li>
+      <li><strong>Any fund with an expense ratio above 0.1%</strong></li>
+    </ul>
+
+    <CalloutBox type="warning" title="You Cannot Move to Cash">
+      <p>
+        Even during a market crash, you cannot move Trump Account money to cash, bonds, or a money market fund. The investment must remain in eligible index funds throughout the growth phase. This is a legal requirement, not a custodian policy.
+      </p>
+    </CalloutBox>
+
+    <h2>How Often Can You Switch?</h2>
+    <p>
+      The law itself does not set a specific limit on switching frequency. However, there are practical considerations:
+    </p>
+    <ul>
+      <li><strong>Custodian policies:</strong> Some brokerages have rules against excessive trading or short-term round-trip trades in the same fund. Check your custodian's trading policies.</li>
+      <li><strong>Settlement times:</strong> ETF trades typically settle in one business day. You may need to wait for settlement before buying a different fund.</li>
+      <li><strong>Mutual fund rules:</strong> Some mutual funds have short-term trading fees or holding periods. ETFs generally do not have these restrictions.</li>
+    </ul>
+
+    <h2>Should You Switch? (Probably Not)</h2>
+    <p>
+      Here is the practical advice: <strong>pick the lowest-cost eligible fund and leave it alone</strong>.
+    </p>
+    <p>
+      All eligible Trump Account funds track the same index or a very similar one. The S&P 500 is the S&P 500, whether you hold it through VOO, SPLG, IVV, or SPY. The only meaningful difference between them is the <a href="/blog/trump-account-fees-explained">expense ratio</a>.
+    </p>
+    <p>
+      There are only a few good reasons to switch:
+    </p>
+    <ol>
+      <li><strong>A cheaper fund becomes available.</strong> If a new ETF launches with a lower expense ratio and your custodian supports it, switching makes sense.</li>
+      <li><strong>Your fund raises its expense ratio.</strong> Unlikely for major ETFs, but if it happens, move to a cheaper alternative.</li>
+      <li><strong>You change custodians.</strong> If you move to a new brokerage that does not carry your current fund, you will need to switch to one they offer.</li>
+    </ol>
+
+    <CalloutBox type="tip" title="Set It and Forget It">
+      <p>
+        The best strategy for a Trump Account is also the simplest. Choose SPLG (0.02%) or VOO (0.03%), set up automatic monthly contributions, and do not touch it for 18 years. That is it. Switching funds frequently does not improve returns when they all track the same index.
+      </p>
+    </CalloutBox>
+
+    <h2>Who Makes the Decision?</h2>
+    <p>
+      During the growth phase (birth to age {limits.growthPhaseEndAge}), the <strong>authorized individual</strong> — typically a parent or legal guardian — controls all investment decisions. This includes:
+    </p>
+    <ul>
+      <li>Choosing the initial fund</li>
+      <li>Switching between eligible funds</li>
+      <li>Making contributions</li>
+    </ul>
+    <p>
+      At age {limits.iraConversionAge}, the account converts to a traditional IRA and <strong>full control transfers to the child</strong>. At that point, the child (now an adult) can invest in anything allowed under standard IRA rules — not just S&P 500 index funds.
+    </p>
+    <p>
+      For more on account control, read <a href="/blog/who-controls-trump-account">Who Controls a Trump Account Before 18?</a> For a detailed comparison of the eligible funds, see <a href="/blog/trump-account-vs-sp500-etfs">Best S&P 500 ETFs for Trump Accounts</a>. And to understand the full list of eligible fund requirements, visit our <a href="/blog/index-fund-requirements">Index Fund Requirements</a> guide.
+    </p>
+  </div>
+</BlogLayout>

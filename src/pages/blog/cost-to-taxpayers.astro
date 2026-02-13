@@ -1,0 +1,163 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('cost-to-taxpayers')!;
+const related = getRelatedArticles('cost-to-taxpayers');
+
+const faqs = [
+  {
+    question: 'How much do Trump Accounts cost taxpayers per year?',
+    answer: `The pilot deposits cost roughly $3.6 billion per year (about 3.6 million births times $${limits.pilotDeposit.toLocaleString()} each). Over the four-year pilot window (${limits.pilotDepositStartYear}-${limits.pilotDepositEndYear}), that totals approximately $14.4 billion in federal spending.`,
+  },
+  {
+    question: 'Is the Dell pledge taxpayer money?',
+    answer: `No. The Dell Foundation's $6.25 billion pledge is entirely private money from Michael and Susan Dell. It does not come from the federal budget or tax revenue.`,
+  },
+  {
+    question: 'How does the cost compare to other federal programs?',
+    answer: 'At roughly $3.6 billion per year, the pilot deposit program is about 0.06% of the annual federal budget of approximately $6.5 trillion. For comparison, the Child Tax Credit costs over $100 billion per year.',
+  },
+  {
+    question: 'Could Trump Accounts save the government money long-term?',
+    answer: 'Potentially. If children who receive accounts build wealth by age 18, they may rely less on government assistance programs later in life and generate more tax revenue from withdrawals. However, these effects will not be measurable for at least 18 years.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>The pilot deposits cost roughly <strong class="text-white">$3.6 billion per year</strong> for four years (2025-2028), totaling about <strong class="text-white">$14.4 billion</strong>.</li>
+        <li>Administrative costs for the IRS, custodians, and the trumpaccounts.gov portal add to the total.</li>
+        <li>The <a href="/blog/dell-pledge-explained" class="text-gold-400 hover:text-gold-300">Dell pledge of $6.25 billion</a> is private money — not a taxpayer expense.</li>
+        <li>Long-term savings from reduced government dependency are possible but hard to measure for decades.</li>
+        <li>The program is funded through general revenue as part of the <strong class="text-white">OBBBA</strong>.</li>
+      </ul>
+    </div>
+
+    <p>
+      Any new government program raises a fair question: <strong>how much does it cost?</strong> Here is a straightforward look at the numbers behind Trump Accounts, with no spin in either direction.
+    </p>
+
+    <h2>The Pilot Deposit: $3.6 Billion Per Year</h2>
+    <p>
+      The federal government provides a one-time <strong>${limits.pilotDeposit.toLocaleString()} deposit</strong> for every eligible child born between <strong>January 1, {limits.pilotDepositStartYear}</strong> and <strong>December 31, {limits.pilotDepositEndYear}</strong>. About <strong>3.6 million babies</strong> are born in the United States each year. That means the annual cost of the pilot deposits is roughly <strong>$3.6 billion</strong>.
+    </p>
+    <p>
+      Over the four-year pilot window, the total cost comes to approximately <strong>$14.4 billion</strong>. After 2028, no more pilot deposits are made — though families can still open Trump Accounts and contribute their own money.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Year</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Est. Births</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Deposit per Child</th>
+            <th class="py-3 text-gray-400 font-medium">Est. Cost</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">2025</td>
+            <td class="py-3 pr-4">~3.6 million</td>
+            <td class="py-3 pr-4">$1,000</td>
+            <td class="py-3">~$3.6 billion</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">2026</td>
+            <td class="py-3 pr-4">~3.6 million</td>
+            <td class="py-3 pr-4">$1,000</td>
+            <td class="py-3">~$3.6 billion</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">2027</td>
+            <td class="py-3 pr-4">~3.6 million</td>
+            <td class="py-3 pr-4">$1,000</td>
+            <td class="py-3">~$3.6 billion</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">2028</td>
+            <td class="py-3 pr-4">~3.6 million</td>
+            <td class="py-3 pr-4">$1,000</td>
+            <td class="py-3">~$3.6 billion</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr class="border-t border-surface-500">
+            <td class="py-3 pr-4 font-bold text-white" colspan="3">Total (4 years)</td>
+            <td class="py-3 font-bold text-gold-400">~$14.4 billion</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <h2>Administrative Costs</h2>
+    <p>
+      Beyond the deposits themselves, there are costs to run the program. The IRS must process <strong>Form 4547</strong> elections, manage the <strong>trumpaccounts.gov</strong> portal, and coordinate with approved custodians who hold the accounts. These administrative costs have not been fully detailed yet, but they add to the total.
+    </p>
+    <p>
+      Custodians (the financial institutions that hold the accounts) also bear costs for account setup, compliance, and reporting. Some of these costs are absorbed by the private sector, not taxpayers.
+    </p>
+
+    <h2>The Dell Pledge: $6.25 Billion in Private Money</h2>
+    <p>
+      An important distinction: the <a href="/blog/dell-pledge-explained"><strong>Dell Foundation's $6.25 billion pledge</strong></a> is entirely private money. Michael and Susan Dell committed $250 per child under age 10 in ZIP codes where median household income is below $150,000. This is <strong>not taxpayer-funded</strong> and should not be counted as a government expense.
+    </p>
+
+    <CalloutBox type="info" title="Public vs. private funding">
+      <p>
+        The $14.4 billion in pilot deposits comes from the federal budget (general revenue). The $6.25 billion Dell pledge comes from the Dell Foundation. Together, they represent roughly $20.6 billion in total deposits — but only $14.4 billion is taxpayer money.
+      </p>
+    </CalloutBox>
+
+    <h2>Putting It in Context</h2>
+    <p>
+      The federal budget is roughly <strong>$6.5 trillion per year</strong>. At $3.6 billion per year, the Trump Account pilot deposits represent about <strong>0.06%</strong> of annual federal spending. For context:
+    </p>
+    <ul>
+      <li>The Child Tax Credit costs over <strong>$100 billion/year</strong></li>
+      <li>SNAP (food stamps) costs roughly <strong>$110 billion/year</strong></li>
+      <li>Federal student aid totals over <strong>$150 billion/year</strong></li>
+    </ul>
+    <p>
+      That does not make the cost insignificant. But it does put it in perspective relative to other programs aimed at families and children.
+    </p>
+
+    <h2>Could It Save Money Long-Term?</h2>
+    <p>
+      This is where the math gets speculative. If Trump Accounts successfully help a generation build wealth, the government could see <strong>two long-term benefits</strong>:
+    </p>
+    <ul>
+      <li><strong>Reduced safety net spending</strong> — Young adults with $50,000+ in assets may be less likely to need government assistance</li>
+      <li><strong>Increased tax revenue</strong> — Withdrawals from the accounts are taxed as ordinary income, generating future federal revenue</li>
+    </ul>
+    <p>
+      However, these effects will not be measurable until the first cohort of children reaches age 18 in <strong>2043</strong>. Any long-term savings projections are estimates, not certainties.
+    </p>
+
+    <h2>How It Is Funded</h2>
+    <p>
+      The pilot deposit program is funded through <strong>general revenue</strong> as part of the One Big Beautiful Bill Act (OBBBA), signed into law on <strong>July 4, 2025</strong>. There is no dedicated tax or fee that pays for Trump Accounts specifically. The cost is part of the overall federal budget.
+    </p>
+
+    <CalloutBox type="warning" title="Educational content only">
+      <p>
+        This article presents publicly available budget data and estimates. It is not political commentary. For official figures, refer to the Congressional Budget Office and IRS guidance.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

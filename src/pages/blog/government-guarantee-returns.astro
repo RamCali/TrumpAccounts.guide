@@ -1,0 +1,141 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('government-guarantee-returns')!;
+const related = getRelatedArticles('government-guarantee-returns');
+
+const faqs = [
+  {
+    question: 'Does the government guarantee Trump Account investment returns?',
+    answer: 'No. The government provides the $1,000 pilot deposit for eligible children, but it does not guarantee any investment returns. Returns depend entirely on the performance of the S&P 500 or broad U.S. equity index fund the money is invested in.',
+  },
+  {
+    question: 'Is the $1,000 federal deposit guaranteed?',
+    answer: `Yes. The $${limits.pilotDeposit.toLocaleString()} one-time deposit for children born between ${limits.pilotDepositStartYear} and ${limits.pilotDepositEndYear} is a guaranteed federal contribution. Once deposited, it is invested and subject to market performance.`,
+  },
+  {
+    question: 'Are Trump Accounts FDIC insured?',
+    answer: 'No. Trump Accounts are investment accounts, not bank accounts. FDIC insurance covers bank deposits, not stock market investments. However, the brokerage custodian holding the account is typically covered by SIPC, which protects against broker failure (not investment losses).',
+  },
+  {
+    question: 'Has the S&P 500 ever lost money over an 18-year period?',
+    answer: 'No. Looking at historical data, every 18-year rolling period in S&P 500 history has produced a positive return. However, past performance does not guarantee future results, and there is no mathematical certainty this pattern will continue.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>The government <strong class="text-white">does NOT guarantee</strong> investment returns on Trump Accounts.</li>
+        <li>The <strong class="text-white">${limits.pilotDeposit.toLocaleString()} federal deposit</strong> is guaranteed — it will be placed in the account for eligible children.</li>
+        <li>Once invested, the money is <strong class="text-white">subject to stock market performance</strong> — it can go up or down.</li>
+        <li>Trump Accounts are <strong class="text-white">not FDIC insured</strong> — they are investment accounts, not bank accounts.</li>
+        <li>Historically, the S&P 500 has <strong class="text-white">never lost money</strong> over any 18-year period.</li>
+      </ul>
+    </div>
+
+    <p>
+      Let's be clear upfront: <strong>No, the government does not guarantee returns on Trump Accounts.</strong> The federal government guarantees the $1,000 deposit for eligible children. But what happens to that money after it is invested depends entirely on the stock market.
+    </p>
+    <p>
+      This is an important distinction that every parent needs to understand before opening an account.
+    </p>
+
+    <h2>What IS Guaranteed</h2>
+    <p>
+      The government guarantees one thing: the <strong>${limits.pilotDeposit.toLocaleString()} pilot deposit</strong> for children born between <strong>January 1, {limits.pilotDepositStartYear}</strong> and <strong>December 31, {limits.pilotDepositEndYear}</strong>. If your child qualifies and you file <strong>{limits.form}</strong>, the deposit will be made.
+    </p>
+    <p>
+      That deposit is real money that goes into the account. It is not a voucher, a credit, or a promise. Once it arrives, it is invested.
+    </p>
+
+    <h2>What Is NOT Guaranteed</h2>
+    <p>
+      Once the ${limits.pilotDeposit.toLocaleString()} is invested — along with any family contributions — it is subject to market performance. That means:
+    </p>
+    <ul>
+      <li><strong>The account can go up in value.</strong> In most years, the stock market rises.</li>
+      <li><strong>The account can go down in value.</strong> In some years, the stock market drops — sometimes significantly.</li>
+      <li><strong>There is no floor or minimum return.</strong> The government does not make up the difference if the market drops.</li>
+      <li><strong>There is no FDIC insurance.</strong> Bank deposits are FDIC insured. Investment accounts are not.</li>
+    </ul>
+
+    <CalloutBox type="warning" title="This is an investment, not a savings account">
+      <p>
+        Trump Accounts are invested in the stock market through <a href="/blog/how-is-trump-account-invested">S&P 500 or broad U.S. equity index funds</a>. Like any stock market investment, the value will fluctuate. Do not expect a steady, predictable return every year.
+      </p>
+    </CalloutBox>
+
+    <h2>The Historical Case for Confidence</h2>
+    <p>
+      While returns are not guaranteed, history is strongly in your favor. Here is why most financial experts are optimistic about 18-year investment horizons:
+    </p>
+    <ul>
+      <li><strong>The S&P 500 has never lost money over any 18-year period.</strong> Going back to 1926, every rolling 18-year window has produced positive total returns.</li>
+      <li><strong>The average annual return is roughly 10%</strong> before inflation (about 7% after inflation).</li>
+      <li><strong>Even the worst 18-year periods</strong> still delivered positive returns, though some were well below average.</li>
+    </ul>
+    <p>
+      This does not guarantee the next 18 years will be positive. But it shows that historically, patient long-term investors in the U.S. stock market have always come out ahead.
+    </p>
+
+    <CalloutBox type="info" title="Time is your biggest advantage">
+      <p>
+        Short-term market drops are normal. The stock market has experienced crashes, corrections, and recessions throughout its history. But over 18-year periods, the market has always recovered and grown. The mandatory lock-up period of a Trump Account (birth to 18) actually works in your favor — it prevents panic selling during downturns.
+      </p>
+    </CalloutBox>
+
+    <h2>What About Market Crashes?</h2>
+    <p>
+      Market crashes will happen during your child's 18-year growth period. There is no way around this. The 2008 financial crisis, the 2020 COVID crash, and other downturns are part of the stock market's history.
+    </p>
+    <p>
+      The key fact: <strong>you cannot withdraw before age 18</strong> (except for rollovers, excess contributions, or death). This means a crash in year 5 has 13 more years to recover. A crash in year 15 still has 3 years. Historically, the market has recovered from every crash.
+    </p>
+    <p>
+      For a deeper look at what happens during downturns, read our guide: <a href="/blog/what-happens-market-crash"><strong>What Happens in a Market Crash?</strong></a>
+    </p>
+
+    <h2>SIPC Protection (Not the Same as FDIC)</h2>
+    <p>
+      While Trump Accounts are not FDIC insured, the brokerage custodian holding the account is typically a member of <strong>SIPC (Securities Investor Protection Corporation)</strong>.
+    </p>
+    <p>
+      SIPC protects against:
+    </p>
+    <ul>
+      <li><strong>Broker failure</strong> — if the custodian goes bankrupt, SIPC covers up to $500,000 in securities</li>
+    </ul>
+    <p>
+      SIPC does <strong>NOT</strong> protect against:
+    </p>
+    <ul>
+      <li><strong>Investment losses</strong> — if the stock market drops, SIPC does not cover the decline</li>
+    </ul>
+    <p>
+      In other words, SIPC protects you from the company holding your money going under. It does not protect you from the market going down.
+    </p>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      The government guarantees the ${limits.pilotDeposit.toLocaleString()} deposit. It does not guarantee what that deposit — or your contributions — will be worth at age 18. But history strongly favors long-term stock market investing, and the 18-year lock-up period protects against emotional selling during downturns.
+    </p>
+    <p>
+      To see projected outcomes at different return rates, use our <a href="/calculators/growth-calculator"><strong>Growth Calculator</strong></a>. For a detailed look at historical returns, visit our <a href="/blog/expected-returns-trump-account">expected returns guide</a>.
+    </p>
+  </div>
+</BlogLayout>

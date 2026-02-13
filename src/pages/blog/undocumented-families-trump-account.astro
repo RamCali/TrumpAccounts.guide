@@ -1,0 +1,152 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('undocumented-families-trump-account')!;
+const related = getRelatedArticles('undocumented-families-trump-account');
+
+const faqs = [
+  {
+    question: 'Can an undocumented parent open a Trump Account for their U.S.-born child?',
+    answer: `The child qualifies if they are a U.S. citizen with a valid SSN. However, filing ${limits.form} requires a tax return, which means the parent needs a taxpayer identification number (SSN or ITIN). A parent with an ITIN may be able to file. IRS guidance on this specific scenario is still developing. Consult a tax professional.`,
+  },
+  {
+    question: 'Does the child need to be born in the United States?',
+    answer: 'Not necessarily. The requirement is U.S. citizenship, not birthplace. However, being born in the U.S. is the most common path to citizenship for children in mixed-status families.',
+  },
+  {
+    question: 'Will opening a Trump Account affect my immigration case?',
+    answer: 'This guide cannot provide immigration advice. The Trump Account belongs to the child, not the parent. However, any interaction with government systems may have implications depending on your situation. Consult an immigration attorney before filing.',
+  },
+  {
+    question: 'Can another family member file Form 4547 instead of the parent?',
+    answer: `${limits.form} must be filed by an "authorized individual," which is generally a parent or legal guardian. If a U.S. citizen relative has legal guardianship, they could potentially file on the child's behalf. Consult a tax professional for your specific situation.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>The <strong class="text-white">child</strong> must be a U.S. citizen with a valid SSN to qualify.</li>
+        <li>A child born in the U.S. is a <strong class="text-white">U.S. citizen</strong> regardless of their parents' immigration status.</li>
+        <li>Parents with an <strong class="text-white">ITIN</strong> (not SSN) may be able to file — IRS guidance is pending.</li>
+        <li>The account belongs to the <strong class="text-white">child</strong>, not the parent.</li>
+        <li>Mixed-status families should <strong class="text-white">consult a tax professional</strong> before filing.</li>
+      </ul>
+    </div>
+
+    <CalloutBox type="info" title="A note about this article">
+      <p>
+        This article covers a sensitive topic. Our goal is to present the facts as clearly as possible based on the law and IRS guidance. We are not providing legal, immigration, or tax advice. Every family's situation is different. We strongly recommend consulting a qualified tax professional or immigration attorney.
+      </p>
+    </CalloutBox>
+
+    <h2>What the Law Says</h2>
+    <p>
+      Trump Account eligibility is based on <strong>the child's status</strong>, not the parent's. The three requirements are:
+    </p>
+    <ol>
+      <li>The child is a <strong>U.S. citizen</strong>.</li>
+      <li>The child has a <strong>valid Social Security number</strong>.</li>
+      <li>The child is <strong>under 18</strong> at the end of the election year.</li>
+    </ol>
+    <p>
+      The law does not ask about the parent's citizenship, immigration status, or income. It only looks at the child.
+    </p>
+
+    <h2>Children Born in the United States</h2>
+    <p>
+      Under the 14th Amendment to the U.S. Constitution, a child born in the United States is a U.S. citizen at birth. This is true <strong>regardless of the parents' immigration status</strong>.
+    </p>
+    <p>
+      If your child was born in the U.S., they are a U.S. citizen. If they have a Social Security number and are under 18, they meet all three requirements for a Trump Account.
+    </p>
+
+    <CalloutBox type="irs-quote" title="From IRS Notice 2025-68">
+      <p>
+        "An eligible child is any individual who is a citizen of the United States who has not attained 18 years of age as of the close of the taxable year and who has a valid Social Security number."
+      </p>
+    </CalloutBox>
+
+    <p>
+      In plain English: the IRS cares about the child's citizenship and SSN. It does not ask about the parents.
+    </p>
+
+    <h2>The Filing Question: Who Submits Form 4547?</h2>
+    <p>
+      Here is where it gets more complicated. While the <strong>child</strong> qualifies based on their own status, someone needs to <strong>file {limits.form}</strong> on the child's behalf. That person is the "authorized individual" — generally a parent or legal guardian.
+    </p>
+    <p>
+      Filing {limits.form} requires including it with a federal tax return. To file a tax return, the parent needs a taxpayer identification number. This can be:
+    </p>
+    <ul>
+      <li><strong>A Social Security number (SSN)</strong> — if the parent has one.</li>
+      <li><strong>An Individual Taxpayer Identification Number (ITIN)</strong> — issued to people who need to file taxes but are not eligible for an SSN.</li>
+    </ul>
+
+    <CalloutBox type="warning" title="IRS guidance is still developing">
+      <p>
+        As of the publication of this article, the IRS has not issued specific guidance on whether a parent filing with an ITIN can submit {limits.form} for their U.S. citizen child. The law focuses on the child's eligibility, but the filing mechanics are still being clarified. Consult a tax professional who is familiar with ITIN filing.
+      </p>
+    </CalloutBox>
+
+    <h2>The Account Belongs to the Child</h2>
+    <p>
+      One important fact: <strong>a Trump Account belongs to the child, not the parent.</strong> The parent is the authorized individual who manages the account during the growth phase (until age {limits.iraConversionAge}). But the money and the account are the child's.
+    </p>
+    <p>
+      This means:
+    </p>
+    <ul>
+      <li>The parent's immigration status does not affect who owns the account.</li>
+      <li>The account's investments and growth belong to the child.</li>
+      <li>At {limits.iraConversionAge}, the account converts to an IRA in the child's name.</li>
+    </ul>
+
+    <h2>If Your Child Was Born {limits.pilotDepositStartYear}–{limits.pilotDepositEndYear}</h2>
+    <p>
+      A U.S. citizen child born between January 1, {limits.pilotDepositStartYear} and December 31, {limits.pilotDepositEndYear} is eligible for the <strong>${limits.pilotDeposit.toLocaleString()} federal pilot deposit</strong> — assuming an election is filed. The deposit goes into the child's account. It is for the child, not the parent.
+    </p>
+
+    <h2>Contributions From Family Members</h2>
+    <p>
+      Anyone can contribute to a child's Trump Account, up to the <strong>${limits.annualContributionLimit.toLocaleString()} annual limit</strong>. This includes grandparents, aunts, uncles, or other family members who may have a different immigration or tax status than the parents.
+    </p>
+    <p>
+      Contributions are after-tax and do not require the contributor to be a U.S. citizen.
+    </p>
+
+    <h2>What to Do Next</h2>
+    <p>
+      If you are in a mixed-status family and your child is a U.S. citizen with an SSN, here is what we recommend:
+    </p>
+    <ol>
+      <li><strong>Talk to a tax professional.</strong> A qualified tax preparer who works with ITIN filers can help you understand your filing options. Many community organizations offer free tax preparation for immigrant families.</li>
+      <li><strong>Gather your child's documents.</strong> You will need the child's birth certificate, Social Security number, and proof of citizenship.</li>
+      <li><strong>Consider consulting an immigration attorney.</strong> If you have any concerns about how filing a tax return or interacting with the IRS could affect your immigration situation, get professional advice first.</li>
+    </ol>
+
+    <CalloutBox type="info" title="Free tax help">
+      <p>
+        The IRS Volunteer Income Tax Assistance (VITA) program offers free tax preparation for qualifying families. Many VITA sites have staff experienced with ITIN filing. Find a location at <a href="https://www.irs.gov/individuals/free-tax-return-preparation-for-qualifying-taxpayers" target="_blank" rel="noopener noreferrer">IRS.gov</a>.
+      </p>
+    </CalloutBox>
+
+    <p>
+      For general eligibility information, see <a href="/blog/who-qualifies-for-trump-account">Who Qualifies for a Trump Account?</a> For help understanding the filing process, visit our <a href="/faq/eligibility">eligibility FAQ</a>.
+    </p>
+  </div>
+</BlogLayout>

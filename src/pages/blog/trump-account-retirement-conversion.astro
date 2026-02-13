@@ -1,0 +1,254 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-retirement-conversion')!;
+const related = getRelatedArticles('trump-account-retirement-conversion');
+
+const faqs = [
+  {
+    question: 'What happens to a Trump Account at age 18?',
+    answer: `At age 18, the Trump Account automatically converts to a traditional IRA. Your child takes full control. They can keep it as a traditional IRA, convert it to a Roth IRA, withdraw funds (subject to taxes and penalties), or later roll it into an employer 401(k).`,
+  },
+  {
+    question: 'Can you convert a Trump Account to a Roth IRA?',
+    answer: 'Yes. Once the Trump Account becomes a traditional IRA at age 18, your child can convert all or part of it to a Roth IRA. They will owe ordinary income tax on the converted amount in the year of conversion, but all future growth and qualified withdrawals from the Roth will be tax-free.',
+  },
+  {
+    question: 'Is it better to keep a traditional IRA or convert to Roth at 18?',
+    answer: 'For most 18-year-olds, converting to a Roth IRA is advantageous because they are likely in a low tax bracket (10-12%). Paying taxes now at a low rate locks in tax-free growth for 40+ years. However, your child needs cash to pay the tax bill — they should not withdraw from the IRA to pay taxes on the conversion.',
+  },
+  {
+    question: 'Can you roll a Trump Account into a 401(k)?',
+    answer: 'Yes. Once it is a traditional IRA at age 18, it can be rolled into an employer-sponsored 401(k) if the plan accepts rollovers. This might make sense once your child starts working and wants to consolidate retirement accounts.',
+  },
+  {
+    question: 'What are the tax consequences of a Roth conversion?',
+    answer: 'The entire converted amount is added to your child\'s taxable income for that year. For example, converting $100,000 at a 12% effective tax rate means owing $12,000 in taxes. After conversion, the Roth IRA grows tax-free, qualified withdrawals after age 59.5 are tax-free, and there are no required minimum distributions.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>At age {limits.iraConversionAge}, the Trump Account <strong class="text-white">automatically becomes a traditional IRA</strong>.</li>
+        <li>Your child can <strong class="text-white">convert to a Roth IRA</strong>, roll into a 401(k), or keep it as-is.</li>
+        <li>Roth conversion at 18 means <strong class="text-white">paying taxes now at a low rate</strong> for tax-free growth forever.</li>
+        <li>Example: $100K converted at 12% = <strong class="text-white">$12K in taxes</strong>, then tax-free growth for 47+ years.</li>
+        <li>Roth IRAs have <strong class="text-white">no required minimum distributions</strong> — money can grow untouched for life.</li>
+      </ul>
+    </div>
+
+    <p>
+      When a Trump Account converts to a traditional IRA at age 18, your child faces one of the most important financial decisions of their life. <strong>What should they do with it?</strong> The answer could mean hundreds of thousands of dollars in tax savings over a lifetime.
+    </p>
+
+    <h2>What Happens at Age 18</h2>
+    <p>
+      At age {limits.iraConversionAge}, the Trump Account <strong>automatically converts to a traditional IRA</strong>. Your child becomes the full owner. No action is required for this conversion — it happens by default.
+    </p>
+    <p>
+      From this point, your child has three main options:
+    </p>
+    <ol>
+      <li><strong>Keep it as a traditional IRA</strong> — growth continues tax-deferred, withdrawals are taxed as ordinary income</li>
+      <li><strong>Convert to a Roth IRA</strong> — pay taxes now, enjoy tax-free growth and withdrawals later</li>
+      <li><strong>Roll into an employer 401(k)</strong> — consolidate with workplace retirement savings later</li>
+    </ol>
+
+    <h2>Option 1: Keep as a Traditional IRA</h2>
+    <p>
+      The simplest choice. Do nothing and the account continues growing tax-deferred. Your child can:
+    </p>
+    <ul>
+      <li>Continue contributing (up to the standard IRA annual limit)</li>
+      <li>Withdraw funds for <a href="/blog/what-can-money-be-used-for">any purpose</a> (taxed as ordinary income, plus 10% penalty before 59.5)</li>
+      <li>Use penalty exceptions for a <a href="/blog/trump-account-for-first-home">first home</a> or <a href="/blog/trump-account-for-college">education</a></li>
+      <li>Take penalty-free withdrawals after age 59.5</li>
+    </ul>
+    <p>
+      The downside: all growth is taxed when withdrawn. And starting at age 73, <strong>required minimum distributions (RMDs)</strong> force annual withdrawals whether your child wants them or not.
+    </p>
+
+    <h2>Option 2: Convert to a Roth IRA</h2>
+    <p>
+      This is the option financial planners get excited about. A <strong>Roth conversion</strong> means paying income tax on the full amount <em>now</em>, and in exchange, the money grows <strong>tax-free forever</strong>.
+    </p>
+
+    <h3>Why age 18 is the perfect time to convert</h3>
+    <p>
+      Most 18-year-olds have <strong>little or no income</strong>. That puts them in the <strong>lowest tax brackets</strong> — 10% or 12%. This is likely the lowest tax rate they will ever pay in their lifetime. Converting now means:
+    </p>
+    <ul>
+      <li>Pay a <strong>small tax bill</strong> at a low rate</li>
+      <li>Lock in <strong>tax-free growth</strong> for 47+ years (until age 65 and beyond)</li>
+      <li><strong>No taxes</strong> on qualified Roth withdrawals after age 59.5</li>
+      <li><strong>No required minimum distributions</strong> — ever</li>
+    </ul>
+
+    <h3>The math: $100,000 Roth conversion at age 18</h3>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Item</th>
+            <th class="py-3 text-gray-400 font-medium">Amount</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Trump Account balance at 18</td>
+            <td class="py-3 font-medium text-white">$100,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Tax on Roth conversion (12% effective rate)</td>
+            <td class="py-3 font-medium text-amber-300">$12,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Amount in Roth IRA after conversion</td>
+            <td class="py-3 font-medium text-white">$100,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Projected value at 59.5 (8% for 41.5 years)</td>
+            <td class="py-3 font-medium text-mint-300">$2,400,000+</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">Taxes owed on that $2.4M</td>
+            <td class="py-3 font-bold text-mint-300">$0 (Roth = tax-free)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Compare that to keeping the traditional IRA: that same $2.4M would be taxed as ordinary income when withdrawn. At a 22% rate, that is over <strong>$528,000 in taxes</strong>. The Roth conversion saved half a million dollars — and it only cost $12,000 at age 18.
+    </p>
+
+    <CalloutBox type="tip" title="The Roth conversion is the power move">
+      <p>
+        Converting at 18 while in a low tax bracket may be the <strong>single most valuable financial decision</strong> your child makes. Paying $12,000 in taxes now to save $500,000+ later is an extraordinary return. Read our full <a href="/blog/trump-account-roth-conversion-strategy">Roth conversion strategy guide</a> for step-by-step planning.
+      </p>
+    </CalloutBox>
+
+    <h3>Important Roth conversion rules</h3>
+    <ul>
+      <li>The converted amount is added to <strong>taxable income</strong> for the year of conversion</li>
+      <li>There is <strong>no 10% penalty</strong> on a Roth conversion (it is not a withdrawal)</li>
+      <li>Your child needs <strong>cash from another source</strong> to pay the tax bill — do not withdraw from the IRA to pay taxes, as that triggers the 10% penalty on the withdrawn amount</li>
+      <li>You can convert <strong>partial amounts</strong> over multiple years to manage the tax impact</li>
+      <li>Roth conversion amounts cannot be withdrawn for <strong>5 years</strong> without penalty (the 5-year rule)</li>
+    </ul>
+
+    <CalloutBox type="warning" title="The 5-year rule">
+      <p>
+        Each Roth conversion has its own 5-year waiting period. If your child converts at age 18 and withdraws the converted amount before age 23, they may face a 10% penalty on the converted amount. The 5-year clock starts January 1 of the conversion year.
+      </p>
+    </CalloutBox>
+
+    <h2>Option 3: Roll Into an Employer 401(k)</h2>
+    <p>
+      Once your child starts working, they may be able to <strong>roll the traditional IRA into their employer's 401(k)</strong> plan. This only works if the employer plan accepts incoming rollovers.
+    </p>
+    <p>
+      Why might this be useful?
+    </p>
+    <ul>
+      <li><strong>Consolidation</strong> — keep all retirement funds in one place</li>
+      <li><strong>Loan provisions</strong> — some 401(k) plans allow loans, which IRAs do not</li>
+      <li><strong>Creditor protection</strong> — 401(k) plans generally have stronger creditor protection than IRAs</li>
+      <li><strong>Backdoor Roth strategy</strong> — rolling pre-tax IRA money into a 401(k) can simplify future Roth conversions</li>
+    </ul>
+
+    <h2>Partial Conversion Strategy</h2>
+    <p>
+      Your child does not have to convert the entire amount at once. A <strong>partial conversion</strong> strategy spreads the tax bill over multiple years:
+    </p>
+    <ul>
+      <li><strong>Year 1 (age 18):</strong> Convert $30,000 — pay ~$3,600 in taxes</li>
+      <li><strong>Year 2 (age 19):</strong> Convert $30,000 — pay ~$3,600 in taxes</li>
+      <li><strong>Year 3 (age 20):</strong> Convert $30,000 — pay ~$3,600 in taxes</li>
+      <li><strong>Remaining $10,000:</strong> Convert in year 4 or keep as traditional</li>
+    </ul>
+    <p>
+      This approach keeps each year's tax bill manageable and may keep your child in a lower tax bracket. It works especially well during college years when income is typically low.
+    </p>
+
+    <CalloutBox type="tip" title="Convert in low-income years">
+      <p>
+        The best years to convert are when your child has <strong>the lowest income</strong> — typically ages 18-22 during college or early career. Once they start earning more, the tax cost of conversion rises. Front-loading conversions in these early years saves the most money long-term.
+      </p>
+    </CalloutBox>
+
+    <h2>Traditional IRA vs Roth IRA: Side by Side</h2>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Feature</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Traditional IRA (default)</th>
+            <th class="py-3 text-gray-400 font-medium">Roth IRA (after conversion)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Tax on growth</td>
+            <td class="py-3 pr-4 text-amber-300">Taxed on withdrawal</td>
+            <td class="py-3 text-mint-300">Tax-free</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Qualified withdrawals after 59.5</td>
+            <td class="py-3 pr-4 text-amber-300">Ordinary income tax</td>
+            <td class="py-3 text-mint-300">Tax-free</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Required minimum distributions</td>
+            <td class="py-3 pr-4 text-amber-300">Yes, starting at 73</td>
+            <td class="py-3 text-mint-300">None</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Early withdrawal penalty (before 59.5)</td>
+            <td class="py-3 pr-4 text-amber-300">10% (with exceptions)</td>
+            <td class="py-3 text-amber-300">10% on earnings (contributions anytime)</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">Best for</td>
+            <td class="py-3 pr-4">Higher tax bracket now, lower later</td>
+            <td class="py-3">Lower tax bracket now, higher later</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      The Trump Account's conversion to a traditional IRA at age 18 is not an ending — it is a beginning. Your child has options that can shape their financial future for decades.
+    </p>
+    <p>
+      For most young adults with low income at 18, the <strong>Roth conversion is the standout strategy</strong>. Pay a small tax bill now, and enjoy potentially hundreds of thousands of dollars in tax-free growth over a lifetime. Even a partial conversion captures enormous value.
+    </p>
+    <p>
+      Read our detailed <a href="/blog/trump-account-roth-conversion-strategy"><strong>Roth conversion strategy guide</strong></a> for step-by-step planning, or compare the <a href="/compare/trump-account-vs-roth-ira">Trump Account vs Roth IRA</a> side by side.
+    </p>
+
+    <CalloutBox type="warning" title="Not financial advice">
+      <p>
+        This is educational content, not tax or financial advice. Tax rules are complex and depend on individual circumstances. Roth conversions have significant tax implications. Consult a qualified tax professional before making conversion decisions.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

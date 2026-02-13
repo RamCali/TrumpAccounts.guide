@@ -1,0 +1,196 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-fees-explained')!;
+const related = getRelatedArticles('trump-account-fees-explained');
+
+const faqs = [
+  {
+    question: 'What is an expense ratio?',
+    answer: 'An expense ratio is the annual fee a fund charges, expressed as a percentage of your total investment. It is deducted automatically from the fund\'s returns. A 0.03% expense ratio on $10,000 means you pay $3 per year.',
+  },
+  {
+    question: 'Are there any other fees for a Trump Account?',
+    answer: 'Most brokerages charge zero trading commissions on ETFs and no account maintenance fees. The expense ratio is typically the only ongoing cost. There is no government fee to open or maintain a Trump Account.',
+  },
+  {
+    question: 'Does the 0.1% expense ratio cap apply to all funds?',
+    answer: 'The 0.1% cap applies only to funds held within a Trump Account. It is a legal requirement under IRC Section 530A. Funds with expense ratios above 0.1% are simply not eligible, even if they track the S&P 500.',
+  },
+  {
+    question: 'Is SPY still a good choice even though it costs more?',
+    answer: 'SPY works, but it is not optimal. At 0.09%, it costs three times more than VOO (0.03%) and four-and-a-half times more than SPLG (0.02%). Over 18 years, that difference adds up to hundreds of dollars in lost growth.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>The expense ratio is the <strong class="text-white">only meaningful fee</strong> in a Trump Account.</li>
+        <li>Congress capped expense ratios at <strong class="text-white">0.1% (10 basis points)</strong>.</li>
+        <li>The cheapest eligible ETF is <strong class="text-white">SPLG at 0.02%</strong>. That is $2 per year on $10,000.</li>
+        <li>Over 18 years, the difference between 0.03% and 0.09% on $100,000 is <strong class="text-white">hundreds of dollars</strong>.</li>
+        <li>Most brokers charge <strong class="text-white">zero commissions</strong> on ETF trades and no account maintenance fees.</li>
+      </ul>
+    </div>
+
+    <h2>What Is an Expense Ratio?</h2>
+    <p>
+      An expense ratio is the annual fee a fund charges to manage your money. It is expressed as a percentage of your total investment. You never see it on a bill — it is automatically deducted from the fund's returns each day.
+    </p>
+    <p>
+      Here is what the numbers actually mean in dollars:
+    </p>
+    <ul>
+      <li><strong>0.02% on $10,000</strong> = $2 per year</li>
+      <li><strong>0.03% on $10,000</strong> = $3 per year</li>
+      <li><strong>0.09% on $10,000</strong> = $9 per year</li>
+      <li><strong>0.10% on $10,000</strong> = $10 per year (the legal maximum)</li>
+    </ul>
+    <p>
+      These amounts are small in any single year. But over 18 years of compound growth, even tiny fee differences matter — because fees also compound.
+    </p>
+
+    <CalloutBox type="info" title="The 0.1% Cap Is Law">
+      <p>
+        Under IRC Section 530A, Trump Account funds must have expense ratios at or below <strong>0.1% (10 basis points)</strong>. This was written into the law to protect families from high-fee investment products. Any fund charging more than 0.1% is simply not eligible.
+      </p>
+    </CalloutBox>
+
+    <h2>Comparing Eligible ETF Fees</h2>
+    <p>
+      All major S&P 500 ETFs fall well below the 0.1% cap. Here is how they compare:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm text-left text-gray-300">
+        <thead class="text-xs uppercase text-gold-400 border-b border-surface-600">
+          <tr>
+            <th class="px-4 py-3">ETF</th>
+            <th class="px-4 py-3">Expense Ratio</th>
+            <th class="px-4 py-3">Fee on $10K</th>
+            <th class="px-4 py-3">Fee on $50K</th>
+            <th class="px-4 py-3">Fee on $100K</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-surface-700">
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">SPLG</td>
+            <td class="px-4 py-3 text-mint-400">0.02%</td>
+            <td class="px-4 py-3">$2/yr</td>
+            <td class="px-4 py-3">$10/yr</td>
+            <td class="px-4 py-3">$20/yr</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">VOO</td>
+            <td class="px-4 py-3 text-mint-400">0.03%</td>
+            <td class="px-4 py-3">$3/yr</td>
+            <td class="px-4 py-3">$15/yr</td>
+            <td class="px-4 py-3">$30/yr</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">IVV</td>
+            <td class="px-4 py-3 text-mint-400">0.03%</td>
+            <td class="px-4 py-3">$3/yr</td>
+            <td class="px-4 py-3">$15/yr</td>
+            <td class="px-4 py-3">$30/yr</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">SPY</td>
+            <td class="px-4 py-3 text-gold-400">0.09%</td>
+            <td class="px-4 py-3">$9/yr</td>
+            <td class="px-4 py-3">$45/yr</td>
+            <td class="px-4 py-3">$90/yr</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      On a $10,000 balance, the difference between SPLG and SPY is just $7 per year. But Trump Accounts grow over 18 years. The balance gets larger, and the fee gap widens every year.
+    </p>
+
+    <h2>The Long-Term Fee Impact</h2>
+    <p>
+      Here is where it gets interesting. Let us compare what happens over 18 years with a <strong>$100,000 average balance</strong> (which is realistic for families contributing regularly):
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm text-left text-gray-300">
+        <thead class="text-xs uppercase text-gold-400 border-b border-surface-600">
+          <tr>
+            <th class="px-4 py-3">ETF</th>
+            <th class="px-4 py-3">Expense Ratio</th>
+            <th class="px-4 py-3">Approx. Total Fees Over 18 Years</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-surface-700">
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">SPLG</td>
+            <td class="px-4 py-3 text-mint-400">0.02%</td>
+            <td class="px-4 py-3">~$360</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">VOO / IVV</td>
+            <td class="px-4 py-3 text-mint-400">0.03%</td>
+            <td class="px-4 py-3">~$540</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">SPY</td>
+            <td class="px-4 py-3 text-gold-400">0.09%</td>
+            <td class="px-4 py-3">~$1,620</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      SPY costs roughly <strong>$1,260 more</strong> than SPLG over 18 years on this balance. That is $1,260 that stays invested and compounds for your child when you choose the cheaper fund. And this is a simplified estimate — the actual impact is larger because fees reduce your compounding base every year.
+    </p>
+
+    <CalloutBox type="tip" title="The Easiest Way to Boost Returns">
+      <p>
+        You cannot control the stock market. But you can control fees. Choosing SPLG (0.02%) over SPY (0.09%) gives your child a guaranteed 0.07% annual advantage. Over 18 years, that adds up.
+      </p>
+    </CalloutBox>
+
+    <h2>Other Fees to Know About</h2>
+
+    <h3>Trading Commissions</h3>
+    <p>
+      Most major brokerages — Fidelity, Charles Schwab, Vanguard, and others — charge <strong>zero commissions</strong> on ETF trades. You will not pay anything to buy or sell shares of VOO, SPLG, IVV, or SPY. This was not always the case, but commission-free trading is now the industry standard.
+    </p>
+
+    <h3>Account Maintenance Fees</h3>
+    <p>
+      Custodial and IRA accounts at major brokerages typically have <strong>no annual maintenance fees</strong>. Some smaller brokerages may charge a fee for accounts below a certain balance. Check with your custodian to confirm.
+    </p>
+
+    <h3>Government Fees</h3>
+    <p>
+      There is <strong>no government fee</strong> to open or maintain a Trump Account. Filing {limits.form} is free. The IRS does not charge for the election or for maintaining the account.
+    </p>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      Trump Accounts are one of the lowest-cost investment accounts available. The expense ratio cap of 0.1% keeps fees minimal. The best eligible ETFs charge as little as 0.02%. There are no commissions, no maintenance fees, and no government fees.
+    </p>
+    <p>
+      When choosing a fund, go with the lowest expense ratio your custodian offers. For a detailed ETF comparison, see <a href="/blog/trump-account-vs-sp500-etfs">Best S&P 500 ETFs for Trump Accounts</a>. To see exactly how fees affect your child's balance, try the <a href="/calculators/fund-expense-tracker">fund expense tracker</a>.
+    </p>
+  </div>
+</BlogLayout>

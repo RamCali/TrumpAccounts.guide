@@ -1,0 +1,134 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('who-controls-trump-account')!;
+const related = getRelatedArticles('who-controls-trump-account');
+
+const faqs = [
+  {
+    question: 'Who is the "authorized individual" on a Trump Account?',
+    answer: 'The authorized individual is typically the parent or legal guardian who opens the account. This person manages investments, makes contributions, and views statements on behalf of the child until age 18.',
+  },
+  {
+    question: 'Can both parents be authorized individuals?',
+    answer: 'Generally, one parent is designated as the authorized individual per account. If parents want shared oversight, they should coordinate privately — but the account has one named manager at a time.',
+  },
+  {
+    question: 'Can grandparents control the Trump Account?',
+    answer: `Grandparents can contribute up to the $${limits.annualContributionLimit.toLocaleString()} combined annual limit, but they do not control the account. Only the designated authorized individual (parent or legal guardian) can manage investments and make account decisions.`,
+  },
+  {
+    question: 'What happens to control at age 18?',
+    answer: 'At age 18, the Trump Account converts to a traditional IRA. Full control transfers to the child. The parent is no longer the authorized individual. The child makes all decisions from that point forward.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>The <strong class="text-white">"authorized individual"</strong> — usually a parent or legal guardian — manages the account during the growth phase.</li>
+        <li>They can <strong class="text-white">choose eligible funds, switch funds, contribute money, and view statements</strong>.</li>
+        <li>They <strong class="text-white">cannot withdraw funds</strong>, invest in non-eligible assets, or transfer the account to themselves.</li>
+        <li>At age <strong class="text-white">{limits.growthPhaseEndAge}</strong>, full control passes to the child and the account converts to a traditional IRA.</li>
+        <li>The account <strong class="text-white">belongs to the child</strong>, not the parent. The parent is a manager, not an owner.</li>
+      </ul>
+    </div>
+
+    <p>
+      Every Trump Account has an <strong>"authorized individual"</strong> who manages it. If you are a parent or legal guardian, that person is almost certainly you. But what exactly can you do with the account — and what are you not allowed to do?
+    </p>
+    <p>
+      Here is the plain-English breakdown of who controls a Trump Account and how that control works.
+    </p>
+
+    <h2>What Is an "Authorized Individual"?</h2>
+    <p>
+      Under IRC Section 530A, the authorized individual is the person who manages the Trump Account on behalf of the child. This is typically the <strong>parent or legal guardian</strong> who opens the account using <a href="/blog/how-to-open-step-by-step">IRS Form 4547</a>.
+    </p>
+    <p>
+      Think of it like a trustee. You manage the money for the child's benefit. You make investment decisions. But the money is not yours.
+    </p>
+
+    <CalloutBox type="info" title="One authorized individual per account">
+      <p>
+        Generally, only <strong>one person</strong> is designated as the authorized individual on each Trump Account. If both parents want involvement, they should coordinate privately. The account paperwork names one manager.
+      </p>
+    </CalloutBox>
+
+    <h2>What the Authorized Individual CAN Do</h2>
+    <p>
+      As the authorized individual, you have several important powers:
+    </p>
+    <ul>
+      <li><strong>Choose eligible index funds.</strong> You pick which S&P 500 or broad U.S. equity index fund the money goes into. See our guide to <a href="/blog/index-fund-requirements">eligible fund requirements</a>.</li>
+      <li><strong>Switch between eligible funds.</strong> You can move money from one eligible fund to another — for example, from VOO to IVV. Learn more about <a href="/blog/can-parents-change-investments">changing investments</a>.</li>
+      <li><strong>Make contributions.</strong> You can contribute up to <strong>${limits.annualContributionLimit.toLocaleString()}/year</strong> (combined from all sources).</li>
+      <li><strong>View statements and track growth.</strong> You can monitor the account balance, review investment performance, and check contribution history.</li>
+    </ul>
+
+    <h2>What the Authorized Individual CANNOT Do</h2>
+
+    <CalloutBox type="warning" title="These actions are not allowed">
+      <p>
+        The authorized individual is a manager, not an owner. The following are strictly prohibited:
+      </p>
+    </CalloutBox>
+
+    <ul>
+      <li><strong>Withdraw funds.</strong> No <a href="/blog/early-withdrawal-before-18">withdrawals before age 18</a> except for rollovers, return of excess contributions, or death of the beneficiary.</li>
+      <li><strong>Invest in non-eligible assets.</strong> No individual stocks, bonds, crypto, or any fund that does not meet the S&P 500 or broad U.S. equity index requirement.</li>
+      <li><strong>Transfer the account to themselves.</strong> The account belongs to the child. It cannot be moved to the parent's name or used as a personal asset.</li>
+      <li><strong>Use the account as collateral.</strong> You cannot borrow against the Trump Account or pledge it for a loan.</li>
+    </ul>
+
+    <h2>Can Grandparents or Other Relatives Control the Account?</h2>
+    <p>
+      No. Grandparents, aunts, uncles, and other relatives <strong>can contribute money</strong> to the account, but they do not get management control. Only the designated authorized individual makes account decisions.
+    </p>
+    <p>
+      If you want to learn more about how family contributions work, read our guide on <a href="/blog/can-parents-grandparents-contribute">who can contribute to a Trump Account</a>.
+    </p>
+
+    <h2>What Happens at Age {limits.growthPhaseEndAge}?</h2>
+    <p>
+      This is the big transition. When the child turns {limits.growthPhaseEndAge}, the Trump Account <strong>converts to a traditional IRA</strong>. At that point:
+    </p>
+    <ul>
+      <li><strong>Full control transfers to the child.</strong> The parent is no longer the authorized individual.</li>
+      <li>The child can withdraw funds, change investments, or leave the money to grow.</li>
+      <li>Standard <a href="/blog/trump-account-penalties">IRA rules</a> apply — including the 10% early withdrawal penalty before age 59 1/2 (with exceptions).</li>
+    </ul>
+
+    <CalloutBox type="tip" title="Prepare your child for age 18">
+      <p>
+        The transition happens whether your child is ready or not. Start teaching them about investing and financial responsibility before the account becomes theirs. It could be worth tens of thousands of dollars by then.
+      </p>
+    </CalloutBox>
+
+    <h2>What if the Authorized Individual Changes?</h2>
+    <p>
+      Life happens. If custody changes — due to <a href="/blog/trump-account-divorce">divorce</a>, death of a parent, or a guardianship change — the authorized individual can be updated. The new legal guardian would become the authorized individual.
+    </p>
+    <p>
+      The key point: <strong>the account itself does not change</strong>. It stays in the child's name, with the same funds and the same balance. Only the manager changes.
+    </p>
+
+    <p>
+      For more on how Trump Accounts work from the ground up, check out our <a href="/glossary">glossary of key terms</a> or the full <a href="/blog/what-are-trump-accounts-guide">beginner's guide to Trump Accounts</a>.
+    </p>
+  </div>
+</BlogLayout>

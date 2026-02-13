@@ -1,0 +1,196 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('should-i-wait-or-invest-now')!;
+const related = getRelatedArticles('should-i-wait-or-invest-now');
+
+const faqs = [
+  {
+    question: 'Should I wait for the trumpaccounts.gov portal to launch?',
+    answer: 'No. You can file Form 4547 with your 2025 tax return right now (due April 15, 2026). The portal launching in mid-2026 is a second option, not a requirement. Filing sooner means your money starts compounding sooner.',
+  },
+  {
+    question: 'What if the market is down right now?',
+    answer: 'Over any 18-year period in S&P 500 history, the market has always produced positive returns. Waiting for a "better" entry point usually costs more in lost compounding than you save by timing the bottom.',
+  },
+  {
+    question: 'Can I contribute later and catch up?',
+    answer: 'You can contribute up to $5,000 per year, but there is no "catch-up" provision. If you skip a year, that contribution room is gone forever. You cannot contribute $10,000 the next year to make up for it.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><strong class="text-white">Do not wait.</strong> File {limits.form} with your 2025 tax return now.</li>
+        <li>Every month of delay costs your child real money in lost compounding.</li>
+        <li>Waiting one year on a <strong class="text-white">${limits.pilotDeposit.toLocaleString()} deposit</strong> at 8% returns costs roughly $80 in growth. On $5,000, it costs about $400.</li>
+        <li>Time in the market beats timing the market &mdash; especially over an <strong class="text-white">18-year horizon</strong>.</li>
+        <li>Paper filing works right now. You do not need to wait for the online portal.</li>
+      </ul>
+    </div>
+
+    <p>
+      "Should I wait until the portal launches?" "Should I see how the market does first?" "Maybe I'll set it up next year."
+    </p>
+
+    <p>
+      We hear these questions constantly. The answer is the same every time: <strong>start now</strong>. Here is why waiting costs your child money.
+    </p>
+
+    <h2>Time in the Market Beats Timing the Market</h2>
+
+    <p>
+      This is one of the most proven principles in investing. Over the past 100 years, the S&P 500 has averaged roughly <strong>10% annual returns</strong> (about 7% after inflation). But those returns are not evenly distributed. The best days often follow the worst days.
+    </p>
+
+    <p>
+      A famous study by J.P. Morgan found that if you missed just the <strong>10 best trading days</strong> over a 20-year period, your returns would be cut in half. Nobody can predict which days those will be. The safest strategy is to stay invested.
+    </p>
+
+    <p>
+      With a Trump Account, you have an <strong>18-year investment horizon</strong>. That is one of the longest guaranteed holding periods in any investment account. Over every 18-year period in S&P 500 history, the market has delivered positive returns. Every single one.
+    </p>
+
+    <CalloutBox type="info" title="The math is clear">
+      The S&P 500 has never produced a negative return over any 18-year rolling period. Your child's Trump Account has time on its side. The only risk is not starting.
+    </CalloutBox>
+
+    <h2>What One Year of Waiting Actually Costs</h2>
+
+    <p>
+      Let's look at real numbers. Assume an <strong>8% average annual return</strong> (a conservative estimate for long-term S&P 500 performance).
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Scenario</th>
+            <th class="pb-2 pr-4">Start Year</th>
+            <th class="pb-2 pr-4">Value at Age 18</th>
+            <th class="pb-2">Cost of Waiting</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">$1,000 deposit only</td>
+            <td class="py-2 pr-4">Year 0 (now)</td>
+            <td class="py-2 pr-4 text-mint-400">$3,996</td>
+            <td class="py-2">&mdash;</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">$1,000 deposit only</td>
+            <td class="py-2 pr-4">Year 1 (wait)</td>
+            <td class="py-2 pr-4">$3,700</td>
+            <td class="py-2 text-amber-400">-$296</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">$1,000 + $200/mo</td>
+            <td class="py-2 pr-4">Year 0 (now)</td>
+            <td class="py-2 pr-4 text-mint-400">$50,423</td>
+            <td class="py-2">&mdash;</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">$1,000 + $200/mo</td>
+            <td class="py-2 pr-4">Year 1 (wait)</td>
+            <td class="py-2 pr-4">$46,498</td>
+            <td class="py-2 text-amber-400">-$3,925</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4">$1,000 + $416/mo (max)</td>
+            <td class="py-2 pr-4">Year 0 (now)</td>
+            <td class="py-2 pr-4 text-mint-400">$100,544</td>
+            <td class="py-2">&mdash;</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4">$1,000 + $416/mo (max)</td>
+            <td class="py-2 pr-4">Year 1 (wait)</td>
+            <td class="py-2 pr-4">$92,747</td>
+            <td class="py-2 text-amber-400">-$7,797</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      If you max out contributions, <strong>one year of waiting costs nearly $8,000</strong> in lost growth. That is money your child will never get back.
+    </p>
+
+    <h2>The $1,000 Deposit Starts Growing Immediately</h2>
+
+    <p>
+      For children born between {limits.pilotDepositStartYear} and {limits.pilotDepositEndYear}, the federal government deposits <strong>${limits.pilotDeposit.toLocaleString()}</strong> into the account. But this only happens after you file {limits.form}. The money does not appear by itself.
+    </p>
+
+    <p>
+      Once the deposit is in the account, it starts compounding in your chosen index fund. At 8% returns, that ${limits.pilotDeposit.toLocaleString()} alone grows to roughly <strong>$4,000 by age 18</strong>. At 10%, it reaches about <strong>$5,560</strong>. But only if you start early.
+    </p>
+
+    <CalloutBox type="warning" title="There is no catch-up">
+      The annual contribution limit is ${limits.annualContributionLimit.toLocaleString()}. If you skip a year, you cannot contribute $10,000 the next year. That missed year's contribution space is gone forever.
+    </CalloutBox>
+
+    <h2>You Can File Right Now</h2>
+
+    <p>
+      You do not need to wait for the {limits.portal} portal. There are three ways to file {limits.form} today:
+    </p>
+
+    <ol>
+      <li><strong>With your 2025 tax return</strong> &mdash; due April 15, 2026. Attach the form when you file. This works with both paper and electronic filing.</li>
+      <li><strong>Through {limits.portal}</strong> &mdash; the online portal launches mid-2026. This is convenient but means waiting several more months.</li>
+      <li><strong>By mail</strong> &mdash; print and mail the form to the IRS at any time.</li>
+    </ol>
+
+    <p>
+      Option one is the fastest path. If you are already preparing your 2025 taxes, add Form 4547 now.
+    </p>
+
+    <h2>What About Market Volatility?</h2>
+
+    <p>
+      Yes, the market goes up and down. That is normal. But here is what matters: your child's Trump Account has an <strong>18-year growth phase</strong>. There is no option to withdraw before then (except for rollovers, excess contributions, or death of the beneficiary).
+    </p>
+
+    <p>
+      This forced long-term holding is actually a feature, not a bug. It prevents panic selling during downturns. And over 18 years, short-term volatility smooths out. The S&P 500's worst 18-year return since 1950 was still positive.
+    </p>
+
+    <p>
+      Trying to time the market means you need to be right twice: once when you get out, and once when you get back in. Most professional fund managers cannot do this consistently. You are better off investing steadily over time.
+    </p>
+
+    <CalloutBox type="tip" title="Dollar-cost averaging works">
+      By contributing a fixed amount each month, you automatically buy more shares when prices are low and fewer when prices are high. This smooths out your cost basis over time. Set up automatic contributions and let the math work.
+    </CalloutBox>
+
+    <h2>The Bottom Line</h2>
+
+    <p>
+      Every month you wait is a month of compounding you cannot get back. The process takes about 30 minutes. The potential payoff lasts a lifetime.
+    </p>
+
+    <p>
+      File {limits.form} with your 2025 tax return. Choose a low-cost S&P 500 index fund. Set up monthly contributions. Then let time and compound growth do the work.
+    </p>
+
+    <p>
+      Use our <a href="/calculators/growth-calculator">growth calculator</a> to see exactly how much your child could have at age 18. And read our step-by-step guide on <a href="/blog/how-to-open-step-by-step">how to open a Trump Account</a> if you need help with the process.
+    </p>
+  </div>
+</BlogLayout>

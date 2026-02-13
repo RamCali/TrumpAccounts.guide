@@ -1,0 +1,171 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('economic-impact')!;
+const related = getRelatedArticles('economic-impact');
+
+const faqs = [
+  {
+    question: 'What is the potential economic impact of Trump Accounts?',
+    answer: 'If every child born in a single year receives the $1,000 deposit and it grows for 18 years, that one birth cohort alone could hold $4,000-$6,000 per child in new wealth — even without family contributions. With contributions, the total generational wealth creation could reach hundreds of billions of dollars.',
+  },
+  {
+    question: 'Could Trump Accounts increase homeownership rates?',
+    answer: 'Potentially. A Trump Account that grows to $50,000-$100,000 by age 18 (now a traditional IRA) gives young adults a significant head start on a down payment. The first-time homebuyer IRA exception allows $10,000 in penalty-free withdrawals.',
+  },
+  {
+    question: 'Will Trump Accounts cause everyone to buy the same stocks?',
+    answer: 'Trump Accounts must be invested in S&P 500 or broad U.S. equity index funds. This does concentrate investment in the same funds, but the S&P 500 represents about 500 of the largest U.S. companies across many sectors. The index is already the most widely held investment in the world.',
+  },
+  {
+    question: 'How do Trump Accounts compare to Social Security in terms of impact?',
+    answer: 'Social Security dramatically reduced elderly poverty from over 35% in the 1960s to about 10% today. Trump Accounts aim to build wealth earlier in life. Whether they have a comparable generational effect will not be known for decades.',
+  },
+  {
+    question: 'Do wealthier families benefit more from Trump Accounts?',
+    answer: `Yes, on the contribution side. Families who can afford to contribute the full $${limits.annualContributionLimit.toLocaleString()}/year will build much larger accounts. But the $${limits.pilotDeposit.toLocaleString()} federal deposit is the same for everyone, regardless of income.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Even the <strong class="text-white">${limits.pilotDeposit.toLocaleString()} deposit alone</strong> could create <strong class="text-white">$4,000-$6,000</strong> per child over 18 years at historical returns.</li>
+        <li>Potential benefits: increased <strong class="text-white">financial literacy</strong>, higher <strong class="text-white">homeownership</strong>, more <strong class="text-white">entrepreneurship</strong>, and better retirement readiness.</li>
+        <li>Potential concerns: market concentration in S&P 500 funds and <strong class="text-white">disproportionate benefit</strong> for wealthier families who can contribute more.</li>
+        <li>Historical parallels include Social Security's impact on elderly poverty and the GI Bill's impact on homeownership.</li>
+        <li>Full effects will not be measurable for <strong class="text-white">18+ years</strong>.</li>
+      </ul>
+    </div>
+
+    <p>
+      Trump Accounts are not just an investment program for individual families. At scale — millions of children across every birth cohort — they could reshape the economic landscape. Here is what economists and policy analysts are watching.
+    </p>
+
+    <h2>The Scale of Generational Wealth Creation</h2>
+    <p>
+      Start with the basics. About <strong>3.6 million babies</strong> are born in the U.S. each year. Each one born between {limits.pilotDepositStartYear} and {limits.pilotDepositEndYear} receives a <strong>${limits.pilotDeposit.toLocaleString()} federal deposit</strong>.
+    </p>
+    <p>
+      At the S&P 500's historical average return of about <strong>10% per year</strong>, that $1,000 grows to roughly <strong>$5,560 per child</strong> over 18 years — even if the family contributes nothing else. Multiply that by 3.6 million children and you get about <strong>$20 billion in new wealth</strong> from a single birth cohort's deposits alone.
+    </p>
+    <p>
+      Now add family contributions. If the average family contributes even a modest <strong>$100/month</strong>, the average account at 18 could reach roughly <strong>$50,000</strong>. That is <strong>$180 billion in new wealth per birth cohort</strong>. Over four birth cohorts, the total could exceed <strong>$700 billion</strong>.
+    </p>
+
+    <CalloutBox type="info" title="These are projections">
+      <p>
+        Market returns vary. Participation rates will differ. Not every family will contribute the same amount. These numbers illustrate potential scale, not guaranteed outcomes.
+      </p>
+    </CalloutBox>
+
+    <h2>Potential Positive Effects</h2>
+
+    <h3>1. Financial Literacy From Day One</h3>
+    <p>
+      For millions of American families, a Trump Account will be their <strong>first investment account</strong>. Parents who track their child's account growth may develop investment knowledge they never had before. Children who grow up knowing they have an investment account may enter adulthood more financially prepared.
+    </p>
+    <p>
+      Research consistently shows that <strong>financial literacy is linked to better financial outcomes</strong> — less debt, more savings, and better retirement planning.
+    </p>
+
+    <h3>2. Higher Homeownership Rates</h3>
+    <p>
+      The <strong>#1 barrier to homeownership</strong> for young adults is the down payment. A Trump Account that grows to $50,000-$100,000 by age 18 could give young adults a massive head start. The <a href="/blog/homeownership-impact">first-time homebuyer IRA exception</a> allows up to <strong>$10,000 in penalty-free withdrawals</strong> for a first home purchase.
+    </p>
+    <p>
+      The national homeownership rate is about <strong>65%</strong>. If Trump Accounts help even a small percentage of young adults buy homes sooner, the ripple effects on household wealth and community stability could be meaningful.
+    </p>
+
+    <h3>3. More Entrepreneurship</h3>
+    <p>
+      Starting a business requires capital. Young adults with a five- or six-figure nest egg at 18 have more options than those starting from zero. While withdrawals are taxed as ordinary income (and may face early withdrawal penalties), having <strong>access to capital</strong> changes what is possible.
+    </p>
+
+    <h3>4. Better Retirement Readiness</h3>
+    <p>
+      At age 18, the Trump Account converts to a <strong>traditional IRA</strong>. A child who leaves the money untouched gets a <strong>47-year head start</strong> on retirement savings (from 18 to 65). Even the $1,000 deposit alone, if left to grow at 10% for 65 years, could reach over <strong>$490,000</strong>.
+    </p>
+
+    <h2>Potential Concerns</h2>
+
+    <h3>1. Market Concentration</h3>
+    <p>
+      Trump Accounts must be invested in <strong>S&P 500 or broad U.S. equity index funds</strong>. When millions of accounts all buy into the same index, it concentrates capital in the same 500 companies. Some economists worry this could:
+    </p>
+    <ul>
+      <li>Inflate valuations of S&P 500 companies relative to smaller firms</li>
+      <li>Reduce the market's ability to price individual stocks efficiently</li>
+      <li>Create systemic risk if everyone is in the same investments</li>
+    </ul>
+    <p>
+      However, the S&P 500 is already the <strong>most widely held index in the world</strong>, and index funds account for a large share of total market investment. Trump Accounts would add to this trend but are unlikely to change the fundamental dynamics on their own.
+    </p>
+
+    <h3>2. Inequality in Contributions</h3>
+    <p>
+      The <strong>${limits.pilotDeposit.toLocaleString()} deposit is universal</strong> — every eligible child gets the same amount. But the <strong>${limits.annualContributionLimit.toLocaleString()}/year contribution limit</strong> disproportionately benefits families with more disposable income. A family contributing the maximum will end up with a much larger account than a family that contributes nothing beyond the deposit.
+    </p>
+    <p>
+      This is a real tension in the program design. For more detail, see our <a href="/blog/inequality-reduction">analysis of inequality and Trump Accounts</a>.
+    </p>
+
+    <CalloutBox type="tip" title="The Dell pledge helps here">
+      <p>
+        The <a href="/blog/dell-pledge-explained">Dell Foundation's $6.25 billion pledge</a> targets lower-income ZIP codes specifically, adding $250 per qualifying child. This helps narrow the gap between families who can afford extra contributions and those who cannot.
+      </p>
+    </CalloutBox>
+
+    <h2>Historical Parallels</h2>
+    <p>
+      Trump Accounts are not the first government program designed to build wealth across a generation. Two major historical parallels are worth noting:
+    </p>
+
+    <h3>Social Security (1935)</h3>
+    <p>
+      Before Social Security, <strong>over 35% of elderly Americans lived in poverty</strong>. Today, that figure is about <strong>10%</strong>. Social Security did not eliminate elderly poverty, but it dramatically reduced it over decades. Trump Accounts aim to do something similar for young adults — providing a baseline of wealth where none existed before.
+    </p>
+
+    <h3>The GI Bill (1944)</h3>
+    <p>
+      The GI Bill provided education and housing benefits to returning World War II veterans. It is widely credited with <strong>creating the American middle class</strong> — driving a surge in college education and homeownership. Trump Accounts share the same idea: give a generation a financial head start and watch the effects compound.
+    </p>
+    <p>
+      Neither parallel is perfect. But both show that <strong>broad-based wealth-building programs can have generational effects</strong> that far exceed their initial costs.
+    </p>
+
+    <h2>What We Do Not Know Yet</h2>
+    <p>
+      The honest answer is that much of the <a href="/blog/wealth-creation-potential">economic impact</a> will not be clear for years. Key unknowns include:
+    </p>
+    <ul>
+      <li><strong>Participation rates</strong> — Will 50% of families opt in? 80%? 95%?</li>
+      <li><strong>Contribution behavior</strong> — Will most families contribute beyond the deposit?</li>
+      <li><strong>Withdrawal patterns</strong> — Will 18-year-olds cash out immediately or keep investing?</li>
+      <li><strong>Market conditions</strong> — Will the next 18 years match historical averages?</li>
+    </ul>
+    <p>
+      The first cohort of Trump Account children will not turn 18 until <strong>2043</strong>. Until then, the economic impact is a projection, not a measurement.
+    </p>
+
+    <CalloutBox type="warning" title="Educational content only">
+      <p>
+        This article presents economic analysis based on publicly available data and historical parallels. It is not political commentary or investment advice. Consult official sources for the latest program details.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

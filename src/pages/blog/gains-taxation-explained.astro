@@ -1,0 +1,235 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('gains-taxation-explained')!;
+const related = getRelatedArticles('gains-taxation-explained');
+
+const faqs = [
+  {
+    question: 'Are Trump Account contributions tax-deductible?',
+    answer: 'No. Contributions are made with after-tax dollars. You do not receive a federal or state deduction for contributing to a Trump Account.',
+  },
+  {
+    question: 'Is growth inside a Trump Account taxed each year?',
+    answer: 'No. Growth is tax-deferred. You do not owe taxes on dividends, interest, or capital gains while the money remains in the account. Taxes are owed only when money is withdrawn after age 18.',
+  },
+  {
+    question: 'What tax rate applies to Trump Account withdrawals?',
+    answer: 'Withdrawals are taxed as ordinary income at the account holder\'s marginal tax rate in the year of withdrawal. This is standard traditional IRA treatment.',
+  },
+  {
+    question: 'Is there a penalty for withdrawing before age 59.5?',
+    answer: 'Yes. In addition to ordinary income tax, withdrawals before age 59½ are subject to a 10% early withdrawal penalty. Exceptions include first-time home purchase (up to $10,000), qualified education expenses, disability, and others under standard IRA rules.',
+  },
+  {
+    question: 'How is a Trump Account different from a Roth IRA for tax purposes?',
+    answer: 'A Roth IRA offers tax-free withdrawals in retirement because contributions are made after-tax and growth is never taxed again. A Trump Account converts to a traditional IRA at 18, meaning growth is tax-deferred and withdrawals are taxed as ordinary income. You can convert to a Roth IRA at 18 to switch to tax-free treatment.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Contributions are <strong class="text-white">after-tax</strong> — no deduction on your tax return.</li>
+        <li>Growth is <strong class="text-white">tax-deferred</strong> — no annual taxes on gains, dividends, or interest.</li>
+        <li>Withdrawals after age 18 are taxed as <strong class="text-white">ordinary income</strong> (traditional IRA rules).</li>
+        <li>Before age 59.5, an additional <strong class="text-white">10% early withdrawal penalty</strong> applies (with exceptions).</li>
+        <li>This is <strong class="text-white">NOT a Roth account</strong> — growth is not tax-free.</li>
+      </ul>
+    </div>
+
+    <p>
+      Understanding how Trump Account gains are taxed is one of the most important things a parent can learn about this program. The tax treatment affects how much your child actually keeps when they withdraw money. Here is the full breakdown, with dollar examples.
+    </p>
+
+    <h2>Phase 1: Contributions (After-Tax)</h2>
+    <p>
+      When you contribute to a Trump Account, you use <strong>after-tax dollars</strong>. That means you do not get a tax deduction. If you contribute the full <strong>${limits.annualContributionLimit.toLocaleString()} per year</strong>, your taxable income stays the same.
+    </p>
+    <p>
+      This is different from a traditional 401(k) or traditional IRA, where contributions lower your taxable income. It is similar to a Roth IRA in that you contribute money you have already paid taxes on.
+    </p>
+
+    <CalloutBox type="info" title="No deduction, but still valuable">
+      <p>
+        Even without a tax deduction, Trump Accounts provide a powerful benefit: <strong>tax-deferred growth</strong>. Your money compounds for up to 18 years without any tax drag. That is worth far more than a one-time deduction for most families.
+      </p>
+    </CalloutBox>
+
+    <h2>Phase 2: Growth (Tax-Deferred)</h2>
+    <p>
+      While money sits in the Trump Account from birth through age {limits.growthPhaseEndAge}, all growth is <strong>tax-deferred</strong>. This means:
+    </p>
+    <ul>
+      <li>No taxes on dividends paid by the index fund</li>
+      <li>No taxes on capital gains as the fund increases in value</li>
+      <li>No annual tax filing related to the account's growth</li>
+    </ul>
+    <p>
+      Tax-deferred compounding is powerful. In a regular taxable brokerage account, you would owe taxes each year on dividends and any realized gains. Those annual taxes reduce how much stays invested and growing. In a Trump Account, <strong>every dollar of growth stays invested</strong> and continues compounding.
+    </p>
+
+    <h2>Phase 3: Withdrawals (Ordinary Income Tax)</h2>
+    <p>
+      At age {limits.iraConversionAge}, the Trump Account automatically converts to a <strong>traditional IRA</strong>. When your child withdraws money, the entire withdrawal amount is taxed as <strong>ordinary income</strong> at their marginal tax rate.
+    </p>
+    <p>
+      Here are the approximate 2026 federal tax brackets for a single filer:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Tax Bracket</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Taxable Income Range</th>
+            <th class="py-3 text-gray-400 font-medium">Rate</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">First bracket</td>
+            <td class="py-3 pr-4">$0 – $11,925</td>
+            <td class="py-3 text-mint-400">10%</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Second bracket</td>
+            <td class="py-3 pr-4">$11,926 – $48,475</td>
+            <td class="py-3 text-mint-400">12%</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">Third bracket</td>
+            <td class="py-3 pr-4">$48,476 – $103,350</td>
+            <td class="py-3 text-mint-400">22%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Example: Withdrawing $20,000 at Age 22</h3>
+    <p>
+      Say your child has <strong>$100,000</strong> in their traditional IRA (formerly Trump Account). At age 22, they withdraw <strong>$20,000</strong> to help pay for expenses. They are in the <strong>12% tax bracket</strong>. Here is what they owe:
+    </p>
+    <ul>
+      <li><strong>Income tax:</strong> $20,000 x 12% = <strong>$2,400</strong></li>
+      <li><strong>Early withdrawal penalty (before 59.5):</strong> $20,000 x 10% = <strong>$2,000</strong></li>
+      <li><strong>Total tax cost:</strong> $2,400 + $2,000 = <strong>$4,400</strong></li>
+      <li><strong>Net amount kept:</strong> $20,000 - $4,400 = <strong>$15,600</strong></li>
+    </ul>
+
+    <CalloutBox type="warning" title="The 10% penalty adds up fast">
+      <p>
+        Before age 59.5, your child pays <strong>both</strong> income tax and the 10% penalty. On a $20,000 withdrawal, that is $4,400 gone to taxes. That is why keeping money in the account as long as possible — or <a href="/blog/trump-account-roth-conversion-strategy">converting to a Roth IRA at 18</a> — is so important.
+      </p>
+    </CalloutBox>
+
+    <h3>Example: Withdrawing After Age 59.5</h3>
+    <p>
+      If your child waits until after age 59.5, the math is much simpler. The same $20,000 withdrawal in the 12% bracket:
+    </p>
+    <ul>
+      <li><strong>Income tax:</strong> $20,000 x 12% = <strong>$2,400</strong></li>
+      <li><strong>Early withdrawal penalty:</strong> <strong>$0</strong> (no penalty after 59.5)</li>
+      <li><strong>Total tax cost:</strong> <strong>$2,400</strong></li>
+      <li><strong>Net amount kept:</strong> $20,000 - $2,400 = <strong>$17,600</strong></li>
+    </ul>
+
+    <h2>Exceptions to the 10% Early Withdrawal Penalty</h2>
+    <p>
+      Standard traditional IRA penalty exceptions apply after the Trump Account converts at age {limits.iraConversionAge}. Your child can avoid the 10% penalty (but still owes income tax) for:
+    </p>
+    <ul>
+      <li><strong>First-time home purchase:</strong> Up to $10,000 penalty-free</li>
+      <li><strong>Qualified education expenses:</strong> Tuition, fees, books, and supplies</li>
+      <li><strong>Disability:</strong> If the account holder becomes disabled</li>
+      <li><strong>Substantially equal periodic payments (SEPP):</strong> Regular distributions under IRS Rule 72(t)</li>
+      <li><strong>Unreimbursed medical expenses:</strong> Exceeding 7.5% of adjusted gross income</li>
+      <li><strong>Health insurance premiums while unemployed</strong></li>
+    </ul>
+
+    <h2>How This Compares to Other Accounts</h2>
+    <p>
+      Different savings vehicles have different tax treatment. Here is how the Trump Account stacks up:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Account Type</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Contributions</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Growth</th>
+            <th class="py-3 text-gray-400 font-medium">Withdrawals</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Trump Account / Traditional IRA</td>
+            <td class="py-3 pr-4">After-tax</td>
+            <td class="py-3 pr-4">Tax-deferred</td>
+            <td class="py-3">Ordinary income tax</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Roth IRA</td>
+            <td class="py-3 pr-4">After-tax</td>
+            <td class="py-3 pr-4">Tax-free</td>
+            <td class="py-3">Tax-free (qualified)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">529 Plan</td>
+            <td class="py-3 pr-4">After-tax</td>
+            <td class="py-3 pr-4">Tax-free</td>
+            <td class="py-3">Tax-free (education only)</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 text-white font-medium">Taxable Brokerage</td>
+            <td class="py-3 pr-4">After-tax</td>
+            <td class="py-3 pr-4">Taxed annually</td>
+            <td class="py-3">Capital gains rates</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      The key difference: <strong>a Roth IRA gives you tax-free withdrawals</strong>, while a Trump Account (traditional IRA) gives you <strong>tax-deferred growth but taxable withdrawals</strong>. A 529 offers tax-free withdrawals but only for qualified education expenses. A taxable brokerage account offers no tax deferral but uses more favorable capital gains rates.
+    </p>
+
+    <CalloutBox type="tip" title="The Roth conversion opportunity">
+      <p>
+        At age {limits.iraConversionAge}, your child can <a href="/blog/trump-account-roth-conversion-strategy">convert the traditional IRA to a Roth IRA</a>. They pay income tax on the converted amount, but all future growth becomes tax-free forever. This is especially powerful if they are in a low tax bracket during college years.
+      </p>
+    </CalloutBox>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      Trump Account gains are <strong>not tax-free</strong>. They are <strong>tax-deferred</strong>. Your child will eventually owe ordinary income tax on every dollar they withdraw. Before age 59.5, they also face a 10% early withdrawal penalty unless an exception applies.
+    </p>
+    <p>
+      That said, tax-deferred compounding over 18 years is still enormously valuable. The account grows faster because there is no annual tax drag. And the <a href="/blog/trump-account-roth-conversion-strategy">Roth conversion strategy</a> at age 18 can turn that tax-deferred money into tax-free money at a very low cost.
+    </p>
+    <p>
+      For more details on tax rules, see our <a href="/faq/taxes">tax FAQ</a>. To model withdrawal scenarios, use the <a href="/calculators/withdrawal-simulator">withdrawal simulator</a>.
+    </p>
+
+    <CalloutBox type="warning" title="Not tax or financial advice">
+      <p>
+        This article is for educational purposes only. Tax situations vary by individual. Consult a qualified tax professional or CPA before making decisions about Trump Account withdrawals or Roth conversions.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

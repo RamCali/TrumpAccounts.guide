@@ -1,0 +1,193 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-for-trade-school')!;
+const related = getRelatedArticles('trump-account-for-trade-school');
+
+const faqs = [
+  {
+    question: 'Can a Trump Account pay for trade school?',
+    answer: `Yes. At age 18, the Trump Account converts to a traditional IRA. Your child can withdraw funds for any purpose including trade school, vocational training, and apprenticeship programs. If the school is an eligible institution, the 10% early withdrawal penalty may be waived for qualified education expenses. Income tax still applies.`,
+  },
+  {
+    question: 'Does trade school qualify for the education penalty exception?',
+    answer: 'It depends on the school. If the trade school or vocational program participates in federal student aid programs (Title IV), it is typically an eligible institution for the IRA education expense exception. This waives the 10% penalty but not the income tax.',
+  },
+  {
+    question: 'Is a 529 or Trump Account better for trade school?',
+    answer: 'For tuition at an eligible vocational school, a 529 is more tax-efficient because withdrawals are completely tax-free. A Trump Account taxes all withdrawals as ordinary income. However, the Trump Account is more flexible — it can also cover tools, equipment, and living expenses that a 529 may not cover.',
+  },
+  {
+    question: 'Can Trump Account funds pay for tools and equipment?',
+    answer: 'Yes. There are no restrictions on what you spend withdrawn IRA funds on. If you withdraw to buy tools or equipment for a trade, you owe income tax on the withdrawal. The 10% penalty may be waived if the tools and supplies are required for courses at an eligible institution.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><strong class="text-white">Yes</strong>, Trump Account funds can pay for trade school, vocational training, and apprenticeships.</li>
+        <li>Qualified education expenses at eligible institutions may <strong class="text-white">avoid the 10% penalty</strong>.</li>
+        <li>Withdrawals are still taxed as <strong class="text-white">ordinary income</strong> regardless.</li>
+        <li>A <strong class="text-white">529 plan</strong> covers vocational schools tax-free — consider using both accounts.</li>
+        <li>The Trump Account can also cover <strong class="text-white">tools, equipment, and living expenses</strong> that a 529 may not.</li>
+      </ul>
+    </div>
+
+    <p>
+      Not every child is heading to a four-year university. Trade schools, vocational programs, and apprenticeships are excellent paths to high-paying careers. Here is how Trump Account funds can help pay for them.
+    </p>
+
+    <h2>How It Works</h2>
+    <p>
+      At age {limits.iraConversionAge}, the Trump Account converts to a <strong>traditional IRA</strong>. Your child can withdraw money for any purpose — including trade school tuition, certification programs, and vocational training.
+    </p>
+    <p>
+      The key question is whether the <strong>10% early withdrawal penalty</strong> applies. That depends on the school.
+    </p>
+
+    <h2>The Education Expense Exception</h2>
+    <p>
+      The IRS waives the 10% early withdrawal penalty for <strong>qualified education expenses</strong> at an <strong>eligible institution</strong>. Many trade schools and vocational programs qualify if they participate in federal student aid programs (Title IV).
+    </p>
+    <p>
+      Eligible expenses include:
+    </p>
+    <ul>
+      <li><strong>Tuition and fees</strong></li>
+      <li><strong>Books, supplies, and equipment</strong> required for courses</li>
+      <li><strong>Room and board</strong> (if enrolled at least half-time)</li>
+      <li><strong>Special needs services</strong></li>
+    </ul>
+
+    <CalloutBox type="info" title="Check your school's eligibility">
+      <p>
+        Not all trade programs qualify. The school must participate in <strong>federal student aid programs</strong>. You can check at <a href="https://studentaid.gov/understand-aid/types/international#schools-background" target="_blank" rel="noopener noreferrer">studentaid.gov</a> or ask the school's financial aid office directly. Informal training programs, non-accredited boot camps, and most apprenticeships through employers may not qualify.
+      </p>
+    </CalloutBox>
+
+    <h2>Tax Cost: Trade School Withdrawal Example</h2>
+    <p>
+      Your child enrolls in a <strong>welding certification program</strong> at an eligible vocational school. Total cost: <strong>$12,000</strong> for tuition, supplies, and tools. Here is the tax impact at a 12% bracket:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Item</th>
+            <th class="py-3 text-gray-400 font-medium">Amount</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Withdrawal for trade school</td>
+            <td class="py-3 font-medium text-white">$12,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Federal income tax (12%)</td>
+            <td class="py-3 font-medium text-amber-300">$1,440</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">10% penalty</td>
+            <td class="py-3 font-medium text-mint-300">$0 (education exception)</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium">Net cost in taxes</td>
+            <td class="py-3 font-bold text-amber-300">$1,440</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      If the school does <strong>not</strong> qualify as an eligible institution, the 10% penalty adds another <strong>$1,200</strong> — bringing the total tax cost to <strong>$2,640</strong>.
+    </p>
+
+    <h2>Trump Account vs 529 for Trade School</h2>
+    <p>
+      Here is the important comparison: <strong>529 plans also cover vocational schools</strong>, and they do it tax-free.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Feature</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Trump Account</th>
+            <th class="py-3 text-gray-400 font-medium">529 Plan</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Tuition at eligible school</td>
+            <td class="py-3 pr-4 text-amber-300">Taxed as income</td>
+            <td class="py-3 text-mint-300">Tax-free</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">10% penalty</td>
+            <td class="py-3 pr-4 text-mint-300">Waived (eligible school)</td>
+            <td class="py-3 text-mint-300">None</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Tools and equipment</td>
+            <td class="py-3 pr-4 text-mint-300">Flexible (taxed)</td>
+            <td class="py-3 text-mint-300">Covered if required</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">Living expenses</td>
+            <td class="py-3 pr-4 text-mint-300">Any use (taxed)</td>
+            <td class="py-3 text-amber-300">Room/board only if half-time</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <CalloutBox type="tip" title="Best strategy: 529 for tuition, Trump Account for the rest">
+      <p>
+        If your family has both accounts, use the <strong>529 for tuition and required supplies</strong> (tax-free withdrawals). Use the <strong>Trump Account for living expenses, transportation, tools</strong> not covered by the 529, and anything else. This minimizes total taxes paid.
+      </p>
+    </CalloutBox>
+
+    <h2>Common Trade Paths and Costs</h2>
+    <p>
+      Here are typical costs for popular trade programs. A Trump Account can help cover some or all of these:
+    </p>
+    <ul>
+      <li><strong>Electrician apprenticeship:</strong> $1,000-$10,000 for technical school + tools</li>
+      <li><strong>Welding certification:</strong> $5,000-$15,000</li>
+      <li><strong>HVAC technician:</strong> $3,500-$15,000</li>
+      <li><strong>Cosmetology:</strong> $5,000-$20,000</li>
+      <li><strong>CDL (commercial driving):</strong> $3,000-$7,000</li>
+      <li><strong>Dental hygiene:</strong> $20,000-$40,000 (associate degree)</li>
+    </ul>
+    <p>
+      Many of these cost far less than a four-year degree, meaning your child may only need a partial withdrawal — leaving the rest to <a href="/blog/what-can-money-be-used-for">grow for retirement or a first home</a>.
+    </p>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      Trump Account funds are a great fit for trade school and vocational training. The costs are often lower than college, so your child can fund their training without draining the entire account. Pair with a 529 for the best tax outcome, and keep whatever is left invested for the long term.
+    </p>
+
+    <CalloutBox type="warning" title="Not financial advice">
+      <p>
+        This is educational content, not tax or financial advice. Tax rules are complex and depend on individual circumstances. Consult a qualified tax professional before making withdrawal decisions.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

@@ -1,0 +1,185 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('index-fund-requirements')!;
+const related = getRelatedArticles('index-fund-requirements');
+
+const faqs = [
+  {
+    question: 'Can I invest my Trump Account in individual stocks?',
+    answer: 'No. Trump Accounts are limited to mutual funds or ETFs that track the S&P 500 or a broad U.S. equity index. Individual stocks, bonds, crypto, real estate, and sector-specific funds are not allowed.',
+  },
+  {
+    question: 'What is the expense ratio cap for Trump Account funds?',
+    answer: 'The maximum expense ratio is 0.1% (10 basis points). Most eligible S&P 500 ETFs charge far less — as low as 0.02% for SPLG or 0.03% for VOO and IVV.',
+  },
+  {
+    question: 'Can I use a total stock market fund in a Trump Account?',
+    answer: 'Yes, if the fund tracks a broad U.S. equity index and has an expense ratio at or below 0.1%. Total U.S. stock market index funds that meet these criteria are eligible.',
+  },
+  {
+    question: 'Are international index funds allowed?',
+    answer: 'No. The fund must track the S&P 500 or a broad U.S. equity index. International-only funds, even if they are low-cost index funds, do not qualify.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Trump Account funds must be invested in <strong class="text-white">mutual funds or ETFs tracking the S&P 500 or a broad U.S. equity index</strong>.</li>
+        <li>Expense ratios are <strong class="text-white">capped at 0.1%</strong> (10 basis points) by law.</li>
+        <li>Eligible ETFs include <strong class="text-white">VOO (0.03%), IVV (0.03%), SPY (0.09%), and SPLG (0.02%)</strong>.</li>
+        <li><strong class="text-white">Individual stocks, bonds, crypto, real estate, and sector funds</strong> are not allowed.</li>
+        <li>The parent (authorized individual) chooses from eligible funds and can <strong class="text-white">switch between them</strong>.</li>
+      </ul>
+    </div>
+
+    <h2>What Qualifies as an Eligible Fund?</h2>
+    <p>
+      Under <strong>IRC Section 530A</strong>, Trump Account money must go into a specific type of investment. The rules are simple. The fund must meet <strong>two requirements</strong>:
+    </p>
+    <ol>
+      <li>It must track the <strong>S&P 500 index</strong> or a <strong>broad U.S. equity index</strong>.</li>
+      <li>Its expense ratio must be <strong>at or below 0.1%</strong> (10 basis points).</li>
+    </ol>
+    <p>
+      Both mutual funds and ETFs qualify, as long as they meet these two criteria. You do not need to pick one type over the other.
+    </p>
+
+    <CalloutBox type="irs-quote" title="From IRS Notice 2025-68">
+      <p>
+        Trump Account contributions must be invested in "passive index funds — whether structured as mutual funds or exchange-traded funds — that track the Standard & Poor's 500 index or a broad, market-capitalization-weighted U.S. equity index" with expense ratios not exceeding 0.1%.
+      </p>
+    </CalloutBox>
+
+    <h2>Eligible Fund Examples</h2>
+    <p>
+      Here are some of the most popular funds that meet Trump Account requirements. All track the S&P 500 and charge well below the 0.1% cap.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm text-left text-gray-300">
+        <thead class="text-xs uppercase text-gold-400 border-b border-surface-600">
+          <tr>
+            <th class="px-4 py-3">Fund</th>
+            <th class="px-4 py-3">Ticker</th>
+            <th class="px-4 py-3">Expense Ratio</th>
+            <th class="px-4 py-3">Provider</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-surface-700">
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">SPDR Portfolio S&P 500</td>
+            <td class="px-4 py-3">SPLG</td>
+            <td class="px-4 py-3 text-mint-400">0.02%</td>
+            <td class="px-4 py-3">State Street</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">Vanguard S&P 500</td>
+            <td class="px-4 py-3">VOO</td>
+            <td class="px-4 py-3 text-mint-400">0.03%</td>
+            <td class="px-4 py-3">Vanguard</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">iShares Core S&P 500</td>
+            <td class="px-4 py-3">IVV</td>
+            <td class="px-4 py-3 text-mint-400">0.03%</td>
+            <td class="px-4 py-3">BlackRock</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">SPDR S&P 500</td>
+            <td class="px-4 py-3">SPY</td>
+            <td class="px-4 py-3 text-gold-400">0.09%</td>
+            <td class="px-4 py-3">State Street</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      All four track the same index. The main difference is cost. Over 18 years, even small expense ratio differences add up. See our <a href="/blog/trump-account-fees-explained">fee comparison article</a> for the exact dollar impact.
+    </p>
+
+    <h2>What Does NOT Qualify</h2>
+    <p>
+      The rules are strict about what you <strong>cannot</strong> invest in. None of the following are allowed in a Trump Account:
+    </p>
+    <ul>
+      <li><strong>Individual stocks</strong> — No Apple, Tesla, or any single company shares</li>
+      <li><strong>Bonds or bond funds</strong> — Not even U.S. Treasury bonds</li>
+      <li><strong>Cryptocurrency</strong> — No Bitcoin, Ethereum, or crypto ETFs</li>
+      <li><strong>Real estate or REITs</strong> — No real estate investment trusts</li>
+      <li><strong>International-only funds</strong> — Must be U.S. equity focused</li>
+      <li><strong>Sector funds</strong> — No tech-only, healthcare-only, or energy-only ETFs</li>
+      <li><strong>Actively managed funds</strong> — Must be passive index funds</li>
+      <li><strong>Funds with expense ratios above 0.1%</strong> — Even if they track the S&P 500</li>
+    </ul>
+
+    <CalloutBox type="warning" title="No Exceptions">
+      <p>
+        Even if you believe crypto or tech stocks will outperform the S&P 500, you cannot put them in a Trump Account. The law restricts investments to broad U.S. equity index funds with low fees. This is by design.
+      </p>
+    </CalloutBox>
+
+    <h2>Why Index Funds?</h2>
+    <p>
+      Congress chose index funds for Trump Accounts for three important reasons:
+    </p>
+
+    <h3>1. Low Cost</h3>
+    <p>
+      Index funds charge a fraction of what actively managed funds cost. The average actively managed stock fund charges around 0.6% to 1.0% per year. Trump Account eligible funds charge <strong>0.02% to 0.09%</strong>. Over 18 years, that difference saves your child thousands of dollars.
+    </p>
+
+    <h3>2. Broad Diversification</h3>
+    <p>
+      An S&P 500 index fund holds shares in <strong>500 of the largest U.S. companies</strong> across every major industry. Your child's money is not riding on one company or one sector. It is spread across the entire U.S. economy.
+    </p>
+
+    <h3>3. Proven Track Record</h3>
+    <p>
+      The S&P 500 has delivered an average annual return of roughly <strong>10% nominal</strong> (about <strong>7% after inflation</strong>) over its history. No 18-year period has ever produced a negative total return. That long-term consistency is exactly what a child's account needs.
+    </p>
+
+    <CalloutBox type="tip" title="Keep It Simple">
+      <p>
+        You do not need to overthink fund selection. Pick the lowest-cost option your custodian offers. SPLG at 0.02% or VOO at 0.03% are excellent choices. They all track the same 500 companies.
+      </p>
+    </CalloutBox>
+
+    <h2>How to Choose Your Fund</h2>
+    <p>
+      The parent (or legal guardian), called the "authorized individual" in the law, selects the fund. Here is a simple approach:
+    </p>
+    <ol>
+      <li><strong>Check what your custodian offers.</strong> Not every broker carries every ETF. Confirm which eligible funds are available.</li>
+      <li><strong>Pick the lowest expense ratio.</strong> Since all eligible funds track the same index, the one with the lowest fee will give your child slightly more growth.</li>
+      <li><strong>Set up contributions and leave it alone.</strong> You do not need to check the account daily. The fund tracks the market automatically.</li>
+    </ol>
+    <p>
+      You can also <a href="/blog/can-parents-change-investments">switch between eligible funds</a> later if a lower-cost option becomes available. For a detailed ETF comparison, see <a href="/blog/trump-account-vs-sp500-etfs">Best S&P 500 ETFs for Trump Accounts</a>.
+    </p>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      Trump Account investment rules are intentionally simple. Your money goes into low-cost index funds that track the U.S. stock market. No individual stocks. No crypto. No complex decisions. Just steady, diversified, long-term investing for your child's future.
+    </p>
+    <p>
+      Want to see how fees affect your child's balance? Try the <a href="/calculators/fund-expense-tracker">fund expense tracker</a>. For answers to more investment questions, visit our <a href="/faq/investments">investment FAQ</a>.
+    </p>
+  </div>
+</BlogLayout>

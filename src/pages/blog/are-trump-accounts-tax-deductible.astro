@@ -1,0 +1,164 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('are-trump-accounts-tax-deductible')!;
+const related = getRelatedArticles('are-trump-accounts-tax-deductible');
+
+const faqs = [
+  {
+    question: 'Can I deduct Trump Account contributions on my taxes?',
+    answer: `No. Trump Account contributions are made with after-tax dollars. You cannot deduct them on your federal tax return or any state tax return. This is similar to how Roth IRA contributions work.`,
+  },
+  {
+    question: 'Is the growth in a Trump Account taxed every year?',
+    answer: 'No. Growth is tax-deferred. You do not owe taxes on investment gains, dividends, or interest while the money is in the account. Taxes are owed only when withdrawals are made after the account converts to a traditional IRA at age 18.',
+  },
+  {
+    question: 'How are withdrawals from a Trump Account taxed?',
+    answer: 'After the account converts to a traditional IRA at age 18, withdrawals are taxed as ordinary income. If withdrawals are made before age 59 and a half, a 10% early withdrawal penalty may also apply, with certain exceptions.',
+  },
+  {
+    question: 'Are employer contributions to a Trump Account taxable?',
+    answer: `No. Employer contributions of up to $${limits.employerContributionLimit.toLocaleString()}/year per employee are tax-free to the employee under IRC Section 128. The employee does not report this as income.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Trump Account contributions are <strong class="text-white">NOT tax-deductible</strong>. They are made with after-tax dollars.</li>
+        <li>Growth inside the account is <strong class="text-white">tax-deferred</strong> — no annual taxes on gains.</li>
+        <li>Withdrawals after age 18 are taxed as <strong class="text-white">ordinary income</strong> (traditional IRA treatment).</li>
+        <li>Employer contributions are <strong class="text-white">tax-free</strong> to the employee under IRC Section 128.</li>
+      </ul>
+    </div>
+
+    <p>
+      <strong>No, Trump Account contributions are not tax-deductible.</strong> This is one of the most common questions parents ask, and the answer is clear. You contribute with after-tax dollars, and you will not see a deduction on your tax return.
+    </p>
+    <p>
+      But the tax story does not end there. Trump Accounts still offer meaningful tax benefits. Let's walk through how the full tax treatment works.
+    </p>
+
+    <h2>Contributions: After-Tax Dollars</h2>
+    <p>
+      When you contribute to a Trump Account, you use money you have already paid income tax on. There is <strong>no federal tax deduction</strong> and <strong>no state tax deduction</strong> for these contributions.
+    </p>
+    <p>
+      This puts Trump Accounts in a different category from accounts like a traditional 401(k) or traditional IRA, where contributions reduce your taxable income in the year you make them.
+    </p>
+
+    <CalloutBox type="irs-quote" title="IRS Notice 2025-68">
+      <p>
+        "Contributions to a Trump Account under Section 530A are not deductible by the contributor for federal income tax purposes."
+      </p>
+    </CalloutBox>
+
+    <h2>How Trump Accounts Compare to Other Accounts</h2>
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Account Type</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Contributions</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Growth</th>
+            <th class="py-3 text-gray-400 font-medium">Withdrawals</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Trump Account</td>
+            <td class="py-3 pr-4">After-tax (no deduction)</td>
+            <td class="py-3 pr-4">Tax-deferred</td>
+            <td class="py-3">Taxed as ordinary income</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">401(k)</td>
+            <td class="py-3 pr-4">Pre-tax (deductible)</td>
+            <td class="py-3 pr-4">Tax-deferred</td>
+            <td class="py-3">Taxed as ordinary income</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Traditional IRA</td>
+            <td class="py-3 pr-4">Deductible (income limits apply)</td>
+            <td class="py-3 pr-4">Tax-deferred</td>
+            <td class="py-3">Taxed as ordinary income</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Roth IRA</td>
+            <td class="py-3 pr-4">After-tax (no deduction)</td>
+            <td class="py-3 pr-4">Tax-free</td>
+            <td class="py-3">Tax-free (qualified)</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white"><a href="/compare/trump-account-vs-529" class="text-gold-400 hover:text-gold-300">529 Plan</a></td>
+            <td class="py-3 pr-4">After-tax (state deduction in some states)</td>
+            <td class="py-3 pr-4">Tax-free</td>
+            <td class="py-3">Tax-free (qualified education)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>The Real Tax Benefit: Tax-Deferred Growth</h2>
+    <p>
+      While you do not get a deduction upfront, Trump Accounts offer <strong>tax-deferred growth</strong>. This is a significant advantage.
+    </p>
+    <p>
+      In a regular brokerage account, you owe taxes on dividends, capital gains distributions, and realized gains every year. In a Trump Account, <strong>all of that growth compounds without annual taxes</strong>.
+    </p>
+    <p>
+      Over 18 years of investing in S&P 500 index funds, the difference between taxable and tax-deferred growth can be substantial. The money that would have gone to annual taxes instead stays invested and keeps growing.
+    </p>
+
+    <CalloutBox type="tip" title="Tax-deferred compounding adds up">
+      <p>
+        A $5,000 annual contribution at 8% returns over 18 years grows to roughly $207,000 in a tax-deferred account. In a taxable account with the same contributions and returns, the total could be $15,000-$25,000 less due to annual taxes on dividends and distributions.
+      </p>
+    </CalloutBox>
+
+    <h2>Withdrawals: Taxed as Ordinary Income</h2>
+    <p>
+      At age {limits.iraConversionAge}, the Trump Account converts to a <strong>traditional IRA</strong>. When your child withdraws money, it is taxed as ordinary income — just like withdrawals from a traditional IRA or 401(k).
+    </p>
+    <p>
+      The tax rate depends on your child's income at the time of withdrawal. If they withdraw at 18 while earning little income, the effective tax rate could be very low. This is why some families consider a <a href="/blog/trump-account-roth-conversion-strategy">Roth conversion strategy at age 18</a>.
+    </p>
+    <p>
+      Withdrawals before age 59 and a half may also face a <strong>10% early withdrawal penalty</strong>, with exceptions for first-time home purchases (up to $10,000), qualified education expenses, and other IRA exceptions.
+    </p>
+
+    <h2>Employer Contributions Are Tax-Free</h2>
+    <p>
+      There is one tax benefit that happens upfront: <strong>employer contributions are tax-free</strong> to the employee.
+    </p>
+    <p>
+      Under IRC Section 128, employers can contribute up to <strong>${limits.employerContributionLimit.toLocaleString()}/year per employee</strong>. This amount is <strong>not reported as taxable income</strong> on the employee's W-2. It is essentially free money that goes directly into the child's Trump Account.
+    </p>
+    <p>
+      For more on how this works, see our <a href="/blog/employer-match-trump-account">employer match guide</a>.
+    </p>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      Trump Accounts are <strong>not tax-deductible</strong>. But they still offer two valuable tax benefits: <strong>tax-deferred growth</strong> for up to 18 years and <strong>tax-free employer contributions</strong>. The combination of these benefits, plus the ${limits.pilotDeposit.toLocaleString()} federal deposit, makes Trump Accounts a powerful tool for building your child's financial future.
+    </p>
+    <p>
+      For a deeper dive into how gains are taxed, visit our <a href="/faq/taxes">tax FAQ</a>.
+    </p>
+  </div>
+</BlogLayout>

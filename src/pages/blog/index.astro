@@ -1,0 +1,95 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { breadcrumbSchema, webPageSchema } from '../../lib/seo/schema';
+import { blogArticles, getArticlesByCategory, getArticleCount } from '../../lib/blog/articles';
+import { blogCategories } from '../../lib/blog/categories';
+
+const siteUrl = 'https://trumpaccounts.guide';
+const totalArticles = getArticleCount();
+
+const schemas = [
+  webPageSchema({
+    title: 'Trump Account Blog — Guides, Analysis & Deep Dives',
+    description: `${totalArticles} in-depth articles on Trump Accounts: eligibility, investments, taxes, growth projections, and practical parent guides.`,
+    url: `${siteUrl}/blog`,
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: siteUrl },
+    { name: 'Blog', url: `${siteUrl}/blog` },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Trump Account Blog — Guides & Deep Dives"
+  description={`${totalArticles} in-depth articles on Trump Accounts: eligibility, investments, taxes, growth projections, policy analysis, and practical parent guides.`}
+  schema={schemas}
+>
+  <div class="mx-auto max-w-6xl px-4 py-12">
+    <!-- Breadcrumb -->
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-gold-400 no-underline">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="text-white font-medium">Blog</span>
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Hero -->
+    <div class="mb-12 text-center">
+      <h1 class="text-3xl font-extrabold text-white md:text-4xl">Trump Account Blog</h1>
+      <p class="mx-auto mt-3 max-w-2xl text-lg text-gray-400">
+        In-depth guides, analysis, and practical advice for parents navigating Trump Accounts. {totalArticles} articles across {blogCategories.length} topics.
+      </p>
+    </div>
+
+    <!-- Quick nav -->
+    <div class="mb-12 flex flex-wrap justify-center gap-2">
+      {blogCategories.map((cat) => {
+        const count = getArticlesByCategory(cat.slug).length;
+        return (
+          <a
+            href={`#${cat.slug}`}
+            class="rounded-full border border-surface-600 px-4 py-1.5 text-sm text-gray-400 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5 hover:text-gold-400"
+          >
+            {cat.name} <span class="text-gray-600">({count})</span>
+          </a>
+        );
+      })}
+    </div>
+
+    <!-- Category sections -->
+    {blogCategories.map((cat) => {
+      const articles = getArticlesByCategory(cat.slug);
+      return (
+        <section id={cat.slug} class="mb-14 scroll-mt-24">
+          <div class="mb-6">
+            <h2 class="text-2xl font-bold text-white">{cat.name}</h2>
+            <p class="mt-1 text-gray-400">{cat.description}</p>
+          </div>
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {articles.map((article) => (
+              <a
+                href={`/blog/${article.slug}`}
+                class="group rounded-lg border border-surface-600 p-5 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5"
+              >
+                <h3 class="font-semibold text-white group-hover:text-gold-400 transition-colors">{article.title}</h3>
+                <p class="mt-2 text-sm text-gray-400 line-clamp-2">{article.description}</p>
+                <div class="mt-3 flex items-center gap-3 text-xs text-gray-600">
+                  <span>{article.readingTime}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      );
+    })}
+
+    <!-- Disclaimer -->
+    <p class="mt-10 text-center text-xs text-gray-600">
+      Educational content only, not tax or financial advice.
+      Source: <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-gold-400">IRS Notice 2025-68</a>.
+    </p>
+  </div>
+</BaseLayout>

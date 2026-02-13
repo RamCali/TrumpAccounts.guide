@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import DisclosureBanner from '../components/layout/DisclosureBanner.astro';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import OpenGraph from '../components/seo/OpenGraph.astro';
@@ -49,6 +50,7 @@ const fullTitle = title.includes('TrumpAccounts') ? title : `${title} | TrumpAcc
   </head>
   <body class="flex min-h-screen flex-col bg-surface-900">
     <a href="#main-content" class="skip-link">Skip to content</a>
+    <DisclosureBanner />
     <Header />
     <main id="main-content" class="flex-1">
       <slot />

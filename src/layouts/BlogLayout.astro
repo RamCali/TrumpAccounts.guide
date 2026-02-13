@@ -1,0 +1,153 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Accordion from '../components/ui/Accordion.astro';
+import LastUpdated from '../components/ui/LastUpdated.astro';
+import { articleSchema, breadcrumbSchema, faqSchema } from '../lib/seo/schema';
+
+interface Props {
+  title: string;
+  description: string;
+  slug: string;
+  category: string;
+  categorySlug: string;
+  datePublished: string;
+  dateModified: string;
+  readingTime?: string;
+  author?: string;
+  faqs?: { question: string; answer: string }[];
+  relatedArticles?: { href: string; title: string; description: string }[];
+  sources?: { name: string; url: string }[];
+}
+
+const {
+  title,
+  description,
+  slug,
+  category,
+  categorySlug,
+  datePublished,
+  dateModified,
+  readingTime,
+  author = 'TrumpAccounts.guide Editorial Team',
+  faqs,
+  relatedArticles,
+  sources = [
+    { name: 'IRS Notice 2025-68', url: 'https://www.irs.gov/pub/irs-drop/n-25-68.pdf' },
+    { name: 'trumpaccounts.gov', url: 'https://trumpaccounts.gov' },
+  ],
+} = Astro.props;
+
+const siteUrl = 'https://trumpaccounts.guide';
+
+const schemas = [
+  articleSchema({
+    title,
+    description,
+    url: `${siteUrl}/blog/${slug}`,
+    datePublished,
+    dateModified,
+    author,
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: siteUrl },
+    { name: 'Blog', url: `${siteUrl}/blog` },
+    { name: title, url: `${siteUrl}/blog/${slug}` },
+  ]),
+  ...(faqs && faqs.length > 0 ? [faqSchema(faqs)] : []),
+];
+
+const formattedDate = new Date(datePublished).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={title} description={description} schema={schemas} ogType="article">
+  <article class="mx-auto max-w-3xl px-4 py-12">
+    <!-- Breadcrumb -->
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-gold-400 no-underline">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <a href="/blog" class="hover:text-gold-400 no-underline">Blog</a>
+        </li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="text-white font-medium">{title}</span>
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Category badge -->
+    <a
+      href={`/blog#${categorySlug}`}
+      class="inline-block rounded-full bg-gold-400/10 px-3 py-1 text-xs font-medium text-gold-400 ring-1 ring-gold-400/30 ring-inset no-underline hover:bg-gold-400/20 transition-colors"
+    >
+      {category}
+    </a>
+
+    <!-- Article header -->
+    <h1 class="mt-4 text-3xl font-extrabold text-white md:text-4xl">{title}</h1>
+    <p class="mt-2 text-lg text-gray-400">{description}</p>
+
+    <!-- Meta line -->
+    <div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-gray-500">
+      <time datetime={datePublished}>{formattedDate}</time>
+      <span>{author}</span>
+      {readingTime && <span>{readingTime}</span>}
+    </div>
+
+    <div class="mt-2">
+      <LastUpdated date={dateModified} />
+    </div>
+
+    <!-- Article body -->
+    <div class="mt-8">
+      <slot />
+    </div>
+
+    <!-- FAQ section -->
+    {faqs && faqs.length > 0 && (
+      <div class="mt-12">
+        <h2 class="mb-4 text-xl font-bold text-white">Frequently Asked Questions</h2>
+        <Accordion items={faqs} />
+      </div>
+    )}
+
+    <!-- Related articles -->
+    {relatedArticles && relatedArticles.length > 0 && (
+      <div class="mt-12">
+        <h2 class="mb-4 text-xl font-bold text-white">Related Articles</h2>
+        <div class="grid gap-3 sm:grid-cols-2">
+          {relatedArticles.map((a) => (
+            <a href={a.href} class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+              <h3 class="font-semibold text-white">{a.title}</h3>
+              <p class="mt-1 text-sm text-gray-400">{a.description}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Disclaimer -->
+    <div class="mt-10 rounded-lg border border-amber-500/30 bg-amber-500/10 p-4">
+      <p class="text-sm text-amber-300">
+        <strong class="text-amber-200">Disclaimer:</strong> This is educational content, not tax or financial advice.
+        Consult a qualified tax professional or financial advisor before making investment decisions.
+      </p>
+    </div>
+
+    <!-- Sources -->
+    <div class="mt-6 rounded-lg border border-surface-600 bg-surface-800 p-4 text-xs text-gray-500">
+      <p><strong class="text-gray-300">Sources:</strong></p>
+      <ul class="mt-1 space-y-0.5">
+        {sources.map((s) => (
+          <li>
+            <a href={s.url} target="_blank" rel="noopener noreferrer" class="text-gold-400 hover:text-gold-300">{s.name}</a>
+          </li>
+        ))}
+        <li>One Big Beautiful Bill Act (OBBBA), IRC Section 530A</li>
+      </ul>
+    </div>
+  </article>
+</BaseLayout>

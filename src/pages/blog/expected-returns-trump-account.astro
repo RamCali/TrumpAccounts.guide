@@ -1,0 +1,208 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('expected-returns-trump-account')!;
+const related = getRelatedArticles('expected-returns-trump-account');
+
+const faqs = [
+  {
+    question: 'What is the average annual return of the S&P 500?',
+    answer: 'The S&P 500 has historically returned about 10% per year before inflation and roughly 7% after inflation. These are long-term averages. Individual years vary widely — from gains of 30%+ to losses of 30%+.',
+  },
+  {
+    question: 'Are Trump Account returns guaranteed?',
+    answer: 'No. The government does not guarantee any return. Trump Account money is invested in the stock market, which can go up or down in any given year. However, over long periods like 18 years, the S&P 500 has always delivered positive total returns historically.',
+  },
+  {
+    question: 'What is the worst-case scenario for 18 years of S&P 500 investing?',
+    answer: 'The lowest 18-year annualized return for the S&P 500 was roughly 3-4% per year (during periods starting in the late 1920s). Even in that worst case, the initial investment still grew. No 18-year period has produced a total loss.',
+  },
+  {
+    question: 'Should I use the 10% or 7% return rate for projections?',
+    answer: 'Use 10% for nominal (before-inflation) projections and 7% for inflation-adjusted (real purchasing power) projections. The 7% number is more realistic for understanding what the money will actually buy in the future.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>The S&P 500 has historically returned about <strong class="text-white">10% per year</strong> (roughly <strong class="text-white">7% after inflation</strong>).</li>
+        <li>The ${limits.pilotDeposit.toLocaleString()} deposit alone could grow to <strong class="text-white">$3,380-$5,560</strong> over 18 years depending on returns.</li>
+        <li>With $250/month contributions, the total could reach <strong class="text-white">$78,000 to $152,000+</strong>.</li>
+        <li>No 18-year period in S&P 500 history has ever produced <strong class="text-white">negative total returns</strong>.</li>
+        <li>Past performance <strong class="text-white">does not guarantee</strong> future results.</li>
+      </ul>
+    </div>
+
+    <h2>Historical S&P 500 Returns</h2>
+    <p>
+      Trump Account money is invested in funds that track the S&P 500 or a broad U.S. equity index. So the question every parent asks is: <strong>how much can I expect?</strong>
+    </p>
+    <p>
+      Over its history, the S&P 500 has delivered an average annual return of about <strong>10% before inflation</strong>. After adjusting for inflation, that drops to roughly <strong>7% per year</strong>. These are long-term averages across decades of data.
+    </p>
+    <p>
+      But averages hide a lot of variation. Some years the market gains 30%. Other years it drops 30%. What matters for Trump Accounts is the <strong>18-year window</strong> — and that is where the data gets encouraging.
+    </p>
+
+    <CalloutBox type="info" title="Why 18 Years Matters">
+      <p>
+        Trump Accounts lock in money from birth to age {limits.growthPhaseEndAge}. That long time horizon is your child's biggest advantage. Short-term market swings matter much less when you are investing for nearly two decades.
+      </p>
+    </CalloutBox>
+
+    <h2>Best and Worst 18-Year Periods</h2>
+    <p>
+      Looking at rolling 18-year periods for the S&P 500, here is what the historical data shows:
+    </p>
+    <ul>
+      <li><strong>Best 18-year period:</strong> roughly 16-17% annualized returns (late 1940s through 1960s)</li>
+      <li><strong>Average 18-year period:</strong> roughly 10-11% annualized returns</li>
+      <li><strong>Worst 18-year period:</strong> roughly 3-4% annualized returns (periods starting in the late 1920s)</li>
+    </ul>
+    <p>
+      The critical point: <strong>no 18-year period has ever produced a negative total return</strong>. Even starting right before the Great Depression, an 18-year investor still came out ahead.
+    </p>
+
+    <h2>Projections: ${limits.pilotDeposit.toLocaleString()} Deposit Only</h2>
+    <p>
+      What happens if you open a Trump Account, receive the ${limits.pilotDeposit.toLocaleString()} federal deposit, and never add another dollar? Here is what that single deposit could grow to over 18 years at three different return rates.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm text-left text-gray-300">
+        <thead class="text-xs uppercase text-gold-400 border-b border-surface-600">
+          <tr>
+            <th class="px-4 py-3">Scenario</th>
+            <th class="px-4 py-3">Annual Return</th>
+            <th class="px-4 py-3">Value at Age 18</th>
+            <th class="px-4 py-3">Total Growth</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-surface-700">
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">Conservative</td>
+            <td class="px-4 py-3">6%</td>
+            <td class="px-4 py-3 text-mint-400">$2,854</td>
+            <td class="px-4 py-3">+$1,854</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">Moderate</td>
+            <td class="px-4 py-3">8%</td>
+            <td class="px-4 py-3 text-mint-400">$3,996</td>
+            <td class="px-4 py-3">+$2,996</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">Optimistic</td>
+            <td class="px-4 py-3">10%</td>
+            <td class="px-4 py-3 text-mint-400">$5,560</td>
+            <td class="px-4 py-3">+$4,560</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Even at a conservative 6%, the deposit almost triples. At the historical average of 10%, it grows more than fivefold. But the real power comes when you add regular contributions.
+    </p>
+
+    <h2>Projections: ${limits.pilotDeposit.toLocaleString()} + $250/Month Contributions</h2>
+    <p>
+      Most families will contribute regularly on top of the initial deposit. Here is what the ${limits.pilotDeposit.toLocaleString()} deposit plus <strong>$250 per month</strong> ($3,000/year) could grow to over 18 years.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm text-left text-gray-300">
+        <thead class="text-xs uppercase text-gold-400 border-b border-surface-600">
+          <tr>
+            <th class="px-4 py-3">Scenario</th>
+            <th class="px-4 py-3">Annual Return</th>
+            <th class="px-4 py-3">Value at Age 18</th>
+            <th class="px-4 py-3">Total Contributed</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-surface-700">
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">Conservative</td>
+            <td class="px-4 py-3">6%</td>
+            <td class="px-4 py-3 text-mint-400">$99,580</td>
+            <td class="px-4 py-3">$55,000</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">Moderate</td>
+            <td class="px-4 py-3">8%</td>
+            <td class="px-4 py-3 text-mint-400">$121,690</td>
+            <td class="px-4 py-3">$55,000</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">Optimistic</td>
+            <td class="px-4 py-3">10%</td>
+            <td class="px-4 py-3 text-mint-400">$149,560</td>
+            <td class="px-4 py-3">$55,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      At a moderate 8% return, your child could have <strong>over $121,000</strong> at age 18 from $55,000 in total contributions. That is more than double your money, thanks to compound growth. Try different amounts with our <a href="/calculators/growth-calculator">growth calculator</a>.
+    </p>
+
+    <CalloutBox type="tip" title="The Power of Starting Early">
+      <p>
+        A newborn has the full 18 years of compounding. A 10-year-old only has 8 years. That is why filing {limits.form} early matters so much. Every month of delay reduces the final balance.
+      </p>
+    </CalloutBox>
+
+    <h2>Why Different Rates?</h2>
+    <p>
+      We show three scenarios because nobody knows what the market will do over the next 18 years. Here is what each rate roughly represents:
+    </p>
+    <ul>
+      <li><strong>6% (conservative):</strong> Accounts for below-average market returns or higher-than-usual inflation. This is a cautious planning number.</li>
+      <li><strong>8% (moderate):</strong> Slightly below the historical nominal average. Many financial planners use this as a reasonable baseline.</li>
+      <li><strong>10% (optimistic):</strong> Matches the long-term historical nominal average of the S&P 500. Possible, but not guaranteed.</li>
+    </ul>
+
+    <h2>The Inflation Adjustment</h2>
+    <p>
+      When you see "$149,560 at 10%," remember that is in <strong>future dollars</strong>. Inflation erodes purchasing power over time. At 3% average inflation over 18 years, $149,560 in future dollars would have roughly the same buying power as <strong>$88,000 in today's dollars</strong>.
+    </p>
+    <p>
+      That is still a tremendous head start for an 18-year-old. But it is important to set realistic expectations. The 7% inflation-adjusted return is closer to what the money will actually feel like when your child turns 18.
+    </p>
+
+    <CalloutBox type="warning" title="Past Performance Is Not a Guarantee">
+      <p>
+        All projections in this article are based on historical S&P 500 data. Actual future returns could be higher or lower. The stock market involves risk, and there is no guarantee of any specific return. These numbers are for illustration only.
+      </p>
+    </CalloutBox>
+
+    <h2>What Drives Your Final Balance?</h2>
+    <p>
+      Three factors determine how much your child has at age 18:
+    </p>
+    <ol>
+      <li><strong>How much you contribute.</strong> The ${limits.pilotDeposit.toLocaleString()} deposit helps, but regular monthly contributions make the biggest difference.</li>
+      <li><strong>How long the money compounds.</strong> A newborn gets 18 years. A 10-year-old gets 8. Time is the most powerful factor.</li>
+      <li><strong>What the market returns.</strong> This is the one factor you cannot control. But history strongly favors patient, long-term investors.</li>
+    </ol>
+    <p>
+      Want to see projections for your specific situation? Use the <a href="/calculators/growth-calculator">Trump Account growth calculator</a>. For more on what could go wrong, read <a href="/blog/what-happens-market-crash">What Happens in a Market Crash?</a> For detailed growth targets, see <a href="/blog/how-much-at-age-18">How Much at Age 18?</a>
+    </p>
+  </div>
+</BlogLayout>

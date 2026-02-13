@@ -1,0 +1,359 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-roth-conversion-strategy')!;
+const related = getRelatedArticles('trump-account-roth-conversion-strategy');
+
+const faqs = [
+  {
+    question: 'Can you convert a Trump Account to a Roth IRA?',
+    answer: 'Yes. At age 18, the Trump Account becomes a traditional IRA. Standard IRA rules allow converting a traditional IRA to a Roth IRA at any time. You pay ordinary income tax on the converted amount in the year of conversion, but all future growth is tax-free.',
+  },
+  {
+    question: 'How much tax do you pay on a Roth conversion at 18?',
+    answer: 'It depends on how much you convert and your other income. With no other income, the first $14,600 (2026 standard deduction) is tax-free. The next $11,925 is taxed at 10%. The next $36,550 is taxed at 12%. An 18-year-old with no job could convert $26,525 for roughly $1,193 in total tax.',
+  },
+  {
+    question: 'Should you convert the entire Trump Account to Roth at once?',
+    answer: 'Not necessarily. Converting too much at once pushes you into higher tax brackets. A gradual conversion over several low-income years (college years, for example) often minimizes total taxes paid. The optimal strategy depends on the account balance and expected future income.',
+  },
+  {
+    question: 'What is the deadline for a Roth conversion?',
+    answer: 'Roth conversions must be completed by December 31 of the tax year. There is no way to extend this deadline. Plan ahead so you have time to execute the conversion before year-end.',
+  },
+  {
+    question: 'Can you undo a Roth conversion?',
+    answer: 'No. Since 2018, the IRS eliminated the ability to "recharacterize" (undo) Roth conversions. Once you convert, the tax is owed. Make sure you are comfortable with the tax bill before converting.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>At 18, convert the traditional IRA to a <strong class="text-white">Roth IRA while in a low tax bracket</strong>.</li>
+        <li>The 2026 standard deduction is <strong class="text-white">$14,600</strong> — convert that amount for <strong class="text-white">$0 in taxes</strong>.</li>
+        <li>An 18-year-old with no other income can convert <strong class="text-white">$26,525 for ~$1,193 in tax</strong>.</li>
+        <li>After conversion, all future growth is <strong class="text-white">tax-free forever</strong>.</li>
+        <li>Spread conversions over <strong class="text-white">low-income college years</strong> to stay in the lowest brackets.</li>
+      </ul>
+    </div>
+
+    <p>
+      This is the single most important tax strategy for Trump Account holders. At age {limits.iraConversionAge}, your child's account becomes a traditional IRA. If they convert it to a Roth IRA while in a low tax bracket, they can <strong>turn tax-deferred money into tax-free money</strong> for pennies on the dollar. Here is the exact math.
+    </p>
+
+    <CalloutBox type="tip" title="Why this strategy is so powerful">
+      <p>
+        Most people convert to Roth while they are working and in the 22% or 24% tax bracket. An 18-year-old with little or no income can convert at <strong>0%, 10%, or 12%</strong>. That is a once-in-a-lifetime opportunity. The money then grows tax-free for the next 40+ years.
+      </p>
+    </CalloutBox>
+
+    <h2>How Roth Conversion Works</h2>
+    <p>
+      A Roth conversion is simple in concept:
+    </p>
+    <ol>
+      <li>Move money from a <strong>traditional IRA</strong> to a <strong>Roth IRA</strong>.</li>
+      <li>Pay <strong>ordinary income tax</strong> on the amount converted in that year.</li>
+      <li>All future growth in the Roth IRA is <strong>tax-free</strong>.</li>
+      <li>Qualified withdrawals from the Roth IRA are <strong>tax-free</strong>.</li>
+    </ol>
+    <p>
+      The key insight: <strong>the tax rate you pay on conversion depends on your income in that year</strong>. If your child has little or no income at 18, the conversion happens at the lowest possible tax rates.
+    </p>
+
+    <h2>The 2026 Tax Math for an 18-Year-Old</h2>
+    <p>
+      Here are the approximate 2026 numbers for a single filer:
+    </p>
+    <ul>
+      <li><strong>Standard deduction:</strong> $14,600 — this amount is not taxed at all</li>
+      <li><strong>10% bracket:</strong> $0 to $11,925 of taxable income</li>
+      <li><strong>12% bracket:</strong> $11,926 to $48,475 of taxable income</li>
+      <li><strong>22% bracket:</strong> $48,476 and above</li>
+    </ul>
+    <p>
+      "Taxable income" is your gross income minus the standard deduction. So if your child converts $14,600 from a traditional IRA to a Roth IRA and has no other income, their taxable income is <strong>$0</strong>. They owe <strong>zero dollars in tax</strong> on that conversion.
+    </p>
+
+    <h3>Example 1: Convert $14,600 (Tax-Free)</h3>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Item</th>
+            <th class="py-3 text-gray-400 font-medium">Amount</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Roth conversion amount</td>
+            <td class="py-3 text-white font-medium">$14,600</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Minus standard deduction</td>
+            <td class="py-3">-$14,600</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Taxable income</td>
+            <td class="py-3 text-white font-medium">$0</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">Total tax owed</td>
+            <td class="py-3 text-mint-400 font-bold">$0</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      That is <strong>$14,600 moved from tax-deferred to tax-free for zero cost</strong>. Every dollar of future growth on that $14,600 is never taxed again.
+    </p>
+
+    <h3>Example 2: Convert $26,525 (~$1,193 in Tax)</h3>
+    <p>
+      Your child can convert more than the standard deduction. Here is what happens when they convert <strong>$26,525</strong> with no other income:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Income Layer</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Amount</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Tax Rate</th>
+            <th class="py-3 text-gray-400 font-medium">Tax Owed</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Standard deduction</td>
+            <td class="py-3 pr-4">$14,600</td>
+            <td class="py-3 pr-4">0%</td>
+            <td class="py-3 text-mint-400">$0</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">10% bracket</td>
+            <td class="py-3 pr-4">$11,925</td>
+            <td class="py-3 pr-4">10%</td>
+            <td class="py-3">$1,192.50</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Total converted</td>
+            <td class="py-3 pr-4 font-medium text-white">$26,525</td>
+            <td class="py-3 pr-4">—</td>
+            <td class="py-3 text-mint-400 font-bold">~$1,193</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      For roughly <strong>$1,193 in taxes</strong>, your child converts <strong>$26,525 to a Roth IRA</strong>. That is an effective tax rate of just <strong>4.5%</strong>. If that money grows at 8% for 40 more years, it becomes <strong>$576,000+ in tax-free money</strong>. The $1,193 tax bill is one of the best investments they will ever make.
+    </p>
+
+    <CalloutBox type="tip" title="The effective rate is what matters">
+      <p>
+        Even though the 10% bracket applies to part of the conversion, the <strong>effective tax rate on the full $26,525 is only 4.5%</strong>. That is because the standard deduction shelters the first $14,600 entirely. This blended rate is far lower than what most working adults pay.
+      </p>
+    </CalloutBox>
+
+    <h3>Example 3: Convert $63,075 (~$5,579 in Tax)</h3>
+    <p>
+      For a larger account, here is what it looks like to fill up through the entire 12% bracket:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Income Layer</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Amount</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Tax Rate</th>
+            <th class="py-3 text-gray-400 font-medium">Tax Owed</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Standard deduction</td>
+            <td class="py-3 pr-4">$14,600</td>
+            <td class="py-3 pr-4">0%</td>
+            <td class="py-3 text-mint-400">$0</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">10% bracket</td>
+            <td class="py-3 pr-4">$11,925</td>
+            <td class="py-3 pr-4">10%</td>
+            <td class="py-3">$1,192.50</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">12% bracket</td>
+            <td class="py-3 pr-4">$36,550</td>
+            <td class="py-3 pr-4">12%</td>
+            <td class="py-3">$4,386.00</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Total converted</td>
+            <td class="py-3 pr-4 font-medium text-white">$63,075</td>
+            <td class="py-3 pr-4">—</td>
+            <td class="py-3 text-mint-400 font-bold">~$5,579</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Converting <strong>$63,075</strong> costs about <strong>$5,579 in taxes</strong> — an effective rate of <strong>8.8%</strong>. That is still well below what most working professionals pay. This approach fills the 10% and 12% brackets completely without touching the 22% bracket.
+    </p>
+
+    <h2>The Gradual Conversion Strategy</h2>
+    <p>
+      If your child's Trump Account is worth <strong>$100,000 or more</strong> at age 18, converting the full amount in one year would push them into the 22% bracket or higher. Instead, spread the conversion over multiple low-income years.
+    </p>
+
+    <CalloutBox type="tip" title="College years are the golden window">
+      <p>
+        Most 18-to-22-year-olds have little or no earned income, especially during college. These are the ideal years for gradual Roth conversions. Convert $25,000 to $60,000 per year (depending on part-time job income) and stay in the lowest brackets.
+      </p>
+    </CalloutBox>
+
+    <h3>Example: $120,000 Account, Converted Over 4 College Years</h3>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Year</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Age</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Conversion Amount</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Part-Time Income</th>
+            <th class="py-3 text-gray-400 font-medium">Approx. Tax</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">1</td>
+            <td class="py-3 pr-4">18</td>
+            <td class="py-3 pr-4">$30,000</td>
+            <td class="py-3 pr-4">$0</td>
+            <td class="py-3">~$1,540</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">2</td>
+            <td class="py-3 pr-4">19</td>
+            <td class="py-3 pr-4">$30,000</td>
+            <td class="py-3 pr-4">$5,000</td>
+            <td class="py-3">~$2,140</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">3</td>
+            <td class="py-3 pr-4">20</td>
+            <td class="py-3 pr-4">$30,000</td>
+            <td class="py-3 pr-4">$5,000</td>
+            <td class="py-3">~$2,140</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">4</td>
+            <td class="py-3 pr-4">21</td>
+            <td class="py-3 pr-4">$30,000</td>
+            <td class="py-3 pr-4">$8,000</td>
+            <td class="py-3">~$2,500</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white" colspan="2">Total</td>
+            <td class="py-3 pr-4 font-medium text-white">$120,000</td>
+            <td class="py-3 pr-4">—</td>
+            <td class="py-3 text-mint-400 font-bold">~$8,320</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      By spreading the conversion over 4 years, your child converts <strong>$120,000 to Roth for about $8,320 in total taxes</strong>. That is an effective rate of roughly <strong>6.9%</strong>. If they waited until they were working full-time in the 22% bracket, converting $120,000 would cost closer to <strong>$26,400</strong> — more than three times as much.
+    </p>
+
+    <h2>What Happens After Conversion</h2>
+    <p>
+      Once money is in a Roth IRA:
+    </p>
+    <ul>
+      <li><strong>All future growth is tax-free.</strong> If the $120,000 grows to $1,000,000 by age 65, no taxes are owed.</li>
+      <li><strong>Qualified withdrawals are tax-free.</strong> After age 59.5 (and the Roth has been open 5+ years), every withdrawal is completely tax-free.</li>
+      <li><strong>No required minimum distributions (RMDs).</strong> Unlike a traditional IRA, Roth IRAs do not force you to take money out at age 73+.</li>
+      <li><strong>Contributions (converted amounts) can be withdrawn penalty-free</strong> after 5 years. Growth must wait until 59.5 for penalty-free withdrawal.</li>
+    </ul>
+
+    <CalloutBox type="warning" title="The 5-year rule on conversions">
+      <p>
+        Each Roth conversion has its own 5-year clock. If your child converts at age 18, the converted amount can be withdrawn penalty-free starting at age 23. Growth on the conversion must wait until 59.5. Withdrawing growth early triggers the 10% penalty plus taxes.
+      </p>
+    </CalloutBox>
+
+    <h2>Important Considerations</h2>
+
+    <h3>Where Does the Tax Money Come From?</h3>
+    <p>
+      Ideally, the tax on the conversion is paid from <strong>outside the IRA</strong> — from savings, a gift from parents, or earned income. If your child pays the tax bill from the IRA itself, that withdrawn amount triggers additional taxes and potentially the 10% early withdrawal penalty.
+    </p>
+
+    <CalloutBox type="tip" title="Parents: this is a great gift opportunity">
+      <p>
+        Paying your child's Roth conversion tax bill is one of the highest-impact financial gifts you can give. A <strong>$1,193 gift</strong> to cover the tax on a $26,525 conversion could turn into <strong>hundreds of thousands of dollars</strong> in tax-free retirement money for your child.
+      </p>
+    </CalloutBox>
+
+    <h3>Part-Time Job Income Affects the Math</h3>
+    <p>
+      If your child has a part-time job earning $10,000 per year, that uses up some of the standard deduction and low brackets. The conversion amount should be <strong>reduced</strong> accordingly to stay in the lowest brackets. Always calculate based on <strong>total income</strong> (earned income + conversion amount).
+    </p>
+
+    <h3>Conversions Cannot Be Undone</h3>
+    <p>
+      Since 2018, the IRS no longer allows Roth conversion recharacterizations (undos). Once you convert, the tax is owed. Make sure the numbers work before executing the conversion.
+    </p>
+
+    <h2>Step-by-Step: How to Execute the Conversion</h2>
+    <ol>
+      <li><strong>Estimate total income for the year</strong> (earned income + any other sources).</li>
+      <li><strong>Calculate the optimal conversion amount</strong> — enough to fill the 10% and 12% brackets, but not enter the 22% bracket.</li>
+      <li><strong>Open a Roth IRA</strong> at the same brokerage holding the traditional IRA (simplest) or a different one.</li>
+      <li><strong>Request a Roth conversion</strong> from the brokerage. This is typically a simple online form or phone call.</li>
+      <li><strong>Complete the conversion before December 31</strong> of the tax year.</li>
+      <li><strong>Set aside money for the tax bill</strong> — it will be owed when filing taxes the following April.</li>
+      <li><strong>Report the conversion on Form 8606</strong> with the annual tax return.</li>
+    </ol>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      The Roth conversion at age 18 is the <strong>most valuable tax strategy</strong> available to Trump Account holders. An 18-year-old with no other income can convert <strong>$14,600 completely tax-free</strong>, or <strong>$26,525 for about $1,193 in tax</strong>. Spreading larger conversions over college years keeps the effective rate below 10%.
+    </p>
+    <p>
+      The result: money that would have been taxed as ordinary income at 22%, 24%, or higher later in life gets locked into a Roth IRA at an <strong>effective rate of 0% to 9%</strong>. Every dollar of future growth is tax-free forever.
+    </p>
+    <p>
+      For the full tax treatment of Trump Accounts, see <a href="/compare/trump-account-vs-roth-ira">Trump Account vs. Roth IRA</a>. To model withdrawal scenarios, use the <a href="/calculators/withdrawal-simulator">withdrawal simulator</a>.
+    </p>
+
+    <CalloutBox type="warning" title="Not tax or financial advice">
+      <p>
+        This article is for educational purposes only. Tax situations vary by individual, and tax laws change frequently. Roth conversions have permanent consequences. Consult a qualified tax professional or CPA before executing a Roth conversion strategy.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

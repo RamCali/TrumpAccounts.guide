@@ -1,0 +1,210 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('what-are-trump-accounts-guide')!;
+const related = getRelatedArticles('what-are-trump-accounts-guide');
+
+const faqs = [
+  {
+    question: 'What is a Trump Account in simple terms?',
+    answer: `A Trump Account is a federally funded investment account for children. The government deposits $${limits.pilotDeposit.toLocaleString()} for eligible newborns (${limits.pilotDepositStartYear}-${limits.pilotDepositEndYear}), and families can add up to $${limits.annualContributionLimit.toLocaleString()} per year. The money is invested in S&P 500 index funds and grows tax-deferred until age ${limits.growthPhaseEndAge}, when it converts to a traditional IRA.`,
+  },
+  {
+    question: 'Do I have to pay taxes on a Trump Account?',
+    answer: 'Contributions are made with after-tax dollars (no upfront deduction). The money grows tax-deferred during the growth phase. When your child withdraws money after age 18, the withdrawals are taxed as ordinary income, just like a traditional IRA.',
+  },
+  {
+    question: 'Is a Trump Account the same as a 529 plan?',
+    answer: 'No. A 529 plan is for education expenses and offers tax-free withdrawals for qualified education costs. A Trump Account invests only in S&P 500 index funds, converts to a traditional IRA at age 18, and can be used for anything — not just education. Withdrawals are taxed as ordinary income.',
+  },
+  {
+    question: 'Can I open a Trump Account for my teenager?',
+    answer: `Yes. Any U.S. citizen child under 18 with a valid SSN qualifies. However, only children born between ${limits.pilotDepositStartYear} and ${limits.pilotDepositEndYear} receive the $${limits.pilotDeposit.toLocaleString()} federal deposit. Older children can still benefit from family contributions of up to $${limits.annualContributionLimit.toLocaleString()}/year.`,
+  },
+  {
+    question: 'What happens to the money at age 18?',
+    answer: 'At age 18, the Trump Account automatically converts to a traditional IRA in the child\'s name. They gain full control and can use the money for anything — college, a first home, starting a business, or long-term retirement savings. Standard IRA rules apply from that point forward.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <!-- Key Takeaways -->
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>A Trump Account is a <strong class="text-white">federally funded investment account</strong> for U.S. citizen children, created by IRC Section 530A.</li>
+        <li>Eligible newborns (born {limits.pilotDepositStartYear}-{limits.pilotDepositEndYear}) receive a <strong class="text-white">${limits.pilotDeposit.toLocaleString()} government deposit</strong>.</li>
+        <li>Families can contribute up to <strong class="text-white">${limits.annualContributionLimit.toLocaleString()} per year</strong>. Employers can add up to <strong class="text-white">${limits.employerContributionLimit.toLocaleString()}</strong> tax-free.</li>
+        <li>Money is invested in <strong class="text-white">S&P 500 or broad U.S. equity index funds</strong>.</li>
+        <li>At age {limits.growthPhaseEndAge}, the account converts to a <strong class="text-white">traditional IRA</strong> with no restrictions on use.</li>
+        <li>There are <strong class="text-white">no income limits</strong> for eligibility.</li>
+      </ul>
+    </div>
+
+    <h2>What Is a Trump Account?</h2>
+    <p>
+      A Trump Account is a new type of investment account created by the federal government for American children. It was established under <strong>IRC Section 530A</strong> as part of the <a href="/glossary">One Big Beautiful Bill Act (OBBBA)</a>, which was signed into law on <strong>July 4, 2025</strong>.
+    </p>
+    <p>
+      Think of it as a head start on investing. The government puts in money. Your family puts in money. It all goes into index funds that track the U.S. stock market. Then it grows for up to 18 years with no taxes on the gains during that time.
+    </p>
+    <p>
+      When your child turns 18, the account becomes a traditional IRA in their name. They can use the money for college, a first home, starting a business, or retirement savings.
+    </p>
+
+    <CalloutBox type="irs-quote" title="From IRS Notice 2025-68">
+      <p>
+        "Section 530A provides for the establishment of Trump Accounts, which are individual investment accounts for the benefit of eligible children who are citizens of the United States."
+      </p>
+    </CalloutBox>
+
+    <p>
+      In plain English: this is an investment account the government helps fund for your kid. Every U.S. citizen child with a Social Security number qualifies. There are no income restrictions for families.
+    </p>
+
+    <h2>How Trump Accounts Work: 6 Steps</h2>
+    <p>Here is the full lifecycle from start to finish.</p>
+
+    <h3>Step 1: Check Eligibility</h3>
+    <p>
+      Your child must be a <strong>U.S. citizen</strong>, have a <strong>valid Social Security number</strong>, and be <strong>under 18</strong> at the end of the election year. That is it. There are no income limits. Whether you earn $30,000 or $3 million, your child qualifies. <a href="/faq/eligibility">See full eligibility details</a>.
+    </p>
+
+    <h3>Step 2: Opt In (It Is Not Automatic)</h3>
+    <p>
+      Trump Accounts do not open themselves. You must elect to open one by filing <strong>{limits.form}</strong> with your 2025 federal tax return (due <strong>April 15, 2026</strong>). You can also use the <strong><a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer">{limits.portal}</a></strong> portal when it launches in mid-2026, or file by mail.
+    </p>
+
+    <CalloutBox type="warning" title="Do Not Miss the Deadline">
+      <p>
+        The $1,000 pilot deposit is only for children born between {limits.pilotDepositStartYear} and {limits.pilotDepositEndYear}. If you do not file Form 4547, your child will not receive it.
+      </p>
+    </CalloutBox>
+
+    <h3>Step 3: Receive the Federal Deposit</h3>
+    <p>
+      If your child was born between <strong>January 1, {limits.pilotDepositStartYear}</strong> and <strong>December 31, {limits.pilotDepositEndYear}</strong>, the federal government deposits <strong>${limits.pilotDeposit.toLocaleString()}</strong> into the account. This is a one-time deposit. Children born outside this window can still open an account but will not receive the government money.
+    </p>
+
+    <h3>Step 4: Add Family Contributions</h3>
+    <p>
+      After the account is open, anyone can contribute — parents, grandparents, relatives, or friends. The <strong>combined annual limit is ${limits.annualContributionLimit.toLocaleString()}</strong> from all sources. Contributions are made with after-tax dollars (you do not get a tax deduction).
+    </p>
+    <p>
+      Employers can also contribute up to <strong>${limits.employerContributionLimit.toLocaleString()} per year per employee</strong> under IRC Section 128. This employer contribution is tax-free for the employee and counts toward the ${limits.annualContributionLimit.toLocaleString()} annual cap. <a href="/for-employers">Learn about employer contributions</a>.
+    </p>
+
+    <h3>Step 5: Money Gets Invested</h3>
+    <p>
+      All contributions go into <strong>{limits.investmentRequirement.toLowerCase()}</strong>. You cannot pick individual stocks, bonds, or crypto. The investment options are intentionally limited to keep things simple and low-cost — expense ratios are capped at 0.1%.
+    </p>
+    <p>
+      During the growth phase (birth through age {limits.growthPhaseEndAge}), the money compounds tax-deferred. No withdrawals are allowed except for rollovers, return of excess contributions, or death of the beneficiary. Try the <a href="/calculators/growth-calculator">growth calculator</a> to see projections.
+    </p>
+
+    <CalloutBox type="tip" title="The Power of 18 Years of Compounding">
+      <p>
+        Even a single ${limits.pilotDeposit.toLocaleString()} deposit invested in the S&P 500 for 18 years could grow to roughly $4,000-$6,000 at historical average returns. With monthly family contributions, the total could exceed $100,000 or more.
+      </p>
+    </CalloutBox>
+
+    <h3>Step 6: Conversion at Age 18</h3>
+    <p>
+      When your child turns {limits.iraConversionAge}, the Trump Account <strong>automatically converts to a traditional IRA</strong> in their name. From this point, standard IRA rules apply. Your child gains full control and can:
+    </p>
+    <ul>
+      <li>Keep the money growing for retirement</li>
+      <li>Withdraw for qualified expenses (a first home, education, etc.)</li>
+      <li>Convert to a Roth IRA (paying taxes at their current rate)</li>
+      <li>Use the money for any purpose (subject to taxes and potential penalties)</li>
+    </ul>
+
+    <h2>Who Is Eligible?</h2>
+    <p>
+      Eligibility is straightforward. The child must meet <strong>three requirements</strong>:
+    </p>
+    <ol>
+      <li><strong>U.S. citizen</strong></li>
+      <li><strong>Valid Social Security number (SSN)</strong></li>
+      <li><strong>Under age 18</strong> at the end of the election year</li>
+    </ol>
+    <p>
+      There are no income limits for families. A child of billionaires and a child in a low-income household both qualify on equal terms. Use the <a href="/calculators/eligibility-checker">eligibility checker</a> to verify your child's status.
+    </p>
+
+    <h2>Tax Treatment Explained</h2>
+    <p>
+      Trump Accounts follow <strong>traditional IRA tax treatment</strong>:
+    </p>
+    <ul>
+      <li><strong>Contributions:</strong> After-tax (no deduction)</li>
+      <li><strong>Growth phase:</strong> Tax-deferred (no taxes on gains until withdrawal)</li>
+      <li><strong>Withdrawals after 18:</strong> Taxed as ordinary income</li>
+      <li><strong>Early withdrawals before 59.5:</strong> Subject to a 10% penalty (with standard IRA exceptions)</li>
+    </ul>
+
+    <CalloutBox type="info" title="Not Tax-Free Growth">
+      <p>
+        This is an important distinction. Trump Accounts offer <strong>tax-deferred</strong> growth, not tax-free growth. When your child withdraws money, they will owe ordinary income taxes on the gains. This is different from a Roth IRA, where qualified withdrawals are tax-free.
+      </p>
+    </CalloutBox>
+
+    <h2>The Dell Family Pledge</h2>
+    <p>
+      In addition to the federal ${limits.pilotDeposit.toLocaleString()} deposit, Michael and Susan Dell pledged <strong>$6.25 billion</strong> through their foundation. This pledge provides <strong>${limits.dellPledge.perChildAmount} per child</strong> who is under {limits.dellPledge.eligibleAge} and lives in a ZIP code with a median income below ${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}.
+    </p>
+    <p>
+      The Dell pledge is a private donation, separate from the government deposit. Qualifying children could receive both — the ${limits.pilotDeposit.toLocaleString()} federal deposit and the ${limits.dellPledge.perChildAmount} Dell contribution.
+    </p>
+
+    <h2>How to Open a Trump Account</h2>
+    <p>
+      You have three options to open an account:
+    </p>
+    <ol>
+      <li><strong>With your tax return:</strong> Include <a href="/how-to-open-trump-account">{limits.form}</a> when you file your 2025 federal tax return (due April 15, 2026).</li>
+      <li><strong>Online portal:</strong> Use <a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer">{limits.portal}</a> when it launches in mid-2026.</li>
+      <li><strong>By mail:</strong> Send the completed form directly to the IRS.</li>
+    </ol>
+
+    <CalloutBox type="tip" title="File Early">
+      <p>
+        The sooner you file, the sooner your child's money starts compounding. Even a few months of extra growth over 18 years adds up. Do not wait for the portal if you can file with your tax return now.
+      </p>
+    </CalloutBox>
+
+    <h2>Trump Account vs. Other Accounts</h2>
+    <p>
+      Trump Accounts are not the only option for your child's financial future. Here is a quick comparison:
+    </p>
+    <ul>
+      <li><strong>529 plans</strong> are better for education-only expenses (tax-free withdrawals for tuition). <a href="/compare/trump-account-vs-529">Full comparison</a>.</li>
+      <li><strong>Custodial accounts (UTMA/UGMA)</strong> offer more investment flexibility but no tax-deferred growth.</li>
+      <li><strong>Roth IRAs for kids</strong> require earned income but offer tax-free withdrawals in retirement. <a href="/compare/trump-account-vs-roth-ira">Full comparison</a>.</li>
+    </ul>
+    <p>
+      Many families will benefit from opening <strong>both</strong> a Trump Account and a 529 plan. They serve different purposes and have different tax advantages.
+    </p>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      Trump Accounts give every American child a financial head start. A ${limits.pilotDeposit.toLocaleString()} government deposit, combined with family contributions of up to ${limits.annualContributionLimit.toLocaleString()} per year, invested in low-cost index funds for 18 years — it is a powerful wealth-building tool.
+    </p>
+    <p>
+      The most important step is to <strong>opt in</strong>. File {limits.form} with your 2025 tax return or through {limits.portal} when the portal opens. Your child's compounding clock starts the moment you do.
+    </p>
+  </div>
+</BlogLayout>

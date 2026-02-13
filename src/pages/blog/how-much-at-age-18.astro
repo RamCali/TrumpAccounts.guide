@@ -1,0 +1,181 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('how-much-at-age-18')!;
+const related = getRelatedArticles('how-much-at-age-18');
+
+const faqs = [
+  {
+    question: 'How much will a Trump Account be worth at 18 with no extra contributions?',
+    answer: `The $${limits.pilotDeposit.toLocaleString()} federal deposit alone could grow to roughly $3,400 at 7% average annual returns, $4,000 at 8%, or $5,600 at 10% over 18 years. Market returns are not guaranteed, but the S&P 500 has historically averaged about 10% annually before inflation.`,
+  },
+  {
+    question: 'What is the maximum a Trump Account can grow to by age 18?',
+    answer: `If you contribute the full $${limits.annualContributionLimit.toLocaleString()}/year ($416/month) starting at birth with 8% average returns, the account could reach roughly $210,000 by age 18. That includes the $${limits.pilotDeposit.toLocaleString()} federal deposit for eligible children.`,
+  },
+  {
+    question: 'Do I need to contribute the maximum to see meaningful growth?',
+    answer: `No. Even $100/month with the $${limits.pilotDeposit.toLocaleString()} deposit could grow to roughly $50,000 by age 18 at 8% returns. Any amount you contribute consistently makes a difference thanks to compound growth.`,
+  },
+  {
+    question: 'Are these growth projections guaranteed?',
+    answer: 'No. These are projections based on historical S&P 500 returns. Actual results will vary based on market performance. The stock market goes up and down, but over 18-year periods, the S&P 500 has historically delivered positive returns.',
+  },
+  {
+    question: 'What happens to the money at age 18?',
+    answer: `At age 18, the Trump Account converts to a traditional IRA. Your child gains full control and can withdraw funds (subject to income tax and potential early withdrawal penalties) or keep it growing for retirement.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>The <strong class="text-white">${limits.pilotDeposit.toLocaleString()} federal deposit</strong> alone could grow to roughly $4,000-$5,600 by age 18, depending on market returns.</li>
+        <li>Contributing <strong class="text-white">$250/month</strong> on top of the deposit could produce over <strong class="text-white">$100,000</strong> by age 18.</li>
+        <li>Maxing out at <strong class="text-white">${limits.annualContributionLimit.toLocaleString()}/year</strong> could build a six-figure nest egg for your child.</li>
+        <li>Returns are <strong class="text-white">not guaranteed</strong> — they depend on stock market performance.</li>
+        <li>Try the <a href="/calculators/growth-calculator" class="text-gold-400 hover:text-gold-300">Growth Calculator</a> to run your own numbers.</li>
+      </ul>
+    </div>
+
+    <p>
+      The question every parent wants answered: <strong>How much will my child actually have at age 18?</strong>
+    </p>
+    <p>
+      It depends on three things — the federal deposit, how much you contribute each month, and stock market returns. Let's break down the numbers across realistic scenarios so you can plan with confidence.
+    </p>
+
+    <h2>Starting Point: The ${limits.pilotDeposit.toLocaleString()} Federal Deposit</h2>
+    <p>
+      Children born between <strong>January 1, {limits.pilotDepositStartYear}</strong> and <strong>December 31, {limits.pilotDepositEndYear}</strong> receive a one-time <strong>${limits.pilotDeposit.toLocaleString()} deposit</strong> from the federal government. This money goes directly into the Trump Account and gets invested in S&P 500 or broad U.S. equity index funds.
+    </p>
+    <p>
+      Even if a family contributes nothing else, that deposit grows for 18 years through compound returns. Here is what it could become:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Annual Return</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">$1,000 Deposit Only</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">+ $100/mo</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">+ $250/mo</th>
+            <th class="py-3 text-gray-400 font-medium">+ $416/mo (Max)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">6%</td>
+            <td class="py-3 pr-4">$2,854</td>
+            <td class="py-3 pr-4">$41,700</td>
+            <td class="py-3 pr-4">$99,700</td>
+            <td class="py-3">$164,400</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">8%</td>
+            <td class="py-3 pr-4">$3,996</td>
+            <td class="py-3 pr-4">$52,400</td>
+            <td class="py-3 pr-4">$125,300</td>
+            <td class="py-3">$207,300</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">10%</td>
+            <td class="py-3 pr-4">$5,560</td>
+            <td class="py-3 pr-4">$66,200</td>
+            <td class="py-3 pr-4">$158,500</td>
+            <td class="py-3">$262,600</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <CalloutBox type="info" title="About these numbers">
+      <p>
+        Projections assume monthly compounding and consistent contributions from birth to age 18. Actual returns will vary year to year. The S&P 500 has historically averaged roughly 10% annually before inflation and about 7% after inflation.
+      </p>
+    </CalloutBox>
+
+    <h2>Scenario 1: The $1,000 Deposit Alone</h2>
+    <p>
+      Not every family can contribute extra. That is okay. The federal deposit still works for you. At a <strong>historical average of 8% returns</strong>, $1,000 grows to about <strong>$4,000</strong> over 18 years. At 10%, it reaches roughly <strong>$5,600</strong>.
+    </p>
+    <p>
+      That may not sound life-changing. But remember — it cost the family nothing. And at 18, it converts to a traditional IRA that can keep growing for decades.
+    </p>
+
+    <h2>Scenario 2: $100/Month — The Starter Plan</h2>
+    <p>
+      One hundred dollars a month is about <strong>$3.33 per day</strong>. Add the $1,000 deposit, and at 8% returns, the account could reach roughly <strong>$52,000</strong> by age 18.
+    </p>
+    <p>
+      That is enough for a meaningful chunk of college tuition, a solid start on a home down payment, or a powerful retirement head start.
+    </p>
+
+    <h2>Scenario 3: $250/Month — The Sweet Spot</h2>
+    <p>
+      This is where the numbers get exciting. Contributing <strong>$250 per month</strong> (which equals $3,000/year, well within the <a href="/blog/contribution-limits-explained">${limits.annualContributionLimit.toLocaleString()} annual cap</a>) could grow to over <strong>$100,000</strong> at 8% returns.
+    </p>
+    <p>
+      That is six figures before your child even finishes high school. The power of compound growth is real.
+    </p>
+
+    <CalloutBox type="tip" title="Grandparents and family can help">
+      <p>
+        Remember, <a href="/blog/can-parents-grandparents-contribute">anyone can contribute</a> to a Trump Account — parents, grandparents, aunts, uncles, and friends. Splitting $250/month across multiple family members makes this target more achievable.
+      </p>
+    </CalloutBox>
+
+    <h2>Scenario 4: $416/Month — Maxing Out</h2>
+    <p>
+      The maximum annual contribution is <strong>${limits.annualContributionLimit.toLocaleString()}</strong>, which works out to about <strong>$416 per month</strong>. At 8% returns, a maxed-out account with the $1,000 deposit could reach roughly <strong>$207,000</strong> by age 18.
+    </p>
+    <p>
+      At 10% returns, it could top <strong>$260,000</strong>. This is a life-changing amount of money for an 18-year-old.
+    </p>
+
+    <h2>Why 18 Years of Compounding Is So Powerful</h2>
+    <p>
+      Compound growth means your returns earn their own returns. In the early years, growth feels slow. By year 10, it accelerates. By year 15-18, the growth curve gets steep.
+    </p>
+    <p>
+      This is why <a href="/blog/should-i-wait-or-invest-now">starting early matters so much</a>. Every month of delay reduces the total. A child who starts at birth gets 18 full years of compounding. A child who starts at age 5 gets only 13 years — and the final number can be tens of thousands of dollars less.
+    </p>
+
+    <h2>What Happens at Age 18?</h2>
+    <p>
+      At age {limits.iraConversionAge}, the Trump Account <strong>converts to a traditional IRA</strong>. Your child takes full control. They can:
+    </p>
+    <ul>
+      <li>Keep it invested and let it grow for retirement</li>
+      <li>Withdraw funds for <a href="/blog/what-can-money-be-used-for">any purpose</a> (subject to income tax and potential early withdrawal penalties)</li>
+      <li>Convert to a <a href="/blog/trump-account-roth-conversion-strategy">Roth IRA</a> for future tax-free growth</li>
+      <li>Use the <a href="/blog/trump-account-for-first-home">first-time homebuyer exception</a> for up to $10,000 penalty-free</li>
+    </ul>
+
+    <h2>Run Your Own Numbers</h2>
+    <p>
+      Every family's situation is different. Use our <a href="/calculators/growth-calculator"><strong>Growth Calculator</strong></a> to plug in your specific monthly contribution, expected return rate, and starting deposit to see a personalized projection.
+    </p>
+
+    <CalloutBox type="warning" title="These are projections, not promises">
+      <p>
+        All growth estimates are based on hypothetical rates of return. The stock market can go down. Past performance does not guarantee future results. Trump Account investments are <a href="/blog/government-guarantee-returns">not guaranteed by the government</a>.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

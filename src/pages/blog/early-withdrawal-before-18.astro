@@ -1,0 +1,165 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('early-withdrawal-before-18')!;
+const related = getRelatedArticles('early-withdrawal-before-18');
+
+const faqs = [
+  {
+    question: 'Can I withdraw from a Trump Account in an emergency?',
+    answer: 'No. There are no hardship withdrawals, emergency exceptions, or early access provisions for Trump Accounts before age 18. The money stays invested until the child turns 18.',
+  },
+  {
+    question: 'What are the only exceptions to the no-withdrawal rule?',
+    answer: 'There are exactly three exceptions: 1) Rolling over to another Trump Account (such as changing custodians), 2) Returning excess contributions that exceeded the $5,000 annual limit, and 3) Distribution upon the death of the beneficiary child.',
+  },
+  {
+    question: 'Can I withdraw if my child needs the money for medical bills?',
+    answer: 'No. Medical emergencies do not qualify as an exception. Before age 18, no withdrawals are permitted regardless of the reason. The account is designed for long-term growth only.',
+  },
+  {
+    question: 'How is this different from a 529 plan or UTMA account?',
+    answer: 'A 529 allows withdrawals with a 10% penalty plus taxes on non-qualified expenses. A UTMA gives the parent full control to withdraw for the child\'s benefit. Trump Accounts are the most restrictive — no withdrawals at all before 18.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><strong class="text-white">No withdrawals before age {limits.growthPhaseEndAge}</strong> — this is the core rule of Trump Accounts.</li>
+        <li>There are exactly <strong class="text-white">three exceptions</strong>: rollovers, return of excess contributions, and death of the beneficiary.</li>
+        <li><strong class="text-white">No hardship withdrawals</strong>. No emergency access. No exceptions for medical bills or other urgent needs.</li>
+        <li>This is <strong class="text-white">by design</strong> — it forces the money to stay invested for the full growth phase.</li>
+        <li>After age {limits.growthPhaseEndAge}, the account converts to a traditional IRA with standard withdrawal rules.</li>
+      </ul>
+    </div>
+
+    <p>
+      This is one of the most common questions parents ask: <strong>"Can I take money out of my child's Trump Account before they turn 18?"</strong>
+    </p>
+    <p>
+      The short answer is <strong>no</strong>. And there are almost no exceptions. Here is exactly what the rules say and why.
+    </p>
+
+    <h2>The Core Rule: No Withdrawals Before 18</h2>
+    <p>
+      Under IRC Section 530A, Trump Accounts have a <strong>"growth phase"</strong> that runs from the time the account is opened until the child turns {limits.growthPhaseEndAge}. During this phase, the money must stay invested.
+    </p>
+    <p>
+      This is not like a savings account where you can pull money out whenever you want. It is not like a 529 where you can withdraw with a penalty. The money is <strong>locked in</strong>.
+    </p>
+
+    <CalloutBox type="warning" title="No emergency access">
+      <p>
+        There is no hardship exception for Trump Accounts. Even if you face a medical emergency, job loss, or other financial crisis, you <strong>cannot withdraw</strong> from your child's Trump Account. Plan your emergency fund separately.
+      </p>
+    </CalloutBox>
+
+    <h2>The Three Exceptions</h2>
+    <p>
+      IRS Notice 2025-68 allows exactly three situations where money can leave a Trump Account before age {limits.growthPhaseEndAge}:
+    </p>
+
+    <h3>1. Rollover to Another Trump Account</h3>
+    <p>
+      You can move the money from one Trump Account to another. This typically happens when you <strong>change custodians</strong> — for example, moving from one brokerage to another. The money goes directly from one Trump Account to the other. It does not pass through your hands.
+    </p>
+
+    <h3>2. Return of Excess Contributions</h3>
+    <p>
+      If someone contributes more than the <strong>${limits.annualContributionLimit.toLocaleString()} annual limit</strong>, the excess must be returned. This is a correction, not a withdrawal. The custodian sends back the extra money (plus any earnings on the excess) to avoid penalties.
+    </p>
+
+    <h3>3. Death of the Beneficiary</h3>
+    <p>
+      If the child passes away, the account funds can be distributed to the estate or a designated beneficiary. This is addressed in <a href="/blog/trump-account-death-of-child">our separate guide on this sensitive topic</a>.
+    </p>
+
+    <CalloutBox type="info" title="None of these are &quot;withdrawals&quot; in the normal sense">
+      <p>
+        A rollover moves money between accounts. An excess return corrects a mistake. A death distribution is a final event. None of these let you access the money for personal or family use.
+      </p>
+    </CalloutBox>
+
+    <h2>Why Is It So Strict?</h2>
+    <p>
+      The no-withdrawal rule exists <strong>by design</strong>. Congress structured Trump Accounts to force long-term investing. The idea is simple: if you cannot touch the money for 18 years, it has time to grow through compounding.
+    </p>
+    <p>
+      Historical data backs this up. The S&P 500 has <strong>never lost money over any 18-year period</strong> in its history. By locking the money in, Trump Accounts protect families from the temptation to pull funds out during short-term market dips. Read more about <a href="/blog/what-happens-market-crash">what happens during a market crash</a>.
+    </p>
+
+    <h2>How This Compares to Other Accounts</h2>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Account Type</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Can You Withdraw Early?</th>
+            <th class="py-3 text-gray-400 font-medium">Penalty</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-semibold text-white">Trump Account</td>
+            <td class="py-3 pr-4">No (except 3 exceptions)</td>
+            <td class="py-3">Not applicable — withdrawals are blocked</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">529 Plan</td>
+            <td class="py-3 pr-4">Yes</td>
+            <td class="py-3">10% penalty + income tax on earnings</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">UTMA/UGMA</td>
+            <td class="py-3 pr-4">Yes (parent controls)</td>
+            <td class="py-3">No penalty (must be for child's benefit)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Coverdell ESA</td>
+            <td class="py-3 pr-4">Yes</td>
+            <td class="py-3">10% penalty + income tax on non-education use</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Trump Accounts are the <strong>most restrictive</strong> of all child investment accounts. That strictness is the trade-off for the $1,000 federal deposit and the tax-deferred growth.
+    </p>
+
+    <h2>What Happens After Age {limits.growthPhaseEndAge}?</h2>
+    <p>
+      Once the child turns {limits.growthPhaseEndAge}, the Trump Account converts to a <strong>traditional IRA</strong>. At that point, standard IRA withdrawal rules apply:
+    </p>
+    <ul>
+      <li>Withdrawals are taxed as ordinary income.</li>
+      <li>A <strong>10% early withdrawal penalty</strong> applies before age 59 1/2 (with exceptions for first-time home purchase, education, disability, and more).</li>
+      <li>The child has full control and can withdraw whenever they choose.</li>
+    </ul>
+    <p>
+      For the full breakdown of <a href="/blog/trump-account-penalties">penalties and exceptions after 18</a>, see our detailed guide. And for a deeper look at how withdrawals and use work, visit our <a href="/faq/withdrawals-and-use">withdrawals FAQ</a>.
+    </p>
+
+    <CalloutBox type="tip" title="Plan around the restriction">
+      <p>
+        Because Trump Account money is locked until {limits.growthPhaseEndAge}, do not use it as your only savings strategy for your child. Consider a 529 for education expenses you might need before 18, and keep a separate emergency fund for your family.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

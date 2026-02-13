@@ -1,0 +1,159 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('national-debt-impact')!;
+const related = getRelatedArticles('national-debt-impact');
+
+const faqs = [
+  {
+    question: 'How much do Trump Accounts add to the national debt?',
+    answer: `The pilot deposits total roughly $14.4 billion over four years (${limits.pilotDepositStartYear}-${limits.pilotDepositEndYear}). In the context of a $36 trillion national debt, this adds about 0.04%.`,
+  },
+  {
+    question: 'Is the $14.4 billion a one-time cost or recurring?',
+    answer: `The $${limits.pilotDeposit.toLocaleString()} pilot deposits only apply to children born between ${limits.pilotDepositStartYear} and ${limits.pilotDepositEndYear}. After 2028, there are no more federal deposits unless Congress extends the program. Ongoing administrative costs continue, but they are much smaller.`,
+  },
+  {
+    question: 'Could Trump Accounts pay for themselves over time?',
+    answer: 'Possibly. Withdrawals after age 18 are taxed as ordinary income, generating future tax revenue. And if account holders need fewer government benefits, that could reduce spending. But these effects will not be measurable for at least 18 years.',
+  },
+  {
+    question: 'How does this compare to other recent spending programs?',
+    answer: 'At $3.6 billion per year, the pilot deposits are far smaller than programs like the expanded Child Tax Credit (roughly $100+ billion/year) or pandemic stimulus payments (over $800 billion total). It represents about 0.06% of the annual federal budget.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>The pilot deposits add roughly <strong class="text-white">$14.4 billion</strong> to federal spending over four years.</li>
+        <li>The federal budget is <strong class="text-white">~$6.5 trillion/year</strong> — this program is about <strong class="text-white">0.06%</strong> of annual spending.</li>
+        <li>The national debt is <strong class="text-white">~$36 trillion</strong> — the total pilot cost adds about <strong class="text-white">0.04%</strong>.</li>
+        <li>Long-term effects (tax revenue from withdrawals, reduced safety net spending) could offset costs but will not be measurable for <strong class="text-white">18+ years</strong>.</li>
+      </ul>
+    </div>
+
+    <p>
+      Whenever the federal government spends money, it is fair to ask: <strong>what does this mean for the national debt?</strong> Here are the facts about how Trump Accounts affect the federal balance sheet, presented without political commentary.
+    </p>
+
+    <h2>The Direct Cost: $14.4 Billion Over Four Years</h2>
+    <p>
+      The federal government deposits <strong>${limits.pilotDeposit.toLocaleString()}</strong> into a Trump Account for every eligible child born between <strong>{limits.pilotDepositStartYear}</strong> and <strong>{limits.pilotDepositEndYear}</strong>. With approximately <strong>3.6 million births per year</strong>, that works out to about <strong>$3.6 billion annually</strong> — or <strong>$14.4 billion total</strong> over the four-year pilot window.
+    </p>
+    <p>
+      After 2028, no more federal deposits are made. The ongoing costs are limited to administration — running the trumpaccounts.gov portal, IRS processing of Form 4547 elections, and regulatory oversight of custodians.
+    </p>
+
+    <h2>Putting $14.4 Billion in Perspective</h2>
+    <p>
+      Numbers in the billions sound enormous. And $14.4 billion <em>is</em> a lot of money. But context matters when comparing it to the overall federal picture.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Metric</th>
+            <th class="py-3 text-gray-400 font-medium">Amount</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Annual federal budget</td>
+            <td class="py-3 font-medium text-white">~$6.5 trillion</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Trump Account pilot deposits (per year)</td>
+            <td class="py-3 font-medium text-white">~$3.6 billion</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Pilot deposits as % of annual budget</td>
+            <td class="py-3 font-medium text-gold-400">~0.06%</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">National debt (total)</td>
+            <td class="py-3 font-medium text-white">~$36 trillion</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">Total pilot cost as % of national debt</td>
+            <td class="py-3 font-medium text-gold-400">~0.04%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      At <strong>0.06% of annual spending</strong>, the pilot deposits are a small line item. For comparison, interest payments on the national debt alone total over <strong>$800 billion per year</strong> — more than 200 times the annual cost of Trump Account deposits.
+    </p>
+
+    <CalloutBox type="info" title="Annual budget context">
+      <p>
+        The federal government spends roughly $6.5 trillion per year across defense, Social Security, Medicare, Medicaid, and hundreds of other programs. The Trump Account pilot is one of the smaller new spending items in the OBBBA.
+      </p>
+    </CalloutBox>
+
+    <h2>The Long-Term View: Revenue and Savings</h2>
+    <p>
+      The short-term cost is clear. The long-term picture is harder to calculate because the effects play out over <strong>decades</strong>. Two possible offsets could reduce the net cost:
+    </p>
+
+    <h3>1. Tax Revenue From Withdrawals</h3>
+    <p>
+      When account holders withdraw money after age 18, those withdrawals are <strong>taxed as ordinary income</strong> (traditional IRA treatment). If millions of young adults withdraw even modest amounts, the tax revenue could be substantial. For example, if 3.6 million people each withdraw $50,000 and pay an average 15% tax rate, that generates roughly <strong>$27 billion in tax revenue</strong> from just one birth cohort.
+    </p>
+
+    <h3>2. Reduced Government Dependency</h3>
+    <p>
+      Young adults who start life with a five- or six-figure nest egg may be less likely to need government assistance. Fewer SNAP benefits, fewer housing subsidies, and lower Medicaid enrollment could reduce federal spending. This is plausible, but it is an <strong>estimate, not a guarantee</strong>.
+    </p>
+
+    <CalloutBox type="warning" title="Projections are not guarantees">
+      <p>
+        Long-term revenue and savings projections depend on market returns, participation rates, and economic conditions that nobody can predict precisely. The first cohort of Trump Account children will not turn 18 until 2043.
+      </p>
+    </CalloutBox>
+
+    <h2>What Budget Analysts Watch For</h2>
+    <p>
+      Economists and budget analysts will track several metrics over the coming years:
+    </p>
+    <ul>
+      <li><strong>Participation rates</strong> — How many eligible families actually open accounts?</li>
+      <li><strong>Contribution patterns</strong> — Are families adding to the $1,000 deposit, or leaving it alone?</li>
+      <li><strong>Administrative costs</strong> — How much does it cost to run the program year over year?</li>
+      <li><strong>Market performance</strong> — How do the underlying S&P 500 investments perform over 18-year windows?</li>
+    </ul>
+    <p>
+      These factors will determine whether the program's long-term benefits outweigh its upfront costs.
+    </p>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      Trump Accounts add to federal spending — about <strong>$3.6 billion per year</strong> during the pilot period. In the context of a $6.5 trillion annual budget and a $36 trillion national debt, this is a <strong>relatively small program</strong>. Whether it proves to be a net positive or net cost to taxpayers depends on outcomes that will not be clear for years.
+    </p>
+    <p>
+      For a detailed breakdown of the costs, see our <a href="/blog/cost-to-taxpayers">cost-to-taxpayers analysis</a>. For the broader economic picture, see <a href="/blog/economic-impact">economic impact of Trump Accounts</a>.
+    </p>
+
+    <CalloutBox type="tip" title="Want to see projections?">
+      <p>
+        Use the <a href="/calculators/growth-calculator">Growth Calculator</a> to see how different contribution amounts could grow over 18 years.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

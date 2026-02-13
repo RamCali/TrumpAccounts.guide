@@ -1,0 +1,148 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('can-parents-grandparents-contribute')!;
+const related = getRelatedArticles('can-parents-grandparents-contribute');
+
+const faqs = [
+  {
+    question: 'Can grandparents contribute to a grandchild\'s Trump Account?',
+    answer: `Yes. Anyone can contribute to a child's Trump Account — parents, grandparents, aunts, uncles, friends, or anyone else. The combined total from all contributors cannot exceed $${limits.annualContributionLimit.toLocaleString()} per year.`,
+  },
+  {
+    question: 'Does each contributor get their own $5,000 limit?',
+    answer: `No. The $${limits.annualContributionLimit.toLocaleString()} annual limit is a total cap on the account, not per contributor. If a parent contributes $3,000 and a grandparent contributes $2,000, the limit is reached.`,
+  },
+  {
+    question: 'Do Trump Account contributions count as gifts for tax purposes?',
+    answer: 'Contributions by someone other than the parent may be considered gifts under federal tax law. However, the annual gift tax exclusion is $18,000 per recipient (2025), so Trump Account contributions of up to $5,000 would fall well below this threshold.',
+  },
+  {
+    question: 'Can an employer contribution and a grandparent contribution happen in the same year?',
+    answer: `Yes. Employer contributions (up to $${limits.employerContributionLimit.toLocaleString()}) and family contributions can both go into the same account. But the combined total from all sources cannot exceed $${limits.annualContributionLimit.toLocaleString()}/year.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><strong class="text-white">Anyone</strong> can contribute to a child's Trump Account — parents, grandparents, relatives, and friends.</li>
+        <li>The <strong class="text-white">${limits.annualContributionLimit.toLocaleString()}/year limit</strong> is a combined cap from all contributors.</li>
+        <li>Employer contributions (up to <strong class="text-white">${limits.employerContributionLimit.toLocaleString()}</strong>) also count toward the ${limits.annualContributionLimit.toLocaleString()} cap.</li>
+        <li>Contributions under <strong class="text-white">$18,000</strong> per year fall within the gift tax exclusion — no gift tax paperwork needed.</li>
+      </ul>
+    </div>
+
+    <p>
+      One of the best features of Trump Accounts is that <strong>there are no restrictions on who can contribute</strong>. Parents, grandparents, aunts, uncles, family friends — anyone who wants to invest in a child's future can chip in.
+    </p>
+
+    <h2>The $5,000 Limit Is Per Account, Not Per Person</h2>
+    <p>
+      This is the most important rule to understand. The <strong><a href="/blog/contribution-limits-explained">${limits.annualContributionLimit.toLocaleString()} annual contribution limit</a></strong> applies to the total amount going into the account from all sources combined.
+    </p>
+    <p>
+      It does not matter whether one person contributes $5,000 or five people each contribute $1,000. Once the account hits $5,000 for the year, no more contributions are allowed until the next year.
+    </p>
+
+    <CalloutBox type="warning" title="Watch the total carefully">
+      <p>
+        If multiple family members are contributing, coordinate to avoid going over the <strong>${limits.annualContributionLimit.toLocaleString()} limit</strong>. Excess contributions may trigger penalties. See our <a href="/blog/contribution-limits-explained">contribution limits breakdown</a> for details on what happens if you over-contribute.
+      </p>
+    </CalloutBox>
+
+    <h2>How Grandparent Contributions Work</h2>
+    <p>
+      Grandparents can contribute directly to a grandchild's Trump Account. There is no special process. They send money to the account, and it counts toward the <strong>${limits.annualContributionLimit.toLocaleString()} annual cap</strong>.
+    </p>
+    <p>
+      This makes Trump Accounts an excellent option for grandparents who want to give a meaningful financial gift. Instead of toys or clothes, a $1,000 contribution at birth could grow to <strong>$4,000+</strong> by age 18 — without the grandparent doing anything else.
+    </p>
+
+    <CalloutBox type="tip" title="Birthday and holiday gifts">
+      <p>
+        Consider asking family members to contribute to the Trump Account instead of buying gifts. A $50 birthday contribution each year from four grandparents adds up to $200/year — nearly $4,000 in contributions over 18 years before growth.
+      </p>
+    </CalloutBox>
+
+    <h2>Employer Contributions Count Too</h2>
+    <p>
+      Employers can contribute up to <strong><a href="/blog/employer-match-trump-account">${limits.employerContributionLimit.toLocaleString()} per year</a></strong> per employee under IRC Section 128. These contributions are tax-free to the employee.
+    </p>
+    <p>
+      However, employer contributions <strong>count toward the ${limits.annualContributionLimit.toLocaleString()} annual cap</strong>. If an employer contributes $2,500, the family can only add another $2,500 from all other sources combined.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Source</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Amount</th>
+            <th class="py-3 text-gray-400 font-medium">Running Total</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Employer match</td>
+            <td class="py-3 pr-4">$2,500</td>
+            <td class="py-3">$2,500</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Parents</td>
+            <td class="py-3 pr-4">$1,500</td>
+            <td class="py-3">$4,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Grandparents</td>
+            <td class="py-3 pr-4">$1,000</td>
+            <td class="py-3 font-bold text-white">$5,000 (limit reached)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Gift Tax Considerations</h2>
+    <p>
+      When someone other than the parent contributes to a child's Trump Account, the IRS may consider it a gift. The good news: the <strong>annual gift tax exclusion is $18,000 per recipient</strong> (as of 2025).
+    </p>
+    <p>
+      Since Trump Account contributions max out at ${limits.annualContributionLimit.toLocaleString()}/year, they fall well below the gift tax threshold. Grandparents and other family members generally <strong>will not owe gift tax</strong> and do not need to file gift tax returns for these contributions.
+    </p>
+
+    <CalloutBox type="info" title="Multiple grandchildren?">
+      <p>
+        The $18,000 gift tax exclusion applies per recipient. Grandparents with three grandchildren could contribute up to $5,000 to each child's Trump Account ($15,000 total) without any gift tax concerns.
+      </p>
+    </CalloutBox>
+
+    <h2>Coordinating Contributions Across Family Members</h2>
+    <p>
+      With multiple people contributing, communication is key. Here are some practical tips:
+    </p>
+    <ul>
+      <li><strong>Set a plan at the start of the year.</strong> Decide who contributes how much so you do not accidentally exceed $5,000.</li>
+      <li><strong>Track contributions.</strong> Keep a simple spreadsheet or shared note that everyone updates.</li>
+      <li><strong>Account for employer contributions first.</strong> If a parent's employer contributes $2,500, the family only has $2,500 left to split.</li>
+      <li><strong>Consider automatic monthly contributions.</strong> Parents set up $100/month, and grandparents contribute lump sums for birthdays or holidays.</li>
+    </ul>
+
+    <p>
+      Want to see how much contributions from the whole family could grow? Use the <a href="/calculators/growth-calculator"><strong>Growth Calculator</strong></a> to model different scenarios. And for the full rules on limits and penalties, read our <a href="/blog/contribution-limits-explained">contribution limits guide</a>.
+    </p>
+  </div>
+</BlogLayout>

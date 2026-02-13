@@ -1,0 +1,185 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('how-is-trump-account-invested')!;
+const related = getRelatedArticles('how-is-trump-account-invested');
+
+const faqs = [
+  {
+    question: 'Can I invest a Trump Account in individual stocks?',
+    answer: 'No. Trump Accounts must be invested in mutual funds or ETFs that track the S&P 500 or a broad U.S. equity index. Individual stocks, bonds, crypto, and real estate are not allowed.',
+  },
+  {
+    question: 'What is the expense ratio cap for Trump Account funds?',
+    answer: `Expense ratios are capped at ${(limits.maxExpenseRatio * 100).toFixed(1)}% (10 basis points). This ensures families are not paying excessive fees that eat into returns. Most major S&P 500 ETFs like VOO (0.03%) and IVV (0.03%) are well below this cap.`,
+  },
+  {
+    question: 'Can I switch between eligible funds?',
+    answer: 'Yes. Parents (as the authorized individual) can switch between eligible index funds during the growth phase. You are not locked into one fund. However, you can only move between funds that meet the S&P 500 or broad U.S. equity index requirement.',
+  },
+  {
+    question: 'Who chooses which fund the money goes into?',
+    answer: 'The authorized individual (typically the parent or legal guardian) selects from the eligible funds offered by the account custodian or trustee. The custodian provides a menu of qualifying funds to choose from.',
+  },
+  {
+    question: 'Can I invest in an international stock fund?',
+    answer: 'No. The law requires investments in funds that track the S&P 500 or a broad U.S. equity index. International-only funds, bond funds, and sector-specific funds are not eligible.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Funds must track the <strong class="text-white">S&P 500 or a broad U.S. equity index</strong>.</li>
+        <li>Both <strong class="text-white">mutual funds and ETFs</strong> are allowed.</li>
+        <li>Expense ratios are capped at <strong class="text-white">{(limits.maxExpenseRatio * 100).toFixed(1)}%</strong> (10 basis points).</li>
+        <li><strong class="text-white">No individual stocks, bonds, crypto, or real estate</strong> — index funds only.</li>
+        <li>Parents choose from eligible funds offered by the account custodian.</li>
+      </ul>
+    </div>
+
+    <p>
+      Trump Accounts have a simple investment rule: <strong>all money must go into S&P 500 or broad U.S. equity index funds</strong>. You cannot pick individual stocks. You cannot invest in bonds or crypto. The law intentionally keeps it simple and low-cost.
+    </p>
+    <p>
+      This design is not a limitation — it is a feature. Here is why, and how it works in practice.
+    </p>
+
+    <h2>The Investment Requirement</h2>
+    <p>
+      Under IRC Section 530A, Trump Account funds must be invested in <strong>mutual funds or exchange-traded funds (ETFs)</strong> that track one of these:
+    </p>
+    <ul>
+      <li><strong>The S&P 500 Index</strong> — the 500 largest U.S. publicly traded companies</li>
+      <li><strong>A broad U.S. equity index</strong> — such as the total U.S. stock market</li>
+    </ul>
+    <p>
+      This means every dollar in a Trump Account is invested in a diversified basket of American companies. When you contribute $100, you are buying a small piece of Apple, Microsoft, Amazon, Johnson & Johnson, and hundreds of other companies all at once.
+    </p>
+
+    <CalloutBox type="irs-quote" title="IRS Notice 2025-68 on eligible investments">
+      <p>
+        "Amounts in a Trump Account must be invested in one or more funds (whether mutual funds or exchange-traded funds) that are designed to track the performance of the Standard & Poor's 500 Index or a broad-based domestic equity index."
+      </p>
+    </CalloutBox>
+
+    <h2>What Is NOT Allowed</h2>
+    <p>
+      The law is specific about what you <strong>cannot</strong> invest in:
+    </p>
+    <ul>
+      <li><strong>Individual stocks</strong> — no picking Apple or Tesla on their own</li>
+      <li><strong>Bonds or bond funds</strong> — no fixed-income investments</li>
+      <li><strong>Cryptocurrency</strong> — no Bitcoin, Ethereum, or crypto funds</li>
+      <li><strong>Real estate</strong> — no REITs or direct property investments</li>
+      <li><strong>International-only funds</strong> — must track U.S. equities</li>
+      <li><strong>Sector funds</strong> — no tech-only or healthcare-only funds</li>
+      <li><strong>Target-date funds</strong> — unless they meet the index tracking requirement</li>
+    </ul>
+
+    <CalloutBox type="info" title="Why only index funds?">
+      <p>
+        The law keeps investment options simple for a reason. Index funds are diversified, low-cost, and historically outperform most actively managed funds over long periods. By limiting choices, the government ensures that no child's account is put into risky or expensive investments.
+      </p>
+    </CalloutBox>
+
+    <h2>The Expense Ratio Cap: {(limits.maxExpenseRatio * 100).toFixed(1)}%</h2>
+    <p>
+      Every fund charges a small annual fee called an <strong>expense ratio</strong>. Trump Accounts cap this at <strong>{(limits.maxExpenseRatio * 100).toFixed(1)}%</strong> (10 basis points). That means for every $10,000 invested, you pay no more than <strong>$10 per year</strong> in fund fees.
+    </p>
+    <p>
+      This cap protects families from high-fee funds. Many popular S&P 500 funds are well below this limit:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Fund</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Ticker</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Expense Ratio</th>
+            <th class="py-3 text-gray-400 font-medium">Eligible?</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Vanguard S&P 500 ETF</td>
+            <td class="py-3 pr-4 font-mono text-white">VOO</td>
+            <td class="py-3 pr-4">0.03%</td>
+            <td class="py-3 text-mint-400">Yes</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">iShares Core S&P 500 ETF</td>
+            <td class="py-3 pr-4 font-mono text-white">IVV</td>
+            <td class="py-3 pr-4">0.03%</td>
+            <td class="py-3 text-mint-400">Yes</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">SPDR S&P 500 ETF Trust</td>
+            <td class="py-3 pr-4 font-mono text-white">SPY</td>
+            <td class="py-3 pr-4">0.09%</td>
+            <td class="py-3 text-mint-400">Yes</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">SPDR Portfolio S&P 500 ETF</td>
+            <td class="py-3 pr-4 font-mono text-white">SPLG</td>
+            <td class="py-3 pr-4">0.02%</td>
+            <td class="py-3 text-mint-400">Yes</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">Vanguard Total Stock Market ETF</td>
+            <td class="py-3 pr-4 font-mono text-white">VTI</td>
+            <td class="py-3 pr-4">0.03%</td>
+            <td class="py-3 text-mint-400">Yes (broad U.S. index)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <CalloutBox type="tip" title="Lower fees = more money for your child">
+      <p>
+        The difference between a 0.03% and a 0.09% expense ratio may seem tiny, but over 18 years on a $100,000 account, it adds up to hundreds of dollars. Choose the lowest-cost eligible fund your custodian offers. For a detailed comparison, see our <a href="/blog/trump-account-vs-sp500-etfs">Best S&P 500 ETFs for Trump Accounts</a> guide.
+      </p>
+    </CalloutBox>
+
+    <h2>How the Custodian Works</h2>
+    <p>
+      Every Trump Account is held by a <strong>custodian or trustee</strong> — a financial institution approved to manage these accounts. The custodian:
+    </p>
+    <ul>
+      <li>Holds the account assets</li>
+      <li>Provides a menu of eligible index funds to choose from</li>
+      <li>Processes contributions and investment changes</li>
+      <li>Reports account activity to the IRS</li>
+      <li>Handles the conversion to a traditional IRA at age 18</li>
+    </ul>
+    <p>
+      As the authorized individual (parent or legal guardian), you choose which eligible fund to invest in from the options your custodian provides. You can also <a href="/blog/can-parents-change-investments">switch between eligible funds</a> during the growth phase.
+    </p>
+
+    <h2>Why Index Funds Work for Long-Term Growth</h2>
+    <p>
+      The S&P 500 has delivered an average annual return of roughly <strong>10% before inflation</strong> (about 7% after inflation) over the past several decades. Over any 18-year period in history, the S&P 500 has never delivered a negative return.
+    </p>
+    <p>
+      Index funds keep costs low, provide instant diversification across hundreds of companies, and eliminate the risk of picking the wrong individual stock. For an 18-year time horizon, this is widely considered one of the most reliable investment approaches available.
+    </p>
+    <p>
+      For more on expected returns, visit our <a href="/blog/expected-returns-trump-account">expected returns guide</a>. To learn what happens during market downturns, see <a href="/blog/what-happens-market-crash">What Happens in a Market Crash?</a>. And to run growth projections, try the <a href="/calculators/growth-calculator"><strong>Growth Calculator</strong></a>.
+    </p>
+  </div>
+</BlogLayout>

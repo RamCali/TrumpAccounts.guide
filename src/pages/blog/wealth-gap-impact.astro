@@ -1,0 +1,225 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('wealth-gap-impact')!;
+const related = getRelatedArticles('wealth-gap-impact');
+
+const faqs = [
+  {
+    question: 'Will Trump Accounts close the racial wealth gap?',
+    answer: 'Unlikely on their own. The $1,000 universal deposit helps, but wealthier families can contribute more toward the $5,000 annual limit, which widens the gap over 18 years. Trump Accounts are one tool — not a complete solution. The Dell pledge and potential future policy changes could improve equity.',
+  },
+  {
+    question: 'Does the Dell pledge help lower-income families?',
+    answer: 'Yes. The Dell pledge adds $250 per child under 10 in ZIP codes with median household income below $150,000. This targets lower-income communities specifically and increases their starting balance to $1,250 — a 25% boost over the base deposit.',
+  },
+  {
+    question: 'Are there income limits for Trump Account contributions?',
+    answer: 'No. There are no income restrictions on who can open a Trump Account or contribute. Any U.S. citizen child under 18 with an SSN is eligible. The annual contribution limit is $5,000 regardless of family income.',
+  },
+  {
+    question: 'What would make Trump Accounts more equitable?',
+    answer: 'Researchers who study child development accounts suggest progressive deposits — larger government contributions for lower-income families. Some also suggest matching contributions for low-income families. These are not part of the current law but could be added in future legislation.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>The median White family holds roughly <strong class="text-white">$188,000</strong> in wealth. Black families: <strong class="text-white">$24,000</strong>. Hispanic families: <strong class="text-white">$36,000</strong>.</li>
+        <li>The universal ${limits.pilotDeposit.toLocaleString()} deposit gives every child the <strong class="text-white">same starting point</strong> regardless of family wealth.</li>
+        <li>But contribution capacity differs: higher-income families can max out at <strong class="text-white">${limits.annualContributionLimit.toLocaleString()}/year</strong>, while lower-income families may contribute little or nothing beyond the deposit.</li>
+        <li>The <strong class="text-white">Dell pledge</strong> targets lower-income ZIP codes with an additional $${limits.dellPledge.perChildAmount}.</li>
+        <li>Trump Accounts help narrow the gap but <strong class="text-white">cannot close it alone</strong>.</li>
+      </ul>
+    </div>
+
+    <h2>The Wealth Gap Today</h2>
+    <p>
+      The numbers are stark. According to the Federal Reserve's Survey of Consumer Finances, the median family wealth in the United States breaks down by race and ethnicity like this:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Group</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Median Family Wealth</th>
+            <th class="py-3 text-gray-400 font-medium">Ratio to Highest</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">White families</td>
+            <td class="py-3 pr-4 text-mint-400">$188,200</td>
+            <td class="py-3">1.0x</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Hispanic families</td>
+            <td class="py-3 pr-4 text-mint-400">$36,100</td>
+            <td class="py-3">0.19x</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">Black families</td>
+            <td class="py-3 pr-4 text-mint-400">$24,100</td>
+            <td class="py-3">0.13x</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      The median Black family holds roughly <strong>13 cents for every dollar</strong> a White family holds. Hispanic families hold about 19 cents. These gaps have persisted for decades, driven by differences in homeownership, inheritance, income, and access to investment accounts.
+    </p>
+
+    <CalloutBox type="info" title="Source: Federal Reserve">
+      <p>
+        These figures are from the Federal Reserve's Survey of Consumer Finances. Median wealth is used rather than average wealth because averages are skewed by ultra-wealthy households. Median gives a more representative picture of the typical family.
+      </p>
+    </CalloutBox>
+
+    <h2>What Trump Accounts Get Right</h2>
+    <p>
+      Trump Accounts do something no other federal program has done at scale: <strong>give every child an investment account at birth</strong>.
+    </p>
+    <p>
+      The ${limits.pilotDeposit.toLocaleString()} federal deposit is universal. There are no income restrictions. A child born to a family earning $30,000 a year gets exactly the same deposit as a child born to a family earning $300,000. That flat starting point is genuinely equal.
+    </p>
+    <p>
+      For families with no savings, no investment accounts, and no inherited wealth, that ${limits.pilotDeposit.toLocaleString()} represents something powerful: <strong>a first-ever foothold in the stock market</strong>. Research on child development accounts shows that even small account balances shift expectations and financial behavior.
+    </p>
+    <p>
+      The investment requirement also matters. By mandating S&P 500 or broad U.S. equity index funds, Trump Accounts ensure every child — regardless of financial literacy in the family — is invested in historically high-performing, low-cost funds.
+    </p>
+
+    <h2>Where the Gap Widens</h2>
+    <p>
+      The problem starts the day after the deposit.
+    </p>
+    <p>
+      The annual contribution limit is <strong>${limits.annualContributionLimit.toLocaleString()}</strong>. That is $416 per month. For a family earning $200,000 a year, maxing out is very feasible. For a family earning $40,000 a year, contributing anything beyond the deposit is a stretch.
+    </p>
+    <p>
+      Here is what the gap looks like after 18 years at 8% average returns:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Family Scenario</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Monthly Contribution</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Value at Age 18</th>
+            <th class="py-3 text-gray-400 font-medium">Gap vs. Max</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Lower-income ($0/mo)</td>
+            <td class="py-3 pr-4">$0</td>
+            <td class="py-3 pr-4 text-mint-400">$3,996</td>
+            <td class="py-3">$203,000 behind</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Modest ($50/mo)</td>
+            <td class="py-3 pr-4">$50</td>
+            <td class="py-3 pr-4 text-mint-400">$28,200</td>
+            <td class="py-3">$179,000 behind</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Middle-income ($150/mo)</td>
+            <td class="py-3 pr-4">$150</td>
+            <td class="py-3 pr-4 text-mint-400">$76,000</td>
+            <td class="py-3">$131,000 behind</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">Higher-income ($416/mo max)</td>
+            <td class="py-3 pr-4">$416</td>
+            <td class="py-3 pr-4 text-mint-400">$207,000</td>
+            <td class="py-3">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      The child from the lower-income family ends up with <strong>$4,000</strong>. The child from the higher-income family ends up with <strong>$207,000</strong>. Both started with the same ${limits.pilotDeposit.toLocaleString()}. Contribution capacity created a <strong>52x difference</strong>.
+    </p>
+
+    <CalloutBox type="warning" title="The Contribution Gap Is Real">
+      <p>
+        This is not a flaw specific to Trump Accounts. Every savings and investment vehicle — 529 plans, Roth IRAs, custodial accounts — benefits families with more disposable income. But it is important to understand that a universal deposit does not produce universal outcomes.
+      </p>
+    </CalloutBox>
+
+    <h2>The Dell Pledge: Targeted Help</h2>
+    <p>
+      Michael and Susan Dell pledged <strong>$6.25 billion</strong> to add <strong>$${limits.dellPledge.perChildAmount} per child</strong> under 10 in ZIP codes with median household income below $${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}.
+    </p>
+    <p>
+      This is the most direct attempt to address the contribution gap. For qualifying children, the starting balance goes from $1,000 to <strong>$1,250</strong> — a 25% increase targeted specifically at lower-income communities.
+    </p>
+    <p>
+      Is $250 enough to close the gap? No. At 8% for 18 years, that extra $250 grows to about <strong>$999</strong>. Meaningful, but small compared to the tens of thousands of dollars in contributions that wealthier families can add. The Dell pledge helps at the margin. It does not solve the structural issue.
+    </p>
+    <p>
+      For full details, read <a href="/blog/dell-pledge-explained">The Dell $6.25 Billion Pledge Explained</a>.
+    </p>
+
+    <h2>What the Research Says</h2>
+    <p>
+      Researchers studying child development accounts — programs that give children savings accounts at birth — have found consistent results:
+    </p>
+    <ul>
+      <li><strong>Even small balances change behavior.</strong> Children with savings accounts are more likely to attend college and develop long-term financial planning habits, regardless of the account balance.</li>
+      <li><strong>Universal programs build broader support.</strong> Programs available to everyone (not just low-income families) tend to have higher participation rates and stronger political durability.</li>
+      <li><strong>Progressive deposits are more effective for equity.</strong> Programs that give larger deposits to lower-income families produce more equitable outcomes than flat deposits.</li>
+      <li><strong>Employer contributions favor employed parents.</strong> The ${limits.employerContributionLimit.toLocaleString()} employer contribution (under IRC Section 128) benefits families at companies that offer it — typically larger employers with better benefits packages.</li>
+    </ul>
+
+    <h2>What Would Make It More Equal</h2>
+    <p>
+      Researchers and policy analysts have suggested several modifications that could improve equity. <strong>None of these are current law</strong> — they are ideas for potential future legislation:
+    </p>
+    <ul>
+      <li><strong>Progressive deposits.</strong> Instead of a flat $1,000, the government could deposit $2,000-$5,000 for children in lower-income families. Some state-level child savings programs already use this model.</li>
+      <li><strong>Matching contributions for lower-income families.</strong> The government could match contributions dollar-for-dollar up to a certain amount for families below a certain income threshold.</li>
+      <li><strong>Higher deposit amount.</strong> Increasing the base deposit from $1,000 to $5,000 or $10,000 would make the universal starting point far more impactful, especially for families who cannot contribute further.</li>
+      <li><strong>Extending the pilot beyond 2028.</strong> The current deposit only covers four birth cohorts. Making it permanent would expand the program's reach.</li>
+    </ul>
+
+    <CalloutBox type="info" title="Policy Analysis, Not Advocacy">
+      <p>
+        This article analyzes how Trump Accounts interact with the existing wealth gap using publicly available data. It is not an endorsement of or opposition to the program or any specific policy changes. Consult primary sources for the most current policy proposals.
+      </p>
+    </CalloutBox>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      Trump Accounts represent a genuine step toward universal wealth-building. The ${limits.pilotDeposit.toLocaleString()} deposit is the same for every child. The investment in low-cost index funds is the same for every child. The 18 years of tax-deferred compounding is the same for every child.
+    </p>
+    <p>
+      But contribution capacity is not the same. And over 18 years of compounding, that difference produces dramatically different outcomes. The program narrows the starting gap without eliminating the structural factors that created it.
+    </p>
+    <p>
+      For lower-income families, the most important action is straightforward: <strong>open the account and claim the ${limits.pilotDeposit.toLocaleString()} deposit</strong>. Even with zero additional contributions, that is free money growing in the stock market for 18 years. Every dollar contributed on top of that — however small — makes a difference.
+    </p>
+    <p>
+      For deeper analysis on related topics, read <a href="/blog/inequality-reduction">Can Trump Accounts Reduce Inequality?</a>, <a href="/blog/dell-pledge-explained">The Dell Pledge Explained</a>, and <a href="/blog/economic-impact">Economic Impact of Trump Accounts</a>.
+    </p>
+  </div>
+</BlogLayout>

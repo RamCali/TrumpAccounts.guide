@@ -1,0 +1,132 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-disability')!;
+const related = getRelatedArticles('trump-account-disability');
+
+const faqs = [
+  {
+    question: 'Can a disabled child withdraw from a Trump Account before 18?',
+    answer: 'No. There is no disability exception for early withdrawal during the growth phase. The standard Trump Account rules apply before age 18: no withdrawals except for rollovers, return of excess contributions, or death of the beneficiary.',
+  },
+  {
+    question: 'Does the IRS disability exception apply after age 18?',
+    answer: 'Yes. Once the Trump Account converts to a traditional IRA at age 18, the IRS disability exception under IRC Section 72(m)(7) applies. This waives the 10% early withdrawal penalty, though withdrawals are still taxed as ordinary income.',
+  },
+  {
+    question: 'What is the IRS definition of disability?',
+    answer: 'The IRS defines disability as being unable to engage in any substantial gainful activity due to a physical or mental condition that is expected to last continuously for at least 12 months or result in death. This must be verified by a physician.',
+  },
+  {
+    question: 'Can Trump Account funds be rolled into an ABLE account?',
+    answer: 'After age 18, when the Trump Account becomes a traditional IRA, it may be possible to roll funds into an ABLE account (tax-free, subject to annual contribution limits). ABLE accounts are designed for individuals with disabilities and offer special tax and Medicaid benefits.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><strong class="text-white">Before age {limits.growthPhaseEndAge}</strong>: standard Trump Account rules apply. No special disability exception for early withdrawal.</li>
+        <li><strong class="text-white">After age {limits.growthPhaseEndAge}</strong> (as an IRA): the IRS disability exception waives the 10% early withdrawal penalty.</li>
+        <li>Withdrawals are still <strong class="text-white">taxed as ordinary income</strong> even with the disability exception.</li>
+        <li><strong class="text-white">ABLE accounts</strong> may offer an additional planning tool after age 18.</li>
+        <li><strong class="text-white">Medicaid planning</strong> is important — consult a special needs attorney.</li>
+      </ul>
+    </div>
+
+    <p>
+      If your child has a disability, you may wonder how a Trump Account fits into their long-term financial plan. The rules depend on whether the child is <strong>under or over age {limits.growthPhaseEndAge}</strong>. Here is what you need to know.
+    </p>
+
+    <h2>Before Age {limits.growthPhaseEndAge}: Standard Rules Apply</h2>
+    <p>
+      During the growth phase, a Trump Account follows the same rules for all children — including those with disabilities. There is <strong>no special disability exception</strong> that allows early withdrawal before age {limits.growthPhaseEndAge}.
+    </p>
+    <p>
+      The only exceptions to the no-withdrawal rule are the same three that apply to everyone:
+    </p>
+    <ul>
+      <li>Rollover to another Trump Account</li>
+      <li>Return of excess contributions over the ${limits.annualContributionLimit.toLocaleString()} annual limit</li>
+      <li>Death of the beneficiary</li>
+    </ul>
+
+    <CalloutBox type="warning" title="No hardship or disability withdrawal before 18">
+      <p>
+        Even if your child has significant medical expenses or care needs, you <strong>cannot access Trump Account funds</strong> before age {limits.growthPhaseEndAge}. Plan for care costs using other resources. See our full guide on <a href="/blog/early-withdrawal-before-18">early withdrawal rules</a>.
+      </p>
+    </CalloutBox>
+
+    <h2>After Age {limits.growthPhaseEndAge}: IRA Disability Exception</h2>
+    <p>
+      When the Trump Account converts to a traditional IRA at age {limits.growthPhaseEndAge}, things change significantly. Standard IRA rules include a <strong>disability exception</strong> under IRC Section 72(m)(7).
+    </p>
+    <p>
+      If the account holder meets the IRS definition of disability, they can withdraw funds from the IRA <strong>without paying the 10% early withdrawal penalty</strong>. This applies even if they are under age 59 1/2.
+    </p>
+
+    <h3>What Is the IRS Definition of Disability?</h3>
+    <p>
+      The IRS has a specific standard. To qualify, the person must be:
+    </p>
+    <ul>
+      <li><strong>Unable to engage in any substantial gainful activity</strong> due to a physical or mental condition</li>
+      <li>The condition must be expected to <strong>last continuously for at least 12 months</strong> or result in death</li>
+      <li>A <strong>physician must verify</strong> the condition</li>
+    </ul>
+
+    <CalloutBox type="info" title="Still taxed as income">
+      <p>
+        The disability exception removes the <strong>10% penalty</strong>, but withdrawals are still <strong>taxed as ordinary income</strong>. The tax-deferred growth is paid back when the money comes out. See our guide on <a href="/blog/trump-account-penalties">Trump Account penalties</a> for the full picture.
+      </p>
+    </CalloutBox>
+
+    <h2>ABLE Account Interaction</h2>
+    <p>
+      <strong>ABLE accounts</strong> (Achieving a Better Life Experience) are tax-advantaged savings accounts for individuals with disabilities that began before age 26. They offer important benefits:
+    </p>
+    <ul>
+      <li>Earnings grow tax-free when used for qualified disability expenses</li>
+      <li>Up to $100,000 in an ABLE account is excluded from Medicaid asset limits</li>
+      <li>Funds can cover housing, education, transportation, health care, and more</li>
+    </ul>
+    <p>
+      After age {limits.growthPhaseEndAge}, when the Trump Account is a traditional IRA, it may be possible to <strong>roll funds from the IRA into an ABLE account</strong>. This rollover can be tax-free, subject to the ABLE account's annual contribution limits. This strategy could help protect benefits eligibility.
+    </p>
+
+    <CalloutBox type="tip" title="Consult a special needs attorney">
+      <p>
+        The interaction between IRAs, ABLE accounts, Medicaid, and SSI is highly individual. A special needs planning attorney can help you create a strategy that maximizes your child's benefits and financial security.
+      </p>
+    </CalloutBox>
+
+    <h2>Medicaid Planning Considerations</h2>
+    <p>
+      Many families with disabled children rely on Medicaid for health care and support services. Medicaid has <strong>asset limits</strong> that vary by state. Here is how a Trump Account may affect eligibility:
+    </p>
+    <ul>
+      <li><strong>Before age {limits.growthPhaseEndAge}:</strong> The Trump Account may not count as an accessible asset because the child cannot withdraw from it. However, state rules vary.</li>
+      <li><strong>After age {limits.growthPhaseEndAge}:</strong> As a traditional IRA, the account is the child's asset. It <strong>may count toward Medicaid asset limits</strong> depending on your state's rules.</li>
+    </ul>
+    <p>
+      This is where an ABLE account rollover strategy can be valuable. Moving IRA funds into an ABLE account may help keep the child within Medicaid asset limits while preserving access to the money for disability-related expenses.
+    </p>
+    <p>
+      For more on how Trump Accounts interact with means-tested benefits, read our guide on <a href="/blog/trump-account-medicaid-impact">Trump Accounts and Medicaid</a>.
+    </p>
+  </div>
+</BlogLayout>

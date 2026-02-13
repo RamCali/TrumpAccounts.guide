@@ -1,0 +1,242 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('how-much-money-trump-account')!;
+const related = getRelatedArticles('how-much-money-trump-account');
+
+const faqs = [
+  {
+    question: 'How much does the government put into a Trump Account?',
+    answer: `The federal government deposits $${limits.pilotDeposit.toLocaleString()} as a one-time pilot deposit for children born between ${limits.pilotDepositStartYear} and ${limits.pilotDepositEndYear}. This is not an annual payment — it is a single deposit per eligible child.`,
+  },
+  {
+    question: 'Can I contribute more than $5,000 per year?',
+    answer: `No. The annual contribution limit is $${limits.annualContributionLimit.toLocaleString()} from all sources combined — parents, grandparents, family, friends, and employer contributions. Excess contributions must be removed and may be subject to a penalty.`,
+  },
+  {
+    question: 'Does the employer contribution count toward the $5,000 limit?',
+    answer: `Yes. Employer contributions of up to $${limits.employerContributionLimit.toLocaleString()} per year are tax-free for the employee under IRC Section 128, but they count toward the $${limits.annualContributionLimit.toLocaleString()} total annual cap. If your employer contributes $${limits.employerContributionLimit.toLocaleString()}, you can add up to $${(limits.annualContributionLimit - limits.employerContributionLimit).toLocaleString()} from other sources.`,
+  },
+  {
+    question: 'Does every child get the Dell $250?',
+    answer: `No. The Dell pledge of $${limits.dellPledge.perChildAmount} per child applies to children ${limits.dellPledge.eligibleAge} who live in ZIP codes where the median household income is below $${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}. Not all children will qualify based on location.`,
+  },
+  {
+    question: 'Will the $5,000 limit go up over time?',
+    answer: `Yes. Starting after ${limits.inflationIndexStartYear}, the $${limits.annualContributionLimit.toLocaleString()} annual contribution limit will be indexed for inflation. The exact adjustment will depend on inflation rates in future years.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <!-- Key Takeaways -->
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>The federal government deposits <strong class="text-white">${limits.pilotDeposit.toLocaleString()}</strong> for children born {limits.pilotDepositStartYear}-{limits.pilotDepositEndYear}.</li>
+        <li>Families can contribute up to <strong class="text-white">${limits.annualContributionLimit.toLocaleString()} per year</strong> from all sources combined.</li>
+        <li>Employers can add up to <strong class="text-white">${limits.employerContributionLimit.toLocaleString()} per year</strong> (tax-free, counts toward the ${limits.annualContributionLimit.toLocaleString()} cap).</li>
+        <li>The Dell Foundation may add <strong class="text-white">${limits.dellPledge.perChildAmount}</strong> for qualifying children in lower-income ZIP codes.</li>
+        <li>With maximum contributions at 8% average returns, a Trump Account could exceed <strong class="text-white">$200,000 by age 18</strong>.</li>
+      </ul>
+    </div>
+
+    <h2>Money Source #1: The ${limits.pilotDeposit.toLocaleString()} Federal Deposit</h2>
+    <p>
+      The first money in a Trump Account comes from the federal government. For children born between <strong>January 1, {limits.pilotDepositStartYear}</strong> and <strong>December 31, {limits.pilotDepositEndYear}</strong>, the government deposits <strong>${limits.pilotDeposit.toLocaleString()}</strong> into the account.
+    </p>
+    <p>
+      This is a one-time deposit. It is not annual. Once it is in the account, it gets invested in S&P 500 index funds and starts compounding immediately.
+    </p>
+
+    <CalloutBox type="info" title="What $1,000 Becomes Over 18 Years">
+      <p>
+        At the S&P 500's historical average annual return of about 10%, a single ${limits.pilotDeposit.toLocaleString()} deposit would grow to roughly <strong>$5,560 by age 18</strong>. At a more conservative 7% (adjusting for inflation), it would reach about <strong>$3,380</strong>. Even left completely alone, the government's money does meaningful work over 18 years.
+      </p>
+    </CalloutBox>
+
+    <p>
+      Children born <strong>before {limits.pilotDepositStartYear}</strong> or <strong>after {limits.pilotDepositEndYear}</strong> do not receive this deposit. They can still open a Trump Account and benefit from family contributions and tax-deferred growth, but the seed money will need to come from other sources.
+    </p>
+
+    <h2>Money Source #2: Family Contributions (Up to ${limits.annualContributionLimit.toLocaleString()}/Year)</h2>
+    <p>
+      This is where the real money comes from. Families can contribute up to <strong>${limits.annualContributionLimit.toLocaleString()} per year</strong> to a child's Trump Account. This limit is per child, and it is the combined total from all sources — parents, grandparents, aunts, uncles, family friends, anyone.
+    </p>
+    <p>
+      These contributions are made with <strong>after-tax dollars</strong>. You do not get a tax deduction. But the money grows tax-deferred inside the account, which means no annual taxes on dividends or capital gains while it compounds.
+    </p>
+
+    <h3>What Different Contribution Levels Look Like</h3>
+    <p>
+      Here is what the account could be worth at age 18 with different monthly contribution levels, assuming the ${limits.pilotDeposit.toLocaleString()} deposit and an <strong>8% average annual return</strong>:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto rounded-xl border border-surface-600">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 bg-surface-800">
+            <th class="px-4 py-3 text-left font-semibold text-gold-400">Monthly Contribution</th>
+            <th class="px-4 py-3 text-left font-semibold text-gold-400">Annual Total</th>
+            <th class="px-4 py-3 text-left font-semibold text-gold-400">Total Contributed (18 yrs)</th>
+            <th class="px-4 py-3 text-left font-semibold text-gold-400">Estimated Value at 18</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3">$0 (deposit only)</td>
+            <td class="px-4 py-3">$0</td>
+            <td class="px-4 py-3">$1,000</td>
+            <td class="px-4 py-3 font-semibold text-white">~$4,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3">$50/month</td>
+            <td class="px-4 py-3">$600</td>
+            <td class="px-4 py-3">$11,800</td>
+            <td class="px-4 py-3 font-semibold text-white">~$28,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3">$100/month</td>
+            <td class="px-4 py-3">$1,200</td>
+            <td class="px-4 py-3">$22,600</td>
+            <td class="px-4 py-3 font-semibold text-white">~$52,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3">$250/month</td>
+            <td class="px-4 py-3">$3,000</td>
+            <td class="px-4 py-3">$55,000</td>
+            <td class="px-4 py-3 font-semibold text-white">~$124,000</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3">$417/month (max)</td>
+            <td class="px-4 py-3">$5,000</td>
+            <td class="px-4 py-3">$91,000</td>
+            <td class="px-4 py-3 font-semibold text-mint-400">~$204,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <CalloutBox type="tip" title="Use the Growth Calculator">
+      <p>
+        These are estimates based on an 8% average annual return. Actual results will vary based on market performance. Try the <a href="/calculators/growth-calculator">growth calculator</a> to run your own projections with different contribution amounts and return assumptions.
+      </p>
+    </CalloutBox>
+
+    <p>
+      Even small, consistent contributions make a big difference. <strong>$50 per month</strong> — about $12 a week — could turn into roughly $28,000 by age 18. That is the power of 18 years of compounding.
+    </p>
+
+    <h2>Money Source #3: Employer Contributions (Up to ${limits.employerContributionLimit.toLocaleString()}/Year)</h2>
+    <p>
+      Under <strong>IRC Section 128</strong>, employers can contribute up to <strong>${limits.employerContributionLimit.toLocaleString()} per year per employee</strong> toward their employees' children's Trump Accounts. This employer contribution is:
+    </p>
+    <ul>
+      <li><strong>Tax-free</strong> for the employee (it is not counted as taxable income)</li>
+      <li><strong>Deductible</strong> for the employer as a business expense</li>
+      <li><strong>Counted toward the ${limits.annualContributionLimit.toLocaleString()} annual cap</strong></li>
+    </ul>
+
+    <CalloutBox type="warning" title="The Employer Limit Is Per Employee, Not Per Child">
+      <p>
+        The ${limits.employerContributionLimit.toLocaleString()} employer contribution limit is <strong>per employee</strong>, not per dependent child. If you have three children with Trump Accounts, your employer's total contribution across all of them is still capped at ${limits.employerContributionLimit.toLocaleString()} per year.
+      </p>
+    </CalloutBox>
+
+    <p>
+      If your employer contributes the full ${limits.employerContributionLimit.toLocaleString()}, you can still contribute up to <strong>${(limits.annualContributionLimit - limits.employerContributionLimit).toLocaleString()} per year</strong> from family sources to reach the ${limits.annualContributionLimit.toLocaleString()} cap.
+    </p>
+    <p>
+      Not all employers offer this benefit yet. It is a new program, and companies are still building it into their benefits packages. Ask your HR department if they plan to offer Trump Account contributions. <a href="/for-employers">Learn more about employer contributions</a>.
+    </p>
+
+    <h2>Money Source #4: The Dell Foundation Pledge</h2>
+    <p>
+      Michael and Susan Dell pledged <strong>$6.25 billion</strong> through the Michael & Susan Dell Foundation. This provides <strong>${limits.dellPledge.perChildAmount} per child</strong> who meets both of these criteria:
+    </p>
+    <ul>
+      <li>The child is <strong>{limits.dellPledge.eligibleAge}</strong></li>
+      <li>The child lives in a <strong>ZIP code with a median household income below $150,000</strong></li>
+    </ul>
+    <p>
+      This is a private pledge, separate from the government deposit. A qualifying child could receive <strong>both</strong> the ${limits.pilotDeposit.toLocaleString()} federal deposit and the ${limits.dellPledge.perChildAmount} Dell contribution.
+    </p>
+
+    <CalloutBox type="info" title="Check Your ZIP Code">
+      <p>
+        The Dell pledge targets lower-income communities. Whether your child qualifies depends on the median income in your specific ZIP code, not your family's personal income. You can check median income data for your ZIP code through Census Bureau tools.
+      </p>
+    </CalloutBox>
+
+    <h2>Adding It All Up: Maximum Potential</h2>
+    <p>
+      For a child born in {limits.pilotDepositStartYear} in a qualifying ZIP code, here is the maximum funding scenario in year one:
+    </p>
+    <ul>
+      <li><strong>${limits.pilotDeposit.toLocaleString()}</strong> — Federal pilot deposit</li>
+      <li><strong>${limits.dellPledge.perChildAmount}</strong> — Dell Foundation pledge</li>
+      <li><strong>${limits.annualContributionLimit.toLocaleString()}</strong> — Maximum annual family and employer contributions</li>
+    </ul>
+    <p>
+      That is <strong>$6,250 in the first year alone</strong>. If the family continues contributing ${limits.annualContributionLimit.toLocaleString()} every year for 18 years, the total contributions would be:
+    </p>
+    <ul>
+      <li>${limits.pilotDeposit.toLocaleString()} (one-time deposit) + ${limits.dellPledge.perChildAmount} (Dell) + $90,000 (${limits.annualContributionLimit.toLocaleString()} x 18 years) = <strong>$91,250 total invested</strong></li>
+    </ul>
+    <p>
+      At an 8% average annual return, that invested total could grow to roughly <strong>$210,000+ by age 18</strong>.
+    </p>
+
+    <h2>What If You Can Only Contribute a Little?</h2>
+    <p>
+      Not everyone can max out at ${limits.annualContributionLimit.toLocaleString()} per year. That is completely fine. Even modest contributions make a real difference over 18 years.
+    </p>
+
+    <div class="not-prose my-6 rounded-xl border border-mint-400/30 bg-mint-400/5 p-6">
+      <h3 class="mb-3 text-lg font-bold text-mint-400">Realistic Scenarios</h3>
+      <ul class="space-y-3 text-sm text-gray-300">
+        <li>
+          <strong class="text-white">The deposit-only scenario:</strong> Just opt in and do nothing else. The ${limits.pilotDeposit.toLocaleString()} grows to roughly $4,000-$5,500 by age 18 depending on returns. It is free money — take it.
+        </li>
+        <li>
+          <strong class="text-white">The "$25 a week" family:</strong> $100/month in contributions plus the ${limits.pilotDeposit.toLocaleString()} deposit could reach about $52,000 by age 18. That is a meaningful start on college or a first home.
+        </li>
+        <li>
+          <strong class="text-white">The grandparent boost:</strong> If grandparents contribute $1,000 per year and parents contribute $200/month, the total could reach $100,000+ by age 18. <a href="/faq/money-and-funding" class="text-gold-400 hover:text-gold-300">More on who can contribute</a>.
+        </li>
+      </ul>
+    </div>
+
+    <p>
+      The most important step is not contributing the maximum. It is <strong>opening the account</strong>. A Trump Account with ${limits.pilotDeposit.toLocaleString()} and zero additional contributions is still better than no account at all.
+    </p>
+
+    <h2>The Contribution Limit Will Rise</h2>
+    <p>
+      Starting after {limits.inflationIndexStartYear}, the ${limits.annualContributionLimit.toLocaleString()} annual contribution limit will be <strong>indexed for inflation</strong>. This means the cap will gradually increase over time.
+    </p>
+    <p>
+      If inflation averages 3% per year, the limit could rise to roughly $5,500-$6,000 within a few years. This means families will be able to contribute even more as the years go on.
+    </p>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      A Trump Account can receive money from <strong>four sources</strong>: the federal deposit, family contributions, employer contributions, and the Dell Foundation pledge. The total potential is significant — over $200,000 by age 18 at the maximum contribution level.
+    </p>
+    <p>
+      But even if you can only contribute a little, the math still works in your child's favor. <strong>Time is the most powerful ingredient.</strong> Open the account early, contribute what you can, and let 18 years of compounding do the heavy lifting. Use the <a href="/calculators/growth-calculator">growth calculator</a> to run projections based on your family's budget.
+    </p>
+  </div>
+</BlogLayout>

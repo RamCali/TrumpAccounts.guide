@@ -1,0 +1,221 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('contribution-limits-explained')!;
+const related = getRelatedArticles('contribution-limits-explained');
+
+const faqs = [
+  {
+    question: 'What is the annual contribution limit for Trump Accounts?',
+    answer: `The annual contribution limit is $${limits.annualContributionLimit.toLocaleString()} total from all sources combined — family contributions and employer contributions. This limit is per child, per year.`,
+  },
+  {
+    question: 'Are Trump Account contributions tax-deductible?',
+    answer: `No. Trump Account contributions are made with after-tax dollars. You do not receive a federal or state tax deduction for contributing. Growth is tax-deferred, and withdrawals after age 18 are taxed as ordinary income.`,
+  },
+  {
+    question: 'What happens if I contribute more than $5,000?',
+    answer: 'Excess contributions must be removed before the tax filing deadline (including extensions) for the year. If not removed, the excess amount may be subject to a 6% excise tax each year it remains in the account.',
+  },
+  {
+    question: 'Will the $5,000 limit increase over time?',
+    answer: `Yes. The $${limits.annualContributionLimit.toLocaleString()} limit is indexed for inflation starting after ${limits.inflationIndexStartYear}. The IRS will announce adjustments in future guidance as inflation changes the threshold.`,
+  },
+  {
+    question: 'Does the employer contribution have its own separate limit?',
+    answer: `Employer contributions are capped at $${limits.employerContributionLimit.toLocaleString()} per year per employee under IRC Section 128. This amount counts toward the $${limits.annualContributionLimit.toLocaleString()} total cap. It is not an additional $${limits.employerContributionLimit.toLocaleString()} on top of the $${limits.annualContributionLimit.toLocaleString()}.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Annual contribution limit: <strong class="text-white">${limits.annualContributionLimit.toLocaleString()} total</strong> from all sources combined.</li>
+        <li>Employer contributions: up to <strong class="text-white">${limits.employerContributionLimit.toLocaleString()}/year</strong> per employee, counts toward the $5,000 cap.</li>
+        <li>Contributions are <strong class="text-white">after-tax</strong> — no deduction on your tax return.</li>
+        <li>The limit is <strong class="text-white">indexed for inflation</strong> starting after {limits.inflationIndexStartYear}.</li>
+        <li>Over-contributions face a <strong class="text-white">6% excise tax</strong> if not corrected in time.</li>
+      </ul>
+    </div>
+
+    <p>
+      Trump Account contribution limits are straightforward, but the details matter. Contributing too much triggers penalties. Contributing too little means missing out on years of compound growth. Here is the complete breakdown.
+    </p>
+
+    <h2>The $5,000 Annual Cap</h2>
+    <p>
+      Each Trump Account can receive up to <strong>${limits.annualContributionLimit.toLocaleString()} per year</strong> in total contributions. This is a per-child, per-year limit. If you have three children with Trump Accounts, each one can receive up to $5,000 — that is $15,000 total across all three accounts.
+    </p>
+    <p>
+      The $5,000 cap includes <strong>all contributions from all sources</strong>:
+    </p>
+    <ul>
+      <li>Parent contributions</li>
+      <li><a href="/blog/can-parents-grandparents-contribute">Grandparent and family contributions</a></li>
+      <li><a href="/blog/employer-match-trump-account">Employer contributions</a> (up to ${limits.employerContributionLimit.toLocaleString()})</li>
+      <li>Contributions from friends or anyone else</li>
+    </ul>
+
+    <CalloutBox type="warning" title="The limit is combined, not per person">
+      <p>
+        A common misunderstanding: each contributor does <strong>not</strong> get a separate $5,000 limit. If a grandparent contributes $3,000 and a parent contributes $2,000, the account has reached its annual cap. No one else can contribute until next year.
+      </p>
+    </CalloutBox>
+
+    <h2>Employer Contributions: The ${limits.employerContributionLimit.toLocaleString()} Sub-Limit</h2>
+    <p>
+      Employers can contribute up to <strong>${limits.employerContributionLimit.toLocaleString()} per year per employee</strong> under IRC Section 128. This is tax-free to the employee — it does not count as taxable income.
+    </p>
+    <p>
+      Important details about the employer contribution:
+    </p>
+    <ul>
+      <li>The ${limits.employerContributionLimit.toLocaleString()} limit is <strong>per employee</strong>, not per dependent child.</li>
+      <li>If an employee has three children with Trump Accounts, the employer's $2,500 contribution covers all of them combined — it does not triple to $7,500.</li>
+      <li>The employer contribution <strong>counts toward the ${limits.annualContributionLimit.toLocaleString()} total cap</strong> for the child's account.</li>
+      <li>Read our full <a href="/for-employers">employer guide</a> for setup details.</li>
+    </ul>
+
+    <h3>Example: Employer + Family Contributions</h3>
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Scenario</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Employer</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Family</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Total</th>
+            <th class="py-3 text-gray-400 font-medium">Status</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">A</td>
+            <td class="py-3 pr-4">$2,500</td>
+            <td class="py-3 pr-4">$2,500</td>
+            <td class="py-3 pr-4">$5,000</td>
+            <td class="py-3 text-mint-400">At limit</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">B</td>
+            <td class="py-3 pr-4">$1,000</td>
+            <td class="py-3 pr-4">$4,000</td>
+            <td class="py-3 pr-4">$5,000</td>
+            <td class="py-3 text-mint-400">At limit</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">C</td>
+            <td class="py-3 pr-4">$0</td>
+            <td class="py-3 pr-4">$5,000</td>
+            <td class="py-3 pr-4">$5,000</td>
+            <td class="py-3 text-mint-400">At limit</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">D</td>
+            <td class="py-3 pr-4">$2,500</td>
+            <td class="py-3 pr-4">$3,500</td>
+            <td class="py-3 pr-4">$6,000</td>
+            <td class="py-3 text-red-400">Over limit by $1,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>After-Tax Contributions — No Deduction</h2>
+    <p>
+      Trump Account contributions are made with <strong>after-tax dollars</strong>. You will <strong>not</strong> receive a tax deduction on your federal or state tax return for contributing.
+    </p>
+    <p>
+      This is different from a 401(k) or traditional IRA, where contributions reduce your taxable income. It is similar to a Roth IRA in that you contribute money you have already paid taxes on.
+    </p>
+    <p>
+      The tax benefit comes later: growth inside the account is <strong>tax-deferred</strong>. You do not pay taxes on gains each year. At age 18, when the account converts to a traditional IRA, withdrawals are taxed as ordinary income. For more on the tax treatment, see <a href="/blog/are-trump-accounts-tax-deductible">Are Trump Accounts Tax-Deductible?</a>
+    </p>
+
+    <h2>Inflation Indexing After {limits.inflationIndexStartYear}</h2>
+    <p>
+      The ${limits.annualContributionLimit.toLocaleString()} annual limit is <strong>indexed for inflation starting after {limits.inflationIndexStartYear}</strong>. This means the IRS will periodically increase the limit to keep pace with rising costs.
+    </p>
+    <p>
+      The IRS has not yet announced a specific schedule for adjustments. When it does, the new limits will be published in updated guidance. We will update this page as soon as new limits are announced.
+    </p>
+
+    <CalloutBox type="info" title="How inflation indexing works">
+      <p>
+        Inflation adjustments are typically rounded to the nearest $50 or $100 increment. If inflation runs at 3% annually, the limit could increase to approximately $5,150 in 2028 and continue rising from there. The exact amount depends on IRS methodology.
+      </p>
+    </CalloutBox>
+
+    <h2>What Happens if You Over-Contribute?</h2>
+    <p>
+      Mistakes happen. If total contributions exceed ${limits.annualContributionLimit.toLocaleString()} in a year, here is what you need to know:
+    </p>
+    <ol>
+      <li><strong>Remove the excess before the tax filing deadline</strong> (including extensions) for the year the over-contribution occurred.</li>
+      <li>You must also remove any <strong>earnings attributable</strong> to the excess contribution.</li>
+      <li>If you correct it in time, there is <strong>no penalty</strong>.</li>
+      <li>If you do not correct it, the excess amount is subject to a <strong>6% excise tax each year</strong> it remains in the account.</li>
+    </ol>
+
+    <CalloutBox type="warning" title="Coordinate with all contributors">
+      <p>
+        The most common cause of over-contributions is multiple family members contributing without tracking the total. If grandparents, an employer, and parents all contribute, make sure someone is keeping a running count. See our <a href="/blog/can-parents-grandparents-contribute">family contribution guide</a> for tips.
+      </p>
+    </CalloutBox>
+
+    <h2>Monthly Contribution Breakdown</h2>
+    <p>
+      Here is what the annual limit looks like in monthly terms:
+    </p>
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Strategy</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Monthly</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Annual</th>
+            <th class="py-3 text-gray-400 font-medium">Room for Employer Match</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Max out alone</td>
+            <td class="py-3 pr-4">~$416</td>
+            <td class="py-3 pr-4">$5,000</td>
+            <td class="py-3">$0</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">With full employer match</td>
+            <td class="py-3 pr-4">~$208</td>
+            <td class="py-3 pr-4">$2,500</td>
+            <td class="py-3">$2,500</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">Moderate family plan</td>
+            <td class="py-3 pr-4">~$250</td>
+            <td class="py-3 pr-4">$3,000</td>
+            <td class="py-3">$2,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Want to see how different contribution levels affect your child's account at age 18? Use the <a href="/calculators/growth-calculator"><strong>Growth Calculator</strong></a> to model scenarios. For the full story on employer contributions, visit our <a href="/blog/employer-match-trump-account">employer match guide</a>.
+    </p>
+  </div>
+</BlogLayout>

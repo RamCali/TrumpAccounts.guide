@@ -1,0 +1,138 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('do-all-babies-qualify')!;
+const related = getRelatedArticles('do-all-babies-qualify');
+
+const faqs = [
+  {
+    question: 'Does every baby born in the U.S. automatically get a Trump Account?',
+    answer: `No. Parents must opt in by filing ${limits.form} with their tax return or through ${limits.portal}. The account is not created automatically, even for eligible babies.`,
+  },
+  {
+    question: 'Do babies born outside the U.S. qualify?',
+    answer: 'Only if they are U.S. citizens. A baby born abroad to U.S. citizen parents who obtains U.S. citizenship qualifies. A baby born abroad who is not a U.S. citizen does not qualify.',
+  },
+  {
+    question: 'Does my baby need an SSN before I can open a Trump Account?',
+    answer: `Yes. You need your baby's Social Security number before you can file ${limits.form}. Apply for the SSN at the hospital when your baby is born. You cannot file for an unborn child.`,
+  },
+  {
+    question: 'What if my baby is born in December 2028?',
+    answer: `Your baby still qualifies for the $${limits.pilotDeposit.toLocaleString()} pilot deposit. The window covers births from January 1, ${limits.pilotDepositStartYear} through December 31, ${limits.pilotDepositEndYear}. Any birth within that range is eligible.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>All U.S. citizen babies with a valid SSN <strong class="text-white">qualify</strong> for a Trump Account.</li>
+        <li>The account is <strong class="text-white">not automatic</strong> — parents must opt in by filing {limits.form}.</li>
+        <li>The <strong class="text-white">${limits.pilotDeposit.toLocaleString()} federal deposit</strong> is only for babies born {limits.pilotDepositStartYear}–{limits.pilotDepositEndYear}.</li>
+        <li>Non-citizens and green card holders <strong class="text-white">do not qualify</strong>.</li>
+        <li>There are <strong class="text-white">no income restrictions</strong>. Every eligible family can participate.</li>
+      </ul>
+    </div>
+
+    <h2>The Short Answer</h2>
+    <p>
+      Not automatically — but almost all U.S.-born babies <strong>can</strong> qualify. The catch is that parents must take action. The government will not open an account for your baby on its own. You need to file <strong>{limits.form}</strong> to opt in.
+    </p>
+    <p>
+      If your baby is a U.S. citizen with a valid Social Security number, they are eligible. It does not matter how much money your family makes. There are no income limits.
+    </p>
+
+    <CalloutBox type="warning" title="You must opt in">
+      <p>
+        Even though your baby qualifies, the account will not be created unless you file {limits.form}. Do not assume it happens automatically. See <a href="/blog/is-trump-account-automatic">Is a Trump Account Automatic?</a> for details.
+      </p>
+    </CalloutBox>
+
+    <h2>Quick Eligibility Checklist</h2>
+    <p>
+      Run through this yes/no checklist. Your baby must meet <strong>all three</strong> requirements:
+    </p>
+    <div class="not-prose my-6 rounded-xl border border-surface-600 bg-surface-800 p-6">
+      <ul class="space-y-3 text-sm text-gray-300">
+        <li class="flex items-start gap-3">
+          <span class="mt-0.5 text-mint-400 font-bold">&#10003;</span>
+          <span>Is your child a <strong class="text-white">U.S. citizen</strong>? (Born in the U.S. or obtained citizenship another way)</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="mt-0.5 text-mint-400 font-bold">&#10003;</span>
+          <span>Does your child have a <strong class="text-white">valid Social Security number</strong>? (Not an ITIN)</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="mt-0.5 text-mint-400 font-bold">&#10003;</span>
+          <span>Is your child <strong class="text-white">under 18</strong> at the end of the election year?</span>
+        </li>
+      </ul>
+      <p class="mt-4 text-sm text-gray-400">If you answered yes to all three, your child qualifies. Use our <a href="/calculators/eligibility-checker" class="text-gold-400 hover:text-gold-300">eligibility checker</a> for a personalized answer.</p>
+    </div>
+
+    <h2>Who Does NOT Qualify</h2>
+    <p>
+      Some children are <strong>not eligible</strong>, no matter what:
+    </p>
+    <ul>
+      <li><strong>Non-citizens.</strong> Children who are not U.S. citizens cannot open a Trump Account. This includes children with green cards (permanent residents) who have not become citizens.</li>
+      <li><strong>Children without an SSN.</strong> An Individual Taxpayer Identification Number (ITIN) does not count. You need a real Social Security number.</li>
+      <li><strong>Children 18 or older.</strong> If the child is 18 or older at the end of the election year, they are not eligible.</li>
+      <li><strong>Unborn children.</strong> You cannot file {limits.form} before your baby is born and has an SSN.</li>
+    </ul>
+
+    <h2>The ${limits.pilotDeposit.toLocaleString()} Deposit: Not for Every Baby</h2>
+    <p>
+      Here is where it gets more specific. <strong>Every</strong> qualifying child can open a Trump Account. But the <strong>${limits.pilotDeposit.toLocaleString()} federal pilot deposit</strong> has a tighter window.
+    </p>
+    <p>
+      Your baby only gets the ${limits.pilotDeposit.toLocaleString()} deposit if they were born between <strong>January 1, {limits.pilotDepositStartYear}</strong> and <strong>December 31, {limits.pilotDepositEndYear}</strong>. Babies born before or after that window can still open an account — they just will not receive the government's deposit.
+    </p>
+
+    <CalloutBox type="tip" title="Born before {limits.pilotDepositStartYear}?">
+      <p>
+        Children born before {limits.pilotDepositStartYear} can still open a Trump Account and benefit from family contributions of up to ${limits.annualContributionLimit.toLocaleString()}/year, employer contributions, and tax-deferred growth. See <a href="/blog/already-born-children">Trump Accounts for Already-Born Children</a>.
+      </p>
+    </CalloutBox>
+
+    <h2>Green Card Holders: A Common Confusion</h2>
+    <p>
+      This trips up a lot of families. A green card (permanent resident status) is <strong>not the same as citizenship</strong>. Your child must be a U.S. citizen to qualify. If your child has a green card but has not become a naturalized citizen, they are not eligible.
+    </p>
+    <p>
+      If your child is in the process of becoming a citizen, the account can be opened once citizenship is finalized and an SSN is issued.
+    </p>
+
+    <h2>What About the Dell Pledge?</h2>
+    <p>
+      On top of the ${limits.pilotDeposit.toLocaleString()} federal deposit, Michael and Susan Dell pledged <strong>${limits.dellPledge.perChildAmount} per child</strong> {limits.dellPledge.eligibleAge} in ZIP codes where the median income is below ${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}. This is a private donation, separate from the government program. It goes into your child's Trump Account if they qualify.
+    </p>
+
+    <h2>Next Steps</h2>
+    <p>
+      If your baby qualifies, here is what to do:
+    </p>
+    <ol>
+      <li>Make sure your baby has a <strong>Social Security number</strong>. Apply at the hospital.</li>
+      <li>File <strong>{limits.form}</strong> with your 2025 tax return (due April 15, 2026).</li>
+      <li>Check the <a href="/calculators/eligibility-checker">eligibility checker</a> if you are unsure.</li>
+    </ol>
+    <p>
+      For the full step-by-step process, read our <a href="/blog/how-to-open-step-by-step">How to Open a Trump Account</a> guide. And visit <a href="/faq/eligibility">the eligibility FAQ</a> for more common questions.
+    </p>
+  </div>
+</BlogLayout>
