@@ -1,0 +1,22 @@
+---
+import CalculatorLayout from '../../../layouts/CalculatorLayout.astro';
+import EmployerContributionCalc from '../../../components/calculators/EmployerContributionCalc';
+import esCalc from '../../../i18n/es/calculators.json';
+
+const translations: Record<string, string> = {};
+for (const [key, value] of Object.entries(esCalc)) {
+  if (key.startsWith('employer.')) {
+    translations[key.replace('employer.', '')] = value;
+  }
+}
+---
+
+<CalculatorLayout
+  title="Calculadora de Contribución del Empleador para Cuentas Trump"
+  description="Calcule el aumento de compensación por las contribuciones del empleador a Cuentas Trump de hasta $2,500/año. Vea cómo la contribución acelera el crecimiento."
+  calculatorName="Calculadora de Contribución del Empleador"
+  slug="employer-match"
+  alternateSlug="/calculators/employer-match"
+>
+  <EmployerContributionCalc client:visible translations={translations} />
+</CalculatorLayout>

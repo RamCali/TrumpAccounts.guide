@@ -1,0 +1,191 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('eli5-trump-accounts')!;
+const related = getRelatedArticles('eli5-trump-accounts');
+
+const faqs = [
+  {
+    question: 'What is a Trump Account in one sentence?',
+    answer: `A Trump Account is a special investment account for kids where the government puts in $${limits.pilotDeposit.toLocaleString()}, families can add up to $${limits.annualContributionLimit.toLocaleString()}/year, and the money grows in the stock market until the child turns 18.`,
+  },
+  {
+    question: 'Does every baby get one automatically?',
+    answer: `No. A parent or guardian must file ${limits.form} with the IRS. It takes about 30 minutes. The account is not automatic — you have to opt in.`,
+  },
+  {
+    question: 'Is it really free money?',
+    answer: `The $${limits.pilotDeposit.toLocaleString()} government deposit is free. No catch, no repayment, no strings. You claim it by filing a form. The money goes into a stock market index fund and grows over time.`,
+  },
+  {
+    question: 'What if I don\'t understand investing?',
+    answer: 'You do not need to be an investor. The money goes into an S&P 500 index fund automatically — the same fund that Warren Buffett recommends for most people. You do not pick stocks or make trades. It runs on autopilot.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><strong class="text-white">The government gives your baby $1,000.</strong> You just have to ask for it.</li>
+        <li><strong class="text-white">The money grows on its own.</strong> It is invested in the stock market (like a seed that grows into a tree).</li>
+        <li><strong class="text-white">Nobody can touch it until 18.</strong> It is a time capsule for your child.</li>
+        <li><strong class="text-white">You can add more money.</strong> Up to $5,000/year from family. But you do not have to.</li>
+        <li><strong class="text-white">At 18, it is theirs.</strong> College, a home, a business, or retirement savings.</li>
+      </ul>
+    </div>
+
+    <p>
+      Your cousin asked about it. Your mother-in-law saw something on the news. Your coworker mentioned it in the break room. And now you are wondering: what the heck is a Trump Account? Here it is, in the simplest language possible.
+    </p>
+
+    <h2>The Piggy Bank From Uncle Sam</h2>
+
+    <p>
+      Imagine the government hands your baby a very special piggy bank. They put <strong>${limits.pilotDeposit.toLocaleString()} inside</strong>. But this is not a regular piggy bank. You cannot open it until your kid turns 18. And the money inside? It grows. Like, really grows.
+    </p>
+
+    <p>
+      That is basically a Trump Account. A special investment account for kids, created by a new law signed on July 4, 2025.
+    </p>
+
+    <h2>What Happens to the Money?</h2>
+
+    <p>
+      The money is not sitting in a vault somewhere. It is <strong>planted in the stock market</strong> &mdash; specifically in a fund that tracks the biggest 500 companies in America (called the S&P 500). Think Apple, Amazon, Google, Walmart, and hundreds more.
+    </p>
+
+    <p>
+      Over time, these companies make money. And your child's account grows with them. Historically, this type of investment has returned about <strong>10% per year on average</strong> over long periods.
+    </p>
+
+    <CalloutBox type="tip" title="Think of it like a money tree">
+      You plant a seed ($1,000). Over 18 years, the tree grows. Some years it rains a lot and the tree grows fast. Some years there is a drought and it grows slower. But after 18 years, you have a tree that is much, much bigger than the seed you planted.
+    </CalloutBox>
+
+    <h2>When Can Your Kid Open It?</h2>
+
+    <p>
+      At <strong>age 18</strong>. Not a day sooner (with very few exceptions). Think of it like a time capsule. You bury it when they are born, and they dig it up when they become an adult.
+    </p>
+
+    <p>
+      This is actually a good thing. It means nobody can raid the account to pay bills, buy a car, or cover an emergency. The money is protected for 18 years. When it comes out, it could be worth thousands &mdash; or even tens of thousands &mdash; more than what went in.
+    </p>
+
+    <h2>Do You Have to Put More Money In?</h2>
+
+    <p>
+      <strong>No.</strong> The ${limits.pilotDeposit.toLocaleString()} government deposit grows on its own. If you do nothing else, that ${limits.pilotDeposit.toLocaleString()} could become about <strong>$4,000 by age 18</strong>. Free money that quadrupled.
+    </p>
+
+    <p>
+      But you <em>can</em> add more. Up to <strong>${limits.annualContributionLimit.toLocaleString()} per year</strong> from parents, grandparents, aunts, uncles, friends &mdash; anyone. The more you add, the bigger the tree grows.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">What You Do</th>
+            <th class="pb-2">Rough Value at 18</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">Nothing (just the $1,000)</td>
+            <td class="py-2 text-mint-400">~$4,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">Add $100/month</td>
+            <td class="py-2 text-mint-400">~$44,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">Add $250/month</td>
+            <td class="py-2 text-mint-400">~$101,000</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4">Max it out ($417/month)</td>
+            <td class="py-2 text-mint-400">~$164,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Who Gets One?</h2>
+
+    <p>
+      Any baby who:
+    </p>
+
+    <ul>
+      <li>Is a <strong>U.S. citizen</strong></li>
+      <li>Has a <strong>Social Security Number</strong></li>
+      <li>Is <strong>under 18</strong> at the end of the election year</li>
+    </ul>
+
+    <p>
+      The ${limits.pilotDeposit.toLocaleString()} government deposit is only for babies born between <strong>{limits.pilotDepositStartYear} and {limits.pilotDepositEndYear}</strong>. Older kids can still open an account &mdash; they just do not get the free deposit.
+    </p>
+
+    <p>
+      And here is the best part: <strong>there is no income limit</strong>. It does not matter how much or how little the parents earn. Every eligible child gets the same deal.
+    </p>
+
+    <h2>Is It Really Free Money?</h2>
+
+    <p>
+      <strong>Yes.</strong> The ${limits.pilotDeposit.toLocaleString()} is a gift from the federal government. It is not a loan. You do not pay it back. It is not deducted from your taxes. The government is literally putting money into your child's account because Congress decided it was a good idea.
+    </p>
+
+    <p>
+      You just have to fill out one form: <strong>{limits.form}</strong> (Trump Account Election). Include it with your 2025 tax return, or file it through {limits.portal} when the portal launches.
+    </p>
+
+    <CalloutBox type="warning" title="You have to ask for it">
+      The money does not appear automatically. You must file {limits.form}. If you do not file, your child does not get the ${limits.pilotDeposit.toLocaleString()}. Do not leave free money on the table.
+    </CalloutBox>
+
+    <h2>What If the Stock Market Goes Down?</h2>
+
+    <p>
+      It will. That is normal. The stock market goes up and down all the time. But here is the thing: over <strong>every 18-year period in history</strong>, the S&P 500 has ended higher than where it started. Every. Single. Time.
+    </p>
+
+    <p>
+      The no-withdrawal rule means your child cannot panic and pull the money out during a bad year. By the time they turn 18, history says the account will be worth more than what went in. Usually, a lot more.
+    </p>
+
+    <h2>The 30-Second Summary</h2>
+
+    <ol>
+      <li>The government gives your baby ${limits.pilotDeposit.toLocaleString()}</li>
+      <li>The money goes into the stock market</li>
+      <li>It grows for 18 years</li>
+      <li>Your family can add up to ${limits.annualContributionLimit.toLocaleString()}/year</li>
+      <li>At 18, your child gets all of it</li>
+      <li>They can use it for anything &mdash; college, a home, a business, retirement</li>
+    </ol>
+
+    <p>
+      That is it. No hidden fees. No fine print tricks. No catch. One form, 30 minutes, and your child has a financial head start that most people only dream about.
+    </p>
+
+    <p>
+      Check if your child qualifies with our <a href="/calculators/eligibility-checker">Eligibility Checker</a>. Then follow our <a href="/blog/how-to-open-step-by-step">step-by-step guide</a> to get started.
+    </p>
+  </div>
+</BlogLayout>

@@ -1,0 +1,24 @@
+---
+import CalculatorLayout from '../../../layouts/CalculatorLayout.astro';
+import EligibilityChecker from '../../../components/calculators/EligibilityChecker';
+import esCalc from '../../../i18n/es/calculators.json';
+
+const translations: Record<string, string> = {};
+for (const [key, value] of Object.entries(esCalc)) {
+  if (key.startsWith('eligibility.')) {
+    translations[key.replace('eligibility.', '')] = value;
+  }
+}
+// Add growth calculator href for Spanish
+translations.growthCalcHref = '/es/calculadoras/calculadora-de-crecimiento';
+---
+
+<CalculatorLayout
+  title="Verificador de Elegibilidad de Cuentas Trump"
+  description="Responda 3 preguntas rápidas para saber si su hijo califica para una Cuenta Trump y el depósito piloto federal de $1,000."
+  calculatorName="Verificador de Elegibilidad"
+  slug="eligibility-checker"
+  alternateSlug="/calculators/eligibility-checker"
+>
+  <EligibilityChecker client:visible translations={translations} />
+</CalculatorLayout>

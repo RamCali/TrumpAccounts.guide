@@ -1,0 +1,318 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import MiniGrowthCalc from '../../components/calculators/MiniGrowthCalc';
+import MiniEligibilityChecker from '../../components/calculators/MiniEligibilityChecker';
+import MiniEmployerMatch from '../../components/calculators/MiniEmployerMatch';
+import CountdownTimer from '../../components/CountdownTimer';
+import { organizationSchema, webSiteSchema, faqSchema } from '../../lib/seo/schema';
+import { useTranslations } from '../../i18n/config';
+import esCalc from '../../i18n/es/calculators.json';
+
+const t = useTranslations('es', 'homepage');
+
+const schemas = [
+  organizationSchema(),
+  webSiteSchema(),
+  faqSchema([
+    { question: t('faq.q1'), answer: t('faq.a1') },
+    { question: t('faq.q2'), answer: t('faq.a2') },
+    { question: t('faq.q3'), answer: t('faq.a3') },
+    { question: t('faq.q4'), answer: t('faq.a4') },
+  ]),
+];
+
+const miniGrowthT = {
+  title: esCalc['mini.growth.title'],
+  initialDeposit: esCalc['mini.growth.initialDeposit'],
+  monthlySavings: esCalc['mini.growth.monthlySavings'],
+  growthRate: esCalc['mini.growth.growthRate'],
+  projectedValue: esCalc['mini.growth.projectedValue'],
+  calculateNow: esCalc['mini.growth.calculateNow'],
+  calcHref: '/es/calculadoras/calculadora-de-crecimiento',
+};
+
+const miniEligibilityT = {
+  title: esCalc['mini.eligibility.title'],
+  birthDate: esCalc['mini.eligibility.birthDate'],
+  usCitizen: esCalc['mini.eligibility.usCitizen'],
+  validSSN: esCalc['mini.eligibility.validSSN'],
+  qualifyMsg: esCalc['mini.eligibility.qualifyMsg'],
+  notEligible: esCalc['mini.eligibility.notEligible'],
+  mustBeCitizen: esCalc['mini.eligibility.mustBeCitizen'],
+  ssnRequired: esCalc['mini.eligibility.ssnRequired'],
+};
+
+const miniEmployerT = {
+  title: esCalc['mini.employer.title'],
+  trumpAccount: esCalc['mini.employer.trumpAccount'],
+  employerMatch: esCalc['mini.employer.employerMatch'],
+  yourContrib: esCalc['mini.employer.yourContrib'],
+  employerContrib: esCalc['mini.employer.employerContrib'],
+  totalBenefit: esCalc['mini.employer.totalBenefit'],
+  learnMore: esCalc['mini.employer.learnMore'],
+  calcHref: '/es/calculadoras/contribucion-del-empleador',
+};
+
+const countdownT = {
+  timeLeft: esCalc['countdown.timeLeft'],
+  babiesMsg: esCalc['countdown.babiesMsg'],
+  days: esCalc['countdown.days'],
+  hours: esCalc['countdown.hours'],
+  minutes: esCalc['countdown.minutes'],
+  seconds: esCalc['countdown.seconds'],
+  checkEligibility: esCalc['countdown.checkEligibility'],
+  sendToParent: esCalc['countdown.sendToParent'],
+  expired: esCalc['countdown.expired'],
+  expiredDetail: esCalc['countdown.expiredDetail'],
+  shareText: esCalc['countdown.shareText'],
+  shareTitle: esCalc['countdown.shareTitle'],
+  copied: esCalc['countdown.copied'],
+  eligibilityHref: '/es/calculadoras/verificador-de-elegibilidad',
+};
+---
+
+<BaseLayout
+  title="TrumpAccounts.guide — Su Guía en Español de las Cuentas Trump y el Formulario 4547"
+  description="Calculadoras gratuitas, guía del Formulario IRS 4547, y explicación en español de las Cuentas Trump. Vea cómo crecen $1,000, verifique elegibilidad, y compare con planes 529."
+  schema={schemas}
+  alternateSlug="/"
+>
+  <!-- Hero Section -->
+  <section class="relative border-b border-surface-700">
+    <div class="mx-auto max-w-6xl px-4 py-16 md:py-24">
+      <div class="max-w-3xl">
+        <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-gold-400">
+          {t('hero.badge')}
+        </p>
+        <h1 class="text-4xl font-extrabold leading-tight text-white md:text-5xl">
+          {t('hero.title')}
+        </h1>
+        <p class="mt-4 text-lg leading-relaxed text-gray-400 md:text-xl" set:html={t('hero.description')} />
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/es/que-son-las-cuentas-trump" class="inline-flex items-center rounded-lg bg-gold-500 px-5 py-3 font-semibold text-surface-900 no-underline transition-colors hover:bg-gold-400">
+            {t('hero.ctaWhatAre')}
+          </a>
+          <a href="/es/calculadoras/verificador-de-elegibilidad" class="inline-flex items-center rounded-lg border border-surface-600 bg-surface-800 px-5 py-3 font-semibold text-white no-underline transition-colors hover:border-gold-400/40 hover:bg-surface-700">
+            {t('hero.ctaEligibility')}
+          </a>
+          <a href="/es/calculadoras/calculadora-de-crecimiento" class="inline-flex items-center rounded-lg border border-surface-600 bg-surface-800 px-5 py-3 font-semibold text-white no-underline transition-colors hover:border-gold-400/40 hover:bg-surface-700">
+            {t('hero.ctaGrowth')}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Countdown Timer -->
+  <section class="border-b border-surface-700">
+    <div class="mx-auto max-w-2xl px-4 py-8">
+      <CountdownTimer client:visible translations={countdownT} />
+    </div>
+  </section>
+
+  <!-- Key Facts Bar -->
+  <section class="border-b border-surface-700 bg-surface-800">
+    <div class="mx-auto grid max-w-6xl grid-cols-2 gap-4 px-4 py-8 md:grid-cols-4">
+      <div class="text-center">
+        <p class="text-2xl font-extrabold text-gold-400">{t('facts.deposit')}</p>
+        <p class="mt-1 text-sm text-gray-400">{t('facts.depositLabel')}</p>
+      </div>
+      <div class="text-center">
+        <p class="text-2xl font-extrabold text-mint-400">{t('facts.annual')}</p>
+        <p class="mt-1 text-sm text-gray-400">{t('facts.annualLabel')}</p>
+      </div>
+      <div class="text-center">
+        <p class="text-2xl font-extrabold text-gold-400">{t('facts.employer')}</p>
+        <p class="mt-1 text-sm text-gray-400">{t('facts.employerLabel')}</p>
+      </div>
+      <div class="text-center">
+        <p class="text-2xl font-extrabold text-mint-400">{t('facts.goLive')}</p>
+        <p class="mt-1 text-sm text-gray-400">{t('facts.goLiveLabel')}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who Qualifies -->
+  <section class="border-b border-surface-700">
+    <div class="mx-auto max-w-4xl px-4 py-16">
+      <h2 class="text-center text-2xl font-bold text-white md:text-3xl">{t('qualify.title')}</h2>
+      <p class="mx-auto mt-3 max-w-2xl text-center text-gray-400" set:html={t('qualify.subtitle')} />
+
+      <div class="mt-8 grid gap-4 sm:grid-cols-3">
+        <div class="rounded-xl border border-surface-600 bg-surface-800 p-6 text-center">
+          <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-gold-400/15 text-gold-400">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-white">{t('qualify.citizen')}</h3>
+          <p class="mt-1 text-sm text-gray-400">{t('qualify.citizenDesc')}</p>
+        </div>
+        <div class="rounded-xl border border-surface-600 bg-surface-800 p-6 text-center">
+          <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-gold-400/15 text-gold-400">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-white">{t('qualify.ssn')}</h3>
+          <p class="mt-1 text-sm text-gray-400">{t('qualify.ssnDesc')}</p>
+        </div>
+        <div class="rounded-xl border border-surface-600 bg-surface-800 p-6 text-center">
+          <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-gold-400/15 text-gold-400">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-white">{t('qualify.under18')}</h3>
+          <p class="mt-1 text-sm text-gray-400">{t('qualify.under18Desc')}</p>
+        </div>
+      </div>
+
+      <div class="mt-6 rounded-xl border border-mint-400/30 bg-mint-400/10 p-5">
+        <p class="text-center text-sm leading-relaxed text-mint-200" set:html={t('qualify.pilotInfo')} />
+      </div>
+
+      <div class="mt-6 text-center">
+        <a href="/es/calculadoras/verificador-de-elegibilidad" class="inline-flex items-center rounded-lg bg-gold-500 px-5 py-3 font-semibold text-surface-900 no-underline transition-colors hover:bg-gold-400">
+          {t('qualify.checkCta')} &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mini Calculators Section -->
+  <section class="border-b border-surface-700">
+    <div class="mx-auto max-w-6xl px-4 py-16">
+      <h2 class="text-center text-2xl font-bold text-white md:text-3xl">{t('calcs.title')}</h2>
+      <p class="mx-auto mt-3 max-w-2xl text-center text-gray-400">
+        {t('calcs.subtitle')}
+      </p>
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        <div class="rounded-xl border border-surface-600 bg-surface-800 p-6">
+          <h3 class="mb-4 font-bold text-gold-400">{t('calcs.growthTitle')}</h3>
+          <MiniGrowthCalc client:visible translations={miniGrowthT} />
+          <a href="/es/calculadoras/calculadora-de-crecimiento" class="mt-4 inline-block text-sm font-medium text-gold-400 no-underline hover:text-gold-300">
+            {t('calcs.fullCalculator')} &rarr;
+          </a>
+        </div>
+        <div class="rounded-xl border border-surface-600 bg-surface-800 p-6">
+          <h3 class="mb-4 font-bold text-mint-400">{t('calcs.eligibilityTitle')}</h3>
+          <MiniEligibilityChecker client:visible translations={miniEligibilityT} />
+          <a href="/es/calculadoras/verificador-de-elegibilidad" class="mt-4 inline-block text-sm font-medium text-gold-400 no-underline hover:text-gold-300">
+            {t('calcs.fullChecker')} &rarr;
+          </a>
+        </div>
+        <div class="rounded-xl border border-surface-600 bg-surface-800 p-6">
+          <h3 class="mb-4 font-bold text-purple-400">{t('calcs.employerTitle')}</h3>
+          <MiniEmployerMatch client:visible translations={miniEmployerT} />
+          <a href="/es/calculadoras/contribucion-del-empleador" class="mt-4 inline-block text-sm font-medium text-gold-400 no-underline hover:text-gold-300">
+            {t('calcs.fullCalculator')} &rarr;
+          </a>
+        </div>
+      </div>
+      <div class="mt-6 text-center">
+        <a href="/es/calculadoras" class="text-sm text-gold-400 no-underline hover:text-gold-300">{t('calcs.viewAll')} &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Hubs Section -->
+  <section class="border-b border-surface-700">
+    <div class="mx-auto max-w-6xl px-4 py-16">
+      <h2 class="text-center text-2xl font-bold text-white md:text-3xl">{t('hubs.title')}</h2>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <a href="/es/que-son-las-cuentas-trump" class="group rounded-xl border border-surface-600 bg-surface-800 p-6 no-underline transition-all hover:border-gold-400/40">
+          <h3 class="font-bold text-white group-hover:text-gold-400">{t('hubs.whatAre')}</h3>
+          <p class="mt-2 text-sm text-gray-400">{t('hubs.whatAreDesc')}</p>
+        </a>
+        <a href="/es/como-abrir-cuenta-trump" class="group rounded-xl border border-surface-600 bg-surface-800 p-6 no-underline transition-all hover:border-gold-400/40">
+          <h3 class="font-bold text-white group-hover:text-gold-400">{t('hubs.howToOpen')}</h3>
+          <p class="mt-2 text-sm text-gray-400">{t('hubs.howToOpenDesc')}</p>
+        </a>
+        <a href="/es/irs-notice-2025-68" class="group rounded-xl border border-surface-600 bg-surface-800 p-6 no-underline transition-all hover:border-gold-400/40">
+          <h3 class="font-bold text-white group-hover:text-gold-400">{t('hubs.irsNotice')}</h3>
+          <p class="mt-2 text-sm text-gray-400">{t('hubs.irsNoticeDesc')}</p>
+        </a>
+        <a href="/es/compare" class="group rounded-xl border border-surface-600 bg-surface-800 p-6 no-underline transition-all hover:border-gold-400/40">
+          <h3 class="font-bold text-white group-hover:text-gold-400">{t('hubs.compare')}</h3>
+          <p class="mt-2 text-sm text-gray-400">{t('hubs.compareDesc')}</p>
+        </a>
+        <a href="/es/for-employers" class="group rounded-xl border border-surface-600 bg-surface-800 p-6 no-underline transition-all hover:border-gold-400/40">
+          <h3 class="font-bold text-white group-hover:text-gold-400">{t('hubs.employers')}</h3>
+          <p class="mt-2 text-sm text-gray-400">{t('hubs.employersDesc')}</p>
+        </a>
+        <a href="/es/preguntas-frecuentes" class="group rounded-xl border border-surface-600 bg-surface-800 p-6 no-underline transition-all hover:border-gold-400/40">
+          <h3 class="font-bold text-white group-hover:text-gold-400">{t('hubs.faq')}</h3>
+          <p class="mt-2 text-sm text-gray-400">{t('hubs.faqDesc')}</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Translation Layer Section -->
+  <section class="border-b border-surface-700 bg-surface-800">
+    <div class="mx-auto max-w-4xl px-4 py-16">
+      <h2 class="text-center text-2xl font-bold text-white md:text-3xl">{t('translation.title')}</h2>
+      <p class="mx-auto mt-3 max-w-2xl text-center text-gray-400">
+        {t('translation.subtitle')}
+      </p>
+      <div class="mt-8 space-y-6">
+        <CalloutBox type="irs-quote" title="What the IRS says (Notice 2025-68, Section 3.02)">
+          <p>"An initial Trump account is a trust created or organized in the United States for the exclusive benefit of an eligible child as designated beneficiary..."</p>
+        </CalloutBox>
+        <div class="rounded-lg border border-mint-400/30 bg-mint-400/10 p-4">
+          <p class="mb-1 font-semibold text-mint-300">{t('translation.plainEnglish')}</p>
+          <p class="text-sm leading-relaxed text-mint-200">
+            {t('translation.plainEnglishText')}
+          </p>
+        </div>
+        <div class="text-center">
+          <a href="/es/irs-notice-2025-68" class="inline-flex items-center rounded-lg border border-surface-600 bg-surface-700 px-5 py-3 font-semibold text-white no-underline transition-colors hover:bg-surface-600">
+            {t('translation.readFull')} &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Preview -->
+  <section>
+    <div class="mx-auto max-w-4xl px-4 py-16">
+      <h2 class="text-center text-2xl font-bold text-white md:text-3xl">{t('faq.title')}</h2>
+      <div class="mt-8 space-y-4">
+        <details class="group rounded-lg border border-surface-600 bg-surface-800">
+          <summary class="cursor-pointer px-6 py-4 font-semibold text-white">{t('faq.q1')}</summary>
+          <div class="border-t border-surface-700 px-6 py-4 text-sm text-gray-300">
+            {t('faq.a1')}
+            <a href="/es/que-son-las-cuentas-trump" class="mt-2 block font-medium text-gold-400 no-underline">{t('faq.a1cta')} &rarr;</a>
+          </div>
+        </details>
+        <details class="group rounded-lg border border-surface-600 bg-surface-800">
+          <summary class="cursor-pointer px-6 py-4 font-semibold text-white">{t('faq.q2')}</summary>
+          <div class="border-t border-surface-700 px-6 py-4 text-sm text-gray-300">
+            {t('faq.a2')}
+            <a href="/es/como-abrir-cuenta-trump" class="mt-2 block font-medium text-gold-400 no-underline">{t('faq.a2cta')} &rarr;</a>
+          </div>
+        </details>
+        <details class="group rounded-lg border border-surface-600 bg-surface-800">
+          <summary class="cursor-pointer px-6 py-4 font-semibold text-white">{t('faq.q3')}</summary>
+          <div class="border-t border-surface-700 px-6 py-4 text-sm text-gray-300">
+            {t('faq.a3')}
+            <a href="/es/calculadoras/verificador-de-elegibilidad" class="mt-2 block font-medium text-gold-400 no-underline">{t('faq.a3cta')} &rarr;</a>
+          </div>
+        </details>
+        <details class="group rounded-lg border border-surface-600 bg-surface-800">
+          <summary class="cursor-pointer px-6 py-4 font-semibold text-white">{t('faq.q4')}</summary>
+          <div class="border-t border-surface-700 px-6 py-4 text-sm text-gray-300">
+            {t('faq.a4')}
+            <a href="/es/compare" class="mt-2 block font-medium text-gold-400 no-underline">{t('faq.a4cta')} &rarr;</a>
+          </div>
+        </details>
+      </div>
+      <div class="mt-6 text-center">
+        <a href="/es/preguntas-frecuentes" class="text-gold-400 no-underline hover:text-gold-300">{t('faq.seeAll')} &rarr;</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,190 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('grandparent-gift-guide')!;
+const related = getRelatedArticles('grandparent-gift-guide');
+
+const faqs = [
+  {
+    question: 'Can grandparents contribute directly to a Trump Account?',
+    answer: `Yes. Anyone can contribute to a child's Trump Account — parents, grandparents, aunts, uncles, and friends. All contributions count toward the same $${limits.annualContributionLimit.toLocaleString()}/year cap regardless of who makes them.`,
+  },
+  {
+    question: 'Is a Trump Account contribution subject to gift tax?',
+    answer: 'Contributions to a Trump Account are considered gifts. However, the annual gift tax exclusion is $18,000 per person per recipient (2025). Since the maximum Trump Account contribution is $5,000/year, you will stay well under the gift tax threshold.',
+  },
+  {
+    question: 'Can a grandparent open a Trump Account for a grandchild?',
+    answer: 'The authorized individual (who files Form 4547) is typically the parent or legal guardian. Grandparents can contribute to an existing account but may not be able to open one unless they are the legal guardian. Check with the IRS or a tax advisor for your specific situation.',
+  },
+  {
+    question: 'What if multiple grandparents want to contribute?',
+    answer: `All contributions from all sources count toward the $${limits.annualContributionLimit.toLocaleString()} annual cap. If both sets of grandparents plus parents want to contribute, they need to coordinate to avoid exceeding the limit. Excess contributions may be subject to penalties.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><strong class="text-white">Anyone can contribute</strong> to a Trump Account &mdash; grandparents, relatives, friends.</li>
+        <li><strong class="text-white">All contributions share the ${limits.annualContributionLimit.toLocaleString()}/year cap.</strong> Coordinate with parents to avoid over-contributing.</li>
+        <li><strong class="text-white">No gift tax issues.</strong> The $5,000 max is well below the $18,000 annual gift tax exclusion.</li>
+        <li><strong class="text-white">$125/month from a grandparent</strong> ($1,500/year) could add $43,000+ to the account by age 18.</li>
+      </ul>
+    </div>
+
+    <p>
+      Your grandchild does not need another stuffed animal. They do not need more plastic toys that end up in a bin by February. What they need is a financial head start that lasts a lifetime. Here is how to give them one.
+    </p>
+
+    <h2>How Grandparents Can Contribute</h2>
+
+    <p>
+      Anyone can contribute to a child's Trump Account. You do not need to be the parent or legal guardian. You just need to know the account details and make a contribution. The money goes directly into the child's account and is invested in their chosen S&P 500 index fund.
+    </p>
+
+    <p>
+      All contributions from all sources share the same <strong>${limits.annualContributionLimit.toLocaleString()}/year cap</strong>. This means grandparents, parents, aunts, uncles, and friends all contribute to the same pool. Coordination is important.
+    </p>
+
+    <CalloutBox type="info" title="Coordinate with the parents">
+      Before contributing, ask the parents how much they plan to contribute this year. The combined total from all sources cannot exceed ${limits.annualContributionLimit.toLocaleString()}. Excess contributions may face penalties.
+    </CalloutBox>
+
+    <h2>The Gift-Occasion Framework</h2>
+
+    <p>
+      Instead of buying gifts that get forgotten, consider a consistent contribution schedule tied to occasions your family already celebrates:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Occasion</th>
+            <th class="pb-2 pr-4">Suggested Amount</th>
+            <th class="pb-2">Annual Total</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">Birthday</td>
+            <td class="py-2 pr-4">$500</td>
+            <td class="py-2" rowspan="4" class="py-2 font-bold text-gold-400 align-middle">$1,500/year</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">Christmas / Holidays</td>
+            <td class="py-2 pr-4">$500</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">Easter / Spring</td>
+            <td class="py-2 pr-4">$250</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">Back to School</td>
+            <td class="py-2 pr-4">$250</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      At $1,500/year with 8% average returns over 18 years, grandparent contributions alone could grow to <strong>over $43,000</strong>. That is a real gift.
+    </p>
+
+    <h2>What Your Contributions Could Grow To</h2>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Annual Gift</th>
+            <th class="pb-2 pr-4">Monthly Equivalent</th>
+            <th class="pb-2 pr-4">Total Contributed</th>
+            <th class="pb-2">Value at 18 (8% return)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">$500/year</td>
+            <td class="py-2 pr-4">~$42/mo</td>
+            <td class="py-2 pr-4">$9,000</td>
+            <td class="py-2 text-mint-400">~$19,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">$1,000/year</td>
+            <td class="py-2 pr-4">~$83/mo</td>
+            <td class="py-2 pr-4">$18,000</td>
+            <td class="py-2 text-mint-400">~$36,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">$1,500/year</td>
+            <td class="py-2 pr-4">$125/mo</td>
+            <td class="py-2 pr-4">$27,000</td>
+            <td class="py-2 text-mint-400">~$52,000</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4">$2,500/year</td>
+            <td class="py-2 pr-4">~$208/mo</td>
+            <td class="py-2 pr-4">$45,000</td>
+            <td class="py-2 text-mint-400">~$83,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <CalloutBox type="tip" title="The multiplier effect">
+      $27,000 contributed over 18 years grows to $52,000. That is nearly double your money. The longer the money is invested, the more the compound interest multiplier works in your grandchild's favor.
+    </CalloutBox>
+
+    <h2>Gift Tax: Not a Concern</h2>
+
+    <p>
+      The annual gift tax exclusion for 2025 is <strong>$18,000 per person per recipient</strong>. Since the maximum Trump Account contribution is ${limits.annualContributionLimit.toLocaleString()}/year (shared among all contributors), your contribution will be well under the gift tax threshold.
+    </p>
+
+    <p>
+      For most grandparents, no gift tax return is required. If you have concerns about your specific situation, consult a tax professional.
+    </p>
+
+    <h2>How to Actually Make the Contribution</h2>
+
+    <ol>
+      <li><strong>Confirm the account exists.</strong> The parent or guardian must have already filed {limits.form} and opened the Trump Account.</li>
+      <li><strong>Ask for account details.</strong> You will need the account number and the financial institution where the account is held.</li>
+      <li><strong>Coordinate the amount.</strong> Confirm how much the parents are contributing this year so you stay under the ${limits.annualContributionLimit.toLocaleString()} cap.</li>
+      <li><strong>Make the contribution.</strong> Transfer funds to the account through the financial institution. Some may allow direct deposits or bank transfers.</li>
+      <li><strong>Keep records.</strong> Save receipts for your records and inform the parents of the amount contributed.</li>
+    </ol>
+
+    <h2>A Gift That Keeps Growing</h2>
+
+    <p>
+      A $500 birthday check gets spent in a week. A $500 contribution to a Trump Account grows for 18 years. At 8% returns, that single $500 contribution becomes roughly <strong>$2,000</strong> by the time your grandchild turns 18. That is four times the original gift.
+    </p>
+
+    <p>
+      Use our <a href="/calculators/growth-calculator">Growth Calculator</a> to see exactly how your contributions could grow over time.
+    </p>
+
+    <h2>The Bottom Line</h2>
+
+    <p>
+      The best gift you can give your grandchild is not something they will outgrow. It is a financial foundation that grows with them. Contributing to their Trump Account is simple, tax-efficient, and could make a meaningful difference in their life at 18 and beyond.
+    </p>
+  </div>
+</BlogLayout>

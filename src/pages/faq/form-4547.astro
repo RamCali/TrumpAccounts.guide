@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Accordion from '../../components/ui/Accordion.astro';
+import LastUpdated from '../../components/ui/LastUpdated.astro';
+import { breadcrumbSchema, faqSchema } from '../../lib/seo/schema';
+
+const siteUrl = 'https://trumpaccounts.guide';
+
+const questions = [
+  { q: 'What is IRS Form 4547?', a: 'IRS Form 4547 (Trump Account Election(s)) is the official form used to open a Trump Account for your child and, if eligible, request the $1,000 federal pilot deposit. It is filed with your federal tax return or submitted separately to the IRS.' },
+  { q: 'Where can I get Form 4547?', a: 'You can download Form 4547 from <a href="https://www.irs.gov" target="_blank" rel="noopener noreferrer">IRS.gov</a> or the <a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer">trumpaccounts.gov</a> portal. Your tax software may also include it when you prepare your 2025 return.' },
+  { q: 'How do I file Form 4547?', a: 'Three options: (1) Attach it to your 2025 federal tax return (due April 15, 2026). (2) Submit it through the <a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer">trumpaccounts.gov</a> portal, launching mid-2026. (3) Print and mail it directly to the IRS at the address listed on the form.' },
+  { q: 'What information do I need to complete the form?', a: 'You will need: your child\'s full legal name, date of birth, and Social Security Number (SSN); your name and taxpayer ID (SSN or ITIN); your contact information; and your preferred eligible index fund. The filer becomes the "responsible party" who manages the account until the child turns 18.' },
+  { q: 'Can I file Form 4547 for more than one child?', a: 'Yes. You can include up to two children per form. If you have more than two eligible children, file additional copies of Form 4547.' },
+  { q: 'Do I have to file it with my tax return?', a: 'No. While attaching Form 4547 to your 2025 tax return is the fastest option, you can also submit it separately by mail or through the trumpaccounts.gov online portal once it launches in mid-2026.' },
+  { q: 'Does my tax software support Form 4547?', a: 'Some tax software providers may not support electronic filing of Form 4547 initially. Check with your tax software provider. If e-filing is not available, you can paper-file the form with your return or mail it separately.' },
+  { q: 'Who can file Form 4547?', a: 'An "authorized individual" must file the form. The priority order is: (1) parent, (2) legal guardian, (3) adult sibling, (4) grandparent. The filer becomes the responsible party who manages the account during the growth phase.' },
+  { q: 'Can a grandparent file Form 4547?', a: 'Only if no parent or legal guardian is available or willing to file. The IRS follows a priority order: parent first, then legal guardian, then adult sibling, then grandparent. However, grandparents can contribute to an account opened by a parent.' },
+  { q: 'What happens after I submit Form 4547?', a: 'The IRS processes the election and works with the Treasury Department to create the account. A partner financial institution will contact you for account setup details. If your child qualifies for the $1,000 pilot deposit, it will be deposited into the account. Contributions can begin as of July 4, 2026.' },
+  { q: 'Can I file Form 4547 if I use an ITIN instead of an SSN?', a: 'The child must have a valid SSN. However, the authorized individual (parent/guardian) filing the form can use an ITIN. This allows U.S. citizen children in mixed-status families to receive a Trump Account.' },
+  { q: 'What is the deadline to file Form 4547?', a: 'There is no strict deadline to open a Trump Account. However, filing with your 2025 tax return (due April 15, 2026) is the earliest option. The sooner you file, the sooner the account starts growing. Children must be under 18 at the end of the election year.' },
+  { q: 'Can I change the responsible party later?', a: 'The IRS guidance allows for changes to the responsible party in certain circumstances, such as death, incapacity, or change in legal guardianship. Contact the IRS or the account custodian for the process.' },
+  { q: 'What if I make a mistake on Form 4547?', a: 'Errors like an incorrect SSN can delay processing by weeks. Double-check all information before submitting. If you discover an error after filing, contact the IRS to request a correction.' },
+];
+
+const schemas = [
+  breadcrumbSchema([
+    { name: 'Home', url: siteUrl },
+    { name: 'FAQ', url: `${siteUrl}/faq` },
+    { name: 'Form 4547', url: `${siteUrl}/faq/form-4547` },
+  ]),
+  faqSchema(questions.map(q => ({ question: q.q, answer: q.a }))),
+];
+---
+
+<BaseLayout
+  title="IRS Form 4547 FAQ — How to File for a Trump Account (2026)"
+  description="Everything about IRS Form 4547: how to file, what information you need, deadlines, who can file, what happens after submission, and common questions answered."
+  schema={schemas}
+>
+  <article class="mx-auto max-w-4xl px-4 py-12">
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="no-underline hover:text-gold-400">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <a href="/faq" class="no-underline hover:text-gold-400">FAQ</a>
+        </li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="font-medium text-white">Form 4547</span>
+        </li>
+      </ol>
+    </nav>
+
+    <h1 class="mb-2 text-3xl font-extrabold text-white md:text-4xl">IRS Form 4547: Everything You Need to Know</h1>
+    <p class="mb-8 text-lg text-gray-400">How to file, what to include, who can file, and what happens next.</p>
+
+    <LastUpdated date="2026-02-13" />
+
+    <div class="mt-8">
+      <Accordion items={questions.map(q => ({ question: q.q, answer: q.a }))} />
+    </div>
+
+    <div class="mt-10 grid gap-3 sm:grid-cols-2">
+      <a href="/blog/how-to-open-step-by-step" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Step-by-Step Opening Guide</h3>
+        <p class="text-sm text-gray-400">Full walkthrough from SSN to first contribution</p>
+      </a>
+      <a href="/faq/eligibility" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Eligibility FAQ</h3>
+        <p class="text-sm text-gray-400">Who qualifies, age cutoffs, and special cases</p>
+      </a>
+    </div>
+
+    <p class="mt-10 text-xs text-gray-600">
+      Educational content only, not tax or financial advice.
+      Source: <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf" target="_blank" rel="noopener noreferrer" class="text-gray-500">IRS Notice 2025-68</a>.
+    </p>
+  </article>
+</BaseLayout>

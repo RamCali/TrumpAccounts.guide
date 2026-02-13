@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Accordion from '../../components/ui/Accordion.astro';
+import LastUpdated from '../../components/ui/LastUpdated.astro';
+import { breadcrumbSchema, faqSchema } from '../../lib/seo/schema';
+
+const siteUrl = 'https://trumpaccounts.guide';
+
+const questions = [
+  { q: 'How does a Trump Account compare to a 529 plan?', a: 'Key differences: (1) A 529 is for education expenses; a Trump Account has no use restrictions after age 18. (2) 529 withdrawals for qualified education are tax-free; Trump Account withdrawals are taxed as ordinary income. (3) Trump Accounts require S&P 500 index fund investments; 529s offer more fund choices. (4) Trump Accounts get a $1,000 federal deposit (2025-2028 births); 529s have no government deposit. (5) Trump Accounts have employer match options; 529s generally do not.' },
+  { q: 'How does a Trump Account compare to a Roth IRA?', a: 'Main differences: (1) Roth IRA contributions are after-tax with tax-free growth and withdrawals; Trump Account growth is tax-deferred with taxable withdrawals (traditional IRA treatment). (2) Roth IRAs have income limits; Trump Accounts do not. (3) Roth IRA annual limit is $7,000 (2026); Trump Account limit is $5,000. (4) Roth IRAs require earned income; Trump Accounts do not. (5) Roth IRAs are available at any age; Trump Accounts are for children under 18.' },
+  { q: 'How does a Trump Account compare to a traditional IRA?', a: 'A Trump Account IS a special type of traditional IRA for children under 18. During the growth phase (birth to 18), it has unique rules: S&P 500 investment requirement, no withdrawals, and the $1,000 pilot deposit. At age 18, it converts to a standard traditional IRA with all normal IRA rules.' },
+  { q: 'How does a Trump Account compare to a custodial account (UTMA/UGMA)?', a: 'Key differences: (1) Custodial accounts transfer at 18-21 depending on state; Trump Accounts convert to an IRA at 18. (2) Custodial accounts have no investment restrictions; Trump Accounts require U.S. equity index funds. (3) Custodial account gains are taxed annually (kiddie tax); Trump Account gains are tax-deferred. (4) Trump Accounts get the $1,000 deposit; custodial accounts do not. (5) Custodial accounts count more heavily against financial aid.' },
+  { q: 'How does a Trump Account compare to a Coverdell ESA?', a: 'Key differences: (1) Coverdell ESAs have a $2,000/year limit; Trump Accounts allow $5,000/year. (2) Coverdell is for education only; Trump Accounts have no use restrictions after 18. (3) Coverdell has income phaseouts; Trump Accounts have no income limits. (4) Coverdell funds must be used by age 30; Trump Account funds have no use deadline. (5) Trump Accounts get the $1,000 pilot deposit.' },
+  { q: 'Should I open a Trump Account instead of a 529?', a: 'Consider opening both. A 529 is better for education savings (tax-free qualified withdrawals). A Trump Account is better for general wealth building (no use restrictions, employer match, free $1,000). If you can only choose one and are unsure about college, the Trump Account offers more flexibility.' },
+  { q: 'Can my child have both a Trump Account and a Roth IRA?', a: 'Yes, but a Roth IRA requires earned income. If your teenager has a job, they can contribute to both. The Trump Account grows during the growth phase (under 18), and the Roth IRA grows tax-free. Together, they create a powerful wealth-building combination.' },
+  { q: 'Which account is best for college savings?', a: 'For college specifically, a 529 plan is generally more tax-efficient because qualified education withdrawals are completely tax-free. Trump Account withdrawals for college are taxed as ordinary income. However, if your child might not attend college, the Trump Account offers more flexibility.' },
+  { q: 'Which account is best for long-term wealth?', a: 'For maximum long-term wealth, consider a Trump Account (for the free $1,000 and employer match) plus a Roth IRA once the child has earned income. The Trump Account converts to a traditional IRA at 18, which can then be converted to a Roth IRA while the child is in a low tax bracket.' },
+  { q: 'Do employer contributions work differently than a 401(k) match?', a: 'Yes. With a 401(k), the employer matches your own contributions. With a Trump Account, employer contributions under IRC §128 are an independent benefit — the employee does not need to contribute their own money first. The employer can contribute up to $2,500/year per employee, tax-free.' },
+  { q: 'How does a Trump Account compare to baby bonds proposals?', a: 'Key differences: (1) Trump Accounts invest in the stock market (S&P 500); baby bond proposals typically invest in Treasury bonds. (2) Trump Accounts allow family contributions up to $5,000/year; most baby bond proposals have no private contributions. (3) Trump Accounts include employer match; baby bonds do not. (4) Trump Account investment returns are market-dependent; baby bond returns would be fixed-rate.' },
+];
+
+const schemas = [
+  breadcrumbSchema([
+    { name: 'Home', url: siteUrl },
+    { name: 'FAQ', url: `${siteUrl}/faq` },
+    { name: 'Comparisons', url: `${siteUrl}/faq/comparisons` },
+  ]),
+  faqSchema(questions.map(q => ({ question: q.q, answer: q.a }))),
+];
+---
+
+<BaseLayout
+  title="Trump Account vs 529, Roth IRA, UTMA — Comparison FAQ (2026)"
+  description="How Trump Accounts compare to 529 plans, Roth IRAs, traditional IRAs, custodial accounts, Coverdell ESAs, and baby bonds. Side-by-side answers."
+  schema={schemas}
+>
+  <article class="mx-auto max-w-4xl px-4 py-12">
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="no-underline hover:text-gold-400">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <a href="/faq" class="no-underline hover:text-gold-400">FAQ</a>
+        </li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="font-medium text-white">Comparisons</span>
+        </li>
+      </ol>
+    </nav>
+
+    <h1 class="mb-2 text-3xl font-extrabold text-white md:text-4xl">Trump Account vs Other Accounts</h1>
+    <p class="mb-8 text-lg text-gray-400">Side-by-side comparisons with 529 plans, Roth IRAs, custodial accounts, and more.</p>
+
+    <LastUpdated date="2026-02-13" />
+
+    <div class="mt-8">
+      <Accordion items={questions.map(q => ({ question: q.q, answer: q.a }))} />
+    </div>
+
+    <div class="mt-10 grid gap-3 sm:grid-cols-2">
+      <a href="/blog/best-accounts-for-kids-today" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Best Accounts for Kids (2026)</h3>
+        <p class="text-sm text-gray-400">Full comparison guide with recommendations</p>
+      </a>
+      <a href="/calculators/growth-calculator" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Growth Calculator</h3>
+        <p class="text-sm text-gray-400">See how a Trump Account could grow over 18 years</p>
+      </a>
+    </div>
+
+    <p class="mt-10 text-xs text-gray-600">
+      Educational content only, not tax or financial advice.
+      Source: <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf" target="_blank" rel="noopener noreferrer" class="text-gray-500">IRS Notice 2025-68</a>.
+    </p>
+  </article>
+</BaseLayout>

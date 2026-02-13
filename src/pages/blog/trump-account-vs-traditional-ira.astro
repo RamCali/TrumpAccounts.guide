@@ -1,0 +1,232 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-vs-traditional-ira')!;
+const related = getRelatedArticles('trump-account-vs-traditional-ira');
+
+const faqs = [
+  {
+    question: 'Is a Trump Account the same as a traditional IRA?',
+    answer: 'Not exactly. A Trump Account is a special type of IRA under IRC Section 530A with unique rules during the growth phase (birth to 18): no withdrawals, S&P 500 investment requirement, employer match, and the $1,000 pilot deposit. At age 18, it converts to a standard traditional IRA.',
+  },
+  {
+    question: 'Can my child contribute to both a Trump Account and a traditional IRA?',
+    answer: 'During the growth phase (under 18), the child has only the Trump Account. At 18, when it converts to a traditional IRA, they can also open additional IRAs if they have earned income, subject to normal IRA contribution limits.',
+  },
+  {
+    question: 'Does a Trump Account count toward IRA contribution limits?',
+    answer: 'During the growth phase, the $5,000 Trump Account limit is separate from traditional IRA limits. After conversion at 18, normal IRA rules and limits apply going forward.',
+  },
+  {
+    question: 'Can I roll over an existing IRA into a Trump Account?',
+    answer: 'No. You cannot roll existing IRA funds into a Trump Account. The Trump Account is only funded through the pilot deposit, family contributions, and employer contributions.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+  sources={[
+    { name: 'IRS Notice 2025-68', url: 'https://www.irs.gov/pub/irs-drop/n-25-68.pdf' },
+    { name: 'IRC Section 530A', url: 'https://www.congress.gov' },
+  ]}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>A Trump Account <strong class="text-white">is a special IRA</strong> for children under 18 — not a completely different account type.</li>
+        <li>During the growth phase (birth to 18), Trump Accounts have <strong class="text-white">stricter rules</strong>: no withdrawals, limited investments.</li>
+        <li>At age 18, it <strong class="text-white">automatically converts</strong> to a standard traditional IRA with all normal IRA rules.</li>
+        <li>Trump Accounts offer benefits traditional IRAs do not: <strong class="text-white">$1,000 deposit, employer match, no earned income needed</strong>.</li>
+        <li>Traditional IRAs are more flexible: <strong class="text-white">broader investments, anytime withdrawals (with penalties)</strong>.</li>
+      </ul>
+    </div>
+
+    <p>
+      People often ask: "Is a Trump Account just a traditional IRA for kids?" Close — but not quite. A Trump Account is built on the traditional IRA framework with some important differences during the growth phase. Here is a detailed breakdown.
+    </p>
+
+    <h2>Side-by-Side Comparison</h2>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Feature</th>
+            <th class="pb-2 pr-4">Trump Account (Under 18)</th>
+            <th class="pb-2">Traditional IRA</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-medium text-white">Legal basis</td>
+            <td class="py-2 pr-4">IRC §530A</td>
+            <td class="py-2">IRC §408</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-medium text-white">Eligibility</td>
+            <td class="py-2 pr-4">U.S. citizen, under 18, with SSN</td>
+            <td class="py-2">Anyone with earned income (any age)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-medium text-white">Earned income required</td>
+            <td class="py-2 pr-4">No</td>
+            <td class="py-2">Yes</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-medium text-white">Annual contribution limit</td>
+            <td class="py-2 pr-4">$5,000 (indexed after 2027)</td>
+            <td class="py-2">$7,000 ($8,000 if 50+) for 2026</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-medium text-white">Government deposit</td>
+            <td class="py-2 pr-4">$1,000 (2025-2028 births)</td>
+            <td class="py-2">None</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-medium text-white">Employer contributions</td>
+            <td class="py-2 pr-4">Up to $2,500/year (tax-free)</td>
+            <td class="py-2">Not available</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-medium text-white">Investment options</td>
+            <td class="py-2 pr-4">S&P 500 or broad U.S. equity index only</td>
+            <td class="py-2">Stocks, bonds, mutual funds, ETFs, CDs, etc.</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-medium text-white">Withdrawals before 59.5</td>
+            <td class="py-2 pr-4">Not allowed (before 18); penalties after 18</td>
+            <td class="py-2">Allowed with 10% penalty + income tax</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-medium text-white">Tax on contributions</td>
+            <td class="py-2 pr-4">After-tax (no deduction)</td>
+            <td class="py-2">May be deductible (income-dependent)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-medium text-white">Tax on growth</td>
+            <td class="py-2 pr-4">Tax-deferred</td>
+            <td class="py-2">Tax-deferred</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4 font-medium text-white">Tax on withdrawals</td>
+            <td class="py-2 pr-4">Ordinary income (after 18)</td>
+            <td class="py-2">Ordinary income</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>What Trump Accounts Do Better</h2>
+
+    <h3>No Earned Income Requirement</h3>
+
+    <p>
+      Traditional IRAs require earned income. A baby does not have a job. Trump Accounts solve this by allowing anyone — parents, grandparents, employers — to contribute without the child having earned income.
+    </p>
+
+    <h3>Free Government Deposit</h3>
+
+    <p>
+      Traditional IRAs receive no government funding. Trump Accounts for children born {limits.pilotDepositStartYear}-{limits.pilotDepositEndYear} receive a <strong>$1,000 pilot deposit</strong> — free money that grows for 18 years.
+    </p>
+
+    <h3>Employer Match</h3>
+
+    <p>
+      No employer can contribute to your traditional IRA. But under IRC §128, employers can put up to ${limits.employerContributionLimit.toLocaleString()}/year into an employee's child's Trump Account, completely tax-free to the employee.
+    </p>
+
+    <h3>Built-In Discipline</h3>
+
+    <p>
+      The no-withdrawal rule before 18 forces long-term investing. With a traditional IRA, the temptation to withdraw for short-term needs erodes retirement savings. Trump Accounts eliminate that temptation during the most important compounding years.
+    </p>
+
+    <CalloutBox type="info" title="The compounding advantage">
+      18 years of forced compounding in the S&P 500 is powerful. Every rolling 18-year period in S&P 500 history has produced positive returns. The lock-in protects against panic selling during market downturns.
+    </CalloutBox>
+
+    <h2>What Traditional IRAs Do Better</h2>
+
+    <h3>Investment Flexibility</h3>
+
+    <p>
+      Traditional IRAs can hold almost anything: individual stocks, bonds, REITs, international funds, sector funds, certificates of deposit. Trump Accounts are limited to S&P 500 or broad U.S. equity index funds.
+    </p>
+
+    <h3>Tax Deductibility</h3>
+
+    <p>
+      Traditional IRA contributions may be tax-deductible depending on your income and whether you have a workplace retirement plan. Trump Account contributions are always after-tax — no deduction.
+    </p>
+
+    <h3>Access to Funds</h3>
+
+    <p>
+      You can withdraw from a traditional IRA at any time (with taxes and potential penalties). Trump Account funds are completely locked until age 18 — no exceptions except rollovers, excess contributions, or death.
+    </p>
+
+    <h2>The Conversion at 18: Where They Merge</h2>
+
+    <p>
+      At age 18, the Trump Account <strong>becomes</strong> a traditional IRA. From that point on, there is no difference. Your child gets:
+    </p>
+
+    <ul>
+      <li>Full investment flexibility (any asset class)</li>
+      <li>Ability to withdraw (with penalties before 59.5)</li>
+      <li>Option to convert to a Roth IRA</li>
+      <li>Standard IRA contribution limits going forward</li>
+    </ul>
+
+    <p>
+      Think of a Trump Account as a traditional IRA with <strong>training wheels and a head start</strong>. The guardrails come off at 18, but by then your child has a substantial investment portfolio and years of compounded growth.
+    </p>
+
+    <h2>Who Should Use Which?</h2>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Situation</th>
+            <th class="pb-2">Recommendation</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">Child under 18</td>
+            <td class="py-2"><strong class="text-gold-400">Trump Account</strong> — the only IRA-type option that doesn't require earned income</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">Teenager with a job</td>
+            <td class="py-2"><strong class="text-gold-400">Both</strong> — Trump Account + Roth IRA (if they have earned income)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">Adult (18+)</td>
+            <td class="py-2"><strong class="text-gold-400">Traditional or Roth IRA</strong> — Trump Account converts automatically at 18</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4">Want investment control</td>
+            <td class="py-2"><strong class="text-gold-400">Traditional IRA</strong> (after 18) — broader fund selection</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      For children under 18, the Trump Account is the clear winner: free money, employer match, no earned income requirement, and forced long-term compounding. At 18, it becomes a traditional IRA anyway — so you get the best of both worlds.
+    </p>
+  </div>
+</BlogLayout>

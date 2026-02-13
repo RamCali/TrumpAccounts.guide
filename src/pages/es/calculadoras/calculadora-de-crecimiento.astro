@@ -1,0 +1,22 @@
+---
+import CalculatorLayout from '../../../layouts/CalculatorLayout.astro';
+import GrowthCalculator from '../../../components/calculators/GrowthCalculator';
+import esCalc from '../../../i18n/es/calculators.json';
+
+const translations: Record<string, string> = {};
+for (const [key, value] of Object.entries(esCalc)) {
+  if (key.startsWith('growth.')) {
+    translations[key.replace('growth.', '')] = value;
+  }
+}
+---
+
+<CalculatorLayout
+  title="Calculadora de Crecimiento de Cuentas Trump"
+  description="Vea cómo el depósito federal de $1,000 puede crecer en 18 años con interés compuesto. Ajuste contribuciones mensuales, rendimientos esperados y año de nacimiento."
+  calculatorName="Calculadora de Crecimiento"
+  slug="growth-calculator"
+  alternateSlug="/calculators/growth-calculator"
+>
+  <GrowthCalculator client:visible translations={translations} />
+</CalculatorLayout>

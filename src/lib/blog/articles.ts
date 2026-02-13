@@ -878,6 +878,71 @@ export const blogArticles: Record<string, BlogArticle> = {
     readingTime: '4 min read',
     relatedSlugs: ['what-are-trump-accounts-guide', 'trump-accounts-benefits', 'how-to-open-step-by-step', 'contribution-limits-explained'],
   },
+
+  // ─── New: Form 4547 & Filing ─────────────────────────────────
+  'form-4547-common-mistakes': {
+    slug: 'form-4547-common-mistakes',
+    title: '8 Common Mistakes When Filing Form 4547',
+    description: 'Avoid costly errors on IRS Form 4547. Don\'t miss the $1,000 deposit, enter wrong SSNs, or file as the wrong person. Full checklist inside.',
+    category: 'Parent Guides',
+    categorySlug: 'parent-guides',
+    datePublished: '2026-02-13',
+    dateModified: '2026-02-13',
+    readingTime: '7 min read',
+    relatedSlugs: ['how-to-open-step-by-step', 'when-do-trump-accounts-start', 'is-trump-account-automatic', 'trump-account-multiple-children'],
+  },
+
+  // ─── New: Family Tax Strategy ────────────────────────────────
+  'trump-account-family-tax-strategy': {
+    slug: 'trump-account-family-tax-strategy',
+    title: 'Trump Accounts + Your Family Tax Strategy',
+    description: 'How to combine Trump Accounts with the Child Tax Credit, 529 plans, employer match, and Roth conversions. Complete family savings playbook.',
+    category: 'Tax Questions',
+    categorySlug: 'tax-questions',
+    datePublished: '2026-02-13',
+    dateModified: '2026-02-13',
+    readingTime: '8 min read',
+    relatedSlugs: ['are-trump-accounts-tax-deductible', 'employer-match-trump-account', 'trump-account-roth-conversion-strategy', 'best-accounts-for-kids-today', 'gains-taxation-explained'],
+  },
+
+  // ─── New: Trump Account vs Traditional IRA ───────────────────
+  'trump-account-vs-traditional-ira': {
+    slug: 'trump-account-vs-traditional-ira',
+    title: 'Trump Account vs Traditional IRA: Full Comparison',
+    description: 'A Trump Account IS a special IRA for kids. Side-by-side comparison of rules, limits, investments, taxes, and what happens at age 18.',
+    category: 'Basics',
+    categorySlug: 'basics',
+    datePublished: '2026-02-13',
+    dateModified: '2026-02-13',
+    readingTime: '7 min read',
+    relatedSlugs: ['what-are-trump-accounts-guide', 'trump-account-retirement-conversion', 'trump-account-roth-conversion-strategy', 'gains-taxation-explained'],
+  },
+
+  // ─── New: Multiple Children ──────────────────────────────────
+  'trump-account-multiple-children': {
+    slug: 'trump-account-multiple-children',
+    title: 'Trump Accounts for Multiple Kids: Filing & Strategy',
+    description: 'Filing tips for families with 2+ children: how many forms, contribution strategies, employer match allocation, and budget prioritization.',
+    category: 'Parent Guides',
+    categorySlug: 'parent-guides',
+    datePublished: '2026-02-13',
+    dateModified: '2026-02-13',
+    readingTime: '7 min read',
+    relatedSlugs: ['form-4547-common-mistakes', 'how-to-open-step-by-step', 'contribution-limits-explained', 'employer-match-trump-account', 'grandparent-gift-guide'],
+  },
+
+  // ─── New: Advanced Strategies ────────────────────────────────
+  'advanced-trump-account-strategies': {
+    slug: 'advanced-trump-account-strategies',
+    title: 'Advanced Trump Account Strategies for 2026',
+    description: 'Expert tips: max contributions, employer match, lowest-cost funds, Roth conversion at 18, tax stacking, and corporate sponsorships.',
+    category: 'Parent Guides',
+    categorySlug: 'parent-guides',
+    datePublished: '2026-02-13',
+    dateModified: '2026-02-13',
+    readingTime: '9 min read',
+    relatedSlugs: ['trump-account-roth-conversion-strategy', 'employer-match-trump-account', 'trump-account-fees-explained', 'trump-account-family-tax-strategy', 'build-50k-by-18'],
+  },
 };
 
 /** Get all articles for a given category slug. */

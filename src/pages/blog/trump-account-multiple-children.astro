@@ -1,0 +1,253 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-multiple-children')!;
+const related = getRelatedArticles('trump-account-multiple-children');
+
+const faqs = [
+  {
+    question: 'Do I file a separate Form 4547 for each child?',
+    answer: 'Each Form 4547 covers up to two children. If you have 3 or more eligible children, file additional forms. Each child gets their own account.',
+  },
+  {
+    question: 'Does each child get their own $5,000 contribution limit?',
+    answer: 'Yes. The $5,000 annual limit is per child, not per family. A family with three children can contribute up to $15,000 total per year across all three accounts.',
+  },
+  {
+    question: 'Is the employer contribution per child or per employee?',
+    answer: 'Per employee. If you have three children, your employer can still only contribute $2,500 total — not $2,500 per child. You decide how to allocate the employer contribution among your children\'s accounts.',
+  },
+  {
+    question: 'Do all my children get the $1,000 deposit?',
+    answer: 'Only children born between January 1, 2025 and December 31, 2028 qualify for the $1,000 pilot deposit. Older children (born before 2025) can open Trump Accounts but do not receive the deposit.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+  sources={[
+    { name: 'IRS Notice 2025-68', url: 'https://www.irs.gov/pub/irs-drop/n-25-68.pdf' },
+  ]}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Each child gets <strong class="text-white">their own $5,000/year contribution limit</strong>.</li>
+        <li>Employer contributions are <strong class="text-white">per employee ($2,500 total)</strong>, not per child.</li>
+        <li>File <strong class="text-white">one Form 4547 per two children</strong> — 3+ kids need multiple forms.</li>
+        <li>Prioritize the <strong class="text-white">$1,000 pilot deposit for 2025-2028 newborns</strong> first.</li>
+        <li>Younger children benefit most from compounding — <strong class="text-white">front-load contributions for babies</strong>.</li>
+      </ul>
+    </div>
+
+    <p>
+      Managing one Trump Account is straightforward. Managing three or four? That takes a plan. This guide covers filing tips, contribution strategies, and how to divide limited resources among multiple children.
+    </p>
+
+    <h2>Filing Forms for Multiple Kids</h2>
+
+    <p>
+      Each {limits.form} covers <strong>up to two children</strong>. Here is a quick reference:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Number of Children</th>
+            <th class="pb-2">Forms Needed</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">1-2 children</td>
+            <td class="py-2">1 form</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">3-4 children</td>
+            <td class="py-2">2 forms</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">5-6 children</td>
+            <td class="py-2">3 forms</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4">7+ children</td>
+            <td class="py-2">Round up (children ÷ 2)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      All forms can be attached to your single 2025 tax return. You do not need to file separate tax returns.
+    </p>
+
+    <CalloutBox type="tip" title="File all forms at once">
+      Submit all {limits.form} forms with your 2025 tax return. This processes all elections simultaneously and ensures no child is missed.
+    </CalloutBox>
+
+    <h2>Which Children Get the $1,000 Deposit?</h2>
+
+    <p>
+      The $1,000 pilot deposit is only for children born <strong>January 1, {limits.pilotDepositStartYear} through December 31, {limits.pilotDepositEndYear}</strong>. If you have children across different birth years, some will qualify and others will not:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Child Born</th>
+            <th class="pb-2 pr-4">Pilot Deposit?</th>
+            <th class="pb-2">Trump Account?</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">Before 2025</td>
+            <td class="py-2 pr-4 text-red-400">No</td>
+            <td class="py-2 text-green-400">Yes (if under 18)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">2025-2028</td>
+            <td class="py-2 pr-4 text-green-400">Yes ($1,000)</td>
+            <td class="py-2 text-green-400">Yes</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4">After 2028</td>
+            <td class="py-2 pr-4 text-red-400">No (unless extended)</td>
+            <td class="py-2 text-green-400">Yes (if under 18)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      <strong>Priority:</strong> Make sure you file {limits.form} for pilot-eligible children first. The $1,000 is free — don't leave it on the table.
+    </p>
+
+    <h2>Allocating Contributions With Limited Budget</h2>
+
+    <p>
+      If you cannot max out every child's account, here is how to prioritize:
+    </p>
+
+    <h3>Strategy 1: Youngest First (Maximize Compounding)</h3>
+
+    <p>
+      Younger children have more time for compounding. A dollar invested for a newborn has 18 years to grow. A dollar invested for a 15-year-old has 3 years. If your budget is limited, front-load for the youngest.
+    </p>
+
+    <p>
+      <strong>Example:</strong> $500/month to allocate across 3 children (ages 0, 5, 10):
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Child</th>
+            <th class="pb-2 pr-4">Monthly</th>
+            <th class="pb-2 pr-4">Years to 18</th>
+            <th class="pb-2">Projected at 18 (8% avg.)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">Newborn</td>
+            <td class="py-2 pr-4">$250/mo</td>
+            <td class="py-2 pr-4">18 years</td>
+            <td class="py-2 text-gold-400">~$108,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">5-year-old</td>
+            <td class="py-2 pr-4">$150/mo</td>
+            <td class="py-2 pr-4">13 years</td>
+            <td class="py-2 text-gold-400">~$39,000</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4">10-year-old</td>
+            <td class="py-2 pr-4">$100/mo</td>
+            <td class="py-2 pr-4">8 years</td>
+            <td class="py-2 text-gold-400">~$13,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Strategy 2: Equal Split (Fairness)</h3>
+
+    <p>
+      Some families prefer equal treatment regardless of age. Split contributions evenly. Each child gets the same annual amount. Younger children still benefit from more time, but no child is favored.
+    </p>
+
+    <h3>Strategy 3: Maximize One, Then the Next</h3>
+
+    <p>
+      Max out the youngest child's account ($5,000/year) first, then fund the next youngest, and so on. This maximizes the compounding advantage but may leave older children with smaller accounts.
+    </p>
+
+    <CalloutBox type="info" title="There is no wrong answer">
+      Any contribution is better than no contribution. The "right" strategy depends on your values and financial situation. The most important step is opening accounts for all eligible children.
+    </CalloutBox>
+
+    <h2>Managing the Employer Contribution</h2>
+
+    <p>
+      The employer contribution limit of <strong>${limits.employerContributionLimit.toLocaleString()}/year is per employee</strong>, not per child. If both parents work for employers that offer Trump Account contributions:
+    </p>
+
+    <ul>
+      <li><strong>Parent A's employer:</strong> $2,500 toward any child(ren)</li>
+      <li><strong>Parent B's employer:</strong> $2,500 toward any child(ren)</li>
+      <li><strong>Total employer contributions:</strong> up to $5,000 across children</li>
+    </ul>
+
+    <p>
+      Remember: employer contributions count toward each child's ${limits.annualContributionLimit.toLocaleString()} annual cap. If Parent A directs their full $2,500 to one child, that child has $2,500 remaining from family contributions.
+    </p>
+
+    <h2>Involving Grandparents and Family</h2>
+
+    <p>
+      Multiple children means multiple accounts that family members can contribute to. Here is how to organize it:
+    </p>
+
+    <ul>
+      <li><strong>Birthday and holiday gifts:</strong> Ask grandparents to contribute to Trump Accounts instead of buying toys. Even $100 per occasion adds up.</li>
+      <li><strong>Gift tax note:</strong> Contributions to a Trump Account are considered gifts. In 2026, the annual gift tax exclusion is $19,000 per recipient — far above the $5,000 contribution cap.</li>
+      <li><strong>Coordinate totals:</strong> Make sure all contributors are aware of each child's $5,000 annual cap to avoid excess contributions.</li>
+    </ul>
+
+    <CalloutBox type="warning" title="Watch the $5,000 cap per child">
+      If Mom contributes $3,000, Dad contributes $1,500, and Grandma adds $1,000 to the same child's account — that is $5,500. The extra $500 is an excess contribution subject to a 6% excise tax if not corrected.
+    </CalloutBox>
+
+    <h2>Tracking Multiple Accounts</h2>
+
+    <p>
+      With multiple children, staying organized prevents mistakes:
+    </p>
+
+    <ul>
+      <li><strong>Create a spreadsheet</strong> tracking each child's account: contribution year-to-date, employer contributions, family contributions, and remaining room.</li>
+      <li><strong>Set up automatic contributions</strong> for each child's account to ensure consistent funding.</li>
+      <li><strong>Review annually</strong> to adjust as children age, income changes, or new children are born.</li>
+    </ul>
+
+    <p>
+      Use our <a href="/calculators/growth-calculator">Growth Calculator</a> to model different contribution scenarios for each child. Even small differences in monthly contributions can lead to very different outcomes over 18 years.
+    </p>
+  </div>
+</BlogLayout>

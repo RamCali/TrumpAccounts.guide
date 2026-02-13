@@ -1,0 +1,370 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-hacks')!;
+const related = getRelatedArticles('trump-account-hacks');
+
+const faqs = [
+  {
+    question: 'Are Trump Account hacks legal?',
+    answer: `Yes. These are not loopholes or tricks. They are smart strategies using the rules as written in IRC Section 530A and standard IRA rules. Roth conversions, employer contributions, and front-loading contributions are all explicitly allowed. Always consult a tax professional for your specific situation.`,
+  },
+  {
+    question: 'What is the Roth conversion hack for Trump Accounts?',
+    answer: `At age ${limits.growthPhaseEndAge}, the Trump Account becomes a traditional IRA. Your child can then convert it to a Roth IRA while in a low tax bracket (e.g., during college). The first $14,600 (2026 standard deduction) converts tax-free. All future growth in the Roth is then tax-free forever.`,
+  },
+  {
+    question: 'Can you really become a millionaire from a Trump Account?',
+    answer: `It is mathematically possible. Contributing $${limits.annualContributionLimit.toLocaleString()}/year for 18 years at 8% returns creates roughly $200,000 by age 18. If converted to a Roth IRA and left to grow at 8% until age 65, that could reach $5M-$10M+ tax-free. Results depend on actual market returns, which are not guaranteed.`,
+  },
+  {
+    question: 'How do I stack free money in a Trump Account?',
+    answer: `Claim the $${limits.pilotDeposit.toLocaleString()} federal deposit (for 2025-2028 births) via ${limits.form}. Ask your employer about contributions (up to $${limits.employerContributionLimit.toLocaleString()}/year tax-free). Check if your ZIP code qualifies for the Dell pledge ($${limits.dellPledge.perChildAmount}/child). Then add family contributions up to the $${limits.annualContributionLimit.toLocaleString()} annual cap.`,
+  },
+  {
+    question: 'Should I max out contributions every year?',
+    answer: `If you can afford it, yes. The $${limits.annualContributionLimit.toLocaleString()}/year limit cannot be made up later. There is no catch-up provision. Skipped contribution room is gone forever. Even small amounts help — $100/month is better than $0/month.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><strong class="text-white">The Roth conversion at 18 is the biggest hack.</strong> Convert to a Roth IRA during low-income years to lock in tax-free growth forever.</li>
+        <li><strong class="text-white">Stack every free money layer.</strong> Government deposit + employer match + Dell pledge before contributing your own cash.</li>
+        <li><strong class="text-white">Front-load contributions early.</strong> The first dollars you invest have the longest time to compound. Every year of delay costs thousands.</li>
+        <li><strong class="text-white">Keep investment costs near zero.</strong> Stick to S&P 500 funds with expense ratios under 0.05%.</li>
+        <li><strong class="text-white">Watch for pitfalls.</strong> Large balances can affect financial aid and public benefits. Plan ahead.</li>
+      </ul>
+    </div>
+
+    <p>
+      "Trump Account hacks" are not shady loopholes. They are <strong>smart, legal strategies</strong> that use the rules as written to squeeze every possible dollar of growth out of your child's account. These tips come from financial advisors, tax professionals, and savvy parents who have studied IRC Section 530A inside and out.
+    </p>
+    <p>
+      Here are the five most impactful strategies — ranked from biggest potential payoff to easiest to implement.
+    </p>
+
+    <h2>1. The Roth Conversion Ladder (The Big One)</h2>
+
+    <p>
+      This is the single most discussed Trump Account strategy online — and for good reason. It can turn a <strong>tax-deferred</strong> account into a <strong>tax-free</strong> retirement vehicle worth millions.
+    </p>
+
+    <h3>How It Works</h3>
+    <ol>
+      <li>Contribute up to <strong>${limits.annualContributionLimit.toLocaleString()}/year</strong> from birth to age {limits.growthPhaseEndAge}. All contributions are after-tax.</li>
+      <li>At age {limits.iraConversionAge}, the Trump Account <strong>automatically converts to a traditional IRA</strong>.</li>
+      <li>While your child is in a <strong>low tax bracket</strong> (college years, early career), gradually convert portions to a <strong>Roth IRA</strong>.</li>
+      <li>Pay taxes only on the growth — at <strong>0%, 10%, or 12%</strong> instead of the 22%+ they would pay later in their career.</li>
+      <li>Once in the Roth: <strong>tax-free growth and tax-free withdrawals forever</strong>.</li>
+    </ol>
+
+    <h3>The Numbers</h3>
+    <p>
+      Here is what this strategy could look like with max contributions at 8% average annual returns:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Milestone</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Age</th>
+            <th class="py-3 text-gray-400 font-medium">Estimated Value</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Total contributions (${limits.annualContributionLimit.toLocaleString()}/yr x 18 yrs)</td>
+            <td class="py-3 pr-4">0-18</td>
+            <td class="py-3">$90,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Account value at 18 (8% avg returns)</td>
+            <td class="py-3 pr-4">18</td>
+            <td class="py-3 text-mint-400 font-medium">~$210,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Roth conversion taxes (over 4 college years)</td>
+            <td class="py-3 pr-4">18-21</td>
+            <td class="py-3 text-amber-400">~$14,000-$18,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Value at 40 (no further contributions)</td>
+            <td class="py-3 pr-4">40</td>
+            <td class="py-3 text-mint-400 font-medium">~$1,000,000</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">Value at 65 (no further contributions)</td>
+            <td class="py-3 pr-4">65</td>
+            <td class="py-3 text-mint-400 font-bold">~$6,800,000+</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      The key insight: your child pays roughly <strong>$14,000-$18,000 in conversion taxes</strong> during their low-income college years. In exchange, they get <strong>millions in tax-free money</strong> at retirement. That is an extraordinary return on the tax bill.
+    </p>
+
+    <CalloutBox type="warning" title="Conversions are taxable and permanent">
+      <p>
+        Roth conversions cannot be undone since 2018. The tax is owed in the year of conversion. Convert too much in one year and you push into higher brackets. The sweet spot is spreading conversions over several low-income years. For the full math, see our <a href="/blog/trump-account-roth-conversion-strategy"><strong>Roth Conversion Strategy Guide</strong></a>.
+      </p>
+    </CalloutBox>
+
+    <CalloutBox type="tip" title="Parents: pay the conversion tax as a gift">
+      <p>
+        The single best financial gift you can give your child at 18 is paying their Roth conversion tax bill. A $5,000 gift to cover taxes on a large conversion could turn into <strong>millions in tax-free retirement money</strong> for your child.
+      </p>
+    </CalloutBox>
+
+    <h2>2. Stack Every Free Money Layer</h2>
+
+    <p>
+      Before contributing a single dollar of your own money, make sure you have claimed every free or tax-advantaged dollar available. Think of it as building a layer cake:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Layer</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Amount</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Who Pays</th>
+            <th class="py-3 text-gray-400 font-medium">How to Claim</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Federal pilot deposit</td>
+            <td class="py-3 pr-4">${limits.pilotDeposit.toLocaleString()} (one-time)</td>
+            <td class="py-3 pr-4">U.S. Government</td>
+            <td class="py-3">File {limits.form} with your 2025 tax return</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Employer contribution</td>
+            <td class="py-3 pr-4">Up to ${limits.employerContributionLimit.toLocaleString()}/yr</td>
+            <td class="py-3 pr-4">Your employer</td>
+            <td class="py-3">Ask HR if they offer Trump Account contributions</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Dell pledge</td>
+            <td class="py-3 pr-4">${limits.dellPledge.perChildAmount} (one-time)</td>
+            <td class="py-3 pr-4">Dell Foundation</td>
+            <td class="py-3">Automatic for eligible ZIP codes (under $${(limits.dellPledge.zipCodeMedianIncomeThreshold / 1000)}K median)</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">Family contributions</td>
+            <td class="py-3 pr-4">Up to remaining cap</td>
+            <td class="py-3 pr-4">Parents, grandparents, anyone</td>
+            <td class="py-3">Contribute directly to the child's account</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <CalloutBox type="tip" title="Employer match is the easiest free money">
+      <p>
+        If your employer offers Trump Account contributions, <strong>this is the highest priority after the federal deposit</strong>. It is tax-free income to you under IRC Section 128 — money that never appears on your W-2. Ask your HR department today. For details, see our <a href="/blog/employer-match-trump-account"><strong>Employer Match Guide</strong></a>.
+      </p>
+    </CalloutBox>
+
+    <p>
+      <strong>Grandparents and relatives can contribute too.</strong> Birthday money, holiday gifts, and graduation checks can all go into the Trump Account. The combined total from all sources cannot exceed <a href="/blog/contribution-limits-explained">${limits.annualContributionLimit.toLocaleString()}/year</a>. For a complete strategy on family contributions, see our <a href="/blog/grandparent-gift-guide"><strong>Grandparent Gift Guide</strong></a>.
+    </p>
+
+    <h2>3. Front-Load Contributions Early</h2>
+
+    <p>
+      A dollar invested at birth has 18 years to compound. A dollar invested at age 10 has only 8 years. The difference is not small — it is enormous.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Strategy</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Total Invested</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Value at 18 (8%)</th>
+            <th class="py-3 text-gray-400 font-medium">Growth</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Max from birth ($417/mo x 18 yrs)</td>
+            <td class="py-3 pr-4">$90,000</td>
+            <td class="py-3 pr-4 text-mint-400 font-medium">~$210,000</td>
+            <td class="py-3 text-mint-400">+$120,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Max from age 5 ($417/mo x 13 yrs)</td>
+            <td class="py-3 pr-4">$65,000</td>
+            <td class="py-3 pr-4">~$120,000</td>
+            <td class="py-3">+$55,000</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">Max from age 10 ($417/mo x 8 yrs)</td>
+            <td class="py-3 pr-4">$40,000</td>
+            <td class="py-3 pr-4">~$57,000</td>
+            <td class="py-3">+$17,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Starting at birth and maxing out produces <strong>$120,000 in pure growth</strong>. Starting at age 10 produces only $17,000 in growth — a difference of over <strong>$100,000</strong> from the same annual contribution amount.
+    </p>
+
+    <CalloutBox type="warning" title="No catch-up provision">
+      <p>
+        The annual limit is ${limits.annualContributionLimit.toLocaleString()}. There is no way to contribute more in later years to make up for missed years. If you skip a year, that contribution room is <strong>gone forever</strong>. Even if you can only afford $50/month now, start immediately.
+      </p>
+    </CalloutBox>
+
+    <h3>Tips for Consistent Contributions</h3>
+    <ul>
+      <li><strong>Automate it.</strong> Set up automatic monthly transfers the same day you automate any other bill.</li>
+      <li><strong>Redirect windfalls.</strong> Tax refunds, birthday money, bonuses — funnel them into the Trump Account before spending.</li>
+      <li><strong>For multiple kids:</strong> prioritize the youngest child's account. They have the most years of compounding ahead.</li>
+      <li><strong>$100/month is enough to matter.</strong> At 8% returns, $100/month from birth grows to roughly <strong>$48,000 by age 18</strong>.</li>
+    </ul>
+
+    <h2>4. Optimize Investments and Plan the Transition</h2>
+
+    <p>
+      Trump Accounts are limited to {limits.investmentRequirement.toLowerCase()} with expense ratios capped at {(limits.maxExpenseRatio * 100).toFixed(1)}%. That actually makes choosing a fund simple — pick the cheapest one.
+    </p>
+
+    <h3>Choose the Lowest-Cost Fund</h3>
+    <p>
+      Every dollar saved in fees is a dollar that compounds for your child. Here are the best options:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Fund</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Expense Ratio</th>
+            <th class="py-3 text-gray-400 font-medium">18-Year Fee on $100K</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">FXAIX (Fidelity)</td>
+            <td class="py-3 pr-4 text-mint-400">0.015%</td>
+            <td class="py-3">~$270</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">VOO / IVV (Vanguard / iShares)</td>
+            <td class="py-3 pr-4 text-mint-400">0.03%</td>
+            <td class="py-3">~$540</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">SPY (SPDR)</td>
+            <td class="py-3 pr-4">0.09%</td>
+            <td class="py-3">~$1,620</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      The difference between FXAIX and SPY on a $100,000 balance is over <strong>$1,300 in fees</strong> over 18 years. That is money that should be compounding for your child, not going to a fund company.
+    </p>
+
+    <h3>Plan the Age 18 Transition</h3>
+    <p>
+      When the Trump Account becomes a traditional IRA at {limits.iraConversionAge}, your child gains full control and can:
+    </p>
+    <ul>
+      <li><strong>Diversify.</strong> Add bonds, international stocks, or other asset classes — they are no longer limited to U.S. equity index funds.</li>
+      <li><strong>Convert to Roth.</strong> Use the <a href="/blog/trump-account-roth-conversion-strategy">Roth conversion ladder</a> described above.</li>
+      <li><strong>Withdraw for a first home.</strong> Use the $10,000 first-time homebuyer IRA exception to avoid the 10% early withdrawal penalty.</li>
+    </ul>
+
+    <h3>Pair With Other Accounts</h3>
+    <p>
+      A Trump Account should not be your child's only financial tool. Consider pairing it with:
+    </p>
+    <ul>
+      <li><strong>529 plan</strong> — for tax-free education expenses (Trump Account withdrawals are taxed as income)</li>
+      <li><strong>Custodial Roth IRA</strong> — if your child has earned income from a job, they can contribute to a Roth IRA separately</li>
+      <li><strong>UTMA/UGMA</strong> — for flexible savings with no use restrictions (but no tax deferral)</li>
+    </ul>
+    <p>
+      For a full breakdown, see <a href="/blog/best-accounts-for-kids-today"><strong>Best Investment Accounts for Kids</strong></a>.
+    </p>
+
+    <h2>5. Watch for Common Pitfalls</h2>
+
+    <p>
+      These strategies are powerful, but there are traps to watch for.
+    </p>
+
+    <h3>Public Benefits Impact</h3>
+    <p>
+      A large Trump Account balance could affect means-tested programs:
+    </p>
+    <ul>
+      <li><strong>FAFSA:</strong> At 18, the account becomes a student-owned IRA, which is reported as a student asset. This could reduce financial aid eligibility. See our <a href="/blog/trump-account-fafsa-impact">FAFSA impact guide</a>.</li>
+      <li><strong>Medicaid/SSI:</strong> Asset tests vary by state. A $100K+ IRA at 18 could disqualify your child from certain programs. See our <a href="/blog/trump-account-medicaid-impact">Medicaid impact guide</a>.</li>
+    </ul>
+
+    <CalloutBox type="warning" title="Consult a professional if you receive public benefits">
+      <p>
+        If your family relies on Medicaid, SSI, SNAP, or other means-tested programs, talk to a benefits counselor or financial advisor before maxing out a Trump Account. The long-term benefit usually outweighs the short-term impact, but every situation is different.
+      </p>
+    </CalloutBox>
+
+    <h3>No Early Access</h3>
+    <p>
+      Trump Accounts are <strong>locked until age {limits.growthPhaseEndAge}</strong>. The only exceptions are rollovers, return of excess contributions, or death of the beneficiary. There are no hardship withdrawals, no borrowing against the balance, and no workarounds. If you need flexible access to money, a Trump Account is not the right vehicle for those funds.
+    </p>
+
+    <h3>Tax Planning for Large Balances</h3>
+    <p>
+      If your child's account grows to $200,000+ by age 18, converting the entire balance to Roth in one year would push them into the 22% or even 24% bracket. The fix: <strong>spread conversions over 4-5 low-income years</strong>. Converting $30,000-$50,000 per year during college keeps the effective tax rate under 10%.
+    </p>
+
+    <h3>Educate Your Child</h3>
+    <p>
+      At 18, your child gains full control. If they do not understand the value of the account, they might cash out and pay a massive tax bill. Start teaching them about investing and compounding early. This account is a built-in financial literacy lesson — use it.
+    </p>
+
+    <h2>The Bottom Line</h2>
+
+    <p>
+      None of these "hacks" are complicated. They come down to three principles: <strong>start early, stack free money, and plan the Roth conversion</strong>. The parents who do all three will give their children a financial head start that most adults never get.
+    </p>
+    <p>
+      The most important step is the first one: <strong>file {limits.form} with your 2025 tax return</strong> (due April 15, 2026) or register through <strong>{limits.portal}</strong> when the portal launches mid-2026. Then set up automatic contributions and let compounding do the rest.
+    </p>
+    <p>
+      For projections based on your specific situation, use our <a href="/calculators/growth-calculator"><strong>Growth Calculator</strong></a>.
+    </p>
+
+    <CalloutBox type="warning" title="Not tax or financial advice">
+      <p>
+        This article is for educational purposes only. Tax situations vary by individual, and tax laws change. Roth conversions have permanent consequences. Consult a qualified tax professional or CPA before implementing any of these strategies.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { breadcrumbSchema } from '../../../lib/seo/schema';
+import { useTranslations } from '../../../i18n/config';
+
+const t = useTranslations('es', 'common');
+
+const schema = breadcrumbSchema([
+  { name: t('breadcrumb.home'), url: 'https://trumpaccounts.guide/es' },
+  { name: t('breadcrumb.calculators'), url: 'https://trumpaccounts.guide/es/calculadoras' },
+]);
+
+const calculators = [
+  {
+    title: t('calcLayout.growthCalc'),
+    description: t('calcLayout.growthDesc'),
+    href: '/es/calculadoras/calculadora-de-crecimiento',
+    color: 'gold',
+    icon: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
+  },
+  {
+    title: t('calcLayout.eligibility'),
+    description: t('calcLayout.eligibilityDesc'),
+    href: '/es/calculadoras/verificador-de-elegibilidad',
+    color: 'mint',
+    icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+  },
+  {
+    title: t('calcLayout.employerMatch'),
+    description: t('calcLayout.employerMatchDesc'),
+    href: '/es/calculadoras/contribucion-del-empleador',
+    color: 'purple',
+    icon: 'M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
+  },
+  {
+    title: t('calcLayout.withdrawal'),
+    description: t('calcLayout.withdrawalDesc'),
+    href: '/es/calculadoras/simulador-de-retiro',
+    color: 'amber',
+    icon: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+  },
+  {
+    title: t('calcLayout.fundExpense'),
+    description: t('calcLayout.fundExpenseDesc'),
+    href: '/es/calculadoras/rastreador-de-gastos',
+    color: 'red',
+    icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
+  },
+];
+
+const colorMap: Record<string, { bg: string; text: string; hover: string }> = {
+  gold: { bg: 'bg-gold-400/10', text: 'text-gold-400', hover: 'hover:border-gold-400/40' },
+  mint: { bg: 'bg-mint-400/10', text: 'text-mint-400', hover: 'hover:border-mint-400/40' },
+  purple: { bg: 'bg-purple-500/10', text: 'text-purple-400', hover: 'hover:border-purple-400/40' },
+  amber: { bg: 'bg-amber-500/10', text: 'text-amber-400', hover: 'hover:border-amber-400/40' },
+  red: { bg: 'bg-red-500/10', text: 'text-red-400', hover: 'hover:border-red-400/40' },
+};
+---
+
+<BaseLayout
+  title="Calculadoras Gratuitas de Cuentas Trump"
+  description="Calculadoras interactivas para Cuentas Trump: proyecciones de crecimiento, verificador de elegibilidad, calculadora de contribución del empleador, y más."
+  schema={schema}
+  alternateSlug="/calculators"
+>
+  <div class="mx-auto max-w-4xl px-4 py-12">
+    <h1 class="text-3xl font-extrabold text-white md:text-4xl">
+      Calculadoras y Herramientas de Cuentas Trump
+    </h1>
+    <p class="mt-3 text-lg text-gray-400">
+      Todas las calculadoras son gratuitas, se ejecutan completamente en su navegador, y no almacenan datos personales.
+    </p>
+
+    <div class="mt-8 space-y-4">
+      {calculators.map((calc) => {
+        const colors = colorMap[calc.color];
+        return (
+          <a
+            href={calc.href}
+            class:list={['group flex items-start gap-4 rounded-xl border border-surface-600 bg-surface-800 p-6 no-underline transition-all', colors.hover]}
+          >
+            <div class:list={['shrink-0 rounded-lg p-3', colors.bg, colors.text]}>
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={calc.icon} />
+              </svg>
+            </div>
+            <div>
+              <h2 class:list={['font-bold text-white group-hover:' + colors.text.replace('text-', '')]}>{calc.title}</h2>
+              <p class="mt-1 text-sm text-gray-400">{calc.description}</p>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</BaseLayout>

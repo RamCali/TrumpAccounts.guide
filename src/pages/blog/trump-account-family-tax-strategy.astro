@@ -1,0 +1,217 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-family-tax-strategy')!;
+const related = getRelatedArticles('trump-account-family-tax-strategy');
+
+const faqs = [
+  {
+    question: 'Can I deduct Trump Account contributions on my taxes?',
+    answer: 'No. Trump Account contributions are made with after-tax dollars. You do not receive a tax deduction. However, employer contributions (up to $2,500/year) are excluded from the employee\'s gross income under IRC §128.',
+  },
+  {
+    question: 'How does the Child Tax Credit interact with a Trump Account?',
+    answer: 'They are separate benefits. The expanded Child Tax Credit ($2,200, inflation-adjusted) puts money in your pocket. You can then use that money to fund your child\'s Trump Account — but there is no direct tax connection between the two.',
+  },
+  {
+    question: 'Should I fund a Trump Account or pay off debt first?',
+    answer: 'High-interest debt (credit cards, personal loans) should generally be paid first. But the $1,000 federal deposit is free — file Form 4547 to claim it even if you cannot contribute right away. The deposit grows on its own.',
+  },
+  {
+    question: 'Can I contribute to a Trump Account and a 529 in the same year?',
+    answer: 'Yes. The two accounts have separate contribution limits and rules. You can contribute up to $5,000 to a Trump Account and separately fund a 529 (limits vary by state, typically $300,000+ lifetime).',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+  sources={[
+    { name: 'IRS Notice 2025-68', url: 'https://www.irs.gov/pub/irs-drop/n-25-68.pdf' },
+    { name: 'One Big Beautiful Bill Act', url: 'https://www.congress.gov' },
+  ]}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Trump Accounts fit alongside — not instead of — other family tax benefits like the <strong class="text-white">Child Tax Credit</strong> and <strong class="text-white">529 plans</strong>.</li>
+        <li>Employer contributions (up to <strong class="text-white">${limits.employerContributionLimit.toLocaleString()}/year</strong>) are excluded from gross income — free from income and payroll taxes.</li>
+        <li>The <strong class="text-white">Roth conversion at 18</strong> is a powerful strategy when your child is in a low tax bracket.</li>
+        <li>Parents who earn tips or overtime can benefit from recent tax exclusions and redirect savings to Trump Accounts.</li>
+        <li>The optimal strategy depends on your family's income, goals, and how many children you have.</li>
+      </ul>
+    </div>
+
+    <p>
+      A Trump Account does not exist in a vacuum. It is one piece of your family's financial puzzle. This guide shows how to weave it together with other tax benefits so your family keeps more money and your kids build more wealth.
+    </p>
+
+    <h2>Step 1: Claim the Free Money First</h2>
+
+    <p>
+      Before worrying about contributions, make sure you have claimed every benefit available:
+    </p>
+
+    <ul>
+      <li><strong>$1,000 federal deposit:</strong> File {limits.form} for each child born {limits.pilotDepositStartYear}-{limits.pilotDepositEndYear}. This costs you nothing.</li>
+      <li><strong>Dell Foundation $250:</strong> If your child is under 10 and lives in a ZIP code with median income below $150,000, they may qualify for the Dell pledge.</li>
+      <li><strong>Employer contributions:</strong> Ask your employer if they offer Trump Account contributions. Up to ${limits.employerContributionLimit.toLocaleString()}/year per employee, completely tax-free.</li>
+    </ul>
+
+    <CalloutBox type="tip" title="Even if you can't contribute your own money">
+      The $1,000 deposit alone could grow to $4,000-$6,000 by age 18 at historical returns. File the form even if your budget is tight right now.
+    </CalloutBox>
+
+    <h2>Step 2: Stack Tax Benefits</h2>
+
+    <p>
+      The One Big Beautiful Bill Act created multiple family-friendly tax provisions. Here is how they work together:
+    </p>
+
+    <h3>Child Tax Credit + Trump Account</h3>
+
+    <p>
+      The expanded Child Tax Credit provides up to $2,200 per child (indexed for inflation). This is a direct tax credit — it reduces your tax bill dollar for dollar. Use the savings to fund your child's Trump Account.
+    </p>
+
+    <p>
+      <strong>Example:</strong> A family with two children receives $4,400 in Child Tax Credits. Directing $2,500 of that into each child's Trump Account would nearly max out their annual contributions — at no additional out-of-pocket cost.
+    </p>
+
+    <h3>No Tax on Tips and Overtime</h3>
+
+    <p>
+      Workers in tipped industries and those earning overtime pay may benefit from recent tax exclusions. If your take-home pay increases because tips or overtime are no longer taxed, that extra income can go straight into a Trump Account.
+    </p>
+
+    <h3>Standard Deduction Increase</h3>
+
+    <p>
+      The larger standard deduction means lower taxable income for most families. The tax savings can be redirected to children's accounts.
+    </p>
+
+    <h2>Step 3: Maximize Employer Contributions</h2>
+
+    <p>
+      This is the most overlooked benefit. Under IRC §128, employers can contribute up to <strong>${limits.employerContributionLimit.toLocaleString()}/year per employee</strong> to Trump Accounts. These contributions are:
+    </p>
+
+    <ul>
+      <li>Excluded from the employee's gross income (no income tax)</li>
+      <li>Excluded from payroll taxes (no FICA)</li>
+      <li>Tax-deductible for the employer</li>
+    </ul>
+
+    <p>
+      The employer limit is <strong>per employee, not per child</strong>. If you have three children, your employer still contributes a maximum of ${limits.employerContributionLimit.toLocaleString()} total — you choose how to allocate it.
+    </p>
+
+    <CalloutBox type="info" title="For business owners">
+      If you own a business, you can set up employer contributions as a benefit for yourself and your employees. This is a tax-deductible business expense that doubles as a recruitment tool.
+    </CalloutBox>
+
+    <h2>Step 4: Coordinate With a 529 Plan</h2>
+
+    <p>
+      Many families wonder: Trump Account or 529? The answer is often <strong>both</strong>. Here is a simple framework:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Goal</th>
+            <th class="pb-2 pr-4">Best Account</th>
+            <th class="pb-2">Why</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">College tuition</td>
+            <td class="py-2 pr-4 font-semibold text-gold-400">529 Plan</td>
+            <td class="py-2">Tax-free withdrawals for education</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">General wealth building</td>
+            <td class="py-2 pr-4 font-semibold text-gold-400">Trump Account</td>
+            <td class="py-2">No use restrictions, employer match</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">First home down payment</td>
+            <td class="py-2 pr-4 font-semibold text-gold-400">Trump Account</td>
+            <td class="py-2">$10,000 penalty-free withdrawal</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">Retirement head start</td>
+            <td class="py-2 pr-4 font-semibold text-gold-400">Trump Account</td>
+            <td class="py-2">Converts to IRA at 18, decades of growth</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4">Unsure of child's path</td>
+            <td class="py-2 pr-4 font-semibold text-gold-400">Trump Account</td>
+            <td class="py-2">Maximum flexibility, no restrictions</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      If you can only fund one, and you are not certain your child will attend college, the Trump Account is more flexible. If college is a priority, start with a 529 and add a Trump Account for the free $1,000 deposit.
+    </p>
+
+    <h2>Step 5: Plan the Roth Conversion at 18</h2>
+
+    <p>
+      This is an advanced but powerful strategy. When the Trump Account converts to a traditional IRA at age 18, your child can immediately convert it to a <strong>Roth IRA</strong>.
+    </p>
+
+    <p>
+      Why? At 18, most children are in the <strong>lowest tax bracket</strong> (10% or 12%). Converting early means:
+    </p>
+
+    <ul>
+      <li>Paying a small amount of tax now (on a relatively small balance)</li>
+      <li>All future growth is completely tax-free</li>
+      <li>All qualified withdrawals in retirement are tax-free</li>
+      <li>No Required Minimum Distributions ever</li>
+    </ul>
+
+    <p>
+      <strong>Example:</strong> A Trump Account worth $80,000 at age 18. Converting to a Roth IRA in the 12% bracket costs about $9,600 in taxes. But if that $80,000 grows to $2 million by age 65 (at ~7% real return), every dollar comes out tax-free.
+    </p>
+
+    <CalloutBox type="tip" title="Convert in the gap year">
+      The ideal time to convert is when your child has low or no other income — such as the summer after high school or during the first year of college. Coordinate with a tax advisor.
+    </CalloutBox>
+
+    <h2>Sample Family Strategy</h2>
+
+    <p>
+      Here is how a family with two children (ages 0 and 5) might structure their approach:
+    </p>
+
+    <div class="not-prose my-6 rounded-xl border border-surface-600 bg-surface-800/50 p-6">
+      <ul class="space-y-3 text-sm text-gray-300">
+        <li><strong class="text-white">Newborn (2026):</strong> File {limits.form} → receive $1,000 deposit. Employer contributes $1,250. Parents add $200/month ($2,400/year). Total year 1: $4,650.</li>
+        <li><strong class="text-white">5-year-old:</strong> File {limits.form} (no pilot deposit — born before 2025). Employer contributes $1,250. Parents add $200/month. Total year 1: $3,650.</li>
+        <li><strong class="text-white">529 Plan:</strong> Grandparents gift $2,000/year into a 529 for each child for college.</li>
+        <li><strong class="text-white">Child Tax Credit:</strong> $4,400 total offsets some of the Trump Account contributions.</li>
+        <li><strong class="text-white">At 18:</strong> Both children convert to Roth IRAs while in a low tax bracket.</li>
+      </ul>
+    </div>
+
+    <p>
+      This is educational content, not tax or financial advice. Every family's situation is different. Consult a qualified tax professional to optimize your strategy.
+    </p>
+  </div>
+</BlogLayout>

@@ -1,0 +1,163 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import MiniInflationComparison from '../../components/calculators/MiniInflationComparison';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-vs-savings-account')!;
+const related = getRelatedArticles('trump-account-vs-savings-account');
+
+const faqs = [
+  {
+    question: 'Is a savings account safer than a Trump Account?',
+    answer: 'In the short term, yes. Savings accounts are FDIC insured and do not lose nominal value. But over 18 years, inflation erodes their purchasing power. A Trump Account invested in the S&P 500 has never lost money over any 18-year period in history, and the growth far outpaces inflation.',
+  },
+  {
+    question: 'What if inflation stays low?',
+    answer: 'Even at 2% inflation (below the historical average), a savings account earning 0.5% APY still loses purchasing power every year. The gap between savings and investment returns widens over time regardless of the inflation rate.',
+  },
+  {
+    question: 'Can I put money in both a savings account and a Trump Account?',
+    answer: `Absolutely. Many parents keep an emergency fund in a savings account and invest long-term money in a Trump Account. The key is not leaving <em>all</em> of your child's money in a savings account where inflation eats it away.`,
+  },
+  {
+    question: 'What about high-yield savings accounts?',
+    answer: 'High-yield savings accounts currently offer 4-5% APY, but these rates fluctuate with the federal funds rate. Historically, savings rates average much lower. Even at 4% APY, the S&P 500 has historically returned 10% annually, creating a significant gap over 18 years.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><strong class="text-white">Savings accounts lose money to inflation.</strong> At 0.5% APY and 3% inflation, $1,000 loses over 35% of its purchasing power in 18 years.</li>
+        <li><strong class="text-white">A Trump Account fights back.</strong> At 8% average returns, $1,000 grows to about $4,000 in real purchasing power over 18 years.</li>
+        <li><strong class="text-white">The gap is enormous.</strong> After 18 years, the Trump Account has roughly $3,400 more in real value than the savings account.</li>
+        <li><strong class="text-white">Your baby's money is safest when it grows.</strong> Over an 18-year horizon, the S&P 500 has always delivered positive returns.</li>
+      </ul>
+    </div>
+
+    <p>
+      You opened a savings account for your baby. You feel good. The money is "safe." But here is what nobody tells you: that money is quietly losing value every single day.
+    </p>
+
+    <h2>The Invisible Tax on Your Baby's Savings</h2>
+
+    <p>
+      Inflation is a silent thief. It does not steal your money &mdash; it steals what your money can buy. The average U.S. inflation rate over the past century is about <strong>3% per year</strong>.
+    </p>
+
+    <p>
+      The average savings account pays about <strong>0.5% APY</strong>. Do the math: your money grows at 0.5% while prices rise at 3%. Every year, your child's purchasing power shrinks.
+    </p>
+
+    <CalloutBox type="warning" title="The math is simple">
+      If your savings account earns less than inflation, you are losing money in real terms. At 0.5% APY and 3% inflation, $1,000 today can only buy $634 worth of goods in 18 years.
+    </CalloutBox>
+
+    <h2>See It for Yourself</h2>
+
+    <p>
+      Use the calculator below to see how $1,000 diverges between a savings account and a Trump Account over time.
+    </p>
+
+    <div class="not-prose my-8">
+      <MiniInflationComparison client:visible />
+    </div>
+
+    <h2>$1,000 Over 18 Years: Two Paths</h2>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Year</th>
+            <th class="pb-2 pr-4">Savings Balance</th>
+            <th class="pb-2 pr-4">Savings Real Value</th>
+            <th class="pb-2 pr-4">Trump Account</th>
+            <th class="pb-2">Trump Real Value</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">0</td>
+            <td class="py-2 pr-4">$1,000</td>
+            <td class="py-2 pr-4">$1,000</td>
+            <td class="py-2 pr-4">$1,000</td>
+            <td class="py-2">$1,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">5</td>
+            <td class="py-2 pr-4">$1,025</td>
+            <td class="py-2 pr-4 text-red-400">$884</td>
+            <td class="py-2 pr-4">$1,469</td>
+            <td class="py-2 text-mint-400">$1,267</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">10</td>
+            <td class="py-2 pr-4">$1,051</td>
+            <td class="py-2 pr-4 text-red-400">$782</td>
+            <td class="py-2 pr-4">$2,159</td>
+            <td class="py-2 text-mint-400">$1,607</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4">18</td>
+            <td class="py-2 pr-4">$1,094</td>
+            <td class="py-2 pr-4 text-red-400">$642</td>
+            <td class="py-2 pr-4">$3,996</td>
+            <td class="py-2 text-mint-400">$2,345</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      After 18 years, the savings account has $1,094 in nominal terms &mdash; but it can only buy what $642 buys today. The Trump Account has $3,996, worth $2,345 in today's dollars. The real difference: <strong>$1,703 in purchasing power</strong>.
+    </p>
+
+    <h2>But Isn't the Stock Market Risky?</h2>
+
+    <p>
+      Over any 18-year period, the S&P 500 has never produced a negative return. Not during the Great Depression, not during the dot-com crash, not during the 2008 financial crisis, and not during COVID. The reason is simple: 18 years is long enough for recoveries to compound.
+    </p>
+
+    <p>
+      A Trump Account is designed for this exact time horizon. The no-withdrawal rule before 18 is not a punishment &mdash; it is a feature that prevents panic selling.
+    </p>
+
+    <CalloutBox type="info" title="Risk is relative">
+      Many parents think a savings account is "safe" and the stock market is "risky." But over 18 years, the savings account is almost guaranteed to lose purchasing power, while the stock market is almost guaranteed to grow it. Which one is really riskier for your child's future?
+    </CalloutBox>
+
+    <h2>What About High-Yield Savings Accounts?</h2>
+
+    <p>
+      High-yield savings accounts currently offer 4-5% APY. But these rates are temporary and tied to the Federal Reserve's interest rate policy. Historically, savings rates average well below inflation. And even at 4%, the S&P 500's historical 10% average return creates a significant gap.
+    </p>
+
+    <p>
+      The right move for most parents: keep a liquid emergency fund in a savings account, and put long-term money for your child into a Trump Account where it can actually grow.
+    </p>
+
+    <h2>The Bottom Line</h2>
+
+    <p>
+      A savings account for your baby feels safe. But safety is an illusion when inflation is eating your money. A Trump Account puts your child's money to work in the same index funds that have built wealth for millions of Americans. Over 18 years, the difference is not subtle &mdash; it is life-changing.
+    </p>
+
+    <p>
+      Customize the numbers with our full <a href="/calculators/inflation-comparison">Inflation Comparison Calculator</a>.
+    </p>
+  </div>
+</BlogLayout>

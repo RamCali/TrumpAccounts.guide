@@ -1,0 +1,283 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('advanced-trump-account-strategies')!;
+const related = getRelatedArticles('advanced-trump-account-strategies');
+
+const faqs = [
+  {
+    question: 'Is there a penalty for contributing more than $5,000?',
+    answer: 'Yes. Excess contributions are subject to a 6% excise tax for each year they remain in the account. Remove excess contributions before the tax filing deadline to avoid the penalty.',
+  },
+  {
+    question: 'Can I do a trustee-to-trustee rollover during the growth phase?',
+    answer: 'Yes. You can roll over a Trump Account from one financial institution to another without tax consequences, as long as the new account is also a Trump Account with eligible investments.',
+  },
+  {
+    question: 'What if my employer does not offer Trump Account contributions?',
+    answer: 'Ask them to. Employer contributions are tax-deductible for the business and tax-free for the employee. If your employer won\'t participate, you can still contribute the full $5,000/year from family funds.',
+  },
+  {
+    question: 'Can I change my index fund selection after opening the account?',
+    answer: 'Yes. You can switch between eligible index funds during the growth phase without tax consequences. This is similar to rebalancing within any IRA.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+  sources={[
+    { name: 'IRS Notice 2025-68', url: 'https://www.irs.gov/pub/irs-drop/n-25-68.pdf' },
+    { name: 'IRC Section 530A', url: 'https://www.congress.gov' },
+    { name: 'IRC Section 128', url: 'https://www.congress.gov' },
+  ]}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><strong class="text-white">Max out early, max out often.</strong> $5,000/year at 10% average return reaches $271,000 by age 18.</li>
+        <li><strong class="text-white">Employer contributions are tax-free</strong> — push your employer to offer them.</li>
+        <li><strong class="text-white">Choose the lowest-cost fund.</strong> Even 0.07% saved in fees adds thousands over 18 years.</li>
+        <li><strong class="text-white">Plan the Roth conversion at 18</strong> while your child is in a low tax bracket.</li>
+        <li><strong class="text-white">Combine with other tax benefits</strong> (Child Tax Credit, 529, employer match) for maximum impact.</li>
+      </ul>
+    </div>
+
+    <p>
+      You have opened the account. The $1,000 is invested. Now what? These advanced strategies come from tax professionals, financial advisors, and parents who are thinking long-term about maximizing every dollar in their child's Trump Account.
+    </p>
+
+    <h2>Strategy 1: Max Out Annual Contributions</h2>
+
+    <p>
+      The math is compelling. Contributing the full ${limits.annualContributionLimit.toLocaleString()}/year (about $417/month) turns the initial ${limits.pilotDeposit.toLocaleString()} into potentially <strong>$271,000 by age 18</strong> at the S&P 500's historical average of ~10% annual return.
+    </p>
+
+    <p>
+      Even if you cannot hit $5,000, every dollar matters:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Monthly Contribution</th>
+            <th class="pb-2 pr-4">Annual Total</th>
+            <th class="pb-2">Projected at 18 (10% avg.)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">$0 (deposit only)</td>
+            <td class="py-2 pr-4">$0</td>
+            <td class="py-2 text-gold-400">~$5,600</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">$50/month</td>
+            <td class="py-2 pr-4">$600</td>
+            <td class="py-2 text-gold-400">~$33,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">$100/month</td>
+            <td class="py-2 pr-4">$1,200</td>
+            <td class="py-2 text-gold-400">~$61,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">$250/month</td>
+            <td class="py-2 pr-4">$3,000</td>
+            <td class="py-2 text-gold-400">~$142,000</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4">$417/month (max)</td>
+            <td class="py-2 pr-4">$5,000</td>
+            <td class="py-2 text-gold-400">~$271,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <CalloutBox type="tip" title="Automate it">
+      Set up automatic monthly contributions. It removes the temptation to skip months and ensures consistent dollar-cost averaging into the market.
+    </CalloutBox>
+
+    <h2>Strategy 2: Leverage Employer Contributions</h2>
+
+    <p>
+      Under IRC §128, employer contributions to Trump Accounts are:
+    </p>
+
+    <ul>
+      <li><strong>Tax-free to the employee</strong> — excluded from gross income</li>
+      <li><strong>FICA-exempt</strong> — no payroll taxes</li>
+      <li><strong>Tax-deductible for the employer</strong> — ordinary business expense</li>
+    </ul>
+
+    <p>
+      This is essentially <strong>free money that costs neither party taxes</strong>. If your employer offers it, take the full ${limits.employerContributionLimit.toLocaleString()}/year. If they don't, share this information with your HR department.
+    </p>
+
+    <p>
+      <strong>For business owners:</strong> Setting up employer Trump Account contributions is a competitive benefits tool. It costs your business up to $2,500 per employee per year (tax-deductible) and provides a meaningful benefit that helps recruit and retain employees with children.
+    </p>
+
+    <h2>Strategy 3: Choose the Lowest-Cost Fund</h2>
+
+    <p>
+      All eligible funds track similar indices, but expense ratios vary. Over 18 years, even small fee differences compound significantly.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Fund</th>
+            <th class="pb-2 pr-4">Expense Ratio</th>
+            <th class="pb-2">18-Year Fee Cost on $100K*</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-mono text-gold-400">SPLG</td>
+            <td class="py-2 pr-4">0.02%</td>
+            <td class="py-2">~$360</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-mono text-gold-400">VOO / IVV</td>
+            <td class="py-2 pr-4">0.03%</td>
+            <td class="py-2">~$540</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4 font-mono text-gold-400">SPY</td>
+            <td class="py-2 pr-4">0.09%</td>
+            <td class="py-2">~$1,620</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="mt-2 text-xs text-gray-600">*Approximate cumulative fees on $100,000 average balance over 18 years</p>
+    </div>
+
+    <p>
+      The difference between SPLG (0.02%) and SPY (0.09%) is about <strong>$1,260 over 18 years</strong> on a $100K average balance. Choose the cheapest eligible fund.
+    </p>
+
+    <h2>Strategy 4: Plan the Roth Conversion at 18</h2>
+
+    <p>
+      This is the single most impactful strategy for long-term wealth. When the Trump Account converts to a traditional IRA at age 18, your child can convert it to a <strong>Roth IRA</strong>.
+    </p>
+
+    <p>
+      <strong>Why it works:</strong> At 18, most children have little or no income. Converting in the 10% or 12% tax bracket means paying a small tax bill now for <strong>decades of tax-free growth</strong>.
+    </p>
+
+    <p>
+      <strong>Example scenario:</strong>
+    </p>
+
+    <div class="not-prose my-6 rounded-xl border border-surface-600 bg-surface-800/50 p-6">
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Trump Account balance at 18: <strong class="text-white">$108,000</strong></li>
+        <li>Tax on Roth conversion (12% bracket): <strong class="text-white">~$12,960</strong></li>
+        <li>Roth IRA balance after conversion: <strong class="text-white">$108,000</strong></li>
+        <li>Value at age 65 (7% real return): <strong class="text-white">~$2,400,000</strong></li>
+        <li>Tax on $2.4M Roth withdrawal: <strong class="text-gold-400">$0</strong></li>
+      </ul>
+    </div>
+
+    <p>
+      Paying ~$13,000 in taxes now to avoid taxes on $2.4 million later is an exceptional trade.
+    </p>
+
+    <CalloutBox type="tip" title="Time the conversion">
+      The best time to convert is when your child has the lowest income — typically right after turning 18, during the summer before college, or in their first year of school. Coordinate with a tax advisor.
+    </CalloutBox>
+
+    <h2>Strategy 5: Use the Child Tax Credit to Fund Contributions</h2>
+
+    <p>
+      The expanded Child Tax Credit provides up to $2,200 per child. This is not directly connected to Trump Accounts, but smart families redirect the credit into contributions.
+    </p>
+
+    <p>
+      <strong>Example:</strong> Two children = $4,400 in Child Tax Credits. Directing $2,200 into each child's Trump Account funds nearly half of the annual max — using money you would not have had without the credit.
+    </p>
+
+    <h2>Strategy 6: Monitor for Corporate Sponsorships</h2>
+
+    <p>
+      Beyond the Dell Foundation's $250 pledge, other companies may announce contributions to Trump Accounts. Keep an eye on:
+    </p>
+
+    <ul>
+      <li><strong>Employer announcements</strong> — more companies are expected to offer §128 contributions</li>
+      <li><strong>Corporate pledges</strong> — similar to the Dell model, targeting specific demographics</li>
+      <li><strong>Financial institutions</strong> — some may offer bonus contributions or fee waivers for Trump Account holders</li>
+    </ul>
+
+    <p>
+      Every dollar from external sources is a dollar you don't have to contribute yourself — and it still compounds for 18 years.
+    </p>
+
+    <h2>Strategy 7: Consider Trustee-to-Trustee Rollovers</h2>
+
+    <p>
+      If your initial fund selection has a higher expense ratio, you can do a <strong>trustee-to-trustee rollover</strong> to a different eligible institution without tax consequences. This is useful if:
+    </p>
+
+    <ul>
+      <li>A new fund becomes available with a lower expense ratio</li>
+      <li>Your current institution has poor customer service or tools</li>
+      <li>You want to consolidate accounts at one brokerage for easier management</li>
+    </ul>
+
+    <p>
+      Rollovers are not taxable events during the growth phase. Just make sure the new account meets all Trump Account requirements.
+    </p>
+
+    <h2>Strategy 8: File Early for Maximum Compounding</h2>
+
+    <p>
+      Time in the market matters more than timing the market. File {limits.form} with your 2025 tax return rather than waiting for the {limits.portal} portal.
+    </p>
+
+    <p>
+      <strong>The math:</strong> Filing 6 months earlier on a $5,000 annual contribution at 10% return adds roughly <strong>$250-$400 in extra growth</strong> by age 18. Multiply that by multiple children and the numbers get meaningful.
+    </p>
+
+    <p>
+      Use our <a href="/calculators/cost-of-waiting">Cost of Waiting Calculator</a> to see exactly how much each month of delay costs.
+    </p>
+
+    <h2>Putting It All Together</h2>
+
+    <p>
+      The optimal Trump Account strategy for most families:
+    </p>
+
+    <div class="not-prose my-6 rounded-xl border border-surface-600 bg-surface-800/50 p-6">
+      <ol class="space-y-3 text-sm text-gray-300 list-decimal list-inside">
+        <li><strong class="text-white">File {limits.form} as early as possible</strong> to claim the $1,000 deposit.</li>
+        <li><strong class="text-white">Set up automatic monthly contributions</strong> — even $100/month makes a difference.</li>
+        <li><strong class="text-white">Get employer contributions</strong> if available ($2,500/year tax-free).</li>
+        <li><strong class="text-white">Choose the lowest-cost eligible fund</strong> (SPLG at 0.02% or VOO at 0.03%).</li>
+        <li><strong class="text-white">Redirect the Child Tax Credit</strong> into Trump Account contributions.</li>
+        <li><strong class="text-white">Plan a Roth conversion at 18</strong> while your child is in a low bracket.</li>
+        <li><strong class="text-white">Let compounding do the work</strong> — 18 years is a long time.</li>
+      </ol>
+    </div>
+
+    <p>
+      This is educational content, not tax or financial advice. Every family's situation is different. Consult a qualified tax professional before implementing any strategy.
+    </p>
+  </div>
+</BlogLayout>

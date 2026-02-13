@@ -1,0 +1,232 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('form-4547-common-mistakes')!;
+const related = getRelatedArticles('form-4547-common-mistakes');
+
+const faqs = [
+  {
+    question: 'What happens if I enter the wrong SSN on Form 4547?',
+    answer: 'An incorrect SSN can delay processing by weeks or cause the election to be rejected. Double-check every digit before submitting. If you catch the error after filing, contact the IRS to request a correction.',
+  },
+  {
+    question: 'Can I fix a mistake on Form 4547 after filing?',
+    answer: 'Yes. Contact the IRS to request a correction. If you filed with your tax return, you may need to file an amended return (Form 1040-X) depending on the nature of the error.',
+  },
+  {
+    question: 'What if I forget to check the $1,000 pilot deposit box?',
+    answer: 'If you do not explicitly elect the pilot contribution on Form 4547, your child will not receive the $1,000 federal deposit. You may be able to file an amended election, but it is much easier to get it right the first time.',
+  },
+  {
+    question: 'Can two parents each file Form 4547 for the same child?',
+    answer: 'No. Only one election can be made per child. If two forms are filed for the same child, the IRS will process the first valid submission and reject the duplicate.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+  sources={[
+    { name: 'IRS Notice 2025-68', url: 'https://www.irs.gov/pub/irs-drop/n-25-68.pdf' },
+    { name: 'IRS Form 4547 Instructions', url: 'https://www.irs.gov' },
+  ]}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>The most common mistake is <strong class="text-white">forgetting to elect the $1,000 pilot deposit</strong> — it is not automatic.</li>
+        <li>An <strong class="text-white">incorrect SSN</strong> can delay processing by weeks.</li>
+        <li>Only the highest-priority <strong class="text-white">authorized individual</strong> should file — filing out of order can cause rejection.</li>
+        <li>Filing early with your 2025 tax return gets your account set up <strong class="text-white">months faster</strong> than waiting for the portal.</li>
+        <li>You need a <strong class="text-white">separate form for each pair of children</strong> (up to 2 per form).</li>
+      </ul>
+    </div>
+
+    <p>
+      {limits.form} is a straightforward form. But small mistakes can cost your child real money — either by delaying the account or by missing the $1,000 deposit entirely. Here are the most common errors parents make and how to avoid them.
+    </p>
+
+    <h2>Mistake 1: Not Electing the $1,000 Pilot Deposit</h2>
+
+    <p>
+      This is the biggest one. The $1,000 federal pilot contribution is <strong>not automatic</strong>. You must explicitly check the election box on {limits.form}. If you skip it, your child's account opens with $0 instead of $1,000.
+    </p>
+
+    <p>
+      The pilot deposit is available for children born between {limits.pilotDepositStartYear} and {limits.pilotDepositEndYear}. If your child qualifies, make sure you elect it.
+    </p>
+
+    <CalloutBox type="warning" title="Don't miss the free money">
+      The $1,000 deposit invested in the S&P 500 for 18 years could grow to $4,000-$6,000 at historical average returns. Forgetting to check one box could cost your child thousands.
+    </CalloutBox>
+
+    <h2>Mistake 2: Entering the Wrong SSN</h2>
+
+    <p>
+      A single transposed digit in your child's Social Security Number can delay processing for weeks. The IRS validates SSNs against Social Security Administration records, and a mismatch means your form gets flagged for manual review.
+    </p>
+
+    <p>
+      <strong>How to avoid it:</strong> Have your child's Social Security card in front of you when filling out the form. Read each digit twice. If filing electronically, copy-paste is not reliable — type the number carefully.
+    </p>
+
+    <h2>Mistake 3: Filing as the Wrong Authorized Individual</h2>
+
+    <p>
+      The IRS follows a strict priority order for who can file {limits.form}:
+    </p>
+
+    <ol>
+      <li><strong>Parent</strong> (biological or adoptive)</li>
+      <li><strong>Legal guardian</strong></li>
+      <li><strong>Adult sibling</strong></li>
+      <li><strong>Grandparent</strong></li>
+    </ol>
+
+    <p>
+      If a grandparent files when a parent is available, the election may be rejected. The filer becomes the "responsible party" who manages the account until the child turns 18. Make sure the correct person files.
+    </p>
+
+    <CalloutBox type="tip" title="Choose the responsible party wisely">
+      The responsible party manages investments, handles rollovers, and designates successors for up to 18 years. Pick someone reliable and financially attentive.
+    </CalloutBox>
+
+    <h2>Mistake 4: Waiting for the Online Portal</h2>
+
+    <p>
+      The {limits.portal} portal launches in mid-2026. If you wait instead of filing with your 2025 tax return (due April 15, 2026), you could delay your child's account by months.
+    </p>
+
+    <p>
+      Every month of delay is a month of lost compounding. At historical S&P 500 returns, even a 6-month delay on a $1,000 deposit means roughly $40-$50 less by age 18. With ongoing contributions, the cost of delay grows significantly.
+    </p>
+
+    <p>
+      <strong>Bottom line:</strong> File with your taxes. Don't wait for the portal.
+    </p>
+
+    <h2>Mistake 5: Filing One Form for Too Many Children</h2>
+
+    <p>
+      Each {limits.form} covers <strong>up to two children</strong>. If you have three or more eligible children, you need multiple forms. Some parents try to squeeze all their children onto one form and end up with incomplete elections.
+    </p>
+
+    <p>
+      <strong>How to avoid it:</strong> Count your eligible children. Divide by two. That's how many forms you need.
+    </p>
+
+    <h2>Mistake 6: Assuming Tax Software Handles Everything</h2>
+
+    <p>
+      Not all tax software supports {limits.form} for electronic filing yet. If your software doesn't include it, you have two options:
+    </p>
+
+    <ul>
+      <li><strong>Paper file:</strong> Print {limits.form} and mail it with your paper tax return.</li>
+      <li><strong>File separately:</strong> E-file your tax return as normal, then mail {limits.form} separately to the IRS.</li>
+    </ul>
+
+    <p>
+      Check with your tax software provider before assuming the form is included. Major providers like TurboTax, H&R Block, and FreeTaxUSA are expected to add support, but timing varies.
+    </p>
+
+    <h2>Mistake 7: Not Choosing an Index Fund</h2>
+
+    <p>
+      {limits.form} asks you to select an eligible index fund for your child's investments. If you leave this blank or choose an ineligible fund, the election may be delayed while the IRS contacts you for clarification.
+    </p>
+
+    <p>
+      Eligible funds must track the S&P 500 or a broad U.S. equity index with expense ratios at or below 0.1%. Popular options include:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Fund</th>
+            <th class="pb-2 pr-4">Ticker</th>
+            <th class="pb-2">Expense Ratio</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">SPDR Portfolio S&P 500 ETF</td>
+            <td class="py-2 pr-4 font-mono text-gold-400">SPLG</td>
+            <td class="py-2">0.02%</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">Vanguard S&P 500 ETF</td>
+            <td class="py-2 pr-4 font-mono text-gold-400">VOO</td>
+            <td class="py-2">0.03%</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">iShares Core S&P 500 ETF</td>
+            <td class="py-2 pr-4 font-mono text-gold-400">IVV</td>
+            <td class="py-2">0.03%</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4">Vanguard Total Stock Market ETF</td>
+            <td class="py-2 pr-4 font-mono text-gold-400">VTI</td>
+            <td class="py-2">0.03%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Mistake 8: Not Keeping a Copy</h2>
+
+    <p>
+      Keep a copy of your completed {limits.form} for your records. If the IRS has questions or if there is a processing issue, having your copy makes resolution much faster.
+    </p>
+
+    <p>
+      If filing electronically, save a PDF. If mailing, photocopy the signed form before sending.
+    </p>
+
+    <h2>Quick Checklist Before You File</h2>
+
+    <div class="not-prose my-6 rounded-xl border border-surface-600 bg-surface-800/50 p-6">
+      <ul class="space-y-3 text-sm text-gray-300">
+        <li class="flex items-start gap-2">
+          <span class="mt-0.5 text-gold-400">&#9744;</span>
+          <span>Child's SSN is correct (verified against SS card)</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="mt-0.5 text-gold-400">&#9744;</span>
+          <span>$1,000 pilot deposit box is checked (if child born 2025-2028)</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="mt-0.5 text-gold-400">&#9744;</span>
+          <span>Correct authorized individual is filing (parent first)</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="mt-0.5 text-gold-400">&#9744;</span>
+          <span>Eligible index fund is selected</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="mt-0.5 text-gold-400">&#9744;</span>
+          <span>Separate form for every 2 children</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="mt-0.5 text-gold-400">&#9744;</span>
+          <span>Copy saved for your records</span>
+        </li>
+      </ul>
+    </div>
+
+    <p>
+      Filing {limits.form} correctly the first time saves you weeks of delay and ensures your child's money starts growing as soon as possible. Take 10 extra minutes to double-check everything.
+    </p>
+  </div>
+</BlogLayout>

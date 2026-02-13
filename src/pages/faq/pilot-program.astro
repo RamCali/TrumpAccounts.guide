@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Accordion from '../../components/ui/Accordion.astro';
+import LastUpdated from '../../components/ui/LastUpdated.astro';
+import { breadcrumbSchema, faqSchema } from '../../lib/seo/schema';
+
+const siteUrl = 'https://trumpaccounts.guide';
+
+const questions = [
+  { q: 'What is the $1,000 pilot program?', a: 'The federal government deposits $1,000 into Trump Accounts for every U.S. citizen child born between January 1, 2025 and December 31, 2028. This one-time deposit is free money from the government to give your child a financial head start.' },
+  { q: 'Who qualifies for the $1,000 deposit?', a: 'Your child must be: (1) a U.S. citizen, (2) born between January 1, 2025 and December 31, 2028, and (3) have a valid Social Security Number. There are no income restrictions. Use our <a href="/calculators/eligibility-checker">Eligibility Checker</a> to confirm.' },
+  { q: 'Is the $1,000 deposit automatic?', a: 'No. You must explicitly elect the pilot contribution on IRS Form 4547. If you don\'t check the box or don\'t file the form, your child will not receive the $1,000 deposit.' },
+  { q: 'Does the $1,000 count toward the annual contribution limit?', a: 'No. The $1,000 federal pilot deposit does not count toward the $5,000 annual contribution limit. You can contribute the full $5,000 in addition to the government\'s $1,000.' },
+  { q: 'What if my child was born before 2025?', a: 'Children born before January 1, 2025 do not qualify for the $1,000 pilot deposit. However, they can still open a Trump Account (if under 18) and receive family and employer contributions of up to $5,000/year.' },
+  { q: 'What if my child was born after 2028?', a: 'The pilot program currently covers births through December 31, 2028. Children born after 2028 can still open Trump Accounts but would not receive the $1,000 deposit unless Congress extends the program.' },
+  { q: 'When does the $1,000 get deposited?', a: 'The deposit is made after the IRS processes your Form 4547 election. Contributions begin as of July 4, 2026. The sooner you file, the sooner the deposit starts growing in the market.' },
+  { q: 'Where does the $1,000 come from?', a: 'It comes from the U.S. Treasury, funded by taxpayer dollars as part of the One Big Beautiful Bill Act (OBBBA) signed July 4, 2025. It is not a loan — there is nothing to pay back.' },
+  { q: 'Is the $1,000 taxable when received?', a: 'The deposit itself is not taxable when it enters the account. Growth is tax-deferred during the growth phase (birth to 18). Withdrawals after age 18 are taxed as ordinary income under traditional IRA rules.' },
+  { q: 'Can I get the $1,000 as cash instead?', a: 'No. The $1,000 pilot deposit must go into a Trump Account. It cannot be received as a direct cash payment. The money is invested in eligible S&P 500 or broad U.S. equity index funds.' },
+  { q: 'What is the Dell Foundation $250 bonus?', a: 'Separate from the federal deposit, Michael and Susan Dell pledged $6.25 billion to provide an additional $250 per child under 10 in ZIP codes where the median household income is below $150,000. This is a private donation, not a government program.' },
+  { q: 'Can my child get both the $1,000 and the Dell $250?', a: 'Yes, if they meet both sets of criteria. A child born 2025-2028 (for the $1,000) who also lives in an eligible ZIP code and is under 10 (for the Dell pledge) could receive $1,250 in seed funding before any family contributions.' },
+];
+
+const schemas = [
+  breadcrumbSchema([
+    { name: 'Home', url: siteUrl },
+    { name: 'FAQ', url: `${siteUrl}/faq` },
+    { name: 'Pilot Program', url: `${siteUrl}/faq/pilot-program` },
+  ]),
+  faqSchema(questions.map(q => ({ question: q.q, answer: q.a }))),
+];
+---
+
+<BaseLayout
+  title="$1,000 Pilot Program FAQ — Who Gets the Free Deposit? (2026)"
+  description="Everything about the Trump Account $1,000 pilot deposit: who qualifies, how to claim it, when it arrives, whether it counts toward limits, and the Dell $250 bonus."
+  schema={schemas}
+>
+  <article class="mx-auto max-w-4xl px-4 py-12">
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="no-underline hover:text-gold-400">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <a href="/faq" class="no-underline hover:text-gold-400">FAQ</a>
+        </li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="font-medium text-white">$1,000 Pilot Program</span>
+        </li>
+      </ol>
+    </nav>
+
+    <h1 class="mb-2 text-3xl font-extrabold text-white md:text-4xl">The $1,000 Pilot Program: Who Gets It?</h1>
+    <p class="mb-8 text-lg text-gray-400">How the federal deposit works, who qualifies, and how to claim it for your child.</p>
+
+    <LastUpdated date="2026-02-13" />
+
+    <div class="mt-8">
+      <Accordion items={questions.map(q => ({ question: q.q, answer: q.a }))} />
+    </div>
+
+    <div class="mt-10 grid gap-3 sm:grid-cols-2">
+      <a href="/calculators/eligibility-checker" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Eligibility Checker</h3>
+        <p class="text-sm text-gray-400">See if your child qualifies in 30 seconds</p>
+      </a>
+      <a href="/faq/form-4547" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Form 4547 FAQ</h3>
+        <p class="text-sm text-gray-400">How to file the form to claim the deposit</p>
+      </a>
+    </div>
+
+    <p class="mt-10 text-xs text-gray-600">
+      Educational content only, not tax or financial advice.
+      Source: <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf" target="_blank" rel="noopener noreferrer" class="text-gray-500">IRS Notice 2025-68</a>.
+    </p>
+  </article>
+</BaseLayout>

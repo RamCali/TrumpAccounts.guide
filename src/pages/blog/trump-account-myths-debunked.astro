@@ -1,0 +1,194 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-myths-debunked')!;
+const related = getRelatedArticles('trump-account-myths-debunked');
+
+const faqs = [
+  {
+    question: 'Are Trump Accounts a political program?',
+    answer: 'No. Trump Accounts are a federal investment account program created by IRC Section 530A as part of the One Big Beautiful Bill Act. The name comes from the legislation, not a political affiliation. All eligible children benefit regardless of their family\'s political views.',
+  },
+  {
+    question: 'Can the government take back the $1,000 deposit?',
+    answer: `Once the $${limits.pilotDeposit.toLocaleString()} pilot deposit is made to the account, it belongs to the child. The government cannot claw it back. It is invested in the child's chosen index fund and grows like any other contribution.`,
+  },
+  {
+    question: 'What if Congress changes the law?',
+    answer: 'Existing accounts and deposits would not be retroactively affected. Congress could change future contribution limits or eligibility rules, but money already in accounts is protected by standard property rights.',
+  },
+  {
+    question: 'Is the $1,000 deposit really free?',
+    answer: `Yes. The $${limits.pilotDeposit.toLocaleString()} pilot deposit for children born ${limits.pilotDepositStartYear}-${limits.pilotDepositEndYear} is funded by the federal government. It is not a loan. There is no repayment obligation. You claim it by filing ${limits.form}.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><strong class="text-white">Not political.</strong> It is a federal investment account for all eligible U.S. citizen children.</li>
+        <li><strong class="text-white">Not a scam.</strong> The $1,000 deposit is real, funded by the U.S. government, and codified in law.</li>
+        <li><strong class="text-white">Not complicated.</strong> Filing {limits.form} takes about 30 minutes.</li>
+        <li><strong class="text-white">No income limit.</strong> Every family qualifies, regardless of income level.</li>
+        <li><strong class="text-white">Not a replacement for a 529.</strong> They are complementary accounts with different benefits.</li>
+      </ul>
+    </div>
+
+    <p>
+      Misinformation about Trump Accounts is spreading faster than the facts. Here are the 7 most common myths &mdash; and the truth behind each one.
+    </p>
+
+    <h2>Myth 1: "It's Only for Trump Supporters"</h2>
+
+    <p>
+      <strong>Reality:</strong> Trump Accounts are a federal program under IRC Section 530A. They are available to <strong>every U.S. citizen child</strong> with a valid SSN who is under 18. The name comes from the legislation (the One Big Beautiful Bill Act), not a political requirement.
+    </p>
+
+    <p>
+      There is no political test, party affiliation check, or voting record review. If your child is a U.S. citizen with an SSN, they are eligible. Period.
+    </p>
+
+    <CalloutBox type="info" title="The name explained">
+      The accounts were originally called "MAGA Accounts" in early drafts, then renamed to "Trump Accounts" in the final legislation. Some people call them "Section 530A accounts." Regardless of what you call them, the benefits are the same.
+    </CalloutBox>
+
+    <h2>Myth 2: "You Can Lose All the Money"</h2>
+
+    <p>
+      <strong>Reality:</strong> Trump Account funds are invested in S&P 500 or broad U.S. equity index funds. Yes, the stock market goes up and down. But over every 18-year period in S&P 500 history, the market has delivered <strong>positive returns</strong>. Every single time.
+    </p>
+
+    <p>
+      The no-withdrawal rule before age 18 prevents panic selling during downturns. This forced long-term holding is one of the account's greatest strengths.
+    </p>
+
+    <h2>Myth 3: "It's Too Complicated"</h2>
+
+    <p>
+      <strong>Reality:</strong> Opening a Trump Account takes about 30 minutes. Here is the entire process:
+    </p>
+
+    <ol>
+      <li>Get your child's Social Security Number (you probably already have one)</li>
+      <li>Download {limits.form} (Trump Account Election)</li>
+      <li>Fill it out (it is one page)</li>
+      <li>Include it with your 2025 tax return (due April 15, 2026)</li>
+    </ol>
+
+    <p>
+      That is it. You can also file through the {limits.portal} portal when it launches in mid-2026, or mail the form directly to the IRS. Read our <a href="/blog/how-to-open-step-by-step">step-by-step guide</a> for a full walkthrough.
+    </p>
+
+    <h2>Myth 4: "There's an Income Limit"</h2>
+
+    <p>
+      <strong>Reality:</strong> There is <strong>no income restriction</strong> for Trump Accounts. Unlike Roth IRAs (which have income phase-outs) or certain education credits, Trump Accounts are available to every family regardless of income.
+    </p>
+
+    <p>
+      A family earning $30,000/year and a family earning $300,000/year both qualify for the same ${limits.pilotDeposit.toLocaleString()} deposit and the same ${limits.annualContributionLimit.toLocaleString()}/year contribution limit.
+    </p>
+
+    <CalloutBox type="irs-quote" title="IRS Notice 2025-68">
+      "There are no income requirements or limitations on the authorized individual or any contributor to a section 530A account."
+    </CalloutBox>
+
+    <h2>Myth 5: "You Can Withdraw Anytime"</h2>
+
+    <p>
+      <strong>Reality:</strong> During the growth phase (birth to age 18), withdrawals are <strong>not permitted</strong> except in three specific cases:
+    </p>
+
+    <ul>
+      <li>Rollovers to another Trump Account</li>
+      <li>Return of excess contributions</li>
+      <li>Death of the beneficiary</li>
+    </ul>
+
+    <p>
+      This is by design. The no-withdrawal rule protects the account from being raided for short-term expenses. At 18, the account converts to a traditional IRA with standard IRA rules.
+    </p>
+
+    <h2>Myth 6: "It Replaces a 529 Plan"</h2>
+
+    <p>
+      <strong>Reality:</strong> Trump Accounts and 529 plans are <strong>complementary</strong>, not interchangeable. Key differences:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Feature</th>
+            <th class="pb-2 pr-4">Trump Account</th>
+            <th class="pb-2">529 Plan</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">Tax treatment</td>
+            <td class="py-2 pr-4">Tax-deferred (taxed on withdrawal)</td>
+            <td class="py-2">Tax-free for education expenses</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">Use restrictions</td>
+            <td class="py-2 pr-4">Any purpose after 18</td>
+            <td class="py-2">Education expenses (or 10% penalty)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">Investment options</td>
+            <td class="py-2 pr-4">S&P 500 index funds only</td>
+            <td class="py-2">Various (depends on plan)</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4">Federal deposit</td>
+            <td class="py-2 pr-4">$1,000 for 2025-2028 births</td>
+            <td class="py-2">None</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      The ideal strategy for most families: use a 529 for education expenses (tax-free withdrawals) and a Trump Account for everything else (maximum flexibility). Read our <a href="/compare/trump-account-vs-529">full comparison</a>.
+    </p>
+
+    <h2>Myth 7: "The $1,000 Deposit Is a Scam"</h2>
+
+    <p>
+      <strong>Reality:</strong> The ${limits.pilotDeposit.toLocaleString()} pilot deposit is codified in federal law ({limits.legalBasis}) and detailed in {limits.irsNotice}. It is real money, deposited by the U.S. government into your child's account.
+    </p>
+
+    <p>
+      It is not a loan. There is no repayment. It does not affect your taxes. You claim it by filing {limits.form} &mdash; a one-page IRS form included with your tax return.
+    </p>
+
+    <CalloutBox type="tip" title="Claim it now">
+      The pilot deposit is available for children born {limits.pilotDepositStartYear}&ndash;{limits.pilotDepositEndYear}. File {limits.form} with your 2025 tax return (due April 15, 2026) to claim it. There is no reason to leave free money on the table.
+    </CalloutBox>
+
+    <h2>The Bottom Line</h2>
+
+    <p>
+      Trump Accounts are not political, not a scam, and not complicated. They are a straightforward federal investment account with a free ${limits.pilotDeposit.toLocaleString()} deposit, no income limits, and 18 years of tax-deferred growth. The only mistake is not opening one.
+    </p>
+
+    <p>
+      Check if your child qualifies with our <a href="/calculators/eligibility-checker">Eligibility Checker</a>, then follow our <a href="/blog/how-to-open-step-by-step">step-by-step guide</a> to get started.
+    </p>
+  </div>
+</BlogLayout>

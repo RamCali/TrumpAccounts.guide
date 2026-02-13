@@ -1,0 +1,174 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import MiniMilestones from '../../components/calculators/MiniMilestones';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('millionaire-baby-milestones')!;
+const related = getRelatedArticles('millionaire-baby-milestones');
+
+const faqs = [
+  {
+    question: 'Can a Trump Account really create a millionaire?',
+    answer: 'Yes, but it takes time. At $417/month (the max) with 8% average returns, the account reaches roughly $100K by age 18. If left untouched in the IRA after 18 with no further contributions, compound growth alone can push it past $1 million by the early 40s. At 10% returns, it happens even sooner.',
+  },
+  {
+    question: 'What if I can only contribute $100/month?',
+    answer: `At $100/month with 8% returns, the account reaches about $43,000 by age 18. Getting to $1M would take until the late 50s or early 60s without additional IRA contributions after 18. Any amount helps — the key is starting early.`,
+  },
+  {
+    question: 'Are these projections guaranteed?',
+    answer: 'No. All projections assume a constant average return, which does not reflect real market behavior. Actual returns will vary year to year. However, the S&P 500 has historically averaged about 10% annually over long periods. These projections use a more conservative 8% estimate.',
+  },
+  {
+    question: 'What happens to the account at 18?',
+    answer: `At 18, the Trump Account converts to a traditional IRA. Your child gains full control and can continue growing the account, convert to a Roth IRA, or make withdrawals (subject to taxes and potential penalties before age 59&frac12;).`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><strong class="text-white">$100K by 18</strong> is achievable at max contributions ($417/month) with 8% average returns.</li>
+        <li><strong class="text-white">$1 million</strong> is possible in your child's early 40s if the IRA is left untouched after 18.</li>
+        <li><strong class="text-white">Even $100/month</strong> creates a meaningful head start: roughly $43,000 by age 18.</li>
+        <li><strong class="text-white">The pilot deposit alone</strong> ($1,000) grows to about $4,000 by 18 with zero family contributions.</li>
+      </ul>
+    </div>
+
+    <p>
+      What if the greatest gift you could give your child is not a toy, a car, or even a college fund &mdash; but a head start that turns into generational wealth? Here is exactly when a Trump Account hits each major milestone.
+    </p>
+
+    <h2>Try It Yourself</h2>
+
+    <p>
+      Adjust the monthly contribution below to see when your child's account hits each milestone.
+    </p>
+
+    <div class="not-prose my-8">
+      <MiniMilestones client:visible />
+    </div>
+
+    <h2>The Milestone Timeline</h2>
+
+    <p>
+      The table below assumes a 2025 birth, the ${limits.pilotDeposit.toLocaleString()} pilot deposit, and 8% average annual returns. "Age" is the first year the balance crosses each threshold.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Milestone</th>
+            <th class="pb-2 pr-4">$100/mo</th>
+            <th class="pb-2 pr-4">$250/mo</th>
+            <th class="pb-2">$417/mo (max)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-gold-400">$10,000</td>
+            <td class="py-2 pr-4">Age 6</td>
+            <td class="py-2 pr-4">Age 3</td>
+            <td class="py-2">Age 2</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-gold-400">$25,000</td>
+            <td class="py-2 pr-4">Age 12</td>
+            <td class="py-2 pr-4">Age 7</td>
+            <td class="py-2">Age 5</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-gold-400">$50,000</td>
+            <td class="py-2 pr-4">Age 18</td>
+            <td class="py-2 pr-4">Age 12</td>
+            <td class="py-2">Age 9</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-gold-400">$100,000</td>
+            <td class="py-2 pr-4">Age 27</td>
+            <td class="py-2 pr-4">Age 19</td>
+            <td class="py-2">Age 18</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-gold-400">$500,000</td>
+            <td class="py-2 pr-4">Age 48</td>
+            <td class="py-2 pr-4">Age 38</td>
+            <td class="py-2">Age 35</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4 font-semibold text-gold-400">$1,000,000</td>
+            <td class="py-2 pr-4">Age 57</td>
+            <td class="py-2 pr-4">Age 47</td>
+            <td class="py-2">Age 43</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <CalloutBox type="info" title="Post-18 projections assume no new contributions">
+      After age 18, the account converts to a traditional IRA. These projections assume the IRA grows at 8% annually with no additional contributions after 18. If your child continues contributing to the IRA, milestones are reached even sooner.
+    </CalloutBox>
+
+    <h2>What Each Milestone Means</h2>
+
+    <h3>$50,000 &mdash; College Fund</h3>
+    <p>
+      At $250/month, the account reaches $50K around age 12. By 18, it could be well over $80K. That is enough to cover a significant portion of in-state tuition at most public universities.
+    </p>
+
+    <h3>$100,000 &mdash; Life Launch Fund</h3>
+    <p>
+      A six-figure nest egg at 18 or shortly after gives your child options: college without crushing debt, a down payment on a first home, or seed money for a business.
+    </p>
+
+    <h3>$500,000 &mdash; Financial Security</h3>
+    <p>
+      Half a million dollars in a traditional IRA in your late 30s puts your child decades ahead of most Americans in retirement savings. The median retirement savings for 35-44 year olds is under $60,000.
+    </p>
+
+    <h3>$1,000,000 &mdash; Generational Wealth</h3>
+    <p>
+      Hitting $1M before age 50 &mdash; from a $1,000 seed planted at birth &mdash; is the definition of generational wealth creation. It started with a government deposit and a parent who made a 30-minute decision.
+    </p>
+
+    <h2>The Caveats</h2>
+
+    <p>
+      These projections are illustrative, not guaranteed. Real-world considerations include:
+    </p>
+
+    <ul>
+      <li><strong>Market volatility:</strong> The S&P 500 does not return a smooth 8% every year. Some years it drops 20-30%. Over 18+ years, it has always recovered, but the path is bumpy.</li>
+      <li><strong>Inflation:</strong> $1M in 2065 will not have the same purchasing power as $1M today. At 3% inflation, it would be equivalent to roughly $330,000 in today's dollars.</li>
+      <li><strong>Taxes:</strong> Withdrawals from the traditional IRA are taxed as ordinary income. A Roth conversion at 18 (while in a low tax bracket) could eliminate this.</li>
+    </ul>
+
+    <CalloutBox type="tip" title="Roth conversion at 18">
+      When the account converts to a traditional IRA at 18, your child can convert it to a Roth IRA. If they have little to no income (like most 18-year-olds), the tax bill on the conversion could be minimal. After that, all future growth is tax-free. Read our <a href="/blog/trump-account-roth-conversion-strategy">Roth conversion strategy guide</a>.
+    </CalloutBox>
+
+    <h2>The Bottom Line</h2>
+
+    <p>
+      A Trump Account is not a get-rich-quick scheme. It is a get-rich-slowly machine, powered by compound interest and time. The ${limits.pilotDeposit.toLocaleString()} deposit is the seed. Your monthly contributions are the water. Eighteen years of patience is the sunshine. And the result could change your child's financial trajectory forever.
+    </p>
+
+    <p>
+      See the full interactive milestone chart with our <a href="/calculators/milestones">Milestone Calculator</a>.
+    </p>
+  </div>
+</BlogLayout>
