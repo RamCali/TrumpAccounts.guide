@@ -1,0 +1,164 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import MiniCostOfWaiting from '../../components/calculators/MiniCostOfWaiting';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('cost-of-waiting-calculator')!;
+const related = getRelatedArticles('cost-of-waiting-calculator');
+
+const faqs = [
+  {
+    question: 'How much does one year of waiting cost?',
+    answer: `At $200/month and 8% returns, waiting one year costs roughly $3,900 in lost growth by age 18. At max contributions ($417/month), it costs about $7,800. The exact amount depends on your contribution level and the market's actual returns.`,
+  },
+  {
+    question: 'Is it too late to open a Trump Account if my child is already 5?',
+    answer: `No. A child under 18 at the end of the election year is eligible. You will have fewer years of compounding, but starting now is always better than waiting longer. Children born before ${limits.pilotDepositStartYear} won't receive the $${limits.pilotDeposit.toLocaleString()} pilot deposit, but can still receive family contributions up to $${limits.annualContributionLimit.toLocaleString()}/year.`,
+  },
+  {
+    question: 'Can I make up for lost time with larger contributions?',
+    answer: `The annual contribution limit is $${limits.annualContributionLimit.toLocaleString()}. There is no catch-up provision. If you skip a year, that contribution room is gone forever. You cannot contribute $10,000 the next year to make up for it.`,
+  },
+  {
+    question: 'Does the $1,000 federal deposit grow even if I don\'t add money?',
+    answer: `Yes. The $${limits.pilotDeposit.toLocaleString()} pilot deposit is invested in an S&P 500 index fund and grows on its own. At 8% average annual returns, it would grow to roughly $4,000 by age 18 without any additional contributions.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><strong class="text-white">Every year of delay costs thousands.</strong> At $200/month, waiting 5 years costs roughly $20,000 in lost growth.</li>
+        <li><strong class="text-white">There is no catch-up provision.</strong> The ${limits.annualContributionLimit.toLocaleString()}/year cap means skipped years are gone forever.</li>
+        <li><strong class="text-white">Compounding rewards the early bird.</strong> The first years of growth create the foundation for everything that follows.</li>
+        <li><strong class="text-white">Starting late is still better than not starting.</strong> Even 10 years of compounding beats zero.</li>
+      </ul>
+    </div>
+
+    <p>
+      "I'll get to it next year." Those six words could cost your child tens of thousands of dollars. Here is the math.
+    </p>
+
+    <h2>The Compounding Clock Is Ticking</h2>
+
+    <p>
+      A Trump Account's greatest asset is not the ${limits.pilotDeposit.toLocaleString()} federal deposit. It is <strong>time</strong>. Compound interest works like a snowball rolling downhill. The earlier it starts, the bigger it gets. Every year you wait shrinks the hill.
+    </p>
+
+    <p>
+      Use the calculator below to see exactly how much your child loses for every year of delay.
+    </p>
+
+    <div class="not-prose my-8">
+      <MiniCostOfWaiting client:visible />
+    </div>
+
+    <h2>What the Numbers Look Like</h2>
+
+    <p>
+      Here are concrete scenarios at 8% average annual returns (a conservative estimate for the S&P 500 over 18+ years):
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Start Age</th>
+            <th class="pb-2 pr-4">Years of Growth</th>
+            <th class="pb-2 pr-4">Value at 18 ($200/mo)</th>
+            <th class="pb-2">Cost of Waiting</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">Birth (age 0)</td>
+            <td class="py-2 pr-4">18 years</td>
+            <td class="py-2 pr-4 text-mint-400">$100,846</td>
+            <td class="py-2">&mdash;</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">Age 1</td>
+            <td class="py-2 pr-4">17 years</td>
+            <td class="py-2 pr-4">$90,431</td>
+            <td class="py-2 text-amber-400">-$10,415</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">Age 3</td>
+            <td class="py-2 pr-4">15 years</td>
+            <td class="py-2 pr-4">$72,302</td>
+            <td class="py-2 text-amber-400">-$28,544</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">Age 5</td>
+            <td class="py-2 pr-4">13 years</td>
+            <td class="py-2 pr-4">$57,037</td>
+            <td class="py-2 text-amber-400">-$43,809</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4">Age 10</td>
+            <td class="py-2 pr-4">8 years</td>
+            <td class="py-2 pr-4">$28,082</td>
+            <td class="py-2 text-red-400">-$72,764</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Waiting 5 years at $200/month costs your child over <strong>$43,000</strong>. That is more than an entire year of in-state college tuition at most universities.
+    </p>
+
+    <CalloutBox type="warning" title="No catch-up provision">
+      The annual contribution limit is ${limits.annualContributionLimit.toLocaleString()}. If you skip a year, you cannot contribute $10,000 the next year. That missed contribution room is gone forever.
+    </CalloutBox>
+
+    <h2>Why the First Years Matter Most</h2>
+
+    <p>
+      A dollar contributed at birth has 18 full years to compound. A dollar contributed at age 10 only has 8 years. But the difference is not linear. At 8% returns:
+    </p>
+
+    <ul>
+      <li>$1 at birth becomes <strong>$4.00</strong> at age 18</li>
+      <li>$1 at age 5 becomes <strong>$2.72</strong> at age 18</li>
+      <li>$1 at age 10 becomes <strong>$1.85</strong> at age 18</li>
+    </ul>
+
+    <p>
+      Early dollars are literally worth more because they have more time to multiply. This is why financial advisors say <strong>time in the market beats timing the market</strong>.
+    </p>
+
+    <h2>What If You Already Waited?</h2>
+
+    <p>
+      If your child is already a few years old, do not panic. Starting now is infinitely better than waiting more.
+    </p>
+
+    <CalloutBox type="tip" title="Late is better than never">
+      Even if your child is 10, contributing $417/month for 8 years at 8% returns could grow to $57,000+. That is still a meaningful head start on adult life. The worst time to start is never.
+    </CalloutBox>
+
+    <p>
+      For a detailed projection based on your child's exact age and your contribution plans, use our <a href="/calculators/cost-of-waiting">full Cost of Waiting Calculator</a>.
+    </p>
+
+    <h2>The Bottom Line</h2>
+
+    <p>
+      Compounding does not wait. Every month of delay is a month your child's money is not growing. File {limits.form} with your 2025 tax return, choose a low-cost S&P 500 fund, and start contributing. The cost of doing nothing is far greater than the cost of getting started.
+    </p>
+  </div>
+</BlogLayout>
