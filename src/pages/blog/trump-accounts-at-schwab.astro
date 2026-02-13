@@ -1,0 +1,242 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-accounts-at-schwab')!;
+const related = getRelatedArticles('trump-accounts-at-schwab');
+
+const faqs = [
+  {
+    question: 'Is Schwab an approved Trump Account trustee?',
+    answer: 'Charles Schwab is expected to be an approved Trump Account trustee once the IRS finalizes the list of eligible custodians. As a major brokerage already offering IRAs and custodial accounts, Schwab is well positioned to participate. Check trumpaccounts.gov for the official trustee list when it is published.',
+  },
+  {
+    question: 'What is the cheapest fund at Schwab for a Trump Account?',
+    answer: 'SWPPX (Schwab S&P 500 Index Fund) has an expense ratio of just 0.02%. That is $2 per year on a $10,000 balance. It is one of the lowest-cost S&P 500 funds available anywhere and falls well below the 0.1% cap required by law.',
+  },
+  {
+    question: 'Can I visit a Schwab branch to set up a Trump Account?',
+    answer: 'Yes. Schwab has hundreds of physical branch locations across the United States. This is a major advantage over online-only brokerages. You can walk in, sit down with a representative, and get help opening and funding a Trump Account in person.',
+  },
+  {
+    question: 'Does Schwab charge fees for Trump Accounts?',
+    answer: 'Schwab is not expected to charge account maintenance fees or trading commissions for Trump Accounts. Schwab already offers commission-free trades and zero-fee IRAs. The only ongoing cost would be the fund expense ratio, which starts at 0.02% for SWPPX.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <p>
+      <strong>Yes, you are expected to be able to open a Trump Account at Charles Schwab.</strong> Schwab is anticipated to be an approved trustee for Trump Accounts under IRC Section 530A. As one of the largest brokerages in the country, Schwab already handles millions of IRAs and custodial accounts. Once the IRS publishes the final trustee list, Schwab is widely expected to be on it. You will still need to file {limits.form} first to elect into the program before opening an account at any brokerage.
+    </p>
+
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Charles Schwab is <strong class="text-white">expected to be an approved Trump Account trustee</strong>.</li>
+        <li>Schwab offers SWPPX (S&P 500 Index) at <strong class="text-white">0.02% expense ratio</strong> — one of the cheapest options anywhere.</li>
+        <li>You must file <strong class="text-white">{limits.form}</strong> with the IRS before opening an account at Schwab or any brokerage.</li>
+        <li>Schwab has <strong class="text-white">physical branches</strong> where you can get in-person help — a big advantage for parents who want hands-on support.</li>
+        <li>No account maintenance fees or trading commissions are expected. The fund expense ratio is the only cost.</li>
+      </ul>
+    </div>
+
+    <CalloutBox type="info" title="Trustee List May Change">
+      <p>
+        The IRS has not yet published the final list of approved Trump Account trustees. Schwab is widely anticipated to qualify, but the official list will be available at <a href="https://trumpaccounts.gov">{limits.portal}</a> when the portal launches in mid-2026. Always verify before making decisions.
+      </p>
+    </CalloutBox>
+
+    <h2>Can You Open a Trump Account at Schwab?</h2>
+    <p>
+      Schwab is expected to be one of the first brokerages to offer Trump Accounts. The firm already supports traditional IRAs, Roth IRAs, and custodial accounts for minors. Adding Trump Account support would be a natural extension of its existing infrastructure.
+    </p>
+    <p>
+      But here is the important part: <strong>you cannot just walk into Schwab and open a Trump Account.</strong> You need to file {limits.form} with the IRS first. This is the Trump Account Election form. It tells the IRS that you want to create a Trump Account for your child.
+    </p>
+    <p>
+      There are three ways to file:
+    </p>
+    <ol>
+      <li><strong>With your 2025 tax return</strong> — include {limits.form} when you file by April 15, 2026.</li>
+      <li><strong>Through {limits.portal}</strong> — the online portal is expected to launch in mid-2026.</li>
+      <li><strong>By mail</strong> — send {limits.form} directly to the IRS.</li>
+    </ol>
+    <p>
+      Once the IRS processes your election, you can then select Schwab (or any approved trustee) to hold the account and choose your fund. For the full walkthrough, see <a href="/blog/how-to-open-step-by-step">How to Open a Trump Account (2026)</a>.
+    </p>
+
+    <h2>Schwab's Eligible Trump Account Funds</h2>
+    <p>
+      Trump Accounts must be invested in mutual funds or ETFs that track the S&P 500 or a broad U.S. equity index. Expense ratios must be at or below {limits.maxExpenseRatio * 100}%. Schwab offers two standout options:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Fund</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Ticker</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Type</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Index Tracked</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Expense Ratio</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Annual Fee on $10K</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Schwab S&P 500 Index Fund</td>
+            <td class="py-3 pr-4 text-gold-400">SWPPX</td>
+            <td class="py-3 pr-4">Mutual Fund</td>
+            <td class="py-3 pr-4">S&P 500</td>
+            <td class="py-3 pr-4 text-mint-400">0.02%</td>
+            <td class="py-3 pr-4">$2</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Schwab Total Stock Market Index</td>
+            <td class="py-3 pr-4 text-gold-400">SWTSX</td>
+            <td class="py-3 pr-4">Mutual Fund</td>
+            <td class="py-3 pr-4">Broad U.S. Equity</td>
+            <td class="py-3 pr-4 text-mint-400">0.03%</td>
+            <td class="py-3 pr-4">$3</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Both funds are well below the {limits.maxExpenseRatio * 100}% expense ratio cap. SWPPX is the cheaper option and tracks the S&P 500 specifically. SWTSX gives you broader exposure to the entire U.S. stock market, including small and mid-cap companies, for just 0.01% more.
+    </p>
+    <p>
+      For a deeper look at eligible funds, see <a href="/blog/index-fund-requirements">Trump Account Index Fund Requirements</a>.
+    </p>
+
+    <h2>How to Open a Trump Account at Schwab</h2>
+    <p>
+      Here is the step-by-step process:
+    </p>
+    <ol>
+      <li><strong>Get your child's SSN.</strong> Your child must be a U.S. citizen with a valid Social Security Number.</li>
+      <li><strong>File {limits.form}.</strong> Include it with your 2025 tax return or submit it through {limits.portal} when the portal launches.</li>
+      <li><strong>Wait for IRS confirmation.</strong> The IRS will process your election and activate the Trump Account.</li>
+      <li><strong>Select Schwab as your trustee.</strong> Once your account is active, designate Charles Schwab as your custodian.</li>
+      <li><strong>Choose your fund.</strong> Pick SWPPX (0.02%) or SWTSX (0.03%) — or both, depending on your preference.</li>
+      <li><strong>Make your first contribution.</strong> You can contribute up to ${limits.annualContributionLimit.toLocaleString()} per year. If your child was born between 2025 and 2028, the $1,000 federal pilot deposit will also be deposited into the account.</li>
+    </ol>
+    <p>
+      You can do this entirely online, by phone, or by visiting a Schwab branch in person. For the complete guide, see <a href="/blog/how-to-open-step-by-step">How to Open a Trump Account (2026)</a>.
+    </p>
+
+    <h2>Schwab Trump Account Fees</h2>
+    <p>
+      Schwab is known for low fees. Here is what to expect:
+    </p>
+    <ul>
+      <li><strong>Account maintenance fee:</strong> $0. Schwab does not charge annual fees on brokerage or IRA accounts.</li>
+      <li><strong>Trading commissions:</strong> $0. Schwab offers commission-free trading on stocks, ETFs, and Schwab mutual funds.</li>
+      <li><strong>Fund expense ratio:</strong> 0.02% for SWPPX, 0.03% for SWTSX. This is the only ongoing cost.</li>
+      <li><strong>Account minimums:</strong> $0. Schwab has no minimum balance requirement to open an account.</li>
+    </ul>
+    <p>
+      On a $10,000 balance, SWPPX costs just $2 per year. On $50,000, it costs $10 per year. That is about as cheap as investing gets. For a full breakdown of how fees affect long-term growth, see <a href="/blog/trump-account-fees-explained">Trump Account Fees and Expense Ratios</a>.
+    </p>
+
+    <h2>Schwab vs Fidelity vs Vanguard for Trump Accounts</h2>
+    <p>
+      All three major brokerages are expected to offer Trump Accounts. Here is how their lowest-cost eligible funds compare:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Brokerage</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">S&P 500 Fund</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Ticker</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Expense Ratio</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Total Market Fund</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Ticker</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Expense Ratio</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Schwab</td>
+            <td class="py-3 pr-4">Schwab S&P 500 Index</td>
+            <td class="py-3 pr-4 text-gold-400">SWPPX</td>
+            <td class="py-3 pr-4 text-mint-400">0.02%</td>
+            <td class="py-3 pr-4">Schwab Total Stock Mkt</td>
+            <td class="py-3 pr-4 text-gold-400">SWTSX</td>
+            <td class="py-3 pr-4 text-mint-400">0.03%</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Fidelity</td>
+            <td class="py-3 pr-4">Fidelity 500 Index</td>
+            <td class="py-3 pr-4 text-gold-400">FXAIX</td>
+            <td class="py-3 pr-4 text-mint-400">0.015%</td>
+            <td class="py-3 pr-4">Fidelity Total Market</td>
+            <td class="py-3 pr-4 text-gold-400">FSKAX</td>
+            <td class="py-3 pr-4 text-mint-400">0.015%</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Vanguard</td>
+            <td class="py-3 pr-4">Vanguard 500 Index</td>
+            <td class="py-3 pr-4 text-gold-400">VOO / VFIAX</td>
+            <td class="py-3 pr-4 text-mint-400">0.03%</td>
+            <td class="py-3 pr-4">Vanguard Total Stock Mkt</td>
+            <td class="py-3 pr-4 text-gold-400">VTI / VTSAX</td>
+            <td class="py-3 pr-4 text-mint-400">0.03%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      The expense ratio differences between these three brokerages are tiny — fractions of a penny per dollar per year. All three are excellent choices. The real differentiators are service, features, and convenience.
+    </p>
+    <p>
+      For a detailed ETF-level comparison, see <a href="/blog/trump-account-vs-sp500-etfs">Best S&P 500 ETFs for Trump Accounts</a>.
+    </p>
+
+    <h2>Why Schwab for a Trump Account?</h2>
+    <p>
+      Here is why many parents will choose Schwab:
+    </p>
+    <ul>
+      <li><strong>Physical branches.</strong> Schwab has hundreds of branch locations across the U.S. If you prefer face-to-face help, this is a major advantage. Vanguard has no branches. Fidelity has some, but fewer than Schwab.</li>
+      <li><strong>Strong customer service.</strong> Schwab consistently ranks high in customer satisfaction surveys. You can call, chat, or walk into a branch.</li>
+      <li><strong>No account minimums.</strong> You can open an account with $0. No minimum balance required.</li>
+      <li><strong>Ultra-low fund costs.</strong> SWPPX at 0.02% is tied for the lowest S&P 500 fund expense ratio among major brokerages.</li>
+      <li><strong>All-in-one platform.</strong> If you already have a Schwab checking account, brokerage account, or IRA, managing your child's Trump Account in the same place is convenient.</li>
+      <li><strong>Commission-free trading.</strong> No fees to buy or sell Schwab mutual funds or any ETFs.</li>
+    </ul>
+
+    <CalloutBox type="tip" title="Already a Schwab Customer?">
+      <p>
+        If you already bank or invest with Schwab, keeping your child's Trump Account there makes managing everything easier. One login, one dashboard, one relationship. And you can walk into any branch if you ever need help.
+      </p>
+    </CalloutBox>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      Charles Schwab is expected to be an excellent choice for a Trump Account. With SWPPX at 0.02%, no account fees, no minimums, and physical branches for in-person support, it checks every box. The process starts with filing {limits.form} — not with calling Schwab. Once the IRS activates your child's account, you can then designate Schwab as your trustee and start investing.
+    </p>
+    <p>
+      Your child's Trump Account grows from birth through age {limits.growthPhaseEndAge}, then converts to a traditional IRA. Schwab's low costs help maximize every dollar of that growth.
+    </p>
+    <p>
+      To compare all eligible funds and their costs, visit our <a href="/blog/trump-account-fees-explained">fee breakdown</a> or <a href="/blog/trump-account-vs-sp500-etfs">S&P 500 ETF comparison</a>.
+    </p>
+  </div>
+</BlogLayout>

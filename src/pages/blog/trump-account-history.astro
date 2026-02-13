@@ -1,0 +1,224 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+
+const article = getArticle('trump-account-history')!;
+const related = getRelatedArticles('trump-account-history');
+
+const faqs = [
+  {
+    question: 'Who created Trump Accounts?',
+    answer: 'Texas Senator Ted Cruz is credited as the primary architect of Trump Accounts. He discussed the concept with House Speaker Mike Johnson for over a year before it was included in the One Big Beautiful Bill Act in May 2025. President Trump directly pushed for its inclusion.',
+  },
+  {
+    question: 'What were Trump Accounts originally called?',
+    answer: 'The accounts went through three names. They were initially conceived as "Invest America" accounts, renamed to "MAGA Accounts" (Money Accounts for Growth and Advancement) on the way to committee, and finally renamed to "Trump Accounts" as the bill was finalized in the House.',
+  },
+  {
+    question: 'When was the One Big Beautiful Bill Act signed?',
+    answer: 'The OBBBA was signed into law on July 4, 2025. Trump Accounts are defined in IRC Section 530A, which was created by the act.',
+  },
+  {
+    question: 'Are Trump Accounts related to baby bonds?',
+    answer: 'The concept parallels Senator Cory Booker\'s baby bonds proposal, but with key differences. Baby bonds would have been managed by the U.S. Treasury and not invested in equities. Trump Accounts are privately managed and invested entirely in stock market index funds.',
+  },
+  {
+    question: 'When will Trump Accounts be available?',
+    answer: 'Trump Accounts will be available for initial deposits on July 4, 2026 — the 250th anniversary of the Declaration of Independence (the U.S. Semiquincentennial).',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Trump Accounts were created by <strong class="text-white">Texas Senator Ted Cruz</strong>, who developed the concept over a year before it entered legislation.</li>
+        <li>The accounts went through <strong class="text-white">three name changes</strong>: Invest America → MAGA Accounts → Trump Accounts.</li>
+        <li>The concept parallels <strong class="text-white">Senator Cory Booker's baby bonds</strong> proposal but uses private management and stock investments.</li>
+        <li>President Trump promoted the accounts at the <strong class="text-white">White House in June 2025</strong> ahead of Senate passage.</li>
+        <li>Accounts open on <strong class="text-white">July 4, 2026</strong> — the 250th anniversary of the Declaration of Independence.</li>
+      </ul>
+    </div>
+
+    <p>
+      Trump Accounts did not appear out of nowhere. They are the result of more than a year of behind-the-scenes work by a single senator, a concept borrowed from across the aisle, and a last-minute name change that made headlines. Here is the full story of how Trump Accounts went from idea to law.
+    </p>
+
+    <h2>Ted Cruz: The Architect Behind Trump Accounts</h2>
+    <p>
+      The primary architect of Trump Accounts is <strong>Texas Senator Ted Cruz</strong>. According to reporting by <a href="https://www.semafor.com/article/05/12/2025/the-new-republican-maga-account-has-a-surprising-architect-ted-cruz" target="_blank" rel="noopener">Semafor</a>, Cruz had been discussing the idea within the Republican Party and with House Speaker Mike Johnson for <strong>over a year</strong> before it appeared in legislation.
+    </p>
+    <p>
+      Many were surprised when the concept was included in the first draft of the One Big Beautiful Bill Act (OBBBA) in May 2025. According to Cruz, President Trump directly pushed for its inclusion.
+    </p>
+    <p>
+      Cruz's stated goal was to address what he saw as young Americans' negative views of capitalism. He said Trump Accounts would <strong>"help create new capitalists"</strong> by letting more Americans have a stake in the financial system and benefit from tax-deferred compounding.
+    </p>
+
+    <CalloutBox type="info" title="Cruz's vision">
+      <p>
+        Senator Cruz argued that giving every child an investment account would fundamentally change how the next generation thinks about the stock market and capitalism. Instead of viewing Wall Street as something for the wealthy, children would grow up as investors.
+      </p>
+    </CalloutBox>
+
+    <h2>The Name Changes: Invest America → MAGA → Trump Accounts</h2>
+    <p>
+      The accounts you know as "Trump Accounts" went through <strong>three distinct names</strong> before being signed into law:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Stage</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Name</th>
+            <th class="py-3 text-gray-400 font-medium">Context</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Original concept</td>
+            <td class="py-3 pr-4">Invest America Accounts</td>
+            <td class="py-3">Cruz's initial name for the proposal</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Committee stage</td>
+            <td class="py-3 pr-4">MAGA Accounts</td>
+            <td class="py-3">"Money Accounts for Growth and Advancement" — renamed on its way to the House Ways and Means committee</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">Final law</td>
+            <td class="py-3 pr-4">Trump Accounts</td>
+            <td class="py-3">Changed at the last minute as the bill was finalized by House Republicans</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      The final name change to "Trump Accounts" happened as the bill was being finalized by Republicans in the House of Representatives. The name stuck and is what appears in the <strong>Internal Revenue Code under Section 530A</strong>.
+    </p>
+    <p>
+      For more on how the naming affects perception and participation, see our article on <a href="/blog/trump-account-name-explained">why they're called Trump Accounts</a>.
+    </p>
+
+    <h2>The Baby Bonds Connection</h2>
+    <p>
+      The concept of giving children investment accounts at birth is not new. <strong>New Jersey Senator Cory Booker</strong>, a Democrat, had previously proposed a "baby bonds" program with a similar goal: give every child a financial head start.
+    </p>
+    <p>
+      However, the two proposals differ in important ways:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Feature</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Trump Accounts</th>
+            <th class="py-3 text-gray-400 font-medium">Baby Bonds (Booker)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Management</td>
+            <td class="py-3 pr-4">Privately managed by brokerages</td>
+            <td class="py-3">Managed by the U.S. Treasury</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Investments</td>
+            <td class="py-3 pr-4">Stock market index funds (S&P 500)</td>
+            <td class="py-3">Not investable in equity markets</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Contributions</td>
+            <td class="py-3 pr-4">Government + family + employer + charity</td>
+            <td class="py-3">Government only (income-based)</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">Status</td>
+            <td class="py-3 pr-4">Signed into law (July 4, 2025)</td>
+            <td class="py-3">Proposed only (never passed)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      The key philosophical difference: <strong>Baby bonds would have been government-managed and conservative</strong>. Trump Accounts are <strong>privately managed and invest entirely in stock equities</strong>. Cruz's approach puts children's money into the stock market, betting on long-term equity growth.
+    </p>
+
+    <h2>Legislative Timeline</h2>
+    <p>
+      Here is how Trump Accounts moved from concept to law:
+    </p>
+
+    <div class="not-prose my-6 space-y-4">
+      <div class="flex gap-4">
+        <div class="flex-shrink-0 w-24 text-sm font-medium text-gold-400">2024</div>
+        <div class="text-gray-300">Cruz begins discussing the "Invest America" concept with GOP leadership and House Speaker Mike Johnson.</div>
+      </div>
+      <div class="flex gap-4">
+        <div class="flex-shrink-0 w-24 text-sm font-medium text-gold-400">May 2025</div>
+        <div class="text-gray-300">First draft of the OBBBA includes Trump Accounts. Cruz also introduces the standalone Invest America Act. Utah Rep. Blake Moore introduces the MAGA Act in collaboration with Cruz.</div>
+      </div>
+      <div class="flex gap-4">
+        <div class="flex-shrink-0 w-24 text-sm font-medium text-gold-400">Jun 2025</div>
+        <div class="text-gray-300">President Trump promotes the accounts at a White House roundtable. CEOs from Dell, Nvidia, and Robinhood express support at the Invest America Council meeting.</div>
+      </div>
+      <div class="flex gap-4">
+        <div class="flex-shrink-0 w-24 text-sm font-medium text-gold-400">Jul 4, 2025</div>
+        <div class="text-gray-300">The One Big Beautiful Bill Act is signed into law. Trump Accounts are codified as IRC Section 530A.</div>
+      </div>
+      <div class="flex gap-4">
+        <div class="flex-shrink-0 w-24 text-sm font-medium text-gold-400">Dec 2, 2025</div>
+        <div class="text-gray-300">IRS releases Notice 2025-68 with planned regulations. Michael and Susan Dell announce their $6.25 billion pledge.</div>
+      </div>
+      <div class="flex gap-4">
+        <div class="flex-shrink-0 w-24 text-sm font-medium text-gold-400">Jul 4, 2026</div>
+        <div class="text-gray-300">Trump Accounts open for initial deposits — coinciding with the 250th anniversary of the Declaration of Independence.</div>
+      </div>
+    </div>
+
+    <h2>Bipartisan Interest</h2>
+    <p>
+      While Trump Accounts were created by Republicans, the concept attracted some bipartisan interest. <strong>Senate Minority Whip Dick Durbin</strong>, a Democrat who opposed many provisions of the OBBBA, praised the idea of child investment accounts, saying that <strong>"even a stopped watch"</strong> was right twice a day.
+    </p>
+    <p>
+      The bipartisan appeal makes sense. The core idea — give every child a financial head start — is not inherently partisan. The implementation details (private management, stock investments, the "Trump" branding) are where political opinions diverge.
+    </p>
+
+    <h2>The Cost</h2>
+    <p>
+      The <strong>Congressional Joint Committee on Taxation</strong> estimated that Trump Accounts will cost the U.S. Treasury approximately <strong>$15 billion by 2034</strong>. This includes the $1,000 pilot deposits for children born 2025-2028 and the administrative costs of setting up the program.
+    </p>
+    <p>
+      For a deeper look at the fiscal impact, see our article on <a href="/blog/cost-to-taxpayers">how much Trump Accounts cost taxpayers</a>.
+    </p>
+
+    <h2>What Comes Next</h2>
+    <p>
+      Trump Accounts are set to open on <strong>July 4, 2026</strong>. Parents can already file <a href="/blog/how-to-open-step-by-step">IRS Form 4547</a> with their 2025 tax returns (due April 15, 2026) to elect into the program. The <a href="https://trumpaccounts.gov" target="_blank" rel="noopener">trumpaccounts.gov</a> portal is expected to launch mid-2026.
+    </p>
+    <p>
+      Whether Trump Accounts achieve Cruz's vision of "creating new capitalists" remains to be seen. But the infrastructure is now law, the money is allocated, and <a href="/blog/corporate-pledges-trump-accounts">major corporations are lining up to support it</a>.
+    </p>
+
+    <CalloutBox type="warning" title="Educational content only">
+      <p>
+        This article is based on published reporting and public records. It is educational content, not tax or financial advice. Consult a qualified professional for guidance on your specific situation.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

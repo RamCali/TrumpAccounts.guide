@@ -49,7 +49,108 @@ There are three ways to establish a Trump Account:
 
 ### The Dell Foundation Pledge
 
-Michael and Susan Dell pledged $6.25 billion — $250 per child under 10 in ZIP codes where the median household income is below $150,000. This is in addition to the $1,000 federal pilot deposit.
+Michael and Susan Dell pledged $6.25 billion — $250 per child under 10 in ZIP codes where the median household income is below $150,000. This is in addition to the $1,000 federal pilot deposit. This is the largest known private commitment tied to the program. A qualifying newborn born 2025-2028 in an eligible ZIP code could start with $1,250 total ($1,000 federal + $250 Dell).
+
+---
+
+## Trump Accounts for Newborns (2025-2028)
+
+Children born between January 1, 2025 and December 31, 2028 receive a special benefit: a one-time $1,000 federal pilot deposit into their Trump Account. This is free money from the government — no repayment, no strings attached.
+
+### How to Claim the $1,000 Deposit for Your Newborn
+
+1. Get your baby's Social Security number (apply at the hospital with the birth certificate).
+2. File IRS Form 4547 (Trump Account Election(s)) with your 2025 tax return (due April 15, 2026), or submit through trumpaccounts.gov when the portal launches mid-2026.
+3. The $1,000 is deposited into your child's Trump Account. It is not automatic — you must opt in.
+
+### Growth Projections for Newborns
+
+Starting with just the $1,000 federal deposit and no additional contributions:
+- At 6% annual return: ~$2,854 by age 18
+- At 8% annual return: ~$3,996 by age 18
+- At 10% annual return (S&P 500 historical average): ~$5,560 by age 18
+
+With $1,000 deposit + $100/month family contributions:
+- At 10% annual return: ~$57,000 by age 18
+
+With $1,000 deposit + $416.67/month ($5,000/year max):
+- At 10% annual return: ~$175,000+ by age 18
+
+### Newborns in Dell-Qualifying ZIP Codes
+
+Newborns in ZIP codes with median household income below $150,000 also receive $250 from the Dell Foundation, for a $1,250 starting balance. At 10% annual return, $1,250 grows to roughly $6,950 over 18 years without additional contributions.
+
+---
+
+## Trump Account Benefits
+
+Seven key benefits of Trump Accounts:
+
+1. **Free $1,000 Government Deposit**: Children born 2025-2028 receive a $1,000 pilot deposit at no cost to the family.
+2. **No Income Limits**: Unlike Roth IRAs or many tax credits, there are zero income restrictions. Every U.S. citizen child qualifies.
+3. **Tax-Deferred Growth**: Investment gains are not taxed while in the account. Over 18 years, tax-deferred compounding can add thousands compared to a taxable account.
+4. **Employer Matching**: Employers can contribute up to $2,500/year per employee, tax-free under IRC §128. This is essentially free money on top of family contributions.
+5. **Low-Cost S&P 500 Investing**: Funds must track the S&P 500 or broad U.S. equity index with expense ratios capped at 0.1%. This protects families from high-fee products.
+6. **Automatic IRA Conversion at 18**: At age 18, the account becomes a traditional IRA. The child gets a retirement account head start that most Americans don't get until their 20s or 30s.
+7. **Dell Foundation Bonus**: Qualifying children receive an additional $250 from the Dell Foundation.
+
+### Are There Downsides?
+
+- Funds are locked until age 18 (no early withdrawals for emergencies)
+- Limited to S&P 500 / broad index funds (no individual stocks, bonds, or real estate)
+- Withdrawals after 18 are taxed as ordinary income (traditional IRA treatment, not Roth)
+- Early withdrawal penalty of 10% before age 59½ applies after IRA conversion
+- Contributions are after-tax (no upfront tax deduction)
+
+---
+
+## Where to Open a Trump Account: Brokerage Guide
+
+The IRS will publish a list of approved trustees (brokerages and financial institutions) authorized to hold Trump Accounts. Based on their existing IRA infrastructure and fund offerings, the following major brokerages are expected to participate.
+
+### Fidelity and Trump Accounts
+
+Fidelity Investments is widely expected to be among the first approved Trump Account trustees. Key details:
+
+- **Eligible S&P 500 fund**: Fidelity 500 Index Fund (FXAIX) — 0.015% expense ratio (well under the 0.1% cap)
+- **Eligible total market fund**: Fidelity Total Market Index Fund (FSKAX) — 0.015% expense ratio
+- **Account fees**: Expected $0 account maintenance fees and $0 trading commissions (consistent with Fidelity's existing IRA fee structure)
+- **How to open**: Expected through Fidelity.com or at 200+ Investor Centers nationwide, after IRS publishes the approved trustee list
+- **Why Fidelity**: Lowest expense ratios among major brokerages, strong digital platform, physical branch access, established IRA infrastructure
+
+### Schwab and Trump Accounts
+
+Charles Schwab is also expected to be among the first approved trustees. Key details:
+
+- **Eligible S&P 500 fund**: Schwab S&P 500 Index Fund (SWPPX) — 0.02% expense ratio
+- **Eligible total market fund**: Schwab Total Stock Market Index Fund (SWTSX) — 0.03% expense ratio
+- **Account fees**: Expected $0 account maintenance fees and $0 commissions
+- **How to open**: Expected through Schwab.com or at 400+ physical branches nationwide
+- **Why Schwab**: Largest branch network among discount brokerages, strong customer service reputation, competitive expense ratios
+
+### Robinhood and Trump Accounts
+
+Robinhood has not been confirmed as an approved Trump Account trustee as of early 2026. Important considerations:
+
+- **Status**: Not yet confirmed. Robinhood would need to apply for and receive IRS approval as a Trump Account trustee.
+- **Potential eligible ETFs if approved**: VOO (Vanguard S&P 500 ETF, 0.03% ER), IVV (iShares Core S&P 500 ETF, 0.03% ER), SPY (SPDR S&P 500 ETF, 0.0945% ER)
+- **Key concern**: Trump Accounts require mutual fund or ETF options tracking the S&P 500. Robinhood primarily offers ETFs, not mutual funds, which may limit options.
+- **Recommendation**: Traditional brokerages like Fidelity and Schwab offer lower expense ratios on mutual funds and have established IRA custodian infrastructure. Consider waiting for the official IRS trustee list before choosing a brokerage.
+
+### Fund Comparison Across Brokerages
+
+| Brokerage | Fund | Type | Expense Ratio |
+|-----------|------|------|---------------|
+| Fidelity | FXAIX | Mutual Fund | 0.015% |
+| Fidelity | FSKAX | Mutual Fund | 0.015% |
+| Schwab | SWPPX | Mutual Fund | 0.02% |
+| Schwab | SWTSX | Mutual Fund | 0.03% |
+| Vanguard | VFIAX | Mutual Fund | 0.04% |
+| Vanguard | VOO | ETF | 0.03% |
+| iShares | IVV | ETF | 0.03% |
+| SPDR | SPY | ETF | 0.0945% |
+
+Note: All expense ratios are below the 0.1% cap required for Trump Account-eligible funds. Lower is better — even small differences compound over 18 years.
 
 ---
 
@@ -156,6 +257,55 @@ Michael and Susan Dell pledged $6.25 billion — $250 per child under 10 in ZIP 
 
 ### Blog
 - Blog Hub: https://trumpaccounts.guide/blog
+- Trump Accounts for Newborns: https://trumpaccounts.guide/blog/trump-accounts-for-newborns
+- Trump Accounts Benefits: https://trumpaccounts.guide/blog/trump-accounts-benefits
+- Who Qualifies for a Trump Account: https://trumpaccounts.guide/blog/who-qualifies-for-trump-account
+- How Are Trump Account Gains Taxed: https://trumpaccounts.guide/blog/gains-taxation-explained
+- The Dell $6.25 Billion Pledge: https://trumpaccounts.guide/blog/dell-pledge-explained
+- Contribution Limits (2026): https://trumpaccounts.guide/blog/contribution-limits-explained
+- Trump Accounts at Fidelity: https://trumpaccounts.guide/blog/trump-accounts-at-fidelity
+- Trump Accounts at Schwab: https://trumpaccounts.guide/blog/trump-accounts-at-schwab
+- Trump Accounts at Robinhood: https://trumpaccounts.guide/blog/trump-accounts-at-robinhood
+
+---
+
+## Frequently Asked Questions
+
+**Q: What is a Trump Account?**
+A: A Trump Account is a tax-advantaged savings account for children created by the One Big Beautiful Bill Act (IRC §530A). The government deposits $1,000 for children born 2025-2028, parents can add up to $5,000/year, and the money grows tax-deferred in S&P 500 index funds until age 18, when it converts to a traditional IRA.
+
+**Q: Who qualifies for a Trump Account?**
+A: Any child who is a U.S. citizen, has a valid Social Security number, and is under 18 at the end of the election year. There are NO income limits.
+
+**Q: Is there an income limit for Trump Accounts?**
+A: No. There are absolutely no income restrictions. Every U.S. citizen child with a valid SSN qualifies, regardless of family income.
+
+**Q: How do I open a Trump Account?**
+A: File IRS Form 4547 with your 2025 tax return (due April 15, 2026), through trumpaccounts.gov (launching mid-2026), or by mail.
+
+**Q: Do all newborns get the $1,000 deposit?**
+A: Only children born between January 1, 2025 and December 31, 2028 receive the $1,000 pilot deposit. You must opt in by filing Form 4547 — it is not automatic.
+
+**Q: What can I invest in with a Trump Account?**
+A: Mutual funds or ETFs that track the S&P 500 or a broad U.S. equity index, with expense ratios capped at 0.1%.
+
+**Q: What happens to a Trump Account at age 18?**
+A: It automatically converts to a traditional IRA with standard IRA rules. The child can then withdraw funds (taxed as ordinary income) or continue growing the account tax-deferred.
+
+**Q: How much can a Trump Account grow to?**
+A: With just the $1,000 deposit and no contributions, roughly $5,560 by age 18 (at 10% returns). With maximum contributions of $5,000/year, it could exceed $175,000 by age 18.
+
+**Q: Can my employer contribute to my child's Trump Account?**
+A: Yes. Employers can contribute up to $2,500/year per employee, tax-free under IRC §128. This counts toward the $5,000 annual cap.
+
+**Q: Is a Trump Account better than a 529 plan?**
+A: They serve different purposes. 529s are tax-free for education expenses. Trump Accounts convert to a traditional IRA at 18 with no usage restrictions but withdrawals are taxed as ordinary income. If saving specifically for college, a 529 may be better. For general financial head start, a Trump Account offers more flexibility.
+
+**Q: Can I open a Trump Account at Fidelity?**
+A: Fidelity is expected to be among the first approved trustees. Their Fidelity 500 Index Fund (FXAIX) has a 0.015% expense ratio — the lowest among major brokerages. Check the official IRS trustee list when published.
+
+**Q: What is the Dell pledge for Trump Accounts?**
+A: Michael and Susan Dell pledged $6.25 billion — $250 per child under 10 in ZIP codes where median household income is below $150,000. This is private money from the Dell Foundation, not government funds.
 
 ---
 

@@ -1,0 +1,258 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-accounts-benefits')!;
+const related = getRelatedArticles('trump-accounts-benefits');
+
+const faqs = [
+  {
+    question: 'Are Trump Accounts worth it?',
+    answer: `Yes, for most families. You get a free $${limits.pilotDeposit.toLocaleString()} federal deposit (for ${limits.pilotDepositStartYear}-${limits.pilotDepositEndYear} births), tax-deferred growth in low-cost index funds, possible employer matching up to $${limits.employerContributionLimit.toLocaleString()}/year, and no income restrictions. Even if you cannot contribute beyond the deposit, 18 years of compound growth turns $${limits.pilotDeposit.toLocaleString()} into roughly $5,500 at historical S&P 500 returns.`,
+  },
+  {
+    question: 'What is the biggest benefit of a Trump Account?',
+    answer: `The combination of free money and time. The $${limits.pilotDeposit.toLocaleString()} federal deposit costs you nothing. Invested in S&P 500 index funds for ${limits.growthPhaseEndAge} years of tax-deferred compounding, even that single deposit grows significantly. Add family and employer contributions, and the account can reach tens of thousands of dollars by age ${limits.growthPhaseEndAge}.`,
+  },
+  {
+    question: 'Are there any fees?',
+    answer: `Expense ratios on eligible funds are capped at ${limits.maxExpenseRatio * 100}% (10 basis points). That means you pay no more than $1 per year for every $1,000 invested. There are no account maintenance fees, no setup fees, and no annual account charges. This is one of the lowest-cost investment accounts available.`,
+  },
+  {
+    question: 'Can high-income families use Trump Accounts?',
+    answer: `Yes. There are no income restrictions on Trump Accounts. A family earning $500,000/year qualifies on the same terms as a family earning $30,000/year. The $${limits.annualContributionLimit.toLocaleString()} annual contribution limit and ${limits.growthPhaseEndAge}-year growth phase apply to everyone equally.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Free <strong class="text-white">${limits.pilotDeposit.toLocaleString()} federal deposit</strong> for children born {limits.pilotDepositStartYear}-{limits.pilotDepositEndYear} — no strings attached.</li>
+        <li><strong class="text-white">No income limits.</strong> Every U.S. citizen child under {limits.growthPhaseEndAge} qualifies.</li>
+        <li>Growth is <strong class="text-white">tax-deferred</strong> for up to {limits.growthPhaseEndAge} years — no annual taxes on gains.</li>
+        <li>Employers can add up to <strong class="text-white">${limits.employerContributionLimit.toLocaleString()}/year tax-free</strong> under IRC Section 128.</li>
+        <li>Expense ratios capped at <strong class="text-white">{limits.maxExpenseRatio * 100}%</strong> — among the lowest fees of any investment account.</li>
+        <li>At age {limits.growthPhaseEndAge}, it converts to an <strong class="text-white">IRA with no use restrictions</strong>.</li>
+        <li>Dell Foundation bonus of <strong class="text-white">${limits.dellPledge.perChildAmount}</strong> for children in qualifying ZIP codes.</li>
+      </ul>
+    </div>
+
+    <p>
+      Trump Accounts offer several key benefits for families: a free ${limits.pilotDeposit.toLocaleString()} government deposit, no income restrictions, tax-deferred growth in low-cost S&P 500 index funds, employer matching up to ${limits.employerContributionLimit.toLocaleString()}/year, and flexible use once your child turns {limits.growthPhaseEndAge}. Here is a closer look at each benefit and what it means for your family.
+    </p>
+
+    <h2>1. Free $${limits.pilotDeposit.toLocaleString()} Federal Deposit</h2>
+    <p>
+      Every U.S. citizen child born between <strong>{limits.pilotDepositStartYear} and {limits.pilotDepositEndYear}</strong> receives a <strong>${limits.pilotDeposit.toLocaleString()} one-time federal deposit</strong> into their Trump Account. This is real money from the government. You do not need to pay it back.
+    </p>
+    <p>
+      Parents must opt in by filing <strong>{limits.form}</strong> with their tax return or through the <a href="https://trumpaccounts.gov">{limits.portal}</a> portal. The deposit is not automatic. See our <a href="/blog/how-to-open-step-by-step">step-by-step guide to opening a Trump Account</a> for exactly how to claim it.
+    </p>
+    <p>
+      Even if you never add another dollar, the ${limits.pilotDeposit.toLocaleString()} deposit invested in the S&P 500 could grow to roughly <strong>$5,500</strong> by age {limits.growthPhaseEndAge} at historical average returns. That is free money working for your child.
+    </p>
+
+    <h2>2. No Income Limits</h2>
+    <p>
+      Unlike many government programs, Trump Accounts have <strong>no income restrictions</strong>. A family earning $30,000/year and a family earning $1 million/year both qualify on the same terms.
+    </p>
+    <p>
+      The only requirements are:
+    </p>
+    <ul>
+      <li>The child must be a <strong>U.S. citizen</strong></li>
+      <li>The child must have a <strong>valid Social Security Number (SSN)</strong></li>
+      <li>The child must be <strong>under {limits.growthPhaseEndAge}</strong> at the end of the election year</li>
+    </ul>
+    <p>
+      That is it. No means testing. No phase-outs. No complicated income calculations. Check your child's eligibility with our <a href="/calculators/eligibility-checker">eligibility checker</a>.
+    </p>
+
+    <h2>3. Tax-Deferred Growth</h2>
+    <p>
+      During the growth phase (birth through age {limits.growthPhaseEndAge}), <strong>you pay zero taxes on investment gains</strong>. The money compounds without being reduced by annual capital gains taxes or dividend taxes.
+    </p>
+    <p>
+      This matters more than most people realize. In a regular taxable brokerage account, you owe taxes every year on dividends and any capital gains from fund rebalancing. Over {limits.growthPhaseEndAge} years, those taxes drag down returns significantly.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Account Type</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Annual Tax Drag</th>
+            <th class="py-3 text-gray-400 font-medium">$5,000/yr for 18 Years (at 10%)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Trump Account</td>
+            <td class="py-3 pr-4">0% (tax-deferred)</td>
+            <td class="py-3 font-medium text-gold-400">~$252,000</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">Taxable brokerage</td>
+            <td class="py-3 pr-4">~0.5-1.0% effective</td>
+            <td class="py-3">~$228,000-$240,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      The tax-deferred advantage can add <strong>$12,000-$24,000</strong> to your child's account over {limits.growthPhaseEndAge} years at maximum contributions. For a full breakdown of how gains are taxed after age {limits.growthPhaseEndAge}, read <a href="/blog/gains-taxation-explained">our taxation guide</a>.
+    </p>
+
+    <h2>4. Employer Matching Up to ${limits.employerContributionLimit.toLocaleString()}/Year</h2>
+    <p>
+      Your employer can contribute up to <strong>${limits.employerContributionLimit.toLocaleString()} per year</strong> to your child's Trump Account, <strong>tax-free</strong> under IRC Section 128. This contribution:
+    </p>
+    <ul>
+      <li>Does <strong>not count as taxable income</strong> on your W-2</li>
+      <li>Is <strong>tax-deductible</strong> for the employer</li>
+      <li><strong>Counts toward the ${limits.annualContributionLimit.toLocaleString()} annual cap</strong> on the child's account</li>
+    </ul>
+
+    <CalloutBox type="tip" title="Ask your HR department">
+      <p>
+        Employer contributions are voluntary, not mandatory. If your company has not announced a Trump Account program, ask HR about it. Many employers are adding this benefit for recruiting and retention. See our full guide on <a href="/blog/employer-match-trump-account">employer matching for Trump Accounts</a>.
+      </p>
+    </CalloutBox>
+
+    <p>
+      Think of it like a 401(k) match for your child. If your employer contributes the full ${limits.employerContributionLimit.toLocaleString()}, your family can still add up to ${limits.employerContributionLimit.toLocaleString()} more from personal contributions to reach the ${limits.annualContributionLimit.toLocaleString()} cap.
+    </p>
+
+    <h2>5. Low-Cost Index Fund Investing</h2>
+    <p>
+      Trump Account funds must be invested in <strong>mutual funds or ETFs tracking the S&P 500 or a broad U.S. equity index</strong>. Expense ratios are capped at <strong>{limits.maxExpenseRatio * 100}%</strong> (10 basis points).
+    </p>
+    <p>
+      That means you pay no more than <strong>$1 per year for every $1,000 invested</strong>. Compare that to:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Account Type</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Typical Fees</th>
+            <th class="py-3 text-gray-400 font-medium">Annual Cost on $50,000</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Trump Account</td>
+            <td class="py-3 pr-4">0.03-0.10%</td>
+            <td class="py-3 font-medium text-gold-400">$15-$50</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Average 529 plan</td>
+            <td class="py-3 pr-4">0.20-0.70%</td>
+            <td class="py-3">$100-$350</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">Actively managed fund</td>
+            <td class="py-3 pr-4">0.50-1.50%</td>
+            <td class="py-3">$250-$750</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Low fees are one of the biggest predictors of long-term investment success. Over {limits.growthPhaseEndAge} years, even a 0.5% fee difference can cost thousands. Trump Accounts lock in some of the lowest fees available anywhere. See <a href="/blog/trump-account-fees-explained">our detailed fee breakdown</a>.
+    </p>
+
+    <h2>6. Flexible Use at Age {limits.growthPhaseEndAge}</h2>
+    <p>
+      At age {limits.growthPhaseEndAge}, the Trump Account converts to a <strong>traditional IRA</strong>. From that point, the money can be used for <strong>anything</strong>:
+    </p>
+    <ul>
+      <li><strong>College or trade school</strong> — <a href="/blog/trump-account-for-college">see details</a></li>
+      <li><strong>First home purchase</strong> — up to $10,000 penalty-free under IRA rules</li>
+      <li><strong>Starting a business</strong></li>
+      <li><strong>Long-term retirement savings</strong></li>
+      <li><strong>Any other purpose</strong></li>
+    </ul>
+    <p>
+      Unlike a 529 plan, which penalizes non-education withdrawals, Trump Account money has <strong>no use restrictions</strong> once it becomes an IRA. Withdrawals are taxed as ordinary income, but there are no extra penalties for using the money for non-education purposes.
+    </p>
+    <p>
+      For more on how the IRA conversion works, see <a href="/blog/what-can-money-be-used-for">what can Trump Account money be used for</a>.
+    </p>
+
+    <h2>7. Dell Foundation Bonus (${limits.dellPledge.perChildAmount})</h2>
+    <p>
+      Michael and Susan Dell pledged <strong>$6.25 billion</strong> to add <strong>${limits.dellPledge.perChildAmount} per qualifying child</strong> to their Trump Account. Your child qualifies if:
+    </p>
+    <ul>
+      <li>They are <strong>under age {limits.dellPledge.eligibleAge}</strong></li>
+      <li>They live in a ZIP code with a <strong>median household income below $${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}</strong></li>
+    </ul>
+    <p>
+      The $${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()} threshold covers the vast majority of American ZIP codes. Combined with the federal deposit, a qualifying newborn starts with <strong>$1,250</strong> before any family contributions. Read the full details in our <a href="/blog/dell-pledge-explained">Dell pledge explainer</a>.
+    </p>
+
+    <h2>Are There Any Downsides?</h2>
+    <p>
+      No financial product is perfect. Here are the tradeoffs you should know about:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Downside</th>
+            <th class="py-3 text-gray-400 font-medium">Details</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">No early withdrawals</td>
+            <td class="py-3">You cannot access the money before age {limits.growthPhaseEndAge} (except for rollovers, excess contributions, or death).</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Taxed on withdrawal</td>
+            <td class="py-3">Withdrawals after {limits.growthPhaseEndAge} are taxed as ordinary income (traditional IRA treatment, not Roth).</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Limited investment choices</td>
+            <td class="py-3">Only S&P 500 or broad U.S. equity index funds. No individual stocks, bonds, or international funds.</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">Market risk</td>
+            <td class="py-3">Returns are not guaranteed. The stock market can decline, though historically it has always recovered over 18-year periods.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      For most families, the benefits far outweigh these drawbacks. The locked-in growth period is a feature, not a bug — it ensures the money compounds without temptation to withdraw early. And the tax-deferred S&P 500 investment with capped fees is better than what most adults get in their own retirement accounts.
+    </p>
+    <p>
+      To see how much your child's account could grow, try the <a href="/calculators/growth-calculator"><strong>Growth Calculator</strong></a>. To check if your child qualifies, use the <a href="/calculators/eligibility-checker"><strong>Eligibility Checker</strong></a>.
+    </p>
+
+    <CalloutBox type="warning" title="Not tax or financial advice">
+      <p>
+        This article is educational content based on IRC Section 530A and IRS Notice 2025-68. It is not tax or financial advice. Consult a qualified tax professional or financial advisor before making decisions about your child's account.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

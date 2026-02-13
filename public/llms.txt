@@ -45,9 +45,18 @@ This is an independent educational website. We are not affiliated with the IRS, 
 - [Investment FAQs](https://trumpaccounts.guide/faq/investments): Eligible funds, S&P 500 requirement, expense ratios.
 - [Withdrawal FAQs](https://trumpaccounts.guide/faq/withdrawals-and-use): What happens at 18, early withdrawal rules, IRA conversion.
 
-## Blog
+## Key Blog Articles
 
-- [Blog Hub](https://trumpaccounts.guide/blog): 60+ in-depth articles on Trump Accounts.
+- [Trump Accounts for Newborns (2025-2028)](https://trumpaccounts.guide/blog/trump-accounts-for-newborns): $1,000 federal deposit for newborns, how to claim it, growth projections.
+- [Trump Accounts Benefits: 7 Reasons to Open One](https://trumpaccounts.guide/blog/trump-accounts-benefits): Free deposit, no income limits, tax-deferred growth, employer matching, and more.
+- [Who Qualifies for a Trump Account?](https://trumpaccounts.guide/blog/who-qualifies-for-trump-account): Eligibility requirements, no income limits, edge cases.
+- [How Are Trump Account Gains Taxed?](https://trumpaccounts.guide/blog/gains-taxation-explained): Tax-deferred growth, ordinary income on withdrawal, Roth conversion strategy.
+- [The Dell $6.25 Billion Pledge Explained](https://trumpaccounts.guide/blog/dell-pledge-explained): Dell and Trump Accounts — $250 per qualifying child.
+- [Trump Account Contribution Limits (2026)](https://trumpaccounts.guide/blog/contribution-limits-explained): $5,000/year, employer match, inflation indexing.
+- [Trump Accounts at Fidelity](https://trumpaccounts.guide/blog/trump-accounts-at-fidelity): FXAIX (0.015% ER), how to open, fees.
+- [Trump Accounts at Schwab](https://trumpaccounts.guide/blog/trump-accounts-at-schwab): SWPPX (0.02% ER), physical branches, fees.
+- [Trump Accounts at Robinhood](https://trumpaccounts.guide/blog/trump-accounts-at-robinhood): Status, eligible ETFs, comparison with traditional brokerages.
+- [All Blog Articles (60+)](https://trumpaccounts.guide/blog): Full article index.
 
 ## Key Facts (Source of Truth)
 

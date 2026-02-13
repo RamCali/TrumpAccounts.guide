@@ -1,0 +1,228 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-accounts-at-fidelity')!;
+const related = getRelatedArticles('trump-accounts-at-fidelity');
+
+const faqs = [
+  {
+    question: 'Is Fidelity an approved Trump Account trustee?',
+    answer: 'Fidelity is expected to be an approved Trump Account trustee based on its status as one of the largest brokerages in the U.S. The final list of approved trustees will be confirmed by the IRS. Check trumpaccounts.gov for the official list when it launches.',
+  },
+  {
+    question: 'What is the cheapest fund at Fidelity for a Trump Account?',
+    answer: 'FXAIX (Fidelity 500 Index Fund) has an expense ratio of just 0.015%. That is well below the 0.1% legal cap and among the cheapest S&P 500 funds available anywhere. On a $10,000 balance, you would pay just $1.50 per year.',
+  },
+  {
+    question: 'Can I open a Trump Account at Fidelity online?',
+    answer: 'You cannot open a Trump Account directly at Fidelity first. You must file IRS Form 4547 with your tax return or through trumpaccounts.gov. Once the IRS activates the account, you can then select Fidelity as your trustee and choose your fund.',
+  },
+  {
+    question: 'Does Fidelity charge fees for Trump Accounts?',
+    answer: 'Fidelity is expected to charge no account maintenance fees and no trading commissions, consistent with their current pricing for IRAs and custodial accounts. The only ongoing cost would be the fund expense ratio, which is as low as 0.015% for FXAIX.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <p>
+      <strong>Yes, Fidelity is expected to be an approved Trump Account trustee.</strong> As one of the largest brokerages in the country, Fidelity is anticipated to support Trump Accounts under IRC Section 530A. They offer some of the cheapest S&P 500 index funds available, making them a strong choice for your child's account. You will need to file {limits.form} first to elect a Trump Account, then select Fidelity as your trustee.
+    </p>
+
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Fidelity is <strong class="text-white">expected to be an approved trustee</strong> for Trump Accounts.</li>
+        <li>Their flagship fund <strong class="text-white">FXAIX costs just 0.015%</strong> — one of the lowest expense ratios available.</li>
+        <li>No account maintenance fees or trading commissions are expected.</li>
+        <li>You must file <strong class="text-white">{limits.form}</strong> with the IRS before selecting Fidelity as your trustee.</li>
+        <li>Fidelity has <strong class="text-white">no minimum investment</strong> for most funds, which is great for smaller contributions.</li>
+      </ul>
+    </div>
+
+    <CalloutBox type="info" title="Trustee List Not Yet Final">
+      <p>
+        The final list of approved Trump Account trustees will be published by the IRS through {limits.portal}. Fidelity's participation is anticipated based on their role as a major brokerage, but the official trustee list may change. We will update this page as soon as the IRS confirms approved custodians.
+      </p>
+    </CalloutBox>
+
+    <h2>Can You Open a Trump Account at Fidelity?</h2>
+    <p>
+      Fidelity is widely expected to participate as a Trump Account trustee. They already serve as custodians for IRAs, 529 plans, and custodial accounts. Supporting Trump Accounts would be a natural extension of their existing services.
+    </p>
+    <p>
+      Here is what we know as of early 2026:
+    </p>
+    <ul>
+      <li>The IRS has not yet published the final list of approved trustees.</li>
+      <li>Major brokerages like Fidelity, Schwab, and Vanguard are expected to participate.</li>
+      <li>The {limits.portal} portal is set to launch mid-2026 with the full trustee directory.</li>
+      <li>You must file {limits.form} with your 2025 tax return (due April 15, 2026) to elect the account first.</li>
+    </ul>
+    <p>
+      You do not pick a brokerage first. The process starts with the IRS. Once the account is activated, you then choose your trustee. For a full walkthrough, see our <a href="/blog/how-to-open-step-by-step">step-by-step guide to opening a Trump Account</a>.
+    </p>
+
+    <h2>Fidelity's Eligible Trump Account Funds</h2>
+    <p>
+      Fidelity offers two standout funds that meet Trump Account requirements. Both track broad U.S. equity indexes. Both have expense ratios far below the {(limits.maxExpenseRatio * 100).toFixed(1)}% legal cap.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Fund</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Ticker</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Index Tracked</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Expense Ratio</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Fee on $10K</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Fidelity 500 Index Fund</td>
+            <td class="py-3 pr-4">FXAIX</td>
+            <td class="py-3 pr-4">S&P 500</td>
+            <td class="py-3 pr-4 text-mint-400 font-bold">0.015%</td>
+            <td class="py-3 pr-4">$1.50/yr</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Fidelity Total Market Index Fund</td>
+            <td class="py-3 pr-4">FSKAX</td>
+            <td class="py-3 pr-4">Broad U.S. Equity</td>
+            <td class="py-3 pr-4 text-mint-400 font-bold">0.015%</td>
+            <td class="py-3 pr-4">$1.50/yr</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Both funds charge just <strong>0.015%</strong>. That is 1.5 basis points. On a $10,000 balance, you pay $1.50 per year. On a $50,000 balance, you pay $7.50 per year. These are among the cheapest index funds in the entire industry.
+    </p>
+    <p>
+      FXAIX tracks the S&P 500. FSKAX tracks the total U.S. stock market, which includes the S&P 500 plus thousands of smaller companies. Both are expected to qualify under the Trump Account <a href="/blog/index-fund-requirements">index fund requirements</a>.
+    </p>
+
+    <CalloutBox type="tip" title="FXAIX vs FSKAX: Which One?">
+      <p>
+        Both cost the same. FXAIX gives you the 500 largest U.S. companies. FSKAX gives you those 500 plus thousands more. Historically, their returns are very similar. Pick either one — you cannot go wrong.
+      </p>
+    </CalloutBox>
+
+    <h2>How to Open a Trump Account at Fidelity</h2>
+    <p>
+      You cannot walk into Fidelity and open a Trump Account today. The process starts with the IRS. Here are the steps:
+    </p>
+    <ol>
+      <li><strong>File {limits.form} with your 2025 tax return.</strong> This is how you elect a Trump Account for your child. The deadline is April 15, 2026. You can also file through the {limits.portal} portal when it launches mid-2026.</li>
+      <li><strong>Wait for IRS activation.</strong> The IRS will process your election and activate the account. You will receive confirmation.</li>
+      <li><strong>Select Fidelity as your trustee.</strong> Once the account is active, you choose which brokerage will hold the funds. Select Fidelity from the list of approved trustees.</li>
+      <li><strong>Choose your fund.</strong> Pick FXAIX, FSKAX, or another eligible fund. Start contributing up to ${limits.annualContributionLimit.toLocaleString()} per year.</li>
+    </ol>
+    <p>
+      For the complete walkthrough with screenshots and tips, see our <a href="/blog/how-to-open-step-by-step">step-by-step guide to opening a Trump Account</a>.
+    </p>
+
+    <h2>Fidelity Trump Account Fees</h2>
+    <p>
+      Fidelity is known for keeping costs low. Here is what to expect for a Trump Account:
+    </p>
+    <ul>
+      <li><strong>Account maintenance fees:</strong> None expected. Fidelity does not charge annual fees for IRAs or custodial accounts.</li>
+      <li><strong>Trading commissions:</strong> None expected. Fidelity offers commission-free trading on mutual funds and ETFs.</li>
+      <li><strong>Fund expense ratios:</strong> As low as 0.015% for FXAIX and FSKAX. This is the only ongoing cost.</li>
+      <li><strong>Minimum investment:</strong> No minimum for most Fidelity mutual funds. You can start with any amount.</li>
+    </ul>
+    <p>
+      The total cost of holding a Trump Account at Fidelity is essentially the fund expense ratio — and at 0.015%, that is about as cheap as it gets. For a deeper look at all the costs, see our <a href="/blog/trump-account-fees-explained">Trump Account fees guide</a>.
+    </p>
+
+    <h2>Fidelity vs Schwab vs Vanguard for Trump Accounts</h2>
+    <p>
+      Fidelity is not the only option. Schwab and Vanguard are also expected to serve as Trump Account trustees. Here is how their lowest-cost S&P 500 funds compare:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Brokerage</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Fund</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Ticker</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Expense Ratio</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Minimum Investment</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Fidelity</td>
+            <td class="py-3 pr-4">Fidelity 500 Index Fund</td>
+            <td class="py-3 pr-4">FXAIX</td>
+            <td class="py-3 pr-4 text-mint-400 font-bold">0.015%</td>
+            <td class="py-3 pr-4">None</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Schwab</td>
+            <td class="py-3 pr-4">Schwab S&P 500 Index Fund</td>
+            <td class="py-3 pr-4">SWPPX</td>
+            <td class="py-3 pr-4 text-mint-400">0.02%</td>
+            <td class="py-3 pr-4">None</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Vanguard</td>
+            <td class="py-3 pr-4">Vanguard 500 Index Fund</td>
+            <td class="py-3 pr-4">VFIAX</td>
+            <td class="py-3 pr-4 text-mint-400">0.04%</td>
+            <td class="py-3 pr-4">$3,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Fidelity has the lowest expense ratio at 0.015%. Schwab is close behind at 0.02%. Vanguard's Admiral Shares fund (VFIAX) is 0.04% and requires a $3,000 minimum, though their ETF (VOO) is available at 0.03% with no minimum.
+    </p>
+    <p>
+      All three brokerages charge zero trading commissions and zero account maintenance fees. The main differences are fund expense ratios and minimum investment requirements.
+    </p>
+    <p>
+      For a side-by-side look at Schwab specifically, see our <a href="/blog/trump-accounts-at-schwab">Trump Accounts at Schwab</a> guide. For a broader ETF comparison, see <a href="/blog/trump-account-vs-sp500-etfs">Best S&P 500 ETFs for Trump Accounts</a>.
+    </p>
+
+    <h2>Why Fidelity for a Trump Account?</h2>
+    <p>
+      Fidelity stands out for several reasons:
+    </p>
+    <ul>
+      <li><strong>Ultra-low expense ratios.</strong> FXAIX at 0.015% is cheaper than most competitors. Over {limits.growthPhaseEndAge} years of compounding, every basis point matters.</li>
+      <li><strong>No minimum investment.</strong> You can start with $1. This is ideal for families making small monthly contributions. Vanguard's Admiral Shares require $3,000 to start.</li>
+      <li><strong>Strong customer service.</strong> Fidelity consistently ranks at the top for customer support. They have over 200 branch offices if you prefer in-person help.</li>
+      <li><strong>Robust mobile app and website.</strong> Managing contributions and checking balances is easy. Their app is well-reviewed and regularly updated.</li>
+      <li><strong>Long track record.</strong> Fidelity has been managing index funds since 1988. FXAIX alone holds over $500 billion in assets.</li>
+    </ul>
+
+    <CalloutBox type="tip" title="The Bottom Line">
+      <p>
+        Fidelity is expected to be an excellent choice for a Trump Account. Their 0.015% expense ratio on FXAIX is among the lowest in the industry. No account fees. No minimums. Strong service. File {limits.form} to get started, then select Fidelity as your trustee once the account is activated.
+      </p>
+    </CalloutBox>
+
+    <p>
+      For more on how fees affect your child's long-term balance, try the <a href="/calculators/fund-expense-tracker">fund expense tracker</a>.
+    </p>
+  </div>
+</BlogLayout>

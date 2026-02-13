@@ -1,0 +1,250 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-accounts-at-robinhood')!;
+const related = getRelatedArticles('trump-accounts-at-robinhood');
+
+const faqs = [
+  {
+    question: 'Is Robinhood an approved Trump Account trustee?',
+    answer: 'Not yet confirmed. The official list of approved trustees will be available at trumpaccounts.gov. Check there for the most current information before opening any account.',
+  },
+  {
+    question: 'Can I buy individual stocks in a Trump Account through Robinhood?',
+    answer: 'No. Trump Accounts must be invested in S&P 500 or broad U.S. equity index funds only, regardless of the brokerage. Individual stocks, crypto, and options are not allowed in any Trump Account, even at Robinhood.',
+  },
+  {
+    question: 'Does Robinhood offer S&P 500 ETFs?',
+    answer: 'Yes. Robinhood offers access to ETFs like VOO (Vanguard S&P 500, 0.03%), SPY (SPDR S&P 500, 0.0945%), and IVV (iShares Core S&P 500, 0.03%). These funds could qualify for a Trump Account if Robinhood becomes an approved trustee.',
+  },
+  {
+    question: 'Where should I open a Trump Account right now?',
+    answer: 'Traditional brokerages like Fidelity, Charles Schwab, and Vanguard are widely expected to be approved trustees. They have decades of IRA experience and established custodial infrastructure. See our step-by-step guide at /blog/how-to-open-step-by-step for the full process.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <p>
+      <strong>Can you open a Trump Account at Robinhood?</strong> As of now, Robinhood has not been confirmed as an approved Trump Account trustee. Robinhood is best known for commission-free stock and crypto trading. Trump Accounts require investing in S&P 500 or broad U.S. equity index funds only. While Robinhood does offer some eligible ETFs, whether it will participate as a custodian for Trump Accounts under IRC Section 530A is still unclear. Check <a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer">{limits.portal}</a> for the official list of approved trustees.
+    </p>
+
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Robinhood has <strong class="text-white">not yet been confirmed</strong> as an approved Trump Account trustee.</li>
+        <li>Trump Accounts require <strong class="text-white">{limits.investmentRequirement}</strong> — no individual stocks.</li>
+        <li>Robinhood does offer eligible ETFs like <strong class="text-white">VOO (0.03%), SPY (0.0945%), and IVV (0.03%)</strong>.</li>
+        <li>Traditional brokerages like Fidelity and Schwab have <strong class="text-white">more IRA infrastructure</strong> and are widely expected trustees.</li>
+        <li>Always check <strong class="text-white">{limits.portal}</strong> for the official approved trustee list before opening an account.</li>
+      </ul>
+    </div>
+
+    <CalloutBox type="warning" title="Official Status Not Confirmed">
+      <p>
+        Robinhood's participation as a Trump Account trustee has not been announced or confirmed. The information below discusses what Robinhood <em>would</em> need to offer if it participates. Always verify the official list of approved trustees at <a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer">{limits.portal}</a> before making any decisions.
+      </p>
+    </CalloutBox>
+
+    <h2>Can You Open a Trump Account at Robinhood?</h2>
+    <p>
+      Right now, we do not know. Robinhood has not publicly announced plans to serve as a Trump Account trustee. To offer Trump Accounts, Robinhood would need to meet the custodial requirements under IRC Section 530A and be listed on the official approved trustee registry at {limits.portal}.
+    </p>
+    <p>
+      Robinhood already offers brokerage accounts and some retirement products. It launched Robinhood Retirement (Roth and Traditional IRAs) in recent years. That IRA infrastructure could serve as a foundation for Trump Account support. But offering IRAs is not the same as being approved for Trump Accounts.
+    </p>
+    <p>
+      The key question is whether Robinhood will apply to be an approved trustee and meet all the regulatory requirements. Until that happens, you cannot open a Trump Account at Robinhood.
+    </p>
+
+    <h2>What Robinhood Would Need to Offer</h2>
+    <p>
+      If Robinhood participates, it would need to meet specific requirements under the law. Trump Accounts are not standard brokerage accounts. Here is what would be required:
+    </p>
+    <ul>
+      <li><strong>Eligible index funds only.</strong> The account must invest in {limits.investmentRequirement}. No individual stocks, no crypto, no options.</li>
+      <li><strong>Expense ratios at or below {limits.maxExpenseRatio * 100}%.</strong> All funds offered must stay under this legal cap.</li>
+      <li><strong>No withdrawals before age {limits.growthPhaseEndAge}.</strong> The platform must enforce the growth phase lockup (except for rollovers, excess contributions, or death).</li>
+      <li><strong>IRA conversion at {limits.iraConversionAge}.</strong> The account must automatically convert to a traditional IRA when the child turns {limits.growthPhaseEndAge}.</li>
+      <li><strong>Proper custodial controls.</strong> The authorized individual (parent or guardian) manages the account, and the child cannot access it before {limits.growthPhaseEndAge}.</li>
+    </ul>
+    <p>
+      Robinhood is known for its clean, simple app. But Trump Accounts require strict compliance features that go beyond standard trading accounts. The platform would need to build specific guardrails to prevent non-eligible investments.
+    </p>
+
+    <h2>Robinhood's Eligible ETFs for Trump Accounts</h2>
+    <p>
+      If Robinhood becomes an approved trustee, it already offers several ETFs that would likely qualify. These S&P 500 index funds all fall below the {limits.maxExpenseRatio * 100}% expense ratio cap:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm text-left text-gray-300">
+        <thead class="text-xs uppercase text-gold-400 border-b border-surface-600">
+          <tr>
+            <th class="px-4 py-3">ETF</th>
+            <th class="px-4 py-3">Full Name</th>
+            <th class="px-4 py-3">Expense Ratio</th>
+            <th class="px-4 py-3">Provider</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-surface-700">
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">VOO</td>
+            <td class="px-4 py-3">Vanguard S&P 500 ETF</td>
+            <td class="px-4 py-3 text-mint-400">0.03%</td>
+            <td class="px-4 py-3">Vanguard</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">IVV</td>
+            <td class="px-4 py-3">iShares Core S&P 500 ETF</td>
+            <td class="px-4 py-3 text-mint-400">0.03%</td>
+            <td class="px-4 py-3">BlackRock</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">SPY</td>
+            <td class="px-4 py-3">SPDR S&P 500 ETF Trust</td>
+            <td class="px-4 py-3 text-gold-400">0.0945%</td>
+            <td class="px-4 py-3">State Street</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      VOO and IVV are the cheapest options at 0.03%. SPY works but costs about three times more in fees. Over {limits.growthPhaseEndAge} years, that fee difference adds up. For a detailed fee comparison, see <a href="/blog/trump-account-fees-explained">Trump Account Fees & Expense Ratios</a>.
+    </p>
+
+    <CalloutBox type="tip" title="Lower Fees Mean More Growth">
+      <p>
+        If you do end up using Robinhood, choose VOO or IVV over SPY. The funds all track the same 500 companies, but VOO and IVV charge roughly one-third the fees. Over {limits.growthPhaseEndAge} years of compounding, that saves your child hundreds of dollars.
+      </p>
+    </CalloutBox>
+
+    <h2>How Trump Accounts Work at Any Brokerage</h2>
+    <p>
+      The process for opening a Trump Account is the same regardless of which brokerage you choose. Here is how it works:
+    </p>
+    <ol>
+      <li><strong>File {limits.form} first.</strong> Include it with your 2025 tax return (due April 15, 2026) or submit through the {limits.portal} portal when it launches mid-2026.</li>
+      <li><strong>Select an approved trustee.</strong> Choose from the official list of approved brokerages at {limits.portal}.</li>
+      <li><strong>Choose an eligible fund.</strong> Pick an S&P 500 or broad U.S. equity index fund with an expense ratio at or below {limits.maxExpenseRatio * 100}%.</li>
+      <li><strong>Contribute up to ${limits.annualContributionLimit.toLocaleString()}/year.</strong> Anyone can contribute — parents, grandparents, family, friends. The total from all sources cannot exceed the annual limit.</li>
+      <li><strong>Wait until age {limits.growthPhaseEndAge}.</strong> The account stays locked during the growth phase. At {limits.growthPhaseEndAge}, it converts to a traditional IRA.</li>
+    </ol>
+    <p>
+      Whether you use Robinhood, Fidelity, Schwab, or Vanguard, the steps are identical. The brokerage simply holds the account. For a full walkthrough, see <a href="/blog/how-to-open-step-by-step">How to Open a Trump Account (2026)</a>.
+    </p>
+
+    <h2>Robinhood vs Traditional Brokerages for Trump Accounts</h2>
+    <p>
+      If Robinhood becomes an approved trustee, how would it compare to traditional brokerages? Here is a side-by-side look:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm text-left text-gray-300">
+        <thead class="text-xs uppercase text-gold-400 border-b border-surface-600">
+          <tr>
+            <th class="px-4 py-3">Feature</th>
+            <th class="px-4 py-3">Robinhood</th>
+            <th class="px-4 py-3">Fidelity / Schwab / Vanguard</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-surface-700">
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">App Experience</td>
+            <td class="px-4 py-3">Clean, mobile-first design</td>
+            <td class="px-4 py-3">Full-featured apps and desktop platforms</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">Physical Branches</td>
+            <td class="px-4 py-3">None</td>
+            <td class="px-4 py-3">Yes (Fidelity and Schwab have branches nationwide)</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">IRA Experience</td>
+            <td class="px-4 py-3">Newer (launched IRAs recently)</td>
+            <td class="px-4 py-3">Decades of IRA and custodial account experience</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">Eligible S&P 500 ETFs</td>
+            <td class="px-4 py-3">VOO, SPY, IVV</td>
+            <td class="px-4 py-3">VOO, SPY, IVV, SPLG, plus proprietary funds</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">Trading Commissions</td>
+            <td class="px-4 py-3">$0</td>
+            <td class="px-4 py-3">$0</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">Customer Support</td>
+            <td class="px-4 py-3">Chat and phone</td>
+            <td class="px-4 py-3">Chat, phone, and in-person at branches</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">Target Audience</td>
+            <td class="px-4 py-3">Younger, mobile-native investors</td>
+            <td class="px-4 py-3">All ages, full-service financial planning</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-white font-medium">Trump Account Status</td>
+            <td class="px-4 py-3 text-amber-300">Not confirmed</td>
+            <td class="px-4 py-3 text-mint-400">Widely expected</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Both Robinhood and traditional brokerages charge zero commissions on ETF trades. The main differences are in IRA experience, support options, and whether they are confirmed as approved trustees. For more on what to expect from established brokerages, see <a href="/blog/trump-accounts-at-fidelity">Trump Accounts at Fidelity</a> and <a href="/blog/trump-accounts-at-schwab">Trump Accounts at Schwab</a>.
+    </p>
+
+    <h2>Should You Use Robinhood for a Trump Account?</h2>
+    <p>
+      The honest answer: it depends on whether Robinhood is approved, and what features they offer.
+    </p>
+    <p>
+      <strong>Reasons to consider Robinhood (if approved):</strong>
+    </p>
+    <ul>
+      <li>Simple, clean app that is easy for first-time investors</li>
+      <li>Zero commissions on ETF trades</li>
+      <li>Existing IRA infrastructure from Robinhood Retirement</li>
+      <li>Fractional share support (useful for regular contributions)</li>
+    </ul>
+    <p>
+      <strong>Reasons to consider traditional brokerages instead:</strong>
+    </p>
+    <ul>
+      <li>Decades of custodial and IRA account experience</li>
+      <li>Physical branches for in-person support</li>
+      <li>Wider selection of eligible funds (including proprietary options like Fidelity's FXAIX at 0.015%)</li>
+      <li>More established compliance infrastructure for tax-advantaged accounts</li>
+      <li>Already widely expected to be approved trustees</li>
+    </ul>
+
+    <CalloutBox type="info" title="Our Suggestion">
+      <p>
+        Do not wait for Robinhood to be confirmed. File {limits.form} now and choose a trustee from the official approved list at <a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer">{limits.portal}</a>. Time in the market matters more than which brokerage you use. You can always transfer to Robinhood later if they are approved and you prefer their platform.
+      </p>
+    </CalloutBox>
+
+    <p>
+      A Trump Account is a long-term investment for your child — it lasts {limits.growthPhaseEndAge} years before converting to an IRA. The brokerage you choose matters less than getting started. Every month of delay means less time for compounding.
+    </p>
+    <p>
+      For details on eligible investments, see <a href="/blog/index-fund-requirements">Trump Account Index Fund Requirements</a>. To compare ETF options, read <a href="/blog/trump-account-vs-sp500-etfs">Best S&P 500 ETFs for Trump Accounts</a>.
+    </p>
+  </div>
+</BlogLayout>

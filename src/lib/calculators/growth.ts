@@ -3,10 +3,25 @@
  * All functions are pure — no UI or side effects.
  */
 
+export interface ContributionPhase {
+  fromAge: number;
+  toAge: number;
+  monthlyAmount: number;
+}
+
 export interface GrowthInput {
   birthYear: number;
   pilotDeposit: number;
   monthlyContribution: number;
+  annualReturn: number;
+  startAge?: number;
+  endAge?: number;
+}
+
+export interface PhasedGrowthInput {
+  birthYear: number;
+  pilotDeposit: number;
+  phases: ContributionPhase[];
   annualReturn: number;
   startAge?: number;
   endAge?: number;
@@ -28,23 +43,34 @@ export interface GrowthResult {
   snapshots: YearlySnapshot[];
 }
 
+const MAX_ANNUAL_CONTRIBUTION = 5000;
+
 /**
- * Calculate compound growth of a Trump Account from birth to a target age.
- * Uses annual compounding with monthly contributions converted to annual.
+ * Get annual contribution for a given age based on phases.
+ * Caps at $5,000/year. If no phase covers this age, returns 0.
  */
-export function calculateGrowth(input: GrowthInput): GrowthResult {
+function getAnnualContribution(age: number, phases: ContributionPhase[]): number {
+  for (const phase of phases) {
+    if (age >= phase.fromAge && age < phase.toAge) {
+      return Math.min(phase.monthlyAmount * 12, MAX_ANNUAL_CONTRIBUTION);
+    }
+  }
+  return 0;
+}
+
+/**
+ * Calculate compound growth with variable contribution phases.
+ * Each phase defines a monthly contribution for a range of ages.
+ */
+export function calculatePhasedGrowth(input: PhasedGrowthInput): GrowthResult {
   const {
     birthYear,
     pilotDeposit,
-    monthlyContribution,
+    phases,
     annualReturn,
     startAge = 0,
     endAge = 18,
   } = input;
-
-  const annualContribution = monthlyContribution * 12;
-  const maxAnnualContribution = 5000;
-  const cappedAnnualContribution = Math.min(annualContribution, maxAnnualContribution);
 
   let balance = pilotDeposit;
   let totalContributions = pilotDeposit;
@@ -53,7 +79,7 @@ export function calculateGrowth(input: GrowthInput): GrowthResult {
 
   for (let age = startAge; age < endAge; age++) {
     const startBalance = balance;
-    const contribution = cappedAnnualContribution;
+    const contribution = getAnnualContribution(age, phases);
     const earnings = (startBalance + contribution) * annualReturn;
 
     balance = startBalance + contribution + earnings;
@@ -79,18 +105,42 @@ export function calculateGrowth(input: GrowthInput): GrowthResult {
 }
 
 /**
+ * Calculate compound growth of a Trump Account from birth to a target age.
+ * Uses annual compounding with a single monthly contribution amount.
+ */
+export function calculateGrowth(input: GrowthInput): GrowthResult {
+  const {
+    birthYear,
+    pilotDeposit,
+    monthlyContribution,
+    annualReturn,
+    startAge = 0,
+    endAge = 18,
+  } = input;
+
+  return calculatePhasedGrowth({
+    birthYear,
+    pilotDeposit,
+    phases: [{ fromAge: startAge, toAge: endAge, monthlyAmount: monthlyContribution }],
+    annualReturn,
+    startAge,
+    endAge,
+  });
+}
+
+/**
  * Calculate projected value at age 65 (for "Millionaire Baby" scenario).
  * After age 18, account converts to traditional IRA.
- * Assumes continued contributions up to IRA limits post-18.
+ * Supports phased contributions during growth phase.
  */
-export function calculateLifetimeGrowth(input: GrowthInput & {
+export function calculatePhasedLifetimeGrowth(input: PhasedGrowthInput & {
   postIRAContribution?: number;
   retirementAge?: number;
 }): GrowthResult {
   const { postIRAContribution = 0, retirementAge = 65, ...baseInput } = input;
 
-  // Phase 1: Birth to 18 (Trump Account)
-  const phase1 = calculateGrowth({ ...baseInput, endAge: 18 });
+  // Phase 1: Start age to 18 (Trump Account)
+  const phase1 = calculatePhasedGrowth({ ...baseInput, endAge: 18 });
 
   // Phase 2: 18 to retirement (Traditional IRA)
   let balance = phase1.finalBalance;
@@ -123,4 +173,23 @@ export function calculateLifetimeGrowth(input: GrowthInput & {
     finalBalance: Math.round(balance * 100) / 100,
     snapshots,
   };
+}
+
+/**
+ * Calculate projected value at age 65 with a single monthly contribution.
+ * Backwards-compatible wrapper around calculatePhasedLifetimeGrowth.
+ */
+export function calculateLifetimeGrowth(input: GrowthInput & {
+  postIRAContribution?: number;
+  retirementAge?: number;
+}): GrowthResult {
+  const { postIRAContribution = 0, retirementAge = 65, monthlyContribution, startAge = 0, ...rest } = input;
+
+  return calculatePhasedLifetimeGrowth({
+    ...rest,
+    startAge,
+    phases: [{ fromAge: startAge, toAge: 18, monthlyAmount: monthlyContribution }],
+    postIRAContribution,
+    retirementAge,
+  });
 }

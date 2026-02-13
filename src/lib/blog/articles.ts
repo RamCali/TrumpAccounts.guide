@@ -29,10 +29,21 @@ export const blogArticles: Record<string, BlogArticle> = {
     readingTime: '8 min read',
     relatedSlugs: ['who-qualifies-for-trump-account', 'how-much-money-trump-account', 'when-do-trump-accounts-start', 'is-trump-account-automatic'],
   },
+  'trump-accounts-benefits': {
+    slug: 'trump-accounts-benefits',
+    title: 'Trump Accounts Benefits: 7 Reasons to Open One',
+    description: 'Free $1,000 deposit, no income limits, tax-deferred growth, employer matching, low fees, flexible use at 18, and the Dell bonus. Full breakdown.',
+    category: 'Basics',
+    categorySlug: 'basics',
+    datePublished: '2026-02-12',
+    dateModified: '2026-02-12',
+    readingTime: '7 min read',
+    relatedSlugs: ['what-are-trump-accounts-guide', 'how-to-open-step-by-step', 'employer-match-trump-account', 'dell-pledge-explained', 'gains-taxation-explained'],
+  },
   'who-qualifies-for-trump-account': {
     slug: 'who-qualifies-for-trump-account',
-    title: 'Who Qualifies for a Trump Account?',
-    description: 'Every U.S. citizen child under 18 with an SSN qualifies. No income limits. Learn who gets the $1,000 deposit and who does not.',
+    title: 'Who Qualifies for a Trump Account? Kids Eligibility Guide',
+    description: 'Trump Accounts eligibility for kids: U.S. citizen, SSN, under 18. No income limits. Learn who gets the $1,000 deposit and who does not.',
     category: 'Basics',
     categorySlug: 'basics',
     datePublished: '2026-02-12',
@@ -604,6 +615,17 @@ export const blogArticles: Record<string, BlogArticle> = {
     readingTime: '5 min read',
     relatedSlugs: ['how-much-money-trump-account', 'inequality-reduction', 'what-are-trump-accounts-guide'],
   },
+  'trump-accounts-for-newborns': {
+    slug: 'trump-accounts-for-newborns',
+    title: 'Trump Accounts for Newborns: $1,000 Federal Deposit (2025–2028)',
+    description: 'Every U.S. citizen newborn (2025-2028) gets a $1,000 federal deposit. Learn how to claim it, how much it could grow, and what to do next.',
+    category: 'Parent Guides',
+    categorySlug: 'parent-guides',
+    datePublished: '2026-02-12',
+    dateModified: '2026-02-12',
+    readingTime: '7 min read',
+    relatedSlugs: ['how-to-open-step-by-step', 'dell-pledge-explained', 'who-qualifies-for-trump-account', 'how-much-at-age-18', 'do-all-babies-qualify'],
+  },
 
   // ─── Cluster 9: Practical Parent Guides ──────────────────────
   'how-to-open-step-by-step': {
@@ -695,6 +717,41 @@ export const blogArticles: Record<string, BlogArticle> = {
     dateModified: '2026-02-12',
     readingTime: '7 min read',
     relatedSlugs: ['inequality-reduction', 'dell-pledge-explained', 'economic-impact'],
+  },
+
+  // ─── Cluster 11: Brokerage Guides ──────────────────────────
+  'trump-accounts-at-fidelity': {
+    slug: 'trump-accounts-at-fidelity',
+    title: 'Trump Accounts at Fidelity: Funds, Fees & How to Open',
+    description: 'Fidelity is expected to offer Trump Accounts with ultra-low-cost index funds like FXAIX (0.015%). Learn how to open one and what to expect.',
+    category: 'Brokerage Guides',
+    categorySlug: 'brokerage-guides',
+    datePublished: '2026-02-12',
+    dateModified: '2026-02-12',
+    readingTime: '7 min read',
+    relatedSlugs: ['how-to-open-step-by-step', 'trump-account-fees-explained', 'index-fund-requirements', 'trump-account-vs-sp500-etfs'],
+  },
+  'trump-accounts-at-schwab': {
+    slug: 'trump-accounts-at-schwab',
+    title: 'Trump Accounts at Schwab: Funds, Fees & How to Open',
+    description: 'Schwab is expected to offer Trump Accounts with SWPPX (0.02% ER) and SWTSX (0.03% ER). Learn about fees, branches, and how to open.',
+    category: 'Brokerage Guides',
+    categorySlug: 'brokerage-guides',
+    datePublished: '2026-02-12',
+    dateModified: '2026-02-12',
+    readingTime: '7 min read',
+    relatedSlugs: ['how-to-open-step-by-step', 'trump-account-fees-explained', 'index-fund-requirements', 'trump-account-vs-sp500-etfs', 'trump-accounts-at-fidelity'],
+  },
+  'trump-accounts-at-robinhood': {
+    slug: 'trump-accounts-at-robinhood',
+    title: 'Trump Accounts at Robinhood: What to Know',
+    description: 'Robinhood has not been confirmed as a Trump Account trustee. Learn what Robinhood would need to offer, which ETFs qualify, and how it compares.',
+    category: 'Brokerage Guides',
+    categorySlug: 'brokerage-guides',
+    datePublished: '2026-02-12',
+    dateModified: '2026-02-12',
+    readingTime: '7 min read',
+    relatedSlugs: ['how-to-open-step-by-step', 'trump-account-fees-explained', 'index-fund-requirements', 'trump-account-vs-sp500-etfs', 'trump-accounts-at-fidelity', 'trump-accounts-at-schwab'],
   },
 };
 
