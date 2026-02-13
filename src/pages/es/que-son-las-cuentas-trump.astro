@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { faqSchema } from '../../lib/seo/schema';
+
+const schemas = [
+  faqSchema([
+    {
+      question: '¿Qué es una Cuenta Trump?',
+      answer: 'Es una cuenta de inversión con ventajas fiscales creada por la Ley One Big Beautiful Bill (IRC §530A). Permite invertir en el S&P 500 para niños menores de 18 años, con un depósito federal inicial de $1,000 para los nacidos entre 2025-2028.',
+    },
+    {
+      question: '¿El dinero es del gobierno o de mi hijo?',
+      answer: 'El dinero pertenece 100% a su hijo. Es un fideicomiso privado custodiado por una institución financiera (como Fidelity o Schwab), no una cuenta gubernamental.',
+    },
+    {
+      question: '¿En qué se puede invertir?',
+      answer: 'Por ley, los fondos deben invertirse en fondos indexados de acciones de EE.UU. de base amplia (como el S&P 500) hasta que el niño cumpla 18 años para maximizar el crecimiento.',
+    },
+    {
+      question: '¿Qué pasa cuando el niño cumple 18 años?',
+      answer: 'La cuenta se convierte automáticamente en una IRA Tradicional. El niño (ahora adulto) toma el control y puede decidir si mantener la inversión, cambiarla o retirarla (sujeto a impuestos).',
+    },
+  ]),
+];
+---
+
+<BaseLayout
+  title="¿Qué Son las Cuentas Trump? Guía Completa (IRC §530A)"
+  description="Todo lo que necesita saber sobre las Cuentas Trump: el depósito de $1,000, reglas de elegibilidad, límites de contribución y cómo funcionan las inversiones del S&P 500."
+  schema={schemas}
+  alternateSlug="/what-are-trump-accounts"
+>
+  <article class="mx-auto max-w-3xl px-4 py-12">
+    <header class="mb-10 text-center">
+      <p class="mb-4 text-sm font-bold uppercase tracking-wider text-gold-400">La Guía Definitiva</p>
+      <h1 class="text-4xl font-extrabold leading-tight text-white md:text-5xl">¿Qué Son las Cuentas Trump?</h1>
+      <p class="mx-auto mt-6 text-xl text-gray-400">
+        La explicación en español sencillo de la nueva ley financiera más importante para las familias estadounidenses en décadas.
+      </p>
+    </header>
+
+    <div class="prose prose-invert prose-lg mx-auto">
+      <p class="lead text-xl text-white">
+        Una <strong>Cuenta Trump</strong> (técnicamente una cuenta bajo IRC §530A) es un nuevo tipo de cuenta de inversión diseñada para convertir a cada niño estadounidense en un inversor desde su nacimiento.
+      </p>
+      <p>
+        Creada por la <em>One Big Beautiful Bill Act</em> firmada el 4 de julio de 2025, estas cuentas combinan un depósito federal gratuito con poderosos incentivos fiscales para padres y empleadores.
+      </p>
+
+      <CalloutBox type="info" title="En Resumen">
+        <ul>
+          <li><strong>Para quién:</strong> Ciudadanos de EE.UU. menores de 18 años.</li>
+          <li><strong>Beneficio clave:</strong> Depósito federal de $1,000 (para nacidos 2025-2028).</li>
+          <li><strong>Inversión:</strong> Crece libre de impuestos en el S&P 500.</li>
+          <li><strong>Meta:</strong> Crear riqueza generacional para cada familia, sin importar sus ingresos.</li>
+        </ul>
+      </CalloutBox>
+
+      <h2>1. El Depósito Piloto de $1,000</h2>
+      <p>
+        La característica más famosa del programa es el "bono de bebé". El gobierno federal depositará <strong>$1,000</strong> en la cuenta de cada niño elegible nacido entre el <strong>1 de enero de 2025 y el 31 de diciembre de 2028</strong>.
+      </p>
+      <p>
+        Este dinero no es un préstamo. Es una subvención para iniciar el interés compuesto. Si ese dinero se deja crecer al 10% anual (el promedio histórico del mercado), esos $1,000 por sí solos podrían convertirse en más de $5,500 cuando el niño cumpla 18 años, o más de $450,000 cuando se jubile a los 65 años.
+      </p>
+
+      <h2>2. Reglas de Inversión: El "Estándar Americano"</h2>
+      <p>
+        A diferencia de otras cuentas donde puede elegir inversiones arriesgadas, las Cuentas Trump tienen una "barandilla de seguridad" obligatoria.
+      </p>
+      <p>
+        Hasta que el niño cumpla 18 años, los fondos <strong>deben</strong> invertirse en fondos indexados de acciones de EE.UU. de base amplia y bajo costo (como un ETF del S&P 500 o Total Stock Market).
+      </p>
+      <p>
+        <strong>¿Por qué?</strong> La ley está diseñada para evitar que la inflación erosione los ahorros (como pasa con las cuentas de ahorro bancarias) y para asegurar que todos los niños participen en el crecimiento de la economía estadounidense.
+      </p>
+
+      <h2>3. Límites de Contribución</h2>
+      <p>
+        Usted no tiene que detenerse en los $1,000 iniciales. Las familias pueden agregar más dinero para acelerar el crecimiento.
+      </p>
+      <ul>
+        <li><strong>Límite Anual Total:</strong> $5,000 por año.</li>
+        <li><strong>Contribuciones de Padres:</strong> Se hacen con dólares "después de impuestos" (no son deducibles en su declaración personal).</li>
+        <li><strong>Contribuciones de Empleadores:</strong> Los jefes pueden aportar hasta $2,500/año libre de impuestos.</li>
+      </ul>
+
+      <h2>4. ¿Qué Pasa a los 18 Años?</h2>
+      <p>
+        El día que su hijo cumple 18 años, la "fase de crecimiento" termina y la cuenta se convierte legalmente en una <strong>IRA Tradicional</strong> (Cuenta de Retiro Individual).
+      </p>
+      <p>
+        En ese momento, su hijo (ahora un adulto) tiene control total. Tiene tres opciones:
+      </p>
+      <ol>
+        <li><strong>Dejarlo crecer:</strong> Mantener el dinero invertido para su jubilación (la opción más inteligente fiscalmente).</li>
+        <li><strong>Usarlo para educación/casa:</strong> Las reglas de la IRA permiten retiros sin penalización para la primera vivienda o educación superior.</li>
+        <li><strong>Retirarlo todo:</strong> Pueden sacar el dinero, pero tendrán que pagar impuestos sobre la renta sobre las ganancias.</li>
+      </ol>
+
+      <h2>Preguntas Frecuentes</h2>
+      <details class="group mb-4 rounded-lg border border-surface-600 bg-surface-800">
+        <summary class="cursor-pointer px-6 py-4 font-semibold text-white">¿Hay límites de ingresos para abrir una cuenta?</summary>
+        <div class="border-t border-surface-700 px-6 py-4 text-gray-300">
+          No. A diferencia de las Roth IRA o ciertos créditos fiscales, las Cuentas Trump están disponibles para todos los niños ciudadanos de EE.UU., ya sea que sus padres ganen $20,000 o $2,000,000 al año.
+        </div>
+      </details>
+
+      <details class="group mb-4 rounded-lg border border-surface-600 bg-surface-800">
+        <summary class="cursor-pointer px-6 py-4 font-semibold text-white">¿Puedo perder el dinero si el mercado cae?</summary>
+        <div class="border-t border-surface-700 px-6 py-4 text-gray-300">
+          Como cualquier inversión en el mercado de valores, el valor fluctuará día a día. Sin embargo, en periodos largos (18 años), el mercado de valores de EE.UU. históricamente siempre ha subido. La ley exige fondos indexados diversificados para minimizar el riesgo de que una sola empresa quiebre.
+        </div>
+      </details>
+
+      <div class="mt-12 text-center">
+        <a href="/es/como-abrir-una-cuenta-trump" class="inline-flex items-center rounded-lg bg-gold-500 px-8 py-4 text-lg font-bold text-surface-900 transition-colors hover:bg-gold-400">
+          Cómo Abrir una Cuenta →
+        </a>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

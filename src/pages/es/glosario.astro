@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const terms = [
+  {
+    term: 'Sección 530A (IRC §530A)',
+    definition: 'La sección del Código de Rentas Internas añadida por la Ley One Big Beautiful Bill que establece oficialmente las Cuentas Trump. Define la elegibilidad, los límites de contribución y el tratamiento fiscal de estas cuentas de fideicomiso.'
+  },
+  {
+    term: 'Formulario 4547',
+    definition: 'El formulario oficial del IRS titulado "Elección de Cuenta Trump". Los padres deben presentar este formulario (generalmente con su declaración de impuestos de 2025) para abrir legalmente la cuenta y reclamar el depósito federal.'
+  },
+  {
+    term: 'Aviso del IRS 2025-68',
+    definition: 'El documento de orientación técnica publicado por el IRS el 3 de diciembre de 2025. Aclara las reglas operativas para las Cuentas Trump, incluyendo cómo funcionan las transferencias y qué sucede si un niño nace en el extranjero.'
+  },
+  {
+    term: 'Fase de Crecimiento',
+    definition: 'El período desde que se abre la cuenta hasta que el beneficiario cumple 18 años. Durante esta fase, los activos deben invertirse en fondos indexados de acciones de EE.UU. de base amplia (como el S&P 500) y no pueden retirarse excepto en circunstancias extremas.'
+  },
+  {
+    term: 'Exclusión de la Sección 128',
+    definition: 'Un nuevo beneficio fiscal que permite a los empleadores contribuir hasta $2,500 por año a la Cuenta Trump de un hijo de un empleado. Este dinero es deducible para el empleador y libre de impuestos para el empleado.'
+  },
+  {
+    term: 'Depósito Piloto',
+    definition: 'El depósito federal inicial de $1,000 otorgado a niños elegibles nacidos entre el 1 de enero de 2025 y el 31 de diciembre de 2028. Este dinero no cuenta como ingreso gravable.'
+  },
+  {
+    term: 'Individuo Autorizado',
+    definition: 'El padre, tutor o adulto responsable que administra la Cuenta Trump en nombre del niño hasta que este cumple 18 años. Tienen la autoridad para dirigir inversiones (dentro de las opciones permitidas) y manejar el papeleo.'
+  },
+  {
+    term: 'Conversión a IRA',
+    definition: 'El evento automático que ocurre cuando el beneficiario cumple 18 años. La Cuenta Trump deja de estar restringida a fondos indexados y se convierte en una Cuenta de Retiro Individual (IRA) tradicional, otorgando control total al beneficiario.'
+  }
+];
+
+// Construct DefinedTerm schema manually
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "DefinedTermSet",
+  "name": "Glosario de Cuentas Trump",
+  "hasDefinedTerm": terms.map(t => ({
+    "@type": "DefinedTerm",
+    "name": t.term,
+    "description": t.definition
+  }))
+};
+---
+
+<BaseLayout
+  title="Glosario de Cuentas Trump: Términos Clave Definidos | TrumpAccounts.guide"
+  description="Diccionario completo de términos de las Cuentas Trump. Entienda qué significan Sección 530A, Formulario 4547, Aviso 2025-68 y otros términos legales."
+  schema={schema}
+  alternateSlug="/glossary"
+>
+  <section class="bg-surface-900 border-b border-surface-700">
+    <div class="mx-auto max-w-4xl px-4 py-16 text-center">
+      <p class="mb-4 text-sm font-bold uppercase tracking-wider text-gold-400">Diccionario Financiero</p>
+      <h1 class="text-3xl font-bold text-white md:text-5xl">Glosario de Términos</h1>
+      <p class="mx-auto mt-6 max-w-2xl text-xl text-gray-400">
+        El gobierno ama sus acrónimos. Aquí explicamos qué significan realmente en español sencillo.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="mx-auto max-w-3xl px-4">
+      <div class="grid gap-8">
+        {terms.map((item) => (
+          <div class="rounded-xl border border-surface-600 bg-surface-800 p-6 transition-colors hover:border-gold-500/30">
+            <h2 class="text-xl font-bold text-white mb-3">{item.term}</h2>
+            <p class="text-gray-300 leading-relaxed">
+              {item.definition}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12 rounded-2xl bg-surface-800 p-8 text-center border border-surface-600">
+        <h3 class="text-xl font-bold text-white">¿Busca más detalles?</h3>
+        <p class="mt-2 text-gray-400">Lea nuestra traducción completa del documento oficial del IRS.</p>
+        <a href="/es/irs-notice-2025-68" class="mt-6 inline-flex items-center justify-center rounded-lg bg-surface-700 px-6 py-3 font-semibold text-white transition-colors hover:bg-surface-600">
+          Ver Aviso del IRS 2025-68
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,302 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-investment-rules')!;
+const related = getRelatedArticles('trump-account-investment-rules');
+
+const faqs = [
+  {
+    question: 'Can I invest a Trump Account in Bitcoin or crypto?',
+    answer: 'No. Trump Accounts are restricted to mutual funds and ETFs that track the S&P 500 or a broad U.S. equity index. Cryptocurrency, crypto ETFs, and any non-index investments are not eligible.',
+  },
+  {
+    question: 'Are target-date funds eligible for Trump Accounts?',
+    answer: 'Only if they meet both requirements: they must track the S&P 500 or a broad U.S. equity index, and their expense ratio must be at or below 0.1%. Most target-date funds do not qualify because they include bonds and international holdings.',
+  },
+  {
+    question: 'What is a "broad U.S. equity index"?',
+    answer: 'A broad-based domestic equity index covers a wide range of U.S.-traded companies — not just the S&P 500. Examples include the total U.S. stock market (tracked by funds like VTI and ITOT), which holds thousands of U.S. companies across large, mid, and small caps.',
+  },
+  {
+    question: 'Can I hold cash in a Trump Account temporarily?',
+    answer: 'No. All funds in a Trump Account must be invested in eligible index funds. There is no option to park money in cash, money market funds, or savings-like instruments during the growth phase.',
+  },
+  {
+    question: 'What happens if my fund raises its expense ratio above 0.1%?',
+    answer: 'You would need to switch to a compliant fund. In practice, this is extremely unlikely — the major S&P 500 and total market ETFs have been steadily lowering fees for years and are well below the 0.1% cap. Your custodian would notify you if a fund becomes ineligible.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Funds must track the <strong class="text-white">S&P 500 or a broad U.S. equity index</strong> consisting primarily of U.S. companies.</li>
+        <li>Expense ratios are capped at <strong class="text-white">{(limits.maxExpenseRatio * 100).toFixed(1)}%</strong> (10 basis points) — keeping costs minimal.</li>
+        <li><strong class="text-white">No leverage</strong> allowed — no borrowed funds or derivatives to amplify returns.</li>
+        <li><strong class="text-white">No cash, bonds, individual stocks, crypto, sector funds, or international-heavy funds</strong> permitted.</li>
+        <li>Trustees provide a menu of compliant options and designate a <strong class="text-white">default fund</strong> (often an S&P 500 tracker).</li>
+        <li>At age 18, the account <strong class="text-white">converts to a traditional IRA</strong> with standard investment rules.</li>
+      </ul>
+    </div>
+
+    <p>
+      Trump Accounts (IRC Section 530A) are designed for long-term, tax-advantaged growth for children under 18. They function like starter traditional IRAs with strict investment rules during the "growth period" — birth through age 18. These restrictions are intentional: they promote simple, low-cost, passive exposure to U.S. equities and harness compounding over 18+ years.
+    </p>
+    <p>
+      This is the complete reference for every investment rule that applies during the growth phase.
+    </p>
+
+    <h2>The Two Core Requirements</h2>
+    <p>
+      Every dollar in a Trump Account must satisfy two rules:
+    </p>
+    <ol>
+      <li><strong>Track a qualified index</strong> — The fund must follow the S&P 500 or another broad-market equity index consisting primarily (at least 90%) of U.S. companies.</li>
+      <li><strong>Stay below the expense cap</strong> — The fund's annual expense ratio cannot exceed {(limits.maxExpenseRatio * 100).toFixed(1)}% (10 basis points).</li>
+    </ol>
+    <p>
+      That is it. If a fund meets both requirements, it is eligible. If it fails either one, it is not.
+    </p>
+
+    <h2>Eligible Investment Types</h2>
+    <p>
+      Both <strong>mutual funds and exchange-traded funds (ETFs)</strong> qualify, as long as they track a qualifying index and stay under the expense ratio cap. Here are examples of funds that meet both requirements:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Fund</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Ticker</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Type</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Expense Ratio</th>
+            <th class="py-3 text-gray-400 font-medium">Index Tracked</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">SPDR Portfolio S&P 500 ETF</td>
+            <td class="py-3 pr-4 font-mono text-white">SPLG</td>
+            <td class="py-3 pr-4">ETF</td>
+            <td class="py-3 pr-4 text-mint-400">0.02%</td>
+            <td class="py-3">S&P 500</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Vanguard S&P 500 ETF</td>
+            <td class="py-3 pr-4 font-mono text-white">VOO</td>
+            <td class="py-3 pr-4">ETF</td>
+            <td class="py-3 pr-4 text-mint-400">0.03%</td>
+            <td class="py-3">S&P 500</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">iShares Core S&P 500 ETF</td>
+            <td class="py-3 pr-4 font-mono text-white">IVV</td>
+            <td class="py-3 pr-4">ETF</td>
+            <td class="py-3 pr-4 text-mint-400">0.03%</td>
+            <td class="py-3">S&P 500</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">SPDR S&P 500 ETF Trust</td>
+            <td class="py-3 pr-4 font-mono text-white">SPY</td>
+            <td class="py-3 pr-4">ETF</td>
+            <td class="py-3 pr-4 text-mint-400">0.09%</td>
+            <td class="py-3">S&P 500</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Vanguard Total Stock Market ETF</td>
+            <td class="py-3 pr-4 font-mono text-white">VTI</td>
+            <td class="py-3 pr-4">ETF</td>
+            <td class="py-3 pr-4 text-mint-400">0.03%</td>
+            <td class="py-3">Broad U.S. equity</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">iShares Core S&P Total U.S. Stock Market ETF</td>
+            <td class="py-3 pr-4 font-mono text-white">ITOT</td>
+            <td class="py-3 pr-4">ETF</td>
+            <td class="py-3 pr-4 text-mint-400">0.03%</td>
+            <td class="py-3">Broad U.S. equity</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Fidelity 500 Index Fund</td>
+            <td class="py-3 pr-4 font-mono text-white">FXAIX</td>
+            <td class="py-3 pr-4">Mutual Fund</td>
+            <td class="py-3 pr-4 text-mint-400">0.015%</td>
+            <td class="py-3">S&P 500</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Schwab S&P 500 Index Fund</td>
+            <td class="py-3 pr-4 font-mono text-white">SWPPX</td>
+            <td class="py-3 pr-4">Mutual Fund</td>
+            <td class="py-3 pr-4 text-mint-400">0.02%</td>
+            <td class="py-3">S&P 500</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">Fidelity Total Market Index Fund</td>
+            <td class="py-3 pr-4 font-mono text-white">FSKAX</td>
+            <td class="py-3 pr-4">Mutual Fund</td>
+            <td class="py-3 pr-4 text-mint-400">0.015%</td>
+            <td class="py-3">Broad U.S. equity</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      For a detailed head-to-head comparison of the most popular ETFs, see our <a href="/blog/trump-account-vs-sp500-etfs">Best S&P 500 ETFs for Trump Accounts</a> guide.
+    </p>
+
+    <h2>What Is NOT Allowed: The Full List</h2>
+    <p>
+      Trump Accounts enforce a <strong>100% equity, U.S.-focused, passive index strategy</strong>. The following are explicitly ineligible:
+    </p>
+    <ul>
+      <li><strong>Individual stocks</strong> — no picking Apple, Tesla, or any single company</li>
+      <li><strong>Bonds or bond funds</strong> — no fixed-income investments of any kind</li>
+      <li><strong>Cryptocurrency</strong> — no Bitcoin, Ethereum, or crypto ETFs</li>
+      <li><strong>International-only funds</strong> — must primarily track U.S. equities (at least 90% U.S.-based)</li>
+      <li><strong>Sector funds</strong> — no tech-only, healthcare-only, or energy-only funds</li>
+      <li><strong>Target-date funds</strong> — unless they happen to meet both the index tracking and expense ratio requirements (most do not)</li>
+      <li><strong>Actively managed funds</strong> — only passive index funds qualify</li>
+      <li><strong>Real estate</strong> — no REITs or direct property investments</li>
+      <li><strong>Cash or money market funds</strong> — you cannot park money in cash during the growth phase</li>
+      <li><strong>Leveraged or inverse ETFs</strong> — no 2x, 3x, or short-selling funds</li>
+      <li><strong>Alternative investments</strong> — no commodities, precious metals, or hedge fund strategies</li>
+    </ul>
+
+    <CalloutBox type="warning" title="The no-leverage rule">
+      <p>
+        Trump Accounts explicitly prohibit leverage — no borrowed funds or derivatives to amplify returns. This means leveraged ETFs (like SSO or UPRO) and inverse ETFs (like SH or SPXU) are not allowed, even though they may reference the S&P 500. The intent is steady, long-term compounding without amplified risk.
+      </p>
+    </CalloutBox>
+
+    <h2>The {(limits.maxExpenseRatio * 100).toFixed(1)}% Expense Ratio Cap</h2>
+    <p>
+      Every eligible fund must charge an annual expense ratio of <strong>{(limits.maxExpenseRatio * 100).toFixed(1)}% or less</strong> — that is 10 basis points. In dollar terms:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Account Balance</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Max Annual Fee (0.1%)</th>
+            <th class="py-3 text-gray-400 font-medium">Typical Fee (0.03%)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">$1,000</td>
+            <td class="py-3 pr-4">$1.00</td>
+            <td class="py-3">$0.30</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">$10,000</td>
+            <td class="py-3 pr-4">$10.00</td>
+            <td class="py-3">$3.00</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">$50,000</td>
+            <td class="py-3 pr-4">$50.00</td>
+            <td class="py-3">$15.00</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">$100,000</td>
+            <td class="py-3 pr-4">$100.00</td>
+            <td class="py-3">$30.00</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      The cap protects families from high-fee funds that would erode returns over 18 years. Most major S&P 500 and total market funds are well below the limit. For a deep dive on how fees compound over time, see our <a href="/blog/trump-account-fees-explained">fees and expense ratios guide</a>.
+    </p>
+
+    <CalloutBox type="tip" title="Lower fees = more money for your child">
+      <p>
+        The difference between 0.02% (SPLG) and 0.09% (SPY) seems tiny, but over 18 years on a growing account it adds up to hundreds of dollars. Always choose the lowest-cost eligible fund your custodian offers.
+      </p>
+    </CalloutBox>
+
+    <h2>How Trustees and Custodians Work</h2>
+    <p>
+      Every Trump Account is held by a <strong>partner financial institution</strong> (trustee or custodian) authorized by the Treasury Department. The custodian:
+    </p>
+    <ul>
+      <li>Provides a <strong>menu of compliant fund options</strong> — you pick from their list</li>
+      <li>Designates a <strong>default investment</strong> (typically an S&P 500 index tracker) for accounts where no selection is made</li>
+      <li>Holds account assets and processes contributions</li>
+      <li>Reports activity to the IRS</li>
+      <li>Handles the conversion to a traditional IRA at age {limits.growthPhaseEndAge}</li>
+    </ul>
+    <p>
+      Not every custodian carries every fund. Your choices depend on which institution holds the account. If your custodian offers several compliant options, compare expense ratios and pick the lowest.
+    </p>
+
+    <h2>Switching Between Eligible Funds</h2>
+    <p>
+      Parents (as the authorized individual) can switch between eligible index funds during the growth phase. Key points:
+    </p>
+    <ul>
+      <li>Switching within the account is <strong>not a taxable event</strong> — gains are not realized</li>
+      <li>You can only move between funds that meet both requirements (qualified index + expense cap)</li>
+      <li>There is no limit on how often you can switch, though frequent trading is unnecessary with passive funds</li>
+    </ul>
+    <p>
+      For full details on switching, see <a href="/blog/can-parents-change-investments">Can Parents Change Trump Account Funds?</a>
+    </p>
+
+    <h2>What Changes at Age {limits.growthPhaseEndAge}</h2>
+    <p>
+      On the beneficiary's 18th birthday, the Trump Account <strong>converts to a standard traditional IRA</strong>. This lifts all growth-phase investment restrictions:
+    </p>
+    <ul>
+      <li>Individual stocks, bonds, international funds, and real estate become available</li>
+      <li>The expense ratio cap no longer applies</li>
+      <li>Standard IRA contribution and withdrawal rules take effect</li>
+      <li>The beneficiary (now an adult) gains control of the account</li>
+    </ul>
+    <p>
+      This is a major transition point. For strategies on how to handle it, see our <a href="/blog/trump-account-investment-strategies">investment strategies guide</a> and <a href="/blog/trump-account-roth-conversion-strategy">Roth conversion strategy</a>.
+    </p>
+
+    <CalloutBox type="irs-quote" title="IRS Notice 2025-68 on eligible investments">
+      <p>
+        "Amounts in a Trump Account must be invested in one or more funds (whether mutual funds or exchange-traded funds) that are designed to track the performance of the Standard & Poor's 500 Index or a broad-based domestic equity index."
+      </p>
+    </CalloutBox>
+    <p>
+      <strong>In plain English:</strong> Pick an S&P 500 fund or a total U.S. stock market fund. Keep the fees under {(limits.maxExpenseRatio * 100).toFixed(1)}%. That is the entire investment requirement.
+    </p>
+
+    <h2>Why These Rules Exist</h2>
+    <p>
+      The restrictions force a <strong>100% equity, U.S.-focused, passive index strategy</strong> — no active management, no diversification into bonds or international stocks during the growth years. The intent is to:
+    </p>
+    <ul>
+      <li><strong>Maximize long-term compounding</strong> — historical U.S. stock returns (roughly 7–10% annualized) compound powerfully over 18 years</li>
+      <li><strong>Minimize fees and complexity</strong> — ultra-low expense ratios mean more money stays invested</li>
+      <li><strong>Protect families from bad choices</strong> — no speculative bets, no high-fee products, no chasing trends</li>
+      <li><strong>Keep it simple</strong> — most families can set it and forget it with the default fund</li>
+    </ul>
+
+    <p>
+      Ready to decide which fund to pick and how to maximize growth? See our <a href="/blog/trump-account-investment-strategies"><strong>5 Smart Investment Strategies for Trump Accounts</strong></a>.
+    </p>
+  </div>
+</BlogLayout>

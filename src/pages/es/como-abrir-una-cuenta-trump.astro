@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { faqSchema } from '../../lib/seo/schema';
+
+const schemas = [
+  faqSchema([
+    {
+      question: '¿Cuándo puedo abrir una Cuenta Trump?',
+      answer: 'Puede presentar el Formulario 4547 con su declaración de impuestos de 2025 (antes del 15 de abril de 2026). El portal en línea se abrirá a mediados de 2026.',
+    },
+    {
+      question: '¿Necesito un abogado para abrir una cuenta?',
+      answer: 'No. Es tan simple como presentar un formulario de impuestos adicional o registrarse en línea. Es similar a abrir una cuenta bancaria.',
+    },
+    {
+      question: '¿Qué sucede si olvido presentar el formulario con mis impuestos?',
+      answer: 'No se preocupe. Puede presentar el formulario por separado por correo o usar el portal trumpaccounts.gov una vez que se lance en julio de 2026.',
+    },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Cómo Abrir una Cuenta Trump: Guía Paso a Paso del Formulario 4547"
+  description="Aprenda las 3 formas de abrir una Cuenta Trump para su hijo: con su declaración de impuestos 2025, en línea en trumpaccounts.gov, o por correo. Guía completa en español."
+  schema={schemas}
+  alternateSlug="/how-to-open-trump-account"
+>
+  <article class="mx-auto max-w-3xl px-4 py-12">
+    <header class="mb-10 text-center">
+      <p class="mb-4 text-sm font-bold uppercase tracking-wider text-gold-400">Guía de Implementación</p>
+      <h1 class="text-4xl font-extrabold leading-tight text-white md:text-5xl">Cómo Abrir una Cuenta Trump</h1>
+      <p class="mx-auto mt-6 text-xl text-gray-400">
+        Tiene tres opciones para asegurar el futuro financiero de su hijo. La mayoría de los padres deberían usar la <strong>Opción 1</strong>.
+      </p>
+    </header>
+
+    <div class="prose prose-invert prose-lg mx-auto">
+      <div class="not-prose mb-12 grid gap-6 md:grid-cols-3">
+        <div class="rounded-xl border border-gold-500/30 bg-gold-500/10 p-6">
+          <h3 class="text-lg font-bold text-white">Opción 1: Impuestos</h3>
+          <p class="mt-2 text-sm text-gray-400">Presente el Formulario 4547 con su declaración de 2025.</p>
+          <span class="mt-4 inline-block rounded bg-gold-500 px-2 py-1 text-xs font-bold text-surface-900">Recomendado</span>
+        </div>
+        <div class="rounded-xl border border-surface-600 bg-surface-800 p-6">
+          <h3 class="text-lg font-bold text-white">Opción 2: En Línea</h3>
+          <p class="mt-2 text-sm text-gray-400">Use el portal oficial trumpaccounts.gov.</p>
+          <span class="mt-4 inline-block text-xs font-bold text-mint-400">Disponible Jul 2026</span>
+        </div>
+        <div class="rounded-xl border border-surface-600 bg-surface-800 p-6">
+          <h3 class="text-lg font-bold text-white">Opción 3: Correo</h3>
+          <p class="mt-2 text-sm text-gray-400">Envíe el formulario en papel al IRS.</p>
+        </div>
+      </div>
+
+      <h2>Lo Que Necesita Antes de Empezar</h2>
+      <p>
+        Antes de intentar abrir una cuenta, asegúrese de tener a mano la siguiente información:
+      </p>
+      <ul>
+        <li><strong>Número de Seguro Social (SSN) del niño:</strong> Obligatorio. Si su recién nacido aún no tiene uno, debe solicitarlo primero.</li>
+        <li><strong>Su propia identificación fiscal:</strong> SSN o ITIN del padre/tutor.</li>
+        <li><strong>Prueba de ciudadanía:</strong> Generalmente no se requiere presentarla, pero debe certificar que el niño es ciudadano de EE.UU.</li>
+      </ul>
+
+      <hr />
+
+      <h2>Opción 1: Presentar con su Declaración de Impuestos (La Más Fácil)</h2>
+      <p>
+        Para la mayoría de las familias, este es el mejor método. Cuando presente sus impuestos federales de 2025 (antes del 15 de abril de 2026), simplemente incluya un formulario adicional.
+      </p>
+      <h3>Pasos:</h3>
+      <ol>
+        <li>Descargue el <strong>Formulario 4547 del IRS</strong> (Elección de Cuenta Trump).</li>
+        <li>Complete la Parte I con la información de su hijo.</li>
+        <li>Adjúntelo a su Formulario 1040.</li>
+        <li>Si usa software como TurboTax o H&R Block, simplemente responda "Sí" cuando le pregunten si desea abrir una Cuenta Trump.</li>
+      </ol>
+      <CalloutBox type="tip" title="Consejo Profesional">
+        No necesita depositar dinero para abrir la cuenta. Simplemente presentar el formulario asegura la elegibilidad de su hijo para el depósito federal de $1,000 (si nació entre 2025-2028).
+      </CalloutBox>
+
+      <h2>Opción 2: El Portal TrumpAccounts.gov</h2>
+      <p>
+        El Departamento del Tesoro lanzará un sitio web dedicado a mediados de 2026.
+      </p>
+      <ul>
+        <li><strong>Cuándo:</strong> Se espera que esté activo el 4 de julio de 2026.</li>
+        <li><strong>Cómo:</strong> Creará una cuenta login.gov, ingresará el SSN de su hijo y seleccionará un custodio financiero (como Fidelity, Vanguard, etc.) de una lista aprobada.</li>
+      </ul>
+
+      <h2>Opción 3: Correo Postal</h2>
+      <p>
+        Si no presenta impuestos o prefiere el papel, puede descargar el Formulario 4547 y enviarlo por correo a la dirección del IRS indicada en las instrucciones del formulario.
+      </p>
+
+      <h2>Preguntas Frecuentes</h2>
+      <details class="group rounded-lg border border-surface-600 bg-surface-800">
+        <summary class="cursor-pointer px-6 py-4 font-semibold text-white">¿Tiene algún costo abrir la cuenta?</summary>
+        <div class="border-t border-surface-700 px-6 py-4 text-gray-300">
+          No hay tarifas gubernamentales para abrir la cuenta. Sin embargo, la institución financiera que elija (el custodio) podría cobrar pequeñas tarifas de administración, aunque la ley fomenta opciones de bajo costo.
+        </div>
+      </details>
+    </div>
+  </article>
+</BaseLayout>

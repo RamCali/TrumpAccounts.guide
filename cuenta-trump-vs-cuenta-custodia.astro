@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import CalloutBox from '../../../components/ui/CalloutBox.astro';
+
+const title = "Cuenta Trump vs. Cuenta de Custodia (UTMA/UGMA)";
+const description = "Diferencias clave entre Cuentas Trump y cuentas UTMA/UGMA. Impacto en impuestos (Kiddie Tax) y ayuda financiera (FAFSA).";
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  alternateSlug="/compare/trump-account-vs-custodial-account"
+>
+  <article class="mx-auto max-w-3xl px-4 py-12">
+    <header class="mb-10 text-center">
+      <p class="mb-4 text-sm font-bold uppercase tracking-wider text-gold-400">Comparación de Cuentas</p>
+      <h1 class="text-3xl font-extrabold leading-tight text-white md:text-5xl">Cuenta Trump vs. UTMA/UGMA</h1>
+      <p class="mx-auto mt-6 text-xl text-gray-400">
+        Las cuentas de custodia tradicionales ofrecen libertad de inversión, pero vienen con dolores de cabeza fiscales que las Cuentas Trump evitan.
+      </p>
+    </header>
+
+    <div class="prose prose-invert prose-lg mx-auto">
+      <p class="lead">
+        Antes de las Cuentas Trump, si quería invertir en acciones para su hijo sin restricciones de educación (como el 529), usaba una cuenta UTMA o UGMA. Ahora, la elección es más clara.
+      </p>
+
+      <h2>Tabla Comparativa Rápida</h2>
+      <div class="not-prose overflow-x-auto">
+        <table class="w-full min-w-[600px] border-collapse text-left text-sm">
+          <thead>
+            <tr class="border-b border-surface-600">
+              <th class="p-4 text-gray-400 font-medium">Característica</th>
+              <th class="p-4 text-gold-400 font-bold text-lg bg-surface-800/50 rounded-t-lg">Cuenta Trump</th>
+              <th class="p-4 text-white font-bold text-lg">Custodia (UTMA/UGMA)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-surface-700 text-gray-300">
+            <tr>
+              <td class="p-4 font-semibold text-white">Impuestos Anuales</td>
+              <td class="p-4 bg-surface-800/30"><span class="text-mint-400 font-bold">Ninguno</span> (Diferidos)</td>
+              <td class="p-4 text-red-300">Sí (Dividendos/Ganancias gravables)</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-semibold text-white">Impacto FAFSA</td>
+              <td class="p-4 bg-surface-800/30">Bajo (No reportable hasta retiro)</td>
+              <td class="p-4 text-red-300">Alto (Cuenta como activo del estudiante)</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-semibold text-white">Límite de Aporte</td>
+              <td class="p-4 bg-surface-800/30">$5,000 / año</td>
+              <td class="p-4">Ilimitado (sujeto a impuesto de donación)</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-semibold text-white">Opciones de Inversión</td>
+              <td class="p-4 bg-surface-800/30">S&P 500 / Índices</td>
+              <td class="p-4">Cualquier activo (Acciones, Cripto, etc.)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>1. El Problema de los Impuestos ("Kiddie Tax")</h2>
+      <p>
+        Las cuentas UTMA/UGMA son cuentas imponibles.
+      </p>
+      <ul>
+        <li><strong>UTMA:</strong> Cada año, debe reportar los dividendos y ganancias de capital en la declaración de impuestos. Si las ganancias superan cierto umbral ($2,500 en 2025), se gravan a la tasa impositiva de los padres (que suele ser alta). Esto se conoce como el "Kiddie Tax".</li>
+        <li><strong>Cuenta Trump:</strong> No genera impuestos anuales. El crecimiento es diferido hasta que se retira el dinero. No hay papeleo fiscal anual durante la infancia.</li>
+      </ul>
+
+      <h2>2. Ayuda Financiera (FAFSA)</h2>
+      <p>
+        Si espera que su hijo solicite ayuda financiera para la universidad, tenga cuidado con las UTMA.
+      </p>
+      <ul>
+        <li><strong>UTMA:</strong> Se considera un activo del <em>estudiante</em>. La fórmula de FAFSA espera que el estudiante contribuya con el 20-25% de sus activos para la universidad cada año.</li>
+        <li><strong>Cuenta Trump:</strong> Al ser una cuenta de retiro calificada (fideicomiso §530A), generalmente no se cuenta como un activo reportable en FAFSA hasta que se retira el dinero, protegiendo la elegibilidad para becas.</li>
+      </ul>
+
+      <CalloutBox type="info" title="¿Cuándo usar una UTMA?">
+        La cuenta de custodia sigue siendo útil si desea transferir activos que no sean efectivo (como bienes raíces o acciones de una empresa familiar) o si ya ha maximizado los $5,000 de la Cuenta Trump y los límites del 529.
+      </CalloutBox>
+
+      <h2>Conclusión</h2>
+      <p>
+        La Cuenta Trump ofrece una protección fiscal y de ayuda financiera muy superior. La UTMA solo gana en flexibilidad de inversión (si quiere comprar acciones individuales o criptomonedas para su hijo), pero viene con un costo fiscal anual.
+      </p>
+
+      <div class="mt-12 text-center">
+        <a href="/es/como-abrir-una-cuenta-trump" class="inline-flex items-center rounded-lg bg-gold-500 px-8 py-4 text-lg font-bold text-surface-900 transition-colors hover:bg-gold-400">
+          Abrir Cuenta Trump →
+        </a>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

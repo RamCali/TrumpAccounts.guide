@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+
+const title = "Aviso del IRS 2025-68 en Español Sencillo";
+const description = "Traducción y explicación del Aviso 2025-68 del IRS sobre las Cuentas Trump (IRC §530A). Entienda las reglas de elegibilidad y contribución sin la jerga legal.";
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  alternateSlug="/irs-notice-2025-68"
+>
+  <article class="mx-auto max-w-3xl px-4 py-12">
+    <header class="mb-10 text-center">
+      <p class="mb-4 text-sm font-bold uppercase tracking-wider text-gold-400">La Capa de Traducción</p>
+      <h1 class="text-4xl font-extrabold leading-tight text-white md:text-5xl">Aviso del IRS 2025-68: Explicado</h1>
+      <p class="mx-auto mt-6 text-xl text-gray-400">
+        El 3 de diciembre de 2025, el IRS publicó la guía oficial para las Cuentas Trump. Aquí explicamos lo que significa en español sencillo.
+      </p>
+    </header>
+
+    <div class="prose prose-invert prose-lg mx-auto">
+      <p class="lead">
+        Este documento establece las reglas de la carretera para las nuevas cuentas de la Sección 530A. A continuación, desglosamos las secciones más importantes.
+      </p>
+
+      <hr />
+
+      <!-- Section 3.01 -->
+      <h2>Sección 3.01: Definición de "Niño Elegible"</h2>
+      
+      <CalloutBox type="irs-quote" title="Lo que dice el IRS">
+        "For purposes of § 530A, the term 'eligible child' means any individual who is a citizen or national of the United States, has not attained age 18, and has a valid social security number."
+      </CalloutBox>
+
+      <div class="pl-4 border-l-2 border-mint-400/30 mt-4">
+        <h3 class="text-mint-400 text-lg font-bold mt-0">En Español Sencillo:</h3>
+        <p>
+          Su hijo califica si cumple con tres condiciones simples:
+        </p>
+        <ol>
+          <li>Es ciudadano de EE.UU.</li>
+          <li>Tiene menos de 18 años.</li>
+          <li>Tiene un número de Seguro Social (SSN).</li>
+        </ol>
+        <p><strong>Nota importante:</strong> No hay requisitos de ingresos. No importa si usted es rico o pobre, su hijo es elegible. Tampoco es necesario que el niño viva en EE.UU., siempre que sea ciudadano.</p>
+      </div>
+
+      <hr />
+
+      <!-- Section 3.05 -->
+      <h2>Sección 3.05: El Depósito Piloto ($1,000)</h2>
+
+      <CalloutBox type="irs-quote" title="Lo que dice el IRS">
+        "The Secretary shall deposit $1,000 into the Trump Account of any eligible child born after December 31, 2024, and before January 1, 2029. This amount is not treated as income to the beneficiary."
+      </CalloutBox>
+
+      <div class="pl-4 border-l-2 border-mint-400/30 mt-4">
+        <h3 class="text-mint-400 text-lg font-bold mt-0">En Español Sencillo:</h3>
+        <p>
+          Si su bebé nace entre 2025 y 2028, el gobierno le regala $1,000 para empezar.
+        </p>
+        <ul>
+          <li><strong>¿Es ingreso gravable?</strong> No. No tiene que pagar impuestos sobre estos $1,000.</li>
+          <li><strong>¿Tengo que devolverlo?</strong> No. Es una subvención, no un préstamo.</li>
+        </ul>
+      </div>
+
+      <hr />
+
+      <!-- Section 4.02 -->
+      <h2>Sección 4.02: Reglas de Inversión</h2>
+
+      <CalloutBox type="irs-quote" title="Lo que dice el IRS">
+        "Assets in a Trump Account must be held in a qualified broad-based United States equity index fund... designed to track the performance of the aggregate United States equity market."
+      </CalloutBox>
+
+      <div class="pl-4 border-l-2 border-mint-400/30 mt-4">
+        <h3 class="text-mint-400 text-lg font-bold mt-0">En Español Sencillo:</h3>
+        <p>
+          No puede usar este dinero para comprar Bitcoin, acciones individuales de Tesla o bonos.
+        </p>
+        <p>
+          Por ley, el dinero debe invertirse en el mercado de valores de EE.UU. en general (como el <strong>S&P 500</strong> o un Fondo de Mercado Total). Esto está diseñado para proteger el dinero y asegurar que crezca con la economía estadounidense hasta que el niño sea adulto.
+        </p>
+      </div>
+
+      <hr />
+
+      <div class="bg-surface-800 p-6 rounded-xl border border-surface-600 mt-12 text-center">
+        <h3 class="text-white mt-0">¿Listo para actuar?</h3>
+        <p class="text-gray-400 mb-6">Ahora que entiende las reglas, vea cuánto podría crecer el dinero de su hijo.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/es/calculadoras/calculadora-de-crecimiento" class="inline-flex items-center justify-center rounded-lg bg-gold-500 px-6 py-3 font-semibold text-surface-900 transition-colors hover:bg-gold-400 no-underline">
+            Calculadora de Crecimiento
+          </a>
+          <a href="/es/como-abrir-una-cuenta-trump" class="inline-flex items-center justify-center rounded-lg border border-surface-600 bg-surface-800 px-6 py-3 font-semibold text-white transition-colors hover:bg-surface-700 no-underline">
+            Cómo Abrir una Cuenta
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </article>
+</BaseLayout>

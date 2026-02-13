@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getTranslationObject } from '../../../i18n/config';
+
+const hp = getTranslationObject('es', 'homepage');
+---
+
+<BaseLayout
+  title={`${hp['viral.hrTitle']} | TrumpAccounts.guide`}
+  description={hp['viral.hrDesc']}
+  alternateSlug="/tools/hr-email"
+>
+  <section class="border-b border-surface-700 bg-surface-900">
+    <div class="mx-auto max-w-4xl px-4 py-16 text-center">
+      <p class="mb-4 text-sm font-bold uppercase tracking-wider text-purple-400">Herramientas Virales</p>
+      <h1 class="text-3xl font-bold text-white md:text-5xl">{hp['viral.hrTitle']}</h1>
+      <p class="mx-auto mt-6 max-w-2xl text-xl text-gray-400">
+        {hp['viral.hrDesc']}
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="mx-auto max-w-3xl px-4">
+      <div class="rounded-2xl border border-surface-600 bg-surface-800 p-6 shadow-2xl md:p-8">
+        <label class="mb-2 block text-sm font-bold text-gray-300">Asunto del Correo:</label>
+        <div class="mb-6 rounded-lg bg-surface-900 p-4 text-white border border-surface-700">
+          Pregunta sobre beneficios: Programa de Cuentas Trump (§128)
+        </div>
+
+        <label class="mb-2 block text-sm font-bold text-gray-300">Cuerpo del Correo:</label>
+        <div class="relative rounded-lg bg-surface-900 p-4 text-gray-300 border border-surface-700 font-mono text-sm leading-relaxed">
+          <p class="mb-4">Hola [Nombre del Gerente o RR.HH.],</p>
+          <p class="mb-4">
+            Recientemente leí sobre el nuevo programa de <strong>Cuentas Trump (IRC §530A)</strong> que permite a los empleadores contribuir hasta <strong>$2,500 al año</strong> a las cuentas de inversión de los hijos de los empleados.
+          </p>
+          <p class="mb-4">
+            Entiendo que estas contribuciones son:
+            <br/>1. Libres de impuestos para los empleados (bajo la exclusión de la Sección 128).
+            <br/>2. Deducibles de impuestos para la empresa.
+          </p>
+          <p class="mb-4">
+            ¿Nuestra empresa tiene planes de ofrecer este beneficio en el próximo período de inscripción abierta? Me encantaría aprovecharlo para el futuro de mi familia.
+          </p>
+          <p>
+            Gracias,<br/>
+            [Su Nombre]
+          </p>
+        </div>
+
+        <div class="mt-6 text-center">
+          <button
+            onclick="navigator.clipboard.writeText('Asunto: Pregunta sobre beneficios: Programa de Cuentas Trump (§128)\n\nHola [Nombre],\n\nRecientemente leí sobre el nuevo programa de Cuentas Trump (IRC §530A) que permite a los empleadores contribuir hasta $2,500 al año a las cuentas de inversión de los hijos de los empleados.\n\nEntiendo que estas contribuciones son:\n1. Libres de impuestos para los empleados (bajo la exclusión de la Sección 128).\n2. Deducibles de impuestos para la empresa.\n\n¿Nuestra empresa tiene planes de ofrecer este beneficio en el próximo período de inscripción abierta? Me encantaría aprovecharlo para el futuro de mi familia.\n\nGracias,\n[Su Nombre]').then(() => alert('¡Correo copiado al portapapeles!'))"
+            class="inline-flex items-center justify-center rounded-lg bg-purple-500 px-6 py-3 font-semibold text-white transition-colors hover:bg-purple-400 cursor-pointer border-none"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mr-2 h-5 w-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184" />
+            </svg>
+            Copiar al Portapapeles
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

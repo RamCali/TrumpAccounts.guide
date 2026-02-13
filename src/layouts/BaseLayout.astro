@@ -5,6 +5,8 @@ import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import OpenGraph from '../components/seo/OpenGraph.astro';
 import SchemaOrg from '../components/seo/SchemaOrg.astro';
+import { getLocaleFromUrl } from '../i18n/config';
+import { getAlternateUrl } from '../i18n/url-map';
 
 interface Props {
   title: string;
@@ -12,6 +14,7 @@ interface Props {
   canonical?: string;
   schema?: Record<string, unknown> | Record<string, unknown>[];
   ogType?: string;
+  alternateSlug?: string;
 }
 
 const {
@@ -20,21 +23,32 @@ const {
   canonical,
   schema,
   ogType = 'website',
+  alternateSlug,
 } = Astro.props;
 
+const locale = getLocaleFromUrl(Astro.url);
 const siteUrl = 'https://trumpaccounts.guide';
 const canonicalUrl = canonical || new URL(Astro.url.pathname, siteUrl).toString();
 const fullTitle = title.includes('TrumpAccounts') ? title : `${title} | TrumpAccounts.guide`;
+const alternateUrl = alternateSlug
+  ? new URL(alternateSlug, siteUrl).toString()
+  : new URL(getAlternateUrl(Astro.url.pathname, locale), siteUrl).toString();
+const skipText = locale === 'es' ? 'Ir al contenido' : 'Skip to content';
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={locale}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/png" href="/TrumpAccounts.guide_favicon.png" />
     <link rel="canonical" href={canonicalUrl} />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- hreflang for i18n -->
+    <link rel="alternate" hreflang={locale === 'en' ? 'en' : 'es'} href={canonicalUrl} />
+    <link rel="alternate" hreflang={locale === 'en' ? 'es' : 'en'} href={alternateUrl} />
+    <link rel="alternate" hreflang="x-default" href={locale === 'en' ? canonicalUrl : alternateUrl} />
 
     <!-- Performance hints -->
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
@@ -59,6 +73,7 @@ const fullTitle = title.includes('TrumpAccounts') ? title : `${title} | TrumpAcc
       description={description}
       url={canonicalUrl}
       type={ogType}
+      locale={locale}
     />
 
     {schema && <SchemaOrg schema={schema} />}
@@ -68,7 +83,7 @@ const fullTitle = title.includes('TrumpAccounts') ? title : `${title} | TrumpAcc
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZG237LN"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-    <a href="#main-content" class="skip-link">Skip to content</a>
+    <a href="#main-content" class="skip-link">{skipText}</a>
     <DisclosureBanner />
     <Header />
     <main id="main-content" class="flex-1">

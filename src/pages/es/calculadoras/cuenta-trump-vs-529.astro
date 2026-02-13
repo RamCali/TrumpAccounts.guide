@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import CalloutBox from '../../../components/ui/CalloutBox.astro';
+
+const title = "Cuenta Trump vs. Plan 529: ¿Cuál es Mejor?";
+const description = "Comparación detallada entre las Cuentas Trump (IRC §530A) y los planes 529. Descubra qué cuenta ofrece mejores beneficios fiscales y flexibilidad para su hijo.";
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  alternateSlug="/compare/trump-account-vs-529"
+>
+  <article class="mx-auto max-w-3xl px-4 py-12">
+    <header class="mb-10 text-center">
+      <p class="mb-4 text-sm font-bold uppercase tracking-wider text-gold-400">Comparación de Cuentas</p>
+      <h1 class="text-3xl font-extrabold leading-tight text-white md:text-5xl">Cuenta Trump vs. Plan 529</h1>
+      <p class="mx-auto mt-6 text-xl text-gray-400">
+        El 529 es el rey del ahorro universitario, pero la Cuenta Trump ofrece una flexibilidad que el 529 no puede igualar. Aquí le mostramos cómo elegir.
+      </p>
+    </header>
+
+    <div class="prose prose-invert prose-lg mx-auto">
+      <p class="lead">
+        Durante décadas, el plan 529 ha sido la cuenta predeterminada para los padres que ahorran para el futuro de sus hijos. Pero con la llegada de las Cuentas Trump (IRC §530A), el panorama ha cambiado.
+      </p>
+
+      <h2>Tabla Comparativa Rápida</h2>
+      <div class="not-prose overflow-x-auto">
+        <table class="w-full min-w-[600px] border-collapse text-left text-sm">
+          <thead>
+            <tr class="border-b border-surface-600">
+              <th class="p-4 text-gray-400 font-medium">Característica</th>
+              <th class="p-4 text-gold-400 font-bold text-lg bg-surface-800/50 rounded-t-lg">Cuenta Trump</th>
+              <th class="p-4 text-white font-bold text-lg">Plan 529</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-surface-700 text-gray-300">
+            <tr>
+              <td class="p-4 font-semibold text-white">Uso de Fondos</td>
+              <td class="p-4 bg-surface-800/30">Cualquier cosa (después de los 18)</td>
+              <td class="p-4">Solo educación calificada</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-semibold text-white">Beneficio Fiscal</td>
+              <td class="p-4 bg-surface-800/30">Crecimiento diferido</td>
+              <td class="p-4">Crecimiento libre de impuestos (si es para educación)</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-semibold text-white">Depósito Federal</td>
+              <td class="p-4 bg-surface-800/30"><span class="text-mint-400 font-bold">$1,000</span> (si nace 2025-28)</td>
+              <td class="p-4">Ninguno</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-semibold text-white">Contribución del Empleador</td>
+              <td class="p-4 bg-surface-800/30">Sí, libre de impuestos (§128)</td>
+              <td class="p-4">No hay exclusión fiscal federal específica</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-semibold text-white">Límite Anual</td>
+              <td class="p-4 bg-surface-800/30">$5,000</td>
+              <td class="p-4">Muy alto ($18,000+ sin impuesto de donación)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>1. Flexibilidad vs. Especificidad</h2>
+      <p>
+        La mayor diferencia es el <strong>propósito</strong>.
+      </p>
+      <ul>
+        <li><strong>Plan 529:</strong> Está diseñado estrictamente para la educación (universidad, escuelas de oficios, matrícula K-12 privada). Si usa el dinero para comprar una casa o iniciar un negocio, paga impuestos más una multa del 10%.</li>
+        <li><strong>Cuenta Trump:</strong> A los 18 años, se convierte en una IRA Tradicional. El dinero se puede mantener para la jubilación o retirar (pagando impuestos ordinarios) para cualquier propósito. No hay penalización por "no ir a la universidad".</li>
+      </ul>
+
+      <CalloutBox type="tip" title="El Veredicto">
+        Si está 100% seguro de que su hijo irá a la universidad, el 529 gana por sus retiros libres de impuestos. Si quiere opciones abiertas, la Cuenta Trump gana.
+      </CalloutBox>
+
+      <h2>2. Tratamiento Fiscal</h2>
+      <p>
+        Aquí es donde el 529 brilla si se usa correctamente.
+      </p>
+      <ul>
+        <li><strong>529:</strong> Las ganancias nunca se gravan si se usan para educación.</li>
+        <li><strong>Cuenta Trump:</strong> Las ganancias se gravan como ingresos ordinarios cuando se retiran (como una IRA Tradicional o 401k).</li>
+      </ul>
+
+      <h2>3. El Factor del Empleador</h2>
+      <p>
+        La Cuenta Trump tiene una ventaja única: la <strong>Exclusión de la Sección 128</strong>.
+      </p>
+      <p>
+        Los empleadores pueden contribuir hasta $2,500 al año a la Cuenta Trump de su hijo <em>libre de impuestos</em>. Esto significa que no paga impuestos sobre la renta ni impuestos de nómina sobre ese dinero. Los planes 529 no tienen un equivalente federal tan poderoso.
+      </p>
+
+      <h2>Conclusión: ¿Por qué no ambos?</h2>
+      <p>
+        Para muchas familias, la estrategia ideal es:
+      </p>
+      <ol>
+        <li>Asegurar el depósito federal de $1,000 en la Cuenta Trump.</li>
+        <li>Aprovechar cualquier contribución del empleador a la Cuenta Trump.</li>
+        <li>Usar un 529 para ahorros adicionales destinados específicamente a la universidad, especialmente si su estado ofrece deducciones fiscales estatales.</li>
+      </ol>
+
+      <div class="mt-12 text-center">
+        <a href="/es/calculadoras/herramienta-de-comparacion" class="inline-flex items-center rounded-lg bg-gold-500 px-8 py-4 text-lg font-bold text-surface-900 transition-colors hover:bg-gold-400">
+          Usar Herramienta de Comparación →
+        </a>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

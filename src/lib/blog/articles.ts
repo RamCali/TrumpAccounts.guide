@@ -172,7 +172,7 @@ export const blogArticles: Record<string, BlogArticle> = {
     datePublished: '2026-02-12',
     dateModified: '2026-02-12',
     readingTime: '5 min read',
-    relatedSlugs: ['index-fund-requirements', 'trump-account-fees-explained', 'trump-account-vs-sp500-etfs'],
+    relatedSlugs: ['index-fund-requirements', 'trump-account-fees-explained', 'trump-account-vs-sp500-etfs', 'trump-account-investment-rules'],
   },
   'government-guarantee-returns': {
     slug: 'government-guarantee-returns',
@@ -207,7 +207,7 @@ export const blogArticles: Record<string, BlogArticle> = {
     datePublished: '2026-02-12',
     dateModified: '2026-02-12',
     readingTime: '5 min read',
-    relatedSlugs: ['trump-account-fees-explained', 'trump-account-vs-sp500-etfs', 'how-is-trump-account-invested'],
+    relatedSlugs: ['trump-account-fees-explained', 'trump-account-vs-sp500-etfs', 'how-is-trump-account-invested', 'trump-account-investment-rules'],
   },
   'expected-returns-trump-account': {
     slug: 'expected-returns-trump-account',
@@ -229,7 +229,7 @@ export const blogArticles: Record<string, BlogArticle> = {
     datePublished: '2026-02-12',
     dateModified: '2026-02-12',
     readingTime: '4 min read',
-    relatedSlugs: ['index-fund-requirements', 'trump-account-vs-sp500-etfs', 'how-is-trump-account-invested'],
+    relatedSlugs: ['index-fund-requirements', 'trump-account-vs-sp500-etfs', 'how-is-trump-account-invested', 'trump-account-investment-rules'],
   },
   'what-happens-market-crash': {
     slug: 'what-happens-market-crash',
@@ -262,7 +262,29 @@ export const blogArticles: Record<string, BlogArticle> = {
     datePublished: '2026-02-12',
     dateModified: '2026-02-12',
     readingTime: '6 min read',
-    relatedSlugs: ['trump-account-fees-explained', 'index-fund-requirements', 'how-is-trump-account-invested'],
+    relatedSlugs: ['trump-account-fees-explained', 'index-fund-requirements', 'how-is-trump-account-invested', 'trump-account-investment-rules', 'trump-account-investment-strategies'],
+  },
+  'trump-account-investment-rules': {
+    slug: 'trump-account-investment-rules',
+    title: 'Trump Account Investment Rules: The Complete Guide',
+    description: 'Every investment rule for Trump Accounts: eligible funds, expense ratio cap, no leverage, no cash or bonds. The definitive reference for 2026.',
+    category: 'Investment Structure',
+    categorySlug: 'investment-structure',
+    datePublished: '2026-02-13',
+    dateModified: '2026-02-13',
+    readingTime: '7 min read',
+    relatedSlugs: ['trump-account-investment-strategies', 'index-fund-requirements', 'trump-account-vs-sp500-etfs', 'trump-account-fees-explained', 'can-parents-change-investments', 'how-is-trump-account-invested'],
+  },
+  'trump-account-investment-strategies': {
+    slug: 'trump-account-investment-strategies',
+    title: '5 Smart Investment Strategies for Trump Accounts',
+    description: 'Maximize your child\'s Trump Account with these 5 proven strategies: lowest-cost funds, max contributions, buy-and-hold, provider monitoring, and transition planning.',
+    category: 'Investment Structure',
+    categorySlug: 'investment-structure',
+    datePublished: '2026-02-13',
+    dateModified: '2026-02-13',
+    readingTime: '7 min read',
+    relatedSlugs: ['trump-account-investment-rules', 'should-i-wait-or-invest-now', 'build-50k-by-18', 'trump-account-roth-conversion-strategy', 'should-i-contribute-own-money', 'best-accounts-for-kids-today'],
   },
 
   // ─── Cluster 4: Use of Funds ─────────────────────────────────
@@ -534,7 +556,7 @@ export const blogArticles: Record<string, BlogArticle> = {
     datePublished: '2026-02-12',
     dateModified: '2026-02-12',
     readingTime: '6 min read',
-    relatedSlugs: ['gains-taxation-explained', 'is-growth-tax-free', 'trump-account-retirement-conversion'],
+    relatedSlugs: ['gains-taxation-explained', 'is-growth-tax-free', 'trump-account-retirement-conversion', 'trump-account-investment-strategies'],
   },
 
   // ─── Cluster 8: Policy & Economics ───────────────────────────
@@ -648,7 +670,7 @@ export const blogArticles: Record<string, BlogArticle> = {
     datePublished: '2026-02-12',
     dateModified: '2026-02-12',
     readingTime: '5 min read',
-    relatedSlugs: ['how-much-at-age-18', 'expected-returns-trump-account', 'how-to-open-step-by-step', 'cost-of-waiting-calculator'],
+    relatedSlugs: ['how-much-at-age-18', 'expected-returns-trump-account', 'how-to-open-step-by-step', 'cost-of-waiting-calculator', 'trump-account-investment-strategies'],
   },
   'replicate-trump-account-yourself': {
     slug: 'replicate-trump-account-yourself',
@@ -670,7 +692,7 @@ export const blogArticles: Record<string, BlogArticle> = {
     datePublished: '2026-02-12',
     dateModified: '2026-02-12',
     readingTime: '5 min read',
-    relatedSlugs: ['how-much-at-age-18', 'contribution-limits-explained', 'expected-returns-trump-account'],
+    relatedSlugs: ['how-much-at-age-18', 'contribution-limits-explained', 'expected-returns-trump-account', 'trump-account-investment-strategies'],
   },
   'best-accounts-for-kids-today': {
     slug: 'best-accounts-for-kids-today',
@@ -877,6 +899,19 @@ export const blogArticles: Record<string, BlogArticle> = {
     dateModified: '2026-02-13',
     readingTime: '4 min read',
     relatedSlugs: ['what-are-trump-accounts-guide', 'trump-accounts-benefits', 'how-to-open-step-by-step', 'contribution-limits-explained'],
+  },
+
+  // ─── Existing: Hacks / Advanced ───────────────────────────────
+  'trump-account-hacks': {
+    slug: 'trump-account-hacks',
+    title: '5 Legal Trump Account Hacks for Maximum Growth',
+    description: 'Roth conversion ladder, stacking free money, front-loading contributions, low-cost funds, and avoiding pitfalls. Expert strategies explained.',
+    category: 'Parent Guides',
+    categorySlug: 'parent-guides',
+    datePublished: '2026-02-13',
+    dateModified: '2026-02-13',
+    readingTime: '10 min read',
+    relatedSlugs: ['trump-account-roth-conversion-strategy', 'employer-match-trump-account', 'trump-account-fees-explained', 'advanced-trump-account-strategies', 'build-50k-by-18'],
   },
 
   // ─── New: Form 4547 & Filing ─────────────────────────────────

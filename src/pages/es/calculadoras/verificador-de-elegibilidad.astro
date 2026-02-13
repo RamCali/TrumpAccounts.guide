@@ -1,24 +1,95 @@
 ---
-import CalculatorLayout from '../../../layouts/CalculatorLayout.astro';
-import EligibilityChecker from '../../../components/calculators/EligibilityChecker';
-import esCalc from '../../../i18n/es/calculators.json';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import MiniEligibilityChecker from '../../../components/calculators/MiniEligibilityChecker';
+import CalloutBox from '../../../components/ui/CalloutBox.astro';
+import { getTranslationObject } from '../../../i18n/config';
 
-const translations: Record<string, string> = {};
-for (const [key, value] of Object.entries(esCalc)) {
-  if (key.startsWith('eligibility.')) {
-    translations[key.replace('eligibility.', '')] = value;
-  }
-}
-// Add growth calculator href for Spanish
-translations.growthCalcHref = '/es/calculadoras/calculadora-de-crecimiento';
+const calc = getTranslationObject('es', 'calculators');
+
+const miniEligibilityT = {
+  title: calc['mini.eligibility.title'],
+  birthDate: calc['mini.eligibility.birthDate'],
+  birthYearAria: calc['mini.eligibility.birthYearAria'],
+  usCitizen: calc['mini.eligibility.usCitizen'],
+  usCitizenAria: calc['mini.eligibility.usCitizenAria'],
+  validSSN: calc['mini.eligibility.validSSN'],
+  validSSNAria: calc['mini.eligibility.validSSNAria'],
+  eligible: calc['mini.eligibility.eligible'],
+  grant: calc['mini.eligibility.grant'],
+  notEligible: calc['mini.eligibility.notEligible'],
+  mustBeCitizen: calc['mini.eligibility.mustBeCitizen'],
+  ssnRequired: calc['mini.eligibility.ssnRequired'],
+};
 ---
 
-<CalculatorLayout
-  title="Verificador de Elegibilidad de Cuentas Trump"
-  description="Responda 3 preguntas rápidas para saber si su hijo califica para una Cuenta Trump y el depósito piloto federal de $1,000."
-  calculatorName="Verificador de Elegibilidad"
-  slug="eligibility-checker"
+<BaseLayout
+  title="Verificador de Elegibilidad para Cuentas Trump | TrumpAccounts.guide"
+  description="Averigüe si su hijo califica para el depósito federal de $1,000 de la Cuenta Trump. Verifique los requisitos de edad, ciudadanía y SSN al instante."
   alternateSlug="/calculators/eligibility-checker"
 >
-  <EligibilityChecker client:visible translations={translations} />
-</CalculatorLayout>
+  <section class="bg-surface-900 border-b border-surface-700">
+    <div class="mx-auto max-w-4xl px-4 py-16 text-center">
+      <p class="mb-4 text-sm font-bold uppercase tracking-wider text-mint-400">Herramientas Gratuitas</p>
+      <h1 class="text-3xl font-bold text-white md:text-5xl">Verificador de Elegibilidad</h1>
+      <p class="mx-auto mt-6 max-w-2xl text-xl text-gray-400">
+        Solo hay tres requisitos simples para calificar para una Cuenta Trump. Use esta herramienta para ver si su hijo es elegible para el depósito federal de $1,000.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="grid gap-12 lg:grid-cols-2">
+        <!-- Calculator Column -->
+        <div>
+          <div class="sticky top-8 rounded-2xl border border-surface-600 bg-surface-800 p-6 shadow-2xl md:p-8">
+            <MiniEligibilityChecker translations={miniEligibilityT} client:visible />
+          </div>
+        </div>
+
+        <!-- Content Column -->
+        <div class="prose prose-invert prose-lg">
+          <h2>Los 3 Requisitos Clave</h2>
+          <p>
+            Para abrir una Cuenta Trump, el beneficiario (el niño) debe cumplir con los criterios establecidos en la Sección 530A del Código de Rentas Internas.
+          </p>
+
+          <div class="not-prose mt-6 space-y-4">
+            <div class="flex items-start gap-4 rounded-lg bg-surface-800 p-4 border border-surface-700">
+              <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold-500 text-surface-900 font-bold">1</div>
+              <div>
+                <h3 class="text-lg font-bold text-white">Ciudadanía de EE.UU.</h3>
+                <p class="text-gray-400 text-sm">El niño debe ser ciudadano o nacional de los Estados Unidos. Los residentes permanentes (Green Card) no califican para la apertura inicial bajo la ley actual.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 rounded-lg bg-surface-800 p-4 border border-surface-700">
+              <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold-500 text-surface-900 font-bold">2</div>
+              <div>
+                <h3 class="text-lg font-bold text-white">Menor de 18 Años</h3>
+                <p class="text-gray-400 text-sm">La cuenta debe abrirse antes de que el niño cumpla 18 años. Una vez que cumplen 18, la cuenta se convierte en una IRA.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 rounded-lg bg-surface-800 p-4 border border-surface-700">
+              <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold-500 text-surface-900 font-bold">3</div>
+              <div>
+                <h3 class="text-lg font-bold text-white">Número de Seguro Social</h3>
+                <p class="text-gray-400 text-sm">Debe tener un SSN válido emitido por la Administración del Seguro Social. Los ITIN no son aceptados para este programa.</p>
+              </div>
+            </div>
+          </div>
+
+          <h3>Sobre el Depósito de $1,000</h3>
+          <p>
+            Aunque cualquier niño elegible puede tener una cuenta, el <strong>depósito piloto federal de $1,000</strong> es exclusivo para una ventana de tiempo específica.
+          </p>
+          <CalloutBox type="info" title="Ventana de Nacimiento">
+            Solo los niños nacidos entre el <strong>1 de enero de 2025</strong> y el <strong>31 de diciembre de 2028</strong> recibirán automáticamente los $1,000 del gobierno.
+          </CalloutBox>
+          <p>
+            Si su hijo nació antes de 2025, aún puede abrir una cuenta y disfrutar del crecimiento libre de impuestos, pero deberá financiarla con contribuciones de los padres o del empleador.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -18,6 +18,7 @@ export function webPageSchema(params: {
   description: string;
   url: string;
   dateModified?: string;
+  inLanguage?: string;
 }) {
   return {
     '@context': 'https://schema.org',
@@ -26,6 +27,7 @@ export function webPageSchema(params: {
     description: params.description,
     url: params.url,
     dateModified: params.dateModified,
+    ...(params.inLanguage && { inLanguage: params.inLanguage }),
     publisher: {
       '@type': 'Organization',
       name: 'TrumpAccounts.guide',
@@ -75,6 +77,7 @@ export function webApplicationSchema(params: {
   name: string;
   description: string;
   url: string;
+  inLanguage?: string;
 }) {
   return {
     '@context': 'https://schema.org',
@@ -82,6 +85,7 @@ export function webApplicationSchema(params: {
     name: params.name,
     description: params.description,
     url: params.url,
+    ...(params.inLanguage && { inLanguage: params.inLanguage }),
     applicationCategory: 'FinanceApplication',
     operatingSystem: 'All',
     offers: {

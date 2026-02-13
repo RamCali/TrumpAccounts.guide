@@ -45,7 +45,7 @@ export function getLocalizedPath(path: string, locale: Locale): string {
     return path.startsWith('/') ? path : `/${path}`;
   }
   const cleanPath = path.startsWith('/') ? path : `/${path}`;
-  return `/es${cleanPath}`;
+  return `/${locale}${cleanPath}`;
 }
 
 export function getTranslationObject(locale: Locale, ns: string): Record<string, string> {

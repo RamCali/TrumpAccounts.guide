@@ -1,14 +1,18 @@
 ---
+import { getLocaleFromUrl, useTranslations } from '../../i18n/config';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale, 'common');
 ---
 
 <div class="border-b border-amber-500/20 bg-amber-950/40 px-4 py-2 text-center text-xs text-amber-200/80 sm:text-sm">
   <p>
-    <strong class="text-amber-200">Disclosure:</strong>
-    TrumpAccounts.guide is an independent informational website. We are <strong>not</strong> affiliated with,
-    endorsed by, or operated by the IRS, U.S. Treasury, or any government agency.
-    This is <strong>not</strong> the official
-    <a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer" class="text-amber-300 underline hover:text-amber-100">TrumpAccounts.gov</a> website.
-    Information may change&mdash;always verify with
-    <a href="https://www.irs.gov" target="_blank" rel="noopener noreferrer" class="text-amber-300 underline hover:text-amber-100">official sources</a>.
+    <strong class="text-amber-200">{t('disclosure.label')}</strong>
+    {t('disclosure.text')} <strong>{t('disclosure.notAffiliated')}</strong>
+    {t('disclosure.govText')}
+    <strong>{t('disclosure.notThe')}</strong> {t('disclosure.theOfficial')}
+    <a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer" class="text-amber-300 underline hover:text-amber-100">{t('disclosure.govSite')}</a> {t('disclosure.website')}
+    {t('disclosure.mayChange')}
+    <a href="https://www.irs.gov" target="_blank" rel="noopener noreferrer" class="text-amber-300 underline hover:text-amber-100">{t('disclosure.officialSources')}</a>.
   </p>
 </div>

@@ -1,20 +1,30 @@
 ---
+import { getLocaleFromUrl, useTranslations, getLocalizedPath } from '../../i18n/config';
+import { getAlternateUrl } from '../../i18n/url-map';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale, 'common');
+const currentPath = Astro.url.pathname;
+
 const navItems = [
-  { label: 'How to Open', href: '/how-to-open-trump-account' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Calculators', href: '/calculators' },
-  { label: 'Compare', href: '/compare' },
-  { label: 'FAQ', href: '/faq' },
-  { label: 'Employers', href: '/for-employers' },
-  { label: 'Glossary', href: '/glossary' },
+  { label: t('nav.howToOpen'), href: getLocalizedPath('/how-to-open-trump-account', locale) },
+  { label: t('nav.blog'), href: getLocalizedPath('/blog', locale) },
+  { label: t('nav.calculators'), href: getLocalizedPath('/calculators', locale) },
+  { label: t('nav.compare'), href: getLocalizedPath('/compare', locale) },
+  { label: t('nav.faq'), href: getLocalizedPath('/faq', locale) },
+  { label: t('nav.employers'), href: getLocalizedPath('/for-employers', locale) },
+  { label: t('nav.glossary'), href: getLocalizedPath('/glossary', locale) },
 ];
 
-const currentPath = Astro.url.pathname;
+const alternateUrl = getAlternateUrl(Astro.url.pathname, locale);
+const langSwitchLabel = t('lang.switchLabel');
+const langSwitchText = t('lang.switch');
+const homeHref = locale === 'es' ? '/es' : '/';
 ---
 
 <header class="sticky top-0 z-50 border-b border-surface-700 bg-surface-800/95 backdrop-blur-sm">
   <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3" aria-label="Main navigation">
-    <a href="/" class="flex items-center no-underline">
+    <a href={homeHref} class="flex items-center no-underline">
       <img
         src="/TrumpAccounts.guide.png"
         alt="TrumpAccounts.guide — Form 4547 Trump Accounts"
@@ -41,19 +51,37 @@ const currentPath = Astro.url.pathname;
           </a>
         </li>
       ))}
+      <li>
+        <a
+          href={alternateUrl}
+          class="rounded-lg border border-surface-600 px-3 py-1.5 text-xs font-bold no-underline text-gold-400 transition-colors hover:bg-surface-700"
+          aria-label={langSwitchLabel}
+        >
+          {langSwitchText}
+        </a>
+      </li>
     </ul>
 
-    <!-- Mobile Menu Button -->
-    <button
-      id="mobile-menu-btn"
-      class="rounded-lg p-2 text-gray-400 hover:bg-surface-700 md:hidden"
-      aria-label="Toggle menu"
-      aria-expanded="false"
-    >
-      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
-    </button>
+    <!-- Mobile: Lang switch + Menu button -->
+    <div class="flex items-center gap-2 md:hidden">
+      <a
+        href={alternateUrl}
+        class="rounded-lg border border-surface-600 px-2.5 py-1.5 text-xs font-bold no-underline text-gold-400 transition-colors hover:bg-surface-700"
+        aria-label={langSwitchLabel}
+      >
+        {langSwitchText}
+      </a>
+      <button
+        id="mobile-menu-btn"
+        class="rounded-lg p-2 text-gray-400 hover:bg-surface-700"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
   </nav>
 
   <!-- Mobile Nav -->

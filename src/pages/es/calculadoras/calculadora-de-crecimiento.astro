@@ -1,22 +1,88 @@
 ---
-import CalculatorLayout from '../../../layouts/CalculatorLayout.astro';
-import GrowthCalculator from '../../../components/calculators/GrowthCalculator';
-import esCalc from '../../../i18n/es/calculators.json';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import MiniGrowthCalc from '../../../components/calculators/MiniGrowthCalc';
+import CalloutBox from '../../../components/ui/CalloutBox.astro';
+import { getTranslationObject } from '../../../i18n/config';
 
-const translations: Record<string, string> = {};
-for (const [key, value] of Object.entries(esCalc)) {
-  if (key.startsWith('growth.')) {
-    translations[key.replace('growth.', '')] = value;
-  }
-}
+const calc = getTranslationObject('es', 'calculators');
+
+const miniGrowthT = {
+  title: calc['mini.growth.title'],
+  initialDeposit: calc['mini.growth.initialDeposit'],
+  monthlySavings: calc['mini.growth.monthlySavings'],
+  growthRate: calc['mini.growth.growthRate'],
+  projectedValue: calc['mini.growth.projectedValue'],
+  cta: calc['mini.growth.cta'],
+  ctaHref: calc['mini.growth.ctaHref'],
+  initialDepositAria: calc['mini.growth.initialDepositAria'],
+  monthlySavingsAria: calc['mini.growth.monthlySavingsAria'],
+  growthRateAria: calc['mini.growth.growthRateAria'],
+};
 ---
 
-<CalculatorLayout
-  title="Calculadora de Crecimiento de Cuentas Trump"
-  description="Vea cómo el depósito federal de $1,000 puede crecer en 18 años con interés compuesto. Ajuste contribuciones mensuales, rendimientos esperados y año de nacimiento."
-  calculatorName="Calculadora de Crecimiento"
-  slug="growth-calculator"
+<BaseLayout
+  title="Calculadora de Crecimiento de Cuentas Trump | TrumpAccounts.guide"
+  description="Proyecte el valor futuro de la Cuenta Trump de su hijo. Vea cómo el interés compuesto convierte $1,000 en una inversión significativa a los 18 años."
   alternateSlug="/calculators/growth-calculator"
 >
-  <GrowthCalculator client:visible translations={translations} />
-</CalculatorLayout>
+  <section class="bg-surface-900 border-b border-surface-700">
+    <div class="mx-auto max-w-4xl px-4 py-16 text-center">
+      <p class="mb-4 text-sm font-bold uppercase tracking-wider text-mint-400">Herramientas de Proyección</p>
+      <h1 class="text-3xl font-bold text-white md:text-5xl">Calculadora de Crecimiento</h1>
+      <p class="mx-auto mt-6 max-w-2xl text-xl text-gray-400">
+        El interés compuesto es la octava maravilla del mundo. Vea lo que sucede cuando combina el depósito federal de $1,000 con el crecimiento del mercado a largo plazo.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="grid gap-12 lg:grid-cols-2">
+        <!-- Calculator Column -->
+        <div>
+          <div class="sticky top-8 rounded-2xl border border-surface-600 bg-surface-800 p-6 shadow-2xl md:p-8">
+            <MiniGrowthCalc translations={miniGrowthT} client:visible />
+            <p class="mt-6 text-xs text-gray-500 text-center">
+              * Las proyecciones se basan en rendimientos anuales constantes y capitalización mensual. El mercado de valores real fluctúa. El rendimiento histórico promedio del S&P 500 es de aproximadamente 10% antes de la inflación.
+            </p>
+          </div>
+        </div>
+
+        <!-- Content Column -->
+        <div class="prose prose-invert prose-lg">
+          <h2>El Poder de Empezar Temprano</h2>
+          <p>
+            Las Cuentas Trump están diseñadas para aprovechar el horizonte de tiempo de 18 años de un niño.
+          </p>
+
+          <CalloutBox type="tip" title="La Regla del 72">
+            A una tasa de rendimiento del 10%, su dinero se duplica aproximadamente cada 7.2 años. En 18 años, el dinero invertido al nacer puede duplicarse más de dos veces sin que usted agregue un centavo extra.
+          </CalloutBox>
+
+          <h3>Cómo Usar Esta Calculadora</h3>
+          <ul>
+            <li><strong>Depósito Inicial:</strong> Para la mayoría de los niños elegibles (nacidos 2025-2028), esto es al menos <strong>$1,000</strong> (el depósito federal).</li>
+            <li><strong>Ahorro Mensual:</strong> ¿Cuánto pueden contribuir los padres o abuelos? Incluso $50 al mes hacen una gran diferencia.</li>
+            <li><strong>Tasa de Crecimiento:</strong> El S&P 500 ha promediado históricamente alrededor del 10%. Recomendamos usar 7-8% para una estimación más conservadora ajustada a la inflación.</li>
+          </ul>
+
+          <h3>Límites a Recordar</h3>
+          <p>
+            Puede contribuir hasta <strong>$5,000 por año</strong> en total. Esto incluye:
+          </p>
+          <ul>
+            <li>Contribuciones de los padres (después de impuestos).</li>
+            <li>Contribuciones de los empleadores (libres de impuestos, hasta $2,500).</li>
+            <li>Regalos de abuelos u otros familiares.</li>
+          </ul>
+          
+          <div class="mt-8">
+            <a href="/es/calculadoras/contribucion-del-empleador" class="text-gold-400 hover:text-gold-300 font-semibold no-underline">
+              ¿Quiere ver cuánto puede aportar su jefe? Pruebe la calculadora de empleadores &rarr;
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

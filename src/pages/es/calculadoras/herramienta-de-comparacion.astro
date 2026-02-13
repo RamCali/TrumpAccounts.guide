@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import CalloutBox from '../../../components/ui/CalloutBox.astro';
+
+const title = "Comparación: Cuenta Trump vs. Plan 529 vs. Roth IRA";
+const description = "Compare las Cuentas Trump (IRC §530A) con los planes 529 y las cuentas Roth IRA para niños. Tabla detallada de límites, impuestos y flexibilidad.";
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  alternateSlug="/calculators/comparison-tool"
+>
+  <section class="bg-surface-900 border-b border-surface-700">
+    <div class="mx-auto max-w-4xl px-4 py-16 text-center">
+      <p class="mb-4 text-sm font-bold uppercase tracking-wider text-mint-400">Herramientas de Planificación</p>
+      <h1 class="text-3xl font-bold text-white md:text-5xl">Cuenta Trump vs. 529 vs. Roth IRA</h1>
+      <p class="mx-auto mt-6 max-w-2xl text-xl text-gray-400">
+        No existe una cuenta "perfecta". Vea cómo se compara la nueva Cuenta Trump con las opciones tradicionales de ahorro para la universidad y el retiro.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="mx-auto max-w-6xl px-4">
+      
+      <!-- Interactive Tool Placeholder -->
+      <div class="mb-16 rounded-2xl border border-surface-600 bg-surface-800 p-8 text-center shadow-2xl">
+        <div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-surface-700 text-mint-400 ring-1 ring-surface-600">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-8 w-8">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0 0 12 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 0 1-2.031.352 5.988 5.988 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971Zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 0 1-2.031.352 5.989 5.989 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971Z" />
+          </svg>
+        </div>
+        <h2 class="text-2xl font-bold text-white">Calculadora Interactiva en Camino</h2>
+        <p class="mt-2 text-gray-400">Estamos finalizando la herramienta que le permitirá proyectar saldos comparativos basados en sus aportes mensuales.</p>
+      </div>
+
+      <!-- Comparison Table -->
+      <div class="overflow-x-auto">
+        <table class="w-full min-w-[800px] border-collapse text-left text-sm">
+          <thead>
+            <tr class="border-b border-surface-600">
+              <th class="p-4 text-gray-400 font-medium">Característica</th>
+              <th class="p-4 text-gold-400 font-bold text-lg bg-surface-800/50 rounded-t-lg">Cuenta Trump (§530A)</th>
+              <th class="p-4 text-white font-bold text-lg">Plan 529</th>
+              <th class="p-4 text-white font-bold text-lg">Roth IRA (Niños)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-surface-700 text-gray-300">
+            <tr>
+              <td class="p-4 font-semibold text-white">Propósito Principal</td>
+              <td class="p-4 bg-surface-800/30">Riqueza General / Jubilación</td>
+              <td class="p-4">Educación</td>
+              <td class="p-4">Jubilación</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-semibold text-white">Depósito Federal</td>
+              <td class="p-4 bg-surface-800/30"><span class="text-mint-400 font-bold">$1,000</span> (si nace 2025-28)</td>
+              <td class="p-4">Ninguno</td>
+              <td class="p-4">Ninguno</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-semibold text-white">Límite de Aporte</td>
+              <td class="p-4 bg-surface-800/30">$5,000 / año</td>
+              <td class="p-4">Muy alto (varía por estado)</td>
+              <td class="p-4">$7,000 / año (requiere ingreso ganado)</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-semibold text-white">Contribución del Empleador</td>
+              <td class="p-4 bg-surface-800/30"><span class="text-mint-400 font-bold">Sí, libre de impuestos</span></td>
+              <td class="p-4">Posible (pero gravable)</td>
+              <td class="p-4">No</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-semibold text-white">Flexibilidad de Uso</td>
+              <td class="p-4 bg-surface-800/30">Alta (se convierte en IRA a los 18)</td>
+              <td class="p-4">Baja (solo educación)</td>
+              <td class="p-4">Media (reglas estrictas de retiro)</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-semibold text-white">Requisito de Ingreso</td>
+              <td class="p-4 bg-surface-800/30"><span class="text-mint-400 font-bold">Ninguno</span></td>
+              <td class="p-4">Ninguno</td>
+              <td class="p-4">El niño debe trabajar (ingreso ganado)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-12 prose prose-invert prose-lg mx-auto">
+        <h3>¿Cuál debería elegir?</h3>
+        <p>Para la mayoría de las familias, la respuesta no es "uno u otro", sino una combinación.</p>
+        
+        <div class="grid gap-6 md:grid-cols-2 mt-8">
+          <CalloutBox type="tip" title="La Estrategia Ganadora">
+            <strong>Priorice la Cuenta Trump</strong> para los primeros $5,000 anuales. ¿Por qué? Porque ofrece la mayor flexibilidad a largo plazo y el potencial de contribuciones del empleador libres de impuestos.
+          </CalloutBox>
+          
+          <CalloutBox type="info" title="Cuándo usar el 529">
+            Use un Plan 529 para cualquier ahorro <strong>adicional</strong> destinado específicamente a la universidad, o si vive en un estado que ofrece deducciones fiscales estatales por contribuciones al 529.
+          </CalloutBox>
+        </div>
+
+        <h3>El problema con la Roth IRA para niños</h3>
+        <p>
+          Las Roth IRA son fantásticas, pero tienen un gran obstáculo: <strong>el niño debe tener "ingreso ganado"</strong>. Un bebé de 6 meses no puede tener una Roth IRA porque no trabaja.
+        </p>
+        <p>
+          La Cuenta Trump elimina esta barrera. Puede abrirla el día que nace el bebé, sin que necesiten tener un empleo.
+        </p>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>

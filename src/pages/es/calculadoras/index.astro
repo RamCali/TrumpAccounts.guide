@@ -1,50 +1,66 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import { breadcrumbSchema } from '../../../lib/seo/schema';
-import { useTranslations } from '../../../i18n/config';
+import { webPageSchema, breadcrumbSchema } from '../../../lib/seo/schema';
 
-const t = useTranslations('es', 'common');
-
-const schema = breadcrumbSchema([
-  { name: t('breadcrumb.home'), url: 'https://trumpaccounts.guide/es' },
-  { name: t('breadcrumb.calculators'), url: 'https://trumpaccounts.guide/es/calculadoras' },
-]);
+const siteUrl = 'https://trumpaccounts.guide';
+const schemas = [
+  webPageSchema({
+    title: 'Calculadoras de Cuentas Trump',
+    description: 'Calculadoras gratuitas para Cuentas Trump: proyecciones de crecimiento, verificador de elegibilidad, contribución del empleador, simulador de retiro y más.',
+    url: `${siteUrl}/es/calculadoras`,
+    inLanguage: 'es',
+  }),
+  breadcrumbSchema([
+    { name: 'Inicio', url: `${siteUrl}/es` },
+    { name: 'Calculadoras', url: `${siteUrl}/es/calculadoras` },
+  ]),
+];
 
 const calculators = [
   {
-    title: t('calcLayout.growthCalc'),
-    description: t('calcLayout.growthDesc'),
+    title: 'Calculadora de Crecimiento',
+    description: 'Vea cómo el depósito federal de $1,000 puede crecer en 18 años con interés compuesto. Ajuste contribuciones mensuales, rendimientos esperados y año de nacimiento.',
     href: '/es/calculadoras/calculadora-de-crecimiento',
     color: 'gold',
     icon: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
   },
   {
-    title: t('calcLayout.eligibility'),
-    description: t('calcLayout.eligibilityDesc'),
+    title: 'Verificador de Elegibilidad',
+    description: 'Responda 3 preguntas rápidas para saber si su hijo califica para una Cuenta Trump y el depósito piloto federal de $1,000.',
     href: '/es/calculadoras/verificador-de-elegibilidad',
     color: 'mint',
     icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
   },
   {
-    title: t('calcLayout.employerMatch'),
-    description: t('calcLayout.employerMatchDesc'),
+    title: 'Contribución del Empleador',
+    description: 'Calcule cuánto puede contribuir su empleador a la Cuenta Trump de su hijo. Hasta $2,500/año libre de impuestos bajo §128.',
     href: '/es/calculadoras/contribucion-del-empleador',
     color: 'purple',
     icon: 'M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
   },
   {
-    title: t('calcLayout.withdrawal'),
-    description: t('calcLayout.withdrawalDesc'),
-    href: '/es/calculadoras/simulador-de-retiro',
+    title: 'Simulador de Retiro',
+    description: 'Vea cuánto pierde en impuestos y penalidades a diferentes edades de retiro. Compare a los 18, 30, 59½ y 65 años.',
+    href: '/calculators/withdrawal-simulator',
     color: 'amber',
     icon: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+    badge: 'English',
   },
   {
-    title: t('calcLayout.fundExpense'),
-    description: t('calcLayout.fundExpenseDesc'),
-    href: '/es/calculadoras/rastreador-de-gastos',
+    title: 'Rastreador de Gastos de Fondos',
+    description: 'Compare ETFs y fondos mutuos elegibles del S&P 500. Vea cómo las pequeñas diferencias en comisiones afectan el crecimiento en 18 años.',
+    href: '/calculators/fund-expense-tracker',
     color: 'red',
     icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
+    badge: 'English',
+  },
+  {
+    title: 'Calculadora de Legado',
+    description: 'Vea cuánto vale una Cuenta Trump a los 18 (universidad), 30 (enganche de casa) y 65 años (jubilación). Visualice la riqueza generacional.',
+    href: '/calculators/legacy-calculator',
+    color: 'gold',
+    icon: 'M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7',
+    badge: 'English',
   },
 ];
 
@@ -59,16 +75,27 @@ const colorMap: Record<string, { bg: string; text: string; hover: string }> = {
 
 <BaseLayout
   title="Calculadoras Gratuitas de Cuentas Trump"
-  description="Calculadoras interactivas para Cuentas Trump: proyecciones de crecimiento, verificador de elegibilidad, calculadora de contribución del empleador, y más."
-  schema={schema}
+  description="Calculadoras interactivas para Cuentas Trump: proyecciones de crecimiento, verificador de elegibilidad, calculadora de contribución del empleador, simulador de retiro y más."
+  schema={schemas}
   alternateSlug="/calculators"
 >
   <div class="mx-auto max-w-4xl px-4 py-12">
+    <!-- Breadcrumbs -->
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/es" class="hover:text-gold-400 no-underline">Inicio</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="text-white font-medium">Calculadoras</span>
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Hero -->
     <h1 class="text-3xl font-extrabold text-white md:text-4xl">
       Calculadoras y Herramientas de Cuentas Trump
     </h1>
     <p class="mt-3 text-lg text-gray-400">
-      Todas las calculadoras son gratuitas, se ejecutan completamente en su navegador, y no almacenan datos personales.
+      Todas las calculadoras son gratuitas, se ejecutan completamente en su navegador y no almacenan datos personales.
     </p>
 
     <div class="mt-8 space-y-4">
@@ -84,8 +111,15 @@ const colorMap: Record<string, { bg: string; text: string; hover: string }> = {
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={calc.icon} />
               </svg>
             </div>
-            <div>
-              <h2 class:list={['font-bold text-white group-hover:' + colors.text.replace('text-', '')]}>{calc.title}</h2>
+            <div class="flex-1">
+              <div class="flex items-center gap-2">
+                <h2 class:list={['font-bold text-white group-hover:' + colors.text.replace('text-', '')]}>{calc.title}</h2>
+                {'badge' in calc && calc.badge && (
+                  <span class="inline-flex items-center rounded-full bg-surface-700 px-2 py-0.5 text-xs font-medium text-gray-400">
+                    {calc.badge}
+                  </span>
+                )}
+              </div>
               <p class="mt-1 text-sm text-gray-400">{calc.description}</p>
             </div>
           </a>

@@ -1,108 +1,314 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import Accordion from '../../../components/ui/Accordion.astro';
 import { faqPageSchema, breadcrumbSchema } from '../../../lib/seo/schema';
 
+const siteUrl = 'https://trumpaccounts.guide';
+
 const faqs = [
-  // Conceptos Básicos
-  { question: '¿Qué es una Cuenta Trump?', answer: 'Una Cuenta Trump es una cuenta de ahorro con ventajas fiscales creada bajo la Sección 530A del IRC por la Ley One Big Beautiful Bill (OBBBA), firmada el 4 de julio de 2025. Proporciona un depósito piloto federal de $1,000 para niños nacidos entre 2025–2028 y permite crecimiento con impuestos diferidos hasta los 18 años, cuando se convierte en un IRA tradicional.' },
-  { question: '¿Quién creó las Cuentas Trump?', answer: 'Las Cuentas Trump fueron establecidas por la Ley One Big Beautiful Bill (OBBBA), firmada el 4 de julio de 2025. El IRS publicó orientación en el Aviso 2025-68 el 3 de diciembre de 2025.' },
-  { question: '¿Son reales las Cuentas Trump?', answer: 'Sí. Las Cuentas Trump están establecidas en la ley federal bajo la Sección 530A del IRC. El IRS ha publicado orientación formal (Aviso 2025-68), creado el Formulario 4547, y está construyendo el portal trumpaccounts.gov.' },
-
-  // Elegibilidad
-  { question: '¿Quién califica para una Cuenta Trump?', answer: 'Cualquier niño ciudadano estadounidense menor de 18 años con un Número de Seguro Social válido. <strong>No hay restricciones de ingresos</strong>.' },
-  { question: '¿Mi hijo califica para el depósito de $1,000?', answer: 'Solo los niños nacidos entre el 1 de enero de 2025 y el 31 de diciembre de 2028 califican para el depósito piloto federal único de $1,000. Use nuestro <a href="/es/calculadoras/verificador-de-elegibilidad">Verificador de Elegibilidad</a> para confirmar.' },
-  { question: '¿Puedo abrir una Cuenta Trump para un niño nacido antes de 2025?', answer: 'Sí — cualquier niño ciudadano estadounidense menor de 18 años puede tener una Cuenta Trump. Sin embargo, los niños nacidos antes de 2025 <strong>no</strong> reciben el depósito piloto de $1,000.' },
-  { question: '¿Hay un límite de ingresos?', answer: 'No. A diferencia de los Roth IRA, las Cuentas Trump <strong>no tienen restricciones de ingresos</strong>. Cualquier familia puede participar.' },
-
-  // Contribuciones
-  { question: '¿Cuánto puedo contribuir?', answer: 'Hasta <strong>$5,000 por año</strong> (después de impuestos). Este límite se ajustará por inflación a partir de 2027.' },
-  { question: '¿Pueden contribuir los empleadores?', answer: 'Sí. Los empleadores pueden contribuir hasta <strong>$2,500/año por empleado</strong>, libre de impuestos bajo IRC §128. Esto cuenta para el límite anual de $5,000 y es por empleado, no por dependiente.' },
-  { question: '¿Pueden contribuir los abuelos?', answer: 'Sí. Cualquier persona puede contribuir a una Cuenta Trump, incluyendo abuelos, familiares o amigos — siempre que las contribuciones anuales totales no excedan $5,000.' },
-
-  // Inversiones
-  { question: '¿En qué se puede invertir el dinero de la Cuenta Trump?', answer: 'Los fondos deben invertirse en fondos mutuos o ETFs que sigan el <strong>S&P 500 o un índice amplio de acciones estadounidenses</strong>. Los ratios de gastos están limitados al 0.1% (10 puntos básicos). Vea nuestro <a href="/es/calculadoras/rastreador-de-gastos">Rastreador de Gastos de Fondos</a> para opciones elegibles.' },
-  { question: '¿Puedo elegir acciones individuales?', answer: 'No. Las Cuentas Trump están restringidas solo a fondos/ETFs del S&P 500 o índices amplios de acciones estadounidenses.' },
-
-  // Retiros e Impuestos
-  { question: '¿Puedo retirar dinero antes de los 18 años?', answer: 'No. Los retiros antes de los 18 años no están permitidos excepto por: (1) transferencias a otra Cuenta Trump, (2) devolución de contribuciones en exceso, o (3) fallecimiento del niño.' },
-  { question: '¿Qué pasa a los 18 años?', answer: 'La Cuenta Trump se convierte automáticamente en un <strong>IRA tradicional</strong>. A partir de ese momento, aplican las reglas estándar del IRA para contribuciones, retiros y distribuciones mínimas requeridas.' },
-  { question: '¿Cómo se gravan los retiros?', answer: 'Los retiros se gravan como <strong>ingreso ordinario</strong> (tratamiento de IRA tradicional). Antes de los 59½ años, también aplica una penalización del 10% por retiro anticipado. Use nuestro <a href="/es/calculadoras/simulador-de-retiro">Simulador de Retiro</a> para ver el impacto.' },
-
-  // Cómo Abrir
-  { question: '¿Cómo abro una Cuenta Trump?', answer: 'Tres formas: (1) Incluir el Formulario IRS 4547 con su declaración de impuestos 2025 (vence el 15 de abril de 2026), (2) a través del portal <a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer">trumpaccounts.gov</a> (disponible a mediados de 2026), o (3) enviando el Formulario 4547 por correo al IRS.' },
-  { question: '¿Qué es el Formulario 4547?', answer: 'El Formulario IRS 4547 (Elección(es) de Cuenta Trump) es el formulario que presenta para establecer una Cuenta Trump para su hijo. Se incluye con su declaración de impuestos federal.' },
-
-  // Promesa Dell
-  { question: '¿Qué es la promesa de la Fundación Dell?', answer: 'Michael y Susan Dell prometieron <strong>$6.25 mil millones</strong> — $250 por niño menor de 10 años en códigos postales donde el ingreso medio del hogar es inferior a $150,000. Esto es adicional al depósito piloto federal de $1,000.' },
+  {
+    question: '¿Qué son las Cuentas Trump?',
+    answer: 'Las Cuentas Trump son cuentas de ahorro con ventajas fiscales creadas bajo la Sección 530A del IRC por la Ley One Big Beautiful Bill Act (OBBBA), firmada el 4 de julio de 2025. El gobierno federal deposita $1,000 para niños nacidos entre 2025 y 2028, y las familias pueden contribuir hasta $5,000 al año. El dinero crece con impuestos diferidos hasta los 18 años, cuando la cuenta se convierte automáticamente en un IRA tradicional.',
+  },
+  {
+    question: '¿Cómo abro una Cuenta Trump para mi hijo?',
+    answer: 'Hay tres formas de abrir una Cuenta Trump: (1) incluir el <a href="/es/preguntas-frecuentes#formulario-4547">Formulario IRS 4547</a> con su declaración de impuestos 2025 (vence el 15 de abril de 2026), (2) a través del portal <a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer">trumpaccounts.gov</a> que estará disponible a mediados de 2026, o (3) enviando el Formulario 4547 por correo al IRS. Necesitará el Número de Seguro Social de su hijo y su información como contribuyente.',
+  },
+  {
+    question: '¿Quién califica para el depósito federal de $1,000?',
+    answer: 'Solo los niños nacidos entre el 1 de enero de 2025 y el 31 de diciembre de 2028 califican para el depósito piloto federal único de $1,000. El niño debe ser ciudadano estadounidense con un Número de Seguro Social válido. Use nuestro <a href="/es/calculadoras/verificador-de-elegibilidad">Verificador de Elegibilidad</a> para confirmar si su hijo califica.',
+  },
+  {
+    question: '¿Cuánto puedo contribuir a una Cuenta Trump?',
+    answer: 'El límite anual de contribución es de <strong>$5,000 por año</strong> (después de impuestos). Este límite se ajustará por inflación a partir de 2027. Si su empleador también contribuye (hasta $2,500), esa cantidad cuenta dentro del límite de $5,000. Cualquier persona puede contribuir — padres, abuelos, familiares o amigos — siempre que no se exceda el límite total.',
+  },
+  {
+    question: '¿Qué pasa a los 18 años?',
+    answer: 'A los 18 años, la Cuenta Trump se convierte automáticamente en un <strong>IRA tradicional</strong>. A partir de ese momento, su hijo tendrá el control de la cuenta y aplicarán las reglas estándar del IRA para contribuciones, retiros y distribuciones mínimas requeridas. Los retiros se gravarán como ingreso ordinario. Use nuestra <a href="/es/calculadoras/calculadora-de-crecimiento">Calculadora de Crecimiento</a> para ver cuánto podría acumularse.',
+  },
+  {
+    question: '¿En qué se invierte el dinero?',
+    answer: 'Los fondos deben invertirse en fondos mutuos o ETFs que sigan el <strong>S&P 500 o un índice amplio de acciones estadounidenses</strong>. No se permiten acciones individuales, criptomonedas ni otros tipos de inversiones. Los ratios de gastos de los fondos están limitados al 0.1% (10 puntos básicos), lo que protege a las familias de comisiones elevadas.',
+  },
+  {
+    question: '¿Puedo retirar dinero antes de los 18?',
+    answer: 'No. Los retiros antes de los 18 años <strong>no están permitidos</strong> excepto en tres situaciones: (1) transferencia (rollover) a otra Cuenta Trump, (2) devolución de contribuciones en exceso, o (3) fallecimiento del menor. Esta restricción garantiza que el dinero crezca durante toda la fase de acumulación para beneficio del niño.',
+  },
+  {
+    question: '¿Es diferente de un plan 529?',
+    answer: 'Sí, hay diferencias importantes. Un plan 529 es para gastos educativos y ofrece crecimiento libre de impuestos para ese fin. Una Cuenta Trump se convierte en IRA tradicional a los 18 años y puede usarse para cualquier propósito (jubilación, compra de vivienda, etc.), pero los retiros se gravan como ingreso ordinario. Además, las Cuentas Trump incluyen un depósito federal de $1,000 y están limitadas a fondos del S&P 500.',
+  },
+  {
+    question: '¿Qué es el Formulario 4547 del IRS?',
+    answer: 'El Formulario IRS 4547, oficialmente llamado "Trump Account Election(s)", es el documento que usted presenta para establecer una Cuenta Trump para su hijo. Se incluye con su declaración de impuestos federal del año 2025. El formulario requiere información básica: datos del contribuyente, Número de Seguro Social del niño, y la elección de establecer la cuenta.',
+  },
+  {
+    question: '¿Cuándo abren las cuentas?',
+    answer: 'Las Cuentas Trump ya están disponibles. Puede incluir el Formulario 4547 con su declaración de impuestos 2025, que vence el 15 de abril de 2026. El portal en línea <a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer">trumpaccounts.gov</a> estará disponible a mediados de 2026 para quienes prefieran registrarse digitalmente. El IRS publicó la orientación oficial en el Aviso 2025-68 el 3 de diciembre de 2025.',
+  },
+  {
+    question: '¿Puede mi empleador contribuir?',
+    answer: 'Sí. Los empleadores pueden contribuir hasta <strong>$2,500 por año por empleado</strong>, libre de impuestos bajo la Sección 128 del IRC. Esta contribución del empleador cuenta dentro del límite anual de $5,000. Es importante notar que el límite de $2,500 es por empleado, no por dependiente — así que si tiene varios hijos con Cuentas Trump, el límite del empleador sigue siendo $2,500 en total. Visite nuestra <a href="/es/calculadoras/contribucion-del-empleador">Calculadora de Contribución del Empleador</a> para más detalles.',
+  },
+  {
+    question: '¿Hay restricciones de ingresos?',
+    answer: '<strong>No hay restricciones de ingresos</strong> para abrir o contribuir a una Cuenta Trump. A diferencia de los Roth IRA, que tienen límites de ingresos, cualquier familia puede participar sin importar cuánto gane. Esta es una de las ventajas principales del programa.',
+  },
+  {
+    question: '¿Qué pasa si mi hijo no es ciudadano de EE.UU.?',
+    answer: 'Desafortunadamente, las Cuentas Trump requieren que el menor sea <strong>ciudadano estadounidense</strong> con un Número de Seguro Social válido. Los niños que son residentes permanentes (green card) o que tienen otro estatus migratorio no califican para el programa. No hay excepciones a este requisito de ciudadanía según la Sección 530A del IRC.',
+  },
+  {
+    question: '¿Cómo afecta esto a FAFSA?',
+    answer: 'La orientación específica sobre cómo las Cuentas Trump afectan la solicitud FAFSA aún está siendo definida por el Departamento de Educación. Dado que la cuenta se convierte en un IRA tradicional a los 18 años, es probable que se trate como un activo del estudiante en la fórmula de FAFSA, lo cual podría afectar la elegibilidad para ayuda financiera. Consulte con un asesor financiero para planificar adecuadamente.',
+  },
+  {
+    question: '¿Qué pasa si el mercado cae?',
+    answer: 'Como las Cuentas Trump están invertidas en fondos del S&P 500 o índices amplios del mercado, el valor de la cuenta fluctuará con el mercado. Sin embargo, históricamente el S&P 500 ha generado un rendimiento promedio de aproximadamente 10% anual a largo plazo. Dado que estas cuentas están diseñadas para un horizonte de 18 años, hay tiempo suficiente para recuperarse de las caídas del mercado.',
+  },
+  {
+    question: '¿Puedo abrir una cuenta para un niño mayor?',
+    answer: 'Sí. Cualquier niño ciudadano estadounidense menor de 18 años al final del año de la elección puede tener una Cuenta Trump. Sin embargo, los niños nacidos <strong>antes de 2025</strong> no reciben el depósito piloto federal de $1,000 — solo los nacidos entre 2025 y 2028 califican para ese beneficio. Aún así, las familias pueden contribuir hasta $5,000 anuales para niños mayores. Use nuestro <a href="/es/calculadoras/verificador-de-elegibilidad">Verificador de Elegibilidad</a> para confirmar.',
+  },
+  {
+    question: '¿Qué pasa en caso de divorcio?',
+    answer: 'En caso de divorcio, la Cuenta Trump del menor generalmente se trata como un activo en beneficio del hijo, no de los padres. Los tribunales de familia pueden incluir la administración de la cuenta en los acuerdos de custodia. Ambos padres pueden seguir contribuyendo, siempre que el total anual no exceda $5,000. Consulte con un abogado de familia para entender cómo aplica en su situación específica.',
+  },
+  {
+    question: '¿Es esto seguro? ¿Es una estafa?',
+    answer: 'Las Cuentas Trump <strong>no son una estafa</strong>. Están establecidas en la ley federal bajo la Sección 530A del IRC, creadas por la Ley One Big Beautiful Bill Act firmada el 4 de julio de 2025. El IRS ha publicado orientación formal (Aviso 2025-68), ha creado el Formulario 4547, y está construyendo el portal oficial <a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer">trumpaccounts.gov</a>. Tenga cuidado con sitios fraudulentos — use solo fuentes oficiales del IRS.',
+  },
 ];
 
 const schemas = [
   faqPageSchema(faqs),
   breadcrumbSchema([
-    { name: 'Inicio', url: 'https://trumpaccounts.guide/es' },
-    { name: 'Preguntas Frecuentes', url: 'https://trumpaccounts.guide/es/preguntas-frecuentes' },
+    { name: 'Inicio', url: `${siteUrl}/es` },
+    { name: 'Preguntas Frecuentes', url: `${siteUrl}/es/preguntas-frecuentes` },
   ]),
 ];
 ---
 
 <BaseLayout
-  title="Preguntas Frecuentes sobre Cuentas Trump"
-  description="Respuestas a las preguntas más comunes sobre las Cuentas Trump: elegibilidad, contribuciones, inversiones, impuestos, retiros, y cómo abrir una."
+  title="Preguntas Frecuentes sobre Cuentas Trump | FAQ en Español"
+  description="Respuestas a las preguntas más comunes sobre Cuentas Trump, elegibilidad, contribuciones, el Formulario 4547 del IRS y más."
   schema={schemas}
   alternateSlug="/faq"
 >
-  <div class="mx-auto max-w-3xl px-4 py-12">
-    <h1 class="text-3xl font-extrabold text-white md:text-4xl">
-      Preguntas Frecuentes
-    </h1>
-    <p class="mt-3 text-lg text-gray-400">
-      Todo lo que necesita saber sobre las Cuentas Trump, respondido en español sencillo.
-    </p>
+  <!-- Hero Section -->
+  <section class="relative border-b border-surface-700">
+    <div class="mx-auto max-w-3xl px-4 py-16 md:py-20">
+      <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-gold-400">
+        FAQ en Español
+      </p>
+      <h1 class="text-3xl font-extrabold text-white md:text-4xl">
+        Preguntas Frecuentes sobre Cuentas Trump
+      </h1>
+      <p class="mt-4 text-lg leading-relaxed text-gray-400">
+        Todo lo que necesita saber sobre las Cuentas Trump, respondido en español sencillo.
+        Desde elegibilidad y contribuciones hasta inversiones e impuestos.
+      </p>
+    </div>
+  </section>
 
-    <div class="mt-8 space-y-8">
-      <section>
-        <h2 class="mb-4 text-xl font-bold text-white">Conceptos Básicos</h2>
-        <Accordion items={faqs.slice(0, 3)} />
-      </section>
+  <!-- FAQ Accordions -->
+  <section class="mx-auto max-w-3xl px-4 py-12">
 
-      <section>
-        <h2 class="mb-4 text-xl font-bold text-white">Elegibilidad</h2>
-        <Accordion items={faqs.slice(3, 7)} />
-      </section>
-
-      <section>
-        <h2 class="mb-4 text-xl font-bold text-white">Contribuciones</h2>
-        <Accordion items={faqs.slice(7, 10)} />
-      </section>
-
-      <section>
-        <h2 class="mb-4 text-xl font-bold text-white">Inversiones</h2>
-        <Accordion items={faqs.slice(10, 12)} />
-      </section>
-
-      <section>
-        <h2 class="mb-4 text-xl font-bold text-white">Retiros e Impuestos</h2>
-        <Accordion items={faqs.slice(12, 15)} />
-      </section>
-
-      <section>
-        <h2 class="mb-4 text-xl font-bold text-white">Cómo Abrir</h2>
-        <Accordion items={faqs.slice(15, 17)} />
-      </section>
-
-      <section>
-        <h2 class="mb-4 text-xl font-bold text-white">Fundación Dell</h2>
-        <Accordion items={faqs.slice(17)} />
-      </section>
+    <!-- Conceptos Básicos -->
+    <div class="mb-10">
+      <h2 class="mb-4 text-xl font-bold text-white">Conceptos Básicos</h2>
+      <div class="space-y-3">
+        <!-- FAQ 1: ¿Qué son las Cuentas Trump? -->
+        <details class="group rounded-lg border border-surface-600 bg-surface-800">
+          <summary class="cursor-pointer px-6 py-4 font-semibold text-white">{faqs[0].question}</summary>
+          <div class="border-t border-surface-700 px-6 py-4 text-sm text-gray-300">
+            <Fragment set:html={faqs[0].answer} />
+          </div>
+        </details>
+        <!-- FAQ 18: ¿Es esto seguro? ¿Es una estafa? -->
+        <details class="group rounded-lg border border-surface-600 bg-surface-800">
+          <summary class="cursor-pointer px-6 py-4 font-semibold text-white">{faqs[17].question}</summary>
+          <div class="border-t border-surface-700 px-6 py-4 text-sm text-gray-300">
+            <Fragment set:html={faqs[17].answer} />
+          </div>
+        </details>
+      </div>
     </div>
 
+    <!-- Elegibilidad -->
+    <div class="mb-10">
+      <h2 class="mb-4 text-xl font-bold text-white">Elegibilidad</h2>
+      <div class="space-y-3">
+        <!-- FAQ 3: ¿Quién califica para el depósito federal de $1,000? -->
+        <details class="group rounded-lg border border-surface-600 bg-surface-800">
+          <summary class="cursor-pointer px-6 py-4 font-semibold text-white">{faqs[2].question}</summary>
+          <div class="border-t border-surface-700 px-6 py-4 text-sm text-gray-300">
+            <Fragment set:html={faqs[2].answer} />
+          </div>
+        </details>
+        <!-- FAQ 12: ¿Hay restricciones de ingresos? -->
+        <details class="group rounded-lg border border-surface-600 bg-surface-800">
+          <summary class="cursor-pointer px-6 py-4 font-semibold text-white">{faqs[11].question}</summary>
+          <div class="border-t border-surface-700 px-6 py-4 text-sm text-gray-300">
+            <Fragment set:html={faqs[11].answer} />
+          </div>
+        </details>
+        <!-- FAQ 13: ¿Qué pasa si mi hijo no es ciudadano de EE.UU.? -->
+        <details class="group rounded-lg border border-surface-600 bg-surface-800">
+          <summary class="cursor-pointer px-6 py-4 font-semibold text-white">{faqs[12].question}</summary>
+          <div class="border-t border-surface-700 px-6 py-4 text-sm text-gray-300">
+            <Fragment set:html={faqs[12].answer} />
+          </div>
+        </details>
+        <!-- FAQ 16: ¿Puedo abrir una cuenta para un niño mayor? -->
+        <details class="group rounded-lg border border-surface-600 bg-surface-800">
+          <summary class="cursor-pointer px-6 py-4 font-semibold text-white">{faqs[15].question}</summary>
+          <div class="border-t border-surface-700 px-6 py-4 text-sm text-gray-300">
+            <Fragment set:html={faqs[15].answer} />
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- Cómo Abrir y Formulario 4547 -->
+    <div class="mb-10">
+      <h2 id="formulario-4547" class="mb-4 text-xl font-bold text-white">Cómo Abrir y Formulario 4547</h2>
+      <div class="space-y-3">
+        <!-- FAQ 2: ¿Cómo abro una Cuenta Trump para mi hijo? -->
+        <details class="group rounded-lg border border-surface-600 bg-surface-800">
+          <summary class="cursor-pointer px-6 py-4 font-semibold text-white">{faqs[1].question}</summary>
+          <div class="border-t border-surface-700 px-6 py-4 text-sm text-gray-300">
+            <Fragment set:html={faqs[1].answer} />
+          </div>
+        </details>
+        <!-- FAQ 9: ¿Qué es el Formulario 4547 del IRS? -->
+        <details class="group rounded-lg border border-surface-600 bg-surface-800">
+          <summary class="cursor-pointer px-6 py-4 font-semibold text-white">{faqs[8].question}</summary>
+          <div class="border-t border-surface-700 px-6 py-4 text-sm text-gray-300">
+            <Fragment set:html={faqs[8].answer} />
+          </div>
+        </details>
+        <!-- FAQ 10: ¿Cuándo abren las cuentas? -->
+        <details class="group rounded-lg border border-surface-600 bg-surface-800">
+          <summary class="cursor-pointer px-6 py-4 font-semibold text-white">{faqs[9].question}</summary>
+          <div class="border-t border-surface-700 px-6 py-4 text-sm text-gray-300">
+            <Fragment set:html={faqs[9].answer} />
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- Contribuciones -->
+    <div class="mb-10">
+      <h2 class="mb-4 text-xl font-bold text-white">Contribuciones</h2>
+      <div class="space-y-3">
+        <!-- FAQ 4: ¿Cuánto puedo contribuir a una Cuenta Trump? -->
+        <details class="group rounded-lg border border-surface-600 bg-surface-800">
+          <summary class="cursor-pointer px-6 py-4 font-semibold text-white">{faqs[3].question}</summary>
+          <div class="border-t border-surface-700 px-6 py-4 text-sm text-gray-300">
+            <Fragment set:html={faqs[3].answer} />
+          </div>
+        </details>
+        <!-- FAQ 11: ¿Puede mi empleador contribuir? -->
+        <details class="group rounded-lg border border-surface-600 bg-surface-800">
+          <summary class="cursor-pointer px-6 py-4 font-semibold text-white">{faqs[10].question}</summary>
+          <div class="border-t border-surface-700 px-6 py-4 text-sm text-gray-300">
+            <Fragment set:html={faqs[10].answer} />
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- Inversiones y Crecimiento -->
+    <div class="mb-10">
+      <h2 class="mb-4 text-xl font-bold text-white">Inversiones y Crecimiento</h2>
+      <div class="space-y-3">
+        <!-- FAQ 6: ¿En qué se invierte el dinero? -->
+        <details class="group rounded-lg border border-surface-600 bg-surface-800">
+          <summary class="cursor-pointer px-6 py-4 font-semibold text-white">{faqs[5].question}</summary>
+          <div class="border-t border-surface-700 px-6 py-4 text-sm text-gray-300">
+            <Fragment set:html={faqs[5].answer} />
+          </div>
+        </details>
+        <!-- FAQ 15: ¿Qué pasa si el mercado cae? -->
+        <details class="group rounded-lg border border-surface-600 bg-surface-800">
+          <summary class="cursor-pointer px-6 py-4 font-semibold text-white">{faqs[14].question}</summary>
+          <div class="border-t border-surface-700 px-6 py-4 text-sm text-gray-300">
+            <Fragment set:html={faqs[14].answer} />
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- Retiros y Conversión a IRA -->
+    <div class="mb-10">
+      <h2 class="mb-4 text-xl font-bold text-white">Retiros y Conversión a IRA</h2>
+      <div class="space-y-3">
+        <!-- FAQ 7: ¿Puedo retirar dinero antes de los 18? -->
+        <details class="group rounded-lg border border-surface-600 bg-surface-800">
+          <summary class="cursor-pointer px-6 py-4 font-semibold text-white">{faqs[6].question}</summary>
+          <div class="border-t border-surface-700 px-6 py-4 text-sm text-gray-300">
+            <Fragment set:html={faqs[6].answer} />
+          </div>
+        </details>
+        <!-- FAQ 5: ¿Qué pasa a los 18 años? -->
+        <details class="group rounded-lg border border-surface-600 bg-surface-800">
+          <summary class="cursor-pointer px-6 py-4 font-semibold text-white">{faqs[4].question}</summary>
+          <div class="border-t border-surface-700 px-6 py-4 text-sm text-gray-300">
+            <Fragment set:html={faqs[4].answer} />
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- Comparaciones -->
+    <div class="mb-10">
+      <h2 class="mb-4 text-xl font-bold text-white">Comparaciones</h2>
+      <div class="space-y-3">
+        <!-- FAQ 8: ¿Es diferente de un plan 529? -->
+        <details class="group rounded-lg border border-surface-600 bg-surface-800">
+          <summary class="cursor-pointer px-6 py-4 font-semibold text-white">{faqs[7].question}</summary>
+          <div class="border-t border-surface-700 px-6 py-4 text-sm text-gray-300">
+            <Fragment set:html={faqs[7].answer} />
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- Situaciones Especiales -->
+    <div class="mb-10">
+      <h2 class="mb-4 text-xl font-bold text-white">Situaciones Especiales</h2>
+      <div class="space-y-3">
+        <!-- FAQ 14: ¿Cómo afecta esto a FAFSA? -->
+        <details class="group rounded-lg border border-surface-600 bg-surface-800">
+          <summary class="cursor-pointer px-6 py-4 font-semibold text-white">{faqs[13].question}</summary>
+          <div class="border-t border-surface-700 px-6 py-4 text-sm text-gray-300">
+            <Fragment set:html={faqs[13].answer} />
+          </div>
+        </details>
+        <!-- FAQ 17: ¿Qué pasa en caso de divorcio? -->
+        <details class="group rounded-lg border border-surface-600 bg-surface-800">
+          <summary class="cursor-pointer px-6 py-4 font-semibold text-white">{faqs[16].question}</summary>
+          <div class="border-t border-surface-700 px-6 py-4 text-sm text-gray-300">
+            <Fragment set:html={faqs[16].answer} />
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- CTA Section -->
     <div class="mt-10 rounded-lg border border-gold-400/30 bg-gold-400/10 p-6 text-center">
       <h2 class="font-bold text-gold-300">¿Aún tiene preguntas?</h2>
       <p class="mt-2 text-sm text-gold-200/70">
-        Consulte nuestra <a href="/es/que-son-las-cuentas-trump" class="underline text-gold-400">guía completa</a> o use nuestras
-        <a href="/es/calculadoras" class="underline text-gold-400">calculadoras gratuitas</a> para hacer sus propios cálculos.
+        Consulte nuestra <a href="/es/que-son-las-cuentas-trump" class="underline text-gold-400">guía completa</a>,
+        use nuestras <a href="/es/calculadoras" class="underline text-gold-400">calculadoras gratuitas</a>,
+        o verifique la <a href="/es/calculadoras/verificador-de-elegibilidad" class="underline text-gold-400">elegibilidad de su hijo</a>.
       </p>
     </div>
-  </div>
+
+    <!-- Disclaimer -->
+    <p class="mt-8 text-center text-xs text-gray-500">
+      Este contenido es educativo y no constituye asesoramiento fiscal ni financiero.
+      Consulte a un profesional calificado. Fuentes: IRS Aviso 2025-68, IRC Sección 530A.
+    </p>
+  </section>
 </BaseLayout>

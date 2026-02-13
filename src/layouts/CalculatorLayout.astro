@@ -1,7 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-import SchemaOrg from '../components/seo/SchemaOrg.astro';
 import { webApplicationSchema, breadcrumbSchema } from '../lib/seo/schema';
+import { getLocaleFromUrl, useTranslations, getLocalizedPath } from '../i18n/config';
 
 interface Props {
   title: string;
@@ -12,19 +12,43 @@ interface Props {
 
 const { title, description, calculatorName, slug } = Astro.props;
 
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale, 'common');
+const lp = (path: string) => getLocalizedPath(path, locale);
+const isEs = locale === 'es';
+
 const siteUrl = 'https://trumpaccounts.guide';
+const calcBase = isEs ? '/es/calculadoras' : '/calculators';
 
 const schemas = [
   webApplicationSchema({
     name: calculatorName,
     description,
-    url: `${siteUrl}/calculators/${slug}`,
+    url: `${siteUrl}${calcBase}/${slug}`,
+    inLanguage: locale,
   }),
   breadcrumbSchema([
-    { name: 'Home', url: siteUrl },
-    { name: 'Calculators', url: `${siteUrl}/calculators` },
-    { name: calculatorName, url: `${siteUrl}/calculators/${slug}` },
+    { name: t('calc.home'), url: isEs ? `${siteUrl}/es` : siteUrl },
+    { name: t('calc.calculators'), url: `${siteUrl}${calcBase}` },
+    { name: calculatorName, url: `${siteUrl}${calcBase}/${slug}` },
   ]),
+];
+
+// Cross-link data — translated for Spanish
+const crossLinks = isEs ? [
+  { slug: 'calculadora-de-crecimiento', title: 'Calculadora de Crecimiento', desc: 'Vea cómo $1,000 puede crecer en 18+ años' },
+  { slug: 'verificador-de-elegibilidad', title: 'Verificador de Elegibilidad', desc: '¿Califica su hijo para la subvención de $1,000?' },
+  { slug: 'contribucion-del-empleador', title: 'Contribución del Empleador', desc: 'Calcule el beneficio de contribución de su empleador' },
+] : [
+  { slug: 'growth-calculator', title: 'Growth Calculator', desc: 'See how $1,000 can grow over 18+ years' },
+  { slug: 'eligibility-checker', title: 'Eligibility Checker', desc: 'Does your child qualify for the $1,000 grant?' },
+  { slug: 'employer-match', title: 'Employer Match Calculator', desc: 'Calculate your employer contribution benefit' },
+  { slug: 'withdrawal-simulator', title: 'Withdrawal Simulator', desc: 'See the tax impact of withdrawing at different ages' },
+  { slug: 'fund-expense-tracker', title: 'Fund Expense Tracker', desc: 'Compare eligible ETFs and their expense ratios' },
+  { slug: 'legacy-calculator', title: 'Legacy Calculator', desc: 'See the value at age 18, 30, and 65' },
+  { slug: 'cost-of-waiting', title: 'Cost of Waiting Calculator', desc: 'See how much delay costs your child' },
+  { slug: 'milestones', title: 'Milestone Calculator', desc: 'When will the account hit $100K or $1M?' },
+  { slug: 'inflation-comparison', title: 'Inflation Comparison', desc: 'Savings account vs Trump Account over time' },
 ];
 ---
 
@@ -33,9 +57,9 @@ const schemas = [
     <!-- Breadcrumb -->
     <nav aria-label="Breadcrumb" class="mb-6">
       <ol class="flex items-center gap-2 text-sm text-gray-500">
-        <li><a href="/" class="hover:text-gold-400 no-underline">Home</a></li>
+        <li><a href={isEs ? '/es' : '/'} class="hover:text-gold-400 no-underline">{t('calc.home')}</a></li>
         <li class="before:mr-2 before:content-['/']">
-          <a href="/calculators" class="hover:text-gold-400 no-underline">Calculators</a>
+          <a href={calcBase} class="hover:text-gold-400 no-underline">{t('calc.calculators')}</a>
         </li>
         <li class="before:mr-2 before:content-['/']">
           <span class="text-white font-medium">{calculatorName}</span>
@@ -51,70 +75,20 @@ const schemas = [
     <!-- Disclaimer -->
     <div class="mt-10 rounded-lg border border-amber-500/30 bg-amber-500/10 p-4">
       <p class="text-sm text-amber-300">
-        <strong class="text-amber-200">Disclaimer:</strong> This calculator is for educational and illustrative purposes only.
-        It does not constitute tax or financial advice. Actual returns will vary.
-        Consult a qualified tax professional or financial advisor before making investment decisions.
+        <strong class="text-amber-200">{t('calc.disclaimer')}</strong> {t('calc.disclaimerText')}
       </p>
     </div>
 
     <!-- Cross-links to other calculators -->
     <div class="mt-8">
-      <h2 class="mb-4 text-lg font-bold text-white">More Calculators & Tools</h2>
+      <h2 class="mb-4 text-lg font-bold text-white">{t('calc.moreCalcs')}</h2>
       <div class="grid gap-3 sm:grid-cols-2">
-        {slug !== 'growth-calculator' && (
-          <a href="/calculators/growth-calculator" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
-            <h3 class="font-semibold text-white">Growth Calculator</h3>
-            <p class="text-sm text-gray-400">See how $1,000 can grow over 18+ years</p>
+        {crossLinks.filter(link => link.slug !== slug).map(link => (
+          <a href={`${calcBase}/${link.slug}`} class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+            <h3 class="font-semibold text-white">{link.title}</h3>
+            <p class="text-sm text-gray-400">{link.desc}</p>
           </a>
-        )}
-        {slug !== 'eligibility-checker' && (
-          <a href="/calculators/eligibility-checker" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
-            <h3 class="font-semibold text-white">Eligibility Checker</h3>
-            <p class="text-sm text-gray-400">Does your child qualify for the $1,000 grant?</p>
-          </a>
-        )}
-        {slug !== 'employer-match' && (
-          <a href="/calculators/employer-match" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
-            <h3 class="font-semibold text-white">Employer Match Calculator</h3>
-            <p class="text-sm text-gray-400">Calculate your employer contribution benefit</p>
-          </a>
-        )}
-        {slug !== 'withdrawal-simulator' && (
-          <a href="/calculators/withdrawal-simulator" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
-            <h3 class="font-semibold text-white">Withdrawal Simulator</h3>
-            <p class="text-sm text-gray-400">See the tax impact of withdrawing at different ages</p>
-          </a>
-        )}
-        {slug !== 'fund-expense-tracker' && (
-          <a href="/calculators/fund-expense-tracker" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
-            <h3 class="font-semibold text-white">Fund Expense Tracker</h3>
-            <p class="text-sm text-gray-400">Compare eligible ETFs and their expense ratios</p>
-          </a>
-        )}
-        {slug !== 'legacy-calculator' && (
-          <a href="/calculators/legacy-calculator" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
-            <h3 class="font-semibold text-white">Legacy Calculator</h3>
-            <p class="text-sm text-gray-400">See the value at age 18, 30, and 65</p>
-          </a>
-        )}
-        {slug !== 'cost-of-waiting' && (
-          <a href="/calculators/cost-of-waiting" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
-            <h3 class="font-semibold text-white">Cost of Waiting Calculator</h3>
-            <p class="text-sm text-gray-400">See how much delay costs your child</p>
-          </a>
-        )}
-        {slug !== 'milestones' && (
-          <a href="/calculators/milestones" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
-            <h3 class="font-semibold text-white">Milestone Calculator</h3>
-            <p class="text-sm text-gray-400">When will the account hit $100K or $1M?</p>
-          </a>
-        )}
-        {slug !== 'inflation-comparison' && (
-          <a href="/calculators/inflation-comparison" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
-            <h3 class="font-semibold text-white">Inflation Comparison</h3>
-            <p class="text-sm text-gray-400">Savings account vs Trump Account over time</p>
-          </a>
-        )}
+        ))}
       </div>
     </div>
   </div>

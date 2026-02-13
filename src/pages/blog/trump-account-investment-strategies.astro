@@ -1,0 +1,281 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-investment-strategies')!;
+const related = getRelatedArticles('trump-account-investment-strategies');
+
+const faqs = [
+  {
+    question: 'Should I choose an S&P 500 fund or a total stock market fund?',
+    answer: 'Either works well. The S&P 500 covers roughly 80% of the U.S. stock market by capitalization, while a total market fund adds mid-cap and small-cap companies. Historically, their returns are nearly identical. Pick whichever your custodian offers at the lowest expense ratio.',
+  },
+  {
+    question: 'Is it worth contributing if I can only do $50 per month?',
+    answer: 'Absolutely. $50 per month invested at an average 8% annual return grows to roughly $24,000 over 18 years. Even small, consistent contributions make a meaningful difference thanks to compounding. Start with what you can afford and increase over time.',
+  },
+  {
+    question: 'Should I pair a Trump Account with a 529 plan?',
+    answer: 'Yes, if you can afford both. They serve different purposes. A 529 plan offers tax-free growth for qualified education expenses. A Trump Account converts to a traditional IRA at 18 and can be used for anything — a home, a business, retirement, or education. Using both gives your child maximum flexibility.',
+  },
+  {
+    question: 'What if the S&P 500 underperforms for the next 18 years?',
+    answer: 'No 18-year period in S&P 500 history has produced a negative total return. Even the worst 18-year stretches delivered modest positive returns. Lower-than-average returns still build substantial wealth when combined with consistent contributions over 18 years.',
+  },
+  {
+    question: 'When should I start planning the Roth conversion?',
+    answer: 'Start thinking about it around age 16–17. At 18, the Trump Account converts to a traditional IRA. If your child has little or no earned income that year, they may be in a very low tax bracket — an ideal time to convert some or all of the balance to a Roth IRA and lock in decades of tax-free growth.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Go all-in on the <strong class="text-white">lowest-cost broad U.S. equity index fund</strong> — SPLG (0.02%) or VOO (0.03%).</li>
+        <li><strong class="text-white">Maximize contributions</strong> for maximum compounding — ${limits.annualContributionLimit.toLocaleString()}/year + employer match.</li>
+        <li>Embrace <strong class="text-white">buy-and-hold</strong> — the 18-year lock-in is your greatest advantage.</li>
+        <li><strong class="text-white">Monitor your provider</strong> for fee changes and lower-cost options.</li>
+        <li>Plan the <strong class="text-white">age-18 transition</strong> now — Roth conversion + pairing with other accounts.</li>
+      </ul>
+    </div>
+
+    <p>
+      Trump Account <a href="/blog/trump-account-investment-rules">investment rules</a> are simple by design. But "simple" does not mean "nothing to think about." These five strategies help you squeeze every dollar of growth from your child's account.
+    </p>
+    <p>
+      The overall approach is straightforward: <strong>contribute maximally, invest passively in ultra-low-cost U.S. index funds, and let compounding do the work over decades</strong>. Here is how to execute that effectively.
+    </p>
+
+    <h2>Strategy 1: Choose the Lowest-Cost Eligible Fund</h2>
+    <p>
+      All eligible funds track essentially the same thing — the S&P 500 or a broad U.S. equity index. The main difference between them is <strong>fees</strong>. Over 18 years, even a tiny fee difference compounds into real money.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Fund</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Ticker</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Expense Ratio</th>
+            <th class="py-3 text-gray-400 font-medium">Annual Fee on $50K</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">SPDR Portfolio S&P 500 ETF</td>
+            <td class="py-3 pr-4 font-mono text-white">SPLG</td>
+            <td class="py-3 pr-4 text-mint-400">0.02%</td>
+            <td class="py-3">$10</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Vanguard S&P 500 ETF</td>
+            <td class="py-3 pr-4 font-mono text-white">VOO</td>
+            <td class="py-3 pr-4 text-mint-400">0.03%</td>
+            <td class="py-3">$15</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">iShares Core S&P 500 ETF</td>
+            <td class="py-3 pr-4 font-mono text-white">IVV</td>
+            <td class="py-3 pr-4 text-mint-400">0.03%</td>
+            <td class="py-3">$15</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">SPDR S&P 500 ETF Trust</td>
+            <td class="py-3 pr-4 font-mono text-white">SPY</td>
+            <td class="py-3 pr-4 text-gold-400">0.09%</td>
+            <td class="py-3">$45</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <CalloutBox type="tip" title="The simplest advice">
+      <p>
+        If your custodian offers SPLG, pick it. If not, VOO or IVV. Done. Do not overthink this — the performance difference between these funds is negligible. The fee difference is not.
+      </p>
+    </CalloutBox>
+
+    <p>
+      For a full head-to-head comparison including tracking error and fund size, see our <a href="/blog/trump-account-vs-sp500-etfs">Best S&P 500 ETFs for Trump Accounts</a> guide.
+    </p>
+
+    <h2>Strategy 2: Maximize Contributions for Exponential Growth</h2>
+    <p>
+      The single biggest factor in your child's Trump Account balance at 18 is <strong>how much you contribute and how early you start</strong>. Time in the market beats everything else.
+    </p>
+    <p>
+      The annual contribution limit is <strong>${limits.annualContributionLimit.toLocaleString()}</strong> from all sources. On top of that, employers can contribute up to <strong>${limits.employerContributionLimit.toLocaleString()}</strong> per year (tax-free under IRC Section 128, counting toward the ${limits.annualContributionLimit.toLocaleString()} cap).
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Monthly Contribution</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Total Contributed (18 yr)</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">At 7% Return</th>
+            <th class="py-3 text-gray-400 font-medium">At 10% Return</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">$0 (seed only)</td>
+            <td class="py-3 pr-4">$1,000</td>
+            <td class="py-3 pr-4">$3,380</td>
+            <td class="py-3">$5,560</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">$100/mo</td>
+            <td class="py-3 pr-4">$22,600</td>
+            <td class="py-3 pr-4">$45,200</td>
+            <td class="py-3">$61,900</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">$200/mo</td>
+            <td class="py-3 pr-4">$44,200</td>
+            <td class="py-3 pr-4">$87,000</td>
+            <td class="py-3">$118,800</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">$416/mo (max)</td>
+            <td class="py-3 pr-4">$90,900</td>
+            <td class="py-3 pr-4">$177,500</td>
+            <td class="py-3">$242,700</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">Max + employer match</td>
+            <td class="py-3 pr-4">$136,000</td>
+            <td class="py-3 pr-4">$265,000</td>
+            <td class="py-3">$362,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-sm text-gray-400 italic">
+      Projections include the $1,000 pilot deposit. Returns are illustrative, not guaranteed. Use our <a href="/calculators/growth-calculator">Growth Calculator</a> for personalized projections.
+    </p>
+
+    <p>
+      Even $100 per month doubles your money compared to what you put in. Consistency beats perfection — start with what you can afford and increase over time. Automate contributions if your provider allows it.
+    </p>
+    <p>
+      For a detailed contribution schedule, see <a href="/blog/build-50k-by-18">How to Build $50,000 by Age 18</a>. For employer matching details, see our <a href="/blog/employer-match-trump-account">employer match guide</a>.
+    </p>
+
+    <h2>Strategy 3: Embrace Buy-and-Hold</h2>
+    <p>
+      Here is the hidden advantage of Trump Accounts: <strong>the 18-year lock-in period prevents you from making the most common investing mistake — selling during a downturn</strong>.
+    </p>
+    <p>
+      No withdrawals are allowed before age 18 (except rollovers, excess contributions, or death). This is not a limitation — it is a feature. It enforces the discipline that most investors struggle with on their own.
+    </p>
+    <ul>
+      <li><strong>No 18-year period in S&P 500 history has produced a negative total return.</strong> Not during the Great Depression. Not during the dot-com crash. Not during 2008.</li>
+      <li>The average 18-year return for the S&P 500 is roughly 400–600% (total, not annualized).</li>
+      <li>Market volatility actually <em>helps</em> long-term investors through dollar-cost averaging — buying more shares when prices are low.</li>
+    </ul>
+
+    <CalloutBox type="info" title="Time in the market vs. timing the market">
+      <p>
+        A study of S&P 500 returns from 2003–2022 found that missing just the 10 best trading days would have cut your total return by more than half. Staying invested through ups and downs is the single most important thing you can do. The Trump Account's no-withdrawal rule does this for you automatically.
+      </p>
+    </CalloutBox>
+
+    <p>
+      No rebalancing is needed or allowed during the growth phase. No tactical shifts to "safer" assets near age 18. This keeps things simple: ride out the volatility, trust the long-term trend, and let compounding work.
+    </p>
+    <p>
+      For more on market downturns, see <a href="/blog/what-happens-market-crash">What Happens in a Market Crash?</a> For the math on delaying contributions, see <a href="/blog/should-i-wait-or-invest-now">Wait or Invest Now?</a>
+    </p>
+
+    <h2>Strategy 4: Monitor Your Provider</h2>
+    <p>
+      "Set it and forget it" applies to your investment <em>strategy</em> — not your provider. Check in at least once a year:
+    </p>
+    <ul>
+      <li><strong>Expense ratios can change.</strong> Funds occasionally raise or lower their fees. Verify your fund still offers the best rate.</li>
+      <li><strong>New lower-cost options may appear.</strong> Custodians periodically add new funds to their lineup. A fund at 0.02% beats one at 0.03%.</li>
+      <li><strong>Compare tracking error.</strong> The best index funds closely mirror the actual index performance. A fund that consistently lags its benchmark by more than its expense ratio may have issues.</li>
+      <li><strong>Consider switching custodians.</strong> If another provider offers meaningfully lower costs or better fund options, it may be worth moving the account.</li>
+    </ul>
+    <p>
+      This does not mean checking daily or making frequent trades. An annual review is sufficient. Look at your statement, confirm the expense ratio, and move on.
+    </p>
+
+    <h2>Strategy 5: Plan the Age-18 Transition Now</h2>
+    <p>
+      The conversion from Trump Account to traditional IRA at age {limits.growthPhaseEndAge} is the most important financial event for this account. Planning ahead makes a significant difference.
+    </p>
+
+    <h3>Pair with Other Accounts</h3>
+    <p>
+      Trump Accounts are powerful but limited in scope during the growth phase. Consider combining them with:
+    </p>
+    <ul>
+      <li><strong>529 plan</strong> — tax-free growth for education expenses. Use the 529 for college and the Trump Account for everything else.</li>
+      <li><strong>Custodial account (UTMA/UGMA)</strong> — more investment flexibility (stocks, bonds, international). Use this for diversification beyond U.S. equities.</li>
+      <li><strong>Custodial Roth IRA</strong> — if the child has earned income, a Roth IRA offers tax-free growth with no restrictions at age 18.</li>
+    </ul>
+    <p>
+      For a full comparison, see <a href="/blog/best-accounts-for-kids-today">Best Accounts for Kids Today</a>.
+    </p>
+
+    <h3>The Roth Conversion Opportunity</h3>
+    <p>
+      When the Trump Account becomes a traditional IRA at 18, your child can convert some or all of it to a <strong>Roth IRA</strong>. If they are a student with little or no earned income, they may be in the <strong>0% or 10% tax bracket</strong> — meaning they pay very little tax on the conversion and lock in <strong>decades of tax-free growth</strong>.
+    </p>
+    <p>
+      This is one of the most valuable tax planning moves available. Start thinking about it around age 16–17 so you are ready to execute.
+    </p>
+    <p>
+      For the full math and step-by-step guide, see <a href="/blog/trump-account-roth-conversion-strategy">Roth Conversion Strategy at 18</a>.
+    </p>
+
+    <h3>Tax Considerations</h3>
+    <p>
+      Trump Account growth is <strong>tax-deferred</strong> (like a traditional IRA). After age 18, distributions are taxed as ordinary income. After-tax contributions come out first (tax-free), then earnings are taxed. No early withdrawal penalties apply during the growth phase since withdrawals are simply not allowed.
+    </p>
+
+    <h3>Risk Awareness</h3>
+    <p>
+      A 100% equity portfolio means higher volatility. The market could be down right when the child turns 18. This is manageable:
+    </p>
+    <ul>
+      <li>There is no requirement to withdraw at 18 — the money stays invested as a traditional IRA.</li>
+      <li>The child can wait for a recovery before making large withdrawals.</li>
+      <li>Consider converting to Roth in stages over several years to spread out tax impact.</li>
+    </ul>
+
+    <h2>What NOT to Do</h2>
+    <ul>
+      <li><strong>Do not try to time the market.</strong> You cannot withdraw before 18 anyway. Lump-sum contributions at the start of each year historically outperform monthly dollar-cost averaging.</li>
+      <li><strong>Do not pick a higher-fee fund because of brand recognition.</strong> SPY is the most famous S&P 500 ETF, but at 0.09% it costs 3–4x more than SPLG or VOO for identical performance.</li>
+      <li><strong>Do not ignore the account for 18 years.</strong> An annual check-in takes 10 minutes and ensures you are still in the best fund.</li>
+      <li><strong>Do not panic during market downturns.</strong> The account is locked. The market will recover. Every downturn in history has been followed by new highs.</li>
+    </ul>
+
+    <CalloutBox type="warning" title="Not financial advice">
+      <p>
+        This is educational content, not tax or financial advice. Trump Account rules may evolve with further IRS guidance. Consult a qualified financial advisor or tax professional for personalized recommendations. Check <a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer">trumpaccounts.gov</a> and <a href="https://www.irs.gov" target="_blank" rel="noopener noreferrer">IRS.gov</a> for the latest official information.
+      </p>
+    </CalloutBox>
+
+    <p>
+      For a complete breakdown of every investment rule, see <a href="/blog/trump-account-investment-rules"><strong>Trump Account Investment Rules: The Complete Guide</strong></a>. To run your own projections, try the <a href="/calculators/growth-calculator"><strong>Growth Calculator</strong></a>.
+    </p>
+  </div>
+</BlogLayout>

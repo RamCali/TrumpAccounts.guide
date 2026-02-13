@@ -1,22 +1,91 @@
 ---
-import CalculatorLayout from '../../../layouts/CalculatorLayout.astro';
-import EmployerContributionCalc from '../../../components/calculators/EmployerContributionCalc';
-import esCalc from '../../../i18n/es/calculators.json';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import MiniEmployerMatch from '../../../components/calculators/MiniEmployerMatch';
+import CalloutBox from '../../../components/ui/CalloutBox.astro';
+import { getTranslationObject } from '../../../i18n/config';
 
-const translations: Record<string, string> = {};
-for (const [key, value] of Object.entries(esCalc)) {
-  if (key.startsWith('employer.')) {
-    translations[key.replace('employer.', '')] = value;
-  }
-}
+const calc = getTranslationObject('es', 'calculators');
+
+// Construct translation object for the React component
+const miniEmployerT = {
+  title: calc['mini.employer.title'],
+  trumpAccount: calc['mini.employer.trumpAccount'],
+  employerMatch: calc['mini.employer.employerMatch'],
+  perYear: calc['mini.employer.perYear'],
+  yourContrib: calc['mini.employer.yourContrib'],
+  yourContribAria: calc['mini.employer.yourContribAria'],
+  employerContrib: calc['mini.employer.employerContrib'],
+  employerContribAria: calc['mini.employer.employerContribAria'],
+  totalAnnual: calc['mini.employer.totalAnnual'],
+  cta: calc['mini.employer.cta'],
+  ctaHref: calc['mini.employer.ctaHref'],
+};
 ---
 
-<CalculatorLayout
-  title="Calculadora de Contribución del Empleador para Cuentas Trump"
-  description="Calcule el aumento de compensación por las contribuciones del empleador a Cuentas Trump de hasta $2,500/año. Vea cómo la contribución acelera el crecimiento."
-  calculatorName="Calculadora de Contribución del Empleador"
-  slug="employer-match"
+<BaseLayout
+  title="Calculadora de Contribución del Empleador (Sección 128) | TrumpAccounts.guide"
+  description="Calcule cómo las contribuciones del empleador a las Cuentas Trump crecen libres de impuestos. Guía de la exclusión fiscal de la Sección 128 para empleadores y empleados."
   alternateSlug="/calculators/employer-match"
 >
-  <EmployerContributionCalc client:visible translations={translations} />
-</CalculatorLayout>
+  <section class="bg-surface-900 border-b border-surface-700">
+    <div class="mx-auto max-w-4xl px-4 py-16 text-center">
+      <p class="mb-4 text-sm font-bold uppercase tracking-wider text-purple-400">Herramientas para Empleadores</p>
+      <h1 class="text-3xl font-bold text-white md:text-5xl">Calculadora de Contribución del Empleador</h1>
+      <p class="mx-auto mt-6 max-w-2xl text-xl text-gray-400">
+        Vea cómo una contribución anual de $2,500 puede transformar el futuro financiero de la familia de un empleado — sin costo fiscal para ellos.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="grid gap-12 lg:grid-cols-2">
+        <!-- Calculator Column -->
+        <div>
+          <div class="sticky top-8 rounded-2xl border border-surface-600 bg-surface-800 p-6 shadow-2xl md:p-8">
+            <MiniEmployerMatch translations={miniEmployerT} client:visible />
+            <p class="mt-6 text-xs text-gray-500 text-center">
+              * Este cálculo asume un crecimiento anual del 10% (promedio histórico del S&P 500) y que las contribuciones se realizan anualmente hasta que el niño cumple 18 años.
+            </p>
+          </div>
+        </div>
+
+        <!-- Content Column -->
+        <div class="prose prose-invert prose-lg">
+          <h2>El Beneficio de la Sección 128</h2>
+          <p>
+            Bajo la nueva legislación (IRC §530A), los empleadores pueden contribuir a las Cuentas Trump de los hijos de sus empleados. Estas contribuciones reciben un tratamiento fiscal especial bajo la <strong>Sección 128 del Código de Rentas Internas</strong>.
+          </p>
+
+          <CalloutBox type="tip" title="Beneficio Libre de Impuestos">
+            A diferencia de los salarios o bonos, las contribuciones del empleador a una Cuenta Trump (hasta $2,500/año) <strong>no se incluyen en el ingreso bruto del empleado</strong>. Es dinero 100% libre de impuestos para la familia.
+          </CalloutBox>
+
+          <h3>Para Empleados</h3>
+          <ul>
+            <li><strong>$0 Impuestos:</strong> No paga impuesto sobre la renta federal ni FICA sobre este dinero.</li>
+            <li><strong>Crecimiento Compuesto:</strong> El dinero se invierte y crece libre de impuestos hasta que su hijo cumpla 18 años.</li>
+            <li><strong>Portabilidad:</strong> La cuenta pertenece al niño, no a la empresa. Si cambia de trabajo, el dinero se queda con su hijo.</li>
+          </ul>
+
+          <h3>Para Empleadores</h3>
+          <ul>
+            <li><strong>Deducción Fiscal:</strong> Las contribuciones son totalmente deducibles como gasto comercial.</li>
+            <li><strong>Retención de Talento:</strong> Es un beneficio único y de alto valor para empleados con familias jóvenes.</li>
+            <li><strong>Simplicidad:</strong> Menos carga administrativa que un plan 401(k).</li>
+          </ul>
+
+          <h3>Límites de Contribución</h3>
+          <p>
+            El límite total anual para una Cuenta Trump es de <strong>$5,000</strong>.
+          </p>
+          <ul>
+            <li>El empleador puede aportar hasta <strong>$2,500</strong>.</li>
+            <li>Los padres pueden aportar el resto hasta llegar a los $5,000.</li>
+            <li>Si el empleador no contribuye, los padres pueden aportar el total de $5,000 (pero sus contribuciones son después de impuestos).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
