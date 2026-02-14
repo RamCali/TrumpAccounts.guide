@@ -1,12 +1,43 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CalloutBox from '../../components/ui/CalloutBox.astro';
-import { breadcrumbSchema } from '../../lib/seo/schema';
+import Accordion from '../../components/ui/Accordion.astro';
+import { breadcrumbSchema, faqSchema } from '../../lib/seo/schema';
 
-const schema = breadcrumbSchema([
-  { name: 'Home', url: 'https://trumpaccounts.guide' },
-  { name: 'For Employers', url: 'https://trumpaccounts.guide/for-employers' },
-]);
+const faqs = [
+  {
+    question: 'How much can an employer contribute to a Trump Account?',
+    answer: 'Up to $2,500 per year per employee. This limit is per employee, not per dependent child. An employee with three children receives a maximum of $2,500 total from their employer, not $7,500.',
+  },
+  {
+    question: 'Are employer Trump Account contributions tax-deductible?',
+    answer: 'Yes. Employer contributions to Trump Accounts are tax-deductible as a business expense. For employees, the contributions are excluded from gross income under IRC §128 — meaning they are tax-free to the employee.',
+  },
+  {
+    question: 'Do employer contributions count toward the $5,000 annual limit?',
+    answer: 'Yes. The $5,000 annual contribution limit is the total from all sources — family contributions plus employer contributions. If an employer contributes $2,500, the family can contribute up to $2,500 more for that year.',
+  },
+  {
+    question: 'Can an employer contribute if the employee has no children?',
+    answer: 'No. Employer contributions under IRC §128 are specifically for employees who have children with open Trump Accounts. The employee must have an eligible child (U.S. citizen, valid SSN, under 18) with an established Trump Account.',
+  },
+  {
+    question: 'How do employers report Trump Account contributions?',
+    answer: 'The IRS is still finalizing reporting guidance. Employer contributions under IRC §128 will likely be reported similarly to other fringe benefits. Work with your payroll provider and tax advisor for current reporting requirements.',
+  },
+  {
+    question: 'Is there a minimum employer contribution?',
+    answer: 'No. Employers can contribute any amount up to $2,500 per employee per year. There is no minimum. Some employers may offer a flat amount (e.g., $500/year) while others may match employee contributions.',
+  },
+];
+
+const schema = [
+  breadcrumbSchema([
+    { name: 'Home', url: 'https://trumpaccounts.guide' },
+    { name: 'For Employers', url: 'https://trumpaccounts.guide/for-employers' },
+  ]),
+  faqSchema(faqs),
+];
 ---
 
 <BaseLayout
@@ -77,6 +108,12 @@ const schema = breadcrumbSchema([
       <blockquote>
         "Starting [date], [Company] will contribute up to $2,500 per year to eligible Trump Accounts for employees with qualifying children. This contribution is tax-free to you under IRC §128 and helps build your child's financial future. Contact HR to learn more."
       </blockquote>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="mt-10">
+      <h2 class="text-xl font-bold text-white mb-4">Frequently Asked Questions</h2>
+      <Accordion items={faqs} />
     </div>
 
     <div class="mt-8 grid gap-3 sm:grid-cols-3">

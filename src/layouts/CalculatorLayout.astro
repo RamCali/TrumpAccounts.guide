@@ -1,6 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-import { webApplicationSchema, breadcrumbSchema } from '../lib/seo/schema';
+import { webApplicationSchema, breadcrumbSchema, financialProductSchema } from '../lib/seo/schema';
 import { getLocaleFromUrl, useTranslations, getLocalizedPath } from '../i18n/config';
 
 interface Props {
@@ -8,9 +8,10 @@ interface Props {
   description: string;
   calculatorName: string;
   slug: string;
+  abstract?: string;
 }
 
-const { title, description, calculatorName, slug } = Astro.props;
+const { title, description, calculatorName, slug, abstract } = Astro.props;
 
 const locale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(locale, 'common');
@@ -25,8 +26,10 @@ const schemas = [
     name: calculatorName,
     description,
     url: `${siteUrl}${calcBase}/${slug}`,
+    ...(abstract && { abstract }),
     inLanguage: locale,
   }),
+  financialProductSchema(),
   breadcrumbSchema([
     { name: t('calc.home'), url: isEs ? `${siteUrl}/es` : siteUrl },
     { name: t('calc.calculators'), url: `${siteUrl}${calcBase}` },
@@ -49,6 +52,7 @@ const crossLinks = isEs ? [
   { slug: 'cost-of-waiting', title: 'Cost of Waiting Calculator', desc: 'See how much delay costs your child' },
   { slug: 'milestones', title: 'Milestone Calculator', desc: 'When will the account hit $100K or $1M?' },
   { slug: 'inflation-comparison', title: 'Inflation Comparison', desc: 'Savings account vs Trump Account over time' },
+  { slug: 'grant-eligibility', title: 'Grant Eligibility', desc: 'Check if your ZIP code qualifies for grants like the Dell pledge' },
 ];
 ---
 

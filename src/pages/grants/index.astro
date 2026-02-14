@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LastUpdated from '../../components/ui/LastUpdated.astro';
+import { breadcrumbSchema, webPageSchema } from '../../lib/seo/schema';
+import states from '../../data/states.json';
+import limits from '../../data/contribution-limits.json';
+
+const siteUrl = 'https://trumpaccounts.guide';
+
+const schemas = [
+  webPageSchema({
+    title: 'Trump Account Grants & Eligibility by State — 2026 Guide',
+    description: 'Find Trump Account grants, the $1,000 federal deposit, Dell Foundation $250 bonus, and eligibility details for your state. All 50 states + DC covered.',
+    url: `${siteUrl}/grants`,
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: siteUrl },
+    { name: 'Grants & Eligibility by State', url: `${siteUrl}/grants` },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Trump Account Grants & Eligibility by State (2026)"
+  description="Find Trump Account grants, the $1,000 federal deposit, Dell Foundation $250 bonus, and eligibility details for your state. All 50 states + DC covered."
+  schema={schemas}
+>
+  <article class="mx-auto max-w-4xl px-4 py-12">
+    <!-- Breadcrumb -->
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-gold-400 no-underline">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="text-white font-medium">Grants by State</span>
+        </li>
+      </ol>
+    </nav>
+
+    <LastUpdated date="2026-02-13" />
+
+    <div class="prose mt-4">
+      <h1>Trump Account Grants & Eligibility by State</h1>
+      <p>
+        Trump Accounts are a <strong>federal program</strong> — every U.S. citizen child qualifies regardless of which state they live in. But state-specific factors like the Dell Foundation bonus eligibility, employer programs, and state tax treatment can vary.
+      </p>
+      <p>
+        Select your state below to see a complete guide to Trump Account grants, eligibility, and how to get started.
+      </p>
+    </div>
+
+    <!-- Grant summary -->
+    <div class="my-8 grid gap-4 sm:grid-cols-3">
+      <div class="rounded-lg border border-surface-600 bg-surface-800 p-5 text-center">
+        <p class="text-3xl font-bold text-gold-400">${limits.pilotDeposit.toLocaleString()}</p>
+        <p class="mt-1 text-sm text-gray-400">Federal Pilot Deposit</p>
+        <p class="mt-1 text-xs text-gray-500">Children born 2025–2028</p>
+      </div>
+      <div class="rounded-lg border border-surface-600 bg-surface-800 p-5 text-center">
+        <p class="text-3xl font-bold text-gold-400">${limits.dellPledge.perChildAmount}</p>
+        <p class="mt-1 text-sm text-gray-400">Dell Foundation Bonus</p>
+        <p class="mt-1 text-xs text-gray-500">Under 10, eligible ZIP codes</p>
+      </div>
+      <div class="rounded-lg border border-surface-600 bg-surface-800 p-5 text-center">
+        <p class="text-3xl font-bold text-gold-400">${limits.annualContributionLimit.toLocaleString()}</p>
+        <p class="mt-1 text-sm text-gray-400">Annual Contribution Limit</p>
+        <p class="mt-1 text-xs text-gray-500">Family + employer combined</p>
+      </div>
+    </div>
+
+    <!-- State grid -->
+    <h2 class="mb-4 text-xl font-bold text-white">Choose Your State</h2>
+    <div class="grid gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      {states.map((s) => (
+        <a
+          href={`/grants/${s.slug}`}
+          class="flex items-center justify-between rounded-lg border border-surface-600 px-4 py-3 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5"
+        >
+          <span class="font-medium text-white">{s.name}</span>
+          <span class="text-xs text-gray-500">{s.abbr}</span>
+        </a>
+      ))}
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="mt-12 grid gap-3 sm:grid-cols-2">
+      <a href="/calculators/eligibility-checker" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">Eligibility Checker</h3>
+        <p class="text-sm text-gray-400">Verify your child qualifies in 30 seconds</p>
+      </a>
+      <a href="/calculators/growth-calculator" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">Growth Calculator</h3>
+        <p class="text-sm text-gray-400">See how much a Trump Account could grow</p>
+      </a>
+    </div>
+
+    <p class="mt-10 text-xs text-gray-600">
+      Educational content only, not tax or financial advice.
+      Source: <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf" target="_blank" rel="noopener noreferrer" class="text-gray-500">IRS Notice 2025-68</a>.
+    </p>
+  </article>
+</BaseLayout>

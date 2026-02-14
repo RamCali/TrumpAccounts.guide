@@ -1,0 +1,146 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EligibilityQuiz from '../components/calculators/EligibilityQuiz';
+import LastUpdated from '../components/ui/LastUpdated.astro';
+import { breadcrumbSchema, faqSchema, webApplicationSchema } from '../lib/seo/schema';
+
+const siteUrl = 'https://trumpaccounts.guide';
+
+const schemas = [
+  webApplicationSchema({
+    name: 'Trump Account Eligibility Quiz',
+    description: 'Find out in 3 seconds if your child qualifies for a Trump Account and the $1,000 federal grant.',
+    url: `${siteUrl}/eligibility-quiz`,
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: siteUrl },
+    { name: 'Eligibility Quiz', url: `${siteUrl}/eligibility-quiz` },
+  ]),
+  faqSchema([
+    { question: 'Who qualifies for a Trump Account?', answer: 'Any U.S. citizen child under 18 with a valid Social Security Number. There are no income restrictions.' },
+    { question: 'Who gets the $1,000 grant?', answer: 'Only children born between January 1, 2025 and December 31, 2028 qualify for the one-time $1,000 federal pilot deposit.' },
+    { question: 'Should I open a Trump Account if my child was born before 2025?', answer: 'Yes. Even without the $1,000 grant, you can contribute up to $5,000/year into S&P 500 index funds that grow tax-deferred until age 18, then convert to a traditional IRA.' },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Trump Account Eligibility Quiz — Does Your Child Qualify?"
+  description="One question. Instant answer. Find out if your child qualifies for a Trump Account and the $1,000 federal pilot deposit."
+  schema={schemas}
+>
+  <article class="mx-auto max-w-4xl px-4 py-12">
+    <!-- Breadcrumb -->
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="no-underline hover:text-gold-400">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="font-medium text-white">Eligibility Quiz</span>
+        </li>
+      </ol>
+    </nav>
+
+    <div class="mb-8 text-center">
+      <h1 class="mb-2 text-3xl font-extrabold text-white md:text-4xl">Does Your Child Qualify?</h1>
+      <p class="text-lg text-gray-400">
+        3-second eligibility quiz — account vs. $1,000 grant
+      </p>
+      <LastUpdated date="2026-02-13" />
+    </div>
+
+    <EligibilityQuiz client:visible />
+
+    <!-- Explainer -->
+    <div class="prose mt-12">
+      <h2>Account vs. Grant: What's the Difference?</h2>
+
+      <div class="not-prose my-6 overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-surface-600">
+              <th class="px-4 py-3 text-left font-semibold text-gold-400">Feature</th>
+              <th class="px-4 py-3 text-left font-semibold text-gold-400">Trump Account</th>
+              <th class="px-4 py-3 text-left font-semibold text-gold-400">$1,000 Grant</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-300">
+            <tr class="border-b border-surface-700">
+              <td class="px-4 py-3 font-medium text-white">Who qualifies</td>
+              <td class="px-4 py-3">Any U.S. citizen child under 18</td>
+              <td class="px-4 py-3">Only children born 2025–2028</td>
+            </tr>
+            <tr class="border-b border-surface-700">
+              <td class="px-4 py-3 font-medium text-white">Income limits</td>
+              <td class="px-4 py-3">None</td>
+              <td class="px-4 py-3">None</td>
+            </tr>
+            <tr class="border-b border-surface-700">
+              <td class="px-4 py-3 font-medium text-white">Annual contributions</td>
+              <td class="px-4 py-3">Up to $5,000/year</td>
+              <td class="px-4 py-3">One-time $1,000 from the government</td>
+            </tr>
+            <tr class="border-b border-surface-700">
+              <td class="px-4 py-3 font-medium text-white">Investment</td>
+              <td class="px-4 py-3">S&P 500 or broad U.S. equity index</td>
+              <td class="px-4 py-3">Same — invested alongside your contributions</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 font-medium text-white">At age 18</td>
+              <td class="px-4 py-3">Converts to a traditional IRA</td>
+              <td class="px-4 py-3">Included in the IRA conversion</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Frequently Asked Questions</h2>
+
+      <h3>My child was born before 2025. Should I still open a Trump Account?</h3>
+      <p>
+        Yes. Even without the $1,000 grant, a Trump Account lets you contribute up to $5,000/year into
+        low-cost S&P 500 index funds. The money grows tax-deferred until your child turns 18, then converts
+        to a traditional IRA. Your employer can also add up to $2,500/year tax-free.
+      </p>
+
+      <h3>Is the $1,000 grant automatic?</h3>
+      <p>
+        No. You must explicitly elect the pilot deposit on
+        <a href="https://www.irs.gov/forms-pubs/about-form-4547" target="_blank" rel="noopener noreferrer">IRS Form 4547</a>.
+        If you don't check the box, your child's account opens with $0.
+      </p>
+
+      <h3>Can my child get both the $1,000 grant and the Dell Foundation $250?</h3>
+      <p>
+        Yes. If your child was born 2025–2028 and lives in a ZIP code with median household income
+        under $150,000, they may qualify for both — up to $1,250 in free money before you contribute a dime.
+      </p>
+    </div>
+
+    <!-- Related Links -->
+    <div class="mt-10 grid gap-3 sm:grid-cols-2">
+      <a href="/how-to-open-trump-account" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">How to Open a Trump Account</h3>
+        <p class="text-sm text-gray-400">Step-by-step Form 4547 filing guide</p>
+      </a>
+      <a href="/calculators/eligibility-checker" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Full Eligibility Checker</h3>
+        <p class="text-sm text-gray-400">Detailed check including citizenship and SSN</p>
+      </a>
+      <a href="/calculators/growth-calculator" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Growth Calculator</h3>
+        <p class="text-sm text-gray-400">See how contributions compound over 18 years</p>
+      </a>
+      <a href="/what-are-trump-accounts" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">What Are Trump Accounts?</h3>
+        <p class="text-sm text-gray-400">Complete guide to eligibility, rules, and benefits</p>
+      </a>
+    </div>
+
+    <!-- Disclaimer -->
+    <p class="mt-10 text-xs text-gray-600">
+      This is educational content, not tax or financial advice. Consult a qualified tax professional for advice specific to your situation.
+      Sources: <a href="https://www.irs.gov/forms-pubs/about-form-4547" target="_blank" rel="noopener noreferrer" class="text-gray-500">IRS Form 4547</a>,
+      <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf" target="_blank" rel="noopener noreferrer" class="text-gray-500">IRS Notice 2025-68</a>.
+    </p>
+  </article>
+</BaseLayout>

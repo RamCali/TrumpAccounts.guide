@@ -5,8 +5,10 @@ interface Props {
 
 const { schema } = Astro.props;
 const schemas = Array.isArray(schema) ? schema : [schema];
+
+// Strip individual @context from each schema and wrap in a single @graph
+const graph = schemas.map(({ '@context': _, ...rest }) => rest);
+const graphPayload = { '@context': 'https://schema.org', '@graph': graph };
 ---
 
-{schemas.map((s) => (
-  <script type="application/ld+json" set:html={JSON.stringify(s)} />
-))}
+<script type="application/ld+json" set:html={JSON.stringify(graphPayload)} />

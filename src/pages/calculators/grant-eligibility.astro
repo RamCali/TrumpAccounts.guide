@@ -1,0 +1,13 @@
+---
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import GrantEligibilityChecker from '../../components/calculators/GrantEligibilityChecker';
+---
+
+<CalculatorLayout
+  title="ZIP Code Grant Eligibility Checker"
+  description="Enter your ZIP code to see if your child qualifies for Trump Account grants like the Dell Foundation's $250 pledge."
+  calculatorName="Grant Eligibility"
+  slug="grant-eligibility"
+>
+  <GrantEligibilityChecker client:visible />
+</CalculatorLayout>

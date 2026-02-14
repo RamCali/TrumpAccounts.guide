@@ -5,11 +5,13 @@ import MiniGrowthCalc from '../components/calculators/MiniGrowthCalc';
 import MiniEligibilityChecker from '../components/calculators/MiniEligibilityChecker';
 import MiniEmployerMatch from '../components/calculators/MiniEmployerMatch';
 import CountdownTimer from '../components/CountdownTimer';
-import { organizationSchema, webSiteSchema, faqSchema } from '../lib/seo/schema';
+import { organizationSchema, webSiteSchema, faqSchema, financialProductSchema, governmentServiceSchema } from '../lib/seo/schema';
 
 const schemas = [
   organizationSchema(),
   webSiteSchema(),
+  financialProductSchema(),
+  governmentServiceSchema(),
   faqSchema([
     {
       question: 'What are Trump Accounts?',

@@ -12,21 +12,24 @@ const schemas = [
     { name: 'How to Open a Trump Account', url: `${siteUrl}/how-to-open-trump-account` },
   ]),
   howToSchema({
-    name: 'How to Open a Trump Account (IRS Form 4547)',
-    description: 'Step-by-step guide to opening a Trump Account for your child using IRS Form 4547.',
+    name: 'How to File IRS Form 4547 for Trump Accounts',
+    description: 'Step-by-step instructions for parents to open a Trump Account and claim the $1,000 federal grant using Form 4547.',
+    totalTime: 'PT15M',
+    supply: ['Social Security Number', 'IRS Form 4547'],
     steps: [
-      { name: 'Gather required information', text: "You need your child's Social Security number (SSN), your own SSN, and basic personal info (names, dates of birth, addresses)." },
-      { name: 'Get IRS Form 4547', text: 'Download Form 4547 from IRS.gov/forms-pubs/about-form-4547, or use your tax software which should include it for 2025 returns.' },
-      { name: 'Complete the form', text: "Fill in your child's info, your info as the authorized individual, and elect the $1,000 pilot program contribution if your child was born 2025–2028." },
-      { name: 'Submit with your 2025 tax return', text: 'File Form 4547 with your 2025 federal tax return (due April 15, 2026). E-filing is fastest.' },
-      { name: 'Wait for activation info', text: 'Starting May 2026, the IRS will send information on how to complete account setup with an approved financial institution.' },
-      { name: 'Choose a financial institution and fund', text: 'Select an approved trustee (like Fidelity, Vanguard, or Schwab) and pick an eligible S&P 500 or broad market index fund.' },
+      { name: 'Complete Parent Information', text: "Fill out Part I of Form 4547 with the parent or guardian's name, SSN, and current mailing address.", url: `${siteUrl}/how-to-open-trump-account#step-1` },
+      { name: 'Enter Child Details', text: "In Part II, provide the name, SSN, and birth date for each child. Ensure information matches their Social Security card exactly.", url: `${siteUrl}/how-to-open-trump-account#step-2` },
+      { name: 'Elect the Pilot Program Grant', text: 'For children born 2025-2028, check the box in Part III, Line 7 to receive the $1,000 pilot program contribution.', url: `${siteUrl}/how-to-open-trump-account#step-3` },
+      { name: 'Submit with Your Tax Return', text: 'Attach the completed Form 4547 to your 2025 or 2026 federal income tax return (Form 1040).', url: `${siteUrl}/how-to-open-trump-account#step-4` },
+      { name: 'Complete Authentication', text: 'Starting May 2026, the Treasury Department will contact you to complete a secondary authentication process to activate the account.', url: `${siteUrl}/how-to-open-trump-account#step-5` },
+      { name: 'Choose a Financial Institution & Fund', text: 'Select an approved trustee (like Fidelity, Vanguard, or Schwab) and pick an eligible S&P 500 or broad market index fund.', url: `${siteUrl}/how-to-open-trump-account#step-6` },
     ],
   }),
   faqSchema([
     { question: 'Can I open a Trump Account right now?', answer: 'You can file IRS Form 4547 now with your 2025 tax return (due April 15, 2026). Actual account funding begins July 4, 2026.' },
-    { question: 'What if I already filed my 2025 taxes?', answer: 'You can file an amended return (Form 1040-X) with Form 4547 attached, or use the trumpaccounts.gov online portal when it launches mid-2026.' },
+    { question: 'What if I already filed my 2025 taxes without Form 4547?', answer: 'You cannot add a Trump Account election by filing an amended return (Form 1040-X). If you missed it on your original return, you must wait for the trumpaccounts.gov online portal to open in mid-2026.' },
     { question: 'Do I need a specific brokerage?', answer: 'You need to use a financial institution approved as a Trump Account trustee. Major brokerages like Fidelity, Vanguard, Schwab, and others are expected to participate.' },
+    { question: 'Can one Form 4547 cover multiple children?', answer: 'A single Form 4547 can accommodate up to two children. If you have three or more eligible children, attach multiple copies of the form to your return.' },
   ]),
 ];
 ---
@@ -50,7 +53,7 @@ const schemas = [
     <div class="prose">
       <h1>How to Open a Trump Account: Step-by-Step Guide to IRS Form 4547</h1>
 
-      <LastUpdated date="2026-02-12" />
+      <LastUpdated date="2026-02-13" />
 
       <!-- Key Takeaways -->
       <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
@@ -108,6 +111,10 @@ const schemas = [
         <li><strong>Pilot program election</strong> — if your child was born 2025–2028, elect the $1,000 deposit</li>
       </ol>
 
+      <CalloutBox type="info" title="One form covers up to two children">
+        <p>A single Form 4547 can accommodate <strong>up to two children</strong>. If you have three or more eligible kids, attach multiple copies of the form to your return.</p>
+      </CalloutBox>
+
       <CalloutBox type="irs-quote" title="What the IRS says (Form 4547 Instructions)">
         <p>"The fastest, safest, and easiest way to make the election is to file Form 4547 with your current-year e-filed tax return."</p>
       </CalloutBox>
@@ -143,7 +150,7 @@ const schemas = [
       </p>
 
       <CalloutBox type="warning" title="Already filed your 2025 taxes?">
-        <p>You can file an amended return (Form 1040-X) with Form 4547 attached. Or wait for the trumpaccounts.gov portal in mid-2026.</p>
+        <p>You <strong>cannot</strong> add a Trump Account election by filing an amended return (Form 1040-X). If you missed it, wait for the <a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer">trumpaccounts.gov</a> online portal to open in mid-2026.</p>
       </CalloutBox>
 
       <h2 id="step-4">Step 4: Wait for Activation</h2>
@@ -151,10 +158,18 @@ const schemas = [
       <p>After you submit Form 4547:</p>
 
       <ol>
-        <li><strong>May 2026:</strong> The Treasury Department (or its agent) sends you activation information</li>
-        <li><strong>You'll complete an authentication process</strong> to verify your identity</li>
+        <li><strong>May 2026:</strong> The Treasury Department (or its agent) contacts you with activation information</li>
+        <li><strong>You complete a secondary authentication process</strong> to verify your identity and activate the account</li>
         <li><strong>Then you choose a financial institution</strong> (trustee) to hold the account</li>
       </ol>
+
+      <CalloutBox type="warning" title="Filing the form is not the final step">
+        <p>Filing Form 4547 starts the process, but your account is <strong>not active yet</strong>. Starting May 2026, the Treasury will contact you to complete a secondary authentication process. You must complete this step before your account can receive contributions.</p>
+      </CalloutBox>
+
+      <CalloutBox type="info" title="July 4, 2026: Accounts go live">
+        <p>While you can file Form 4547 now with your 2025 taxes, accounts won't actually be open for private contributions until <strong>July 4, 2026</strong>. The pilot deposit ($1,000 for children born 2025–2028) will be deposited after accounts activate.</p>
+      </CalloutBox>
 
       <h2 id="step-5">Step 5: Choose a Financial Institution & Fund</h2>
 
@@ -240,8 +255,9 @@ const schemas = [
 
       <h3>What if I already filed my 2025 taxes without Form 4547?</h3>
       <p>
-        File an amended return (Form 1040-X) with Form 4547 attached,
-        or use the trumpaccounts.gov portal when it launches mid-2026.
+        You <strong>cannot</strong> add a Trump Account election by filing an amended return (Form 1040-X).
+        If you missed it on your original return, wait for the
+        <a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer">trumpaccounts.gov</a> portal to open in mid-2026.
       </p>
 
       <h3>Can both parents file Form 4547?</h3>
@@ -260,6 +276,19 @@ const schemas = [
       <p>
         You must obtain an SSN before filing Form 4547. For newborns, you can request an SSN
         at the hospital when you apply for the birth certificate. Processing typically takes 2–6 weeks.
+      </p>
+
+      <h3>I have three kids — do I need three forms?</h3>
+      <p>
+        A single Form 4547 can accommodate up to <strong>two children</strong>.
+        If you have three or more eligible kids, attach multiple copies of the form to your return.
+      </p>
+
+      <h3>Is filing Form 4547 enough to open the account?</h3>
+      <p>
+        No. Filing the form starts the process, but you'll need to complete a
+        <strong>secondary authentication step</strong> starting May 2026 when the Treasury contacts you.
+        Only after authentication can you choose a financial institution and begin contributing.
       </p>
     </div>
 

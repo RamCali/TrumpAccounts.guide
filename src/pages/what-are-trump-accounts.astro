@@ -3,22 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import CalloutBox from '../components/ui/CalloutBox.astro';
 import LastUpdated from '../components/ui/LastUpdated.astro';
 import Accordion from '../components/ui/Accordion.astro';
-import { articleSchema, breadcrumbSchema } from '../lib/seo/schema';
-
-const schemas = [
-  articleSchema({
-    title: 'What Are Trump Accounts for Kids? Complete Guide for Parents',
-    description: 'Trump Accounts for kids explained: a $1,000 federal deposit, $5,000/yr contributions, S&P 500 investing, and IRA conversion at 18. Complete parent guide.',
-    url: 'https://trumpaccounts.guide/what-are-trump-accounts',
-    datePublished: '2025-12-03',
-    dateModified: '2026-02-01',
-    author: 'TrumpAccounts.guide Editorial Team',
-  }),
-  breadcrumbSchema([
-    { name: 'Home', url: 'https://trumpaccounts.guide' },
-    { name: 'What Are Trump Accounts?', url: 'https://trumpaccounts.guide/what-are-trump-accounts' },
-  ]),
-];
+import { articleSchema, breadcrumbSchema, faqSchema, financialProductSchema, governmentServiceSchema } from '../lib/seo/schema';
 
 const faqs = [
   {
@@ -37,6 +22,24 @@ const faqs = [
     question: 'Can I withdraw the money before age 18?',
     answer: 'No. Withdrawals before age 18 are not permitted except for rollovers to another Trump Account, return of excess contributions, or in the event of the child\'s death.',
   },
+];
+
+const schemas = [
+  articleSchema({
+    title: 'What Are Trump Accounts for Kids? Complete Guide for Parents',
+    description: 'Trump Accounts for kids explained: a $1,000 federal deposit, $5,000/yr contributions, S&P 500 investing, and IRA conversion at 18. Complete parent guide.',
+    url: 'https://trumpaccounts.guide/what-are-trump-accounts',
+    datePublished: '2025-12-03',
+    dateModified: '2026-02-01',
+    author: 'TrumpAccounts.guide Editorial Team',
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: 'https://trumpaccounts.guide' },
+    { name: 'What Are Trump Accounts?', url: 'https://trumpaccounts.guide/what-are-trump-accounts' },
+  ]),
+  faqSchema(faqs),
+  financialProductSchema(),
+  governmentServiceSchema(),
 ];
 ---
 

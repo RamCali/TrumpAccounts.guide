@@ -1,0 +1,270 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-for-older-kids')!;
+const related = getRelatedArticles('trump-account-for-older-kids');
+
+const faqs = [
+  {
+    question: 'Can a 10-year-old open a Trump Account?',
+    answer: `Yes. Any U.S. citizen child under 18 with a valid SSN can open a Trump Account. A 10-year-old gets 8 years of tax-deferred growth before the account converts to an IRA at ${limits.growthPhaseEndAge}. They will not receive the $${limits.pilotDeposit.toLocaleString()} pilot deposit (only for 2025-2028 births).`,
+  },
+  {
+    question: 'Is it worth opening a Trump Account for a teenager?',
+    answer: `Even a few years of tax-deferred growth has value. A 15-year-old gets 3 years. If you contribute $${limits.annualContributionLimit.toLocaleString()}/year at 8% returns, that is roughly $17,500 by age 18 — plus it becomes a head-start IRA for retirement.`,
+  },
+  {
+    question: 'Do older kids get the $1,000 government deposit?',
+    answer: `No. The $${limits.pilotDeposit.toLocaleString()} pilot deposit is only for children born between ${limits.pilotDepositStartYear} and ${limits.pilotDepositEndYear}. Older children can still receive family contributions up to $${limits.annualContributionLimit.toLocaleString()}/year and employer contributions up to $${limits.employerContributionLimit.toLocaleString()}/year.`,
+  },
+  {
+    question: 'What is the oldest a child can be to open a Trump Account?',
+    answer: 'The child must be under 18 at the end of the election year. A 17-year-old can open one, but they will only have about 1 year of growth before the account converts to an IRA at 18.',
+  },
+  {
+    question: 'Can older kids get the Dell pledge money?',
+    answer: `Yes. The Dell pledge offers $${limits.dellPledge.perChildAmount} per child ${limits.dellPledge.eligibleAge} in ZIP codes with median income below $${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}. This is separate from the federal pilot deposit and applies to already-born children.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+  sources={[
+    { name: 'IRS Notice 2025-68', url: 'https://www.irs.gov/pub/irs-drop/n-25-68.pdf' },
+    { name: 'IRC Section 530A', url: 'https://www.congress.gov' },
+  ]}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Trump Accounts are <strong class="text-white">not just for newborns</strong>. Any child under 18 qualifies.</li>
+        <li>Older kids <strong class="text-white">do not get the ${limits.pilotDeposit.toLocaleString()} deposit</strong> (only for 2025-2028 births).</li>
+        <li>They still get <strong class="text-white">${limits.annualContributionLimit.toLocaleString()}/year in contributions</strong> + employer match + tax-deferred growth.</li>
+        <li>A 5-year-old with $250/month could have <strong class="text-white">~$70,000</strong> by age 18.</li>
+        <li>Even a teenager benefits — the account becomes a <strong class="text-white">head-start IRA</strong> for retirement.</li>
+      </ul>
+    </div>
+
+    <p>
+      Most of the headlines about Trump Accounts focus on newborns and the ${limits.pilotDeposit.toLocaleString()} government deposit. But here is what many parents miss: <strong>any U.S. citizen child under 18 can open a Trump Account</strong>. Your 3-year-old, your 8-year-old, even your 16-year-old.
+    </p>
+
+    <p>
+      The rules are simple. If your child has a valid SSN and is under 18, they are eligible. The only thing older kids miss out on is the ${limits.pilotDeposit.toLocaleString()} pilot deposit. Everything else — family contributions, employer match, tax-deferred growth, the IRA conversion at 18 — is identical.
+    </p>
+
+    <h2>What Older Kids Get (and What They Miss)</h2>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Feature</th>
+            <th class="pb-2 pr-4">Newborns (2025-2028)</th>
+            <th class="pb-2">Older Kids (born before 2025)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">${limits.pilotDeposit.toLocaleString()} federal deposit</td>
+            <td class="py-2 pr-4 text-mint-400">Yes</td>
+            <td class="py-2 text-red-400">No</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">Family contributions</td>
+            <td class="py-2 pr-4 text-mint-400">Up to ${limits.annualContributionLimit.toLocaleString()}/year</td>
+            <td class="py-2 text-mint-400">Up to ${limits.annualContributionLimit.toLocaleString()}/year</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">Employer match</td>
+            <td class="py-2 pr-4 text-mint-400">Up to ${limits.employerContributionLimit.toLocaleString()}/year</td>
+            <td class="py-2 text-mint-400">Up to ${limits.employerContributionLimit.toLocaleString()}/year</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">Tax-deferred growth</td>
+            <td class="py-2 pr-4 text-mint-400">Yes</td>
+            <td class="py-2 text-mint-400">Yes</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">S&P 500 index fund investing</td>
+            <td class="py-2 pr-4 text-mint-400">Yes</td>
+            <td class="py-2 text-mint-400">Yes</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">IRA at 18</td>
+            <td class="py-2 pr-4 text-mint-400">Yes</td>
+            <td class="py-2 text-mint-400">Yes</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4 font-semibold text-white">Dell pledge ($250)</td>
+            <td class="py-2 pr-4 text-mint-400">If under 10 + qualifying ZIP</td>
+            <td class="py-2 text-mint-400">If under 10 + qualifying ZIP</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Growth Projections by Age</h2>
+
+    <p>
+      The younger the child, the more compounding time they have. Here is what ${limits.annualContributionLimit.toLocaleString()}/year (about $417/month) could grow to by age 18, assuming 8% average annual returns:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Child's Age Now</th>
+            <th class="pb-2 pr-4">Years to Grow</th>
+            <th class="pb-2 pr-4">Total Contributed</th>
+            <th class="pb-2">Projected at 18 (8%)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">1 year old</td>
+            <td class="py-2 pr-4">17 years</td>
+            <td class="py-2 pr-4">$85,000</td>
+            <td class="py-2 text-mint-400 font-semibold">~$178,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">3 years old</td>
+            <td class="py-2 pr-4">15 years</td>
+            <td class="py-2 pr-4">$75,000</td>
+            <td class="py-2 text-mint-400 font-semibold">~$146,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">5 years old</td>
+            <td class="py-2 pr-4">13 years</td>
+            <td class="py-2 pr-4">$65,000</td>
+            <td class="py-2 text-mint-400 font-semibold">~$117,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">8 years old</td>
+            <td class="py-2 pr-4">10 years</td>
+            <td class="py-2 pr-4">$50,000</td>
+            <td class="py-2 text-mint-400 font-semibold">~$78,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">10 years old</td>
+            <td class="py-2 pr-4">8 years</td>
+            <td class="py-2 pr-4">$40,000</td>
+            <td class="py-2 text-mint-400 font-semibold">~$57,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">13 years old</td>
+            <td class="py-2 pr-4">5 years</td>
+            <td class="py-2 pr-4">$25,000</td>
+            <td class="py-2 text-mint-400 font-semibold">~$31,700</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">15 years old</td>
+            <td class="py-2 pr-4">3 years</td>
+            <td class="py-2 pr-4">$15,000</td>
+            <td class="py-2 text-mint-400 font-semibold">~$17,500</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4 font-semibold text-white">17 years old</td>
+            <td class="py-2 pr-4">1 year</td>
+            <td class="py-2 pr-4">$5,000</td>
+            <td class="py-2 text-mint-400 font-semibold">~$5,400</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <CalloutBox type="tip" title="Run your own numbers">
+      Use our <a href="/calculators/growth-calculator" class="text-gold-400 hover:text-gold-300">growth calculator</a> to see projections at different contribution levels and return rates for your child's specific age.
+    </CalloutBox>
+
+    <h2>Why Open One for an Older Child?</h2>
+
+    <h3>1. Tax-Deferred Growth</h3>
+
+    <p>
+      In a regular brokerage account, your child pays taxes on dividends and capital gains every year. In a Trump Account, growth is <strong>tax-deferred</strong>. No taxes until withdrawal after 18. Over even 5-10 years, that tax savings compounds significantly.
+    </p>
+
+    <h3>2. Head-Start IRA</h3>
+
+    <p>
+      At 18, the Trump Account becomes a <strong>traditional IRA</strong>. Most young adults do not start retirement saving until their mid-20s or 30s. Your child starts with an IRA that already has years of growth — a massive advantage.
+    </p>
+
+    <p>
+      Even better: at 18, your child can <strong>convert it to a Roth IRA</strong> while in a low tax bracket. That means decades of tax-free growth for retirement. See our <a href="/blog/trump-account-roth-conversion-strategy">Roth conversion strategy guide</a>.
+    </p>
+
+    <h3>3. Employer Match</h3>
+
+    <p>
+      If your employer offers Trump Account contributions under IRC Section 128, that is up to <strong>${limits.employerContributionLimit.toLocaleString()}/year in tax-free money</strong> — regardless of your child's age. This benefit applies equally to a 2-year-old and a 15-year-old.
+    </p>
+
+    <h3>4. Dell Pledge for Under 10</h3>
+
+    <p>
+      Children {limits.dellPledge.eligibleAge} in ZIP codes with median income below ${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()} may qualify for the <strong>${limits.dellPledge.perChildAmount} Dell pledge</strong>. This is separate from the federal pilot deposit and applies to already-born children.
+    </p>
+
+    <h3>5. Financial Literacy</h3>
+
+    <p>
+      Older kids can actually understand what is happening with their money. Showing a 10-year-old their S&P 500 returns teaches investing basics that will benefit them for life.
+    </p>
+
+    <h2>Is It Worth It for a Teenager?</h2>
+
+    <p>
+      Even with only a few years of growth, the answer is usually <strong>yes</strong>. Here is why:
+    </p>
+
+    <ul>
+      <li><strong>The IRA conversion alone has value.</strong> At 18, your teenager has an IRA. Most 18-year-olds have nothing. Even $5,000-$15,000 in an IRA at 18 can grow to $100,000+ by retirement age without any additional contributions.</li>
+      <li><strong>Tax-deferred growth matters even short-term.</strong> Three years of S&P 500 returns without annual capital gains taxes is better than a taxable brokerage account.</li>
+      <li><strong>Employer match is free money.</strong> If available, ${limits.employerContributionLimit.toLocaleString()}/year of tax-free contributions for even 2-3 years is significant.</li>
+    </ul>
+
+    <CalloutBox type="info" title="The $5,000 thought experiment">
+      If your 17-year-old puts $5,000 in a Trump Account and never touches it again, at 8% average returns that $5,000 becomes roughly $105,000 by age 65. One contribution. One year. Over $100K in retirement wealth.
+    </CalloutBox>
+
+    <h2>How to Open an Account for an Older Child</h2>
+
+    <p>
+      The process is identical to opening one for a newborn:
+    </p>
+
+    <ol>
+      <li><strong>Verify eligibility:</strong> U.S. citizen, valid SSN, under 18.</li>
+      <li><strong>File {limits.form}</strong> with your 2025 tax return (due April 15, 2026) or through {limits.portal}.</li>
+      <li><strong>Choose an eligible index fund</strong> (VOO, IVV, SPLG, VTI, etc.).</li>
+      <li><strong>Start contributing</strong> — up to ${limits.annualContributionLimit.toLocaleString()}/year from all sources.</li>
+    </ol>
+
+    <p>
+      <strong>Note:</strong> Do NOT check the pilot deposit box. The ${limits.pilotDeposit.toLocaleString()} deposit is only for 2025-2028 births. Checking it for an older child could cause a processing error.
+    </p>
+
+    <p>
+      For the full walkthrough, see our <a href="/blog/how-to-open-step-by-step">step-by-step guide to opening a Trump Account</a>. To check eligibility, use our <a href="/calculators/eligibility-checker">eligibility checker</a>.
+    </p>
+
+    <h2>Bottom Line</h2>
+
+    <p>
+      Do not skip a Trump Account just because your child is not a newborn. The ${limits.pilotDeposit.toLocaleString()} deposit is a nice bonus, but it is small compared to what a family can contribute over time. Even 5 years of ${limits.annualContributionLimit.toLocaleString()}/year at 8% returns creates real wealth. And the IRA conversion at 18 gives every child — newborn or teenager — a financial head start that most adults never had.
+    </p>
+  </div>
+</BlogLayout>

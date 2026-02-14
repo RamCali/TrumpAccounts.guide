@@ -60,7 +60,7 @@ export const blogArticles: Record<string, BlogArticle> = {
     datePublished: '2026-02-12',
     dateModified: '2026-02-12',
     readingTime: '4 min read',
-    relatedSlugs: ['is-trump-account-automatic', 'how-to-open-step-by-step', 'what-are-trump-accounts-guide'],
+    relatedSlugs: ['is-trump-account-automatic', 'how-to-open-step-by-step', 'what-are-trump-accounts-guide', 'form-4547-guide'],
   },
   'how-much-money-trump-account': {
     slug: 'how-much-money-trump-account',
@@ -82,7 +82,7 @@ export const blogArticles: Record<string, BlogArticle> = {
     datePublished: '2026-02-12',
     dateModified: '2026-02-12',
     readingTime: '4 min read',
-    relatedSlugs: ['how-to-open-step-by-step', 'when-do-trump-accounts-start', 'what-are-trump-accounts-guide'],
+    relatedSlugs: ['how-to-open-step-by-step', 'when-do-trump-accounts-start', 'what-are-trump-accounts-guide', 'form-4547-guide'],
   },
   'trump-account-federal-or-state': {
     slug: 'trump-account-federal-or-state',
@@ -308,7 +308,7 @@ export const blogArticles: Record<string, BlogArticle> = {
     datePublished: '2026-02-12',
     dateModified: '2026-02-12',
     readingTime: '5 min read',
-    relatedSlugs: ['what-can-money-be-used-for', 'trump-account-fafsa-impact', 'gains-taxation-explained'],
+    relatedSlugs: ['what-can-money-be-used-for', 'trump-account-fafsa-impact', 'gains-taxation-explained', 'trump-account-vs-529-blog'],
   },
   'trump-account-for-first-home': {
     slug: 'trump-account-for-first-home',
@@ -387,7 +387,7 @@ export const blogArticles: Record<string, BlogArticle> = {
     datePublished: '2026-02-12',
     dateModified: '2026-02-12',
     readingTime: '4 min read',
-    relatedSlugs: ['do-all-babies-qualify', 'trump-account-age-cutoff', 'who-qualifies-for-trump-account'],
+    relatedSlugs: ['do-all-babies-qualify', 'trump-account-age-cutoff', 'who-qualifies-for-trump-account', 'trump-account-for-older-kids'],
   },
   'adopted-children-trump-account': {
     slug: 'adopted-children-trump-account',
@@ -988,6 +988,69 @@ export const blogArticles: Record<string, BlogArticle> = {
     dateModified: '2026-02-13',
     readingTime: '9 min read',
     relatedSlugs: ['trump-account-roth-conversion-strategy', 'employer-match-trump-account', 'trump-account-fees-explained', 'trump-account-family-tax-strategy', 'build-50k-by-18'],
+  },
+
+  // ─── Keyword-Targeted: Form 4547 (1,300/mo) ───────────────
+  'form-4547-guide': {
+    slug: 'form-4547-guide',
+    title: 'IRS Form 4547: Complete Guide to the Trump Account Election',
+    description: 'Everything about IRS Form 4547: what it is, how to fill it out, where to file, deadlines, and common mistakes. Step-by-step with examples.',
+    category: 'Parent Guides',
+    categorySlug: 'parent-guides',
+    datePublished: '2026-02-13',
+    dateModified: '2026-02-13',
+    readingTime: '8 min read',
+    relatedSlugs: ['form-4547-common-mistakes', 'how-to-open-step-by-step', 'when-do-trump-accounts-start', 'is-trump-account-automatic', 'trump-account-multiple-children', 'what-are-trump-accounts-guide'],
+  },
+
+  // ─── Keyword-Targeted: trump accounts vs 529 ──────────────
+  'trump-account-vs-529-blog': {
+    slug: 'trump-account-vs-529-blog',
+    title: 'Trump Account vs 529 Plan: Which Should You Fund First?',
+    description: 'Trump Account or 529? Compare contribution limits, tax treatment, investment rules, and flexibility. Most families should open both. Here is why.',
+    category: 'Parent Guides',
+    categorySlug: 'parent-guides',
+    datePublished: '2026-02-13',
+    dateModified: '2026-02-13',
+    readingTime: '7 min read',
+    relatedSlugs: ['best-accounts-for-kids-today', 'trump-account-for-college', 'trump-account-family-tax-strategy', 'gains-taxation-explained', 'what-are-trump-accounts-guide', 'contribution-limits-explained'],
+  },
+
+  // ─── Keyword-Targeted: trump account for older kids ────────
+  'trump-account-for-older-kids': {
+    slug: 'trump-account-for-older-kids',
+    title: 'Trump Accounts for Older Kids (Ages 1-17)',
+    description: 'Your child does not need to be a newborn. Any U.S. citizen under 18 can open a Trump Account. Growth projections by age, plus what older kids miss.',
+    category: 'Eligibility',
+    categorySlug: 'eligibility',
+    datePublished: '2026-02-13',
+    dateModified: '2026-02-13',
+    readingTime: '6 min read',
+    relatedSlugs: ['already-born-children', 'trump-account-age-cutoff', 'who-qualifies-for-trump-account', 'how-much-at-age-18', 'how-to-open-step-by-step', 'do-all-babies-qualify'],
+  },
+
+  // ─── Zero-Volume SEO: Data Void Targeting ──────────────────
+  'trump-account-1000-grant-application-status': {
+    slug: 'trump-account-1000-grant-application-status',
+    title: 'Trump Account $1,000 Grant Application Status (2026)',
+    description: 'Check the status of your Trump Account $1,000 deposit. Where is your money? How to track Form 4547, expected timelines, and what to do if it is delayed.',
+    category: 'Basics',
+    categorySlug: 'basics',
+    datePublished: '2026-02-13',
+    dateModified: '2026-02-13',
+    readingTime: '6 min read',
+    relatedSlugs: ['form-4547-guide', 'form-4547-common-mistakes', 'when-do-trump-accounts-start', 'is-trump-account-automatic', 'how-to-open-step-by-step'],
+  },
+  'is-the-one-big-beautiful-bill-act-real': {
+    slug: 'is-the-one-big-beautiful-bill-act-real',
+    title: 'Is the One Big Beautiful Bill Act Real? (Yes — Here\'s Proof)',
+    description: 'The OBBBA is real. Signed July 4, 2025. It created Trump Accounts under IRC §530A. Here is the proof: bill text, IRS guidance, and official sources.',
+    category: 'Basics',
+    categorySlug: 'basics',
+    datePublished: '2026-02-13',
+    dateModified: '2026-02-13',
+    readingTime: '5 min read',
+    relatedSlugs: ['what-are-trump-accounts-guide', 'when-do-trump-accounts-start', 'trump-account-myths-debunked', 'form-4547-guide'],
   },
 };
 

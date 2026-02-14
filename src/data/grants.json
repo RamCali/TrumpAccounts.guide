@@ -1,0 +1,24 @@
+{
+  "dataSource": "U.S. Census Bureau, American Community Survey (ACS) 5-Year Estimates (2018–2022)",
+  "lastUpdated": "2026-02-13",
+  "grants": [
+    {
+      "id": "dell-pledge",
+      "name": "Dell Foundation Pledge",
+      "organization": "Michael & Susan Dell Foundation",
+      "amount": 250,
+      "amountLabel": "$250 per child",
+      "totalPledge": 6250000000,
+      "description": "One-time $250 deposit for eligible children under 10 in qualifying ZIP codes.",
+      "eligibility": {
+        "maxMedianIncome": 150000,
+        "maxAge": 9,
+        "maxAgeLabel": "under 10",
+        "requiresCitizenship": true
+      },
+      "source": "https://www.dell.org",
+      "announcedDate": "2025-07-04",
+      "notes": "The Dell Foundation will publish its own official eligibility list. This tool estimates eligibility based on publicly available Census median household income data."
+    }
+  ]
+}

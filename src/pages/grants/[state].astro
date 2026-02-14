@@ -1,0 +1,235 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import Accordion from '../../components/ui/Accordion.astro';
+import LastUpdated from '../../components/ui/LastUpdated.astro';
+import { breadcrumbSchema, faqSchema, financialProductSchema } from '../../lib/seo/schema';
+import states from '../../data/states.json';
+import limits from '../../data/contribution-limits.json';
+
+export function getStaticPaths() {
+  return states.map((s) => ({
+    params: { state: s.slug },
+    props: s,
+  }));
+}
+
+type Props = (typeof states)[number];
+const { name, abbr, slug, dellEligible, medianIncome } = Astro.props;
+
+const siteUrl = 'https://trumpaccounts.guide';
+const pageUrl = `${siteUrl}/grants/${slug}`;
+const stateMedianBelow = medianIncome < limits.dellPledge.zipCodeMedianIncomeThreshold;
+
+const faqs = [
+  {
+    question: `Do families in ${name} qualify for a Trump Account?`,
+    answer: `Yes. Trump Accounts are a federal program. Every U.S. citizen child under 18 with a valid Social Security number qualifies — regardless of which state they live in. There are no income restrictions. Families in ${name} follow the same rules as all other states.`,
+  },
+  {
+    question: `How do ${name} parents open a Trump Account?`,
+    answer: `File IRS Form 4547 with your 2025 federal tax return (due April 15, 2026). You can also use the trumpaccounts.gov portal when it launches in mid-2026, or mail the form to the IRS. The process is the same nationwide.`,
+  },
+  {
+    question: `Does ${name} offer any additional Trump Account grants or bonuses?`,
+    answer: `Trump Accounts are a federal program — ${name} does not offer a separate state-level Trump Account. However, children ${stateMedianBelow ? 'in many ' + name + ' ZIP codes' : 'in eligible ZIP codes in ' + name} may qualify for the Dell Foundation's $250 bonus (for children under 10 in ZIP codes with median income below $150,000).`,
+  },
+  {
+    question: `Can ${name} employers contribute to Trump Accounts?`,
+    answer: `Yes. Any employer nationwide, including those in ${name}, can contribute up to $2,500 per year per employee toward their children's Trump Accounts. This contribution is tax-free for employees under IRC §128 and counts toward the $5,000 annual cap.`,
+  },
+  {
+    question: `Do I need to live in ${name} to get the $1,000 federal deposit?`,
+    answer: `No. The $1,000 pilot deposit is based on the child's birth year (2025–2028) and U.S. citizenship — not location. A child born in ${name} or any other state qualifies, as long as they are a U.S. citizen with a valid SSN and the parent files Form 4547.`,
+  },
+  {
+    question: `Does ${name} tax Trump Account withdrawals?`,
+    answer: `Trump Account withdrawals (after the account converts to a traditional IRA at age 18) are taxed as ordinary income at the federal level. ${name} state income tax treatment will depend on how ${name} treats traditional IRA distributions. Consult a ${name}-licensed tax professional for state-specific guidance.`,
+  },
+];
+
+const schemas = [
+  breadcrumbSchema([
+    { name: 'Home', url: siteUrl },
+    { name: 'Grants & Eligibility by State', url: `${siteUrl}/grants` },
+    { name: `${name}`, url: pageUrl },
+  ]),
+  faqSchema(faqs),
+  financialProductSchema({
+    name: `Trump Account for ${name} Families`,
+    description: `Trump Account eligibility, grants, and Dell Foundation bonus information for families in ${name}. Federal $1,000 pilot deposit, $5,000/year contributions, and S&P 500 investing.`,
+    url: pageUrl,
+  }),
+];
+
+const title = `Trump Account Grants & Eligibility in ${name} (${abbr}) — 2026 Guide`;
+const description = `How ${name} families can claim the $1,000 Trump Account deposit, Dell Foundation $250 bonus, and contribute up to $5,000/year. Step-by-step for ${abbr} parents.`;
+---
+
+<BaseLayout title={title} description={description} schema={schemas} ogType="article">
+  <article class="mx-auto max-w-3xl px-4 py-12">
+    <!-- Breadcrumb -->
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-gold-400 no-underline">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <a href="/grants" class="hover:text-gold-400 no-underline">Grants by State</a>
+        </li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="text-white font-medium">{name}</span>
+        </li>
+      </ol>
+    </nav>
+
+    <LastUpdated date="2026-02-13" />
+
+    <div class="prose mt-4">
+      <h1>Trump Account Grants & Eligibility in {name}</h1>
+
+      <p>
+        If you're a parent in <strong>{name}</strong>, your child is eligible for a Trump Account — the new federal investment account created by the <strong>One Big Beautiful Bill Act (IRC §530A)</strong>. Here is everything {name} families need to know about grants, deposits, and how to open an account.
+      </p>
+
+      <!-- Key Takeaways -->
+      <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+        <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways for {name} Families</h2>
+        <ul class="space-y-2 text-sm text-gray-300">
+          <li>Trump Accounts are <strong class="text-white">federal</strong> — {name} families qualify under the same rules as every state.</li>
+          <li>Children born 2025–2028 receive a <strong class="text-white">${limits.pilotDeposit.toLocaleString()} government deposit</strong>.</li>
+          <li>Families can contribute up to <strong class="text-white">${limits.annualContributionLimit.toLocaleString()}/year</strong>. Employers can add <strong class="text-white">${limits.employerContributionLimit.toLocaleString()}</strong> tax-free.</li>
+          {stateMedianBelow && (
+            <li>Many {name} ZIP codes qualify for the <strong class="text-white">Dell Foundation $250 bonus</strong> (median income below $150K).</li>
+          )}
+          <li>File <strong class="text-white">{limits.form}</strong> with your 2025 tax return by <strong class="text-white">April 15, 2026</strong>.</li>
+        </ul>
+      </div>
+
+      <h2>Federal Grants Available to {name} Families</h2>
+
+      <h3>1. The $1,000 Federal Pilot Deposit</h3>
+      <p>
+        Every U.S. citizen child born between <strong>January 1, 2025</strong> and <strong>December 31, 2028</strong> is eligible for a one-time <strong>${limits.pilotDeposit.toLocaleString()} federal deposit</strong>. This is not a loan — it's a direct government contribution to your child's Trump Account.
+      </p>
+      <p>
+        To receive it, {name} parents must file <strong>{limits.form}</strong> with their 2025 federal tax return (due April 15, 2026) or through <a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer">{limits.portal}</a> when it launches in mid-2026.
+      </p>
+
+      <CalloutBox type="warning" title={`${name} Parents: Don't Miss the Deadline`}>
+        <p>
+          The $1,000 deposit is NOT automatic. You must opt in by filing Form 4547. If you don't file, your child will not receive the federal deposit.
+        </p>
+      </CalloutBox>
+
+      <h3>2. Dell Foundation Bonus ($250 per Child)</h3>
+      <p>
+        Michael and Susan Dell pledged <strong>$6.25 billion</strong> — $250 per child under 10 who lives in a ZIP code with a median household income below $150,000.
+      </p>
+      {stateMedianBelow ? (
+        <p>
+          <strong>{name}'s statewide median household income is ${medianIncome.toLocaleString()}</strong>, which is below the $150,000 threshold. This means <strong>many {name} ZIP codes are likely eligible</strong> for the Dell Foundation bonus. Children who qualify could receive both the $1,000 federal deposit <em>and</em> the $250 Dell contribution — a total of <strong>$1,250 in free seed money</strong>.
+        </p>
+      ) : (
+        <p>
+          {name}'s statewide median household income is ${medianIncome.toLocaleString()}. While the statewide median is below $150,000, eligibility is determined at the <strong>ZIP code level</strong>. Many ZIP codes in {name} will qualify. Check your specific ZIP code for eligibility.
+        </p>
+      )}
+
+      <h3>3. Employer Contributions</h3>
+      <p>
+        {name} employers can contribute up to <strong>${limits.employerContributionLimit.toLocaleString()}/year per employee</strong> toward their children's Trump Accounts. This is tax-free for the employee under IRC §128 and counts toward the $5,000 annual cap.
+      </p>
+      <p>
+        If you work for a {name}-based company, ask your HR department about Trump Account employer matching. <a href="/for-employers">See our employer guide</a>.
+      </p>
+
+      <h2>How to Open a Trump Account in {name}</h2>
+      <p>The process is the same in all 50 states:</p>
+      <ol>
+        <li><strong>Check eligibility:</strong> Your child must be a U.S. citizen with a valid SSN, under 18. <a href="/calculators/eligibility-checker">Use our eligibility checker</a>.</li>
+        <li><strong>File Form 4547:</strong> Include IRS Form 4547 (Trump Account Election(s)) with your 2025 federal tax return, due April 15, 2026.</li>
+        <li><strong>Or use the portal:</strong> Visit <a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer">trumpaccounts.gov</a> when it launches in mid-2026.</li>
+        <li><strong>Start contributing:</strong> Add up to $5,000/year. The sooner you start, the more time compound growth has to work.</li>
+      </ol>
+
+      <CalloutBox type="tip" title="Run the Numbers">
+        <p>
+          Use our <a href="/calculators/growth-calculator">growth calculator</a> to see how a Trump Account could grow for your {name} child over 18 years.
+        </p>
+      </CalloutBox>
+
+      <h2>Total Potential Grants for a {name} Newborn</h2>
+      <p>A child born in 2025 in {name} could receive up to:</p>
+      <div class="not-prose my-6 overflow-hidden rounded-lg border border-surface-600">
+        <table class="w-full text-sm">
+          <thead class="bg-surface-700">
+            <tr>
+              <th class="px-4 py-3 text-left text-gray-300">Source</th>
+              <th class="px-4 py-3 text-right text-gray-300">Amount</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-surface-600">
+            <tr>
+              <td class="px-4 py-3 text-gray-300">Federal Pilot Deposit</td>
+              <td class="px-4 py-3 text-right font-semibold text-white">$1,000</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 text-gray-300">Dell Foundation Bonus (if eligible ZIP)</td>
+              <td class="px-4 py-3 text-right font-semibold text-white">$250</td>
+            </tr>
+            <tr class="bg-gold-400/5">
+              <td class="px-4 py-3 font-semibold text-gold-400">Total Free Seed Money</td>
+              <td class="px-4 py-3 text-right font-bold text-gold-400">Up to $1,250</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        Add family contributions of up to $5,000/year and employer contributions of up to $2,500/year, and the account can grow significantly over 18 years of tax-deferred compounding.
+      </p>
+
+      <h2>Frequently Asked Questions for {name} Parents</h2>
+    </div>
+
+    <div class="mt-6">
+      <Accordion items={faqs} />
+    </div>
+
+    <!-- Related links -->
+    <div class="mt-12 grid gap-3 sm:grid-cols-2">
+      <a href="/calculators/growth-calculator" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">Growth Calculator</h3>
+        <p class="text-sm text-gray-400">See how much a Trump Account could grow over 18 years</p>
+      </a>
+      <a href="/calculators/eligibility-checker" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">Eligibility Checker</h3>
+        <p class="text-sm text-gray-400">Verify your child qualifies in 30 seconds</p>
+      </a>
+      <a href="/how-to-open-trump-account" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">How to Open a Trump Account</h3>
+        <p class="text-sm text-gray-400">Step-by-step Form 4547 walkthrough</p>
+      </a>
+      <a href="/grants" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">All 50 States</h3>
+        <p class="text-sm text-gray-400">See grants and eligibility for every state</p>
+      </a>
+    </div>
+
+    <!-- Disclaimer -->
+    <div class="mt-10 rounded-lg border border-amber-500/30 bg-amber-500/10 p-4">
+      <p class="text-sm text-amber-300">
+        <strong class="text-amber-200">Disclaimer:</strong> This is educational content, not tax or financial advice.
+        State tax treatment may vary. Consult a qualified tax professional or financial advisor in {name} before making investment decisions.
+      </p>
+    </div>
+
+    <!-- Sources -->
+    <div class="mt-6 rounded-lg border border-surface-600 bg-surface-800 p-4 text-xs text-gray-500">
+      <p><strong class="text-gray-300">Sources:</strong></p>
+      <ul class="mt-1 space-y-0.5">
+        <li><a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf" target="_blank" rel="noopener noreferrer" class="text-gold-400 hover:text-gold-300">IRS Notice 2025-68</a></li>
+        <li><a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer" class="text-gold-400 hover:text-gold-300">trumpaccounts.gov</a></li>
+        <li>One Big Beautiful Bill Act (OBBBA), IRC Section 530A</li>
+      </ul>
+    </div>
+  </article>
+</BaseLayout>

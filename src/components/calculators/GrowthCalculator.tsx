@@ -7,14 +7,17 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  ReferenceLine,
 } from 'recharts';
 import {
-  calculatePhasedGrowth,
-  calculatePhasedLifetimeGrowth,
+  calculateEnhancedGrowth,
+  calculateEnhancedLifetimeGrowth,
+  getEffectiveCap,
   type ContributionPhase,
 } from '../../lib/calculators/growth';
 import SliderInput from './shared/SliderInput';
 import ResultCard from './shared/ResultCard';
+import limits from '../../data/contribution-limits.json';
 
 const fmt = (n: number) =>
   n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
@@ -25,32 +28,37 @@ interface Preset {
   phases: (startAge: number) => ContributionPhase[];
 }
 
-function makePresets(startAge: number, endAge: number): Preset[] {
+function makePresets(startAge: number, endAge: number, employerAnnual: number): Preset[] {
+  const personalCap = limits.annualContributionLimit - employerAnnual;
+  const personalMaxMo = Math.floor(personalCap / 12);
+
   return [
     {
       label: 'Deposit only',
-      description: 'No family contributions — just the $1,000 pilot deposit',
+      description: employerAnnual > 0
+        ? `No family contributions — employer adds $${employerAnnual.toLocaleString()}/yr`
+        : 'No family contributions — just the $1,000 pilot deposit',
       phases: () => [],
     },
     {
       label: '$100/mo',
       description: `$1,200/year from age ${startAge} to ${endAge}`,
-      phases: (s) => [{ fromAge: s, toAge: endAge, monthlyAmount: 100 }],
+      phases: (s) => [{ fromAge: s, toAge: endAge, monthlyAmount: Math.min(100, personalMaxMo) }],
     },
     {
       label: '$250/mo',
       description: `$3,000/year from age ${startAge} to ${endAge}`,
-      phases: (s) => [{ fromAge: s, toAge: endAge, monthlyAmount: 250 }],
+      phases: (s) => [{ fromAge: s, toAge: endAge, monthlyAmount: Math.min(250, personalMaxMo) }],
     },
     {
-      label: 'Max ($417/mo)',
-      description: `$5,000/year from age ${startAge} to ${endAge}`,
-      phases: (s) => [{ fromAge: s, toAge: endAge, monthlyAmount: 417 }],
+      label: `Max ($${personalMaxMo}/mo)`,
+      description: `$${personalCap.toLocaleString()}/year personal${employerAnnual > 0 ? ` + $${employerAnnual.toLocaleString()} employer` : ''} from age ${startAge} to ${endAge}`,
+      phases: (s) => [{ fromAge: s, toAge: endAge, monthlyAmount: personalMaxMo }],
     },
     {
       label: '5 yrs then stop',
       description: `$250/mo for 5 years, then $0`,
-      phases: (s) => [{ fromAge: s, toAge: Math.min(s + 5, endAge), monthlyAmount: 250 }],
+      phases: (s) => [{ fromAge: s, toAge: Math.min(s + 5, endAge), monthlyAmount: Math.min(250, personalMaxMo) }],
     },
     {
       label: 'Start small, grow',
@@ -58,8 +66,8 @@ function makePresets(startAge: number, endAge: number): Preset[] {
       phases: (s) => {
         const mid = Math.round(s + (endAge - s) / 2);
         return [
-          { fromAge: s, toAge: mid, monthlyAmount: 100 },
-          { fromAge: mid, toAge: endAge, monthlyAmount: 300 },
+          { fromAge: s, toAge: mid, monthlyAmount: Math.min(100, personalMaxMo) },
+          { fromAge: mid, toAge: endAge, monthlyAmount: Math.min(300, personalMaxMo) },
         ];
       },
     },
@@ -72,11 +80,21 @@ export default function GrowthCalculator() {
   const [showLifetime, setShowLifetime] = useState(false);
   const [activePreset, setActivePreset] = useState<string | null>(null);
 
+  // Advanced options
+  const [inflationAdjustCap, setInflationAdjustCap] = useState(false);
+  const [annualEmployer, setAnnualEmployer] = useState(0);
+  const [includeDellPledge, setIncludeDellPledge] = useState(false);
+  const [expenseRatio, setExpenseRatio] = useState(limits.defaultExpenseRatio * 100); // as percentage (0.04)
+
   // Contributions can first be made for the 2025 tax year
   const firstContributionYear = 2025;
   const hasPilotDeposit = birthYear >= 2025 && birthYear <= 2028;
+  const hasDellEligibility = hasPilotDeposit;
   const startAge = Math.max(0, firstContributionYear - birthYear);
   const yearsOfGrowth = 18 - startAge;
+  const dellPledgeAmount = includeDellPledge && hasDellEligibility ? limits.dellPledge.perChildAmount : 0;
+  const expenseRatioDecimal = expenseRatio / 100;
+  const personalMaxMonthly = Math.floor((limits.annualContributionLimit - annualEmployer) / 12);
 
   // Contribution phases
   const [phases, setPhases] = useState<ContributionPhase[]>([
@@ -93,33 +111,39 @@ export default function GrowthCalculator() {
   }, [phases, startAge, showLifetime]);
 
   const result = useMemo(() => {
+    const commonInput = {
+      birthYear,
+      pilotDeposit: hasPilotDeposit ? limits.pilotDeposit : 0,
+      phases: effectivePhases,
+      annualReturn: annualReturn / 100,
+      startAge,
+      inflationAdjustCap,
+      inflationRate: limits.defaultInflationRate,
+      inflationIndexStartYear: limits.inflationIndexStartYear,
+      annualEmployerContribution: annualEmployer,
+      dellPledgeAmount,
+      expenseRatio: expenseRatioDecimal,
+    };
+
     if (showLifetime) {
-      return calculatePhasedLifetimeGrowth({
-        birthYear,
-        pilotDeposit: hasPilotDeposit ? 1000 : 0,
-        phases: effectivePhases,
-        annualReturn: annualReturn / 100,
-        startAge,
+      return calculateEnhancedLifetimeGrowth({
+        ...commonInput,
         retirementAge: 65,
         postIRAContribution: 0,
       });
     }
-    return calculatePhasedGrowth({
-      birthYear,
-      pilotDeposit: hasPilotDeposit ? 1000 : 0,
-      phases: effectivePhases,
-      annualReturn: annualReturn / 100,
-      startAge,
-      endAge: 18,
-    });
-  }, [birthYear, effectivePhases, annualReturn, showLifetime, startAge, hasPilotDeposit]);
+    return calculateEnhancedGrowth({ ...commonInput, endAge: 18 });
+  }, [birthYear, effectivePhases, annualReturn, showLifetime, startAge, hasPilotDeposit,
+      inflationAdjustCap, annualEmployer, dellPledgeAmount, expenseRatioDecimal]);
+
+  const seedMoney = (hasPilotDeposit ? limits.pilotDeposit : 0) + dellPledgeAmount;
 
   const chartData = result.snapshots.map((s, i) => ({
     age: s.age,
     balance: Math.round(s.endBalance),
     contributions: Math.round(
       result.snapshots.slice(0, i + 1).reduce((sum, snap) => sum + snap.contributions, 0) +
-      (hasPilotDeposit ? 1000 : 0)
+      seedMoney
     ),
   }));
 
@@ -153,7 +177,7 @@ export default function GrowthCalculator() {
     setActivePreset(preset.label);
   }, [startAge]);
 
-  const presets = useMemo(() => makePresets(startAge, 18), [startAge]);
+  const presets = useMemo(() => makePresets(startAge, 18, annualEmployer), [startAge, annualEmployer]);
 
   // Build dynamic help text for birth year slider
   const birthYearHelp = hasPilotDeposit
@@ -202,11 +226,86 @@ export default function GrowthCalculator() {
         </label>
       </div>
 
+      {/* Advanced Options */}
+      <details className="rounded-xl border border-surface-600 bg-surface-800 shadow-sm">
+        <summary className="flex cursor-pointer items-center justify-between px-6 py-4 text-sm font-semibold text-gray-300 hover:bg-surface-700/50">
+          <span>Advanced Options</span>
+          <span className="text-xs text-gray-500">Inflation, Employer Match, Dell Pledge, Fees</span>
+        </summary>
+        <div className="space-y-5 px-6 pb-6">
+          {/* Inflation Adjustment */}
+          <div>
+            <label className="flex cursor-pointer items-center gap-2">
+              <input
+                type="checkbox"
+                checked={inflationAdjustCap}
+                onChange={(e) => setInflationAdjustCap(e.target.checked)}
+                className="h-4 w-4 rounded border-surface-600 accent-[#c5a059]"
+              />
+              <span className="text-sm text-gray-300">
+                Adjust ${limits.annualContributionLimit.toLocaleString()} cap for inflation (post-{limits.inflationIndexStartYear})
+              </span>
+            </label>
+            <p className="ml-6 mt-1 text-xs text-gray-500">
+              The annual limit is indexed ~2.5%/year starting {limits.inflationIndexStartYear + 1}.
+              {inflationAdjustCap && hasPilotDeposit && (
+                <> By age 18, the cap could be ~{fmt(getEffectiveCap(birthYear + 17, limits.annualContributionLimit, true, limits.defaultInflationRate, limits.inflationIndexStartYear))}/year.</>
+              )}
+            </p>
+          </div>
+
+          {/* Employer Match */}
+          <SliderInput
+            label="Annual Employer Contribution"
+            value={annualEmployer}
+            min={0}
+            max={limits.employerContributionLimit}
+            step={100}
+            onChange={(v) => { setAnnualEmployer(v); setActivePreset(null); }}
+            prefix="$"
+            helpText={`Tax-free under IRC §128. Counts toward the $${limits.annualContributionLimit.toLocaleString()} cap. Remaining for personal: $${(limits.annualContributionLimit - annualEmployer).toLocaleString()}/yr ($${personalMaxMonthly}/mo)`}
+          />
+
+          {/* Dell Pledge */}
+          {hasDellEligibility && (
+            <div>
+              <label className="flex cursor-pointer items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={includeDellPledge}
+                  onChange={(e) => setIncludeDellPledge(e.target.checked)}
+                  className="h-4 w-4 rounded border-surface-600 accent-[#c5a059]"
+                />
+                <span className="text-sm text-gray-300">
+                  Include Dell Foundation bonus (+${limits.dellPledge.perChildAmount})
+                </span>
+              </label>
+              <p className="ml-6 mt-1 text-xs text-gray-500">
+                For children {limits.dellPledge.eligibleAge} in ZIP codes with median income below ${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}.
+                {includeDellPledge && ` Total seed: $${(limits.pilotDeposit + limits.dellPledge.perChildAmount).toLocaleString()}.`}
+              </p>
+            </div>
+          )}
+
+          {/* Expense Ratio */}
+          <SliderInput
+            label="Fund Expense Ratio"
+            value={expenseRatio}
+            min={0}
+            max={limits.maxExpenseRatio * 100}
+            step={0.01}
+            onChange={setExpenseRatio}
+            suffix="%"
+            helpText="Law caps fees at 0.10%. VOO/IVV typically charge 0.03–0.04%. Deducted from returns annually."
+          />
+        </div>
+      </details>
+
       {/* Contribution plan */}
       <div className="rounded-xl border border-surface-600 bg-surface-800 p-6 shadow-sm">
         <h2 className="mb-2 text-lg font-bold text-white">Contribution Plan</h2>
         <p className="mb-4 text-sm text-gray-400">
-          Set how much you'll contribute during different periods. Max $5,000/year ($417/mo) from all sources.
+          Set how much you'll contribute during different periods. Max ${personalMaxMonthly}/mo personal{annualEmployer > 0 ? ` + $${annualEmployer.toLocaleString()}/yr employer` : ''} ($${limits.annualContributionLimit.toLocaleString()}/yr total from all sources).
         </p>
 
         {/* Quick presets */}
@@ -295,16 +394,16 @@ export default function GrowthCalculator() {
                     <input
                       type="number"
                       min={0}
-                      max={417}
+                      max={personalMaxMonthly}
                       step={25}
                       value={phase.monthlyAmount}
-                      onChange={(e) => updatePhase(i, 'monthlyAmount', Math.min(417, Math.max(0, Number(e.target.value))))}
+                      onChange={(e) => updatePhase(i, 'monthlyAmount', Math.min(personalMaxMonthly, Math.max(0, Number(e.target.value))))}
                       className="w-full rounded-lg border border-surface-600 bg-surface-800 py-2 pl-7 pr-3 text-sm text-white tabular-nums"
                       aria-label={`Phase ${i + 1} monthly contribution`}
                     />
                   </div>
                   <p className="mt-1 text-xs text-gray-600">
-                    ${(Math.min(phase.monthlyAmount * 12, 5000)).toLocaleString()}/yr
+                    ${(Math.min(phase.monthlyAmount * 12, limits.annualContributionLimit - annualEmployer)).toLocaleString()}/yr
                   </p>
                 </div>
               </div>
@@ -314,16 +413,16 @@ export default function GrowthCalculator() {
                 <input
                   type="range"
                   min={0}
-                  max={417}
+                  max={personalMaxMonthly}
                   step={25}
-                  value={phase.monthlyAmount}
+                  value={Math.min(phase.monthlyAmount, personalMaxMonthly)}
                   onChange={(e) => updatePhase(i, 'monthlyAmount', Number(e.target.value))}
                   className="w-full h-2 bg-surface-600 rounded-lg appearance-none cursor-pointer accent-[#c5a059]"
                   aria-label={`Phase ${i + 1} amount slider`}
                 />
                 <div className="flex justify-between text-xs text-gray-600">
                   <span>$0</span>
-                  <span>$417/mo</span>
+                  <span>${personalMaxMonthly}/mo</span>
                 </div>
               </div>
             </div>
@@ -347,7 +446,7 @@ export default function GrowthCalculator() {
         <div className="mt-4 rounded-lg bg-surface-900/50 px-4 py-3">
           <p className="text-xs text-gray-400">
             {effectivePhases.length === 0 ? (
-              <>No contributions — {hasPilotDeposit ? '$1,000 pilot deposit grows on its own' : 'account starts at $0'}</>
+              <>No personal contributions — {hasPilotDeposit ? `$${seedMoney.toLocaleString()} seed grows on its own` : 'account starts at $0'}</>
             ) : (
               <>
                 {effectivePhases.map((p, i) => (
@@ -357,6 +456,9 @@ export default function GrowthCalculator() {
                   </span>
                 ))}
               </>
+            )}
+            {annualEmployer > 0 && (
+              <span className="text-gray-500"> + ${annualEmployer.toLocaleString()}/yr employer</span>
             )}
           </p>
         </div>
@@ -383,6 +485,9 @@ export default function GrowthCalculator() {
         <ResultCard
           label="Total Contributions"
           value={fmt(result.totalContributions)}
+          sublabel={annualEmployer > 0
+            ? `Personal: ${fmt(result.totalPersonalContributions ?? 0)} · Employer: ${fmt(result.totalEmployerContributions ?? 0)}`
+            : undefined}
         />
         <ResultCard
           label="Total Earnings"
@@ -390,11 +495,38 @@ export default function GrowthCalculator() {
           sublabel={result.totalContributions > 0 ? `${((result.totalEarnings / result.totalContributions) * 100).toFixed(0)}% return on contributions` : undefined}
         />
         <ResultCard
-          label="Pilot Deposit"
-          value={hasPilotDeposit ? '$1,000' : '$0'}
-          sublabel={hasPilotDeposit ? 'Federal grant' : 'Born outside 2025–2028'}
+          label="Seed Money"
+          value={fmt(seedMoney)}
+          sublabel={[
+            hasPilotDeposit ? `$${limits.pilotDeposit.toLocaleString()} pilot` : null,
+            includeDellPledge ? `$${limits.dellPledge.perChildAmount} Dell` : null,
+            !hasPilotDeposit && !includeDellPledge ? 'No seed (born outside 2025–2028)' : null,
+          ].filter(Boolean).join(' + ')}
         />
       </div>
+
+      {/* Tax Basis Breakdown */}
+      {(result.taxFreeBasis ?? 0) > 0 && (
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+          <ResultCard
+            label="Tax-Free Basis"
+            value={fmt(result.taxFreeBasis ?? 0)}
+            sublabel="Your after-tax contributions (not taxed again)"
+          />
+          <ResultCard
+            label="Taxable at Withdrawal"
+            value={fmt(result.taxableAtConversion ?? 0)}
+            sublabel="Seed + employer + earnings (taxed as income)"
+          />
+          {(result.totalExpensesPaid ?? 0) > 0 && (
+            <ResultCard
+              label="Total Fees Paid"
+              value={fmt(result.totalExpensesPaid ?? 0)}
+              sublabel={`${expenseRatio.toFixed(2)}% expense ratio over ${showLifetime ? '47' : yearsOfGrowth} years`}
+            />
+          )}
+        </div>
+      )}
 
       {/* Chart */}
       <div className="rounded-xl border border-surface-600 bg-surface-800 p-4 shadow-sm">
@@ -431,6 +563,14 @@ export default function GrowthCalculator() {
               labelFormatter={(label: number) => `Age ${label}`}
               contentStyle={{ borderRadius: '8px', backgroundColor: '#1a1a1a', border: '1px solid #333333', color: '#f5f5f5' }}
             />
+            {showLifetime && (
+              <ReferenceLine
+                x={18}
+                stroke="#60a5fa"
+                strokeDasharray="5 5"
+                label={{ value: 'Converts to IRA', position: 'top', fill: '#60a5fa', fontSize: 11 }}
+              />
+            )}
             <Area
               type="monotone"
               dataKey="balance"
@@ -470,18 +610,39 @@ export default function GrowthCalculator() {
               <tr className="border-b border-surface-600 text-left text-gray-500">
                 <th className="py-2 pr-4">Age</th>
                 <th className="py-2 pr-4">Year</th>
-                <th className="py-2 pr-4 text-right">Contributions</th>
+                {annualEmployer > 0 && <th className="py-2 pr-4 text-right">Personal</th>}
+                {annualEmployer > 0 && <th className="py-2 pr-4 text-right">Employer</th>}
+                <th className="py-2 pr-4 text-right">{annualEmployer > 0 ? 'Total' : 'Contributions'}</th>
+                {inflationAdjustCap && <th className="py-2 pr-4 text-right">Cap</th>}
                 <th className="py-2 pr-4 text-right">Earnings</th>
+                {expenseRatioDecimal > 0 && <th className="py-2 pr-4 text-right">Fees</th>}
                 <th className="py-2 text-right">Balance</th>
               </tr>
             </thead>
             <tbody>
               {result.snapshots.map((s) => (
-                <tr key={s.age} className="border-b border-surface-600/50">
+                <tr
+                  key={s.age}
+                  className={`border-b border-surface-600/50 ${
+                    s.age === 18 && showLifetime ? 'border-b-2 border-blue-500/50 bg-blue-500/5' : ''
+                  }`}
+                >
                   <td className="py-2 pr-4 tabular-nums">{s.age}</td>
                   <td className="py-2 pr-4 tabular-nums">{s.year}</td>
+                  {annualEmployer > 0 && (
+                    <td className="py-2 pr-4 text-right tabular-nums">{fmt(s.personalContributions ?? 0)}</td>
+                  )}
+                  {annualEmployer > 0 && (
+                    <td className="py-2 pr-4 text-right tabular-nums text-blue-400">{fmt(s.employerContributions ?? 0)}</td>
+                  )}
                   <td className="py-2 pr-4 text-right tabular-nums">{fmt(s.contributions)}</td>
+                  {inflationAdjustCap && (
+                    <td className="py-2 pr-4 text-right tabular-nums text-gray-500">{fmt(s.effectiveCapForYear ?? limits.annualContributionLimit)}</td>
+                  )}
                   <td className="py-2 pr-4 text-right tabular-nums">{fmt(s.earnings)}</td>
+                  {expenseRatioDecimal > 0 && (
+                    <td className="py-2 pr-4 text-right tabular-nums text-red-400/70">{fmt(s.expenseDeducted ?? 0)}</td>
+                  )}
                   <td className="py-2 text-right font-medium tabular-nums">{fmt(s.endBalance)}</td>
                 </tr>
               ))}

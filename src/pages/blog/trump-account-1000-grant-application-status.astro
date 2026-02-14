@@ -1,0 +1,187 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-1000-grant-application-status')!;
+const related = getRelatedArticles('trump-account-1000-grant-application-status');
+
+const faqs = [
+  {
+    question: 'How long does it take to receive the $1,000 Trump Account deposit?',
+    answer: `After filing Form 4547, expect 2-4 weeks for electronic filing or 4-8 weeks for paper/mail filing. The $${limits.pilotDeposit.toLocaleString()} pilot deposit is credited to your child's Trump Account once the IRS processes the form and establishes the account with your chosen custodian.`,
+  },
+  {
+    question: 'How do I check if my Trump Account application was approved?',
+    answer: `You will receive a confirmation notice from the IRS by mail after your Form 4547 is processed. You can also check your status through the ${limits.portal} portal when it launches in mid-2026, or call the IRS directly. Keep your copy of Form 4547 for reference.`,
+  },
+  {
+    question: 'What if I filed Form 4547 but haven\'t received the $1,000?',
+    answer: 'First, confirm your Form 4547 was accepted (check your tax return acknowledgment if e-filed). Processing times vary: electronic takes 2-4 weeks, mail takes 4-8 weeks. If it has been longer than 8 weeks, contact the IRS or check the trumpaccounts.gov portal for status updates.',
+  },
+  {
+    question: 'Is the $1,000 Trump Account deposit real?',
+    answer: `Yes. The $${limits.pilotDeposit.toLocaleString()} pilot deposit is a real federal program created by ${limits.legislation} and codified under ${limits.legalBasis}. The IRS published official guidance in ${limits.irsNotice} on ${limits.irsNoticeDate}. It is not a scam, grant application, or third-party offer.`,
+  },
+  {
+    question: 'Do I need to apply for the $1,000 separately?',
+    answer: `No. There is no separate "grant application." Filing ${limits.form} with your 2025 tax return (or through ${limits.portal}) is the only step required. If your child was born between ${limits.pilotDepositStartYear} and ${limits.pilotDepositEndYear}, you check the pilot deposit box on the form and the $${limits.pilotDeposit.toLocaleString()} is deposited automatically.`,
+  },
+  {
+    question: 'Can I speed up my Trump Account processing?',
+    answer: 'The fastest method is e-filing Form 4547 with your 2025 tax return through software like TurboTax or H&R Block. Electronic filing processes in 2-4 weeks vs. 4-8 weeks for paper. Double-check all SSNs and information to avoid delays from errors.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+  sources={[
+    { name: 'IRS Notice 2025-68', url: 'https://www.irs.gov/pub/irs-drop/n-25-68.pdf' },
+    { name: 'trumpaccounts.gov', url: 'https://trumpaccounts.gov' },
+    { name: 'One Big Beautiful Bill Act (OBBBA)', url: 'https://www.congress.gov' },
+  ]}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>The <strong class="text-white">${limits.pilotDeposit.toLocaleString()} federal deposit</strong> is real — it is not a scam, grant, or third-party offer.</li>
+        <li>File <strong class="text-white">{limits.form}</strong> with your 2025 tax return (due April 15, 2026) to receive it.</li>
+        <li>Processing takes <strong class="text-white">2-4 weeks (e-file)</strong> or <strong class="text-white">4-8 weeks (mail)</strong>.</li>
+        <li>There is no separate "grant application" — the form IS the application.</li>
+        <li>Check status through the <strong class="text-white">{limits.portal}</strong> portal (launching mid-2026) or your IRS confirmation notice.</li>
+      </ul>
+    </div>
+
+    <h2>Where Is My $1,000 Trump Account Deposit?</h2>
+
+    <p>
+      If you have filed {limits.form} and are wondering where your child's ${limits.pilotDeposit.toLocaleString()} federal deposit is, you are not alone. This is the most common question parents ask after filing.
+    </p>
+
+    <p>
+      The short answer: <strong>it takes time</strong>. The IRS must process your form, verify your child's eligibility, establish the account with a custodian, and then deposit the funds. Here is exactly what to expect.
+    </p>
+
+    <h2>Trump Account Application Timeline</h2>
+
+    <p>
+      There is no separate "application" for the $1,000. Filing Form 4547 IS the application. Here is the timeline from filing to deposit:
+    </p>
+
+    <div class="not-prose my-6 overflow-hidden rounded-lg border border-surface-600">
+      <table class="w-full text-sm">
+        <thead class="bg-surface-700">
+          <tr>
+            <th class="px-4 py-3 text-left text-gray-300">Step</th>
+            <th class="px-4 py-3 text-left text-gray-300">Timeline</th>
+            <th class="px-4 py-3 text-left text-gray-300">Status</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-surface-600">
+          <tr>
+            <td class="px-4 py-3 text-gray-300">File Form 4547</td>
+            <td class="px-4 py-3 text-gray-300">Day 1</td>
+            <td class="px-4 py-3"><span class="rounded-full bg-blue-500/15 px-2 py-1 text-xs font-medium text-blue-400">Submitted</span></td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-gray-300">IRS processes form</td>
+            <td class="px-4 py-3 text-gray-300">1-4 weeks (e-file) / 2-6 weeks (mail)</td>
+            <td class="px-4 py-3"><span class="rounded-full bg-yellow-500/15 px-2 py-1 text-xs font-medium text-yellow-400">Processing</span></td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-gray-300">Eligibility verified</td>
+            <td class="px-4 py-3 text-gray-300">Included in processing</td>
+            <td class="px-4 py-3"><span class="rounded-full bg-yellow-500/15 px-2 py-1 text-xs font-medium text-yellow-400">Processing</span></td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-gray-300">Account established with custodian</td>
+            <td class="px-4 py-3 text-gray-300">2-4 weeks after approval</td>
+            <td class="px-4 py-3"><span class="rounded-full bg-purple-500/15 px-2 py-1 text-xs font-medium text-purple-400">Setting Up</span></td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 text-gray-300">$1,000 deposit credited</td>
+            <td class="px-4 py-3 text-gray-300">Within days of account setup</td>
+            <td class="px-4 py-3"><span class="rounded-full bg-mint-400/15 px-2 py-1 text-xs font-medium text-mint-400">Complete</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      <strong>Total expected time:</strong> 2-4 weeks for e-filers, 4-8 weeks for mail filers. Peak filing season (March-April 2026) may cause additional delays.
+    </p>
+
+    <CalloutBox type="tip" title="E-file for fastest processing">
+      Electronic filing through tax software processes significantly faster than paper mail. If you have not filed yet, e-filing is the best option for getting the deposit sooner.
+    </CalloutBox>
+
+    <h2>How to Check Your Trump Account Status</h2>
+
+    <h3>Method 1: IRS Confirmation Notice</h3>
+    <p>
+      After processing your Form 4547, the IRS will mail a confirmation notice to the address on the form. This notice confirms the account was established and the pilot deposit was credited.
+    </p>
+
+    <h3>Method 2: trumpaccounts.gov Portal (Mid-2026)</h3>
+    <p>
+      The official <a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer">{limits.portal}</a> portal is expected to launch in mid-2026. Once live, you can check your account status, view deposits, and manage your account online.
+    </p>
+
+    <h3>Method 3: Contact the IRS</h3>
+    <p>
+      If it has been more than 8 weeks since filing and you have not received confirmation, contact the IRS directly. Have your Form 4547 copy, your SSN, and your child's SSN ready.
+    </p>
+
+    <h2>This Is Not a "Grant Application"</h2>
+
+    <p>
+      Important clarification: the ${limits.pilotDeposit.toLocaleString()} Trump Account deposit is <strong>not a grant</strong> in the traditional sense. You do not "apply" for it through a grant application process. Here is how it actually works:
+    </p>
+
+    <ul>
+      <li>It is a <strong>federal pilot deposit</strong> authorized by {limits.legislation} under {limits.legalBasis}.</li>
+      <li>You receive it by filing <strong>{limits.form}</strong> — the same form that opens the account.</li>
+      <li>There is no separate application, no approval process, and no income qualification.</li>
+      <li>Every U.S. citizen child born between {limits.pilotDepositStartYear} and {limits.pilotDepositEndYear} is eligible.</li>
+    </ul>
+
+    <CalloutBox type="warning" title="Watch out for scams">
+      If anyone asks you to pay money, provide banking information, or fill out a "grant application" for the Trump Account deposit, it is a scam. The only legitimate way to receive the deposit is through IRS Form 4547, filed directly with the IRS. The deposit goes into your child's Trump Account, not your bank account.
+    </CalloutBox>
+
+    <h2>Common Reasons for Delays</h2>
+
+    <ul>
+      <li><strong>Wrong SSN on the form</strong> — one incorrect digit causes weeks of delay. Double-check before filing.</li>
+      <li><strong>Paper filing during peak season</strong> — March-April is the busiest time. E-filing is faster.</li>
+      <li><strong>Missing pilot deposit checkbox</strong> — if you did not check the box, the deposit was not requested.</li>
+      <li><strong>Child's SSN not yet in IRS system</strong> — for newborns, allow time for the SSA to issue the number and for it to sync with IRS records.</li>
+      <li><strong>Filing priority conflict</strong> — if two adults file for the same child, the IRS must resolve which filer has priority.</li>
+    </ul>
+
+    <h2>What to Do If Your Deposit Is Missing</h2>
+
+    <ol>
+      <li><strong>Confirm your form was accepted.</strong> If e-filed, check your tax return acknowledgment. If mailed, check that you sent it to the correct address.</li>
+      <li><strong>Wait the full processing period.</strong> 2-4 weeks for e-file, 4-8 weeks for mail.</li>
+      <li><strong>Check {limits.portal}.</strong> Use the portal when it launches to view account status.</li>
+      <li><strong>Contact the IRS.</strong> If you have waited longer than 8 weeks with no confirmation.</li>
+      <li><strong>File a corrected form if needed.</strong> If you missed the pilot deposit checkbox, you may need to refile through the portal.</li>
+    </ol>
+
+    <h2>The Bottom Line</h2>
+
+    <p>
+      The ${limits.pilotDeposit.toLocaleString()} Trump Account deposit is real, it is free, and every eligible child is entitled to it. There is no separate "grant application." File {limits.form} with your 2025 tax return, check the pilot deposit box, and wait 2-8 weeks for processing. If something seems off, use the official {limits.portal} portal or contact the IRS directly.
+    </p>
+  </div>
+</BlogLayout>

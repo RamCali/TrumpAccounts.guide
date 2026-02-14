@@ -1,12 +1,39 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { breadcrumbSchema } from '../../lib/seo/schema';
+import Accordion from '../../components/ui/Accordion.astro';
+import { breadcrumbSchema, faqSchema } from '../../lib/seo/schema';
 import { accountTypes } from '../../lib/calculators/comparison';
 
-const schema = breadcrumbSchema([
-  { name: 'Home', url: 'https://trumpaccounts.guide' },
-  { name: 'Compare', url: 'https://trumpaccounts.guide/compare' },
-]);
+const faqs = [
+  {
+    question: 'What is the best savings account for my child in 2026?',
+    answer: 'It depends on your goals. Trump Accounts are best for long-term investing with a $1,000 federal deposit and no income limits. 529 plans are best if you want tax-free withdrawals for education. Roth IRAs offer tax-free growth but require the child to have earned income. Many families open both a Trump Account and a 529.',
+  },
+  {
+    question: 'Can I have a Trump Account AND a 529 plan?',
+    answer: 'Yes. Trump Accounts and 529 plans are completely separate programs with separate contribution limits. You can contribute up to $5,000/year to a Trump Account and separately contribute to a 529 plan. They serve different purposes — a Trump Account converts to an IRA at 18, while a 529 is for education expenses.',
+  },
+  {
+    question: 'Which account has the highest contribution limit?',
+    answer: '529 plans typically allow the highest contributions (often $300,000+ lifetime). Trump Accounts are capped at $5,000/year. Roth IRAs are limited to $7,000/year (2025) and require earned income. UTMA/UGMA accounts have no contribution limits but are subject to gift tax rules above $18,000/year.',
+  },
+  {
+    question: 'Is a Trump Account better than a Roth IRA for kids?',
+    answer: 'They have different advantages. A Trump Account does not require earned income, provides a $1,000 federal deposit, and has a $5,000 annual limit. A custodial Roth IRA requires earned income but offers tax-free withdrawals in retirement. If your child has no earned income, a Trump Account is the only option of the two.',
+  },
+  {
+    question: 'Do Trump Accounts replace 529 plans or Coverdell ESAs?',
+    answer: 'No. Trump Accounts are a new, separate account type. They do not replace 529 plans, Coverdell ESAs, UTMA/UGMA accounts, or any existing savings vehicle. Families can use multiple account types simultaneously.',
+  },
+];
+
+const schema = [
+  breadcrumbSchema([
+    { name: 'Home', url: 'https://trumpaccounts.guide' },
+    { name: 'Compare', url: 'https://trumpaccounts.guide/compare' },
+  ]),
+  faqSchema(faqs),
+];
 
 const accounts = Object.values(accountTypes);
 ---
@@ -123,6 +150,12 @@ const accounts = Object.values(accountTypes);
         <strong class="text-amber-200">Disclaimer:</strong> This comparison is for educational purposes only and not tax or financial advice.
         Account features and limits may change. Consult a qualified professional before making investment decisions.
       </p>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="mt-10">
+      <h2 class="mb-4 text-xl font-bold text-white">Frequently Asked Questions</h2>
+      <Accordion items={faqs} />
     </div>
 
     <!-- Detailed Comparisons -->

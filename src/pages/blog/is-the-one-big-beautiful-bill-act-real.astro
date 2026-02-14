@@ -1,0 +1,191 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('is-the-one-big-beautiful-bill-act-real')!;
+const related = getRelatedArticles('is-the-one-big-beautiful-bill-act-real');
+
+const faqs = [
+  {
+    question: 'Is the One Big Beautiful Bill Act real?',
+    answer: `Yes. The One Big Beautiful Bill Act (OBBBA) is a real federal law signed by President Trump on July 4, 2025. It was passed by Congress and is publicly available on congress.gov. It created Trump Accounts under IRC Section 530A, among other provisions.`,
+  },
+  {
+    question: 'Is the $1,000 Trump Account deposit real or a scam?',
+    answer: `The $${limits.pilotDeposit.toLocaleString()} federal pilot deposit is real. It is authorized by ${limits.legislation} under ${limits.legalBasis} and administered by the IRS. The official guidance is published in ${limits.irsNotice}. There is no third-party application — you file ${limits.form} directly with the IRS.`,
+  },
+  {
+    question: 'Where can I read the actual text of the OBBBA?',
+    answer: 'The full text of the One Big Beautiful Bill Act is available on congress.gov. Search for the One Big Beautiful Bill Act or navigate to the bill page directly. IRC Section 530A (Trump Accounts) is the specific section that creates the child investment account program.',
+  },
+  {
+    question: 'Has the IRS confirmed Trump Accounts?',
+    answer: `Yes. The IRS published ${limits.irsNotice} on ${limits.irsNoticeDate}, providing official guidance on Trump Accounts. They also created ${limits.form} (Trump Account Election(s)) and the ${limits.portal} portal. These are official IRS publications, not third-party claims.`,
+  },
+  {
+    question: 'Why is it called the "One Big Beautiful Bill"?',
+    answer: 'The name comes from the legislative process used to pass the law. It was a comprehensive reconciliation bill that combined multiple policy priorities into a single package. The name was used during the legislative process and became the informal title of the law.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+  sources={[
+    { name: 'IRS Notice 2025-68', url: 'https://www.irs.gov/pub/irs-drop/n-25-68.pdf' },
+    { name: 'trumpaccounts.gov', url: 'https://trumpaccounts.gov' },
+    { name: 'One Big Beautiful Bill Act — Congress.gov', url: 'https://www.congress.gov' },
+    { name: 'IRC Section 530A', url: 'https://www.law.cornell.edu/uscode/text/26/530A' },
+  ]}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>The One Big Beautiful Bill Act (OBBBA) is <strong class="text-white">real federal law</strong>, signed July 4, 2025.</li>
+        <li>It created <strong class="text-white">Trump Accounts</strong> under IRC Section 530A.</li>
+        <li>The IRS has published <strong class="text-white">official guidance (Notice 2025-68)</strong> and created <strong class="text-white">Form 4547</strong>.</li>
+        <li>The <strong class="text-white">${limits.pilotDeposit.toLocaleString()} federal deposit</strong> for children born 2025-2028 is real — not a scam.</li>
+        <li>Full bill text is publicly available on <strong class="text-white">congress.gov</strong>.</li>
+      </ul>
+    </div>
+
+    <h2>Yes, the One Big Beautiful Bill Act Is Real</h2>
+
+    <p>
+      If you have seen headlines about the "One Big Beautiful Bill Act" and wondered if it is real — it is. The <strong>{limits.legislation}</strong> is a federal law that was passed by Congress and signed by President Trump on <strong>July 4, 2025</strong>.
+    </p>
+
+    <p>
+      The name sounds unusual, which is why many people assume it is fake, satirical, or a social media hoax. It is none of those things. It is a real law, codified in federal statute, with real IRS guidance and real money being deposited into children's investment accounts.
+    </p>
+
+    <h2>Proof the OBBBA Is Real</h2>
+
+    <p>
+      Here are the official, verifiable sources that confirm the law exists:
+    </p>
+
+    <h3>1. The Law Itself (Congress.gov)</h3>
+    <p>
+      The full text of the One Big Beautiful Bill Act is publicly available on <a href="https://www.congress.gov" target="_blank" rel="noopener noreferrer">congress.gov</a>, the official website of the U.S. Congress. You can read every word of the bill, see every vote, and verify its signing date.
+    </p>
+
+    <h3>2. IRS Notice 2025-68</h3>
+    <p>
+      The Internal Revenue Service published <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf" target="_blank" rel="noopener noreferrer">{limits.irsNotice}</a> on <strong>{limits.irsNoticeDate}</strong>. This 20+ page document provides the official IRS interpretation of how Trump Accounts work under {limits.legalBasis}. The IRS does not publish guidance for fake laws.
+    </p>
+
+    <h3>3. IRS Form 4547</h3>
+    <p>
+      The IRS created <strong>{limits.form}</strong>, officially titled "Trump Account Election(s)." This is a real IRS form with a real form number. You can download it from IRS.gov.
+    </p>
+
+    <h3>4. trumpaccounts.gov</h3>
+    <p>
+      The federal government created <a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer">{limits.portal}</a>, an official .gov domain dedicated to Trump Account information. The .gov domain suffix is controlled by the U.S. government and cannot be used by private parties.
+    </p>
+
+    <CalloutBox type="info" title="The .gov domain is the key">
+      Any website ending in .gov is operated by the U.S. government. The existence of trumpaccounts.gov is independent confirmation that this is a real federal program. Scammers cannot create .gov domains.
+    </CalloutBox>
+
+    <h2>What the OBBBA Actually Does</h2>
+
+    <p>
+      The One Big Beautiful Bill Act is a comprehensive federal law that covers many policy areas. The section relevant to Trump Accounts is <strong>{limits.legalBasis}</strong>, which:
+    </p>
+
+    <ul>
+      <li>Creates <strong>Trump Accounts</strong> — tax-deferred investment accounts for U.S. citizen children under 18.</li>
+      <li>Authorizes a <strong>${limits.pilotDeposit.toLocaleString()} federal pilot deposit</strong> for children born January 1, {limits.pilotDepositStartYear} through December 31, {limits.pilotDepositEndYear}.</li>
+      <li>Sets the <strong>annual contribution limit at ${limits.annualContributionLimit.toLocaleString()}</strong> (indexed for inflation after {limits.inflationIndexStartYear}).</li>
+      <li>Allows <strong>employer contributions up to ${limits.employerContributionLimit.toLocaleString()}/year</strong> per employee, tax-free under IRC §128.</li>
+      <li>Requires investments in <strong>{limits.investmentRequirement.toLowerCase()}</strong>.</li>
+      <li>Mandates that the account <strong>converts to a traditional IRA at age {limits.iraConversionAge}</strong>.</li>
+    </ul>
+
+    <h2>Why People Think It Is Fake</h2>
+
+    <p>
+      There are a few reasons people are skeptical:
+    </p>
+
+    <ul>
+      <li><strong>The name:</strong> "One Big Beautiful Bill" sounds informal for federal legislation. But Congress has passed bills with informal names before (e.g., the "CARES Act," the "SECURE Act").</li>
+      <li><strong>Free money:</strong> A $1,000 government deposit sounds too good to be true. But the U.S. has precedent for similar programs (stimulus checks, child tax credits, earned income credits).</li>
+      <li><strong>Social media misinformation:</strong> Viral posts about the law often include incorrect details, making the whole thing seem unreliable. Always check official sources.</li>
+      <li><strong>Scams using the name:</strong> Scammers have created fake "Trump Account" websites and applications. These scams are real, but the underlying law is also real. Only use official IRS forms and .gov websites.</li>
+    </ul>
+
+    <CalloutBox type="warning" title="Watch out for scams">
+      The law is real, but scams targeting confused parents are also real. Never pay money to "apply" for a Trump Account. Never give banking information to a third party claiming to process your deposit. The only legitimate way to open a Trump Account is through IRS Form 4547, filed directly with the IRS.
+    </CalloutBox>
+
+    <h2>How to Verify It Yourself</h2>
+
+    <p>
+      If you want to independently verify that the One Big Beautiful Bill Act and Trump Accounts are real, here is what to check:
+    </p>
+
+    <ol>
+      <li><strong>Go to <a href="https://www.congress.gov" target="_blank" rel="noopener noreferrer">congress.gov</a></strong> and search for the One Big Beautiful Bill Act. Read the bill text, especially IRC Section 530A.</li>
+      <li><strong>Go to <a href="https://www.irs.gov" target="_blank" rel="noopener noreferrer">irs.gov</a></strong> and search for "Notice 2025-68" or "Form 4547." Download and read the official IRS documents.</li>
+      <li><strong>Visit <a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer">trumpaccounts.gov</a></strong> — this is an official .gov domain, confirming government operation.</li>
+      <li><strong>Consult a tax professional.</strong> Any CPA or tax attorney can confirm the law exists and advise you on filing.</li>
+    </ol>
+
+    <h2>The Timeline of Events</h2>
+
+    <div class="not-prose my-6 overflow-hidden rounded-lg border border-surface-600">
+      <table class="w-full text-sm">
+        <thead class="bg-surface-700">
+          <tr>
+            <th class="px-4 py-3 text-left text-gray-300">Date</th>
+            <th class="px-4 py-3 text-left text-gray-300">Event</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-surface-600">
+          <tr>
+            <td class="px-4 py-3 font-semibold text-white">July 4, 2025</td>
+            <td class="px-4 py-3 text-gray-300">One Big Beautiful Bill Act signed into law</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-semibold text-white">December 3, 2025</td>
+            <td class="px-4 py-3 text-gray-300">IRS publishes Notice 2025-68 (official Trump Account guidance)</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-semibold text-white">Early 2026</td>
+            <td class="px-4 py-3 text-gray-300">IRS Form 4547 available for filing</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-semibold text-white">April 15, 2026</td>
+            <td class="px-4 py-3 text-gray-300">Deadline to file Form 4547 with 2025 tax return</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-semibold text-white">Mid-2026</td>
+            <td class="px-4 py-3 text-gray-300">trumpaccounts.gov portal expected to launch</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>The Bottom Line</h2>
+
+    <p>
+      The One Big Beautiful Bill Act is real. Trump Accounts are real. The $1,000 federal deposit is real. These are not scams, hoaxes, or internet rumors. They are established in federal law, confirmed by IRS guidance, and available to every eligible American family.
+    </p>
+
+    <p>
+      The only action you need to take is filing <a href="/blog/form-4547-guide">{limits.form}</a> with your 2025 tax return or through {limits.portal}. Your child's financial head start is waiting.
+    </p>
+  </div>
+</BlogLayout>

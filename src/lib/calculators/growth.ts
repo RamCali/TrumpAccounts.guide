@@ -34,6 +34,13 @@ export interface YearlySnapshot {
   contributions: number;
   earnings: number;
   endBalance: number;
+  // Enhanced fields (populated by calculateEnhancedGrowth)
+  personalContributions?: number;
+  employerContributions?: number;
+  effectiveCapForYear?: number;
+  taxFreeBasis?: number;
+  taxableBalance?: number;
+  expenseDeducted?: number;
 }
 
 export interface GrowthResult {
@@ -41,6 +48,12 @@ export interface GrowthResult {
   totalEarnings: number;
   finalBalance: number;
   snapshots: YearlySnapshot[];
+  // Enhanced fields (populated by calculateEnhancedGrowth)
+  totalPersonalContributions?: number;
+  totalEmployerContributions?: number;
+  taxFreeBasis?: number;
+  taxableAtConversion?: number;
+  totalExpensesPaid?: number;
 }
 
 const MAX_ANNUAL_CONTRIBUTION = 5000;
@@ -376,5 +389,204 @@ export function calculateInflationComparison(input: {
     investmentFinalPurchasingPower: last.investmentPurchasingPower,
     purchasingPowerLostInSavings: Math.round((initialAmount - last.savingsPurchasingPower) * 100) / 100,
     investmentAdvantage: Math.round((last.investmentPurchasingPower - last.savingsPurchasingPower) * 100) / 100,
+  };
+}
+
+// ─── Enhanced Growth Calculator ─────────────────────────────
+
+function round2(n: number): number {
+  return Math.round(n * 100) / 100;
+}
+
+export interface EnhancedGrowthInput extends PhasedGrowthInput {
+  inflationAdjustCap?: boolean;
+  inflationRate?: number;
+  inflationIndexStartYear?: number;
+  annualEmployerContribution?: number;
+  dellPledgeAmount?: number;
+  expenseRatio?: number;
+}
+
+/**
+ * Get the inflation-adjusted annual contribution cap for a given year.
+ * IRS typically rounds indexed limits to the nearest $50.
+ */
+export function getEffectiveCap(
+  year: number,
+  baseCap: number,
+  inflationAdjust: boolean,
+  inflationRate: number,
+  inflationIndexStartYear: number,
+): number {
+  if (!inflationAdjust || year <= inflationIndexStartYear) return baseCap;
+  const yearsOfInflation = year - inflationIndexStartYear;
+  return Math.round((baseCap * Math.pow(1 + inflationRate, yearsOfInflation)) / 50) * 50;
+}
+
+/**
+ * Get annual contribution split into personal and employer amounts.
+ * Employer is applied first, personal fills the remaining cap.
+ */
+function getAnnualContributionDetailed(
+  age: number,
+  year: number,
+  phases: ContributionPhase[],
+  annualEmployer: number,
+  effectiveCap: number,
+): { personal: number; employer: number; total: number } {
+  let personal = 0;
+  for (const phase of phases) {
+    if (age >= phase.fromAge && age < phase.toAge) {
+      personal = phase.monthlyAmount * 12;
+      break;
+    }
+  }
+
+  const cappedEmployer = Math.min(annualEmployer, effectiveCap);
+  const cappedPersonal = Math.min(personal, effectiveCap - cappedEmployer);
+  const total = cappedPersonal + cappedEmployer;
+
+  return { personal: cappedPersonal, employer: cappedEmployer, total };
+}
+
+/**
+ * Enhanced compound growth calculation with inflation-adjusted cap,
+ * employer contributions, Dell Pledge, expense ratio, and tax basis tracking.
+ */
+export function calculateEnhancedGrowth(input: EnhancedGrowthInput): GrowthResult {
+  const {
+    birthYear,
+    pilotDeposit,
+    phases,
+    annualReturn,
+    startAge = 0,
+    endAge = 18,
+    inflationAdjustCap = false,
+    inflationRate = 0.025,
+    inflationIndexStartYear = 2027,
+    annualEmployerContribution = 0,
+    dellPledgeAmount = 0,
+    expenseRatio = 0,
+  } = input;
+
+  const baseCap = MAX_ANNUAL_CONTRIBUTION;
+  const initialSeed = pilotDeposit + dellPledgeAmount;
+  let balance = initialSeed;
+  let totalContributions = initialSeed;
+  let totalEarnings = 0;
+  let totalPersonal = 0;
+  let totalEmployer = 0;
+  let totalExpenses = 0;
+  let taxFreeBasis = 0;
+  let taxableAccum = initialSeed;
+
+  const snapshots: YearlySnapshot[] = [];
+
+  for (let age = startAge; age < endAge; age++) {
+    const year = birthYear + age + 1;
+    const effectiveCap = getEffectiveCap(
+      year, baseCap, inflationAdjustCap, inflationRate, inflationIndexStartYear,
+    );
+
+    const startBalance = balance;
+    const { personal, employer, total } = getAnnualContributionDetailed(
+      age, year, phases, annualEmployerContribution, effectiveCap,
+    );
+
+    const netReturn = annualReturn - expenseRatio;
+    const earnings = (startBalance + total) * netReturn;
+    const expenseCost = (startBalance + total) * expenseRatio;
+
+    balance = startBalance + total + earnings;
+    totalContributions += total;
+    totalPersonal += personal;
+    totalEmployer += employer;
+    totalEarnings += earnings;
+    totalExpenses += expenseCost;
+
+    taxFreeBasis += personal;
+    taxableAccum += employer + earnings;
+
+    snapshots.push({
+      age: age + 1,
+      year,
+      startBalance: round2(startBalance),
+      contributions: round2(total),
+      earnings: round2(earnings),
+      endBalance: round2(balance),
+      personalContributions: round2(personal),
+      employerContributions: round2(employer),
+      effectiveCapForYear: effectiveCap,
+      taxFreeBasis: round2(taxFreeBasis),
+      taxableBalance: round2(taxableAccum),
+      expenseDeducted: round2(expenseCost),
+    });
+  }
+
+  return {
+    totalContributions: round2(totalContributions),
+    totalEarnings: round2(totalEarnings),
+    finalBalance: round2(balance),
+    snapshots,
+    totalPersonalContributions: round2(totalPersonal),
+    totalEmployerContributions: round2(totalEmployer),
+    taxFreeBasis: round2(taxFreeBasis),
+    taxableAtConversion: round2(balance - taxFreeBasis),
+    totalExpensesPaid: round2(totalExpenses),
+  };
+}
+
+/**
+ * Enhanced lifetime growth: Trump Account (birth–18) then Traditional IRA (18–retirement).
+ */
+export function calculateEnhancedLifetimeGrowth(input: EnhancedGrowthInput & {
+  postIRAContribution?: number;
+  retirementAge?: number;
+}): GrowthResult {
+  const { postIRAContribution = 0, retirementAge = 65, ...baseInput } = input;
+
+  const phase1 = calculateEnhancedGrowth({ ...baseInput, endAge: 18 });
+
+  let balance = phase1.finalBalance;
+  let totalContributions = phase1.totalContributions;
+  let totalEarnings = phase1.totalEarnings;
+  let totalExpenses = phase1.totalExpensesPaid ?? 0;
+  const snapshots = [...phase1.snapshots];
+
+  const netReturn = baseInput.annualReturn - (baseInput.expenseRatio ?? 0);
+  const er = baseInput.expenseRatio ?? 0;
+
+  for (let age = 18; age < retirementAge; age++) {
+    const startBalance = balance;
+    const contribution = postIRAContribution;
+    const earnings = (startBalance + contribution) * netReturn;
+    const expenseCost = (startBalance + contribution) * er;
+
+    balance = startBalance + contribution + earnings;
+    totalContributions += contribution;
+    totalEarnings += earnings;
+    totalExpenses += expenseCost;
+
+    snapshots.push({
+      age: age + 1,
+      year: baseInput.birthYear + age + 1,
+      startBalance: round2(startBalance),
+      contributions: round2(contribution),
+      earnings: round2(earnings),
+      endBalance: round2(balance),
+      expenseDeducted: round2(expenseCost),
+    });
+  }
+
+  return {
+    totalContributions: round2(totalContributions),
+    totalEarnings: round2(totalEarnings),
+    finalBalance: round2(balance),
+    snapshots,
+    totalPersonalContributions: phase1.totalPersonalContributions,
+    totalEmployerContributions: phase1.totalEmployerContributions,
+    taxFreeBasis: phase1.taxFreeBasis,
+    taxableAtConversion: round2(balance - (phase1.taxFreeBasis ?? 0)),
+    totalExpensesPaid: round2(totalExpenses),
   };
 }

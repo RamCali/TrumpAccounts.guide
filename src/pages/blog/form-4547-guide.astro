@@ -1,0 +1,349 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('form-4547-guide')!;
+const related = getRelatedArticles('form-4547-guide');
+
+const faqs = [
+  {
+    question: 'What is IRS Form 4547?',
+    answer: `IRS Form 4547 is the official "Trump Account Election(s)" form. You file it to open a Trump Account for your child under IRC Section 530A. It tells the IRS your child's information, your chosen index fund, and whether you want the $${limits.pilotDeposit.toLocaleString()} pilot deposit.`,
+  },
+  {
+    question: 'Where can I download Form 4547?',
+    answer: `You can download Form 4547 from IRS.gov or from the ${limits.portal} website. It will also be available through major tax software like TurboTax, H&R Block, and FreeTaxUSA when they add support.`,
+  },
+  {
+    question: 'When is the deadline to file Form 4547?',
+    answer: 'If filing with your 2025 tax return, the deadline is April 15, 2026 (or October 15, 2026 with an extension). You can also file through the trumpaccounts.gov portal when it launches in mid-2026, or mail it directly to the IRS at any time.',
+  },
+  {
+    question: 'Do I need a separate Form 4547 for each child?',
+    answer: 'Each Form 4547 covers up to two children. If you have three or more eligible children, you need multiple forms. File a separate form for every pair.',
+  },
+  {
+    question: 'Can I file Form 4547 electronically?',
+    answer: `Yes. You can e-file Form 4547 with your 2025 tax return if your tax software supports it. Major providers are expected to add support. You can also file through ${limits.portal} when the portal launches in mid-2026.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+  sources={[
+    { name: 'IRS Notice 2025-68', url: 'https://www.irs.gov/pub/irs-drop/n-25-68.pdf' },
+    { name: 'IRS Form 4547 (Trump Account Election)', url: 'https://www.irs.gov' },
+    { name: 'One Big Beautiful Bill Act (OBBBA)', url: 'https://www.congress.gov' },
+  ]}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><strong class="text-white">{limits.form}</strong> is the only form you need to open a Trump Account for your child.</li>
+        <li>File it with your <strong class="text-white">2025 tax return</strong> (due April 15, 2026), through <strong class="text-white">{limits.portal}</strong>, or by mail.</li>
+        <li>Each form covers <strong class="text-white">up to 2 children</strong>. You need multiple forms for 3+ kids.</li>
+        <li>You must <strong class="text-white">explicitly elect</strong> the $1,000 pilot deposit — it is not automatic.</li>
+        <li>The form takes about <strong class="text-white">15-30 minutes</strong> to complete.</li>
+      </ul>
+    </div>
+
+    <p>
+      {limits.form} is the official IRS form that opens a Trump Account for your child. It was created under <strong>{limits.legalBasis}</strong> as part of the {limits.legislation}. Without this form, your child does not get an account and does not receive the ${limits.pilotDeposit.toLocaleString()} federal deposit.
+    </p>
+
+    <p>
+      This guide walks you through every section of Form 4547: what it asks, how to fill it out, where to file, and how to avoid the mistakes that delay processing.
+    </p>
+
+    <h2>What Is Form 4547?</h2>
+
+    <p>
+      <strong>{limits.form}</strong> is officially titled "Trump Account Election(s)." It is a one-page IRS form that does three things:
+    </p>
+
+    <ol>
+      <li><strong>Opens a Trump Account</strong> for your child under {limits.legalBasis}.</li>
+      <li><strong>Elects the pilot deposit</strong> — the ${limits.pilotDeposit.toLocaleString()} federal contribution for children born {limits.pilotDepositStartYear}-{limits.pilotDepositEndYear}.</li>
+      <li><strong>Designates an authorized individual</strong> (usually a parent) to manage the account until the child turns {limits.growthPhaseEndAge}.</li>
+    </ol>
+
+    <p>
+      The form was introduced after IRS Notice 2025-68 was published on {limits.irsNoticeDate}. It is filed once per child. You do not need to file it every year.
+    </p>
+
+    <CalloutBox type="info" title="One form, one time">
+      You only file Form 4547 once per child to open the account. After that, contributions and investment changes are handled through your custodian (brokerage). You do not re-file the form annually.
+    </CalloutBox>
+
+    <h2>Who Needs to File Form 4547?</h2>
+
+    <p>
+      Any parent or legal guardian of a U.S. citizen child under 18 with a valid SSN. There are <strong>no income restrictions</strong>. Whether you earn $30,000 or $3 million, you file the same form.
+    </p>
+
+    <p>
+      The IRS follows a priority order for who can file:
+    </p>
+
+    <ol>
+      <li><strong>Parent</strong> (biological or adoptive) — files first</li>
+      <li><strong>Legal guardian</strong> — if no parent is available</li>
+      <li><strong>Adult sibling</strong> — if no parent or guardian</li>
+      <li><strong>Grandparent</strong> — last in priority</li>
+    </ol>
+
+    <p>
+      If a lower-priority person files when a higher-priority person is available, the IRS may reject the form.
+    </p>
+
+    <h2>What Information You Need</h2>
+
+    <p>
+      Have these ready before you start:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Item</th>
+            <th class="pb-2">Details</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">Child's full legal name</td>
+            <td class="py-2">Exactly as it appears on their Social Security card</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">Child's SSN</td>
+            <td class="py-2">9-digit Social Security Number (required)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">Child's date of birth</td>
+            <td class="py-2">Must be under 18 at end of election year</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">Your name and SSN/ITIN</td>
+            <td class="py-2">The authorized individual filing the election</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">Your mailing address</td>
+            <td class="py-2">Where IRS correspondence will be sent</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4 font-semibold text-white">Index fund selection</td>
+            <td class="py-2">S&P 500 or broad U.S. equity ETF/mutual fund</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>How to Fill Out Form 4547: Section by Section</h2>
+
+    <h3>Section 1: Child Information</h3>
+
+    <p>
+      Enter your child's full legal name, SSN, and date of birth. If filing for two children, enter both here. Each form can handle up to two children.
+    </p>
+
+    <CalloutBox type="warning" title="Double-check the SSN">
+      A single wrong digit delays processing by weeks. Have the Social Security card in front of you and verify each number twice.
+    </CalloutBox>
+
+    <h3>Section 2: Authorized Individual</h3>
+
+    <p>
+      This is you — the parent or guardian making the election. Enter your name, SSN (or ITIN), and address. The authorized individual manages the account until the child turns {limits.growthPhaseEndAge}.
+    </p>
+
+    <h3>Section 3: Pilot Deposit Election</h3>
+
+    <p>
+      If your child was born between January 1, {limits.pilotDepositStartYear} and December 31, {limits.pilotDepositEndYear}, <strong>check the box</strong> to elect the ${limits.pilotDeposit.toLocaleString()} federal pilot deposit. This is the most commonly missed step.
+    </p>
+
+    <CalloutBox type="warning" title="This box is not pre-checked">
+      The $1,000 pilot deposit is NOT automatic. If you skip this checkbox, your child's account opens with $0. You cannot fix this with an amended return — you would need to use the trumpaccounts.gov portal when it opens in mid-2026. Get it right the first time.
+    </CalloutBox>
+
+    <h3>Section 4: Investment Election</h3>
+
+    <p>
+      Choose an eligible index fund. All funds must track the S&P 500 or a broad U.S. equity index with expense ratios at or below 0.1%.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Fund</th>
+            <th class="pb-2 pr-4">Ticker</th>
+            <th class="pb-2 pr-4">Expense Ratio</th>
+            <th class="pb-2">Index</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">SPDR Portfolio S&P 500 ETF</td>
+            <td class="py-2 pr-4 font-mono text-gold-400">SPLG</td>
+            <td class="py-2 pr-4">0.02%</td>
+            <td class="py-2">S&P 500</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">Vanguard S&P 500 ETF</td>
+            <td class="py-2 pr-4 font-mono text-gold-400">VOO</td>
+            <td class="py-2 pr-4">0.03%</td>
+            <td class="py-2">S&P 500</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">iShares Core S&P 500 ETF</td>
+            <td class="py-2 pr-4 font-mono text-gold-400">IVV</td>
+            <td class="py-2 pr-4">0.03%</td>
+            <td class="py-2">S&P 500</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4">Fidelity 500 Index Fund</td>
+            <td class="py-2 pr-4 font-mono text-gold-400">FXAIX</td>
+            <td class="py-2 pr-4">0.015%</td>
+            <td class="py-2">S&P 500</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4">Vanguard Total Stock Market ETF</td>
+            <td class="py-2 pr-4 font-mono text-gold-400">VTI</td>
+            <td class="py-2 pr-4">0.03%</td>
+            <td class="py-2">Total U.S. Market</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      You can change your fund selection later through your custodian. But you need to pick one to submit the form.
+    </p>
+
+    <h3>Section 5: Signature and Date</h3>
+
+    <p>
+      Sign and date the form. If e-filing, your electronic signature counts. If mailing, sign in ink.
+    </p>
+
+    <h2>Three Ways to File Form 4547</h2>
+
+    <h3>Option 1: With Your 2025 Tax Return (Recommended)</h3>
+
+    <p>
+      Attach Form 4547 when you file your 2025 taxes. The deadline is <strong>April 15, 2026</strong> (October 15 with an extension). This is the fastest way to activate the account.
+    </p>
+
+    <p>
+      Works with both paper and electronic filing. Check that your tax software supports Form 4547 — most major providers (TurboTax, H&R Block, FreeTaxUSA) are expected to include it.
+    </p>
+
+    <h3>Option 2: Through {limits.portal}</h3>
+
+    <p>
+      The online portal launches in <strong>mid-2026</strong>. You can file Form 4547 directly without waiting for tax season. Good if you miss the tax deadline or want to file outside of tax season.
+    </p>
+
+    <h3>Option 3: By Mail</h3>
+
+    <p>
+      Print, sign, and mail Form 4547 to the IRS address listed on the form. This works year-round but is the slowest option (4-8 weeks for processing).
+    </p>
+
+    <CalloutBox type="tip" title="File early for maximum compounding">
+      Every month your child's money is invested is another month of growth. Filing with your 2025 tax return (due April 2026) gets the account active months before the portal opens. See our <a href="/blog/should-i-wait-or-invest-now" class="text-gold-400 hover:text-gold-300">analysis on waiting vs. investing now</a>.
+    </CalloutBox>
+
+    <h2>After You File: What Happens Next</h2>
+
+    <ol>
+      <li><strong>IRS processes the form</strong> — typically 2-4 weeks for electronic, 4-8 weeks for mail.</li>
+      <li><strong>Account is established</strong> — your chosen custodian sets up the account.</li>
+      <li><strong>Pilot deposit is credited</strong> — the ${limits.pilotDeposit.toLocaleString()} goes into your chosen index fund (if eligible).</li>
+      <li><strong>You can start contributing</strong> — up to ${limits.annualContributionLimit.toLocaleString()}/year from all sources.</li>
+    </ol>
+
+    <p>
+      You will receive a confirmation notice from the IRS. Keep it with your copy of Form 4547 for your records.
+    </p>
+
+    <h2>Common Mistakes to Avoid</h2>
+
+    <p>
+      The biggest errors parents make on Form 4547:
+    </p>
+
+    <ul>
+      <li><strong>Forgetting the pilot deposit checkbox</strong> — this is not automatic. Check the box or your child starts with $0.</li>
+      <li><strong>Wrong SSN</strong> — one transposed digit causes weeks of delay.</li>
+      <li><strong>Filing out of priority order</strong> — a grandparent filing when a parent is available can cause rejection.</li>
+      <li><strong>Not choosing an index fund</strong> — leaving the investment section blank delays processing.</li>
+      <li><strong>Filing one form for 3+ children</strong> — each form covers only 2 children.</li>
+    </ul>
+
+    <p>
+      For the full breakdown, see our guide on <a href="/blog/form-4547-common-mistakes">8 common mistakes when filing Form 4547</a>.
+    </p>
+
+    <h2>Form 4547 at a Glance</h2>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-gray-400">Official name</td>
+            <td class="py-2 text-white">Trump Account Election(s)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-gray-400">Form number</td>
+            <td class="py-2 text-white">{limits.form}</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-gray-400">Legal basis</td>
+            <td class="py-2 text-white">{limits.legalBasis} ({limits.legislation})</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-gray-400">IRS guidance</td>
+            <td class="py-2 text-white">{limits.irsNotice} (published {limits.irsNoticeDate})</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-gray-400">Filing deadline</td>
+            <td class="py-2 text-white">April 15, 2026 (with tax return) or anytime via portal/mail</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-gray-400">Children per form</td>
+            <td class="py-2 text-white">Up to 2</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-gray-400">Frequency</td>
+            <td class="py-2 text-white">One time per child</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4 font-semibold text-gray-400">Cost to file</td>
+            <td class="py-2 text-white">Free</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Form 4547 is the single most important step in getting your child's Trump Account started. It takes 15-30 minutes. The ${limits.pilotDeposit.toLocaleString()} deposit alone could grow to $4,000-$6,000 by age 18. Don't leave free money on the table.
+    </p>
+
+    <p>
+      Ready to open an account? See our full <a href="/blog/how-to-open-step-by-step">step-by-step guide</a> or check <a href="/blog/when-do-trump-accounts-start">key dates and deadlines</a>.
+    </p>
+  </div>
+</BlogLayout>
