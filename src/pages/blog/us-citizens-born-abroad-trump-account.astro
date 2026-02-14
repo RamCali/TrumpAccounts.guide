@@ -1,0 +1,176 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('us-citizens-born-abroad-trump-account')!;
+const related = getRelatedArticles('us-citizens-born-abroad-trump-account');
+
+const faqs = [
+  {
+    question: 'Does my child need to be born in the United States to qualify?',
+    answer: `No. Birth location does not matter. The three requirements are U.S. citizenship, a valid Social Security number, and being under ${limits.iraConversionAge} at the end of the election year. A child born in Paris to American parents qualifies the same as a child born in Ohio.`,
+  },
+  {
+    question: 'Do children born abroad get the $1,000 pilot deposit?',
+    answer: `Yes, if the child was born between January 1, ${limits.pilotDepositStartYear} and December 31, ${limits.pilotDepositEndYear}, is a U.S. citizen, and has a valid SSN. The deposit is based on birth year and citizenship, not birth location.`,
+  },
+  {
+    question: 'Can I file Form 4547 from overseas?',
+    answer: `Yes. U.S. citizens living abroad can file ${limits.form} with their U.S. tax return. You can also use the ${limits.portal} portal when it launches in mid-2026. You may file by mail as well.`,
+  },
+  {
+    question: 'What if my child was born abroad but is not a U.S. citizen?',
+    answer: 'They do not qualify. U.S. citizenship is a strict requirement. If only one parent is a U.S. citizen, the child may or may not have acquired citizenship at birth depending on the parent\'s prior physical presence in the U.S. Consult an immigration attorney if you are unsure.',
+  },
+  {
+    question: 'Do children born in U.S. territories like Puerto Rico or Guam qualify?',
+    answer: `Yes. People born in U.S. territories (Puerto Rico, Guam, U.S. Virgin Islands, American Samoa, and Northern Mariana Islands) are generally U.S. citizens at birth. They qualify for Trump Accounts on the same terms as anyone else.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><strong class="text-white">Birth location does not matter.</strong> U.S. citizenship is the requirement.</li>
+        <li>Children born abroad to U.S. citizen parents are often <strong class="text-white">citizens at birth</strong>.</li>
+        <li>You need a <strong class="text-white">Consular Report of Birth Abroad (CRBA)</strong> and a <strong class="text-white">Social Security number</strong>.</li>
+        <li>The <strong class="text-white">${limits.pilotDeposit.toLocaleString()} pilot deposit</strong> applies if the child was born {limits.pilotDepositStartYear}–{limits.pilotDepositEndYear}.</li>
+        <li>Children born in <strong class="text-white">U.S. territories</strong> (Puerto Rico, Guam, etc.) also qualify.</li>
+      </ul>
+    </div>
+
+    <h2>Yes, Children Born Abroad Can Qualify</h2>
+    <p>
+      If your child was born outside the United States but is a U.S. citizen, <strong>they qualify for a Trump Account</strong>. The IRS does not care where your child was born. The three eligibility requirements are:
+    </p>
+    <ol>
+      <li>The child is a <strong>U.S. citizen</strong>.</li>
+      <li>The child has a <strong>valid Social Security number</strong> (not an ITIN).</li>
+      <li>The child is <strong>under {limits.iraConversionAge}</strong> at the end of the election year.</li>
+    </ol>
+    <p>
+      Notice what is <em>not</em> on the list: place of birth. A child born in London, Seoul, Mexico City, or anywhere else qualifies — as long as they are a U.S. citizen with an SSN.
+    </p>
+
+    <CalloutBox type="tip" title="Citizenship, not geography">
+      <p>
+        Think of it this way: Trump Accounts follow the child's passport, not their birth certificate's city or country. If your child is an American citizen, they are eligible.
+      </p>
+    </CalloutBox>
+
+    <h2>How Children Born Abroad Become U.S. Citizens</h2>
+    <p>
+      There are several ways a child born outside the U.S. can be a U.S. citizen:
+    </p>
+
+    <h3>Citizenship at Birth (Most Common)</h3>
+    <p>
+      A child born abroad to U.S. citizen parents may acquire citizenship automatically at birth. The rules depend on the parents' citizenship and how long they lived in the U.S. before the child was born:
+    </p>
+    <ul>
+      <li><strong>Both parents are U.S. citizens:</strong> The child is a citizen at birth if at least one parent lived in the U.S. at any point before the birth.</li>
+      <li><strong>One parent is a U.S. citizen, one is not:</strong> The U.S. citizen parent must have been physically present in the U.S. for at least 5 years before the child's birth, with at least 2 of those years after age 14.</li>
+    </ul>
+    <p>
+      If your child acquired citizenship at birth, you can document it with a <strong>Consular Report of Birth Abroad (CRBA)</strong> from the nearest U.S. embassy or consulate.
+    </p>
+
+    <h3>Naturalization</h3>
+    <p>
+      Children born abroad who are not citizens at birth may later become citizens through naturalization — for example, if they are adopted by U.S. citizen parents (see the <a href="/blog/adopted-children-trump-account">adopted children guide</a>) or if a parent naturalizes while the child is under 18.
+    </p>
+
+    <CalloutBox type="info" title="Not sure if your child is a citizen?">
+      <p>
+        Citizenship rules for children born abroad can be complex. If you are unsure whether your child acquired U.S. citizenship at birth, consult an immigration attorney or contact the nearest U.S. embassy or consulate. You can also apply for a <strong>Certificate of Citizenship</strong> from USCIS.
+      </p>
+    </CalloutBox>
+
+    <h2>Getting an SSN for a Child Born Abroad</h2>
+    <p>
+      To open a Trump Account, your child needs a <strong>Social Security number</strong>. Here is how to get one for a child born outside the U.S.:
+    </p>
+    <ol>
+      <li><strong>At the embassy or consulate:</strong> When you apply for the CRBA, you can request an SSN at the same time. This is the easiest route.</li>
+      <li><strong>After returning to the U.S.:</strong> Visit a local Social Security Administration office with the child's CRBA or U.S. passport, plus evidence of age and identity.</li>
+    </ol>
+    <p>
+      Once you have the CRBA and SSN, you can file {limits.form} with your U.S. tax return or through {limits.portal}.
+    </p>
+
+    <h2>The ${limits.pilotDeposit.toLocaleString()} Pilot Deposit</h2>
+    <p>
+      The federal <strong>${limits.pilotDeposit.toLocaleString()} pilot deposit</strong> is available to children born abroad on the same basis as everyone else. The only question is birth year:
+    </p>
+    <ul>
+      <li><strong>Born {limits.pilotDepositStartYear}–{limits.pilotDepositEndYear}:</strong> Eligible for the ${limits.pilotDeposit.toLocaleString()} deposit.</li>
+      <li><strong>Born before {limits.pilotDepositStartYear} or after {limits.pilotDepositEndYear}:</strong> Can still open the account, but no federal deposit.</li>
+    </ul>
+    <p>
+      Birth location does not affect the deposit. A baby born in {limits.pilotDepositStartYear} in Tokyo gets the same ${limits.pilotDeposit.toLocaleString()} as a baby born in Texas.
+    </p>
+
+    <h2>Children Born in U.S. Territories</h2>
+    <p>
+      Children born in <strong>U.S. territories</strong> are generally U.S. citizens at birth. This includes:
+    </p>
+    <ul>
+      <li>Puerto Rico</li>
+      <li>Guam</li>
+      <li>U.S. Virgin Islands</li>
+      <li>Northern Mariana Islands</li>
+      <li>American Samoa (note: people born in American Samoa are U.S. nationals, not citizens, by statute — though this is an evolving legal area)</li>
+    </ul>
+    <p>
+      If your child was born in a U.S. territory and is a U.S. citizen with an SSN, they qualify for a Trump Account on the same terms as any other U.S. citizen child.
+    </p>
+
+    <h2>Military Families Stationed Overseas</h2>
+    <p>
+      If you are in the U.S. military and your child was born at an overseas base or hospital, your child is a U.S. citizen (assuming you meet the citizenship transmission requirements). Military families can:
+    </p>
+    <ul>
+      <li>Obtain a CRBA through the base's legal assistance office or nearest embassy/consulate.</li>
+      <li>Apply for an SSN through the embassy or when returning to the U.S.</li>
+      <li>File {limits.form} with their U.S. tax return, which military families file regardless of where they are stationed.</li>
+    </ul>
+
+    <CalloutBox type="tip" title="Military tax filing">
+      <p>
+        Active-duty military families already file U.S. tax returns. Adding {limits.form} to your return is the same process whether you are stationed in Germany, Japan, or Kansas. Many military tax assistance centers (VITA sites on base) can help.
+      </p>
+    </CalloutBox>
+
+    <h2>Foreign Tax Considerations</h2>
+    <p>
+      If you live abroad, be aware that your country of residence may have its own rules about foreign investment accounts. The Trump Account is a U.S.-based account, but your local tax authority may require you to report it.
+    </p>
+    <p>
+      For a deeper look at this topic, see our guide on <a href="/blog/moving-abroad-trump-account">What Happens if You Move Abroad?</a>
+    </p>
+
+    <h2>Step-by-Step: Opening a Trump Account for a Child Born Abroad</h2>
+    <ol>
+      <li><strong>Confirm citizenship.</strong> Obtain a Consular Report of Birth Abroad (CRBA) from the U.S. embassy or consulate.</li>
+      <li><strong>Get an SSN.</strong> Apply at the embassy (with the CRBA) or at a Social Security office in the U.S.</li>
+      <li><strong>File {limits.form}.</strong> Include it with your U.S. tax return or use {limits.portal} when available.</li>
+      <li><strong>Start contributing.</strong> Up to ${limits.annualContributionLimit.toLocaleString()}/year from family, plus up to ${limits.employerContributionLimit.toLocaleString()}/year from an employer.</li>
+    </ol>
+    <p>
+      For detailed filing instructions, see <a href="/blog/how-to-open-step-by-step">How to Open a Trump Account</a>. For general eligibility rules, visit <a href="/blog/who-qualifies-for-trump-account">Who Qualifies for a Trump Account?</a> You can also check our <a href="/faq/eligibility">eligibility FAQ</a> for quick answers.
+    </p>
+  </div>
+</BlogLayout>

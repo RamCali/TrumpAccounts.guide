@@ -398,7 +398,7 @@ export const blogArticles: Record<string, BlogArticle> = {
     datePublished: '2026-02-12',
     dateModified: '2026-02-12',
     readingTime: '4 min read',
-    relatedSlugs: ['who-qualifies-for-trump-account', 'do-all-babies-qualify', 'undocumented-families-trump-account'],
+    relatedSlugs: ['who-qualifies-for-trump-account', 'do-all-babies-qualify', 'undocumented-families-trump-account', 'us-citizens-born-abroad-trump-account'],
   },
   'undocumented-families-trump-account': {
     slug: 'undocumented-families-trump-account',
@@ -420,7 +420,7 @@ export const blogArticles: Record<string, BlogArticle> = {
     datePublished: '2026-02-12',
     dateModified: '2026-02-12',
     readingTime: '4 min read',
-    relatedSlugs: ['who-qualifies-for-trump-account', 'who-controls-trump-account', 'gains-taxation-explained'],
+    relatedSlugs: ['who-qualifies-for-trump-account', 'who-controls-trump-account', 'gains-taxation-explained', 'us-citizens-born-abroad-trump-account'],
   },
   'trump-account-age-cutoff': {
     slug: 'trump-account-age-cutoff',
@@ -432,6 +432,17 @@ export const blogArticles: Record<string, BlogArticle> = {
     dateModified: '2026-02-12',
     readingTime: '4 min read',
     relatedSlugs: ['already-born-children', 'who-qualifies-for-trump-account', 'do-all-babies-qualify'],
+  },
+  'us-citizens-born-abroad-trump-account': {
+    slug: 'us-citizens-born-abroad-trump-account',
+    title: 'Born Outside the U.S.? Your Child Can Still Qualify',
+    description: 'U.S. citizen children born abroad qualify for Trump Accounts. Birth location does not matter. Learn about CRBA, SSN requirements, and the $1,000 deposit.',
+    category: 'Eligibility',
+    categorySlug: 'eligibility',
+    datePublished: '2026-02-13',
+    dateModified: '2026-02-13',
+    readingTime: '6 min read',
+    relatedSlugs: ['who-qualifies-for-trump-account', 'adopted-children-trump-account', 'moving-abroad-trump-account', 'how-to-open-step-by-step', 'do-all-babies-qualify'],
   },
 
   // ─── Cluster 6: Control & Access ─────────────────────────────
