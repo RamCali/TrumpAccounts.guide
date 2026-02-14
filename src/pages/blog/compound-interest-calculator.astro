@@ -1,0 +1,301 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import MiniGrowthCalc from '../../components/calculators/MiniGrowthCalc';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('compound-interest-calculator')!;
+const related = getRelatedArticles('compound-interest-calculator');
+
+const faqs = [
+  {
+    question: 'How does compound interest work in a Trump Account?',
+    answer: 'Your Trump Account is invested in S&P 500 or broad U.S. equity index funds. Returns compound automatically — dividends are reinvested and growth builds on previous growth. Over 18 years, this compounding effect can turn small monthly contributions into significant wealth.',
+  },
+  {
+    question: 'What rate of return should I expect?',
+    answer: 'The S&P 500 has averaged roughly 10% per year over its history (about 7% after inflation). Conservative estimates use 6-8%. Past performance does not guarantee future results, but 18-year periods have historically always produced positive returns.',
+  },
+  {
+    question: 'How much does $100/month grow to in 18 years?',
+    answer: 'At 8% average annual returns, $100/month for 18 years grows to approximately $48,000. You contribute $21,600 total, and compound interest adds roughly $26,400. With the $1,000 federal deposit, the total is about $52,000.',
+  },
+  {
+    question: 'Does the $1,000 federal deposit earn compound interest?',
+    answer: `Yes. The $${limits.pilotDeposit.toLocaleString()} deposit is invested alongside all other contributions. At 10% average returns, the deposit alone grows to about $5,560 over 18 years. At 8%, it grows to about $4,000.`,
+  },
+  {
+    question: 'Is Trump Account growth the same as compound interest?',
+    answer: 'Technically, stock market returns are not "interest" — they are investment returns. But the compounding effect is the same: your gains generate more gains. In a Trump Account, dividends are reinvested and growth compounds tax-deferred, which behaves like compound interest.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+  sources={[
+    { name: 'IRS Notice 2025-68', url: 'https://www.irs.gov/pub/irs-drop/n-25-68.pdf' },
+    { name: 'S&P 500 Historical Returns', url: 'https://www.slickcharts.com/sp500/returns' },
+  ]}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Compound interest turns <strong class="text-white">small, regular contributions into serious wealth</strong> over 18 years.</li>
+        <li>At 8% returns, <strong class="text-white">$200/month grows to ~$96,000</strong> by age 18 (including the $1,000 deposit).</li>
+        <li>The earlier you start, the more <strong class="text-white">compounding works in your favor</strong>.</li>
+        <li>Trump Accounts amplify compounding because <strong class="text-white">growth is tax-deferred</strong> — no annual tax drag.</li>
+        <li>Use the calculator below to <strong class="text-white">see your exact projection</strong>.</li>
+      </ul>
+    </div>
+
+    <p>
+      Compound interest is the single most powerful force behind a Trump Account. A $${limits.pilotDeposit.toLocaleString()} deposit that sits untouched for 18 years does not just grow by 18 years of returns. It grows by 18 years of <strong>returns on returns</strong>. Add monthly contributions, and the numbers get dramatic.
+    </p>
+
+    <h2>Try the Calculator</h2>
+
+    <p>
+      Adjust the sliders below to see how compound interest affects your child's Trump Account over 18 years.
+    </p>
+
+    <div class="not-prose my-8">
+      <MiniGrowthCalc
+        client:visible
+        translations={{
+          title: 'Compound Interest Calculator',
+          cta: 'See Full Projections',
+        }}
+      />
+    </div>
+
+    <h2>How Compound Interest Works (Simple Explanation)</h2>
+
+    <p>
+      Here is the easiest way to understand it:
+    </p>
+
+    <ul>
+      <li><strong>Year 1:</strong> You have $1,000. It earns 8% = $80. New balance: $1,080.</li>
+      <li><strong>Year 2:</strong> You have $1,080. It earns 8% = $86.40. New balance: $1,166.40.</li>
+      <li><strong>Year 3:</strong> You have $1,166.40. It earns 8% = $93.31. New balance: $1,259.71.</li>
+    </ul>
+
+    <p>
+      Notice how the dollar amount earned <strong>increases every year</strong> — $80, then $86, then $93 — even though the rate stays the same. That is compounding. Each year's growth becomes part of next year's base.
+    </p>
+
+    <p>
+      Over 18 years, this snowball effect is significant. The longer the timeline, the more dramatic the curve.
+    </p>
+
+    <h2>Compound Interest Tables for Trump Accounts</h2>
+
+    <h3>Growth of the $1,000 Deposit Alone (No Additional Contributions)</h3>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Year</th>
+            <th class="pb-2 pr-4">Balance (6%)</th>
+            <th class="pb-2 pr-4">Balance (8%)</th>
+            <th class="pb-2">Balance (10%)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">0</td>
+            <td class="py-2 pr-4">$1,000</td>
+            <td class="py-2 pr-4">$1,000</td>
+            <td class="py-2">$1,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">5</td>
+            <td class="py-2 pr-4">$1,338</td>
+            <td class="py-2 pr-4">$1,469</td>
+            <td class="py-2">$1,611</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">10</td>
+            <td class="py-2 pr-4">$1,791</td>
+            <td class="py-2 pr-4">$2,159</td>
+            <td class="py-2">$2,594</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">15</td>
+            <td class="py-2 pr-4">$2,397</td>
+            <td class="py-2 pr-4">$3,172</td>
+            <td class="py-2">$4,177</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4 font-semibold text-white">18</td>
+            <td class="py-2 pr-4 text-gold-400 font-semibold">$2,854</td>
+            <td class="py-2 pr-4 text-gold-400 font-semibold">$3,996</td>
+            <td class="py-2 text-gold-400 font-semibold">$5,560</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Even with zero contributions, the $${limits.pilotDeposit.toLocaleString()} deposit nearly <strong>quadruples</strong> at 8% over 18 years. At 10%, it grows to over $5,500.
+    </p>
+
+    <h3>Growth With Monthly Contributions (8% Return)</h3>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Monthly Contribution</th>
+            <th class="pb-2 pr-4">Total Contributed</th>
+            <th class="pb-2 pr-4">Value at 18</th>
+            <th class="pb-2">Interest Earned</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">$0/month</td>
+            <td class="py-2 pr-4">$1,000</td>
+            <td class="py-2 pr-4">$3,996</td>
+            <td class="py-2 text-mint-400">$2,996</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">$50/month</td>
+            <td class="py-2 pr-4">$11,800</td>
+            <td class="py-2 pr-4">$27,764</td>
+            <td class="py-2 text-mint-400">$15,964</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">$100/month</td>
+            <td class="py-2 pr-4">$22,600</td>
+            <td class="py-2 pr-4">$51,532</td>
+            <td class="py-2 text-mint-400">$28,932</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">$200/month</td>
+            <td class="py-2 pr-4">$44,200</td>
+            <td class="py-2 pr-4">$99,068</td>
+            <td class="py-2 text-mint-400">$54,868</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">$300/month</td>
+            <td class="py-2 pr-4">$65,800</td>
+            <td class="py-2 pr-4">$146,604</td>
+            <td class="py-2 text-mint-400">$80,804</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4 font-semibold text-white">$417/month (max)</td>
+            <td class="py-2 pr-4">$91,072</td>
+            <td class="py-2 pr-4 text-gold-400 font-semibold">$201,600</td>
+            <td class="py-2 text-mint-400">$110,528</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      At max contributions ($417/month = $5,000/year), compound interest more than <strong>doubles</strong> your money. You put in $91,000 — you get back over $200,000.
+    </p>
+
+    <CalloutBox type="tip" title="Start with what you can afford">
+      <p>
+        Even $50/month turns the $1,000 deposit into almost $28,000 by age 18. You do not need to max out to benefit from compound interest. The most important thing is to <strong>start</strong>.
+      </p>
+    </CalloutBox>
+
+    <h2>Why Trump Accounts Compound Better Than Taxable Accounts</h2>
+
+    <p>
+      In a regular brokerage account, you pay taxes every year on dividends and capital gains. That reduces your balance, which means less money compounding. This is called <strong>tax drag</strong>.
+    </p>
+
+    <p>
+      Trump Accounts eliminate tax drag during the growth phase. Every dividend is reinvested pre-tax. Every dollar of growth compounds without the IRS skimming off a portion each year.
+    </p>
+
+    <p>
+      Over 18 years, the tax deferral advantage adds roughly <strong>8-15% more</strong> to your final balance compared to a taxable account with identical contributions and returns.
+    </p>
+
+    <h2>The Rule of 72</h2>
+
+    <p>
+      A quick way to estimate compound interest: divide 72 by the annual return rate to find how many years it takes to double your money.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Annual Return</th>
+            <th class="pb-2 pr-4">Years to Double</th>
+            <th class="pb-2">Doubles in 18 Years</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">6%</td>
+            <td class="py-2 pr-4">12 years</td>
+            <td class="py-2">~1.5x</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">8%</td>
+            <td class="py-2 pr-4">9 years</td>
+            <td class="py-2">~2x</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4 font-semibold text-white">10%</td>
+            <td class="py-2 pr-4">7.2 years</td>
+            <td class="py-2 text-mint-400 font-semibold">~2.5x</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      At the S&P 500's historical average of 10%, $${limits.pilotDeposit.toLocaleString()} roughly <strong>doubles twice and then some</strong> over 18 years — landing at about $5,560.
+    </p>
+
+    <h2>Compound Interest Beyond Age 18</h2>
+
+    <p>
+      Here is what many parents do not realize: the compounding does not stop at 18. The account converts to a traditional IRA, and if your child leaves the money invested, it keeps growing.
+    </p>
+
+    <ul>
+      <li><strong>$5,000 at age 18 → ~$108,000 at age 65</strong> (at 7% real returns, no additional contributions)</li>
+      <li><strong>$50,000 at age 18 → ~$1,080,000 at age 65</strong> (same assumptions)</li>
+      <li><strong>$100,000 at age 18 → ~$2,160,000 at age 65</strong></li>
+    </ul>
+
+    <p>
+      The 18-year growth phase is just the beginning. If your child converts to a <a href="/blog/trump-account-roth-conversion-strategy">Roth IRA at 18</a>, all that future growth is <strong>completely tax-free</strong>.
+    </p>
+
+    <h2>Bottom Line</h2>
+
+    <p>
+      Compound interest is why Trump Accounts work. The combination of a long time horizon (18 years), stock market returns (~8-10%), and tax deferral creates a powerful wealth-building machine. You do not need to contribute thousands per month. Even the $${limits.pilotDeposit.toLocaleString()} deposit alone, left to compound, becomes a meaningful head start for your child.
+    </p>
+
+    <p>
+      For full projections with more options, use our <a href="/calculators/growth-calculator">growth calculator</a>.
+    </p>
+
+    <CalloutBox type="warning" title="Not financial advice">
+      <p>
+        These projections use historical averages and are for educational purposes only. Actual returns will vary. Past performance does not guarantee future results. Consult a qualified financial professional for personalized advice.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

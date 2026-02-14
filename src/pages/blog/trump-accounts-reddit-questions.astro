@@ -1,0 +1,305 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-accounts-reddit-questions')!;
+const related = getRelatedArticles('trump-accounts-reddit-questions');
+
+const faqs = [
+  {
+    question: 'Are Trump Accounts a scam?',
+    answer: `No. Trump Accounts are codified in federal law under IRC Section 530A, created by the One Big Beautiful Bill Act signed July 4, 2025. IRS Notice 2025-68 provides official guidance. The program is administered through the IRS and registered financial institutions.`,
+  },
+  {
+    question: 'Is the $1,000 deposit real?',
+    answer: `Yes. The federal government deposits $${limits.pilotDeposit.toLocaleString()} into Trump Accounts for U.S. citizen children born between ${limits.pilotDepositStartYear} and ${limits.pilotDepositEndYear}. Parents must opt in by filing IRS Form 4547.`,
+  },
+  {
+    question: 'Can the government take the money back?',
+    answer: 'Once deposited, the money belongs to the child\'s account. Congress could change future rules, but funds already deposited and invested are the account holder\'s property, protected like any IRA.',
+  },
+  {
+    question: 'Why is it called a "Trump Account" and not something neutral?',
+    answer: 'The name evolved from "Invest America" to "MAGA Accounts" to "Trump Accounts" during the legislative process. The official legal name is a Section 530A account. Regardless of the name, the tax treatment and rules are the same.',
+  },
+  {
+    question: 'Do Trump Accounts benefit rich people more?',
+    answer: `Families who can contribute the full $${limits.annualContributionLimit.toLocaleString()}/year do benefit more from compounding. However, the $${limits.pilotDeposit.toLocaleString()} deposit and $${limits.dellPledge.perChildAmount} Dell pledge are available regardless of family income. And unlike Roth IRAs, there are no income limits to participate.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+  sources={[
+    { name: 'IRS Notice 2025-68', url: 'https://www.irs.gov/pub/irs-drop/n-25-68.pdf' },
+    { name: 'IRC Section 530A (OBBBA)', url: 'https://www.congress.gov' },
+    { name: 'Dell Foundation Pledge Announcement', url: 'https://www.dell.com' },
+  ]}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Trump Accounts are <strong class="text-white">real and codified in federal law</strong> (IRC Section 530A).</li>
+        <li>The $${limits.pilotDeposit.toLocaleString()} deposit is <strong class="text-white">not automatic</strong> — you must file Form 4547.</li>
+        <li>Growth is <strong class="text-white">tax-deferred, not tax-free</strong>. Withdrawals are taxed as ordinary income.</li>
+        <li>You <strong class="text-white">cannot touch the money</strong> until the child turns 18.</li>
+        <li>There are <strong class="text-white">no income limits</strong> and <strong class="text-white">no catch</strong>. It is a government-funded investment account.</li>
+      </ul>
+    </div>
+
+    <p>
+      Reddit threads about Trump Accounts are full of the same questions — and a lot of misinformation. We read through hundreds of comments on r/personalfinance, r/investing, r/parenting, and r/tax so you do not have to. Here are the most common questions, answered with facts from IRS Notice 2025-68.
+    </p>
+
+    <h2>"Is this actually real or a scam?"</h2>
+
+    <p>
+      <strong>It is real.</strong> Trump Accounts were created by the One Big Beautiful Bill Act (OBBBA), signed into law on July 4, 2025. The legal basis is IRC Section 530A. The IRS published official guidance in <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf">Notice 2025-68</a> on December 3, 2025.
+    </p>
+
+    <p>
+      You can verify this yourself:
+    </p>
+
+    <ul>
+      <li>The IRS has a dedicated portal at <strong>trumpaccounts.gov</strong></li>
+      <li>Form 4547 is on the <a href="https://www.irs.gov">IRS website</a></li>
+      <li>Major brokerages (Fidelity, Schwab, Vanguard) are preparing to offer accounts</li>
+    </ul>
+
+    <p>
+      If someone on Reddit tells you it is a scam, ask them to read <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf">IRS Notice 2025-68</a>. It is 30 pages of detailed rules. Scams do not come with IRS guidance documents.
+    </p>
+
+    <h2>"So the government just gives you $1,000? What's the catch?"</h2>
+
+    <p>
+      The $${limits.pilotDeposit.toLocaleString()} federal deposit is real, but here are the conditions:
+    </p>
+
+    <ul>
+      <li><strong>Only for children born ${limits.pilotDepositStartYear}-${limits.pilotDepositEndYear}</strong> (the pilot period)</li>
+      <li><strong>You must opt in</strong> by filing IRS Form 4547 — it is not automatic</li>
+      <li><strong>The money is locked until age 18</strong> — no early withdrawals</li>
+      <li><strong>It must be invested</strong> in S&P 500 or broad U.S. equity index funds</li>
+      <li><strong>Withdrawals are taxed</strong> as ordinary income (traditional IRA rules)</li>
+    </ul>
+
+    <p>
+      Is that a "catch"? Depends on your perspective. You get $${limits.pilotDeposit.toLocaleString()} of free money invested in the stock market for your child. The trade-off is you cannot access it for 18 years and withdrawals are taxed. Most financial planners consider this an excellent deal.
+    </p>
+
+    <CalloutBox type="info" title="The real catch people miss">
+      <p>
+        The biggest risk is <strong>not signing up</strong>. The $${limits.pilotDeposit.toLocaleString()} deposit must be claimed. If you do not file Form 4547, you get nothing. The IRS will not do it for you.
+      </p>
+    </CalloutBox>
+
+    <h2>"Why would I lock up money for 18 years?"</h2>
+
+    <p>
+      This is the most common objection on Reddit, and it shows a misunderstanding of what the account does. You are not locking up <strong>your</strong> money. You are opening an account that receives <strong>$${limits.pilotDeposit.toLocaleString()} of the government's money</strong>.
+    </p>
+
+    <p>
+      Any additional contributions are optional. If you want to add $100/month, great. If you want to contribute $0 beyond the deposit, that is fine too. The $${limits.pilotDeposit.toLocaleString()} still grows tax-deferred for 18 years.
+    </p>
+
+    <p>
+      At 8% average returns, that $${limits.pilotDeposit.toLocaleString()} becomes roughly <strong>$4,000</strong> by age 18 — with zero effort or contributions from you.
+    </p>
+
+    <h2>"Is this just a political stunt that will get repealed?"</h2>
+
+    <p>
+      It is possible that a future Congress could modify or end the program. However:
+    </p>
+
+    <ul>
+      <li><strong>The law is already enacted.</strong> Repealing it requires new legislation.</li>
+      <li><strong>Funds already deposited are yours.</strong> Even if the program ends, existing accounts continue under IRA rules.</li>
+      <li><strong>Similar programs have bipartisan support.</strong> Democrats proposed their own version (baby bonds) for years. The concept of child investment accounts is not controversial — the name is.</li>
+    </ul>
+
+    <p>
+      Even if the pilot deposit ends after 2028, contributions from family and employers can continue. The worst case is you lose access to the free government money — not the account itself.
+    </p>
+
+    <h2>"Doesn't this just benefit rich people?"</h2>
+
+    <p>
+      This is a fair criticism, and Reddit debates it constantly. The honest answer:
+    </p>
+
+    <p>
+      <strong>Higher-income families benefit more from contributions</strong> because they can afford to max out the $${limits.annualContributionLimit.toLocaleString()}/year limit. A family contributing $5,000/year for 18 years at 8% returns accumulates roughly <strong>$200,000</strong>. A family that contributes $0 gets about $4,000 from the deposit alone.
+    </p>
+
+    <p>
+      <strong>But the program still helps lower-income families:</strong>
+    </p>
+
+    <ul>
+      <li>The $${limits.pilotDeposit.toLocaleString()} deposit is the same for everyone — no income test</li>
+      <li>The <a href="/blog/dell-pledge-explained">Dell pledge ($250)</a> specifically targets lower-income ZIP codes</li>
+      <li>Employer contributions (up to ${limits.employerContributionLimit.toLocaleString()}/year) do not come from the family's budget</li>
+      <li>Even $4,000 in an IRA at 18 is more than most young adults start with</li>
+    </ul>
+
+    <p>
+      For a deeper dive, see our <a href="/blog/inequality-reduction">analysis of Trump Accounts and inequality</a>.
+    </p>
+
+    <h2>"What happens if the market crashes?"</h2>
+
+    <p>
+      Your money stays invested. You cannot withdraw before 18 (that is actually a feature, not a bug). The S&P 500 has <strong>never had a negative return over any 18-year period</strong> in its history — including periods with the Great Depression, 2008 financial crisis, and COVID crash.
+    </p>
+
+    <p>
+      The worst 18-year return for the S&P 500 was roughly 3.1% annualized (1929-1947). The best was 16.7% (1982-2000). The average is about 10%.
+    </p>
+
+    <p>
+      The lock-up period is actually what makes this work. It prevents panic selling. Historically, the biggest investor mistake is selling during downturns. You literally cannot make that mistake with a Trump Account.
+    </p>
+
+    <p>
+      Read more in our <a href="/blog/what-happens-market-crash">market crash guide</a>.
+    </p>
+
+    <h2>"Can't I just open a regular brokerage account and invest in VOO myself?"</h2>
+
+    <p>
+      Yes. And if your child does not qualify for the $${limits.pilotDeposit.toLocaleString()} deposit, that might be a reasonable approach. But here is what you give up:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Feature</th>
+            <th class="pb-2 pr-4">Trump Account</th>
+            <th class="pb-2">DIY Brokerage</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">$1,000 free deposit</td>
+            <td class="py-2 pr-4 text-mint-400">Yes (2025-2028 births)</td>
+            <td class="py-2 text-red-400">No</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">Tax-deferred growth</td>
+            <td class="py-2 pr-4 text-mint-400">Yes</td>
+            <td class="py-2 text-red-400">No — taxed annually</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">Employer contributions</td>
+            <td class="py-2 pr-4 text-mint-400">Up to ${limits.employerContributionLimit.toLocaleString()}/yr tax-free</td>
+            <td class="py-2 text-red-400">No</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">Dell pledge</td>
+            <td class="py-2 pr-4 text-mint-400">${limits.dellPledge.perChildAmount} if eligible</td>
+            <td class="py-2 text-red-400">No</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">Investment flexibility</td>
+            <td class="py-2 pr-4 text-gold-400">S&P 500 / broad index only</td>
+            <td class="py-2 text-mint-400">Anything</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4 font-semibold text-white">Withdrawal flexibility</td>
+            <td class="py-2 pr-4 text-red-400">Locked until 18</td>
+            <td class="py-2 text-mint-400">Anytime</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Most families should do both: open the Trump Account for the free money and tax advantages, then use a brokerage account for additional savings. See our <a href="/blog/replicate-trump-account-yourself">DIY Trump Account guide</a>.
+    </p>
+
+    <h2>"I don't trust the government with my kid's money"</h2>
+
+    <p>
+      The government does not hold or manage the money. Here is how it actually works:
+    </p>
+
+    <ol>
+      <li>You open the account at a <strong>private financial institution</strong> (Fidelity, Schwab, Vanguard, etc.)</li>
+      <li>The money is invested in <strong>S&P 500 or broad market index funds</strong></li>
+      <li>The account is <strong>in your child's name</strong></li>
+      <li>You (the parent) are the <strong>authorized individual</strong> who manages it until 18</li>
+    </ol>
+
+    <p>
+      The government's role is limited to: making the $${limits.pilotDeposit.toLocaleString()} deposit, setting the rules (contribution limits, eligible funds), and collecting taxes on withdrawals. The money is held at private brokerages, not in a government vault.
+    </p>
+
+    <h2>"My tax preparer has never heard of this"</h2>
+
+    <p>
+      Trump Accounts are new. IRS Notice 2025-68 was published December 3, 2025. Many tax preparers are still catching up. If your preparer has not heard of Form 4547 yet, share these resources:
+    </p>
+
+    <ul>
+      <li><a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf">IRS Notice 2025-68</a> (official guidance)</li>
+      <li><a href="/blog/form-4547-guide">Our Form 4547 guide</a> (step-by-step)</li>
+      <li>The form itself is available at IRS.gov and through trumpaccounts.gov</li>
+    </ul>
+
+    <p>
+      Filing is straightforward. Form 4547 attaches to your 2025 tax return. Any competent preparer can handle it once they review the notice.
+    </p>
+
+    <h2>"ELI5: How does this actually work?"</h2>
+
+    <p>
+      Here it is in the simplest possible terms:
+    </p>
+
+    <ol>
+      <li><strong>You fill out a form</strong> (Form 4547) with your tax return</li>
+      <li><strong>The government puts $1,000</strong> in an investment account for your kid (if born 2025-2028)</li>
+      <li><strong>The money goes into stock market index funds</strong> (S&P 500)</li>
+      <li><strong>You can add more money</strong> (up to $5,000/year) if you want</li>
+      <li><strong>Nobody touches it for 18 years</strong> — it just grows</li>
+      <li><strong>At 18, your kid gets access</strong> — it becomes a retirement account (IRA) they can use for anything</li>
+    </ol>
+
+    <p>
+      That is it. For the full ELI5, see <a href="/blog/eli5-trump-accounts">Trump Accounts Explained Like You're 5</a>.
+    </p>
+
+    <CalloutBox type="tip" title="The Reddit consensus">
+      <p>
+        After sorting through the noise, most Reddit threads reach the same conclusion: <strong>open the account, claim the free money, and move on</strong>. The $${limits.pilotDeposit.toLocaleString()} deposit alone is free money with no downside. Additional contributions are a personal decision based on your financial situation.
+      </p>
+    </CalloutBox>
+
+    <h2>Bottom Line</h2>
+
+    <p>
+      Most of the skepticism on Reddit comes from people who have not read the actual IRS guidance. The program is real, the money is real, and the tax benefits are real. The name is political, the account is not. Whether you contribute $0 or $5,000/year beyond the deposit, there is no good reason <strong>not</strong> to file Form 4547 and claim the free money.
+    </p>
+
+    <CalloutBox type="warning" title="Educational content only">
+      <p>
+        This article addresses common questions and misconceptions. It is not tax or financial advice. Consult a qualified professional for advice specific to your situation.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

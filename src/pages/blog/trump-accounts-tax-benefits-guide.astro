@@ -1,0 +1,336 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-accounts-tax-benefits-guide')!;
+const related = getRelatedArticles('trump-accounts-tax-benefits-guide');
+
+const faqs = [
+  {
+    question: 'Are Trump Account contributions tax-deductible?',
+    answer: `No. Contributions are made with after-tax dollars. You do not get a deduction for contributing to a Trump Account. However, employer contributions (up to $${limits.employerContributionLimit.toLocaleString()}/year) are excluded from the employee's taxable income under IRC Section 128.`,
+  },
+  {
+    question: 'Is Trump Account growth tax-free?',
+    answer: 'Growth is tax-deferred, not tax-free. You do not pay taxes on dividends or capital gains while the money is in the account. Withdrawals after age 18 are taxed as ordinary income, just like a traditional IRA.',
+  },
+  {
+    question: 'Are there income limits for Trump Accounts?',
+    answer: 'No. Unlike Roth IRAs, there are zero income restrictions. A family earning $30,000 or $3,000,000 has the same eligibility and contribution limits.',
+  },
+  {
+    question: 'How are Trump Account withdrawals taxed?',
+    answer: 'At age 18, the Trump Account converts to a traditional IRA. Withdrawals are taxed as ordinary income. Before age 59.5, a 10% early withdrawal penalty also applies (with exceptions for first-time home purchase, disability, etc.).',
+  },
+  {
+    question: 'Can I convert a Trump Account to a Roth IRA?',
+    answer: 'Yes. After the account converts to a traditional IRA at age 18, your child can convert to a Roth IRA. They pay ordinary income tax on the conversion amount, but all future growth is tax-free. This is especially advantageous if they convert while in a low tax bracket.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+  sources={[
+    { name: 'IRS Notice 2025-68', url: 'https://www.irs.gov/pub/irs-drop/n-25-68.pdf' },
+    { name: 'IRC Section 530A (OBBBA)', url: 'https://www.congress.gov' },
+    { name: 'IRC Section 128 — Employer Contributions', url: 'https://www.congress.gov' },
+  ]}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><strong class="text-white">Tax-deferred growth</strong> — no annual taxes on dividends or capital gains during the 18-year growth phase.</li>
+        <li><strong class="text-white">Tax-free employer match</strong> — employer contributions up to ${ limits.employerContributionLimit.toLocaleString()}/year are excluded from your taxable income.</li>
+        <li><strong class="text-white">No income limits</strong> — unlike Roth IRAs, every family qualifies regardless of income.</li>
+        <li><strong class="text-white">Roth conversion opportunity</strong> — at 18, convert to a Roth IRA in a low tax bracket for decades of tax-free growth.</li>
+        <li><strong class="text-white">No contribution deduction</strong> — contributions are after-tax, like a Roth IRA.</li>
+      </ul>
+    </div>
+
+    <p>
+      Trump Accounts have several distinct tax advantages. Some are obvious. Others require a little strategy. Here is every tax benefit in one place, with the math behind each one.
+    </p>
+
+    <h2>1. Tax-Deferred Growth for 18 Years</h2>
+
+    <p>
+      This is the biggest benefit. In a regular brokerage account, you pay taxes every year on:
+    </p>
+
+    <ul>
+      <li><strong>Dividends</strong> — the S&P 500 pays roughly 1.3% in dividends annually</li>
+      <li><strong>Capital gains distributions</strong> — when index funds rebalance</li>
+    </ul>
+
+    <p>
+      In a Trump Account, <strong>none of that is taxed until withdrawal</strong>. The entire balance compounds untouched for up to 18 years. That is 18 years of dividends reinvesting without the IRS taking a cut.
+    </p>
+
+    <h3>How Much Does Tax Deferral Save?</h3>
+
+    <p>
+      Here is a side-by-side comparison of $250/month invested over 18 years at 8% average returns:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Account Type</th>
+            <th class="pb-2 pr-4">Total Contributed</th>
+            <th class="pb-2 pr-4">Value at 18</th>
+            <th class="pb-2">Tax Drag Cost</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">Trump Account (tax-deferred)</td>
+            <td class="py-2 pr-4">$54,000</td>
+            <td class="py-2 pr-4 text-mint-400 font-semibold">~$108,000</td>
+            <td class="py-2 text-mint-400">$0</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4 font-semibold text-white">Taxable brokerage (22% bracket)</td>
+            <td class="py-2 pr-4">$54,000</td>
+            <td class="py-2 pr-4">~$99,000</td>
+            <td class="py-2 text-red-400">~$9,000 lost</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Tax deferral saves roughly <strong>$9,000</strong> over 18 years in this scenario. The higher your returns and tax bracket, the bigger the savings.
+    </p>
+
+    <CalloutBox type="info" title="Tax-deferred, not tax-free">
+      <p>
+        You will owe ordinary income tax when withdrawing after 18. But your child will likely be in a <strong>lower tax bracket at 18</strong> than the family's bracket during the contribution years. That is a built-in tax advantage.
+      </p>
+    </CalloutBox>
+
+    <h2>2. Tax-Free Employer Contributions</h2>
+
+    <p>
+      Under <strong>IRC Section 128</strong>, employers can contribute up to <strong>${limits.employerContributionLimit.toLocaleString()}/year per employee</strong> to their employees' Trump Accounts. This money is:
+    </p>
+
+    <ul>
+      <li><strong>Excluded from the employee's taxable income</strong> — you do not pay income tax on it</li>
+      <li><strong>Excluded from payroll taxes</strong> — no Social Security or Medicare tax</li>
+      <li><strong>Tax-deductible for the employer</strong> — like a 401(k) contribution</li>
+    </ul>
+
+    <p>
+      This means ${limits.employerContributionLimit.toLocaleString()}/year goes into your child's account without anyone paying income tax on it. For an employee in the 22% tax bracket, that is <strong>$550/year in tax savings</strong> on the income tax alone, plus payroll tax savings.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Tax Bracket</th>
+            <th class="pb-2 pr-4">Employer Contribution</th>
+            <th class="pb-2 pr-4">Income Tax Saved</th>
+            <th class="pb-2">Total Tax Saved (incl. FICA)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">12%</td>
+            <td class="py-2 pr-4">${limits.employerContributionLimit.toLocaleString()}</td>
+            <td class="py-2 pr-4">$300</td>
+            <td class="py-2 text-mint-400 font-semibold">~$491</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">22%</td>
+            <td class="py-2 pr-4">${limits.employerContributionLimit.toLocaleString()}</td>
+            <td class="py-2 pr-4">$550</td>
+            <td class="py-2 text-mint-400 font-semibold">~$741</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4 font-semibold text-white">32%</td>
+            <td class="py-2 pr-4">${limits.employerContributionLimit.toLocaleString()}</td>
+            <td class="py-2 pr-4">$800</td>
+            <td class="py-2 text-mint-400 font-semibold">~$991</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Over 18 years of max employer contributions, that is <strong>$45,000 contributed tax-free</strong>. Read the full details in our <a href="/blog/employer-match-trump-account">employer match guide</a>.
+    </p>
+
+    <h2>3. No Income Limits</h2>
+
+    <p>
+      This is a major advantage over Roth IRAs. Roth IRA contributions phase out at $161,000 (single) or $240,000 (married filing jointly) in 2025. Many high-income families cannot contribute to a Roth at all.
+    </p>
+
+    <p>
+      Trump Accounts have <strong>zero income restrictions</strong>. Whether your household income is $30,000 or $3,000,000, the rules are identical:
+    </p>
+
+    <ul>
+      <li>Same ${limits.annualContributionLimit.toLocaleString()}/year contribution limit</li>
+      <li>Same ${limits.employerContributionLimit.toLocaleString()}/year employer contribution</li>
+      <li>Same tax-deferred growth</li>
+      <li>Same IRA conversion at 18</li>
+    </ul>
+
+    <h2>4. The Roth Conversion Strategy at 18</h2>
+
+    <p>
+      This is where the real tax planning happens. At 18, the Trump Account becomes a <strong>traditional IRA</strong>. Your child can then <strong>convert it to a Roth IRA</strong>.
+    </p>
+
+    <p>
+      Why is this powerful? Because most 18-year-olds earn little or no income. The <strong>standard deduction in 2026 is about $15,000</strong>. That means your child can convert up to ~$15,000 per year and pay <strong>zero federal income tax</strong>.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Conversion Strategy</th>
+            <th class="pb-2 pr-4">Tax on Conversion</th>
+            <th class="pb-2">Future Tax on Growth</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">Leave as traditional IRA</td>
+            <td class="py-2 pr-4">None now</td>
+            <td class="py-2 text-red-400">Taxed at future rate</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4 font-semibold text-white">Convert to Roth at 18</td>
+            <td class="py-2 pr-4 text-gold-400">Low/zero (if under standard deduction)</td>
+            <td class="py-2 text-mint-400">Tax-free forever</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      A child who converts $50,000 to a Roth over 3-4 years at 18-21 while in college could have that entire balance grow <strong>tax-free for 40+ years</strong>. At 8% returns, $50,000 becomes roughly <strong>$1,000,000 by age 65</strong> — completely tax-free.
+    </p>
+
+    <p>
+      For the full math, see our <a href="/blog/trump-account-roth-conversion-strategy">Roth conversion strategy guide</a>.
+    </p>
+
+    <CalloutBox type="tip" title="This is the sleeper benefit">
+      <p>
+        Most parents focus on the $1,000 deposit. Financial planners focus on the Roth conversion. Converting a traditional IRA to Roth while in a 0% or 10% tax bracket is one of the best tax moves in personal finance.
+      </p>
+    </CalloutBox>
+
+    <h2>5. The $1,000 Pilot Deposit Is Not Taxable Income</h2>
+
+    <p>
+      The $${limits.pilotDeposit.toLocaleString()} federal deposit for children born ${limits.pilotDepositStartYear}-${limits.pilotDepositEndYear} is <strong>not taxable income to the family</strong> in the year it is received. You do not report it on your tax return. It simply goes into the account and grows tax-deferred.
+    </p>
+
+    <p>
+      Taxes are only due when the child withdraws funds after 18 — and at that point, the child pays taxes at their own (likely lower) rate.
+    </p>
+
+    <h2>6. No Capital Gains Tax on Rebalancing</h2>
+
+    <p>
+      In a taxable account, switching from one S&P 500 fund to another triggers capital gains tax. Inside a Trump Account, <strong>fund switches are tax-free</strong>. You can move from SPY to VOO, or from IVV to VTI, without any tax event.
+    </p>
+
+    <p>
+      This is the same advantage that IRAs and 401(k)s provide — but starting at birth instead of at your first job.
+    </p>
+
+    <h2>Tax Benefits Comparison: Trump Account vs Other Accounts</h2>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left text-gray-400">
+            <th class="pb-2 pr-4">Tax Feature</th>
+            <th class="pb-2 pr-4">Trump Account</th>
+            <th class="pb-2 pr-4">529 Plan</th>
+            <th class="pb-2 pr-4">Roth IRA</th>
+            <th class="pb-2">Taxable Brokerage</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">Contribution deduction</td>
+            <td class="py-2 pr-4 text-red-400">No</td>
+            <td class="py-2 pr-4 text-gold-400">State-level (varies)</td>
+            <td class="py-2 pr-4 text-red-400">No</td>
+            <td class="py-2 text-red-400">No</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">Tax-deferred growth</td>
+            <td class="py-2 pr-4 text-mint-400">Yes</td>
+            <td class="py-2 pr-4 text-mint-400">Yes</td>
+            <td class="py-2 pr-4 text-mint-400">Yes (tax-free)</td>
+            <td class="py-2 text-red-400">No</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">Qualified withdrawals</td>
+            <td class="py-2 pr-4 text-gold-400">Ordinary income</td>
+            <td class="py-2 pr-4 text-mint-400">Tax-free (education)</td>
+            <td class="py-2 pr-4 text-mint-400">Tax-free</td>
+            <td class="py-2 text-gold-400">Capital gains rate</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">Income limits</td>
+            <td class="py-2 pr-4 text-mint-400">None</td>
+            <td class="py-2 pr-4 text-mint-400">None</td>
+            <td class="py-2 pr-4 text-red-400">Yes (phases out)</td>
+            <td class="py-2 text-mint-400">None</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-2 pr-4 font-semibold text-white">Employer contribution</td>
+            <td class="py-2 pr-4 text-mint-400">Yes (tax-free)</td>
+            <td class="py-2 pr-4 text-red-400">No</td>
+            <td class="py-2 pr-4 text-red-400">No</td>
+            <td class="py-2 text-red-400">No</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4 font-semibold text-white">Use restrictions</td>
+            <td class="py-2 pr-4 text-mint-400">None (after 18)</td>
+            <td class="py-2 pr-4 text-red-400">Education only</td>
+            <td class="py-2 pr-4 text-mint-400">None</td>
+            <td class="py-2 text-mint-400">None</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Bottom Line</h2>
+
+    <p>
+      Trump Accounts combine <strong>tax-deferred growth</strong>, <strong>tax-free employer contributions</strong>, <strong>no income limits</strong>, and a <strong>Roth conversion opportunity at 18</strong>. No single benefit is unique — 529s have tax-free growth for education, Roth IRAs have tax-free withdrawals, employer 401(k)s have matching. But Trump Accounts bundle several advantages into one account specifically designed for children, with no strings attached on how the money is used after 18.
+    </p>
+
+    <p>
+      The smartest strategy: <strong>open the Trump Account for the free money and tax deferral, then plan a Roth conversion at 18</strong>. That turns ordinary-income treatment into tax-free retirement wealth at the lowest possible cost.
+    </p>
+
+    <CalloutBox type="warning" title="Not tax or financial advice">
+      <p>
+        This article is educational content based on IRC Section 530A and IRS Notice 2025-68. Tax situations vary. Consult a qualified tax professional for advice specific to your family.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

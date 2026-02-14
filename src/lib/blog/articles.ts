@@ -1052,6 +1052,41 @@ export const blogArticles: Record<string, BlogArticle> = {
     readingTime: '5 min read',
     relatedSlugs: ['what-are-trump-accounts-guide', 'when-do-trump-accounts-start', 'trump-account-myths-debunked', 'form-4547-guide'],
   },
+
+  // ─── Keyword-Targeted: tax benefits, reddit, compound interest ─────
+  'trump-accounts-tax-benefits-guide': {
+    slug: 'trump-accounts-tax-benefits-guide',
+    title: 'Trump Accounts Tax Benefits: The Complete Guide',
+    description: 'Every tax benefit of Trump Accounts in one place: tax-deferred growth, tax-free employer match, no income limits, Roth conversion strategy at 18.',
+    category: 'Tax Questions',
+    categorySlug: 'tax-questions',
+    datePublished: '2026-02-13',
+    dateModified: '2026-02-13',
+    readingTime: '7 min read',
+    relatedSlugs: ['gains-taxation-explained', 'are-trump-accounts-tax-deductible', 'is-growth-tax-free', 'employer-match-trump-account', 'trump-account-roth-conversion-strategy', 'trump-account-family-tax-strategy'],
+  },
+  'trump-accounts-reddit-questions': {
+    slug: 'trump-accounts-reddit-questions',
+    title: 'Trump Accounts: Answering Reddit\'s Top Questions',
+    description: 'Straight talk on the most-asked Reddit questions about Trump Accounts. No hype, no politics — just facts from IRS Notice 2025-68.',
+    category: 'Basics',
+    categorySlug: 'basics',
+    datePublished: '2026-02-13',
+    dateModified: '2026-02-13',
+    readingTime: '8 min read',
+    relatedSlugs: ['trump-account-myths-debunked', 'eli5-trump-accounts', 'what-are-trump-accounts-guide', 'is-the-one-big-beautiful-bill-act-real', 'trump-accounts-benefits', 'gains-taxation-explained'],
+  },
+  'compound-interest-calculator': {
+    slug: 'compound-interest-calculator',
+    title: 'Compound Interest Calculator for Trump Accounts',
+    description: 'See the power of compound interest on your child\'s Trump Account. Enter your monthly contribution and watch 18 years of tax-deferred growth add up.',
+    category: 'Parent Guides',
+    categorySlug: 'parent-guides',
+    datePublished: '2026-02-13',
+    dateModified: '2026-02-13',
+    readingTime: '6 min read',
+    relatedSlugs: ['millionaire-baby-milestones', 'cost-of-waiting-calculator', 'how-much-at-age-18', 'expected-returns-trump-account', 'build-50k-by-18'],
+  },
 };
 
 /** Get all articles for a given category slug. */
