@@ -365,6 +365,17 @@ export const blogArticles: Record<string, BlogArticle> = {
     readingTime: '5 min read',
     relatedSlugs: ['trump-account-roth-conversion-strategy', 'gains-taxation-explained', 'what-can-money-be-used-for'],
   },
+  'trump-account-dos-and-donts': {
+    slug: 'trump-account-dos-and-donts',
+    title: "Trump Account Rules: What You Can and Can't Do",
+    description: "Complete list of what you can and can't do with Trump Account money — before 18, after 18, investments, contributions, and withdrawals.",
+    category: 'Use of Funds',
+    categorySlug: 'use-of-funds',
+    datePublished: '2026-02-13',
+    dateModified: '2026-02-13',
+    readingTime: '7 min read',
+    relatedSlugs: ['what-can-money-be-used-for', 'trump-account-penalties', 'trump-account-investment-rules', 'early-withdrawal-before-18'],
+  },
 
   // ─── Cluster 5: Eligibility Deep Dive ────────────────────────
   'do-all-babies-qualify': {

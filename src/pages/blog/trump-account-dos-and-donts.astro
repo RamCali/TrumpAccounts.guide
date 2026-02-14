@@ -1,0 +1,198 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-dos-and-donts')!;
+const related = getRelatedArticles('trump-account-dos-and-donts');
+
+const faqs = [
+  {
+    question: 'Can I withdraw Trump Account money before my child turns 18?',
+    answer: 'No. Before age 18, withdrawals are not allowed except in three narrow cases: rollovers to another Trump Account, return of excess contributions above the $5,000 annual limit, or death of the beneficiary. There are no hardship or emergency exceptions.',
+  },
+  {
+    question: 'Can I invest Trump Account money in individual stocks or crypto?',
+    answer: 'No. During the growth phase (birth through age 18), all funds must be invested in mutual funds or ETFs that track the S&P 500 or a broad U.S. equity index with an expense ratio at or below 0.1%. Individual stocks, bonds, crypto, and non-index funds are not eligible.',
+  },
+  {
+    question: 'Can my child use Trump Account money for anything after age 18?',
+    answer: 'Yes. At age 18 the account converts to a traditional IRA. Your child can withdraw for any purpose — college, a home, a business, or anything else. There are no restrictions on use. However, all withdrawals are taxed as ordinary income, and withdrawals before age 59.5 face an additional 10% early withdrawal penalty (with some exceptions).',
+  },
+  {
+    question: 'Can I contribute more than $5,000 per year to a Trump Account?',
+    answer: 'No. The annual contribution limit is $5,000 from all sources combined (parents, grandparents, employer contributions). Excess contributions face a 6% excise tax for each year they remain in the account. The limit is indexed for inflation starting after 2027.',
+  },
+  {
+    question: 'Can my child convert the Trump Account to a Roth IRA at 18?',
+    answer: 'Yes. At age 18, the account becomes a traditional IRA. Your child can convert some or all of it to a Roth IRA. They pay ordinary income tax on the converted amount, but all future growth and qualified withdrawals from the Roth are tax-free. This is especially powerful if your child has low income at 18.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><strong class="text-white">Before 18:</strong> You can contribute, switch funds, and let it grow — but you <strong class="text-white">cannot withdraw</strong> for any reason.</li>
+        <li><strong class="text-white">Investments are limited</strong> to S&P 500 or broad U.S. equity index funds with expense ratios at or below 0.1%.</li>
+        <li><strong class="text-white">After 18:</strong> The money can be used for <strong class="text-white">anything</strong> — college, a home, a business, retirement, or daily expenses.</li>
+        <li>All withdrawals after 18 are taxed as <strong class="text-white">ordinary income</strong>. Before 59.5, there is an extra <strong class="text-white">10% penalty</strong> (with exceptions).</li>
+        <li>Annual contribution limit: <strong class="text-white">${limits.annualContributionLimit.toLocaleString()}</strong> from all sources combined.</li>
+      </ul>
+    </div>
+
+    <p>
+      Trump Accounts come with clear rules about what you can and cannot do with the money. This page is your <strong>one-stop reference</strong> — organized by age, with links to deeper guides for each topic.
+    </p>
+
+    <h2>What You CAN Do Before Age 18</h2>
+    <p>
+      During the growth phase (birth through age {limits.growthPhaseEndAge}), Trump Account money stays invested. Here is what is allowed:
+    </p>
+    <ul>
+      <li><strong>Contribute up to ${limits.annualContributionLimit.toLocaleString()}/year</strong> — from parents, grandparents, aunts, uncles, or anyone else. All contributions are after-tax.</li>
+      <li><strong>Receive employer contributions</strong> — up to <a href="/blog/employer-contribution-guide">${limits.employerContributionLimit.toLocaleString()}/year per employee</a>, tax-free under IRC §128. Counts toward the ${limits.annualContributionLimit.toLocaleString()} cap.</li>
+      <li><strong>Receive the $${limits.pilotDeposit.toLocaleString()} government pilot deposit</strong> — for U.S. citizen children born January 1, 2025 through December 31, 2028.</li>
+      <li><strong>Qualify for the Dell Foundation deposit</strong> — $${limits.dellPledge.perChildAmount} per child under 10 in ZIP codes with median income under $150,000.</li>
+      <li><strong>Switch between eligible index funds</strong> — you can <a href="/blog/can-parents-change-investments">move between qualifying S&P 500 or broad U.S. equity funds</a> at any time.</li>
+      <li><strong>Roll over to a different custodian</strong> — transfer the account to a different brokerage without penalty.</li>
+      <li><strong>Let earnings grow tax-deferred</strong> — no taxes on gains while the money stays in the account.</li>
+    </ul>
+
+    <h2>What You CANNOT Do Before Age 18</h2>
+    <p>
+      The growth phase has strict restrictions. Here is what is <strong>not allowed</strong>:
+    </p>
+    <ul>
+      <li><strong>Withdraw money</strong> — <a href="/blog/early-withdrawal-before-18">no withdrawals before 18</a>, period. No hardship exceptions, no emergency access, no medical exemptions. The only exceptions are rollovers, excess contribution returns, or death.</li>
+      <li><strong>Invest in individual stocks</strong> — no Apple, no Tesla, no picking winners. Only <a href="/blog/trump-account-investment-rules">S&P 500 or broad U.S. equity index funds</a>.</li>
+      <li><strong>Invest in bonds, crypto, or alternatives</strong> — no Bitcoin, no bond funds, no REITs, no international funds, no target-date funds (unless they meet the index requirement).</li>
+      <li><strong>Hold cash or money market funds</strong> — all money must be invested in eligible index funds. No parking money on the sidelines.</li>
+      <li><strong>Contribute more than ${limits.annualContributionLimit.toLocaleString()}/year</strong> — excess contributions face a <a href="/blog/trump-account-penalties">6% excise tax</a> for each year they remain.</li>
+      <li><strong>Open an account for a non-U.S. citizen</strong> — the child must be a U.S. citizen with a valid Social Security number.</li>
+      <li><strong>Open an account for someone 18 or older</strong> — the child must be under 18 at the end of the election year.</li>
+      <li><strong>Use funds with an expense ratio above {limits.maxExpenseRatio * 100}%</strong> — only low-cost index funds qualify.</li>
+    </ul>
+
+    <CalloutBox type="warning" title="No emergency access before 18">
+      <p>
+        This is the rule that surprises most parents. Unlike a savings account, UTMA, or even a 529, you <strong>cannot access Trump Account money for any emergency</strong> before your child turns 18. Plan your family finances accordingly.
+      </p>
+    </CalloutBox>
+
+    <h2>What You CAN Do After Age 18</h2>
+    <p>
+      At age {limits.iraConversionAge}, the Trump Account converts to a <strong>traditional IRA</strong>. Your child takes full control. The rules open up significantly:
+    </p>
+    <ul>
+      <li><strong>Withdraw for any purpose</strong> — <a href="/blog/what-can-money-be-used-for">college, a home, a business, travel, living expenses</a>, or anything else. The IRS does not restrict how the money is spent.</li>
+      <li><strong><a href="/blog/trump-account-retirement-conversion">Convert to a Roth IRA</a></strong> — pay taxes on the conversion now, then enjoy tax-free growth and tax-free withdrawals later. Especially powerful at age 18 when income is often low.</li>
+      <li><strong>Keep the money invested</strong> — leave it in the traditional IRA and let it continue to grow tax-deferred for decades.</li>
+      <li><strong>Use penalty-free withdrawal exceptions</strong> — the 10% early withdrawal penalty is waived for a <a href="/blog/trump-account-for-first-home">first-time home purchase</a> (up to $10,000), <a href="/blog/trump-account-for-college">qualified education expenses</a>, disability, SEPP/72(t), and other IRA exceptions.</li>
+      <li><strong>Invest in anything</strong> — once it is a traditional IRA, standard IRA investment rules apply. Stocks, bonds, mutual funds, ETFs, REITs — the S&P-only restriction ends.</li>
+      <li><strong>Contribute additional IRA funds</strong> — your child can make standard IRA contributions on top of the existing balance (subject to annual IRA limits and earned income requirements).</li>
+    </ul>
+
+    <CalloutBox type="tip" title="Best move at 18: Roth conversion">
+      <p>
+        If your child has little or no income at age 18, <a href="/blog/trump-account-retirement-conversion">converting to a Roth IRA</a> can be a powerful strategy. They pay a low tax rate on the conversion, and all future growth is completely tax-free. No taxes on withdrawals. No required minimum distributions.
+      </p>
+    </CalloutBox>
+
+    <h2>What You CANNOT Do After Age 18</h2>
+    <p>
+      Even after the account converts to a traditional IRA, there are still rules:
+    </p>
+    <ul>
+      <li><strong>Avoid income tax on withdrawals</strong> — every dollar withdrawn from a traditional IRA is <a href="/blog/gains-taxation-explained">taxed as ordinary income</a>. The only way around this is a Roth conversion (which requires paying taxes upfront).</li>
+      <li><strong>Avoid the 10% penalty before 59.5</strong> — withdrawals before age 59.5 face a <a href="/blog/trump-account-penalties">10% early withdrawal penalty</a> on top of income tax, unless an exception applies.</li>
+      <li><strong>Skip required minimum distributions after 73</strong> — starting at age 73, the IRS requires annual withdrawals from traditional IRAs. Missing an RMD triggers a 25% penalty.</li>
+      <li><strong>Put money back once withdrawn</strong> — once funds are withdrawn from a traditional IRA, you cannot return them (with the narrow exception of a 60-day indirect rollover).</li>
+      <li><strong>Avoid taxation entirely</strong> — the growth was tax-deferred, not tax-free. The IRS will collect eventually, either through withdrawals or RMDs.</li>
+    </ul>
+
+    <h2>Quick Reference Table</h2>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Rule</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Before 18</th>
+            <th class="py-3 text-gray-400 font-medium">After 18</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Withdraw money</td>
+            <td class="py-3 pr-4 text-amber-300">No</td>
+            <td class="py-3 text-mint-300">Yes (taxed)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Choose any investment</td>
+            <td class="py-3 pr-4 text-amber-300">No (index funds only)</td>
+            <td class="py-3 text-mint-300">Yes (standard IRA rules)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Contribute</td>
+            <td class="py-3 pr-4 text-mint-300">Yes (up to $5K/yr)</td>
+            <td class="py-3 text-mint-300">Yes (standard IRA limits)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Receive employer match</td>
+            <td class="py-3 pr-4 text-mint-300">Yes (up to $2.5K/yr)</td>
+            <td class="py-3 text-amber-300">No (IRA, not Trump Account)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Switch funds</td>
+            <td class="py-3 pr-4 text-mint-300">Yes (eligible funds only)</td>
+            <td class="py-3 text-mint-300">Yes (any IRA-eligible)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Convert to Roth</td>
+            <td class="py-3 pr-4 text-amber-300">No</td>
+            <td class="py-3 text-mint-300">Yes</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Tax-free growth</td>
+            <td class="py-3 pr-4 text-mint-300">Yes (tax-deferred)</td>
+            <td class="py-3 text-mint-300">Yes (if kept in IRA)</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">Use for any purpose</td>
+            <td class="py-3 pr-4 text-amber-300">No</td>
+            <td class="py-3 text-mint-300">Yes (no restrictions)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      Trump Accounts are <strong>simple but strict before 18</strong> and <strong>flexible after 18</strong>. During the growth phase, your only job is to contribute and let it grow. You cannot touch the money, and you cannot invest in anything outside of low-cost index funds.
+    </p>
+    <p>
+      Once the account converts to a traditional IRA at age {limits.iraConversionAge}, your child gets full control. They can use the money for anything, convert to a Roth, or keep it invested for decades. The key trade-off: all withdrawals are taxed as ordinary income.
+    </p>
+    <p>
+      For more details, see our guides on <a href="/blog/what-can-money-be-used-for">what the money can be used for</a>, <a href="/blog/trump-account-penalties">penalties and withdrawal rules</a>, and <a href="/blog/trump-account-investment-rules">investment requirements</a>.
+    </p>
+
+    <CalloutBox type="warning" title="Not financial advice">
+      <p>
+        This is educational content, not tax or financial advice. Tax rules are complex and depend on individual circumstances. Consult a qualified tax professional before making decisions about your Trump Account.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>
