@@ -28,7 +28,7 @@ This is an independent educational website. We are not affiliated with the IRS, 
 
 - [Trump Account vs 529 Plan](https://trumpaccounts.guide/compare/trump-account-vs-529): Education savings, tax treatment, and contribution limits compared.
 - [Trump Account vs Roth IRA](https://trumpaccounts.guide/compare/trump-account-vs-roth-ira): Earned income requirements, traditional vs Roth tax treatment.
-- [Trump Account vs Custodial Account](https://trumpaccounts.guide/compare/trump-account-vs-custodial-account): UTMA/UGMA, kiddie tax, and investment flexibility.
+- [Trump Account vs UTMA/UGMA](https://trumpaccounts.guide/compare/trump-account-vs-utma): Honest tax comparison — capital gains rates, kiddie tax, 0% LTCG strategy, Roth conversion, and when each account wins.
 - [Trump Account vs Coverdell ESA](https://trumpaccounts.guide/compare/trump-account-vs-coverdell): Income limits, age-30 deadline, and education savings.
 - [Trump Account vs Baby Bonds](https://trumpaccounts.guide/compare/trump-account-vs-baby-bonds): Universal vs income-targeted policy comparison.
 - [All Comparisons](https://trumpaccounts.guide/compare): Side-by-side comparison hub.

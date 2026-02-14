@@ -1,0 +1,507 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import LastUpdated from '../../components/ui/LastUpdated.astro';
+import { breadcrumbSchema, faqSchema } from '../../lib/seo/schema';
+
+const siteUrl = 'https://trumpaccounts.guide';
+
+const faqs = [
+  {
+    question: 'Is a UTMA really better than a Trump Account for taxes?',
+    answer: 'It depends on your child\'s income when they withdraw. UTMA holdings sold as long-term capital gains can qualify for the 0% federal rate if income is low (under ~$48,350 in 2026). Trump Account withdrawals are taxed as ordinary income starting at 10%. However, if your employer offers Trump Account matching or your child qualifies for the $1,000 pilot deposit, the free money can outweigh the tax difference.',
+  },
+  {
+    question: 'What is the kiddie tax and how does it affect UTMAs?',
+    answer: 'The kiddie tax applies to a child\'s unearned income (dividends, interest, capital gains) above approximately $2,700 per year. The first ~$1,350 is tax-free, the next ~$1,350 is taxed at the child\'s rate, and anything above that is taxed at the parent\'s marginal rate. For UTMA accounts holding index funds, annual dividends often stay below the tax-free threshold for the first several years.',
+  },
+  {
+    question: 'Can I convert a Trump Account to a Roth IRA?',
+    answer: 'Yes. At age 18, a Trump Account converts to a traditional IRA. Your child can then convert it to a Roth IRA by paying ordinary income tax on the converted amount. This works best during low-income years (such as college) when the tax rate on the conversion is lowest. You do not have to convert all at once.',
+  },
+  {
+    question: 'Does the $1,000 pilot deposit make up for worse tax treatment?',
+    answer: 'For smaller accounts, yes. $1,000 of free money compounding for 18 years is worth roughly $4,000 at 8% returns. For larger accounts ($100K+), the long-term capital gains tax advantage of a UTMA could exceed that value. Employer matching changes the math even further in favor of the Trump Account.',
+  },
+  {
+    question: 'What if my employer offers Trump Account matching?',
+    answer: 'Employer matching changes the math entirely in favor of the Trump Account. Up to $2,500 per year in tax-exempt employer contributions is free money. Even with ordinary income tax on eventual withdrawals, the return on employer-matched contributions is almost always superior to any tax-rate advantage from a UTMA.',
+  },
+  {
+    question: 'Can I have both a Trump Account and a UTMA?',
+    answer: 'Yes. They are completely separate account types with no interaction. You can contribute to both simultaneously. Many financial advisors recommend using both to get the Trump Account\'s free money while also benefiting from the UTMA\'s tax-rate flexibility.',
+  },
+  {
+    question: 'How does FAFSA treat a UTMA vs a Trump Account?',
+    answer: 'UTMA assets are counted as student assets on the FAFSA, reducing financial aid eligibility by up to 20% of the account balance per year. Trump Accounts convert to traditional IRAs at 18, and IRAs are generally not counted as assets on the FAFSA. Formal guidance is still pending, but the IRA treatment is expected to be favorable.',
+  },
+  {
+    question: 'What does Michael Kitces say about Trump Accounts vs UTMAs?',
+    answer: 'Financial planning expert Michael Kitces and his team have noted that Trump Accounts\' tax treatment — after-tax contributions with ordinary income tax on withdrawals — can be inferior to UTMA custodial accounts where long-term capital gains are taxed at lower rates (0%, 15%, or 20%). They recommend evaluating the pilot deposit and employer matching before deciding, and suggest that a Roth conversion at 18 can improve the Trump Account\'s long-term tax outcome.',
+  },
+];
+
+const schemas = [
+  breadcrumbSchema([
+    { name: 'Home', url: siteUrl },
+    { name: 'Compare', url: `${siteUrl}/compare` },
+    { name: 'Trump Account vs UTMA/UGMA', url: `${siteUrl}/compare/trump-account-vs-utma` },
+  ]),
+  faqSchema(faqs),
+];
+---
+
+<BaseLayout
+  title="Trump Account vs UTMA/UGMA — Honest Tax Comparison (2026)"
+  description="Trump Account vs UTMA custodial account: which is really better? Tax treatment, capital gains rates, kiddie tax, Roth conversion, and worked examples."
+  schema={schemas}
+>
+  <article class="mx-auto max-w-4xl px-4 py-12">
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="no-underline hover:text-gold-400">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <a href="/compare" class="no-underline hover:text-gold-400">Compare</a>
+        </li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="font-medium text-white">Trump Account vs UTMA/UGMA</span>
+        </li>
+      </ol>
+    </nav>
+
+    <div class="prose">
+      <h1>Trump Account vs UTMA/UGMA: Which Is Actually Better?</h1>
+
+      <LastUpdated date="2026-02-13" />
+
+      <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+        <h2 class="mb-3 text-lg font-bold text-gold-400">Bottom Line</h2>
+        <ul class="space-y-2 text-sm text-gray-300">
+          <li><strong class="text-white">Tax efficiency:</strong> UTMA may win — long-term capital gains rates (0–20%) beat ordinary income tax (10–37%) on Trump Account withdrawals</li>
+          <li><strong class="text-white">Free money:</strong> Trump Account wins — $1,000 federal deposit + employer match up to $2,500/yr</li>
+          <li><strong class="text-white">Flexibility before 18:</strong> UTMA wins — custodian can access funds; Trump Account is locked</li>
+          <li><strong class="text-white">For newborns (2025–2028):</strong> Claim the Trump Account first for the $1,000, then consider a UTMA for additional savings</li>
+          <li><strong class="text-white">Best answer:</strong> Use both. The tax debate is real, but free money from the pilot deposit and employer match tips the scale for initial contributions.</li>
+        </ul>
+      </div>
+
+      <p>
+        This is probably the most important comparison on this site. Financial planning experts — including
+        <a href="https://www.kitces.com/blog/taxable-accounts-custodial-kiddie-tax-obbba-trump-accounts-one-big-beautiful-act-roth-rmd-529-plan/" target="_blank" rel="noopener noreferrer">the team at Kitces.com</a>,
+        one of the most respected voices in financial planning — have raised a legitimate question: are Trump Accounts actually worse than plain UTMA custodial accounts?
+      </p>
+
+      <p>
+        The short answer: it depends on your situation. The Trump Account's tax treatment has real weaknesses, but its free money features (pilot deposit, employer match) can overcome them. Let's walk through the full picture so you can decide for your family.
+      </p>
+
+      <h2 id="comparison-table">Side-by-Side Comparison</h2>
+    </div>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600">
+            <th class="px-4 py-3 text-left font-semibold text-gray-400">Feature</th>
+            <th class="px-4 py-3 text-left font-semibold text-gold-400">Trump Account</th>
+            <th class="px-4 py-3 text-left font-semibold text-purple-400">UTMA/UGMA</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Legal basis</td>
+            <td class="px-4 py-3">IRC §530A (federal)</td>
+            <td class="px-4 py-3">State law (varies by state)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Federal deposit</td>
+            <td class="px-4 py-3 text-mint-400">$1,000 (2025–2028 births)</td>
+            <td class="px-4 py-3 text-gray-500">None</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Employer contributions</td>
+            <td class="px-4 py-3 text-mint-400">Up to $2,500/yr tax-free (§128)</td>
+            <td class="px-4 py-3 text-gray-500">Not available</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Annual contribution limit</td>
+            <td class="px-4 py-3">$5,000/year</td>
+            <td class="px-4 py-3">No limit (gift tax rules apply above $19K)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Investment options</td>
+            <td class="px-4 py-3">S&P 500 / U.S. equity index only</td>
+            <td class="px-4 py-3 text-mint-400">Almost anything: stocks, bonds, ETFs, real estate, crypto</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Tax on contributions</td>
+            <td class="px-4 py-3">After-tax (no deduction)</td>
+            <td class="px-4 py-3">After-tax (no deduction)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Tax on growth (while holding)</td>
+            <td class="px-4 py-3 text-mint-400">Tax-deferred — no annual tax</td>
+            <td class="px-4 py-3">Kiddie tax on dividends/gains annually</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Tax on dividends during growth</td>
+            <td class="px-4 py-3 text-mint-400">None until withdrawal</td>
+            <td class="px-4 py-3">Taxed annually (kiddie tax rules)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Tax rate on withdrawals</td>
+            <td class="px-4 py-3">Ordinary income (10–37%)</td>
+            <td class="px-4 py-3 text-mint-400">Long-term capital gains (0–20%)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">0% tax rate available?</td>
+            <td class="px-4 py-3 text-gray-500">No</td>
+            <td class="px-4 py-3 text-mint-400">Yes — for low-income filers (under ~$48,350)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Strategic cost basis harvesting</td>
+            <td class="px-4 py-3 text-gray-500">No (all growth taxed as income)</td>
+            <td class="px-4 py-3 text-mint-400">Yes — sell gains in low-tax years</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Withdrawals before 18</td>
+            <td class="px-4 py-3 text-red-400">Not allowed (locked)</td>
+            <td class="px-4 py-3 text-mint-400">Custodian can withdraw for child's benefit</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Child gets control at</td>
+            <td class="px-4 py-3">Age 18 (converts to traditional IRA)</td>
+            <td class="px-4 py-3">Age 18–21 (varies by state)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Roth conversion possible?</td>
+            <td class="px-4 py-3 text-mint-400">Yes, at 18 (pay tax on growth)</td>
+            <td class="px-4 py-3 text-gray-500">N/A (not an IRA)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Change beneficiary?</td>
+            <td class="px-4 py-3 text-gray-500">No (one account per child)</td>
+            <td class="px-4 py-3 text-gray-500">No (irrevocable gift to child)</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-medium text-white">FAFSA impact</td>
+            <td class="px-4 py-3">TBD — IRA treatment expected (minimal impact)</td>
+            <td class="px-4 py-3 text-red-400">Counted as student asset (up to 20% assessed/yr)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="prose">
+      <h2 id="tax-problem">The Tax Treatment Problem</h2>
+
+      <p>
+        This is the heart of the debate. Let's break down why some financial experts think UTMAs have a tax edge.
+      </p>
+
+      <CalloutBox type="irs-quote" title="The core issue">
+        <p>Trump Accounts take after-tax dollars in and tax all withdrawals — including growth — as ordinary income. This is similar to the tax treatment of nondeductible IRA contributions, which financial planners have long considered the least efficient tax structure for stock investments.</p>
+      </CalloutBox>
+
+      <p>
+        Here's how the two accounts compare at each stage:
+      </p>
+
+      <p>
+        <strong>Going in:</strong> Both accounts use after-tax dollars. Neither gives you a tax deduction. This is a tie.
+      </p>
+
+      <p>
+        <strong>While growing:</strong> Trump Account wins here. You pay zero tax on dividends and capital gains while the money grows. A UTMA's earnings are subject to the kiddie tax each year — though as we'll see, the actual tax is often very small.
+      </p>
+
+      <p>
+        <strong>Coming out:</strong> UTMA wins here — and this is the big one. When your child sells stocks in a UTMA, gains are taxed at long-term capital gains rates: 0%, 15%, or 20%. Trump Account withdrawals are taxed as ordinary income: 10% to 37%. For most young adults, that means the UTMA can be completely tax-free on withdrawal while the Trump Account is not.
+      </p>
+
+      <p>
+        The question is whether the tax-free growth phase of a Trump Account is valuable enough to overcome the higher tax rate when the money comes out.
+      </p>
+
+      <CalloutBox type="info" title="Same investment, different wrapper">
+        <p>Both accounts can hold the same S&P 500 index fund. The Trump Account's investment restriction (S&P 500 or broad U.S. equity index) is actually the exact fund most financial advisors would recommend for a child's account anyway. So this comparison is really about tax wrappers, not investment strategy.</p>
+      </CalloutBox>
+
+      <h2 id="kiddie-tax">How the Kiddie Tax Actually Helps</h2>
+
+      <p>
+        One of the supposed downsides of a UTMA is the "kiddie tax" — taxes on a child's unearned income. But it's smaller than most people think.
+      </p>
+
+      <p>
+        Here's how it works in 2026:
+      </p>
+
+      <ul>
+        <li>First ~$1,350 of unearned income (dividends, interest, capital gains): <strong>tax-free</strong></li>
+        <li>Next ~$1,350: taxed at the <strong>child's rate</strong> (usually 10%)</li>
+        <li>Above ~$2,700: taxed at the <strong>parent's marginal rate</strong> (up to 37%)</li>
+      </ul>
+
+      <p>
+        That sounds scary, but look at the numbers. An S&P 500 index fund yields roughly 1.3% in dividends. On a $50,000 UTMA balance, that's about $650 per year in dividends — well within the tax-free zone.
+      </p>
+
+      <CalloutBox type="tip" title="The practical reality">
+        <p>For families contributing $5,000/year to index funds, UTMA dividend income will typically stay below the $1,350 tax-free threshold for the first 5–8 years. Even as the balance grows, annual dividend income stays modest because index funds distribute most returns as unrealized capital gains — which aren't taxed until sold.</p>
+      </CalloutBox>
+
+      <p>
+        And unrealized capital gains? Those don't trigger the kiddie tax at all. In a UTMA holding index funds, most of the growth is naturally deferred as unrealized gains — just like a Trump Account, but without the ordinary income tax penalty when you sell.
+      </p>
+
+      <h2 id="zero-percent-rate">The 0% Capital Gains Rate</h2>
+
+      <p>
+        This is the most underappreciated advantage of UTMA accounts. Here's how it works:
+      </p>
+
+      <p>
+        In 2026, single filers pay <strong>0% federal tax</strong> on long-term capital gains if their total taxable income is below approximately $48,350. An 18-year-old starting college or their first part-time job likely falls well under this threshold.
+      </p>
+
+      <p>
+        That means your child could sell UTMA holdings and pay zero federal income tax on the gains.
+      </p>
+
+      <p>
+        Compare that to a Trump Account, where every dollar of growth is taxed as ordinary income at 10% or higher — from the very first dollar.
+      </p>
+
+      <h3>Worked Example</h3>
+
+      <p>
+        Assume: $5,000/year for 18 years, 8% average annual return, $90,000 total contributions, approximately $108,000 in gains.
+      </p>
+    </div>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600">
+            <th class="px-4 py-3 text-left font-semibold text-gray-400"></th>
+            <th class="px-4 py-3 text-left font-semibold text-gold-400">Trump Account</th>
+            <th class="px-4 py-3 text-left font-semibold text-purple-400">UTMA</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Total balance at 18</td>
+            <td class="px-4 py-3">~$198,000</td>
+            <td class="px-4 py-3">~$195,000*</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Gains (growth)</td>
+            <td class="px-4 py-3">~$108,000</td>
+            <td class="px-4 py-3">~$105,000*</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Tax rate on gains</td>
+            <td class="px-4 py-3">Ordinary income (10–24%)</td>
+            <td class="px-4 py-3 text-mint-400">LTCG (0% if income under ~$48K)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Federal tax if sold at 18 (low income)</td>
+            <td class="px-4 py-3">~$14,000–$18,000</td>
+            <td class="px-4 py-3 text-mint-400">$0 (sold over 2–3 years)</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-medium text-white">After-tax value</td>
+            <td class="px-4 py-3">~$180,000–$184,000</td>
+            <td class="px-4 py-3 text-mint-400">~$195,000</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="mt-2 text-xs text-gray-500">
+        *UTMA balance slightly lower due to minor annual kiddie tax on dividends. Trump Account includes $1,000 pilot deposit. Both assume $5,000/yr and 8% returns. These are estimates only — actual results will vary.
+      </p>
+    </div>
+
+    <div class="prose">
+      <CalloutBox type="warning" title="Important caveat">
+        <p>The 0% LTCG rate requires the child to have low total taxable income in the year they sell. If they're working full-time at 18, their income could push gains into the 15% bracket. The strategy works best if gains are harvested over 2–3 low-income years (college years, gap year). State taxes may also apply.</p>
+      </CalloutBox>
+
+      <h2 id="trump-account-wins">Where Trump Accounts Still Win</h2>
+
+      <p>
+        The tax argument is real, but it's not the whole story. Trump Accounts have features no UTMA can match.
+      </p>
+
+      <h3>The $1,000 Free Money</h3>
+
+      <p>
+        For children born 2025–2028, the federal pilot deposit is genuinely free. $1,000 invested at 8% for 18 years grows to roughly $4,000. No UTMA, 529, or Roth IRA offers anything like this.
+      </p>
+
+      <h3>Employer Match (Up to $2,500/Year)</h3>
+
+      <p>
+        This is the single biggest potential advantage. Under IRC §128, employers can contribute up to $2,500 per year per employee toward their children's Trump Accounts, tax-free. Even with ordinary income tax on the eventual withdrawal, free employer money delivers a return that's nearly impossible to beat with tax-rate optimization alone.
+      </p>
+
+      <CalloutBox type="tip" title="The golden rule">
+        <p>If your employer offers Trump Account contributions, use the Trump Account first. Free money beats tax optimization every time. This is the same logic as "always take the 401(k) match before funding a Roth IRA."</p>
+      </CalloutBox>
+
+      <h3>Forced Discipline</h3>
+
+      <p>
+        Trump Accounts are locked until age 18. You cannot withdraw the money, and neither can your teenager. This sounds like a disadvantage — and it is in terms of flexibility — but behavioral finance research consistently shows that locked accounts produce better long-term outcomes. UTMA funds, by contrast, can be withdrawn by the custodian for "the child's benefit," a standard that's elastic enough to be abused.
+      </p>
+
+      <h3>FAFSA Advantage (Likely)</h3>
+
+      <p>
+        UTMA assets are counted as student assets on the FAFSA, which can reduce financial aid eligibility by up to 20% of the account balance per year. A $100,000 UTMA could reduce financial aid by up to $20,000 annually.
+      </p>
+
+      <p>
+        Trump Accounts convert to a traditional IRA at 18. While formal FAFSA guidance hasn't been issued yet, traditional IRAs are generally not counted as assets on the FAFSA — only withdrawals count as income. For families expecting to apply for financial aid, this could be a significant advantage.
+      </p>
+
+      <h2 id="roth-conversion">The Roth Conversion Play</h2>
+
+      <p>
+        Financial experts at Kitces.com have highlighted an interesting strategy: converting the Trump Account to a Roth IRA shortly after the child turns 18.
+      </p>
+
+      <p>
+        Here's how it works:
+      </p>
+
+      <ol>
+        <li>At 18, the Trump Account automatically converts to a <strong>traditional IRA</strong></li>
+        <li>Your child can then convert some or all of it to a <strong>Roth IRA</strong></li>
+        <li>They pay ordinary income tax on the converted amount — but the money then grows <strong>tax-free forever</strong></li>
+        <li>No taxes on Roth withdrawals in retirement, no required minimum distributions</li>
+      </ol>
+
+      <p>
+        If the child does the conversion during college years or other low-income periods, they may pay only 10–12% on the conversion — then never pay taxes on that money again.
+      </p>
+
+      <CalloutBox type="tip" title="Gradual conversion strategy">
+        <p>You don't have to convert all at once. Converting $15,000–$20,000 per year during low-income years (college, gap year, early career) keeps the taxable amount within the 10–12% bracket and avoids triggering higher rates.</p>
+      </CalloutBox>
+
+      <CalloutBox type="warning" title="Watch out for the penalty trap">
+        <p>If the child needs to withdraw money from the Trump Account/IRA to pay the conversion tax, that withdrawal is subject to a 10% early withdrawal penalty (before age 59&frac12;). The conversion itself is not penalized, but pulling money out to cover the tax bill is. Make sure conversion taxes can be paid from outside funds.</p>
+      </CalloutBox>
+
+      <h2 id="which-to-choose">Which Families Should Choose What</h2>
+
+      <h3>Choose Trump Account first if:</h3>
+
+      <ul>
+        <li><strong>Child born 2025–2028</strong> — claim the free $1,000 pilot deposit</li>
+        <li><strong>Employer offers matching</strong> — get up to $2,500/yr in free money</li>
+        <li><strong>You want FAFSA protection</strong> — IRA treatment expected to be more favorable</li>
+        <li><strong>You want a hands-off, locked approach</strong> — no temptation to withdraw early</li>
+        <li><strong>You plan to do a Roth conversion at 18</strong> — lock in low tax rates, grow tax-free</li>
+      </ul>
+
+      <h3>Choose UTMA first if:</h3>
+
+      <ul>
+        <li><strong>No pilot deposit available</strong> — child born before 2025 or after 2028</li>
+        <li><strong>No employer match</strong> — the free-money advantage doesn't apply</li>
+        <li><strong>You want investment flexibility</strong> — individual stocks, bonds, REITs, alternatives</li>
+        <li><strong>You may need access before 18</strong> — custodian can withdraw for child's benefit</li>
+        <li><strong>Child will have low income at 18</strong> — 0% LTCG strategy is available</li>
+        <li><strong>You want to teach investing</strong> — buy individual stocks the child can follow</li>
+        <li><strong>You want to save more than $5,000/year</strong> — UTMA has no contribution cap</li>
+      </ul>
+
+      <h2 id="use-both">The Best Strategy: Use Both</h2>
+
+      <p>
+        For most families, the answer isn't one or the other — it's both. They serve different purposes and complement each other.
+      </p>
+
+      <CalloutBox type="info" title="Suggested approach">
+        <p><strong>Step 1:</strong> Open a Trump Account to claim the $1,000 pilot deposit (if your child was born 2025–2028).<br>
+        <strong>Step 2:</strong> Max out any employer match in the Trump Account (up to $2,500/yr).<br>
+        <strong>Step 3:</strong> Put additional savings into a UTMA invested in the same index funds — for long-term capital gains treatment and flexibility.<br>
+        <strong>Step 4:</strong> At 18, convert the Trump Account to a Roth IRA gradually during low-income years.<br>
+        <strong>Step 5:</strong> Harvest UTMA gains strategically using the 0% LTCG rate.</p>
+      </CalloutBox>
+
+      <p>
+        For a family contributing $5,000/year total with employer matching available: put $2,500 in the Trump Account (to get the match) and $2,500 in a UTMA. If no employer match is available, consider putting more into the UTMA for tax-rate flexibility — but still open the Trump Account for the $1,000 deposit.
+      </p>
+
+      <h2 id="faq">Frequently Asked Questions</h2>
+
+      <h3>Is a UTMA really better than a Trump Account for taxes?</h3>
+      <p>
+        It depends on your child's income at withdrawal. If they sell UTMA holdings with low income and qualify for the 0% long-term capital gains rate, a UTMA can be more tax-efficient. But if they have significant income, the advantage shrinks. And Trump Accounts offer free money (pilot deposit, employer match) that UTMAs cannot match.
+      </p>
+
+      <h3>What is the kiddie tax and how does it affect UTMAs?</h3>
+      <p>
+        The kiddie tax applies to a child's unearned income above approximately $2,700 per year. The first ~$1,350 is tax-free, the next ~$1,350 is taxed at the child's rate (usually 10%), and amounts above that are taxed at the parent's marginal rate. For UTMA accounts holding index funds, annual dividends often stay below the tax-free threshold for the first several years.
+      </p>
+
+      <h3>Can I convert a Trump Account to a Roth IRA?</h3>
+      <p>
+        Yes. At age 18, the Trump Account becomes a traditional IRA. Your child can then convert it to a Roth IRA by paying ordinary income tax on the converted amount. This works best during low-income years (college, gap year) when the tax rate on the conversion is lowest. You don't have to convert it all at once.
+      </p>
+
+      <h3>Does the $1,000 pilot deposit make up for worse tax treatment?</h3>
+      <p>
+        For smaller accounts, yes — $1,000 compounding for 18 years at 8% is worth roughly $4,000. For larger accounts ($100K+), the capital gains tax advantage of a UTMA may exceed that value. Employer matching shifts the math further toward the Trump Account.
+      </p>
+
+      <h3>What if my employer offers Trump Account matching?</h3>
+      <p>
+        Employer matching changes the math entirely. Up to $2,500/year in tax-exempt employer contributions is free money. Even with ordinary income tax on eventual withdrawals, the return on employer-matched contributions is almost always superior to any tax-rate advantage from a UTMA.
+      </p>
+
+      <h3>Can I have both a Trump Account and a UTMA?</h3>
+      <p>
+        Yes. They are completely separate account types with no interaction. You can fund both simultaneously.
+      </p>
+
+      <h3>How does FAFSA treat a UTMA vs a Trump Account?</h3>
+      <p>
+        UTMA assets are counted as student assets on the FAFSA, reducing financial aid eligibility by up to 20% of the balance per year. Trump Accounts convert to IRAs at 18, which are generally not counted as FAFSA assets. Formal guidance is pending.
+      </p>
+
+      <h3>What does Michael Kitces say about Trump Accounts vs UTMAs?</h3>
+      <p>
+        Financial planning expert Michael Kitces and his team have noted that Trump Accounts' tax treatment — after-tax contributions taxed as ordinary income on withdrawal — can be inferior to UTMA custodial accounts where long-term capital gains get lower rates. They recommend evaluating the pilot deposit and employer matching before deciding, and suggest a Roth conversion at 18 can improve the Trump Account's long-term outcome.
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-3 sm:grid-cols-2">
+      <a href="/compare/trump-account-vs-529" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Trump Account vs 529 Plan</h3>
+        <p class="text-sm text-gray-400">Education savings comparison</p>
+      </a>
+      <a href="/compare/trump-account-vs-roth-ira" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Trump Account vs Roth IRA</h3>
+        <p class="text-sm text-gray-400">Traditional vs Roth tax treatment</p>
+      </a>
+      <a href="/calculators/growth-calculator" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Growth Calculator</h3>
+        <p class="text-sm text-gray-400">Model your own contribution scenario</p>
+      </a>
+      <a href="/calculators/withdrawal-simulator" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Withdrawal Simulator</h3>
+        <p class="text-sm text-gray-400">See the tax impact at different ages</p>
+      </a>
+    </div>
+
+    <p class="mt-10 text-xs text-gray-600">
+      This is educational content, not tax or financial advice. Consult a qualified professional before making investment decisions.
+      Sources: <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf" target="_blank" rel="noopener noreferrer" class="text-gray-500">IRS Notice 2025-68</a>,
+      <a href="https://www.kitces.com/blog/taxable-accounts-custodial-kiddie-tax-obbba-trump-accounts-one-big-beautiful-act-roth-rmd-529-plan/" target="_blank" rel="noopener noreferrer" class="text-gray-500">Kitces.com</a>.
+    </p>
+  </article>
+</BaseLayout>

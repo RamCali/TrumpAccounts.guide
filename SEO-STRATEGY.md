@@ -74,7 +74,7 @@ Comparison pages:
 | `/compare/trump-account-vs-529` | trump account vs 529 plan | Detailed comparison |
 | `/compare/trump-account-vs-roth-ira` | trump account vs roth ira for kids | Detailed comparison |
 | `/compare/trump-account-vs-baby-bonds` | trump accounts vs baby bonds | Policy comparison |
-| `/compare/trump-account-vs-custodial-account` | trump account vs UTMA UGMA | Detailed comparison |
+| `/compare/trump-account-vs-utma` | trump account vs UTMA UGMA | Detailed comparison |
 | `/compare/trump-account-vs-coverdell` | trump account vs coverdell ESA | Detailed comparison |
 | `/compare/all-kids-savings-accounts` | best savings account for kids 2026 | Master comparison |
 

@@ -237,7 +237,7 @@ Note: All expense ratios are below the 0.1% cap required for Trump Account-eligi
 - All Comparisons: https://trumpaccounts.guide/compare
 - vs 529 Plan: https://trumpaccounts.guide/compare/trump-account-vs-529
 - vs Roth IRA: https://trumpaccounts.guide/compare/trump-account-vs-roth-ira
-- vs Custodial Account: https://trumpaccounts.guide/compare/trump-account-vs-custodial-account
+- vs UTMA/UGMA: https://trumpaccounts.guide/compare/trump-account-vs-utma
 - vs Coverdell ESA: https://trumpaccounts.guide/compare/trump-account-vs-coverdell
 - vs Baby Bonds: https://trumpaccounts.guide/compare/trump-account-vs-baby-bonds
 
