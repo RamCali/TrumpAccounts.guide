@@ -20,8 +20,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   // ─── Cluster 1: Basics ───────────────────────────────────────
   'what-are-trump-accounts-guide': {
     slug: 'what-are-trump-accounts-guide',
-    title: 'What Are Trump Accounts? Simple Guide',
-    description: 'The complete beginner\'s guide to Trump Accounts (IRC Section 530A). Eligibility, limits, how they work, and what happens at age 18.',
+    title: 'How Do Trump Accounts Work? Simple Guide (2026)',
+    description: 'How do Trump accounts work? $1,000 federal deposit, $5,000/yr contributions, S&P 500 investing, IRA at 18. Complete beginner guide to IRC §530A.',
     category: 'Basics',
     categorySlug: 'basics',
     datePublished: '2026-02-12',
@@ -42,8 +42,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   },
   'who-qualifies-for-trump-account': {
     slug: 'who-qualifies-for-trump-account',
-    title: 'Who Qualifies for a Trump Account? Kids Eligibility Guide',
-    description: 'Trump Accounts eligibility for kids: U.S. citizen, SSN, under 18. No income limits. Learn who gets the $1,000 deposit and who does not.',
+    title: 'Trump Accounts for Kids Eligibility: Who Qualifies? (2026)',
+    description: 'Trump accounts for kids eligibility: U.S. citizen, SSN, under 18. No income limits. Full guide to who qualifies and who gets the $1,000 deposit.',
     category: 'Basics',
     categorySlug: 'basics',
     datePublished: '2026-02-12',
@@ -53,8 +53,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   },
   'when-do-trump-accounts-start': {
     slug: 'when-do-trump-accounts-start',
-    title: 'When Do Trump Accounts Start? Key Dates',
-    description: 'File Form 4547 with your 2025 tax return by April 15, 2026. The trumpaccounts.gov portal launches mid-2026. Full timeline inside.',
+    title: 'Are Trump Accounts Available Now? Key Dates (2026)',
+    description: 'Are Trump accounts available now? Yes — file Form 4547 with your 2025 tax return by April 15, 2026. Portal launches mid-2026. Full timeline.',
     category: 'Basics',
     categorySlug: 'basics',
     datePublished: '2026-02-12',
@@ -356,8 +356,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   },
   'trump-account-retirement-conversion': {
     slug: 'trump-account-retirement-conversion',
-    title: 'Trump Account to Retirement Account at 18',
-    description: 'At 18, it automatically becomes a traditional IRA. Your child can also convert to a Roth IRA, paying taxes now for tax-free growth later.',
+    title: 'Trump Retirement Accounts: What Happens at Age 18?',
+    description: 'Trump retirement accounts: at 18, the Trump Account becomes a traditional IRA. Your child can convert to Roth, withdraw, or keep investing.',
     category: 'Use of Funds',
     categorySlug: 'use-of-funds',
     datePublished: '2026-02-12',
@@ -369,8 +369,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   // ─── Cluster 5: Eligibility Deep Dive ────────────────────────
   'do-all-babies-qualify': {
     slug: 'do-all-babies-qualify',
-    title: 'Do All Babies Qualify for Trump Accounts?',
-    description: 'All U.S. citizen babies with an SSN qualify. But the $1,000 deposit is only for 2025-2028 births. Parents must opt in.',
+    title: 'Trump Baby Accounts: Do All Babies Qualify?',
+    description: 'Trump baby accounts: all U.S. citizen babies with an SSN qualify. The $1,000 deposit is only for 2025-2028 births. Parents must opt in.',
     category: 'Eligibility',
     categorySlug: 'eligibility',
     datePublished: '2026-02-12',
@@ -380,8 +380,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   },
   'already-born-children': {
     slug: 'already-born-children',
-    title: 'Trump Accounts for Already-Born Children',
-    description: 'Children born before 2025 can open a Trump Account if under 18. They won\'t get the $1,000 deposit but can receive family contributions.',
+    title: 'Trump Accounts for Kids Born Before 2025: What You Still Get',
+    description: 'Trump accounts for kids born before 2025: they can still open one. No $1,000 deposit, but family contributions, employer match, and Dell pledge apply.',
     category: 'Eligibility',
     categorySlug: 'eligibility',
     datePublished: '2026-02-12',
@@ -639,8 +639,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   },
   'dell-pledge-explained': {
     slug: 'dell-pledge-explained',
-    title: 'The Dell $6.25 Billion Pledge Explained',
-    description: 'Michael and Susan Dell pledged $250 per child under 10 in ZIP codes below $150K median income. Here is how it works and who qualifies.',
+    title: 'Michael Dell Trump Accounts: The $6.25 Billion Pledge Explained',
+    description: 'Michael and Susan Dell donation to Trump Accounts: $6.25 billion, $250 per child under 10 in qualifying ZIP codes. Who qualifies and how to claim it.',
     category: 'Policy & Economics',
     categorySlug: 'policy-and-economics',
     datePublished: '2026-02-12',
@@ -651,7 +651,7 @@ export const blogArticles: Record<string, BlogArticle> = {
   'trump-accounts-for-newborns': {
     slug: 'trump-accounts-for-newborns',
     title: 'Trump Accounts for Newborns: $1,000 Federal Deposit (2025–2028)',
-    description: 'Every U.S. citizen newborn (2025-2028) gets a $1,000 federal deposit. Learn how to claim it, how much it could grow, and what to do next.',
+    description: 'Trump accounts for newborns explained: every baby born 2025-2028 gets a free $1,000 deposit. How to claim it, growth projections, and next steps.',
     category: 'Parent Guides',
     categorySlug: 'parent-guides',
     datePublished: '2026-02-12',
@@ -834,8 +834,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   },
   'corporate-pledges-trump-accounts': {
     slug: 'corporate-pledges-trump-accounts',
-    title: 'Which Companies Are Supporting Trump Accounts?',
-    description: 'Dell pledged $6.25B, Nvidia and Robinhood committed support. Full breakdown of corporate pledges and what they mean for families.',
+    title: 'Trump Accounts Treasury Push: Which Companies Are In?',
+    description: 'Trump accounts treasury push: Dell pledged $6.25B, Nvidia and Robinhood committed support. Full breakdown of corporate pledges for families.',
     category: 'Policy & Economics',
     categorySlug: 'policy-and-economics',
     datePublished: '2026-02-13',
@@ -869,8 +869,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   },
   'trump-account-vs-savings-account': {
     slug: 'trump-account-vs-savings-account',
-    title: "Trump Account vs Savings Account: Why Your Baby's Money Is Losing Value",
-    description: 'Inflation eats savings accounts alive. See how $1,000 in a bank vs a Trump Account diverges dramatically over 18 years.',
+    title: "Trump Savings Accounts vs Bank Savings: Why Your Baby's Money Is Losing Value",
+    description: 'Trump savings accounts vs bank savings: inflation eats cash. See how $1,000 in a bank vs a Trump Account diverges dramatically over 18 years.',
     category: 'Money & Growth',
     categorySlug: 'money-and-growth',
     datePublished: '2026-02-13',
@@ -902,8 +902,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   },
   'eli5-trump-accounts': {
     slug: 'eli5-trump-accounts',
-    title: "Trump Accounts Explained Like You're 5",
-    description: 'The simplest possible explanation of Trump Accounts. Analogies, plain language, zero jargon. Perfect for sharing with confused family members.',
+    title: "Trump Accounts Explained Simply (Like You're 5)",
+    description: 'Trump accounts explained in plain English: how they work, who qualifies, and what happens at 18. Zero jargon. Perfect for sharing with family.',
     category: 'Basics',
     categorySlug: 'basics',
     datePublished: '2026-02-13',
@@ -1019,8 +1019,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   // ─── Keyword-Targeted: trump account for older kids ────────
   'trump-account-for-older-kids': {
     slug: 'trump-account-for-older-kids',
-    title: 'Trump Accounts for Older Kids (Ages 1-17)',
-    description: 'Your child does not need to be a newborn. Any U.S. citizen under 18 can open a Trump Account. Growth projections by age, plus what older kids miss.',
+    title: 'Trump Kid Accounts: Guide for Older Kids (Ages 1-17)',
+    description: 'Trump kid accounts for children ages 1-17: any U.S. citizen under 18 can open one. Growth projections by age, plus what older kids miss.',
     category: 'Eligibility',
     categorySlug: 'eligibility',
     datePublished: '2026-02-13',
@@ -1067,8 +1067,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   },
   'trump-accounts-reddit-questions': {
     slug: 'trump-accounts-reddit-questions',
-    title: 'Trump Accounts: Answering Reddit\'s Top Questions',
-    description: 'Straight talk on the most-asked Reddit questions about Trump Accounts. No hype, no politics — just facts from IRS Notice 2025-68.',
+    title: 'Trump Accounts Reddit: Top Questions Answered (2026)',
+    description: 'Trump accounts Reddit FAQ: are they real, is the $1,000 a scam, can the government take it back? No hype — just facts from IRS Notice 2025-68.',
     category: 'Basics',
     categorySlug: 'basics',
     datePublished: '2026-02-13',
