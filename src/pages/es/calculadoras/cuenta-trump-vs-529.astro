@@ -1,15 +1,35 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import CalloutBox from '../../../components/ui/CalloutBox.astro';
+import { articleSchema, financialProductSchema, breadcrumbSchema } from '../../../lib/seo/schema';
 
+const siteUrl = 'https://trumpaccounts.guide';
 const title = "Cuenta Trump vs. Plan 529: ¿Cuál es Mejor?";
 const description = "Comparación detallada entre las Cuentas Trump (IRC §530A) y los planes 529. Descubra qué cuenta ofrece mejores beneficios fiscales y flexibilidad para su hijo.";
+
+const schemas = [
+  articleSchema({
+    title,
+    description,
+    url: `${siteUrl}/es/calculadoras/cuenta-trump-vs-529`,
+    datePublished: '2026-01-15',
+    dateModified: '2026-02-13',
+    author: 'TrumpAccounts.guide Editorial Team',
+    articleSection: 'Comparaciones',
+  }),
+  financialProductSchema(),
+  breadcrumbSchema([
+    { name: 'Inicio', url: `${siteUrl}/es` },
+    { name: 'Calculadoras', url: `${siteUrl}/es/calculadoras` },
+    { name: 'Cuenta Trump vs. 529', url: `${siteUrl}/es/calculadoras/cuenta-trump-vs-529` },
+  ]),
+];
 ---
 
 <BaseLayout
   title={title}
   description={description}
-  abstract="Compara en detalle la Cuenta Trump (Sección 530A) con el plan 529, analizando beneficios fiscales, flexibilidad de uso, contribuciones del empleador y límites anuales."
+  schema={schemas}
   alternateSlug="/compare/trump-account-vs-529"
 >
   <article class="mx-auto max-w-3xl px-4 py-12">

@@ -1,15 +1,33 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import CalloutBox from '../../../components/ui/CalloutBox.astro';
+import { webApplicationSchema, financialProductSchema, breadcrumbSchema } from '../../../lib/seo/schema';
 
+const siteUrl = 'https://trumpaccounts.guide';
 const title = "Comparación: Cuenta Trump vs. Plan 529 vs. Roth IRA";
 const description = "Compare las Cuentas Trump (IRC §530A) con los planes 529 y las cuentas Roth IRA para niños. Tabla detallada de límites, impuestos y flexibilidad.";
+
+const schemas = [
+  webApplicationSchema({
+    name: 'Herramienta de Comparación',
+    description,
+    url: `${siteUrl}/es/calculadoras/herramienta-de-comparacion`,
+    abstract: 'Compara las Cuentas Trump (Sección 530A) con los planes 529 y las cuentas Roth IRA para niños, mostrando diferencias en límites de aporte, tratamiento fiscal y flexibilidad de uso.',
+    inLanguage: 'es',
+  }),
+  financialProductSchema(),
+  breadcrumbSchema([
+    { name: 'Inicio', url: `${siteUrl}/es` },
+    { name: 'Calculadoras', url: `${siteUrl}/es/calculadoras` },
+    { name: 'Herramienta de Comparación', url: `${siteUrl}/es/calculadoras/herramienta-de-comparacion` },
+  ]),
+];
 ---
 
 <BaseLayout
   title={title}
   description={description}
-  abstract="Compara las Cuentas Trump (Sección 530A) con los planes 529 y las cuentas Roth IRA para niños, mostrando diferencias en límites de aporte, tratamiento fiscal y flexibilidad de uso."
+  schema={schemas}
   alternateSlug="/calculators/comparison-tool"
 >
   <section class="bg-surface-900 border-b border-surface-700">

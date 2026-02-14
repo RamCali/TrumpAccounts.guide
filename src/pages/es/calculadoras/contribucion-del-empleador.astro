@@ -3,8 +3,26 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import MiniEmployerMatch from '../../../components/calculators/MiniEmployerMatch';
 import CalloutBox from '../../../components/ui/CalloutBox.astro';
 import { getTranslationObject } from '../../../i18n/config';
+import { webApplicationSchema, financialProductSchema, breadcrumbSchema } from '../../../lib/seo/schema';
 
+const siteUrl = 'https://trumpaccounts.guide';
 const calc = getTranslationObject('es', 'calculators');
+
+const schemas = [
+  webApplicationSchema({
+    name: 'Calculadora de Contribución del Empleador',
+    description: 'Calcule cómo las contribuciones del empleador a las Cuentas Trump crecen libres de impuestos. Guía de la exclusión fiscal de la Sección 128 para empleadores y empleados.',
+    url: `${siteUrl}/es/calculadoras/contribucion-del-empleador`,
+    abstract: 'Calcula el impacto de las contribuciones del empleador de hasta $2,500 anuales en una Cuenta Trump (Sección 530A) y proyecta el crecimiento total libre de impuestos bajo la exclusión de la Sección 128.',
+    inLanguage: 'es',
+  }),
+  financialProductSchema(),
+  breadcrumbSchema([
+    { name: 'Inicio', url: `${siteUrl}/es` },
+    { name: 'Calculadoras', url: `${siteUrl}/es/calculadoras` },
+    { name: 'Contribución del Empleador', url: `${siteUrl}/es/calculadoras/contribucion-del-empleador` },
+  ]),
+];
 
 // Construct translation object for the React component
 const miniEmployerT = {
@@ -25,7 +43,7 @@ const miniEmployerT = {
 <BaseLayout
   title="Calculadora de Contribución del Empleador (Sección 128) | TrumpAccounts.guide"
   description="Calcule cómo las contribuciones del empleador a las Cuentas Trump crecen libres de impuestos. Guía de la exclusión fiscal de la Sección 128 para empleadores y empleados."
-  abstract="Calcula el impacto de las contribuciones del empleador de hasta $2,500 anuales en una Cuenta Trump (Sección 530A) y proyecta el crecimiento total libre de impuestos bajo la exclusión de la Sección 128."
+  schema={schemas}
   alternateSlug="/calculators/employer-match"
 >
   <section class="bg-surface-900 border-b border-surface-700">
