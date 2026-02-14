@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BirthdayCardGenerator from '../../components/BirthdayCardGenerator';
+import { breadcrumbSchema, webApplicationSchema } from '../../lib/seo/schema';
+
+const siteUrl = 'https://trumpaccounts.guide';
+
+const schemas = [
+  breadcrumbSchema([
+    { name: 'Home', url: siteUrl },
+    { name: 'Tools', url: `${siteUrl}/tools` },
+    { name: 'Birthday Card', url: `${siteUrl}/tools/birthday-card` },
+  ]),
+  webApplicationSchema({
+    name: 'Trump Account Birthday Card Generator',
+    description: 'Create a shareable birthday card asking party guests to contribute to your child\'s Trump Account instead of buying toys. Works for birthdays, baby showers, and holidays.',
+    url: `${siteUrl}/tools/birthday-card`,
+  }),
+];
+---
+
+<BaseLayout
+  title="Birthday Contribution Card — Ask Guests to Invest, Not Buy Toys"
+  description="Create a shareable birthday card asking party guests to contribute to your child's Trump Account. A $50 gift today could grow to $200+ by age 18. Free generator."
+  schema={schemas}
+>
+  <article class="mx-auto max-w-3xl px-4 py-12">
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-gold-400 no-underline">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="text-white font-medium">Birthday Card Generator</span>
+        </li>
+      </ol>
+    </nav>
+
+    <h1 class="text-3xl font-extrabold text-white md:text-4xl">Birthday Contribution Card</h1>
+    <p class="mt-3 text-lg text-gray-400">
+      Parents spend $500+ per birthday on toys that end up in a closet.
+      Give guests a better option: a card asking them to contribute to your child's Trump Account instead.
+    </p>
+
+    <div class="mt-4 rounded-lg border border-mint-400/30 bg-mint-400/10 px-4 py-3">
+      <p class="text-sm text-mint-200">
+        <strong class="text-mint-300">How it works:</strong> Pick a card type (birthday, baby shower, or holiday),
+        customize with your child's name and age, then share the card in your party group chat or print it
+        for physical invitations. Every parent at the party sees it — and many will want one for their kid too.
+      </p>
+    </div>
+
+    <div class="mt-4 grid grid-cols-3 gap-3 text-center">
+      <div class="rounded-lg border border-surface-600 bg-surface-800 p-3">
+        <p class="text-2xl font-bold text-gold-400">10-30</p>
+        <p class="text-xs text-gray-400">families see each card</p>
+      </div>
+      <div class="rounded-lg border border-surface-600 bg-surface-800 p-3">
+        <p class="text-2xl font-bold text-mint-400">$0</p>
+        <p class="text-xs text-gray-400">cost to create</p>
+      </div>
+      <div class="rounded-lg border border-surface-600 bg-surface-800 p-3">
+        <p class="text-2xl font-bold text-gold-400">3</p>
+        <p class="text-xs text-gray-400">card templates</p>
+      </div>
+    </div>
+
+    <div class="mt-8">
+      <BirthdayCardGenerator client:visible />
+    </div>
+
+    <!-- SEO content below the tool -->
+    <div class="mt-12 space-y-8">
+      <section>
+        <h2 class="text-xl font-bold text-white">Why Birthday Contributions Beat Toys</h2>
+        <p class="mt-2 text-sm leading-relaxed text-gray-400">
+          The average American family spends $500-$700 on birthday gifts per year. Most toys are forgotten within weeks.
+          A $50 contribution to a Trump Account, invested in an S&P 500 index fund, could grow to over $200 by age 18
+          — and over $7,000 by retirement age. That's the power of compound interest starting early.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-white">How Guests Can Contribute</h2>
+        <ul class="mt-2 space-y-2 text-sm text-gray-400">
+          <li class="flex items-start gap-2">
+            <span class="mt-0.5 text-gold-400">1.</span>
+            <span>Visit <strong class="text-white">trumpaccounts.gov</strong> and enter the child's information</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="mt-0.5 text-gold-400">2.</span>
+            <span>Or give cash/check to the parents, who deposit it into the account</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="mt-0.5 text-gold-400">3.</span>
+            <span>Contributions are after-tax and count toward the $5,000 annual limit</span>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-white">Works for Every Occasion</h2>
+        <p class="mt-2 text-sm leading-relaxed text-gray-400">
+          Use the <strong class="text-white">Birthday Party</strong> template for invitations.
+          The <strong class="text-white">Baby Shower</strong> template is perfect for new parents expecting a child born 2025–2028
+          (eligible for the $1,000 federal pilot deposit). The <strong class="text-white">Holiday Gift</strong> template
+          works for Christmas, Hanukkah, or any gift-giving occasion.
+        </p>
+      </section>
+    </div>
+
+    <div class="mt-10 rounded-lg border border-amber-500/30 bg-amber-500/10 p-4">
+      <p class="text-sm text-amber-300">
+        <strong class="text-amber-200">Disclaimer:</strong> Growth projections are hypothetical and assume an 8% average annual return
+        based on historical S&P 500 performance. This is not financial advice. Actual investment returns will vary.
+        Contributions to Trump Accounts are after-tax and subject to annual limits.
+      </p>
+    </div>
+  </article>
+</BaseLayout>

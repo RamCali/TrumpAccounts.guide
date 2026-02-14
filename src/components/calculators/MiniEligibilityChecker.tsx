@@ -2,17 +2,20 @@ import { useState, useMemo } from 'react';
 
 const DEFAULT_T = {
   title: 'Eligibility Checker',
-  birthDate: 'Birth Date (2025–2028)',
+  birthDate: 'Birth Year',
   birthYearAria: "Child's birth year",
   usCitizen: 'US Citizen?',
   usCitizenAria: 'US Citizen toggle',
   validSSN: 'Valid SSN',
   validSSNAria: 'Valid SSN toggle',
-  eligible: 'You Qualify for the',
+  eligibleGrant: 'You Qualify for the',
   grant: '$1,000 Grant!',
+  eligibleAccount: 'Eligible for a Trump Account',
+  noGrant: 'No $1,000 deposit (2025–2028 births only)',
   notEligible: 'Not currently eligible',
   mustBeCitizen: 'Must be a U.S. citizen. ',
   ssnRequired: 'Valid SSN required. ',
+  tooOld: 'Must be under 18. ',
 };
 
 type Translations = typeof DEFAULT_T;
@@ -23,22 +26,28 @@ interface MiniEligibilityCheckerProps {
 
 export default function MiniEligibilityChecker({ translations }: MiniEligibilityCheckerProps = {}) {
   const t = { ...DEFAULT_T, ...(translations || {}) };
+  const currentYear = new Date().getFullYear();
   const [birthYear, setBirthYear] = useState(2025);
   const [isCitizen, setIsCitizen] = useState(true);
   const [hasSSN, setHasSSN] = useState(true);
 
   const result = useMemo(() => {
     const yearNum = Number(birthYear);
-    const eligible = isCitizen && hasSSN && yearNum >= 2025 && yearNum <= 2028;
+    const age = currentYear - yearNum;
+    const underAge = age < 18;
+    const basicEligible = isCitizen && hasSSN && underAge;
     const pilotEligible = yearNum >= 2025 && yearNum <= 2028;
-    return { eligible, pilotEligible };
-  }, [birthYear, isCitizen, hasSSN]);
+    return { basicEligible, pilotEligible, underAge };
+  }, [birthYear, isCitizen, hasSSN, currentYear]);
+
+  // Generate years from current year down to (currentYear - 17) — all under-18 options plus a few over
+  const years = Array.from({ length: 22 }, (_, i) => currentYear - i + 1).filter(y => y <= currentYear + 1 && y >= currentYear - 20);
 
   return (
     <div className="rounded-xl border border-[#2a2a2a] bg-[#1a1a1a] p-5">
       <h3 className="mb-4 text-lg font-bold text-white">{t.title}</h3>
 
-      {/* Birth Date */}
+      {/* Birth Year */}
       <div className="mb-4">
         <label className="mb-1 block text-sm text-gray-400">
           {t.birthDate}
@@ -49,7 +58,7 @@ export default function MiniEligibilityChecker({ translations }: MiniEligibility
           className="w-full rounded-lg border border-[#333] bg-[#222] px-3 py-2 text-sm text-white focus:border-[#c5a059] focus:outline-none"
           aria-label={t.birthYearAria}
         >
-          {[2025, 2026, 2027, 2028].map((year) => (
+          {years.map((year) => (
             <option key={year} value={year}>{year}</option>
           ))}
         </select>
@@ -82,11 +91,20 @@ export default function MiniEligibilityChecker({ translations }: MiniEligibility
       </div>
 
       {/* Result */}
-      {result.eligible ? (
+      {result.basicEligible && result.pilotEligible ? (
         <div className="rounded-lg border border-green-600/40 bg-green-900/20 px-4 py-3 text-center">
           <p className="text-sm font-semibold text-green-400">
-            {t.eligible}{' '}
+            {t.eligibleGrant}{' '}
             <span className="text-green-300">{t.grant}</span>
+          </p>
+        </div>
+      ) : result.basicEligible ? (
+        <div className="rounded-lg border border-amber-500/40 bg-amber-900/20 px-4 py-3 text-center">
+          <p className="text-sm font-semibold text-amber-400">
+            {t.eligibleAccount}
+          </p>
+          <p className="mt-1 text-xs text-amber-400/70">
+            {t.noGrant}
           </p>
         </div>
       ) : (
@@ -97,6 +115,7 @@ export default function MiniEligibilityChecker({ translations }: MiniEligibility
           <p className="mt-1 text-xs text-red-400/70">
             {!isCitizen && t.mustBeCitizen}
             {!hasSSN && t.ssnRequired}
+            {!result.underAge && t.tooOld}
           </p>
         </div>
       )}

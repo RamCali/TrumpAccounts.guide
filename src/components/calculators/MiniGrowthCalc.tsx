@@ -7,13 +7,13 @@ const fmt = (n: number) =>
 const DEFAULT_T = {
   title: 'Millionaire Baby Calculator',
   initialDeposit: 'Initial Deposit',
-  monthlySavings: 'Monthly Savings',
+  monthlySavings: 'Monthly Contributions',
   growthRate: 'Growth Rate',
   projectedValue: 'Projected Value at Age 18:',
   cta: 'Calculate Now',
   ctaHref: '/calculators/growth-calculator',
   initialDepositAria: 'Initial deposit amount',
-  monthlySavingsAria: 'Monthly savings amount',
+  monthlySavingsAria: 'Monthly contribution amount',
   growthRateAria: 'Annual growth rate',
 };
 
@@ -66,7 +66,7 @@ export default function MiniGrowthCalc({ translations }: MiniGrowthCalcProps = {
         />
       </div>
 
-      {/* Monthly Savings & Growth Rate side by side */}
+      {/* Monthly Contributions & Growth Rate side by side */}
       <div className="mb-4 grid grid-cols-2 gap-3">
         <div>
           <div className="mb-1 flex items-center justify-between">

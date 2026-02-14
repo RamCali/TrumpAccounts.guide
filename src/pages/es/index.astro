@@ -27,17 +27,20 @@ const miniGrowthT = {
 
 const miniEligibilityT = {
   title: calc['mini.eligibility.title'],
-  birthDate: calc['mini.eligibility.birthDate'],
+  birthDate: calc['mini.eligibility.birthDate'] || 'Año de nacimiento',
   birthYearAria: calc['mini.eligibility.birthYearAria'],
   usCitizen: calc['mini.eligibility.usCitizen'],
   usCitizenAria: calc['mini.eligibility.usCitizenAria'],
   validSSN: calc['mini.eligibility.validSSN'],
   validSSNAria: calc['mini.eligibility.validSSNAria'],
-  eligible: calc['mini.eligibility.eligible'],
+  eligibleGrant: calc['mini.eligibility.eligible'],
   grant: calc['mini.eligibility.grant'],
+  eligibleAccount: 'Elegible para una Cuenta Trump',
+  noGrant: 'Sin depósito de $1,000 (solo nacimientos 2025–2028)',
   notEligible: calc['mini.eligibility.notEligible'],
   mustBeCitizen: calc['mini.eligibility.mustBeCitizen'],
   ssnRequired: calc['mini.eligibility.ssnRequired'],
+  tooOld: 'Debe ser menor de 18 años. ',
 };
 
 const miniEmployerT = {
