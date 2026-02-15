@@ -1,0 +1,193 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-baby-bonus')!;
+const related = getRelatedArticles('trump-baby-bonus');
+
+const faqs = [
+  {
+    question: 'What is the Trump Baby Bonus?',
+    answer: `The "Trump Baby Bonus" is the popular name for the $${limits.pilotDeposit.toLocaleString()} federal pilot deposit into a Trump Account for every U.S. citizen child born between ${limits.pilotDepositStartYear} and ${limits.pilotDepositEndYear}. It is a one-time government deposit, not a recurring payment.`,
+  },
+  {
+    question: 'How do I get the $1,000 Trump Baby Bonus?',
+    answer: `File ${limits.form} with your ${limits.pilotDepositStartYear} federal tax return (due April 15, 2026), through ${limits.portal} when it launches mid-2026, or by mail. You need your child's SSN. The deposit is not automatic — you must opt in.`,
+  },
+  {
+    question: 'Do I have to pay back the $1,000?',
+    answer: 'No. The $1,000 is a one-time government deposit, not a loan. It does not need to be repaid. The money belongs to your child and grows in their Trump Account until they turn 18.',
+  },
+  {
+    question: 'Is the Trump Baby Bonus taxable?',
+    answer: `The $${limits.pilotDeposit.toLocaleString()} deposit itself is not taxable when received. The investment growth is tax-deferred. When your child withdraws money after age ${limits.growthPhaseEndAge} (from the traditional IRA), withdrawals are taxed as ordinary income.`,
+  },
+  {
+    question: 'Can older children get the $1,000 bonus?',
+    answer: `No. The $${limits.pilotDeposit.toLocaleString()} pilot deposit is only for children born between January 1, ${limits.pilotDepositStartYear} and December 31, ${limits.pilotDepositEndYear}. Children born before ${limits.pilotDepositStartYear} can still open a Trump Account but do not receive the deposit.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>The "Trump Baby Bonus" is a <strong class="text-white">${limits.pilotDeposit.toLocaleString()} government deposit</strong> into a Trump Account for every eligible newborn.</li>
+        <li>Eligible: U.S. citizen children born <strong class="text-white">{limits.pilotDepositStartYear}–{limits.pilotDepositEndYear}</strong> with a valid SSN.</li>
+        <li>It is <strong class="text-white">not automatic</strong>. Parents must file <strong class="text-white">{limits.form}</strong> to claim it.</li>
+        <li>The money is <strong class="text-white">invested in S&P 500 index funds</strong> and grows until age {limits.growthPhaseEndAge}.</li>
+        <li>At <strong class="text-white">10% historical average</strong>, $1,000 grows to roughly <strong class="text-white">$5,560 by age 18</strong> with no extra contributions.</li>
+      </ul>
+    </div>
+
+    <p>
+      The "Trump Baby Bonus" is what many people are calling the <strong>${limits.pilotDeposit.toLocaleString()} federal deposit</strong> that goes into a Trump Account for every U.S. citizen baby born between {limits.pilotDepositStartYear} and {limits.pilotDepositEndYear}. It is not technically a "bonus" — it is a <strong>one-time government contribution</strong> into an investment account that your child keeps for life. But the effect is the same: free money from the government to give your baby a financial head start. Here is exactly how to claim it.
+    </p>
+
+    <h2>How the $1,000 Baby Bonus Works</h2>
+    <p>
+      The ${limits.pilotDeposit.toLocaleString()} deposit is part of the <strong>Trump Account pilot contribution program</strong>, created by the {limits.legislation} under {limits.legalBasis}. Here is the process:
+    </p>
+    <ol>
+      <li><strong>Your baby is born</strong> between January 1, {limits.pilotDepositStartYear} and December 31, {limits.pilotDepositEndYear}.</li>
+      <li><strong>You get your baby's SSN</strong> — apply at the hospital or your local SSA office.</li>
+      <li><strong>You file {limits.form}</strong> to elect a Trump Account for your child.</li>
+      <li><strong>The government deposits ${limits.pilotDeposit.toLocaleString()}</strong> into the account.</li>
+      <li><strong>The money is invested</strong> in an S&P 500 or broad U.S. equity index fund.</li>
+      <li><strong>It grows tax-deferred</strong> until your child turns {limits.growthPhaseEndAge}.</li>
+    </ol>
+
+    <CalloutBox type="tip" title="You must opt in to claim the bonus">
+      <p>
+        The ${limits.pilotDeposit.toLocaleString()} deposit is <strong>not automatic</strong>. If you do not file {limits.form}, your child does not receive the money. Do not wait. File with your {limits.pilotDepositStartYear} tax return (due April 15, 2026) or through {limits.portal} when it launches mid-2026. See <a href="/blog/how-to-open-step-by-step">how to file step by step</a>.
+      </p>
+    </CalloutBox>
+
+    <h2>Who Gets the Trump Baby Bonus?</h2>
+    <p>
+      Every qualifying child. The requirements are simple:
+    </p>
+    <ul>
+      <li><strong>U.S. citizen</strong></li>
+      <li><strong>Valid Social Security Number</strong></li>
+      <li><strong>Born between January 1, {limits.pilotDepositStartYear} and December 31, {limits.pilotDepositEndYear}</strong></li>
+    </ul>
+    <p>
+      There are <strong>no income limits</strong>. A family earning $30,000 gets the same ${limits.pilotDeposit.toLocaleString()} as a family earning $500,000. Every qualifying baby gets the same amount. Use our <a href="/calculators/eligibility-checker">Eligibility Checker</a> to confirm.
+    </p>
+
+    <h2>How Much Is the Baby Bonus Really Worth?</h2>
+    <p>
+      The ${limits.pilotDeposit.toLocaleString()} is deposited into an investment account — not handed over as cash. It grows with the stock market for up to 18 years. Here is what it could be worth at different return rates:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Annual Return</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Value at Age {limits.growthPhaseEndAge}</th>
+            <th class="py-3 text-gray-400 font-medium">Effective "Bonus" Value</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">6% (conservative)</td>
+            <td class="py-3 pr-4 font-medium text-gold-400">$2,854</td>
+            <td class="py-3">Nearly 3x the original</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">8% (moderate)</td>
+            <td class="py-3 pr-4 font-medium text-gold-400">$3,996</td>
+            <td class="py-3">Nearly 4x the original</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">10% (historical avg)</td>
+            <td class="py-3 pr-4 font-medium text-gold-400">$5,560</td>
+            <td class="py-3">Over 5.5x the original</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">12% (optimistic)</td>
+            <td class="py-3 pr-4 font-medium text-gold-400">$7,690</td>
+            <td class="py-3">Nearly 8x the original</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      At the S&P 500's historical average of about 10% per year, the ${limits.pilotDeposit.toLocaleString()} "baby bonus" grows to <strong>$5,560</strong> by age {limits.growthPhaseEndAge}. That is a 5.5x return on free money. Use the <a href="/calculators/growth-calculator">Growth Calculator</a> to model your own scenario.
+    </p>
+
+    <h2>Can the Baby Bonus Get Even Bigger?</h2>
+    <p>
+      <strong>Yes.</strong> In qualifying ZIP codes, the <a href="/blog/dell-pledge-explained">Dell Foundation pledge</a> adds another <strong>${limits.dellPledge.perChildAmount}</strong> per child. That brings the total starting balance to <strong>$1,250</strong>.
+    </p>
+    <p>
+      On top of that, families can contribute up to <strong>${limits.annualContributionLimit.toLocaleString()}/year</strong>. Employers can add <strong>${limits.employerContributionLimit.toLocaleString()}/year</strong> tax-free. The ${limits.pilotDeposit.toLocaleString()} deposit does not count toward the annual contribution limit.
+    </p>
+    <p>
+      So the "bonus" is really just the <strong>starting point</strong>. With family contributions, the account can grow dramatically larger.
+    </p>
+
+    <h2>Trump Baby Bonus vs Other Government Benefits</h2>
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Benefit</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Amount</th>
+            <th class="py-3 text-gray-400 font-medium">How It Works</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Trump Baby Bonus</td>
+            <td class="py-3 pr-4 font-bold text-gold-400">$1,000</td>
+            <td class="py-3">One-time deposit into investment account. Grows for 18 years.</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Child Tax Credit</td>
+            <td class="py-3 pr-4">$2,000/yr</td>
+            <td class="py-3">Annual tax credit. Reduces your tax bill. Cash in your pocket now.</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 text-white font-medium">Dependent Care Credit</td>
+            <td class="py-3 pr-4">Up to $1,050</td>
+            <td class="py-3">Tax credit for childcare expenses. Annual.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      The Trump baby bonus is different from the Child Tax Credit. The CTC reduces your taxes each year. The Trump baby bonus is a <strong>one-time investment deposit</strong> that grows over 18 years. You can claim <strong>both</strong> — they are separate programs. For strategy tips, see <a href="/blog/trump-account-family-tax-strategy">Trump Accounts and your family tax strategy</a>.
+    </p>
+
+    <h2>What Happens If You Do Not Claim It?</h2>
+    <p>
+      If you do not file {limits.form}, your child <strong>does not receive the ${limits.pilotDeposit.toLocaleString()} deposit</strong>. There is no retroactive claim after the program window closes. The money does not go to your child automatically.
+    </p>
+    <p>
+      This is why we encourage every parent of a child born {limits.pilotDepositStartYear}–{limits.pilotDepositEndYear} to file as soon as possible. Even if you cannot contribute additional money, the free ${limits.pilotDeposit.toLocaleString()} deposit alone could be worth over $5,000 by age {limits.growthPhaseEndAge}.
+    </p>
+
+    <CalloutBox type="warning" title="Educational content only">
+      <p>
+        This article explains the Trump Account pilot deposit based on {limits.irsNotice} and the {limits.legislation}. Growth projections use historical averages and are not guaranteed. This is not tax advice or financial advice. Consult a qualified professional for your specific situation.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

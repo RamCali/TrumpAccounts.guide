@@ -1,0 +1,300 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-investment-account-for-children')!;
+const related = getRelatedArticles('trump-investment-account-for-children');
+
+const faqs = [
+  {
+    question: 'What is a Trump investment account for children?',
+    answer: `A Trump investment account (officially called a Trump Account or Children's Tax Advantage Account under IRC Section 530A) is a government-created investment account for U.S. citizen children under 18. Money is invested in S&P 500 index funds. Children born ${limits.pilotDepositStartYear}-${limits.pilotDepositEndYear} receive a $${limits.pilotDeposit.toLocaleString()} federal deposit.`,
+  },
+  {
+    question: 'How is a Trump Account invested?',
+    answer: `All funds must go into mutual funds or ETFs that track the S&P 500 or a broad U.S. equity index. The expense ratio must be at or below ${(limits.maxExpenseRatio * 100).toFixed(1)}%. Popular options include VOO (0.03%), IVV (0.03%), and FXAIX (0.015%).`,
+  },
+  {
+    question: 'Can I choose how the money is invested?',
+    answer: 'You can choose which eligible index fund to invest in, but you cannot invest in individual stocks, bonds, crypto, real estate, or other assets. The investment options are limited to S&P 500 and broad U.S. equity index funds by law.',
+  },
+  {
+    question: 'Is a Trump Account better than a custodial investment account?',
+    answer: `It depends. Trump Accounts offer a free $${limits.pilotDeposit.toLocaleString()} deposit and tax-deferred growth, but have limited investment choices (index funds only) and no withdrawals before 18. Custodial accounts (UTMA/UGMA) offer broader investment options but no government deposit and less favorable tax treatment. Many families open both.`,
+  },
+  {
+    question: 'What returns can I expect from a Trump investment account?',
+    answer: 'The S&P 500 has historically averaged about 10% per year (7% after inflation) over long periods. Past performance does not guarantee future results, but over 18-year periods, the S&P 500 has always delivered positive returns.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>A Trump Account is a <strong class="text-white">government-created investment account</strong> for children — not a savings account.</li>
+        <li>All money is invested in <strong class="text-white">S&P 500 or broad U.S. equity index funds</strong>.</li>
+        <li>Children born <strong class="text-white">{limits.pilotDepositStartYear}–{limits.pilotDepositEndYear}</strong> receive a <strong class="text-white">${limits.pilotDeposit.toLocaleString()} government deposit</strong>.</li>
+        <li>Families contribute up to <strong class="text-white">${limits.annualContributionLimit.toLocaleString()}/year</strong>. Growth is <strong class="text-white">tax-deferred</strong>.</li>
+        <li>At age <strong class="text-white">{limits.growthPhaseEndAge}</strong>, the account converts to a <strong class="text-white">traditional IRA</strong>. Your child controls it.</li>
+      </ul>
+    </div>
+
+    <p>
+      Looking for a <strong>Trump investment account for your child</strong>? You are in the right place. Trump Accounts — officially called Children's Tax Advantage Accounts under {limits.legalBasis} — are <strong>investment accounts</strong>, not savings accounts. Your child's money goes into S&P 500 index funds and grows with the stock market for up to 18 years. With a free ${limits.pilotDeposit.toLocaleString()} government deposit and tax-deferred growth, they are one of the best investment vehicles available for children today.
+    </p>
+
+    <h2>How the Trump Investment Account Works</h2>
+    <p>
+      Unlike a bank savings account or a simple trust fund, a Trump Account is a <strong>real investment account</strong> in the stock market. Here is the structure:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-gray-400 font-medium">Account type</td>
+            <td class="py-3 text-white font-medium">Investment account (not savings)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-gray-400 font-medium">Investments</td>
+            <td class="py-3 text-white font-medium">S&P 500 or broad U.S. equity index funds</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-gray-400 font-medium">Expense ratio cap</td>
+            <td class="py-3 text-white font-medium">{(limits.maxExpenseRatio * 100).toFixed(1)}% maximum</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-gray-400 font-medium">Government deposit</td>
+            <td class="py-3 text-white font-medium">${limits.pilotDeposit.toLocaleString()} ({limits.pilotDepositStartYear}–{limits.pilotDepositEndYear} births)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-gray-400 font-medium">Annual contribution limit</td>
+            <td class="py-3 text-white font-medium">${limits.annualContributionLimit.toLocaleString()}</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-gray-400 font-medium">Growth phase</td>
+            <td class="py-3 text-white font-medium">Birth through age {limits.growthPhaseEndAge} (no withdrawals)</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 text-gray-400 font-medium">At age {limits.growthPhaseEndAge}</td>
+            <td class="py-3 text-white font-medium">Converts to traditional IRA</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>What Can You Invest In?</h2>
+    <p>
+      Trump Accounts are intentionally limited to <strong>low-cost, broad market index funds</strong>. You can invest in:
+    </p>
+    <ul>
+      <li><strong>S&P 500 index funds</strong> — tracks the 500 largest U.S. companies (e.g., VOO, IVV, SPY, FXAIX, SWPPX)</li>
+      <li><strong>Broad U.S. equity index funds</strong> — tracks the total U.S. stock market (e.g., VTI, ITOT, FSKAX, SWTSX)</li>
+    </ul>
+    <p>
+      You <strong>cannot</strong> invest in:
+    </p>
+    <ul>
+      <li>Individual stocks (no Apple, Tesla, etc.)</li>
+      <li>Bonds or bond funds</li>
+      <li>Cryptocurrency</li>
+      <li>Real estate or REITs</li>
+      <li>International funds</li>
+      <li>Sector or thematic ETFs</li>
+    </ul>
+    <p>
+      This restriction is by design. Congress wanted the money in <strong>proven, low-cost, diversified investments</strong> that historically deliver strong returns over long time horizons. For the full list of eligible funds, see our <a href="/blog/index-fund-requirements">index fund requirements guide</a>.
+    </p>
+
+    <h2>Best Funds for a Trump Investment Account</h2>
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Fund</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Ticker</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Index</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Expense Ratio</th>
+            <th class="py-3 text-gray-400 font-medium">Brokerage</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Fidelity 500 Index</td>
+            <td class="py-3 pr-4">FXAIX</td>
+            <td class="py-3 pr-4">S&P 500</td>
+            <td class="py-3 pr-4 text-mint-400 font-bold">0.015%</td>
+            <td class="py-3">Fidelity</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Schwab S&P 500 Index</td>
+            <td class="py-3 pr-4">SWPPX</td>
+            <td class="py-3 pr-4">S&P 500</td>
+            <td class="py-3 pr-4 text-mint-400">0.02%</td>
+            <td class="py-3">Schwab</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Vanguard S&P 500 ETF</td>
+            <td class="py-3 pr-4">VOO</td>
+            <td class="py-3 pr-4">S&P 500</td>
+            <td class="py-3 pr-4 text-mint-400">0.03%</td>
+            <td class="py-3">Any</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">iShares Core S&P 500</td>
+            <td class="py-3 pr-4">IVV</td>
+            <td class="py-3 pr-4">S&P 500</td>
+            <td class="py-3 pr-4 text-mint-400">0.03%</td>
+            <td class="py-3">Any</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 text-white font-medium">Vanguard Total Stock Market</td>
+            <td class="py-3 pr-4">VTI</td>
+            <td class="py-3 pr-4">Total U.S. Market</td>
+            <td class="py-3 pr-4 text-mint-400">0.03%</td>
+            <td class="py-3">Any</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      The golden rule: <strong>pick the fund with the lowest expense ratio</strong>. Over 18 years, even small fee differences compound into hundreds or thousands of dollars. See our <a href="/blog/trump-account-vs-sp500-etfs">best S&P 500 ETFs for Trump Accounts</a> for a detailed comparison.
+    </p>
+
+    <CalloutBox type="tip" title="Lower fees = more money for your child">
+      <p>
+        At 0.015%, FXAIX costs $1.50/year per $10,000. At 0.09%, SPY costs $9/year per $10,000. Over 18 years on a growing balance, the cheaper fund could save your child $500+ in fees alone.
+      </p>
+    </CalloutBox>
+
+    <h2>Growth Projections: What Your Child's Investment Could Be Worth</h2>
+    <p>
+      Here is what different contribution levels could produce over {limits.growthPhaseEndAge} years at the S&P 500's historical average of ~10% per year:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Monthly Contribution</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Total Contributed</th>
+            <th class="py-3 text-gray-400 font-medium">Value at Age {limits.growthPhaseEndAge} (10%)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">$0 (deposit only)</td>
+            <td class="py-3 pr-4">$1,000</td>
+            <td class="py-3 font-medium text-gold-400">$5,560</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">$50/month</td>
+            <td class="py-3 pr-4">$11,800</td>
+            <td class="py-3 font-medium text-gold-400">$31,515</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">$100/month</td>
+            <td class="py-3 pr-4">$22,600</td>
+            <td class="py-3 font-medium text-gold-400">$57,469</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">$250/month</td>
+            <td class="py-3 pr-4">$55,000</td>
+            <td class="py-3 font-medium text-gold-400">$135,234</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 text-white font-medium">$417/month (max)</td>
+            <td class="py-3 pr-4">$91,072</td>
+            <td class="py-3 font-medium text-gold-400">$226,506</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Even $50/month turns into over $31,000 in 18 years. That is the power of <strong>consistent investing in index funds</strong> over a long time horizon. Run your own numbers with the <a href="/calculators/growth-calculator">Growth Calculator</a>.
+    </p>
+
+    <h2>Trump Account vs Other Investment Accounts for Kids</h2>
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Feature</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Trump Account</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Custodial (UTMA)</th>
+            <th class="py-3 text-gray-400 font-medium">529 Plan</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-gray-400">Free money</td>
+            <td class="py-3 pr-4 text-white font-medium">${limits.pilotDeposit.toLocaleString()} deposit</td>
+            <td class="py-3 pr-4">None</td>
+            <td class="py-3">None (some state match)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-gray-400">Investment options</td>
+            <td class="py-3 pr-4">Index funds only</td>
+            <td class="py-3 pr-4 text-white font-medium">Stocks, bonds, ETFs, etc.</td>
+            <td class="py-3">State plan options</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-gray-400">Tax treatment</td>
+            <td class="py-3 pr-4 text-white font-medium">Tax-deferred</td>
+            <td class="py-3 pr-4">Taxed annually (kiddie tax)</td>
+            <td class="py-3">Tax-free for education</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-gray-400">Withdrawals before 18</td>
+            <td class="py-3 pr-4">Not allowed</td>
+            <td class="py-3 pr-4 text-white font-medium">For child's benefit</td>
+            <td class="py-3">For education (with penalty otherwise)</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 text-gray-400">Use at 18+</td>
+            <td class="py-3 pr-4 text-white font-medium">Anything (IRA rules)</td>
+            <td class="py-3 pr-4">Anything</td>
+            <td class="py-3">Education only</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      <strong>Our recommendation:</strong> Open a Trump Account for the free deposit and tax-deferred growth. If you want broader investment choices or earlier access, add a custodial account. If college is the priority, also open a 529. See our <a href="/blog/best-accounts-for-kids-today">best accounts for kids</a> guide.
+    </p>
+
+    <h2>How to Open a Trump Investment Account</h2>
+    <ol>
+      <li><strong>Get your child's SSN</strong> — apply at the hospital or SSA office.</li>
+      <li><strong>File {limits.form}</strong> — attach to your {limits.pilotDepositStartYear} tax return (due April 15, 2026), use {limits.portal} (mid-2026), or mail it.</li>
+      <li><strong>Select a trustee</strong> — choose a brokerage like <a href="/blog/trump-accounts-at-fidelity">Fidelity</a>, <a href="/blog/trump-accounts-at-schwab">Schwab</a>, or Vanguard.</li>
+      <li><strong>Pick your index fund</strong> — lowest expense ratio wins.</li>
+      <li><strong>Start contributing</strong> — up to ${limits.annualContributionLimit.toLocaleString()}/year.</li>
+    </ol>
+    <p>
+      For the complete walkthrough, see <a href="/blog/how-to-open-step-by-step">how to open a Trump Account step by step</a>.
+    </p>
+
+    <CalloutBox type="warning" title="Educational content only">
+      <p>
+        This article explains Trump Accounts based on {limits.irsNotice} and the {limits.legislation}. Growth projections use historical averages and are not guaranteed. Past performance does not predict future results. This is not tax advice or financial advice. Consult a qualified professional.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

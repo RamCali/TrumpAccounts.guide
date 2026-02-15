@@ -1,0 +1,174 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('visa-trump-accounts')!;
+const related = getRelatedArticles('visa-trump-accounts');
+
+const faqs = [
+  {
+    question: 'What did Visa announce about Trump Accounts?',
+    answer: 'Visa announced a future feature that would allow credit card rewards points to be directed into Trump Accounts. This was announced at the Trump Accounts Summit on January 28, 2026. The feature is planned but not yet live.',
+  },
+  {
+    question: 'Can I use Visa rewards to fund my child\'s Trump Account?',
+    answer: 'Not yet. Visa announced the option as a future feature at the January 2026 Trump Accounts Summit. The specific launch date and mechanics have not been confirmed. We will update this page when the feature goes live.',
+  },
+  {
+    question: 'Does Visa\'s rewards contribution count toward the $5,000 limit?',
+    answer: `This has not been officially clarified. Rewards directed to a Trump Account would likely count as a contribution toward the $${limits.annualContributionLimit.toLocaleString()} annual limit, since they would be treated as a deposit from the cardholder. Check IRS guidance for the latest rules.`,
+  },
+  {
+    question: 'Is Visa a Trump Account trustee?',
+    answer: 'No. Visa is a payment network, not a brokerage or bank. Visa does not hold accounts or manage funds. The Trump Account trustee would be a brokerage like Fidelity, Schwab, or Vanguard. Visa\'s role is to create a channel for cardholders to direct rewards into their existing Trump Account.',
+  },
+  {
+    question: 'Did Trump praise Visa\'s announcement?',
+    answer: 'Yes. According to Bloomberg, President Trump praised Visa\'s move to allow credit card rewards to be used for Trump Accounts. The announcement was made during the Trump Accounts Summit that Trump himself headlined.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Visa announced a <strong class="text-white">future option to direct credit card rewards into Trump Accounts</strong>.</li>
+        <li>Announced at the <strong class="text-white">Trump Accounts Summit on January 28, 2026</strong>.</li>
+        <li>The feature is <strong class="text-white">planned but not yet live</strong> — no confirmed launch date.</li>
+        <li>Visa is <strong class="text-white">not a trustee</strong>. It is creating a funding channel, not holding accounts.</li>
+        <li>President Trump <strong class="text-white">praised the initiative</strong> publicly.</li>
+      </ul>
+    </div>
+
+    <p>
+      <strong>Visa announced it will allow credit card rewards to be directed into Trump Accounts.</strong> The announcement came at the <a href="/blog/trump-accounts-summit">Trump Accounts Summit</a> on January 28, 2026, where Visa was one of 27 companies that pledged support for the program. The feature would let cardholders channel their existing rewards points or cashback into their child's Trump Account. Here is what we know so far.
+    </p>
+
+    <h2>What Visa Announced</h2>
+    <p>
+      At the summit, Visa committed to developing a feature that would allow cardholders to <strong>spend their credit card rewards on Trump Account contributions</strong>. According to coverage from Bloomberg, Business Insider, CNBC, and US News:
+    </p>
+    <ul>
+      <li>Cardholders would be able to <strong>redirect rewards points or cashback</strong> into a Trump Account instead of taking cash, gift cards, or travel redemptions.</li>
+      <li>The feature is described as a <strong>"future option"</strong> — it is planned but not yet available.</li>
+      <li>President Trump publicly <strong>praised Visa's move</strong> at the summit.</li>
+      <li>The announcement <strong>went viral</strong>, generating significant media attention and some backlash (Newsweek reported Visa responded to the controversy).</li>
+    </ul>
+
+    <CalloutBox type="info" title="This is a funding channel, not a custodial service">
+      <p>
+        Visa is not going to hold Trump Accounts. Visa is a payment network — it processes credit card transactions. Your child's Trump Account would still be held at a brokerage like <a href="/blog/trump-accounts-at-fidelity">Fidelity</a>, <a href="/blog/trump-accounts-at-schwab">Schwab</a>, or another approved trustee. Visa is simply creating a way to <strong>move rewards money into the account</strong>.
+      </p>
+    </CalloutBox>
+
+    <h2>How It Could Work</h2>
+    <p>
+      While the exact mechanics have not been finalized, here is how a rewards-to-Trump-Account feature might work based on what has been reported:
+    </p>
+    <ol>
+      <li><strong>Earn rewards</strong> on your Visa credit card as you normally would.</li>
+      <li><strong>Select "Trump Account" as a redemption option</strong> instead of cash, travel, or gift cards.</li>
+      <li><strong>Rewards are deposited</strong> into your child's Trump Account at the designated trustee.</li>
+      <li><strong>The deposit counts as a contribution</strong> toward the ${limits.annualContributionLimit.toLocaleString()}/year annual limit.</li>
+    </ol>
+    <p>
+      This is similar to existing features where credit card rewards can be directed into 529 college savings plans or IRA accounts. The innovation here is specifically connecting rewards to Trump Accounts.
+    </p>
+
+    <h2>How Much Could Rewards Contribute?</h2>
+    <p>
+      The typical American household earns <strong>$500-$1,000+ per year</strong> in credit card rewards. If all of that was directed into a Trump Account, here is how it would grow over 18 years at 10% average returns:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Annual Rewards Directed</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Total Contributed</th>
+            <th class="py-3 text-gray-400 font-medium">Value at Age {limits.growthPhaseEndAge} (10%)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">$250/year</td>
+            <td class="py-3 pr-4">$4,500</td>
+            <td class="py-3 font-medium text-gold-400">$12,477</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">$500/year</td>
+            <td class="py-3 pr-4">$9,000</td>
+            <td class="py-3 font-medium text-gold-400">$24,953</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">$750/year</td>
+            <td class="py-3 pr-4">$13,500</td>
+            <td class="py-3 font-medium text-gold-400">$37,430</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 text-white font-medium">$1,000/year</td>
+            <td class="py-3 pr-4">$18,000</td>
+            <td class="py-3 font-medium text-gold-400">$49,906</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      <strong>$500/year in redirected rewards could turn into nearly $25,000 by age {limits.growthPhaseEndAge}.</strong> That is money you would have spent on gift cards or statement credits — now growing in the stock market for your child. Combined with the ${limits.pilotDeposit.toLocaleString()} government deposit and any additional family contributions, the total grows even faster.
+    </p>
+
+    <h2>Visa Was One of 27 Corporate Commitments</h2>
+    <p>
+      Visa was not alone. The <a href="https://home.treasury.gov/news/press-releases/sb0374" target="_blank" rel="noopener noreferrer">Treasury Department announced</a> 27 companies made commitments at the summit. Other notable pledges include:
+    </p>
+    <ul>
+      <li><strong>Mastercard</strong> — Visa's competitor also committed to the initiative</li>
+      <li><strong>Bank of America, JPMorgan Chase, Wells Fargo</strong> — major banks ready to serve as trustees</li>
+      <li><strong>Schwab, Robinhood, SoFi</strong> — brokerages committing to support the program</li>
+      <li><strong>NVIDIA, Intel, IBM, Broadcom</strong> — tech companies likely offering employer match benefits</li>
+      <li><strong>Dell Technologies</strong> — already pledged $6.25 billion through the <a href="/blog/dell-pledge-explained">Dell Foundation</a></li>
+    </ul>
+    <p>
+      For the full summit coverage, see our <a href="/blog/trump-accounts-summit">Trump Accounts Summit recap</a>.
+    </p>
+
+    <h2>What You Can Do Now</h2>
+    <p>
+      You do not need to wait for Visa's rewards feature. Here is what you can do today:
+    </p>
+    <ol>
+      <li><strong>File {limits.form}</strong> with your {limits.pilotDepositStartYear} tax return to claim the ${limits.pilotDeposit.toLocaleString()} deposit.</li>
+      <li><strong>Start contributing</strong> up to ${limits.annualContributionLimit.toLocaleString()}/year.</li>
+      <li><strong>Ask your employer</strong> about Trump Account contributions under IRC §128.</li>
+      <li><strong>Watch for Visa's launch</strong> — we will update this page when the rewards feature goes live.</li>
+    </ol>
+
+    <p>
+      For the full getting-started guide, see <a href="/blog/how-to-open-step-by-step">how to open a Trump Account step by step</a>.
+    </p>
+
+    <h2>Sources</h2>
+    <ul>
+      <li><a href="https://home.treasury.gov/news/press-releases/sb0374" target="_blank" rel="noopener noreferrer">U.S. Treasury: Corporate and Philanthropic Commitments at the Trump Accounts Summit</a></li>
+    </ul>
+
+    <CalloutBox type="warning" title="Educational content only">
+      <p>
+        This article is based on publicly reported announcements from the Trump Accounts Summit. Visa's rewards-to-Trump-Account feature is planned but not yet live. Implementation details and timelines may change. This is not tax advice or financial advice.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

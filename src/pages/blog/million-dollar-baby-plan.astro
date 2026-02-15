@@ -1,0 +1,252 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('million-dollar-baby-plan')!;
+const related = getRelatedArticles('million-dollar-baby-plan');
+
+const faqs = [
+  {
+    question: 'Can a Trump Account really create millionaires?',
+    answer: `Yes, mathematically. If the $${limits.pilotDeposit.toLocaleString()} deposit plus max contributions ($${limits.annualContributionLimit.toLocaleString()}/yr for 18 years) grow at the S&P 500's historical average of ~10%, the account could be worth ~$226,000 at age 18. Left untouched in an IRA at 10%, it hits $1 million by the child's early 40s.`,
+  },
+  {
+    question: 'How long does it take to reach $1 million?',
+    answer: 'At max contributions and 10% average returns: the account reaches about $226,000 at age 18. Left to grow in an IRA at 10%, it crosses $1 million around age 42-44. At more conservative 8% returns, it reaches $1 million around age 50.',
+  },
+  {
+    question: 'Is the $1 million guaranteed?',
+    answer: 'No. The $1 million figure is based on historical S&P 500 averages (~10% per year). Actual returns will vary. The stock market can go up or down in any given year. However, over 40+ year periods, the S&P 500 has historically delivered strong positive returns.',
+  },
+  {
+    question: 'What if I can only contribute $100/month?',
+    answer: 'At $100/month with the $1,000 deposit and 10% average returns, the account would be worth ~$57,000 at age 18. Left to grow at 10%, it crosses $1 million around age 48. Even modest contributions can create significant wealth over decades.',
+  },
+  {
+    question: 'Does inflation reduce the $1 million?',
+    answer: 'Yes. $1 million in 40 years will not buy as much as $1 million today. At 3% inflation, $1 million in 2065 would have about $306,000 in today\'s purchasing power. Even so, that is a substantial sum built from relatively modest contributions.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>At max contributions, a Trump Account could reach <strong class="text-white">~$226,000 by age 18</strong>.</li>
+        <li>Left to grow in an IRA, that <strong class="text-white">crosses $1 million by the early 40s</strong> at historical average returns.</li>
+        <li>Even <strong class="text-white">$100/month</strong> can reach $1 million by age 48.</li>
+        <li>The <strong class="text-white">${limits.pilotDeposit.toLocaleString()} deposit alone</strong> (no extra contributions) could reach $1M by the child's early 60s.</li>
+        <li>Compound growth over <strong class="text-white">40-60 years</strong> is the engine. Time is the most important factor.</li>
+      </ul>
+    </div>
+
+    <p>
+      Trump's "million-dollar baby plan" is not official marketing — but the math is real. A Trump Account, fully funded and left to grow, can plausibly produce <strong>a millionaire</strong>. It is not magic. It is <strong>compound interest over a very long time</strong>. Here are the exact numbers.
+    </p>
+
+    <h2>The Math: How $1,000 Becomes $1 Million</h2>
+    <p>
+      Let's start with the simplest case: the <strong>${limits.pilotDeposit.toLocaleString()} government deposit</strong> with zero additional contributions. How long does it take to reach $1 million at different return rates?
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Annual Return</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Value at Age 18</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Age to Reach $1M</th>
+            <th class="py-3 text-gray-400 font-medium">Years of Growth</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">8%</td>
+            <td class="py-3 pr-4">$3,996</td>
+            <td class="py-3 pr-4 text-gold-400 font-bold">~90</td>
+            <td class="py-3">~90 years</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">10%</td>
+            <td class="py-3 pr-4">$5,560</td>
+            <td class="py-3 pr-4 text-gold-400 font-bold">~72</td>
+            <td class="py-3">~72 years</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">12%</td>
+            <td class="py-3 pr-4">$7,690</td>
+            <td class="py-3 pr-4 text-gold-400 font-bold">~60</td>
+            <td class="py-3">~60 years</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      With the deposit alone, reaching $1 million takes a lifetime. But that changes dramatically when you add contributions.
+    </p>
+
+    <h2>The Realistic Path: Contributions + Time = Millionaire</h2>
+    <p>
+      Here is where the "million-dollar baby" framing becomes realistic. At the S&P 500's historical average of <strong>~10% per year</strong>, different contribution levels reach $1 million at different ages:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Monthly Contribution</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Value at Age 18</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Crosses $1M at Age</th>
+            <th class="py-3 text-gray-400 font-medium">Total Invested</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">$0 (deposit only)</td>
+            <td class="py-3 pr-4">$5,560</td>
+            <td class="py-3 pr-4">~72</td>
+            <td class="py-3">$1,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">$50/month</td>
+            <td class="py-3 pr-4">$31,515</td>
+            <td class="py-3 pr-4 text-gold-400 font-bold">~52</td>
+            <td class="py-3">$11,800</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">$100/month</td>
+            <td class="py-3 pr-4">$57,469</td>
+            <td class="py-3 pr-4 text-gold-400 font-bold">~48</td>
+            <td class="py-3">$22,600</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">$250/month</td>
+            <td class="py-3 pr-4">$135,234</td>
+            <td class="py-3 pr-4 text-gold-400 font-bold">~44</td>
+            <td class="py-3">$55,000</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 text-white font-medium">$417/month (max)</td>
+            <td class="py-3 pr-4">$226,506</td>
+            <td class="py-3 pr-4 text-gold-400 font-bold">~42</td>
+            <td class="py-3">$91,072</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      At max contributions ($417/month for 18 years = ~$91,000 invested), the account hits <strong>$226,000 at age 18</strong>. If the child leaves that money in the IRA and never contributes another dollar, it crosses <strong>$1 million around age 42</strong>. That is a millionaire before middle age — from a program that started with $1,000.
+    </p>
+
+    <CalloutBox type="info" title="The key insight: 18 years of contributions + 24 more years of growth">
+      <p>
+        The Trump Account does the heavy lifting for the first 18 years. Then compound growth in the IRA does the rest. The child does not need to add another penny after 18 for the math to work. Time is the secret ingredient.
+      </p>
+    </CalloutBox>
+
+    <h2>The Million-Dollar Milestones</h2>
+    <p>
+      Here is the journey from $1,000 to $1,000,000 at max contributions and 10% average returns:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Milestone</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Approximate Age</th>
+            <th class="py-3 text-gray-400 font-medium">What's Happening</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">$10,000</td>
+            <td class="py-3 pr-4">3</td>
+            <td class="py-3">Steady contributions building the foundation</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">$50,000</td>
+            <td class="py-3 pr-4">10</td>
+            <td class="py-3">Compound growth starting to accelerate</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">$100,000</td>
+            <td class="py-3 pr-4">14</td>
+            <td class="py-3">Growth now exceeds annual contributions</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">$226,000</td>
+            <td class="py-3 pr-4">18</td>
+            <td class="py-3">Account converts to IRA. Contributions stop.</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">$500,000</td>
+            <td class="py-3 pr-4">~34</td>
+            <td class="py-3">Compound growth doing all the work</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 text-gold-400 font-bold">$1,000,000</td>
+            <td class="py-3 pr-4 text-gold-400 font-bold">~42</td>
+            <td class="py-3 text-gold-400 font-bold">Millionaire</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      For an interactive version of this table, see our <a href="/blog/millionaire-baby-milestones">millionaire milestone calculator</a>.
+    </p>
+
+    <h2>The Reality Check</h2>
+    <p>
+      Before you start planning your child's millionaire party, here are important caveats:
+    </p>
+    <ul>
+      <li><strong>Returns are not guaranteed.</strong> 10% is the historical average. Some decades deliver more, some less. There will be bad years.</li>
+      <li><strong>Inflation erodes purchasing power.</strong> $1 million in 2067 will not buy what $1 million buys today. At 3% inflation, it would be worth roughly $306,000 in today's dollars.</li>
+      <li><strong>Most families cannot max out.</strong> $417/month ($5,000/year) is a lot of money. At $100/month (more realistic for many families), the timeline stretches to age 48.</li>
+      <li><strong>Withdrawals reduce the balance.</strong> If your child withdraws money for college, a home, or other expenses at 18, the timeline resets.</li>
+      <li><strong>Taxes apply.</strong> Withdrawals from the traditional IRA are taxed as ordinary income. The after-tax million depends on your child's tax bracket.</li>
+    </ul>
+
+    <CalloutBox type="tip" title="The Roth conversion strategy">
+      <p>
+        At 18, your child can convert the traditional IRA to a <strong>Roth IRA</strong>. If they are in a low tax bracket (likely as a young adult), they pay a small tax now and enjoy <strong>tax-free growth forever after</strong>. This makes the path to $1 million even more powerful. See our <a href="/blog/trump-account-roth-conversion-strategy">Roth conversion strategy guide</a>.
+      </p>
+    </CalloutBox>
+
+    <h2>Even Small Contributions Create Real Wealth</h2>
+    <p>
+      Not every family can contribute $417/month. That is okay. The "million-dollar baby plan" works at <strong>any contribution level</strong> — the timeline just shifts:
+    </p>
+    <ul>
+      <li><strong>$0/month</strong> (deposit only): ~$5,560 at 18 — still 5.5x the original investment</li>
+      <li><strong>$25/month</strong>: ~$18,500 at 18 — a meaningful head start</li>
+      <li><strong>$50/month</strong>: ~$31,500 at 18 — could cover a year of in-state college</li>
+      <li><strong>$100/month</strong>: ~$57,000 at 18 — a serious financial foundation</li>
+    </ul>
+    <p>
+      Every dollar invested early has 18+ years to compound. The best contribution is the one you can actually make consistently. Use our <a href="/calculators/growth-calculator">Growth Calculator</a> to find your number.
+    </p>
+
+    <CalloutBox type="warning" title="Educational content only">
+      <p>
+        This article uses historical S&P 500 averages for projections. Past performance does not guarantee future results. Growth projections are hypothetical and not a prediction. This is not tax advice or financial advice. Consult a qualified professional for your specific situation.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

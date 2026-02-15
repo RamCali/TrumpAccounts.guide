@@ -1,0 +1,218 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-accounts-at-bank-of-america')!;
+const related = getRelatedArticles('trump-accounts-at-bank-of-america');
+
+const faqs = [
+  {
+    question: 'Can I open a Trump Account at Bank of America?',
+    answer: `Bank of America was among 27 companies that pledged support for Trump Accounts at the January 2026 summit. You cannot open a Trump Account directly at Bank of America yet. First, file ${limits.form} with the IRS, then select your trustee when the ${limits.portal} portal launches.`,
+  },
+  {
+    question: 'What index funds does Bank of America / Merrill Lynch offer for Trump Accounts?',
+    answer: 'Through Merrill Edge (BofA\'s brokerage platform), you would have access to iShares Core S&P 500 ETF (IVV) at 0.03%, iShares Core S&P Total U.S. Stock Market ETF (ITOT) at 0.03%, and other eligible funds. BlackRock\'s iShares funds would likely be prominently featured given their partnership with Merrill.',
+  },
+  {
+    question: 'Does Bank of America charge fees for Trump Accounts?',
+    answer: 'Merrill Edge (BofA\'s brokerage) currently charges no account maintenance fees and $0 commissions on online stock and ETF trades. If they serve as a Trump Account trustee, similar fee structures are expected. The only ongoing cost would be the fund expense ratio.',
+  },
+  {
+    question: 'Did Bank of America pledge money to Trump Accounts?',
+    answer: 'Bank of America was listed among 27 companies that made commitments at the Trump Accounts Summit on January 28, 2026. The Treasury Department said companies pledged to "match seed funding, broaden employee participation, or develop innovative channels for account growth." Specific dollar amounts were not disclosed.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <p>
+      <strong>Bank of America committed to supporting Trump Accounts</strong> at the January 2026 Trump Accounts Summit. As one of the largest banks in the country, BofA and its brokerage arm Merrill Edge are expected to serve as approved trustees for Section 530A accounts. Through Merrill, families would have access to some of the cheapest S&P 500 index funds available via BlackRock's iShares lineup.
+    </p>
+
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Bank of America <strong class="text-white">pledged support</strong> at the Trump Accounts Summit (January 28, 2026).</li>
+        <li>Through <strong class="text-white">Merrill Edge</strong>, BofA would offer Trump Account custodial services.</li>
+        <li>Likely funds: <strong class="text-white">IVV (0.03%)</strong> and <strong class="text-white">ITOT (0.03%)</strong> from BlackRock/iShares.</li>
+        <li>Merrill Edge charges <strong class="text-white">$0 commissions</strong> and no account maintenance fees.</li>
+        <li>You must file <strong class="text-white">{limits.form}</strong> with the IRS before selecting a trustee.</li>
+      </ul>
+    </div>
+
+    <CalloutBox type="info" title="Trustee List Not Yet Final">
+      <p>
+        While Bank of America committed to the Trump Accounts initiative, the official list of approved trustees will be published by the IRS through {limits.portal}. We will update this page when the list is confirmed.
+      </p>
+    </CalloutBox>
+
+    <h2>Bank of America's Commitment to Trump Accounts</h2>
+    <p>
+      At the <a href="/blog/trump-accounts-summit">Trump Accounts Summit</a> on January 28, 2026, Bank of America was among <strong>27 companies</strong> that made commitments to the program. According to the <a href="https://home.treasury.gov/news/press-releases/sb0374" target="_blank" rel="noopener noreferrer">U.S. Treasury press release</a>, participating companies pledged to "match seed funding, broaden employee participation, or develop innovative channels for account growth."
+    </p>
+    <p>
+      For Bank of America — one of the "Big Four" U.S. banks — this likely means:
+    </p>
+    <ul>
+      <li><strong>Serving as a Trump Account trustee</strong> through its Merrill Edge brokerage platform</li>
+      <li><strong>Offering employer Trump Account contributions</strong> for its own employees under IRC Section 128</li>
+      <li><strong>Integrating Trump Accounts</strong> into its banking and mobile app experience</li>
+    </ul>
+
+    <h2>Eligible Funds Through Merrill Edge</h2>
+    <p>
+      Bank of America's brokerage platform is <strong>Merrill Edge</strong> (formerly Merrill Lynch). Through Merrill, families would have access to a wide range of S&P 500 and broad market index funds. BlackRock's <strong>iShares</strong> funds would likely be prominently featured, given Bank of America's close relationship with BlackRock.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Fund</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Ticker</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Index</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Expense Ratio</th>
+            <th class="py-3 text-gray-400 font-medium">Fee on $10K</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">iShares Core S&P 500 ETF</td>
+            <td class="py-3 pr-4">IVV</td>
+            <td class="py-3 pr-4">S&P 500</td>
+            <td class="py-3 pr-4 text-mint-400 font-bold">0.03%</td>
+            <td class="py-3">$3/yr</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">iShares Core S&P Total U.S. Stock Market</td>
+            <td class="py-3 pr-4">ITOT</td>
+            <td class="py-3 pr-4">Total U.S. Market</td>
+            <td class="py-3 pr-4 text-mint-400 font-bold">0.03%</td>
+            <td class="py-3">$3/yr</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Vanguard S&P 500 ETF</td>
+            <td class="py-3 pr-4">VOO</td>
+            <td class="py-3 pr-4">S&P 500</td>
+            <td class="py-3 pr-4 text-mint-400">0.03%</td>
+            <td class="py-3">$3/yr</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 text-white font-medium">SPDR S&P 500 ETF Trust</td>
+            <td class="py-3 pr-4">SPY</td>
+            <td class="py-3 pr-4">S&P 500</td>
+            <td class="py-3 pr-4 text-mint-400">0.09%</td>
+            <td class="py-3">$9/yr</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      IVV and ITOT at <strong>0.03%</strong> are excellent choices — well below the {(limits.maxExpenseRatio * 100).toFixed(1)}% legal cap for Trump Accounts. Both are managed by BlackRock, which manages over $10 trillion in assets globally.
+    </p>
+
+    <CalloutBox type="tip" title="IVV vs ITOT: Which one?">
+      <p>
+        IVV tracks the S&P 500 (500 largest U.S. companies). ITOT tracks the total U.S. stock market (~3,500 companies). Both cost 0.03%. Historically, their returns are nearly identical. Either is a strong choice for a Trump Account.
+      </p>
+    </CalloutBox>
+
+    <h2>Merrill Edge Fees for Trump Accounts</h2>
+    <p>
+      Based on Merrill Edge's current pricing (which already applies to IRAs and custodial accounts):
+    </p>
+    <ul>
+      <li><strong>Account maintenance fees:</strong> None. No annual account charges.</li>
+      <li><strong>Trading commissions:</strong> $0 for online stock and ETF trades.</li>
+      <li><strong>Fund expense ratios:</strong> As low as 0.03% for IVV and ITOT.</li>
+      <li><strong>Minimum investment:</strong> No minimum for ETFs. Buy as little as one share.</li>
+    </ul>
+
+    <h2>Why Choose Bank of America / Merrill Edge?</h2>
+    <p>
+      BofA may be a good choice for families who:
+    </p>
+    <ul>
+      <li><strong>Already bank with BofA</strong> — managing your child's Trump Account alongside your checking, savings, and credit cards in one place.</li>
+      <li><strong>Participate in Preferred Rewards</strong> — BofA's loyalty program offers bonus rewards, reduced fees, and other benefits for customers with qualifying balances across all accounts.</li>
+      <li><strong>Want in-person support</strong> — BofA has over 3,700 branches and 15,000+ ATMs nationwide. If you prefer face-to-face help, they offer more locations than any other brokerage.</li>
+      <li><strong>Want iShares funds</strong> — Merrill's partnership with BlackRock means iShares funds like IVV and ITOT are seamlessly integrated.</li>
+    </ul>
+
+    <h2>How to Open a Trump Account (Then Select BofA)</h2>
+    <ol>
+      <li><strong>File {limits.form}</strong> with your {limits.pilotDepositStartYear} tax return (due April 15, 2026) or through {limits.portal} when it launches mid-2026.</li>
+      <li><strong>Wait for IRS activation.</strong> The IRS will process your election.</li>
+      <li><strong>Select Bank of America / Merrill Edge as your trustee</strong> from the approved list.</li>
+      <li><strong>Choose your fund</strong> — IVV or ITOT recommended for lowest fees.</li>
+      <li><strong>Start contributing</strong> up to ${limits.annualContributionLimit.toLocaleString()}/year.</li>
+    </ol>
+    <p>
+      For the complete walkthrough, see <a href="/blog/how-to-open-step-by-step">how to open a Trump Account step by step</a>.
+    </p>
+
+    <h2>Bank of America vs Fidelity vs Schwab</h2>
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Brokerage</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Cheapest S&P 500 Fund</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Expense Ratio</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Minimum</th>
+            <th class="py-3 text-gray-400 font-medium">Branches</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Bank of America</td>
+            <td class="py-3 pr-4">IVV (iShares)</td>
+            <td class="py-3 pr-4 text-mint-400">0.03%</td>
+            <td class="py-3 pr-4">None (ETF)</td>
+            <td class="py-3">3,700+</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Fidelity</td>
+            <td class="py-3 pr-4">FXAIX</td>
+            <td class="py-3 pr-4 text-mint-400 font-bold">0.015%</td>
+            <td class="py-3 pr-4">None</td>
+            <td class="py-3">200+</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 text-white font-medium">Schwab</td>
+            <td class="py-3 pr-4">SWPPX</td>
+            <td class="py-3 pr-4 text-mint-400">0.02%</td>
+            <td class="py-3 pr-4">None</td>
+            <td class="py-3">400+</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Fidelity has the lowest expense ratio at 0.015%. Schwab is next at 0.02%. Bank of America's iShares IVV is 0.03%. The difference is tiny — on a $50,000 balance, it is $7.50/year at Fidelity vs $15/year at BofA. BofA's advantage is its massive branch network and integration with existing bank accounts.
+    </p>
+    <p>
+      For detailed comparisons, see <a href="/blog/trump-accounts-at-fidelity">Trump Accounts at Fidelity</a> and <a href="/blog/trump-accounts-at-schwab">Trump Accounts at Schwab</a>.
+    </p>
+
+    <CalloutBox type="warning" title="Educational content only">
+      <p>
+        This article is based on publicly reported commitments from the Trump Accounts Summit and Merrill Edge's current fee structure. BofA's specific Trump Account offering may vary. This is not tax advice or financial advice.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

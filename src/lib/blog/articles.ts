@@ -53,8 +53,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   },
   'when-do-trump-accounts-start': {
     slug: 'when-do-trump-accounts-start',
-    title: 'Are Trump Accounts Available Now? Key Dates (2026)',
-    description: 'Are Trump accounts available now? Yes — file Form 4547 with your 2025 tax return by April 15, 2026. Portal launches mid-2026. Full timeline.',
+    title: 'When Can I Open a Trump Account? Key Dates & Timeline (2026)',
+    description: 'When can you open a Trump Account? File Form 4547 with your 2025 tax return by April 15, 2026. The trumpaccounts.gov portal launches mid-2026. Full timeline.',
     category: 'Basics',
     categorySlug: 'basics',
     datePublished: '2026-02-12',
@@ -685,8 +685,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   // ─── Cluster 9: Practical Parent Guides ──────────────────────
   'how-to-open-step-by-step': {
     slug: 'how-to-open-step-by-step',
-    title: 'How to Open a Trump Account (2026)',
-    description: 'Step-by-step: get your child\'s SSN, download Form 4547, file with your taxes or through trumpaccounts.gov. Full walkthrough.',
+    title: 'How to Open (Sign Up for) a Trump Account (2026)',
+    description: 'How to open, sign up for, set up, or apply for a Trump Account. Get your child\'s SSN, file Form 4547, and claim the $1,000 deposit. Full step-by-step walkthrough.',
     category: 'Parent Guides',
     categorySlug: 'parent-guides',
     datePublished: '2026-02-12',
@@ -1108,6 +1108,123 @@ export const blogArticles: Record<string, BlogArticle> = {
     dateModified: '2026-02-13',
     readingTime: '6 min read',
     relatedSlugs: ['millionaire-baby-milestones', 'cost-of-waiting-calculator', 'how-much-at-age-18', 'expected-returns-trump-account', 'build-50k-by-18'],
+  },
+
+  // ─── Keyword Gap: Summit & Events ──────────────────────────
+  'trump-accounts-summit': {
+    slug: 'trump-accounts-summit',
+    title: 'Trump Accounts Summit: What Happened, Who Spoke & 27 Corporate Pledges',
+    description: 'Trump Accounts Summit recap: Jan 28, 2026 at Mellon Auditorium. Trump, Bessent, Nicki Minaj headlined. 27 companies pledged support. 1M sign-ups.',
+    category: 'Policy & Economics',
+    categorySlug: 'policy-and-economics',
+    datePublished: '2026-02-15',
+    dateModified: '2026-02-15',
+    readingTime: '8 min read',
+    relatedSlugs: ['corporate-pledges-trump-accounts', 'dell-pledge-explained', 'visa-trump-accounts', 'what-are-trump-accounts-guide', 'how-to-open-step-by-step'],
+  },
+
+  // ─── Keyword Gap: Official IRS Name ────────────────────────
+  'childrens-tax-advantage-account': {
+    slug: 'childrens-tax-advantage-account',
+    title: 'Children\'s Tax Advantage Account: The Official Name for Trump Accounts',
+    description: 'Children\'s Tax Advantage Account is the IRS name for Trump Accounts. Same program, same rules. $1,000 deposit, $5,000/yr limit, IRA at 18. Full guide.',
+    category: 'Basics',
+    categorySlug: 'basics',
+    datePublished: '2026-02-15',
+    dateModified: '2026-02-15',
+    readingTime: '7 min read',
+    relatedSlugs: ['what-are-trump-accounts-guide', 'trump-account-name-explained', 'who-qualifies-for-trump-account', 'how-to-open-step-by-step', 'gains-taxation-explained'],
+  },
+
+  // ─── Keyword Gap: Savings Account Synonym ──────────────────
+  'trump-savings-account-explained': {
+    slug: 'trump-savings-account-explained',
+    title: 'Trump Savings Account Explained: It\'s an Investment Account (Here\'s Why)',
+    description: 'Trump savings account vs bank savings: $1,000 grows to $5,560 vs $2,026 over 18 years. Why Trump Accounts invest in S&P 500, not a bank.',
+    category: 'Basics',
+    categorySlug: 'basics',
+    datePublished: '2026-02-15',
+    dateModified: '2026-02-15',
+    readingTime: '6 min read',
+    relatedSlugs: ['trump-account-like-baby-savings', 'trump-account-vs-savings-account', 'how-is-trump-account-invested', 'what-are-trump-accounts-guide', 'best-accounts-for-kids-today'],
+  },
+
+  // ─── Keyword Gap: Investment Account Synonym ───────────────
+  'trump-investment-account-for-children': {
+    slug: 'trump-investment-account-for-children',
+    title: 'Trump Investment Account for Children: Complete Guide (2026)',
+    description: 'Trump investment account for children: S&P 500 index funds, $1,000 deposit, $5,000/yr limit. Best funds, growth projections, and how to open one.',
+    category: 'Basics',
+    categorySlug: 'basics',
+    datePublished: '2026-02-15',
+    dateModified: '2026-02-15',
+    readingTime: '7 min read',
+    relatedSlugs: ['how-is-trump-account-invested', 'index-fund-requirements', 'trump-account-vs-sp500-etfs', 'best-accounts-for-kids-today', 'how-to-open-step-by-step'],
+  },
+
+  // ─── Keyword Gap: Baby Bonus Framing ───────────────────────
+  'trump-baby-bonus': {
+    slug: 'trump-baby-bonus',
+    title: 'Trump Baby Bonus: How to Claim the $1,000 Government Deposit',
+    description: 'Trump baby bonus: $1,000 free deposit for babies born 2025-2028. How to claim it, who qualifies, and how much it could grow to by age 18.',
+    category: 'Parent Guides',
+    categorySlug: 'parent-guides',
+    datePublished: '2026-02-15',
+    dateModified: '2026-02-15',
+    readingTime: '6 min read',
+    relatedSlugs: ['trump-accounts-for-newborns', 'do-all-babies-qualify', 'how-to-open-step-by-step', 'how-much-at-age-18', 'dell-pledge-explained'],
+  },
+
+  // ─── Keyword Gap: Million Dollar Baby Plan ─────────────────
+  'million-dollar-baby-plan': {
+    slug: 'million-dollar-baby-plan',
+    title: 'Trump\'s Million-Dollar Baby Plan: Can a Trump Account Create Millionaires?',
+    description: 'At max contributions and 10% returns, a Trump Account could hit $226K by 18 and $1M by 42. The math behind the million-dollar baby plan.',
+    category: 'Analysis',
+    categorySlug: 'analysis',
+    datePublished: '2026-02-15',
+    dateModified: '2026-02-15',
+    readingTime: '7 min read',
+    relatedSlugs: ['could-create-millionaires', 'millionaire-baby-milestones', 'how-much-at-age-18', 'expected-returns-trump-account', 'build-50k-by-18'],
+  },
+
+  // ─── Keyword Gap: Visa ─────────────────────────────────────
+  'visa-trump-accounts': {
+    slug: 'visa-trump-accounts',
+    title: 'Visa Trump Accounts: Credit Card Rewards to Fund Your Child\'s Account',
+    description: 'Visa announced a future feature to direct credit card rewards into Trump Accounts. Announced at the Jan 2026 summit. How it works and what we know.',
+    category: 'Policy & Economics',
+    categorySlug: 'policy-and-economics',
+    datePublished: '2026-02-15',
+    dateModified: '2026-02-15',
+    readingTime: '6 min read',
+    relatedSlugs: ['trump-accounts-summit', 'corporate-pledges-trump-accounts', 'how-to-open-step-by-step', 'contribution-limits-explained'],
+  },
+
+  // ─── Brokerage: Bank of America ────────────────────────────
+  'trump-accounts-at-bank-of-america': {
+    slug: 'trump-accounts-at-bank-of-america',
+    title: 'Trump Accounts at Bank of America: Funds, Fees & How to Open',
+    description: 'Bank of America pledged support for Trump Accounts. Through Merrill Edge: IVV at 0.03%, $0 commissions, 3,700+ branches. How to open and which fund to pick.',
+    category: 'Brokerage Guides',
+    categorySlug: 'brokerage-guides',
+    datePublished: '2026-02-15',
+    dateModified: '2026-02-15',
+    readingTime: '7 min read',
+    relatedSlugs: ['how-to-open-step-by-step', 'trump-account-fees-explained', 'trump-accounts-at-fidelity', 'trump-accounts-at-schwab', 'where-to-open-trump-account'],
+  },
+
+  // ─── Brokerage Hub: Where to Open ─────────────────────────
+  'where-to-open-trump-account': {
+    slug: 'where-to-open-trump-account',
+    title: 'Where to Open a Trump Account: Best Brokerages Compared (2026)',
+    description: 'Compare Fidelity, Schwab, BofA, Vanguard, Robinhood & SoFi for Trump Accounts. Fees, funds, minimums, and branches side by side.',
+    category: 'Brokerage Guides',
+    categorySlug: 'brokerage-guides',
+    datePublished: '2026-02-15',
+    dateModified: '2026-02-15',
+    readingTime: '6 min read',
+    relatedSlugs: ['trump-accounts-at-fidelity', 'trump-accounts-at-schwab', 'trump-accounts-at-bank-of-america', 'trump-accounts-at-robinhood', 'how-to-open-step-by-step', 'trump-account-fees-explained'],
   },
 };
 

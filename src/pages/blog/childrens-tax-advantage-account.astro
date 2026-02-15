@@ -1,0 +1,238 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('childrens-tax-advantage-account')!;
+const related = getRelatedArticles('childrens-tax-advantage-account');
+
+const faqs = [
+  {
+    question: 'What is a Children\'s Tax Advantage Account?',
+    answer: `A Children's Tax Advantage Account is the official IRS term for what most people call a "Trump Account." It is a federally created investment account under IRC Section 530A for U.S. citizen children under 18. The government deposits $${limits.pilotDeposit.toLocaleString()} for children born ${limits.pilotDepositStartYear}-${limits.pilotDepositEndYear}, and families can contribute up to $${limits.annualContributionLimit.toLocaleString()}/year.`,
+  },
+  {
+    question: 'Is a Children\'s Tax Advantage Account the same as a Trump Account?',
+    answer: 'Yes. "Children\'s Tax Advantage Account" is the official name used by the IRS in Notice 2025-68 and on Form 4547. "Trump Account" is the popular name used in the media and by the public. They refer to the exact same program under IRC Section 530A.',
+  },
+  {
+    question: 'Why is it called a Children\'s Tax Advantage Account?',
+    answer: 'The IRS uses this formal name because the account provides tax-advantaged growth for children. Earnings grow tax-deferred during the growth phase (birth through age 18), and the account converts to a traditional IRA at 18 with standard IRA tax treatment.',
+  },
+  {
+    question: 'How do I open a Children\'s Tax Advantage Account?',
+    answer: `File ${limits.form} (Trump Account Election) with your 2025 federal tax return (due April 15, 2026), through ${limits.portal} when it launches mid-2026, or by mail. You need your child's SSN and your tax information.`,
+  },
+  {
+    question: 'What is the tax advantage of a Children\'s Tax Advantage Account?',
+    answer: `Three tax advantages: (1) the $${limits.pilotDeposit.toLocaleString()} government deposit is free money, (2) investment growth is tax-deferred until withdrawal, and (3) employer contributions up to $${limits.employerContributionLimit.toLocaleString()}/year are tax-free to the employee under IRC Section 128.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><strong class="text-white">Children's Tax Advantage Account</strong> is the official IRS name for what everyone calls a <strong class="text-white">Trump Account</strong>.</li>
+        <li>Same program, same rules. Created by the <strong class="text-white">{limits.legislation}</strong> under <strong class="text-white">{limits.legalBasis}</strong>.</li>
+        <li>Children born <strong class="text-white">{limits.pilotDepositStartYear}–{limits.pilotDepositEndYear}</strong> get a free <strong class="text-white">${limits.pilotDeposit.toLocaleString()} federal deposit</strong>.</li>
+        <li>Families can contribute up to <strong class="text-white">${limits.annualContributionLimit.toLocaleString()}/year</strong>. Employers can add <strong class="text-white">${limits.employerContributionLimit.toLocaleString()}/year</strong> tax-free.</li>
+        <li>At age <strong class="text-white">{limits.growthPhaseEndAge}</strong>, it converts to a <strong class="text-white">traditional IRA</strong> with full flexibility.</li>
+      </ul>
+    </div>
+
+    <p>
+      If you have been searching for "Children's Tax Advantage Account" — you have found the right place. <strong>Children's Tax Advantage Account is the official IRS term</strong> for what most people call a <strong>Trump Account</strong>. Same program. Same rules. Same $1,000 deposit. The IRS uses the formal name on official documents, but the media and public use "Trump Account." This guide explains everything under the official name.
+    </p>
+
+    <h2>What Is a Children's Tax Advantage Account?</h2>
+    <p>
+      A Children's Tax Advantage Account is a <strong>federally created investment account</strong> for U.S. citizen children under age {limits.growthPhaseEndAge}. It was established by the <strong>{limits.legislation}</strong>, signed into law on July 4, 2025, under <strong>{limits.legalBasis}</strong>.
+    </p>
+    <p>
+      The IRS issued guidance in <strong>{limits.irsNotice}</strong> (published {limits.irsNoticeDate}) and created <strong>{limits.form}</strong> for parents to elect the account. The official portal at <strong>{limits.portal}</strong> is expected to launch mid-2026.
+    </p>
+    <p>
+      In plain English: the government created an investment account for every American child. For babies born {limits.pilotDepositStartYear}–{limits.pilotDepositEndYear}, the government puts in ${limits.pilotDeposit.toLocaleString()}. The money goes into S&P 500 index funds and grows until the child turns {limits.growthPhaseEndAge}. Then it becomes a traditional IRA that the child fully controls.
+    </p>
+
+    <h2>Why Two Names? "Children's Tax Advantage Account" vs "Trump Account"</h2>
+    <p>
+      The name confusion is common. Here is the breakdown:
+    </p>
+    <ul>
+      <li><strong>Children's Tax Advantage Account</strong> — the formal name used by the IRS on official forms, notices, and guidance documents.</li>
+      <li><strong>Trump Account</strong> — the popular name used in media, by politicians, and by the general public. Named after President Trump who signed the law.</li>
+      <li><strong>Section 530A Account</strong> — the technical legal name referencing the specific tax code section.</li>
+      <li><strong>MAGA Account</strong> — an earlier name used during the legislative process, no longer commonly used.</li>
+    </ul>
+    <p>
+      All four names refer to <strong>the exact same program</strong>. There is no difference in rules, benefits, or eligibility between a "Children's Tax Advantage Account" and a "Trump Account." The IRS does not care which name you use when talking about it — they only care that you file {limits.form}.
+    </p>
+
+    <CalloutBox type="info" title="On official forms, you will see both names">
+      <p>
+        {limits.form} is titled "Trump Account Election(s)" but the IRS guidance in {limits.irsNotice} uses "Children's Tax Advantage Account" and "Trump Account" interchangeably. When searching the IRS website, try both terms.
+      </p>
+    </CalloutBox>
+
+    <h2>What Are the Tax Advantages?</h2>
+    <p>
+      The "tax advantage" in the name refers to three specific benefits:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Tax Advantage</th>
+            <th class="py-3 text-gray-400 font-medium">How It Works</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Free government deposit</td>
+            <td class="py-3">${limits.pilotDeposit.toLocaleString()} deposited for children born {limits.pilotDepositStartYear}–{limits.pilotDepositEndYear}. Not taxable income to the family.</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Tax-deferred growth</td>
+            <td class="py-3">Investment earnings are not taxed during the growth phase (birth through age {limits.growthPhaseEndAge}). No annual capital gains taxes.</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 text-white font-medium">Tax-free employer contributions</td>
+            <td class="py-3">Employer contributions up to ${limits.employerContributionLimit.toLocaleString()}/year are excluded from the employee's taxable income under IRC Section 128.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      The trade-off: when the child withdraws money after age {limits.growthPhaseEndAge} (once it becomes a traditional IRA), withdrawals are taxed as <strong>ordinary income</strong>. This is the same treatment as a traditional IRA. For more on the tax details, see our <a href="/blog/gains-taxation-explained">gains taxation guide</a>.
+    </p>
+
+    <h2>Who Is Eligible?</h2>
+    <p>
+      Every U.S. citizen child under {limits.growthPhaseEndAge} is eligible. There are <strong>no income restrictions</strong>. The three requirements:
+    </p>
+    <ul>
+      <li><strong>U.S. citizen</strong> — born in the U.S. or a U.S. citizen at birth</li>
+      <li><strong>Valid Social Security Number</strong></li>
+      <li><strong>Under age {limits.growthPhaseEndAge}</strong> at the end of the election year</li>
+    </ul>
+    <p>
+      The <strong>${limits.pilotDeposit.toLocaleString()} government deposit</strong> is only for children born between January 1, {limits.pilotDepositStartYear} and December 31, {limits.pilotDepositEndYear}. Children born outside that window can still open a Children's Tax Advantage Account — they just do not receive the deposit. Use our <a href="/calculators/eligibility-checker">Eligibility Checker</a> to confirm.
+    </p>
+
+    <h2>Contribution Limits</h2>
+    <p>
+      The annual contribution limit is <strong>${limits.annualContributionLimit.toLocaleString()}</strong> from all sources combined (after-tax). This includes contributions from parents, grandparents, relatives, and friends. The ${limits.pilotDeposit.toLocaleString()} government deposit does <strong>not</strong> count toward this cap.
+    </p>
+    <p>
+      Employers can contribute up to <strong>${limits.employerContributionLimit.toLocaleString()}/year</strong> per employee, tax-free under IRC Section 128. The employer contribution <strong>does</strong> count toward the ${limits.annualContributionLimit.toLocaleString()} annual cap.
+    </p>
+    <p>
+      The contribution limit is <strong>indexed for inflation</strong> starting in {limits.inflationIndexStartYear}. For more, see our <a href="/blog/contribution-limits-explained">contribution limits guide</a>.
+    </p>
+
+    <h2>How to Open a Children's Tax Advantage Account</h2>
+    <p>
+      There are three ways to open the account (elect the Children's Tax Advantage Account):
+    </p>
+    <ol>
+      <li><strong>With your tax return</strong> — attach {limits.form} to your {limits.pilotDepositStartYear} federal tax return, due April 15, 2026.</li>
+      <li><strong>Through {limits.portal}</strong> — the online portal is expected to launch mid-2026.</li>
+      <li><strong>By mail</strong> — send a completed {limits.form} to the IRS.</li>
+    </ol>
+    <p>
+      For the complete walkthrough, see <a href="/blog/how-to-open-step-by-step">how to open a Trump Account step by step</a>.
+    </p>
+
+    <h2>How the Money Is Invested</h2>
+    <p>
+      All funds in a Children's Tax Advantage Account must be invested in <strong>mutual funds or ETFs</strong> that track the <strong>S&P 500 or a broad U.S. equity index</strong>. The fund expense ratio must be at or below <strong>{(limits.maxExpenseRatio * 100).toFixed(1)}%</strong>.
+    </p>
+    <p>
+      You cannot invest in individual stocks, bonds, crypto, or other assets. The investment options are intentionally limited to broad, low-cost index funds that track the U.S. stock market. For eligible fund options, see our <a href="/blog/index-fund-requirements">index fund requirements guide</a>.
+    </p>
+
+    <h2>What Happens at Age 18?</h2>
+    <p>
+      At age {limits.growthPhaseEndAge}, the Children's Tax Advantage Account <strong>automatically converts to a traditional IRA</strong>. The child gains full control and can:
+    </p>
+    <ul>
+      <li><strong>Keep it invested</strong> for retirement</li>
+      <li><strong>Withdraw for any purpose</strong> — college, a home, a business, or anything else</li>
+      <li><strong>Convert to a Roth IRA</strong> — pay taxes now at a likely low rate, then enjoy tax-free growth</li>
+    </ul>
+    <p>
+      There are no restrictions on how the money is used after {limits.growthPhaseEndAge}. Standard IRA rules apply. For more details, see <a href="/blog/what-can-money-be-used-for">what Trump Account money can be used for</a>.
+    </p>
+
+    <h2>Children's Tax Advantage Account vs Other Accounts</h2>
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Feature</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Children's Tax Advantage Account</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">529 Plan</th>
+            <th class="py-3 text-gray-400 font-medium">Custodial Account (UTMA)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-gray-400">Government deposit</td>
+            <td class="py-3 pr-4 text-white font-medium">${limits.pilotDeposit.toLocaleString()}</td>
+            <td class="py-3 pr-4">None</td>
+            <td class="py-3">None</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-gray-400">Annual limit</td>
+            <td class="py-3 pr-4 text-white font-medium">${limits.annualContributionLimit.toLocaleString()}</td>
+            <td class="py-3 pr-4">Varies (often $300K+ lifetime)</td>
+            <td class="py-3">No federal limit</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-gray-400">Use of funds</td>
+            <td class="py-3 pr-4 text-white font-medium">Anything (after {limits.growthPhaseEndAge})</td>
+            <td class="py-3 pr-4">Education only</td>
+            <td class="py-3">Anything (at age of majority)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-gray-400">Tax treatment</td>
+            <td class="py-3 pr-4">Tax-deferred; taxed on withdrawal</td>
+            <td class="py-3 pr-4">Tax-free for education</td>
+            <td class="py-3">Taxed annually (kiddie tax)</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 text-gray-400">Investment options</td>
+            <td class="py-3 pr-4">S&P 500 / broad index only</td>
+            <td class="py-3 pr-4">Varies by state</td>
+            <td class="py-3">Nearly anything</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      For detailed comparisons, see <a href="/blog/trump-account-vs-529-blog">Trump Account vs 529</a> or <a href="/compare/trump-account-vs-custodial-account">Trump Account vs custodial accounts</a>.
+    </p>
+
+    <CalloutBox type="warning" title="Educational content only">
+      <p>
+        This article explains Children's Tax Advantage Accounts based on {limits.irsNotice} and the {limits.legislation}. It is not tax advice or financial advice. Consult a qualified tax professional or financial advisor for your specific situation.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

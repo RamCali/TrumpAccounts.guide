@@ -1,0 +1,217 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-savings-account-explained')!;
+const related = getRelatedArticles('trump-savings-account-explained');
+
+const faqs = [
+  {
+    question: 'Is a Trump Savings Account the same as a Trump Account?',
+    answer: 'Yes. "Trump Savings Account" is an informal name people use. The official program is called a Trump Account (or Children\'s Tax Advantage Account) under IRC Section 530A. It is an investment account, not a traditional savings account.',
+  },
+  {
+    question: 'Is a Trump Account actually a savings account?',
+    answer: `No. A Trump Account is an investment account. The money goes into S&P 500 or broad U.S. equity index funds — not a bank savings account. Over 18 years, the difference is enormous: a savings account at 4% turns $${limits.pilotDeposit.toLocaleString()} into ~$2,026, while the S&P 500's historical average of 10% turns it into ~$5,560.`,
+  },
+  {
+    question: 'Can I put Trump Account money in a regular savings account?',
+    answer: 'No. By law, Trump Account funds must be invested in mutual funds or ETFs that track the S&P 500 or a broad U.S. equity index. You cannot put the money in a bank savings account, CD, bonds, or individual stocks.',
+  },
+  {
+    question: 'How much can I save in a Trump Account each year?',
+    answer: `The annual contribution limit is $${limits.annualContributionLimit.toLocaleString()} from all sources combined. The $${limits.pilotDeposit.toLocaleString()} government deposit does not count toward this cap. Employers can contribute up to $${limits.employerContributionLimit.toLocaleString()}/year tax-free, which does count toward the cap.`,
+  },
+  {
+    question: 'Is a Trump Savings Account a good idea?',
+    answer: `For most families, yes. The free $${limits.pilotDeposit.toLocaleString()} deposit (for ${limits.pilotDepositStartYear}-${limits.pilotDepositEndYear} births) and tax-deferred growth make it a strong option. The S&P 500 has historically outperformed savings accounts by a wide margin over 18-year periods.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>"Trump Savings Account" is what people call it, but it is actually an <strong class="text-white">investment account</strong>, not a savings account.</li>
+        <li>Money goes into <strong class="text-white">S&P 500 index funds</strong>, not a bank. Historical returns average <strong class="text-white">~10%/year</strong> vs ~4% for savings.</li>
+        <li>Children born <strong class="text-white">{limits.pilotDepositStartYear}–{limits.pilotDepositEndYear}</strong> get a free <strong class="text-white">${limits.pilotDeposit.toLocaleString()} deposit</strong>.</li>
+        <li>Families can contribute up to <strong class="text-white">${limits.annualContributionLimit.toLocaleString()}/year</strong> on top of the deposit.</li>
+        <li>Over 18 years, the difference between a savings account and the S&P 500 is <strong class="text-white">tens of thousands of dollars</strong>.</li>
+      </ul>
+    </div>
+
+    <p>
+      If you searched for "Trump savings account" or "Trump child savings account," you are looking for the right program — but the name is slightly misleading. A <strong>Trump Account is not a savings account</strong>. It is an <strong>investment account</strong> where your child's money goes into S&P 500 index funds and grows with the stock market. That difference matters enormously over 18 years. Here is everything you need to know.
+    </p>
+
+    <h2>Why People Call It a "Trump Savings Account"</h2>
+    <p>
+      The confusion is understandable. People associate saving money for their kids with a savings account. But the official program — created by the <strong>{limits.legislation}</strong> under <strong>{limits.legalBasis}</strong> — is an <strong>investment account</strong>, not a savings account.
+    </p>
+    <p>
+      Here are the names you might hear:
+    </p>
+    <ul>
+      <li><strong>Trump Savings Account</strong> — informal, commonly used but technically inaccurate</li>
+      <li><strong>Trump Account</strong> — the most common name used by media and the public</li>
+      <li><strong>Children's Tax Advantage Account</strong> — the official IRS name</li>
+      <li><strong>Section 530A Account</strong> — the legal/technical name</li>
+    </ul>
+    <p>
+      All refer to the same program. The key thing to understand is that your child's money is <strong>invested in the stock market</strong>, not sitting in a bank.
+    </p>
+
+    <h2>Savings Account vs Trump Account: The 18-Year Difference</h2>
+    <p>
+      This is where the distinction really matters. Let's compare what happens to the ${limits.pilotDeposit.toLocaleString()} government deposit over 18 years in a bank savings account versus a Trump Account:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium"></th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Bank Savings (4% APY)</th>
+            <th class="py-3 text-gray-400 font-medium">Trump Account (10% avg)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-gray-400">Starting amount</td>
+            <td class="py-3 pr-4">$1,000</td>
+            <td class="py-3">$1,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-gray-400">After 5 years</td>
+            <td class="py-3 pr-4">$1,217</td>
+            <td class="py-3 font-medium text-gold-400">$1,611</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-gray-400">After 10 years</td>
+            <td class="py-3 pr-4">$1,480</td>
+            <td class="py-3 font-medium text-gold-400">$2,594</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-gray-400">After 18 years</td>
+            <td class="py-3 pr-4">$2,026</td>
+            <td class="py-3 font-medium text-gold-400">$5,560</td>
+          </tr>
+          <tr class="border-t border-surface-500">
+            <td class="py-3 pr-4 font-bold text-white">Difference</td>
+            <td class="py-3 pr-4" colspan="2"><span class="font-bold text-gold-400">$3,534 more</span> in a Trump Account — <strong class="text-white">2.7x the money</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      That is with <strong>no additional contributions</strong> — just the ${limits.pilotDeposit.toLocaleString()} deposit. Add family contributions and the gap widens dramatically.
+    </p>
+
+    <h2>With Monthly Contributions: The Gap Gets Massive</h2>
+    <p>
+      Now compare what happens if you add $200/month on top of the ${limits.pilotDeposit.toLocaleString()} deposit:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Monthly Contribution</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Bank Savings (4%)</th>
+            <th class="py-3 text-gray-400 font-medium">Trump Account (10%)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">$0/month</td>
+            <td class="py-3 pr-4">$2,026</td>
+            <td class="py-3 font-medium text-gold-400">$5,560</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">$100/month</td>
+            <td class="py-3 pr-4">$32,764</td>
+            <td class="py-3 font-medium text-gold-400">$57,469</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">$200/month</td>
+            <td class="py-3 pr-4">$63,503</td>
+            <td class="py-3 font-medium text-gold-400">$109,378</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 text-white font-medium">$417/month (max)</td>
+            <td class="py-3 pr-4">$130,489</td>
+            <td class="py-3 font-medium text-gold-400">$226,506</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      At $200/month, the difference is <strong>$45,875</strong>. At max contributions, the gap is nearly <strong>$96,000</strong>. This is why Trump Accounts invest in index funds instead of a savings account. The whole point is to harness the <strong>power of compound growth</strong> over a long time horizon.
+    </p>
+
+    <CalloutBox type="tip" title="Use the growth calculator">
+      <p>
+        Run your own numbers with our <a href="/calculators/growth-calculator">Growth Calculator</a>. Enter your child's age, monthly contribution, and see projections at different return rates.
+      </p>
+    </CalloutBox>
+
+    <h2>But Savings Accounts Are Safer, Right?</h2>
+    <p>
+      Yes — in the short term. A bank savings account is FDIC-insured. Your money cannot lose value. The stock market can drop 20% or more in a single year.
+    </p>
+    <p>
+      But here is the thing: <strong>Trump Accounts have an 18-year time horizon</strong>. Over every 18-year period in S&P 500 history, the market has delivered positive returns. The worst 18-year period still beat savings account rates. The lock-up period before age 18 is actually a <strong>feature</strong> — it prevents panic selling during downturns.
+    </p>
+    <p>
+      For more on this, see <a href="/blog/what-happens-market-crash">what happens during a market crash</a>.
+    </p>
+
+    <h2>How a "Trump Savings Account" Actually Works</h2>
+    <p>
+      Here is the step-by-step:
+    </p>
+    <ol>
+      <li><strong>File {limits.form}</strong> with your tax return, through {limits.portal}, or by mail.</li>
+      <li><strong>The government deposits ${limits.pilotDeposit.toLocaleString()}</strong> (for {limits.pilotDepositStartYear}–{limits.pilotDepositEndYear} births).</li>
+      <li><strong>Choose an S&P 500 index fund</strong> at an approved trustee like Fidelity, Schwab, or Vanguard.</li>
+      <li><strong>Contribute up to ${limits.annualContributionLimit.toLocaleString()}/year</strong> (optional). Anyone can contribute — parents, grandparents, relatives.</li>
+      <li><strong>Money grows tax-deferred</strong> for up to {limits.growthPhaseEndAge} years.</li>
+      <li><strong>At {limits.growthPhaseEndAge}, it converts to a traditional IRA.</strong> Your child decides how to use it.</li>
+    </ol>
+
+    <h2>Can I Open Both a Trump Account and a Savings Account?</h2>
+    <p>
+      <strong>Yes.</strong> A Trump Account does not replace a regular savings account. Many families do both:
+    </p>
+    <ul>
+      <li><strong>Trump Account</strong> — long-term wealth building through stock market growth</li>
+      <li><strong>Savings account</strong> — short-term, accessible cash for emergencies</li>
+    </ul>
+    <p>
+      The Trump Account is locked until age {limits.growthPhaseEndAge}. If you need accessible savings for your child, keep a separate account at your bank. But for <strong>long-term growth</strong>, the Trump Account is designed to outperform.
+    </p>
+    <p>
+      For a full breakdown of all account types, see <a href="/blog/best-accounts-for-kids-today">best investment accounts for kids</a>.
+    </p>
+
+    <CalloutBox type="warning" title="Educational content only">
+      <p>
+        This article explains Trump Accounts based on {limits.irsNotice} and the {limits.legislation}. Growth projections use historical averages and are not guaranteed. This is not tax advice or financial advice. Consult a qualified professional for your specific situation.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

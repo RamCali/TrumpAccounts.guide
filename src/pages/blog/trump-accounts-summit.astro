@@ -1,0 +1,301 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-accounts-summit')!;
+const related = getRelatedArticles('trump-accounts-summit');
+
+const faqs = [
+  {
+    question: 'What was the Trump Accounts Summit?',
+    answer: 'The Trump Accounts Summit was a high-profile event hosted by the U.S. Department of the Treasury on January 28, 2026 at the Andrew W. Mellon Auditorium in Washington, D.C. President Trump and Treasury Secretary Scott Bessent headlined the event to promote the Trump Accounts program and announce corporate and philanthropic commitments.',
+  },
+  {
+    question: 'How many people signed up for Trump Accounts after the summit?',
+    answer: 'Treasury Secretary Bessent announced that Trump Account enrollment reached approximately 1 million registrations, with the figure roughly doubling in the days following the summit. He credited the high-profile event and viral media coverage for the surge.',
+  },
+  {
+    question: 'Which companies pledged support at the Trump Accounts Summit?',
+    answer: 'Twenty-seven companies made commitments, including Bank of America, BlackRock, Charles Schwab, JPMorgan Chase, Visa, Mastercard, NVIDIA, Robinhood, Coinbase, Comcast, Intel, IBM, SoFi, and others. They pledged to match seed funding, broaden employee participation, or develop innovative channels for account growth.',
+  },
+  {
+    question: 'Was Nicki Minaj at the Trump Accounts Summit?',
+    answer: 'Yes. Nicki Minaj was a featured guest at the summit on January 28, 2026. She spoke about the program\'s potential to help children and working parents. She is also listed as a philanthropic donor to the Trump Accounts initiative.',
+  },
+  {
+    question: 'When do Trump Accounts officially launch?',
+    answer: 'Trump Accounts officially launch on July 5, 2026 through the trumpaccounts.gov portal. However, families can already file IRS Form 4547 with their 2025 tax return (due April 15, 2026) to elect a Trump Account now.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>The <strong class="text-white">Trump Accounts Summit</strong> was held <strong class="text-white">January 28, 2026</strong> at the Mellon Auditorium in Washington, D.C.</li>
+        <li>President Trump and Treasury Secretary <strong class="text-white">Scott Bessent</strong> headlined the event.</li>
+        <li><strong class="text-white">Nicki Minaj</strong> was the featured guest, helping generate over <strong class="text-white">"a billion hits"</strong> online.</li>
+        <li><strong class="text-white">27 companies</strong> made commitments, including Bank of America, JPMorgan Chase, Visa, BlackRock, Schwab, and NVIDIA.</li>
+        <li>Enrollment surged to roughly <strong class="text-white">1 million sign-ups</strong>, doubling after the summit.</li>
+      </ul>
+    </div>
+
+    <p>
+      On January 28, 2026, the U.S. Department of the Treasury hosted the <strong>Trump Accounts Summit</strong> at Washington's Andrew W. Mellon Auditorium. President Trump and Treasury Secretary Scott Bessent headlined the event, which brought together corporate leaders, philanthropists, and celebrities to promote the Trump Accounts program. The summit generated massive media attention and pushed enrollment past <strong>1 million sign-ups</strong>. Here is everything that happened.
+    </p>
+
+    <h2>What Happened at the Summit</h2>
+    <p>
+      The Trump Accounts Summit was designed to <strong>advance national participation</strong> in the Trump Accounts initiative. The event featured speeches from top government officials, corporate commitments, and a surprise celebrity appearance that dominated news coverage for days.
+    </p>
+
+    <h3>Key Speakers</h3>
+    <ul>
+      <li><strong>President Donald Trump</strong> — headlined the event, promoting the program as a way to give every American child a financial head start.</li>
+      <li><strong>Treasury Secretary Scott Bessent</strong> — co-hosted the summit and announced enrollment milestones.</li>
+      <li><strong>Nicki Minaj</strong> — featured guest, spoke about the program's potential to help children and working parents. Called herself Trump's "No. 1 fan."</li>
+      <li><strong>Sen. Ted Cruz (R-TX)</strong> — the original architect of the legislation that created Trump Accounts.</li>
+      <li><strong>Rep. Jason Smith (R-MO)</strong> — key House sponsor of the One Big Beautiful Bill Act.</li>
+      <li><strong>Karoline Leavitt</strong> — White House press secretary.</li>
+      <li><strong>Cheryl Hines</strong> — wife of HHS Secretary Robert F. Kennedy Jr.</li>
+    </ul>
+
+    <CalloutBox type="info" title="Summit location: Mellon Auditorium">
+      <p>
+        The event was held at the Andrew W. Mellon Auditorium, a historic Treasury Department building in Washington, D.C. The auditorium is named after Andrew Mellon, Treasury Secretary from 1921 to 1932, who was known for tax reform policies. A fitting venue for a program aimed at giving every child an investment account.
+      </p>
+    </CalloutBox>
+
+    <h2>Nicki Minaj's Appearance</h2>
+    <p>
+      The biggest headline from the summit was <strong>Nicki Minaj's appearance</strong> as the featured guest. The rapper spoke alongside President Trump, praising the program's potential benefits for children and working parents. She expressed enthusiasm about the initiative on social media, helping drive massive online engagement.
+    </p>
+    <p>
+      Treasury Secretary Bessent later said the segment featuring Trump and Minaj achieved <strong>"a billion hits"</strong> on the internet. The viral moment is credited with driving a surge in sign-ups: enrollment roughly <strong>doubled</strong> in the days following the summit, reaching approximately <strong>1 million registrations</strong>.
+    </p>
+    <p>
+      Minaj is also listed among the <strong>philanthropic donors</strong> to the Trump Accounts initiative, alongside Michael & Susan Dell, Ray & Barbara Dalio, Brad Gerstner, and Harold Hamm.
+    </p>
+
+    <h2>Corporate Commitments: 27 Companies Pledged Support</h2>
+    <p>
+      The Treasury Department <a href="https://home.treasury.gov/news/press-releases/sb0374" target="_blank" rel="noopener noreferrer">announced</a> that <strong>27 companies</strong> made commitments to the Trump Accounts initiative at the summit. They pledged to match seed funding, broaden employee participation, or develop innovative channels for account growth.
+    </p>
+
+    <h3>Financial Services</h3>
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Company</th>
+            <th class="py-3 text-gray-400 font-medium">Industry</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Bank of America</td>
+            <td class="py-3">Banking / Brokerage</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Bank of New York Mellon</td>
+            <td class="py-3">Banking / Asset Management</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">BlackRock</td>
+            <td class="py-3">Asset Management</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Charles Schwab</td>
+            <td class="py-3">Brokerage</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Chime Financial</td>
+            <td class="py-3">Fintech / Neobank</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Coinbase Global</td>
+            <td class="py-3">Cryptocurrency Exchange</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">JPMorgan Chase</td>
+            <td class="py-3">Banking / Brokerage</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Mastercard</td>
+            <td class="py-3">Payment Network</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Robinhood Markets</td>
+            <td class="py-3">Brokerage</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Russell Investments</td>
+            <td class="py-3">Asset Management</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">SoFi Technologies</td>
+            <td class="py-3">Fintech / Lending</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">State Street</td>
+            <td class="py-3">Asset Management / Custody</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Visa</td>
+            <td class="py-3">Payment Network</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 text-white font-medium">Wells Fargo</td>
+            <td class="py-3">Banking / Brokerage</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Technology & Other Companies</h3>
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Company</th>
+            <th class="py-3 text-gray-400 font-medium">Industry</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Block Inc.</td>
+            <td class="py-3">Fintech (Square, Cash App)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Broadcom</td>
+            <td class="py-3">Semiconductors</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Charter Communications</td>
+            <td class="py-3">Telecommunications</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Chipotle Mexican Grill</td>
+            <td class="py-3">Restaurant</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Comcast</td>
+            <td class="py-3">Media / Telecommunications</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Continental Resources</td>
+            <td class="py-3">Oil & Gas</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Dell Technologies</td>
+            <td class="py-3">Technology</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">IBM</td>
+            <td class="py-3">Technology</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Intel</td>
+            <td class="py-3">Semiconductors</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Investment Company Institute</td>
+            <td class="py-3">Industry Association</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">NVIDIA</td>
+            <td class="py-3">Semiconductors / AI</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Steak 'n Shake</td>
+            <td class="py-3">Restaurant</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Turning Point USA</td>
+            <td class="py-3">Nonprofit</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 text-white font-medium">Uber Technologies</td>
+            <td class="py-3">Transportation / Delivery</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Philanthropic Donors</h2>
+    <p>
+      Five individuals and families were recognized as philanthropic donors to the Trump Accounts initiative:
+    </p>
+    <ul>
+      <li><strong>Michael & Susan Dell</strong> — the largest known private commitment at <a href="/blog/dell-pledge-explained">$6.25 billion</a>, providing $250 per child under 10 in qualifying ZIP codes.</li>
+      <li><strong>Ray & Barbara Dalio</strong> — Bridgewater Associates founder and philanthropist.</li>
+      <li><strong>Brad Gerstner</strong> — Altimeter Capital founder and vocal children's investment advocate.</li>
+      <li><strong>Harold Hamm</strong> — Continental Resources founder.</li>
+      <li><strong>Nicki Minaj</strong> — rapper and featured guest at the summit.</li>
+    </ul>
+
+    <h2>Enrollment Surge: 1 Million Sign-Ups</h2>
+    <p>
+      The summit's biggest measurable impact was on <strong>enrollment numbers</strong>. The day after the event, Treasury Secretary Bessent announced at a Cabinet meeting that Trump Account registrations had reached approximately <strong>1 million</strong>, roughly <strong>doubling</strong> in the days following the summit.
+    </p>
+    <p>
+      Officials credited the viral media coverage — particularly the Trump-Minaj segment, which Bessent said achieved "a billion hits" online — for driving the surge. The administration estimates as many as <strong>25 million families</strong> nationwide could qualify for the program.
+    </p>
+
+    <CalloutBox type="tip" title="Have you signed up yet?">
+      <p>
+        If the summit inspired you to open a Trump Account, here is how to get started: file <strong>{limits.form}</strong> with your {limits.pilotDepositStartYear} tax return (due April 15, 2026). For the complete walkthrough, see <a href="/blog/how-to-open-step-by-step">how to open a Trump Account</a>.
+      </p>
+    </CalloutBox>
+
+    <h2>What Was Announced: Key Highlights</h2>
+    <ul>
+      <li><strong>Visa</strong> announced a future option for cardholders to direct credit card rewards into Trump Accounts. <a href="/blog/visa-trump-accounts">Full details here</a>.</li>
+      <li><strong>Official launch date confirmed</strong>: Trump Accounts officially launch on <strong>July 5, 2026</strong> through the {limits.portal} portal.</li>
+      <li><strong>Corporate employer matching</strong>: Several companies signaled they would offer Trump Account contributions as an employee benefit under IRC Section 128.</li>
+      <li><strong>Brokerages ready</strong>: Schwab, Robinhood, Bank of America, JPMorgan, Wells Fargo, and SoFi all committed to supporting the program as potential trustees.</li>
+    </ul>
+
+    <h2>What This Means for Families</h2>
+    <p>
+      The summit was a promotional event — it did not change any rules or contribution limits. The core program remains the same:
+    </p>
+    <ul>
+      <li><strong>${limits.pilotDeposit.toLocaleString()} pilot deposit</strong> for children born {limits.pilotDepositStartYear}–{limits.pilotDepositEndYear}</li>
+      <li><strong>${limits.annualContributionLimit.toLocaleString()}/year</strong> contribution limit from all sources</li>
+      <li><strong>${limits.employerContributionLimit.toLocaleString()}/year</strong> employer contribution (tax-free under IRC §128)</li>
+      <li><strong>Must file {limits.form}</strong> to opt in — it is not automatic</li>
+    </ul>
+    <p>
+      What the summit <strong>did</strong> change is the level of corporate support. With 27 companies committing to the program, families are likely to see more employer-sponsored Trump Account benefits, more fund choices, and more ways to contribute (like Visa's credit card rewards feature).
+    </p>
+    <p>
+      For a complete guide to how Trump Accounts work, see <a href="/blog/what-are-trump-accounts-guide">our beginner guide</a>. To check if your child qualifies, use the <a href="/calculators/eligibility-checker">Eligibility Checker</a>.
+    </p>
+
+    <h2>Sources</h2>
+    <ul>
+      <li><a href="https://home.treasury.gov/news/press-releases/sb0374" target="_blank" rel="noopener noreferrer">U.S. Treasury Press Release: Corporate and Philanthropic Commitments</a></li>
+      <li><a href="https://www.c-span.org/event/white-house-event/president-trump-treasury-secy-scott-bessent-host-summit-to-launch-trump-accounts/439917" target="_blank" rel="noopener noreferrer">C-SPAN: President Trump & Treasury Secretary Bessent Host Summit</a></li>
+      <li><a href="https://www.pbs.org/newshour/politics/watch-live-trump-bessent-nicki-minaj-and-others-speak-at-trump-accounts-launch-event" target="_blank" rel="noopener noreferrer">PBS NewsHour: Trump, Bessent, Nicki Minaj Speak at Launch Event</a></li>
+    </ul>
+
+    <CalloutBox type="warning" title="Educational content only">
+      <p>
+        This article summarizes publicly reported facts about the Trump Accounts Summit. Corporate commitments described are based on Treasury Department announcements. Specific pledge amounts and implementation timelines may evolve. This is not tax advice or financial advice.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>
