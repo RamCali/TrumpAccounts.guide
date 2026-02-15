@@ -376,6 +376,17 @@ export const blogArticles: Record<string, BlogArticle> = {
     readingTime: '7 min read',
     relatedSlugs: ['what-can-money-be-used-for', 'trump-account-penalties', 'trump-account-investment-rules', 'early-withdrawal-before-18'],
   },
+  'trump-account-withdrawal-exceptions': {
+    slug: 'trump-account-withdrawal-exceptions',
+    title: 'Trump Account Withdrawal Exceptions: Every Penalty-Free Option',
+    description: 'Complete list of Trump Account withdrawal exceptions before and after 18. First home, education, disability, birth/adoption, and 8 more penalty-free IRA exceptions explained.',
+    category: 'Use of Funds',
+    categorySlug: 'use-of-funds',
+    datePublished: '2026-02-15',
+    dateModified: '2026-02-15',
+    readingTime: '8 min read',
+    relatedSlugs: ['early-withdrawal-before-18', 'trump-account-penalties', 'trump-account-for-college', 'trump-account-for-first-home', 'trump-account-roth-conversion-strategy', 'trump-account-dos-and-donts'],
+  },
 
   // ─── Cluster 5: Eligibility Deep Dive ────────────────────────
   'do-all-babies-qualify': {
@@ -549,14 +560,14 @@ export const blogArticles: Record<string, BlogArticle> = {
   },
   'trump-account-fafsa-impact': {
     slug: 'trump-account-fafsa-impact',
-    title: 'Does a Trump Account Affect FAFSA?',
-    description: 'As a child-owned IRA at 18, it may be reported as a student asset on FAFSA, which could reduce financial aid eligibility.',
+    title: 'Trump Account and FAFSA: How It Affects Financial Aid (2026)',
+    description: 'Trump Account FAFSA impact: at 18 it becomes a student-owned IRA, assessed at up to 20%. Dollar impact table, 529 comparison, and strategies to minimize aid reduction.',
     category: 'Tax Questions',
     categorySlug: 'tax-questions',
     datePublished: '2026-02-12',
-    dateModified: '2026-02-12',
+    dateModified: '2026-02-15',
     readingTime: '5 min read',
-    relatedSlugs: ['trump-account-for-college', 'gains-taxation-explained', 'trump-account-medicaid-impact'],
+    relatedSlugs: ['trump-account-for-college', 'gains-taxation-explained', 'trump-account-medicaid-impact', 'trump-account-withdrawal-exceptions'],
   },
   'trump-account-medicaid-impact': {
     slug: 'trump-account-medicaid-impact',
@@ -766,12 +777,12 @@ export const blogArticles: Record<string, BlogArticle> = {
   // ─── Cluster 11: Brokerage Guides ──────────────────────────
   'trump-accounts-at-fidelity': {
     slug: 'trump-accounts-at-fidelity',
-    title: 'Trump Accounts at Fidelity: Funds, Fees & How to Open',
-    description: 'Fidelity is expected to offer Trump Accounts with ultra-low-cost index funds like FXAIX (0.015%). Learn how to open one and what to expect.',
+    title: 'Fidelity Trump Account (530A): Funds, Fees & How to Open (2026)',
+    description: 'Can you open a Trump Account (Section 530A) at Fidelity? Yes. FXAIX at 0.015%, no minimums, no account fees. Step-by-step guide to opening a 530A account at Fidelity.',
     category: 'Brokerage Guides',
     categorySlug: 'brokerage-guides',
     datePublished: '2026-02-12',
-    dateModified: '2026-02-12',
+    dateModified: '2026-02-15',
     readingTime: '7 min read',
     relatedSlugs: ['how-to-open-step-by-step', 'trump-account-fees-explained', 'index-fund-requirements', 'trump-account-vs-sp500-etfs'],
   },

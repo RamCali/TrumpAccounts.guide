@@ -1,0 +1,324 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-withdrawal-exceptions')!;
+const related = getRelatedArticles('trump-account-withdrawal-exceptions');
+
+const faqs = [
+  {
+    question: 'Are there any withdrawal exceptions before age 18?',
+    answer: 'Almost none. The only ways money can leave a Trump Account before age 18 are: 1) a rollover to another Trump Account (changing brokerages), 2) return of excess contributions above the $5,000 annual limit, and 3) distribution upon the death of the beneficiary. There are no hardship, medical, or emergency exceptions.',
+  },
+  {
+    question: 'Can I withdraw from a Trump Account for a first home?',
+    answer: 'Yes, after age 18. Once the Trump Account converts to a traditional IRA, the first-time homebuyer exception allows a penalty-free withdrawal of up to $10,000 (lifetime limit). You still owe ordinary income tax on the withdrawal, but the 10% early withdrawal penalty is waived.',
+  },
+  {
+    question: 'Can I use Trump Account money for college without a penalty?',
+    answer: 'Yes, after age 18. Qualified higher education expenses — tuition, fees, books, supplies, and room and board (if enrolled at least half-time) — are exempt from the 10% early withdrawal penalty. You still owe ordinary income tax on the amount withdrawn.',
+  },
+  {
+    question: 'What happens if I take a non-qualified withdrawal before 59½?',
+    answer: 'You pay ordinary income tax on the full withdrawal amount PLUS a 10% early withdrawal penalty. For example, a $10,000 withdrawal in the 22% tax bracket would cost $2,200 in income tax plus a $1,000 penalty — $3,200 total in taxes and penalties.',
+  },
+  {
+    question: 'Can I avoid all taxes by converting to a Roth IRA first?',
+    answer: 'Not entirely. You pay ordinary income tax on the Roth conversion amount. However, once converted, all future growth and qualified withdrawals from the Roth are tax-free and penalty-free (after the 5-year holding period and age 59½). Converting during low-income years at 18 minimizes the tax hit.',
+  },
+  {
+    question: 'Is there a way to access Trump Account funds for a medical emergency before 18?',
+    answer: 'No. There are no medical, hardship, or emergency exceptions before age 18. This is one of the strictest rules of Trump Accounts. You cannot access the money under any circumstances (other than rollovers, excess returns, or death of the child).',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><strong class="text-white">Before 18:</strong> Almost no exceptions — money is locked. Only rollovers, excess contribution returns, and death distributions are allowed.</li>
+        <li><strong class="text-white">After 18:</strong> The account becomes a traditional IRA with several penalty-free withdrawal exceptions.</li>
+        <li><strong class="text-white">Penalty-free exceptions include:</strong> first home ($10K), education expenses, disability, health insurance while unemployed, and more.</li>
+        <li><strong class="text-white">Even penalty-free withdrawals</strong> are still taxed as ordinary income — only the 10% penalty is waived.</li>
+        <li><strong class="text-white">Best strategy:</strong> Convert to a Roth IRA at 18 during low-income years to minimize lifetime taxes.</li>
+      </ul>
+    </div>
+
+    <p>
+      People search for "Trump Account withdrawal exceptions" for two very different reasons. Some want to know if they can access the money <strong>before their child turns 18</strong>. Others want to know what <strong>penalty-free options exist after 18</strong> when the account becomes a traditional IRA.
+    </p>
+    <p>
+      This guide covers both. The short answer: before 18, there are almost no exceptions. After 18, there are several important ones.
+    </p>
+
+    <h2 id="before-18">Withdrawal Exceptions Before Age 18</h2>
+    <p>
+      During the growth phase (birth through age {limits.growthPhaseEndAge}), Trump Account money is <strong>locked</strong>. IRS Notice 2025-68 allows only three narrow exceptions:
+    </p>
+
+    <h3>1. Rollover to Another Trump Account</h3>
+    <p>
+      You can transfer the entire account from one brokerage to another. This is a trustee-to-trustee transfer — the money never passes through your hands. You might do this to get a lower-cost fund or better service.
+    </p>
+
+    <h3>2. Return of Excess Contributions</h3>
+    <p>
+      If total contributions exceed the ${limits.annualContributionLimit.toLocaleString()}/year limit, the excess (plus any earnings on the excess) must be returned before the tax filing deadline. This is a correction, not a withdrawal. If excess contributions are not removed in time, a <strong>6% excise tax</strong> applies for each year they remain.
+    </p>
+
+    <h3>3. Death of the Beneficiary</h3>
+    <p>
+      If the child passes away, the account balance is distributed to the estate or designated beneficiary.
+    </p>
+
+    <CalloutBox type="warning" title="No other exceptions before 18">
+      <p>
+        That's it. There are <strong>no hardship withdrawals, no medical exceptions, no emergency access, and no court-ordered distributions</strong> before age {limits.growthPhaseEndAge}. This is stricter than a 529, UTMA, or any other child savings account.
+      </p>
+    </CalloutBox>
+
+    <h2 id="after-18">Withdrawal Exceptions After Age 18</h2>
+    <p>
+      At age {limits.iraConversionAge}, the Trump Account converts to a <strong>traditional IRA</strong>. Your child gets full control. All withdrawals are taxed as ordinary income, and withdrawals before age 59½ normally face an additional <strong>10% early withdrawal penalty</strong>.
+    </p>
+    <p>
+      However, the IRS provides several exceptions where the 10% penalty is waived. These are the same exceptions that apply to all traditional IRAs:
+    </p>
+
+    <h3>First-Time Home Purchase</h3>
+    <p>
+      Up to <strong>$10,000</strong> (lifetime limit) can be withdrawn penalty-free for buying, building, or rebuilding a first home. "First-time" means the buyer (and spouse, if applicable) has not owned a home in the previous two years. You still owe income tax on the withdrawal.
+    </p>
+
+    <h3>Qualified Education Expenses</h3>
+    <p>
+      Withdrawals for <strong>tuition, fees, books, supplies, and room and board</strong> (if enrolled at least half-time) at an eligible educational institution are exempt from the 10% penalty. This includes college, graduate school, vocational training, and trade schools.
+    </p>
+
+    <h3>Unreimbursed Medical Expenses</h3>
+    <p>
+      Withdrawals are penalty-free to the extent that unreimbursed medical expenses exceed <strong>7.5% of adjusted gross income (AGI)</strong>. The expenses must be for the account holder, their spouse, or dependents.
+    </p>
+
+    <h3>Health Insurance While Unemployed</h3>
+    <p>
+      If your child loses their job and receives unemployment compensation for at least <strong>12 consecutive weeks</strong>, they can withdraw penalty-free to pay health insurance premiums. The withdrawal must occur during the year they receive unemployment or the following year.
+    </p>
+
+    <h3>Disability</h3>
+    <p>
+      If the IRS determines the account holder is <strong>totally and permanently disabled</strong> (unable to engage in substantial gainful activity), the 10% penalty is waived on all withdrawals.
+    </p>
+
+    <h3>Substantially Equal Periodic Payments (SEPP/72(t))</h3>
+    <p>
+      Your child can set up a series of <strong>substantially equal periodic payments</strong> based on life expectancy. The payments must continue for at least 5 years or until age 59½ (whichever is longer). This is complex but avoids the penalty on all distributions in the series.
+    </p>
+
+    <h3>IRS Levy</h3>
+    <p>
+      Withdrawals taken due to an <strong>IRS levy</strong> (the government seizing the account for unpaid taxes) are not subject to the 10% penalty.
+    </p>
+
+    <h3>Qualified Reservist Distributions</h3>
+    <p>
+      Members of the military reserves called to <strong>active duty for 180+ days</strong> can withdraw penalty-free during the active duty period.
+    </p>
+
+    <h3>Qualified Birth or Adoption</h3>
+    <p>
+      Up to <strong>$5,000</strong> per child can be withdrawn penalty-free within one year of a birth or adoption. This means your child's Trump Account (as an IRA) could help fund their own child's expenses.
+    </p>
+
+    <h3>Domestic Abuse Victims</h3>
+    <p>
+      Victims of domestic abuse can withdraw up to <strong>$10,000</strong> (or 50% of the account, whichever is less) penalty-free. This exception was added by the SECURE 2.0 Act.
+    </p>
+
+    <h3>Terminal Illness</h3>
+    <p>
+      If a physician certifies that the account holder has a <strong>terminal illness</strong> (expected to result in death within 84 months), all withdrawals are penalty-free.
+    </p>
+
+    <h2 id="summary-table">Complete Withdrawal Exception Summary</h2>
+  </div>
+
+  <div class="not-prose my-6 overflow-x-auto">
+    <table class="w-full border-collapse text-sm">
+      <thead>
+        <tr class="border-b border-surface-600 text-left">
+          <th class="py-3 pr-4 text-gray-400 font-medium">Exception</th>
+          <th class="py-3 pr-4 text-gray-400 font-medium">When Available</th>
+          <th class="py-3 pr-4 text-gray-400 font-medium">Limit</th>
+          <th class="py-3 text-gray-400 font-medium">Still Taxed?</th>
+        </tr>
+      </thead>
+      <tbody class="text-gray-300">
+        <tr class="border-b border-surface-700">
+          <td class="py-3 pr-4 font-medium text-white">Rollover</td>
+          <td class="py-3 pr-4">Before or after 18</td>
+          <td class="py-3 pr-4">No limit</td>
+          <td class="py-3 text-mint-400">No tax</td>
+        </tr>
+        <tr class="border-b border-surface-700">
+          <td class="py-3 pr-4 font-medium text-white">Excess contribution return</td>
+          <td class="py-3 pr-4">Before or after 18</td>
+          <td class="py-3 pr-4">Excess amount only</td>
+          <td class="py-3">Earnings taxed</td>
+        </tr>
+        <tr class="border-b border-surface-700">
+          <td class="py-3 pr-4 font-medium text-white">Death of beneficiary</td>
+          <td class="py-3 pr-4">Before or after 18</td>
+          <td class="py-3 pr-4">Full balance</td>
+          <td class="py-3">Yes</td>
+        </tr>
+        <tr class="border-b border-surface-700">
+          <td class="py-3 pr-4 font-medium text-white">First home purchase</td>
+          <td class="py-3 pr-4">After 18</td>
+          <td class="py-3 pr-4">$10,000 lifetime</td>
+          <td class="py-3">Yes (no penalty)</td>
+        </tr>
+        <tr class="border-b border-surface-700">
+          <td class="py-3 pr-4 font-medium text-white">Education expenses</td>
+          <td class="py-3 pr-4">After 18</td>
+          <td class="py-3 pr-4">Actual expenses</td>
+          <td class="py-3">Yes (no penalty)</td>
+        </tr>
+        <tr class="border-b border-surface-700">
+          <td class="py-3 pr-4 font-medium text-white">Medical expenses > 7.5% AGI</td>
+          <td class="py-3 pr-4">After 18</td>
+          <td class="py-3 pr-4">Excess over 7.5% AGI</td>
+          <td class="py-3">Yes (no penalty)</td>
+        </tr>
+        <tr class="border-b border-surface-700">
+          <td class="py-3 pr-4 font-medium text-white">Health insurance (unemployed)</td>
+          <td class="py-3 pr-4">After 18</td>
+          <td class="py-3 pr-4">Premium costs</td>
+          <td class="py-3">Yes (no penalty)</td>
+        </tr>
+        <tr class="border-b border-surface-700">
+          <td class="py-3 pr-4 font-medium text-white">Disability</td>
+          <td class="py-3 pr-4">After 18</td>
+          <td class="py-3 pr-4">No limit</td>
+          <td class="py-3">Yes (no penalty)</td>
+        </tr>
+        <tr class="border-b border-surface-700">
+          <td class="py-3 pr-4 font-medium text-white">SEPP / 72(t)</td>
+          <td class="py-3 pr-4">After 18</td>
+          <td class="py-3 pr-4">Calculated amount</td>
+          <td class="py-3">Yes (no penalty)</td>
+        </tr>
+        <tr class="border-b border-surface-700">
+          <td class="py-3 pr-4 font-medium text-white">Birth or adoption</td>
+          <td class="py-3 pr-4">After 18</td>
+          <td class="py-3 pr-4">$5,000 per child</td>
+          <td class="py-3">Yes (no penalty)</td>
+        </tr>
+        <tr class="border-b border-surface-700">
+          <td class="py-3 pr-4 font-medium text-white">Domestic abuse</td>
+          <td class="py-3 pr-4">After 18</td>
+          <td class="py-3 pr-4">$10,000 or 50%</td>
+          <td class="py-3">Yes (no penalty)</td>
+        </tr>
+        <tr class="border-b border-surface-700">
+          <td class="py-3 pr-4 font-medium text-white">Terminal illness</td>
+          <td class="py-3 pr-4">After 18</td>
+          <td class="py-3 pr-4">No limit</td>
+          <td class="py-3">Yes (no penalty)</td>
+        </tr>
+        <tr class="border-b border-surface-700">
+          <td class="py-3 pr-4 font-medium text-white">Military reservist</td>
+          <td class="py-3 pr-4">After 18</td>
+          <td class="py-3 pr-4">No limit</td>
+          <td class="py-3">Yes (no penalty)</td>
+        </tr>
+        <tr>
+          <td class="py-3 pr-4 font-medium text-white">IRS levy</td>
+          <td class="py-3 pr-4">After 18</td>
+          <td class="py-3 pr-4">Levy amount</td>
+          <td class="py-3">Yes (no penalty)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="prose">
+    <CalloutBox type="info" title="Penalty-free does not mean tax-free">
+      <p>
+        Every exception listed above waives only the <strong>10% early withdrawal penalty</strong>. You still owe <strong>ordinary income tax</strong> on the withdrawn amount. The only way to avoid income tax is to convert to a Roth IRA first (paying tax on the conversion) and then withdraw from the Roth after the 5-year holding period.
+      </p>
+    </CalloutBox>
+
+    <h2 id="real-examples">Real-World Examples</h2>
+
+    <h3>Example 1: Using Trump Account money for college</h3>
+    <p>
+      Emma turns 18 in 2043. Her Trump Account has grown to $120,000 and converts to a traditional IRA. She starts college and withdraws $15,000 for tuition and room and board.
+    </p>
+    <ul>
+      <li><strong>10% penalty:</strong> Waived (education exception)</li>
+      <li><strong>Income tax:</strong> $15,000 taxed as ordinary income. At the 12% bracket, that is $1,800 in federal tax.</li>
+      <li><strong>Net received:</strong> $13,200 after taxes</li>
+    </ul>
+
+    <h3>Example 2: First home down payment</h3>
+    <p>
+      Jake turns 18 and his Trump Account IRA has $80,000. At age 24, he withdraws $10,000 for a first home and an additional $15,000 for other down payment costs.
+    </p>
+    <ul>
+      <li><strong>First $10,000:</strong> Penalty-free (first-home exception). Taxed as income.</li>
+      <li><strong>Additional $15,000:</strong> Taxed as income <strong>plus</strong> the 10% penalty ($1,500 extra).</li>
+      <li><strong>At 22% bracket:</strong> $5,500 in income tax on the $25,000, plus $1,500 penalty on $15,000 = <strong>$7,000 total taxes</strong></li>
+    </ul>
+
+    <h3>Example 3: Roth conversion (best long-term strategy)</h3>
+    <p>
+      Mia turns 18 with a $100,000 Trump Account. She converts $15,000/year to a Roth IRA during her 4 college years while her income is low.
+    </p>
+    <ul>
+      <li><strong>Conversion tax:</strong> ~10-12% on $15,000 = ~$1,500-$1,800/year</li>
+      <li><strong>Total tax over 4 years:</strong> ~$6,000-$7,200 to convert $60,000</li>
+      <li><strong>Result:</strong> $60,000 in a Roth IRA that grows <strong>tax-free forever</strong>. No taxes on future withdrawals. No required minimum distributions.</li>
+    </ul>
+
+    <CalloutBox type="tip" title="The Roth conversion strategy">
+      <p>
+        Converting to a Roth during low-income years (college, gap year, early career) is widely considered the best move for Trump Accounts at 18. You pay a small tax now to avoid potentially much larger taxes later. See our full <a href="/blog/trump-account-roth-conversion-strategy">Roth conversion guide</a>.
+      </p>
+    </CalloutBox>
+
+    <h2 id="after-59">After Age 59½: No Restrictions</h2>
+    <p>
+      Once the account holder reaches age 59½, <strong>all withdrawal restrictions disappear</strong>. Withdrawals from a traditional IRA are still taxed as ordinary income, but there is no penalty of any kind.
+    </p>
+    <p>
+      For money that was converted to a Roth IRA (and the 5-year holding period has passed), withdrawals are <strong>completely tax-free and penalty-free</strong>.
+    </p>
+
+    <h2 id="bottom-line">The Bottom Line</h2>
+    <p>
+      Trump Accounts are one of the most restrictive savings accounts before age 18. But after 18, when the account becomes a traditional IRA, there are <strong>many useful penalty-free withdrawal exceptions</strong> — including education, first home, disability, and birth or adoption.
+    </p>
+    <p>
+      The key thing to remember: "penalty-free" still means "taxed." The 10% penalty is waived, but ordinary income tax always applies to traditional IRA withdrawals. The best long-term strategy is usually a <a href="/blog/trump-account-roth-conversion-strategy">Roth conversion during low-income years</a>.
+    </p>
+
+    <CalloutBox type="warning" title="Not tax or financial advice">
+      <p>
+        This is educational content. Tax rules vary by individual situation. Consult a qualified tax professional before making withdrawal or conversion decisions.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>
