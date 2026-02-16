@@ -60,7 +60,7 @@ export const blogArticles: Record<string, BlogArticle> = {
     datePublished: '2026-02-12',
     dateModified: '2026-02-12',
     readingTime: '4 min read',
-    relatedSlugs: ['is-trump-account-automatic', 'how-to-open-step-by-step', 'what-are-trump-accounts-guide', 'form-4547-guide'],
+    relatedSlugs: ['are-trump-accounts-available-now', 'is-trump-account-automatic', 'how-to-open-step-by-step', 'what-are-trump-accounts-guide', 'form-4547-guide'],
   },
   'how-much-money-trump-account': {
     slug: 'how-much-money-trump-account',
@@ -82,7 +82,7 @@ export const blogArticles: Record<string, BlogArticle> = {
     datePublished: '2026-02-12',
     dateModified: '2026-02-12',
     readingTime: '4 min read',
-    relatedSlugs: ['how-to-open-step-by-step', 'when-do-trump-accounts-start', 'what-are-trump-accounts-guide', 'form-4547-guide'],
+    relatedSlugs: ['how-to-open-step-by-step', 'when-do-trump-accounts-start', 'are-trump-accounts-available-now', 'what-are-trump-accounts-guide', 'form-4547-guide'],
   },
   'trump-account-federal-or-state': {
     slug: 'trump-account-federal-or-state',
@@ -154,8 +154,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   },
   'are-trump-accounts-tax-deductible': {
     slug: 'are-trump-accounts-tax-deductible',
-    title: 'Are Trump Accounts Tax-Deductible? (No)',
-    description: 'Contributions are after-tax. You do not get a deduction. Growth is tax-deferred. Withdrawals are taxed as ordinary income at 18+.',
+    title: 'Are Trump Accounts Tax-Deductible? No — But 3 Tax Perks',
+    description: 'No deduction for contributions. But Trump Accounts still offer tax-deferred growth, tax-free employer match, and a Roth conversion option at 18.',
     category: 'Money & Growth',
     categorySlug: 'money-and-growth',
     datePublished: '2026-02-12',
@@ -301,8 +301,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   },
   'trump-account-for-college': {
     slug: 'trump-account-for-college',
-    title: 'Can You Use a Trump Account for College?',
-    description: 'Yes, but withdrawals are taxed as ordinary income (unlike a 529). Consider using both: a 529 for education and a Trump Account for everything else.',
+    title: 'Trump Account for College: Tax Cost & 529 Strategy (2026)',
+    description: 'Yes, but the tax cost surprises most parents. Withdrawal taxes, FAFSA impact at 18, and the 529 + Trump Account strategy smart families are using.',
     category: 'Use of Funds',
     categorySlug: 'use-of-funds',
     datePublished: '2026-02-12',
@@ -525,8 +525,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   },
   'trump-account-death-of-child': {
     slug: 'trump-account-death-of-child',
-    title: 'What Happens if the Child Dies?',
-    description: 'Funds can be distributed to the estate or designated beneficiary. IRS Notice 2025-68 specifically addresses this scenario.',
+    title: 'What Happens to a Trump Account if the Child Dies?',
+    description: 'No 10% penalty. Funds go to a designated beneficiary or estate. IRS rules, tax treatment, and why naming a beneficiary now matters.',
     category: 'Control & Access',
     categorySlug: 'control-and-access',
     datePublished: '2026-02-12',
@@ -777,8 +777,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   // ─── Cluster 11: Brokerage Guides ──────────────────────────
   'trump-accounts-at-fidelity': {
     slug: 'trump-accounts-at-fidelity',
-    title: 'Fidelity Trump Account (530A): Funds, Fees & How to Open (2026)',
-    description: 'Can you open a Trump Account (Section 530A) at Fidelity? Yes. FXAIX at 0.015%, no minimums, no account fees. Step-by-step guide to opening a 530A account at Fidelity.',
+    title: 'Trump Account at Fidelity: Funds, Fees & How to Open (2026)',
+    description: 'Open a Trump Account at Fidelity: FXAIX at just 0.015%, $0 account fees, no minimums. Full guide from filing Form 4547 to choosing your fund.',
     category: 'Brokerage Guides',
     categorySlug: 'brokerage-guides',
     datePublished: '2026-02-12',
@@ -1049,6 +1049,19 @@ export const blogArticles: Record<string, BlogArticle> = {
     dateModified: '2026-02-13',
     readingTime: '6 min read',
     relatedSlugs: ['already-born-children', 'trump-account-age-cutoff', 'who-qualifies-for-trump-account', 'how-much-at-age-18', 'how-to-open-step-by-step', 'do-all-babies-qualify'],
+  },
+
+  // ─── Keyword Gap: Availability & Status ────────────────────
+  'are-trump-accounts-available-now': {
+    slug: 'are-trump-accounts-available-now',
+    title: 'Are Trump Accounts Available Now? 2026 Status & Timeline',
+    description: 'Yes, Trump Accounts are available now. File IRS Form 4547 with your 2025 tax return. The trumpaccounts.gov portal launches mid-2026. Full status and timeline.',
+    category: 'Basics',
+    categorySlug: 'basics',
+    datePublished: '2026-02-15',
+    dateModified: '2026-02-15',
+    readingTime: '6 min read',
+    relatedSlugs: ['when-do-trump-accounts-start', 'how-to-open-step-by-step', 'form-4547-guide', 'is-trump-account-automatic', 'who-qualifies-for-trump-account', 'trump-account-1000-grant-application-status'],
   },
 
   // ─── Zero-Volume SEO: Data Void Targeting ──────────────────

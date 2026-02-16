@@ -1,0 +1,208 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('are-trump-accounts-available-now')!;
+const related = getRelatedArticles('are-trump-accounts-available-now');
+
+const faqs = [
+  {
+    question: 'Are Trump Accounts available now in 2026?',
+    answer: `Yes. Parents can file ${limits.form} with their 2025 federal tax return (due April 15, 2026) to open a Trump Account and claim the $${limits.pilotDeposit.toLocaleString()} deposit. The ${limits.portal} online portal is expected to launch mid-2026.`,
+  },
+  {
+    question: 'Can I sign up for a Trump Account today?',
+    answer: `Yes, if you are filing your 2025 tax return. Attach ${limits.form} (Trump Account Election) to your return. You can also mail the form separately to the IRS. The online portal at ${limits.portal} is not yet live but is expected mid-2026.`,
+  },
+  {
+    question: 'When will the $1,000 deposit arrive?',
+    answer: `The government deposits the $${limits.pilotDeposit.toLocaleString()} after the IRS processes your ${limits.form}. Contributions begin as of July 4, 2026. The earlier you file, the sooner the deposit starts growing.`,
+  },
+  {
+    question: 'Do I need to wait for trumpaccounts.gov to launch?',
+    answer: `No. You can file ${limits.form} with your 2025 tax return right now. The ${limits.portal} portal is an additional option, not the only option. Do not wait — file with your tax return to get the deposit working sooner.`,
+  },
+  {
+    question: 'What if my child was born in 2025 but I have not filed yet?',
+    answer: `You still have time. File ${limits.form} with your 2025 federal tax return by April 15, 2026. If you need more time, file an extension — but the sooner you file, the sooner the $${limits.pilotDeposit.toLocaleString()} gets invested.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><strong class="text-white">Yes, Trump Accounts are available now.</strong> You can file {limits.form} with your 2025 tax return.</li>
+        <li>The <strong class="text-white">{limits.portal}</strong> online portal is expected to launch <strong class="text-white">mid-2026</strong>.</li>
+        <li>The <strong class="text-white">${limits.pilotDeposit.toLocaleString()} federal deposit</strong> begins as of July 4, 2026, after the IRS processes your form.</li>
+        <li>Children born <strong class="text-white">{limits.pilotDepositStartYear}–{limits.pilotDepositEndYear}</strong> qualify for the deposit. All U.S. citizen children under {limits.growthPhaseEndAge} can open an account.</li>
+        <li><strong class="text-white">Do not wait.</strong> Every month of delay is a month of lost compound growth.</li>
+      </ul>
+    </div>
+
+    <p>
+      The most common question parents ask right now: <strong>are Trump Accounts available yet?</strong> The short answer is <strong>yes</strong>. Trump Accounts are real, signed into law on July 4, 2025, and you can start the process right now. Here is exactly what is available today, what is coming soon, and what you should do.
+    </p>
+
+    <h2>What Is Available Right Now (Early 2026)</h2>
+    <p>
+      As of early 2026, here is what you can do today:
+    </p>
+    <ul>
+      <li><strong>File {limits.form}</strong> — Attach the Trump Account Election form to your 2025 federal tax return (due April 15, 2026). This is the primary way to open a Trump Account right now.</li>
+      <li><strong>Mail {limits.form} separately</strong> — You can send a completed form directly to the IRS without waiting for your full tax return.</li>
+      <li><strong>Choose a brokerage</strong> — Major brokerages like <a href="/blog/trump-accounts-at-fidelity">Fidelity</a>, <a href="/blog/trump-accounts-at-schwab">Schwab</a>, and <a href="/blog/trump-accounts-at-bank-of-america">Bank of America</a> are expected to offer Trump Accounts.</li>
+    </ul>
+
+    <CalloutBox type="tip" title="File with your tax return — it is the fastest option right now">
+      <p>
+        If you are preparing your 2025 taxes, include {limits.form}. This is the quickest path to claiming the ${limits.pilotDeposit.toLocaleString()} deposit. See our <a href="/blog/form-4547-guide">complete Form 4547 guide</a> for a step-by-step walkthrough.
+      </p>
+    </CalloutBox>
+
+    <h2>What Is Coming Soon</h2>
+    <p>
+      Two major milestones are still ahead:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Milestone</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Expected Date</th>
+            <th class="py-3 text-gray-400 font-medium">Status</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">{limits.form} filing with 2025 tax return</td>
+            <td class="py-3 pr-4">Now – April 15, 2026</td>
+            <td class="py-3 font-medium text-green-400">Available now</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">{limits.portal} online portal</td>
+            <td class="py-3 pr-4">Mid-2026</td>
+            <td class="py-3 font-medium text-yellow-400">Coming soon</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 text-white font-medium">First deposits begin</td>
+            <td class="py-3 pr-4">July 4, 2026</td>
+            <td class="py-3 font-medium text-yellow-400">Coming soon</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      The <strong>{limits.portal}</strong> portal will let parents file electronically without attaching the form to a tax return. This is a convenience — not a requirement. You do <strong>not</strong> need to wait for the portal.
+    </p>
+
+    <h2>Who Can Open a Trump Account Right Now?</h2>
+    <p>
+      Any parent or legal guardian of a U.S. citizen child under age {limits.growthPhaseEndAge} can file {limits.form} to open a Trump Account. To qualify:
+    </p>
+    <ul>
+      <li>The child must be a <strong>U.S. citizen</strong></li>
+      <li>The child must have a <strong>valid Social Security Number</strong></li>
+      <li>The child must be <strong>under {limits.growthPhaseEndAge}</strong> at the end of the election year</li>
+    </ul>
+    <p>
+      There are <strong>no income limits</strong>. Use our <a href="/calculators/eligibility-checker">Eligibility Checker</a> to confirm in 30 seconds.
+    </p>
+
+    <CalloutBox type="info" title="The $1,000 deposit is only for 2025–2028 births">
+      <p>
+        The <strong>${limits.pilotDeposit.toLocaleString()} federal pilot deposit</strong> is for children born between January 1, {limits.pilotDepositStartYear} and December 31, {limits.pilotDepositEndYear}. Children born outside this window can still open a Trump Account — they just do not receive the government deposit. See <a href="/blog/already-born-children">Trump Accounts for kids born before 2025</a>.
+      </p>
+    </CalloutBox>
+
+    <h2>Why You Should Not Wait</h2>
+    <p>
+      Compound growth rewards time. Every month you delay is a month of potential growth lost. Here is what happens if you wait:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">When You File</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Growth Time</th>
+            <th class="py-3 text-gray-400 font-medium">$1,000 at 10%</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Now (early 2026)</td>
+            <td class="py-3 pr-4">~17.5 years</td>
+            <td class="py-3 font-medium text-gold-400">$5,311</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Mid-2026 (portal launch)</td>
+            <td class="py-3 pr-4">~17 years</td>
+            <td class="py-3 font-medium text-gold-400">$5,054</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 text-white font-medium">End of 2026</td>
+            <td class="py-3 pr-4">~16.5 years</td>
+            <td class="py-3 font-medium text-gold-400">$4,807</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Waiting six months costs roughly <strong>$250</strong> in lost growth on just the ${limits.pilotDeposit.toLocaleString()} deposit — and much more if you are also contributing. Use our <a href="/calculators/cost-of-waiting">Cost of Waiting Calculator</a> to see the exact cost for your situation.
+    </p>
+
+    <h2>How to Open a Trump Account Today</h2>
+    <p>
+      Here is the step-by-step process you can start right now:
+    </p>
+    <ol>
+      <li><strong>Get your child's SSN</strong> — If your baby was born recently, you likely applied at the hospital. If not, visit your local Social Security office.</li>
+      <li><strong>Download {limits.form}</strong> — Available from IRS.gov. See our <a href="/blog/form-4547-guide">{limits.form} guide</a> for how to fill it out.</li>
+      <li><strong>Attach to your 2025 tax return</strong> — Check the box to elect the pilot contribution. File your return as normal.</li>
+      <li><strong>Choose a brokerage</strong> — Pick a trustee that offers low-cost S&P 500 index funds. See <a href="/blog/where-to-open-trump-account">where to open a Trump Account</a> for a comparison.</li>
+    </ol>
+
+    <p>
+      For the full walkthrough with screenshots and tips, see our <a href="/blog/how-to-open-step-by-step">step-by-step guide to opening a Trump Account</a>.
+    </p>
+
+    <h2>Common Concerns</h2>
+
+    <h3>Is this real?</h3>
+    <p>
+      Yes. Trump Accounts are established under <strong>{limits.legalBasis}</strong>, created by the <strong>{limits.legislation}</strong>, signed into law July 4, 2025. The IRS published official guidance in <strong>{limits.irsNotice}</strong> on {limits.irsNoticeDate}. See our <a href="/blog/is-the-one-big-beautiful-bill-act-real">proof that the law is real</a>.
+    </p>
+
+    <h3>Is it safe?</h3>
+    <p>
+      The account is held at a regulated brokerage (like Fidelity or Schwab) in your child's name. The money is invested in S&P 500 index funds — the same funds used in most 401(k)s and IRAs. Historical 18-year returns for the S&P 500 have <strong>never been negative</strong>. See <a href="/blog/what-happens-market-crash">what happens in a market crash</a>.
+    </p>
+
+    <h3>What if I miss the deadline?</h3>
+    <p>
+      The April 15, 2026 deadline is for the 2025 tax return. You can file an extension if needed. The ${limits.portal} portal (mid-2026) will provide another filing path. The key is not to wait indefinitely — file as soon as you can.
+    </p>
+
+    <CalloutBox type="warning" title="Educational content only">
+      <p>
+        This article is based on {limits.irsNotice} and the {limits.legislation}. It is not tax advice or financial advice. Timelines are based on current IRS guidance and may change. Consult a qualified tax professional for your specific situation.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>
