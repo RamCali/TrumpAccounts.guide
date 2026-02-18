@@ -266,8 +266,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   },
   'trump-account-investment-rules': {
     slug: 'trump-account-investment-rules',
-    title: 'Trump Account Investment Rules: The Complete Guide',
-    description: 'Every investment rule for Trump Accounts: eligible funds, expense ratio cap, no leverage, no cash or bonds. The definitive reference for 2026.',
+    title: 'Trump Account Rules for Kids: Every Investment Rule (2026)',
+    description: 'Complete Trump Account rules for kids: eligible index funds, 0.1% expense ratio cap, no leverage, no cash or bonds. The definitive rules reference.',
     category: 'Investment Structure',
     categorySlug: 'investment-structure',
     datePublished: '2026-02-13',
@@ -345,8 +345,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   },
   'trump-account-penalties': {
     slug: 'trump-account-penalties',
-    title: 'Trump Account Penalties & Early Withdrawal',
-    description: 'No withdrawals before 18 (except rollovers/excess/death). After 18, standard IRA rules: 10% penalty before 59.5, with exceptions.',
+    title: 'Trump Account Penalties: What Happens If You Withdraw (2026)',
+    description: '3 penalty phases: locked before 18, 10% + income tax from 18–59½, penalty-free after 59½. Key exceptions for home, education, and disability.',
     category: 'Use of Funds',
     categorySlug: 'use-of-funds',
     datePublished: '2026-02-12',
@@ -413,8 +413,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   },
   'adopted-children-trump-account': {
     slug: 'adopted-children-trump-account',
-    title: 'Trump Accounts for Adopted Children',
-    description: 'Adopted U.S. citizen children with a valid SSN qualify on the same terms. Citizenship and SSN are what matter, not biological relationship.',
+    title: "Do Adopted Children Get a Trump Account? Yes — Here's How",
+    description: 'Adopted children qualify for Trump Accounts on identical terms — including the $1,000 deposit. Domestic and international adoptees eligible.',
     category: 'Eligibility',
     categorySlug: 'eligibility',
     datePublished: '2026-02-12',
@@ -1015,8 +1015,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   // ─── Keyword-Targeted: Form 4547 (1,300/mo) ───────────────
   'form-4547-guide': {
     slug: 'form-4547-guide',
-    title: 'IRS Form 4547: Complete Guide to the Trump Account Election',
-    description: 'Everything about IRS Form 4547: what it is, how to fill it out, where to file, deadlines, and common mistakes. Step-by-step with examples.',
+    title: 'Trump Account Form (IRS Form 4547): Complete Filing Guide',
+    description: 'IRS Form 4547 is the Trump Account form you need to open an account. How to fill it out, where to file, deadlines, and common mistakes explained.',
     category: 'Parent Guides',
     categorySlug: 'parent-guides',
     datePublished: '2026-02-13',
@@ -1139,8 +1139,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   // ─── Keyword Gap: Official IRS Name ────────────────────────
   'childrens-tax-advantage-account': {
     slug: 'childrens-tax-advantage-account',
-    title: 'Children\'s Tax Advantage Account: The Official Name for Trump Accounts',
-    description: 'Children\'s Tax Advantage Account is the IRS name for Trump Accounts. Same program, same rules. $1,000 deposit, $5,000/yr limit, IRA at 18. Full guide.',
+    title: 'Children\'s Tax Advantage Account (Child Tax Account) Explained',
+    description: 'Children\'s Tax Advantage Account — also called a child tax account or Invest America account — is the IRS name for Trump Accounts. Full guide.',
     category: 'Basics',
     categorySlug: 'basics',
     datePublished: '2026-02-15',
@@ -1178,8 +1178,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   // ─── Keyword Gap: Baby Bonus Framing ───────────────────────
   'trump-baby-bonus': {
     slug: 'trump-baby-bonus',
-    title: 'Trump Baby Bonus: How to Claim the $1,000 Government Deposit',
-    description: 'Trump baby bonus: $1,000 free deposit for babies born 2025-2028. How to claim it, who qualifies, and how much it could grow to by age 18.',
+    title: "Trump Baby Bonus: Claim Your Child's Free $1,000 (2026)",
+    description: 'Every baby born 2025–2028 gets a free $1,000 government deposit. Not automatic — you must file Form 4547. Step-by-step claiming guide inside.',
     category: 'Parent Guides',
     categorySlug: 'parent-guides',
     datePublished: '2026-02-15',
