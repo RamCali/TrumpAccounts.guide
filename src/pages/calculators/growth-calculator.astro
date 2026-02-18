@@ -4,11 +4,62 @@ import GrowthCalculator from '../../components/calculators/GrowthCalculator';
 ---
 
 <CalculatorLayout
-  title="Trump Account Calculator: How Much by Age 18? (Free)"
-  description="Free calculator: enter your child's birth year and monthly contribution. See how the $1,000 federal deposit grows to $50K–$226K by age 18."
-  calculatorName="Growth Calculator"
+  title="Trump Account Savings Calculator — How Much by Age 18?"
+  description="Free savings calculator: see how a $5,000 deposit or small monthly gifts grow in a Trump Account. The $1,000 federal seed can reach $24K–$226K by age 18."
+  calculatorName="Savings Calculator"
   slug="growth-calculator"
-  abstract="Calculates the future value of a Section 530A Trump Account, including the $1,000 federal grant and employer contributions, using historical S&P 500 returns."
+  abstract="Calculates the future value of a Section 530A Trump Account savings plan including the $1,000 federal pilot deposit, one-time personal contributions, annual birthday contributions, and employer match using S&P 500 index returns."
 >
-  <GrowthCalculator client:visible />
+  <section id="popular-scenarios" class="mb-8" aria-label="Popular Savings Scenarios">
+    <h2 class="mb-2 text-xl font-bold text-white">Popular Savings Scenarios</h2>
+    <p class="mb-4 text-sm text-gray-400">Not sure how much to contribute? These two scenarios cover what most parents are considering.</p>
+
+    <div class="grid gap-4 sm:grid-cols-2">
+      <!-- Scenario A -->
+      <div class="rounded-xl border border-surface-600 bg-surface-800 p-6">
+        <div class="mb-2 flex items-center gap-2">
+          <span class="rounded-full bg-gold-400/15 px-2 py-0.5 text-xs font-semibold text-gold-400">Scenario A</span>
+          <h3 class="font-bold text-white">Set It and Forget It</h3>
+        </div>
+        <p class="mb-3 text-sm text-gray-400">
+          Open with a <strong class="text-white">$5,000 personal contribution</strong>. Never add another dollar. The $1,000 federal deposit and your $5,000 grow on their own.
+        </p>
+        <div class="mb-4 rounded-lg bg-surface-900 px-4 py-3">
+          <p class="mb-1 text-xs text-gray-500">Projected at age 18 (8% return, 2025 birth)</p>
+          <p class="text-2xl font-bold tabular-nums text-gold-400">~$23,976</p>
+          <p class="mt-0.5 text-xs text-gray-500">From $6,000 total invested ($1K federal + $5K yours)</p>
+        </div>
+        <a href="#calculator" class="block w-full rounded-lg border border-gold-400/30 bg-gold-400/10 py-2 text-center text-sm font-semibold text-gold-400 transition-colors hover:bg-gold-400/20">
+          Try this scenario in the calculator ↓
+        </a>
+      </div>
+
+      <!-- Scenario B -->
+      <div class="rounded-xl border border-surface-600 bg-surface-800 p-6">
+        <div class="mb-2 flex items-center gap-2">
+          <span class="rounded-full bg-mint-400/15 px-2 py-0.5 text-xs font-semibold text-mint-400">Scenario B</span>
+          <h3 class="font-bold text-white">Annual Birthday Gift</h3>
+        </div>
+        <p class="mb-3 text-sm text-gray-400">
+          Open with $5,000, then add <strong class="text-white">~$100 every birthday</strong>. Just $8/month — less than a streaming subscription.
+        </p>
+        <div class="mb-4 rounded-lg bg-surface-900 px-4 py-3">
+          <p class="mb-1 text-xs text-gray-500">Projected at age 18 (8% return, 2025 birth)</p>
+          <p class="text-2xl font-bold tabular-nums text-mint-400">~$27,475</p>
+          <p class="mt-0.5 text-xs text-gray-500">From $6,000 initial + ~$100/year (~$7,700 total invested)</p>
+        </div>
+        <a href="#calculator" class="block w-full rounded-lg border border-surface-600 bg-surface-700 py-2 text-center text-sm font-semibold text-gray-200 transition-colors hover:border-gold-400/30 hover:text-gold-400">
+          Try this scenario in the calculator ↓
+        </a>
+      </div>
+    </div>
+
+    <p class="mt-3 text-xs text-gray-600">
+      * Projections assume 8% annual return (S&P 500 historical average ~10%; 8% is conservative). Results will differ based on birth year, actual returns, and contribution timing. Not financial advice.
+    </p>
+  </section>
+
+  <div id="calculator">
+    <GrowthCalculator client:visible />
+  </div>
 </CalculatorLayout>

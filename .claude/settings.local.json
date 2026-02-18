@@ -52,7 +52,8 @@
       "WebFetch(domain:tekpon.com)",
       "WebFetch(domain:aiquiks.com)",
       "WebFetch(domain:www.saasworthy.com)",
-      "WebFetch(domain:www.capterra.com)"
+      "WebFetch(domain:www.capterra.com)",
+      "Bash(node:*)"
     ]
   }
 }

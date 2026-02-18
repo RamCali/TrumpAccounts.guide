@@ -37,7 +37,7 @@ function makePresets(startAge: number, endAge: number, employerAnnual: number): 
       label: 'Deposit only',
       description: employerAnnual > 0
         ? `No family contributions — employer adds $${employerAnnual.toLocaleString()}/yr`
-        : 'No family contributions — just the $1,000 pilot deposit',
+        : 'No personal contributions — just the $1,000 federal pilot deposit growing on its own',
       phases: () => [],
     },
     {
@@ -73,6 +73,40 @@ function makePresets(startAge: number, endAge: number, employerAnnual: number): 
     },
   ];
 }
+
+interface FeaturedScenario {
+  id: string;
+  label: string;
+  tag: string;
+  tagColor: string;
+  description: string;
+  note: string;
+  phases: (startAge: number) => ContributionPhase[];
+}
+
+const FEATURED_SCENARIOS: FeaturedScenario[] = [
+  {
+    id: 'set-it-forget-it',
+    label: 'Set It and Forget It',
+    tag: 'Scenario A',
+    tagColor: 'text-gold-400 bg-gold-400/15',
+    description: '$5,000 one-time deposit, then nothing more.',
+    note: '$1,000 federal seed + $5,000 yours = $6,000 working for 18 years',
+    phases: (s) => [{ fromAge: s, toAge: s + 1, monthlyAmount: 417 }],
+  },
+  {
+    id: 'birthday-gift',
+    label: 'Annual Birthday Gift',
+    tag: 'Scenario B',
+    tagColor: 'text-mint-400 bg-mint-400/15',
+    description: '$5,000 to open, then ~$100 every birthday (~$8/mo).',
+    note: '~$8/month is less than a streaming subscription',
+    phases: (s) => [
+      { fromAge: s, toAge: s + 1, monthlyAmount: 417 },
+      { fromAge: s + 1, toAge: 18, monthlyAmount: 8 },
+    ],
+  },
+];
 
 export default function GrowthCalculator() {
   const [birthYear, setBirthYear] = useState(2025);
@@ -175,6 +209,12 @@ export default function GrowthCalculator() {
     const newPhases = preset.phases(startAge);
     setPhases(newPhases.length > 0 ? newPhases : [{ fromAge: startAge, toAge: 18, monthlyAmount: 0 }]);
     setActivePreset(preset.label);
+  }, [startAge]);
+
+  const applyFeaturedScenario = useCallback((scenario: FeaturedScenario) => {
+    const newPhases = scenario.phases(startAge);
+    setPhases(newPhases.length > 0 ? newPhases : [{ fromAge: startAge, toAge: 18, monthlyAmount: 0 }]);
+    setActivePreset(scenario.id);
   }, [startAge]);
 
   const presets = useMemo(() => makePresets(startAge, 18, annualEmployer), [startAge, annualEmployer]);
@@ -307,6 +347,33 @@ export default function GrowthCalculator() {
         <p className="mb-4 text-sm text-gray-400">
           Set how much you'll contribute during different periods. Max ${personalMaxMonthly}/mo personal{annualEmployer > 0 ? ` + $${annualEmployer.toLocaleString()}/yr employer` : ''} ($${limits.annualContributionLimit.toLocaleString()}/yr total from all sources).
         </p>
+
+        {/* Featured scenarios */}
+        <div className="mb-6">
+          <p className="mb-3 text-xs font-medium uppercase tracking-wider text-gray-500">Popular Savings Scenarios</p>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {FEATURED_SCENARIOS.map((scenario) => (
+              <button
+                key={scenario.id}
+                onClick={() => applyFeaturedScenario(scenario)}
+                className={`rounded-xl border p-4 text-left transition-colors ${
+                  activePreset === scenario.id
+                    ? 'border-gold-400/50 bg-gold-400/10'
+                    : 'border-surface-600 bg-surface-900/50 hover:border-gold-400/30 hover:bg-gold-400/5'
+                }`}
+              >
+                <div className="mb-1.5 flex items-center gap-2">
+                  <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${scenario.tagColor}`}>
+                    {scenario.tag}
+                  </span>
+                  <span className="text-sm font-bold text-white">{scenario.label}</span>
+                </div>
+                <p className="text-xs text-gray-400">{scenario.description}</p>
+                <p className="mt-1 text-xs italic text-gray-600">{scenario.note}</p>
+              </button>
+            ))}
+          </div>
+        </div>
 
         {/* Quick presets */}
         <div className="mb-5">
