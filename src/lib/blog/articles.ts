@@ -308,7 +308,7 @@ export const blogArticles: Record<string, BlogArticle> = {
     datePublished: '2026-02-12',
     dateModified: '2026-02-12',
     readingTime: '5 min read',
-    relatedSlugs: ['what-can-money-be-used-for', 'trump-account-fafsa-impact', 'gains-taxation-explained', 'trump-account-vs-529-blog'],
+    relatedSlugs: ['what-can-money-be-used-for', 'trump-account-fafsa-impact', 'gains-taxation-explained', 'trump-account-vs-529-blog', 'trump-account-fafsa-comparison-matrix'],
   },
   'trump-account-for-first-home': {
     slug: 'trump-account-for-first-home',
@@ -363,7 +363,7 @@ export const blogArticles: Record<string, BlogArticle> = {
     datePublished: '2026-02-12',
     dateModified: '2026-02-12',
     readingTime: '5 min read',
-    relatedSlugs: ['trump-account-roth-conversion-strategy', 'gains-taxation-explained', 'what-can-money-be-used-for'],
+    relatedSlugs: ['trump-account-roth-conversion-strategy', 'gains-taxation-explained', 'what-can-money-be-used-for', 'trump-account-rollover-guide'],
   },
   'trump-account-dos-and-donts': {
     slug: 'trump-account-dos-and-donts',
@@ -378,14 +378,14 @@ export const blogArticles: Record<string, BlogArticle> = {
   },
   'trump-account-withdrawal-exceptions': {
     slug: 'trump-account-withdrawal-exceptions',
-    title: 'Trump Account Withdrawal Exceptions: Every Penalty-Free Option',
-    description: 'Complete list of Trump Account withdrawal exceptions before and after 18. First home, education, disability, birth/adoption, and 8 more penalty-free IRA exceptions explained.',
+    title: 'Can You Withdraw from a Trump Account? Exceptions Flowchart',
+    description: 'Complete list of Trump Account withdrawal exceptions before and after 18. Visual flowchart, first home, education, disability, birth/adoption, and 8 more penalty-free IRA exceptions.',
     category: 'Use of Funds',
     categorySlug: 'use-of-funds',
     datePublished: '2026-02-15',
-    dateModified: '2026-02-15',
-    readingTime: '8 min read',
-    relatedSlugs: ['early-withdrawal-before-18', 'trump-account-penalties', 'trump-account-for-college', 'trump-account-for-first-home', 'trump-account-roth-conversion-strategy', 'trump-account-dos-and-donts'],
+    dateModified: '2026-02-19',
+    readingTime: '9 min read',
+    relatedSlugs: ['early-withdrawal-before-18', 'trump-account-penalties', 'trump-account-for-college', 'trump-account-for-first-home', 'trump-account-roth-conversion-strategy', 'trump-account-dos-and-donts', 'trump-account-rollover-guide'],
   },
 
   // ─── Cluster 5: Eligibility Deep Dive ────────────────────────
@@ -488,7 +488,7 @@ export const blogArticles: Record<string, BlogArticle> = {
     datePublished: '2026-02-12',
     dateModified: '2026-02-12',
     readingTime: '4 min read',
-    relatedSlugs: ['trump-account-penalties', 'who-controls-trump-account', 'what-happens-market-crash'],
+    relatedSlugs: ['trump-account-penalties', 'who-controls-trump-account', 'what-happens-market-crash', 'trump-account-rollover-guide'],
   },
   'trump-account-divorce': {
     slug: 'trump-account-divorce',
@@ -567,7 +567,7 @@ export const blogArticles: Record<string, BlogArticle> = {
     datePublished: '2026-02-12',
     dateModified: '2026-02-15',
     readingTime: '5 min read',
-    relatedSlugs: ['trump-account-for-college', 'gains-taxation-explained', 'trump-account-medicaid-impact', 'trump-account-withdrawal-exceptions'],
+    relatedSlugs: ['trump-account-for-college', 'gains-taxation-explained', 'trump-account-medicaid-impact', 'trump-account-withdrawal-exceptions', 'trump-account-fafsa-comparison-matrix'],
   },
   'trump-account-medicaid-impact': {
     slug: 'trump-account-medicaid-impact',
@@ -589,7 +589,7 @@ export const blogArticles: Record<string, BlogArticle> = {
     datePublished: '2026-02-12',
     dateModified: '2026-02-12',
     readingTime: '6 min read',
-    relatedSlugs: ['gains-taxation-explained', 'is-growth-tax-free', 'trump-account-retirement-conversion', 'trump-account-investment-strategies'],
+    relatedSlugs: ['gains-taxation-explained', 'is-growth-tax-free', 'trump-account-retirement-conversion', 'trump-account-investment-strategies', 'trump-account-rollover-guide'],
   },
 
   // ─── Cluster 8: Policy & Economics ───────────────────────────
@@ -736,7 +736,7 @@ export const blogArticles: Record<string, BlogArticle> = {
     datePublished: '2026-02-12',
     dateModified: '2026-02-12',
     readingTime: '7 min read',
-    relatedSlugs: ['replicate-trump-account-yourself', 'what-are-trump-accounts-guide', 'should-i-wait-or-invest-now'],
+    relatedSlugs: ['replicate-trump-account-yourself', 'what-are-trump-accounts-guide', 'should-i-wait-or-invest-now', 'trump-account-fafsa-comparison-matrix'],
   },
 
   // ─── Cluster 10: Analysis / Viral ────────────────────────────
@@ -1227,6 +1227,32 @@ export const blogArticles: Record<string, BlogArticle> = {
     relatedSlugs: ['how-to-open-step-by-step', 'trump-account-fees-explained', 'trump-accounts-at-fidelity', 'trump-accounts-at-schwab', 'where-to-open-trump-account'],
   },
 
+  // ─── FAFSA Comparison Matrix ──────────────────────────────
+  'trump-account-fafsa-comparison-matrix': {
+    slug: 'trump-account-fafsa-comparison-matrix',
+    title: 'FAFSA Impact: Trump Account vs 529 vs Custodial — Full Matrix',
+    description: 'Side-by-side FAFSA impact of every child savings account. Assessment rates, dollar impact at $25K-$150K, and the multi-account strategy for college-bound families.',
+    category: 'Tax Questions',
+    categorySlug: 'tax-questions',
+    datePublished: '2026-02-19',
+    dateModified: '2026-02-19',
+    readingTime: '8 min read',
+    relatedSlugs: ['trump-account-fafsa-impact', 'trump-account-for-college', 'trump-account-vs-529-blog', 'best-accounts-for-kids-today', 'gains-taxation-explained', 'trump-account-roth-conversion-strategy'],
+  },
+
+  // ─── Rollover Guide ─────────────────────────────────────────
+  'trump-account-rollover-guide': {
+    slug: 'trump-account-rollover-guide',
+    title: 'Trump Account Rollovers: Switching Brokerages & Roth Conversions',
+    description: 'How to roll over a Trump Account before and after 18. Trustee-to-trustee transfers, Roth IRA conversions, what you can and cannot roll in, and a step-by-step checklist.',
+    category: 'Use of Funds',
+    categorySlug: 'use-of-funds',
+    datePublished: '2026-02-19',
+    dateModified: '2026-02-19',
+    readingTime: '9 min read',
+    relatedSlugs: ['trump-account-withdrawal-exceptions', 'trump-account-roth-conversion-strategy', 'trump-account-retirement-conversion', 'where-to-open-trump-account', 'trump-account-fees-explained', 'early-withdrawal-before-18'],
+  },
+
   // ─── Brokerage Hub: Where to Open ─────────────────────────
   'where-to-open-trump-account': {
     slug: 'where-to-open-trump-account',
@@ -1237,7 +1263,7 @@ export const blogArticles: Record<string, BlogArticle> = {
     datePublished: '2026-02-15',
     dateModified: '2026-02-15',
     readingTime: '6 min read',
-    relatedSlugs: ['trump-accounts-at-fidelity', 'trump-accounts-at-schwab', 'trump-accounts-at-bank-of-america', 'trump-accounts-at-robinhood', 'how-to-open-step-by-step', 'trump-account-fees-explained'],
+    relatedSlugs: ['trump-accounts-at-fidelity', 'trump-accounts-at-schwab', 'trump-accounts-at-bank-of-america', 'trump-accounts-at-robinhood', 'how-to-open-step-by-step', 'trump-account-fees-explained', 'trump-account-rollover-guide'],
   },
 };
 

@@ -32,6 +32,14 @@ const faqs = [
     question: 'Is there a way to access Trump Account funds for a medical emergency before 18?',
     answer: 'No. There are no medical, hardship, or emergency exceptions before age 18. This is one of the strictest rules of Trump Accounts. You cannot access the money under any circumstances (other than rollovers, excess returns, or death of the child).',
   },
+  {
+    question: 'What is the best withdrawal strategy for a Trump Account at 18?',
+    answer: 'Most financial experts recommend a Roth conversion strategy. Convert portions of the traditional IRA to a Roth IRA during low-income years (college, gap year, early career) when the tax rate is lowest — typically 10-12%. This locks in a low tax rate and all future growth is tax-free. Avoid withdrawing large lump sums, which push you into higher tax brackets.',
+  },
+  {
+    question: 'Can I withdraw from a Trump Account for a medical emergency before 18?',
+    answer: 'No. Unlike a 401(k) or even a 529 plan, Trump Accounts have no hardship, medical, or emergency withdrawal provisions before age 18. The only three exceptions are rollovers to another Trump Account, return of excess contributions, and death of the beneficiary. This is the strictest lock-up period of any child savings account.',
+  },
 ];
 ---
 
@@ -63,6 +71,81 @@ const faqs = [
       This guide covers both. The short answer: before 18, there are almost no exceptions. After 18, there are several important ones.
     </p>
 
+    <h2 id="flowchart">Can I Withdraw? Quick Decision Flowchart</h2>
+  </div>
+
+  <div class="not-prose my-6 overflow-x-auto">
+    <div class="mx-auto max-w-xl space-y-3 text-sm">
+      <!-- Step 1 -->
+      <div class="rounded-lg border border-gold-400/40 bg-gold-400/10 px-4 py-3 text-center font-semibold text-gold-400">
+        Is the beneficiary under 18?
+      </div>
+      <div class="flex items-start justify-center gap-8">
+        <!-- YES branch -->
+        <div class="flex flex-col items-center gap-2">
+          <span class="text-xs font-bold text-mint-400">YES</span>
+          <div class="w-0.5 h-4 bg-surface-600"></div>
+          <div class="rounded-lg border border-red-400/40 bg-red-400/10 px-4 py-3 text-center text-red-300 max-w-[200px]">
+            <strong class="block text-red-400">Locked</strong>
+            Only rollovers, excess returns, or death
+          </div>
+        </div>
+        <!-- NO branch -->
+        <div class="flex flex-col items-center gap-2">
+          <span class="text-xs font-bold text-mint-400">NO (18+)</span>
+          <div class="w-0.5 h-4 bg-surface-600"></div>
+          <div class="rounded-lg border border-gold-400/40 bg-gold-400/10 px-4 py-3 text-center text-gold-400 max-w-[200px]">
+            Is the beneficiary 59&frac12;+?
+          </div>
+        </div>
+      </div>
+      <!-- 59.5 sub-branch -->
+      <div class="ml-auto mr-4 flex items-start justify-center gap-8 max-w-[calc(50%+100px)]">
+        <div class="flex flex-col items-center gap-2">
+          <span class="text-xs font-bold text-mint-400">YES</span>
+          <div class="w-0.5 h-4 bg-surface-600"></div>
+          <div class="rounded-lg border border-mint-400/40 bg-mint-400/10 px-4 py-3 text-center text-mint-300 max-w-[180px]">
+            <strong class="block text-mint-400">No restrictions</strong>
+            Income tax only, no penalty
+          </div>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+          <span class="text-xs font-bold text-gold-400">NO</span>
+          <div class="w-0.5 h-4 bg-surface-600"></div>
+          <div class="rounded-lg border border-purple-400/40 bg-purple-400/10 px-4 py-3 text-center text-purple-300 max-w-[180px]">
+            <strong class="block text-purple-400">Does an exception apply?</strong>
+            <span class="text-xs">See list below</span>
+          </div>
+        </div>
+      </div>
+      <!-- Exception sub-branch -->
+      <div class="ml-auto mr-4 flex items-start justify-center gap-8 max-w-[calc(50%+100px)]">
+        <div class="flex flex-col items-center gap-2 invisible max-w-[180px]">
+          <span class="text-xs">&nbsp;</span>
+        </div>
+        <div class="flex gap-6 justify-center">
+          <div class="flex flex-col items-center gap-2">
+            <span class="text-xs font-bold text-mint-400">YES</span>
+            <div class="w-0.5 h-4 bg-surface-600"></div>
+            <div class="rounded-lg border border-mint-400/40 bg-mint-400/10 px-3 py-2 text-center text-mint-300 text-xs max-w-[150px]">
+              <strong class="block text-mint-400">Penalty-free</strong>
+              Still taxed as income
+            </div>
+          </div>
+          <div class="flex flex-col items-center gap-2">
+            <span class="text-xs font-bold text-red-400">NO</span>
+            <div class="w-0.5 h-4 bg-surface-600"></div>
+            <div class="rounded-lg border border-red-400/40 bg-red-400/10 px-3 py-2 text-center text-red-300 text-xs max-w-[150px]">
+              <strong class="block text-red-400">Full penalty</strong>
+              Income tax + 10% penalty
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="prose">
     <h2 id="before-18">Withdrawal Exceptions Before Age 18</h2>
     <p>
       During the growth phase (birth through age {limits.growthPhaseEndAge}), Trump Account money is <strong>locked</strong>. IRS Notice 2025-68 allows only three narrow exceptions:
@@ -70,7 +153,7 @@ const faqs = [
 
     <h3>1. Rollover to Another Trump Account</h3>
     <p>
-      You can transfer the entire account from one brokerage to another. This is a trustee-to-trustee transfer — the money never passes through your hands. You might do this to get a lower-cost fund or better service.
+      You can transfer the entire account from one brokerage to another. This is a trustee-to-trustee transfer — the money never passes through your hands. You might do this to get a lower-cost fund or better service. See our full <a href="/blog/trump-account-rollover-guide">rollover guide</a> for step-by-step instructions.
     </p>
 
     <h3>2. Return of Excess Contributions</h3>

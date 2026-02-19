@@ -1,3 +1,305 @@
 ---
-return Astro.redirect('/compare/trump-account-vs-utma', 301);
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import LastUpdated from '../../components/ui/LastUpdated.astro';
+import { breadcrumbSchema, faqSchema } from '../../lib/seo/schema';
+import limits from '../../data/contribution-limits.json';
+
+const siteUrl = 'https://trumpaccounts.guide';
+
+const faqs = [
+  {
+    question: 'What is a custodial account?',
+    answer: 'A custodial account (UTMA or UGMA) is a savings or investment account an adult opens and manages on behalf of a minor. The money legally belongs to the child, but the adult (custodian) controls it until the child reaches adulthood — usually age 18 or 21, depending on the state. You can invest in stocks, bonds, mutual funds, and more.',
+  },
+  {
+    question: 'Can I have both a Trump Account and a custodial account?',
+    answer: 'Yes. They are completely separate account types with no overlap. You can contribute to both simultaneously. Many families use the Trump Account to claim the $1,000 federal deposit and employer match, then put additional savings into a custodial account for flexibility.',
+  },
+  {
+    question: 'Is the $1,000 government deposit worth opening a Trump Account?',
+    answer: `Yes, for most families. The $1,000 pilot deposit is free money from the federal government for children born 2025–2028. At 8% annual returns, $1,000 grows to roughly $4,000 by age ${limits.growthPhaseEndAge}. You can still open a custodial account alongside it for additional savings.`,
+  },
+  {
+    question: 'What if my employer offers Trump Account matching?',
+    answer: `Employer matching changes the math entirely. Your employer can contribute up to $${limits.employerContributionLimit.toLocaleString()}/year tax-free toward your child's Trump Account. This is free money — even accounting for the higher tax rate on withdrawals, the return on matched contributions almost always beats any tax advantage from a custodial account.`,
+  },
+  {
+    question: 'Can I withdraw from a custodial account for emergencies?',
+    answer: 'Yes, the custodian (usually a parent) can withdraw money from a custodial account at any time, as long as the funds are used for the child\'s benefit. This is a major flexibility advantage over Trump Accounts, which are locked until age 18 with almost no exceptions.',
+  },
+  {
+    question: 'Which is better for college savings — a Trump Account or custodial account?',
+    answer: 'Neither is specifically designed for college (a 529 plan is better for that). But if you\'re choosing between these two for general savings that might be used for college: a Trump Account may have a FAFSA advantage because it converts to an IRA at 18, and IRAs are generally not counted as assets on the FAFSA. Custodial accounts are counted as student assets, which can reduce aid by up to 20% of the balance.',
+  },
+];
+
+const schemas = [
+  breadcrumbSchema([
+    { name: 'Home', url: siteUrl },
+    { name: 'Compare', url: `${siteUrl}/compare` },
+    { name: 'Trump Account vs Custodial Account', url: `${siteUrl}/compare/trump-account-vs-custodial-account` },
+  ]),
+  faqSchema(faqs),
+];
 ---
+
+<BaseLayout
+  title="Trump Account vs Custodial Account: Full Comparison (2026)"
+  description="Trump Account or custodial account for your child? Compare the free $1,000 deposit, employer match, taxes, FAFSA impact, and which families should pick each."
+  schema={schemas}
+>
+  <article class="mx-auto max-w-4xl px-4 py-12">
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="no-underline hover:text-gold-400">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <a href="/compare" class="no-underline hover:text-gold-400">Compare</a>
+        </li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="font-medium text-white">Trump Account vs Custodial Account</span>
+        </li>
+      </ol>
+    </nav>
+
+    <div class="prose">
+      <h1>Trump Account vs Custodial Account: Which Is Better for Your Kid?</h1>
+
+      <LastUpdated date="2026-02-19" />
+
+      <p>
+        If you're trying to save money for your child's future, you've probably heard about two options: the new <strong>Trump Account</strong> (created by the One Big Beautiful Bill Act in 2025) and a traditional <strong>custodial account</strong>. Both let you invest money on behalf of your child — but they work very differently.
+      </p>
+
+      <CalloutBox type="info" title="What is UTMA/UGMA?">
+        <p>When you see "UTMA" or "UGMA," that's just the legal name for a custodial account. UTMA stands for Uniform Transfers to Minors Act, and UGMA stands for Uniform Gifts to Minors Act. They're the same basic idea: an account you manage for your child until they're old enough to take over. For simplicity, we'll call them "custodial accounts" throughout this guide.</p>
+      </CalloutBox>
+
+      <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+        <h2 class="mb-3 text-lg font-bold text-gold-400">Bottom Line</h2>
+        <ul class="space-y-2 text-sm text-gray-300">
+          <li><strong class="text-white">Free money:</strong> Trump Accounts offer a ${limits.pilotDeposit.toLocaleString()} federal deposit for 2025–2028 births + up to ${limits.employerContributionLimit.toLocaleString()}/yr in tax-free employer matching. Custodial accounts offer neither.</li>
+          <li><strong class="text-white">Flexibility:</strong> Custodial accounts win — you can access the money before 18 and invest in almost anything. Trump Accounts are locked until 18 and limited to index funds.</li>
+          <li><strong class="text-white">Taxes:</strong> Custodial accounts may have lower tax rates on withdrawals (0–20% capital gains vs 10–37% ordinary income). But the free money from a Trump Account often outweighs this.</li>
+          <li><strong class="text-white">Financial aid:</strong> Trump Accounts likely have a FAFSA advantage because they convert to an IRA at {limits.iraConversionAge}, which is typically not counted as an asset.</li>
+          <li><strong class="text-white">Best strategy:</strong> For most families — use both. Claim the Trump Account for free money, then put extra savings in a custodial account.</li>
+        </ul>
+      </div>
+
+      <h2 id="comparison-table">Side-by-Side Comparison</h2>
+    </div>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600">
+            <th class="px-4 py-3 text-left font-semibold text-gray-400">Feature</th>
+            <th class="px-4 py-3 text-left font-semibold text-gold-400">Trump Account</th>
+            <th class="px-4 py-3 text-left font-semibold text-purple-400">Custodial Account</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Free government money</td>
+            <td class="px-4 py-3 text-mint-400">${limits.pilotDeposit.toLocaleString()} for 2025–2028 births</td>
+            <td class="px-4 py-3 text-gray-500">None</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Employer contributions</td>
+            <td class="px-4 py-3 text-mint-400">Up to ${limits.employerContributionLimit.toLocaleString()}/yr tax-free</td>
+            <td class="px-4 py-3 text-gray-500">Not available</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Annual contribution limit</td>
+            <td class="px-4 py-3">${limits.annualContributionLimit.toLocaleString()}/year</td>
+            <td class="px-4 py-3 text-mint-400">No limit (gift tax above $19K)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">What you can invest in</td>
+            <td class="px-4 py-3">S&P 500 / U.S. equity index funds only</td>
+            <td class="px-4 py-3 text-mint-400">Almost anything — stocks, bonds, ETFs, real estate</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Access before age {limits.growthPhaseEndAge}</td>
+            <td class="px-4 py-3 text-red-400">Locked (no withdrawals)</td>
+            <td class="px-4 py-3 text-mint-400">Yes — custodian can withdraw for child's benefit</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Tax on growth</td>
+            <td class="px-4 py-3 text-mint-400">Tax-deferred — no annual tax</td>
+            <td class="px-4 py-3">Kiddie tax on earnings above ~$2,700/yr</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Tax when you withdraw</td>
+            <td class="px-4 py-3">Ordinary income tax (10–37%)</td>
+            <td class="px-4 py-3 text-mint-400">Capital gains tax (0–20%)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Child gets control at</td>
+            <td class="px-4 py-3">Age {limits.iraConversionAge} (converts to IRA)</td>
+            <td class="px-4 py-3">Age 18–21 (varies by state)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Financial aid (FAFSA)</td>
+            <td class="px-4 py-3 text-mint-400">IRA treatment expected (favorable)</td>
+            <td class="px-4 py-3 text-red-400">Student asset — up to 20% assessed/yr</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-medium text-white">Best for</td>
+            <td class="px-4 py-3">Free money + long-term growth</td>
+            <td class="px-4 py-3">Flexibility + lower tax rates</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="prose">
+      <h2 id="free-money">The ${limits.pilotDeposit.toLocaleString()} Federal Deposit and Employer Match</h2>
+
+      <p>
+        This is the single biggest reason most families should open a Trump Account first. No custodial account offers anything like this.
+      </p>
+
+      <p>
+        <strong>The federal deposit:</strong> If your child was born between January 1, 2025, and December 31, {limits.pilotDepositEndYear}, the government deposits ${limits.pilotDeposit.toLocaleString()} into their Trump Account — for free. At 8% average annual returns, that ${limits.pilotDeposit.toLocaleString()} grows to roughly $4,000 by age {limits.growthPhaseEndAge}. No paperwork beyond filing {limits.form} with your tax return.
+      </p>
+
+      <p>
+        <strong>Employer matching:</strong> Under IRC §128, your employer can contribute up to ${limits.employerContributionLimit.toLocaleString()} per year toward your child's Trump Account. This money is tax-free to you — it doesn't count as income. If your employer offers this, it's like getting a raise earmarked for your child's future.
+      </p>
+
+      <CalloutBox type="tip" title="The golden rule: free money first">
+        <p>Open a Trump Account to claim the ${limits.pilotDeposit.toLocaleString()} deposit. Max out any employer match. Then put additional savings into a custodial account for flexibility. This is the same logic as "always take the 401(k) match before investing elsewhere."</p>
+      </CalloutBox>
+
+      <h2 id="flexibility">Flexibility: When Can You Access the Money?</h2>
+
+      <p>
+        This is where custodial accounts have a clear advantage.
+      </p>
+
+      <p>
+        <strong>Custodial accounts:</strong> The custodian (usually a parent) can withdraw money at any time, as long as it's used for the child's benefit. Need to pay for braces, summer camp, or a car for your teenager? A custodial account can cover it.
+      </p>
+
+      <p>
+        <strong>Trump Accounts:</strong> Money is locked until age {limits.growthPhaseEndAge}. There are only three exceptions before then: rolling over to another Trump Account, returning excess contributions, or the death of the child. No hardship withdrawals, no emergency access.
+      </p>
+
+      <p>
+        If you think you might need the money before your child turns {limits.growthPhaseEndAge}, a custodial account gives you that safety net. A Trump Account does not.
+      </p>
+
+      <h2 id="taxes-simplified">Tax Treatment in Plain English</h2>
+
+      <p>
+        Both accounts use money you've already paid income tax on — there's no tax deduction for either one. The difference is how they're taxed when the money comes out.
+      </p>
+
+      <p>
+        <strong>Trump Account:</strong> Growth is tax-deferred (you don't pay annual taxes on dividends or gains while the money sits there). But when your child withdraws the money after age {limits.iraConversionAge}, everything — original contributions and growth — is taxed as ordinary income. That means 10% to 37% depending on their income.
+      </p>
+
+      <p>
+        <strong>Custodial account:</strong> You pay a small annual tax on the child's investment income (the "kiddie tax"), but it's usually minimal for index fund investors. When your child sells investments, gains are taxed at long-term capital gains rates: 0%, 15%, or 20%. An 18-year-old with low income can often pay <strong>0% federal tax</strong> on their gains.
+      </p>
+
+      <p>
+        The bottom line on taxes: custodial accounts can have lower tax rates on withdrawals, especially for young adults with low income. But this advantage can be reduced or eliminated if your employer offers Trump Account matching — free money outweighs tax-rate optimization.
+      </p>
+
+      <p>
+        For a deeper dive into the tax math, including worked examples and the Roth conversion strategy, see our <a href="/compare/trump-account-vs-utma">detailed UTMA/UGMA tax analysis</a>.
+      </p>
+
+      <h2 id="fafsa">Financial Aid Impact</h2>
+
+      <p>
+        If your family plans to apply for financial aid (FAFSA), this is an important difference.
+      </p>
+
+      <p>
+        <strong>Custodial accounts</strong> are counted as <strong>student assets</strong> on the FAFSA. Student assets reduce financial aid eligibility by up to <strong>20%</strong> of the account balance each year. A $100,000 custodial account could reduce your child's aid by up to $20,000 per year.
+      </p>
+
+      <p>
+        <strong>Trump Accounts</strong> convert to a traditional IRA at age {limits.iraConversionAge}. While the Department of Education hasn't issued official guidance yet, traditional IRAs are generally <strong>not counted as assets</strong> on the FAFSA. Only withdrawals from the IRA would count as income on the following year's FAFSA.
+      </p>
+
+      <p>
+        For families expecting to apply for financial aid, this could be a major advantage for Trump Accounts. Learn more in our <a href="/blog/trump-account-fafsa-impact">FAFSA impact guide</a> or see the <a href="/blog/trump-account-fafsa-comparison-matrix">full FAFSA comparison matrix</a> across all account types.
+      </p>
+
+      <h2 id="who-should-choose">Which Should You Choose?</h2>
+
+      <h3>Open a Trump Account first if:</h3>
+
+      <ul>
+        <li><strong>Your child was born 2025–{limits.pilotDepositEndYear}</strong> — claim the free ${limits.pilotDeposit.toLocaleString()} deposit</li>
+        <li><strong>Your employer offers matching</strong> — get up to ${limits.employerContributionLimit.toLocaleString()}/yr in free money</li>
+        <li><strong>You'll apply for financial aid</strong> — IRA treatment is more favorable on the FAFSA</li>
+        <li><strong>You want a hands-off, locked account</strong> — no temptation to withdraw early</li>
+      </ul>
+
+      <h3>Open a custodial account first if:</h3>
+
+      <ul>
+        <li><strong>No pilot deposit available</strong> — child born before 2025 or after {limits.pilotDepositEndYear}</li>
+        <li><strong>No employer match available</strong> — the free-money advantage doesn't apply</li>
+        <li><strong>You may need access before {limits.growthPhaseEndAge}</strong> — emergencies, education expenses, or other needs</li>
+        <li><strong>You want to invest in more than index funds</strong> — individual stocks, bonds, real estate</li>
+        <li><strong>You want to save more than ${limits.annualContributionLimit.toLocaleString()}/year</strong> — custodial accounts have no contribution cap</li>
+      </ul>
+
+      <h2 id="use-both">Best Strategy: Use Both</h2>
+
+      <p>
+        For most families, the answer isn't one or the other — it's both. They serve different purposes and work well together.
+      </p>
+
+      <CalloutBox type="info" title="The recommended approach">
+        <p><strong>Step 1:</strong> Open a Trump Account to claim the ${limits.pilotDeposit.toLocaleString()} pilot deposit (children born 2025–{limits.pilotDepositEndYear}).<br>
+        <strong>Step 2:</strong> Max out any employer match in the Trump Account (up to ${limits.employerContributionLimit.toLocaleString()}/yr).<br>
+        <strong>Step 3:</strong> Put extra savings into a custodial account for flexibility and potentially lower tax rates.<br>
+        <strong>Step 4:</strong> At age {limits.iraConversionAge}, consider converting the Trump Account to a Roth IRA during low-income years for tax-free growth.</p>
+      </CalloutBox>
+
+      <p>
+        For a family contributing ${limits.annualContributionLimit.toLocaleString()}/year total with employer matching available: put ${limits.employerContributionLimit.toLocaleString()} in the Trump Account (to get the match) and ${limits.employerContributionLimit.toLocaleString()} in a custodial account. If no employer match is available, consider putting more into the custodial account — but still open the Trump Account for the ${limits.pilotDeposit.toLocaleString()} deposit.
+      </p>
+
+      <h2 id="faq">Frequently Asked Questions</h2>
+
+      {faqs.map((faq) => (
+        <div>
+          <h3>{faq.question}</h3>
+          <p>{faq.answer}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-10 grid gap-3 sm:grid-cols-2">
+      <a href="/compare/trump-account-vs-utma" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Detailed UTMA Tax Analysis</h3>
+        <p class="text-sm text-gray-400">Deep dive into kiddie tax, 0% capital gains, and Roth conversion strategies</p>
+      </a>
+      <a href="/compare/trump-account-vs-529" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Trump Account vs 529 Plan</h3>
+        <p class="text-sm text-gray-400">Education savings comparison</p>
+      </a>
+      <a href="/blog/trump-account-fafsa-impact" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">FAFSA Impact Guide</h3>
+        <p class="text-sm text-gray-400">How Trump Accounts affect financial aid eligibility</p>
+      </a>
+      <a href="/calculators/growth-calculator" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Growth Calculator</h3>
+        <p class="text-sm text-gray-400">Model your own contribution scenario</p>
+      </a>
+    </div>
+
+    <p class="mt-10 text-xs text-gray-600">
+      This is educational content, not tax or financial advice. Consult a qualified professional before making investment decisions.
+      Sources: <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf" target="_blank" rel="noopener noreferrer" class="text-gray-500">IRS Notice 2025-68</a>.
+    </p>
+  </article>
+</BaseLayout>

@@ -1,0 +1,247 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-rollover-guide')!;
+const related = getRelatedArticles('trump-account-rollover-guide');
+
+const faqs = [
+  {
+    question: 'Can I transfer a Trump Account to a different brokerage?',
+    answer: 'Yes. You can do a trustee-to-trustee rollover at any time, moving the entire Trump Account from one brokerage to another. The money goes directly between institutions — it never passes through your hands. There is no tax, no penalty, and no limit on how many times you can do this.',
+  },
+  {
+    question: 'Is a Trump Account rollover taxable?',
+    answer: 'No, as long as it is a trustee-to-trustee transfer (direct rollover). The money moves directly from one Trump Account trustee to another. This is not a withdrawal — it is an administrative transfer. No taxes, no penalties, no reporting on your tax return.',
+  },
+  {
+    question: 'Can I roll a 529 plan into a Trump Account?',
+    answer: 'No. As of 2026, there is no provision allowing rollovers from 529 plans, UTMA/UGMA accounts, Coverdell ESAs, or any other account type into a Trump Account. Contributions must be made in cash. The SECURE 2.0 Act allows 529-to-Roth IRA rollovers (with conditions), but not 529-to-Trump Account rollovers.',
+  },
+  {
+    question: 'What happens to my Trump Account at age 18?',
+    answer: `At age ${limits.iraConversionAge}, the Trump Account automatically converts to a traditional IRA in the child's name. This is a one-time, automatic conversion — not a rollover you initiate. The child then has full control and can convert to a Roth IRA, make withdrawals (subject to taxes and penalties), or keep investing.`,
+  },
+  {
+    question: 'Can I convert a Trump Account to a Roth IRA before age 18?',
+    answer: 'No. During the growth phase (birth through age 18), the Trump Account cannot be converted to any other account type. The only movement allowed is a trustee-to-trustee rollover to another Trump Account at a different brokerage. Roth conversions become available after the account converts to a traditional IRA at 18.',
+  },
+  {
+    question: 'How long does a Trump Account rollover take?',
+    answer: 'Most trustee-to-trustee transfers take 3-7 business days, though some brokerages may take up to 2-3 weeks depending on their processes. During the transfer, your money is not invested. To minimize time out of the market, initiate the transfer at the receiving brokerage (pull transfer) rather than the sending one (push transfer).',
+  },
+  {
+    question: 'Is there a fee to roll over a Trump Account?',
+    answer: 'Most major brokerages (Fidelity, Schwab, Vanguard) do not charge transfer fees. Some smaller firms may charge an account transfer or closing fee, typically $50-$75. Check with both the sending and receiving brokerage before initiating the rollover.',
+  },
+  {
+    question: 'Can I roll over a Trump Account to my other child?',
+    answer: 'No. Each Trump Account belongs to a specific beneficiary (the child). You cannot transfer or roll over the account to a sibling or another child. Each child must have their own separate Trump Account with their own SSN.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><strong class="text-white">Before 18:</strong> The only rollover allowed is a trustee-to-trustee transfer to another Trump Account at a different brokerage.</li>
+        <li><strong class="text-white">At 18:</strong> The account automatically converts to a traditional IRA. You can then convert to a Roth IRA.</li>
+        <li><strong class="text-white">No outside rollovers in:</strong> You cannot roll a 529, UTMA, Coverdell, or any other account into a Trump Account.</li>
+        <li><strong class="text-white">Tax-free:</strong> Trustee-to-trustee rollovers are not taxable events. No penalties, no reporting.</li>
+        <li><strong class="text-white">After 18:</strong> Standard IRA rollover rules apply — including 60-day indirect rollovers and Roth conversions.</li>
+      </ul>
+    </div>
+
+    <p>
+      "Rollover" means different things at different stages of a Trump Account's life. Before age 18, it means switching brokerages. At 18, the account automatically converts to a traditional IRA. After 18, standard IRA rollover rules apply. This guide covers all three phases.
+    </p>
+
+    <h2 id="before-18">Rollovers Before Age 18: Switching Brokerages</h2>
+    <p>
+      During the growth phase (birth through age {limits.growthPhaseEndAge}), the only way to move money out of a Trump Account is a <strong>trustee-to-trustee transfer</strong> to another Trump Account. This is how you switch brokerages — for example, moving from Schwab to Fidelity to get a lower expense ratio.
+    </p>
+
+    <h3>How a Trustee-to-Trustee Transfer Works</h3>
+    <ol>
+      <li><strong>Open a new Trump Account</strong> at the receiving brokerage. You'll need the child's SSN and the authorized individual's (parent/guardian) information.</li>
+      <li><strong>Initiate the transfer</strong> at the new brokerage. They'll ask for the sending brokerage's account number and details. A "pull" transfer (initiated by the receiving brokerage) is usually faster and easier.</li>
+      <li><strong>The money moves directly</strong> between institutions. It never passes through your hands or a personal bank account. The sending brokerage liquidates the fund, transfers the cash, and the receiving brokerage reinvests it.</li>
+      <li><strong>Confirm completion.</strong> Check the new account after 1-2 weeks to verify the full balance has arrived and is reinvested.</li>
+    </ol>
+
+    <CalloutBox type="info" title="Why switch brokerages?">
+      <p>
+        The most common reasons to roll over a Trump Account are: lower expense ratios (e.g., Fidelity's FXAIX at 0.015% vs Schwab's SWPPX at 0.02%), better customer service, or consolidating accounts at one institution. Even small expense ratio differences compound over 18 years.
+      </p>
+    </CalloutBox>
+
+    <h3>Rules for Pre-18 Rollovers</h3>
+    <ul>
+      <li><strong>Must be trustee-to-trustee.</strong> The money cannot pass through your personal bank account.</li>
+      <li><strong>Must go to another Trump Account.</strong> You cannot transfer to a 529, UTMA, IRA, or any other account type before 18.</li>
+      <li><strong>No limit on frequency.</strong> You can switch brokerages as often as you want, though doing so too often means time out of the market.</li>
+      <li><strong>No tax consequences.</strong> Trustee-to-trustee transfers are not taxable events and don't need to be reported on your tax return.</li>
+      <li><strong>Cannot change beneficiaries.</strong> The account stays in the same child's name. You cannot roll over to a sibling's Trump Account.</li>
+    </ul>
+
+    <CalloutBox type="warning" title="Watch out for time out of the market">
+      <p>
+        During a rollover, your money may be in cash (not invested) for <strong>3-14 business days</strong>. In a strong market, this could mean missing gains. In a down market, you might accidentally sell low and buy back higher. There is no way to do an "in-kind" Trump Account transfer (moving shares directly) — the sending brokerage liquidates to cash first.
+      </p>
+    </CalloutBox>
+
+    <h2 id="at-18">The Automatic Conversion at Age 18</h2>
+    <p>
+      When the beneficiary turns {limits.iraConversionAge}, the Trump Account <strong>automatically converts to a traditional IRA</strong> in the child's name. This is not a rollover you initiate — it happens by operation of law under IRC §530A.
+    </p>
+
+    <h3>What Changes at 18</h3>
+  </div>
+
+  <div class="not-prose my-6 overflow-x-auto">
+    <table class="w-full border-collapse text-sm">
+      <thead>
+        <tr class="border-b border-surface-600 text-left">
+          <th class="py-3 pr-4 font-medium text-gray-400">Feature</th>
+          <th class="py-3 pr-4 font-semibold text-gold-400">Before 18 (Trump Account)</th>
+          <th class="py-3 font-semibold text-purple-400">After 18 (Traditional IRA)</th>
+        </tr>
+      </thead>
+      <tbody class="text-gray-300">
+        <tr class="border-b border-surface-700">
+          <td class="py-3 pr-4 font-medium text-white">Who controls it</td>
+          <td class="py-3 pr-4">Authorized individual (parent/guardian)</td>
+          <td class="py-3">The child (now an adult)</td>
+        </tr>
+        <tr class="border-b border-surface-700 bg-surface-800">
+          <td class="py-3 pr-4 font-medium text-white">Withdrawals</td>
+          <td class="py-3 pr-4 text-red-400">Locked (almost no exceptions)</td>
+          <td class="py-3 text-mint-400">Allowed (with tax + possible penalty)</td>
+        </tr>
+        <tr class="border-b border-surface-700">
+          <td class="py-3 pr-4 font-medium text-white">Investments</td>
+          <td class="py-3 pr-4">S&P 500 / broad U.S. equity index only</td>
+          <td class="py-3 text-mint-400">Any investment allowed in an IRA</td>
+        </tr>
+        <tr class="border-b border-surface-700 bg-surface-800">
+          <td class="py-3 pr-4 font-medium text-white">Contributions</td>
+          <td class="py-3 pr-4">${limits.annualContributionLimit.toLocaleString()}/year from anyone</td>
+          <td class="py-3">Standard IRA limits (requires earned income)</td>
+        </tr>
+        <tr class="border-b border-surface-700">
+          <td class="py-3 pr-4 font-medium text-white">Roth conversion</td>
+          <td class="py-3 pr-4 text-red-400">Not available</td>
+          <td class="py-3 text-mint-400">Available (taxed as ordinary income)</td>
+        </tr>
+        <tr>
+          <td class="py-3 pr-4 font-medium text-white">Rollover options</td>
+          <td class="py-3 pr-4">Trump Account to Trump Account only</td>
+          <td class="py-3 text-mint-400">IRA to IRA, IRA to Roth, IRA to 401(k)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="prose">
+    <h2 id="roth-conversion">Roth IRA Conversion After 18</h2>
+    <p>
+      The most important rollover decision after 18 is whether to <strong>convert the traditional IRA to a Roth IRA</strong>. This is widely considered the best long-term strategy for Trump Accounts.
+    </p>
+
+    <h3>How the Roth Conversion Works</h3>
+    <ol>
+      <li><strong>Open a Roth IRA</strong> at the same brokerage (or a different one).</li>
+      <li><strong>Request a conversion</strong> — the brokerage moves money from the traditional IRA to the Roth IRA.</li>
+      <li><strong>Pay income tax</strong> on the converted amount. The conversion amount is added to your taxable income for that year.</li>
+      <li><strong>Future growth is tax-free.</strong> Once in the Roth, all future growth and qualified withdrawals are completely tax-free.</li>
+    </ol>
+
+    <h3>Why Convert During Low-Income Years</h3>
+    <p>
+      The tax hit depends on your child's income in the year of conversion. A college student earning $10,000/year with a standard deduction of ~$15,000 can convert <strong>up to $5,000 at 0% federal tax</strong> and the next ~$11,600 at just 10%. Converting $15,000-$20,000/year during 4 years of college could move $60,000-$80,000 into a Roth at an effective rate of 5-8%.
+    </p>
+
+    <CalloutBox type="tip" title="The Roth conversion ladder">
+      <p>
+        Convert a portion each year during college and early career when income is low. A 4-year conversion strategy during college (ages 18-22) at $15,000-$20,000/year can move $60,000-$80,000 into a Roth at minimal tax rates. See our full <a href="/blog/trump-account-roth-conversion-strategy">Roth conversion strategy guide</a>.
+      </p>
+    </CalloutBox>
+
+    <h2 id="after-18-rollovers">Other Rollovers After 18</h2>
+    <p>
+      Once the Trump Account becomes a traditional IRA, standard IRA rollover rules apply:
+    </p>
+
+    <h3>Direct Rollover (Trustee-to-Trustee)</h3>
+    <p>
+      Move the IRA from one brokerage to another. Same process as a pre-18 Trump Account rollover. No tax consequences, no limits on frequency.
+    </p>
+
+    <h3>60-Day Indirect Rollover</h3>
+    <p>
+      Withdraw the money, then redeposit it into an IRA within <strong>60 days</strong>. This is risky — if you miss the 60-day window, the full amount is treated as a taxable distribution with a 10% early withdrawal penalty (if under 59&frac12;). You can only do one indirect rollover per 12-month period.
+    </p>
+
+    <h3>IRA to Employer Plan (401(k))</h3>
+    <p>
+      If your child starts a job with a 401(k), they can roll the traditional IRA into the employer plan. This can be useful for creditor protection or if the employer plan has low-cost institutional funds.
+    </p>
+
+    <h2 id="what-you-cannot-do">What You Cannot Roll Into a Trump Account</h2>
+    <p>
+      Trump Accounts only accept <strong>cash contributions</strong>. You cannot roll over or transfer any other account type into a Trump Account:
+    </p>
+    <ul>
+      <li><strong>529 plan</strong> — No rollover path to a Trump Account (the SECURE 2.0 Act allows 529-to-Roth IRA, but not 529-to-Trump Account)</li>
+      <li><strong>UTMA/UGMA</strong> — Cannot be transferred into a Trump Account</li>
+      <li><strong>Coverdell ESA</strong> — No rollover path to a Trump Account</li>
+      <li><strong>Traditional or Roth IRA</strong> — Cannot be rolled into a Trump Account</li>
+      <li><strong>Another child's Trump Account</strong> — Each account is tied to one beneficiary</li>
+    </ul>
+
+    <CalloutBox type="info" title="In-kind transfers are not available">
+      <p>
+        You cannot transfer shares of stock or ETFs directly into a Trump Account. All contributions must be in cash. If you own VOO shares in a brokerage account, you'd need to sell them, contribute the cash, and then the Trump Account trustee invests in the eligible fund.
+      </p>
+    </CalloutBox>
+
+    <h2 id="rollover-checklist">Rollover Checklist</h2>
+    <p>
+      Before initiating any Trump Account rollover:
+    </p>
+    <ol>
+      <li><strong>Compare expense ratios</strong> at the new brokerage. Even 0.01% matters over 18 years.</li>
+      <li><strong>Check for transfer fees</strong> at both the sending and receiving brokerage.</li>
+      <li><strong>Initiate from the receiving brokerage</strong> (pull transfer) for faster processing.</li>
+      <li><strong>Expect 3-14 business days</strong> where your money is not invested.</li>
+      <li><strong>Verify completion</strong> — confirm the full balance arrived and is reinvested.</li>
+      <li><strong>Keep records</strong> of the transfer for your files (though it's not a taxable event).</li>
+    </ol>
+
+    <h2 id="bottom-line">The Bottom Line</h2>
+    <p>
+      Trump Account rollovers are simple before 18 — you can only switch brokerages via a trustee-to-trustee transfer. The real decision comes at 18: whether to convert to a Roth IRA and how much to convert each year. For most young adults, <strong>a gradual Roth conversion during low-income years</strong> is the best move.
+    </p>
+    <p>
+      For the full list of withdrawal exceptions (including penalty-free options after 18), see our <a href="/blog/trump-account-withdrawal-exceptions">withdrawal exceptions guide</a>. For Roth conversion math, see our <a href="/blog/trump-account-roth-conversion-strategy">Roth conversion strategy</a>.
+    </p>
+
+    <CalloutBox type="warning" title="Not tax or financial advice">
+      <p>
+        This is educational content. Rollover and conversion decisions have tax consequences that vary by individual situation. Consult a qualified tax professional before initiating a rollover or Roth conversion.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

@@ -1,0 +1,297 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-fafsa-comparison-matrix')!;
+const related = getRelatedArticles('trump-account-fafsa-comparison-matrix');
+
+const faqs = [
+  {
+    question: 'Which savings account has the lowest FAFSA impact?',
+    answer: 'A parent-owned 529 plan has the lowest FAFSA impact. It is reported as a parent asset and assessed at a maximum of 5.64%. Grandparent-owned 529s have zero asset impact under current FAFSA rules (post-2024 simplification). Trump Accounts and custodial accounts are assessed at up to 20% as student assets.',
+  },
+  {
+    question: 'Are Trump Accounts reported on the FAFSA?',
+    answer: 'Official guidance is still pending. However, because the Trump Account converts to a child-owned traditional IRA at age 18, it will likely be reported as a student asset. Student assets are assessed at up to 20% of their value, which is higher than the 5.64% rate for parent assets.',
+  },
+  {
+    question: 'Does a Roth IRA conversion change the FAFSA treatment?',
+    answer: 'No. Converting from a traditional IRA to a Roth IRA does not change the FAFSA classification. Both are student assets if owned by the student. However, the conversion income no longer affects FAFSA under the post-2024 simplified formula, which uses federal tax return data from two years prior.',
+  },
+  {
+    question: 'Do grandparent-owned 529 plans affect FAFSA?',
+    answer: 'Under the FAFSA Simplification Act (effective 2024-25 award year), grandparent-owned 529 plans no longer affect FAFSA at all. Distributions are no longer reported as student income, and the asset is not reported because it is not owned by the student or parent. This makes grandparent 529s the most FAFSA-friendly option.',
+  },
+  {
+    question: 'Should I skip a Trump Account to protect financial aid eligibility?',
+    answer: 'Generally no. Even if a $100,000 Trump Account reduces aid by $20,000/year, your child still has $80,000+ more than they would without the account. The free $1,000 deposit and employer match are hard to beat. Use a 529 for education costs and a Trump Account for flexible long-term savings.',
+  },
+  {
+    question: 'Can I reduce FAFSA impact by withdrawing before filing?',
+    answer: 'Technically yes — spending down assets before FAFSA filing reduces the reported balance. But this is counterproductive for long-term wealth building. A better strategy is to time large Roth conversions and withdrawals for after the last FAFSA is filed, typically junior year of college.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><strong class="text-white">Parent-owned 529s</strong> have the lowest FAFSA impact (5.64% assessment rate).</li>
+        <li><strong class="text-white">Grandparent-owned 529s</strong> have zero FAFSA impact under current rules.</li>
+        <li><strong class="text-white">Trump Accounts</strong> become child-owned IRAs at 18 — likely assessed at up to 20% as student assets.</li>
+        <li><strong class="text-white">Custodial accounts (UTMA/UGMA)</strong> are also student assets, assessed at up to 20%.</li>
+        <li><strong class="text-white">Best strategy:</strong> Use a 529 for college costs + Trump Account for everything else. The total wealth gain outweighs the aid reduction.</li>
+      </ul>
+    </div>
+
+    <p>
+      If you're saving for a child who might apply for financial aid, you need to know how each account type affects the FAFSA. The differences are large — a $100,000 balance in the wrong account type could reduce aid by <strong>$14,000+ more per year</strong> than the same amount in a FAFSA-friendly account.
+    </p>
+
+    <p>
+      This guide puts every major child savings account side by side so you can see exactly how each one is treated on the FAFSA.
+    </p>
+
+    <CalloutBox type="warning" title="Trump Account FAFSA guidance is pending">
+      <p>
+        As of early 2026, the Department of Education has not issued specific guidance on Trump Accounts and the FAFSA. The analysis below is based on existing IRA rules and how the FAFSA treats similar account types. This page will be updated when official guidance is published.
+      </p>
+    </CalloutBox>
+
+    <h2 id="how-fafsa-works">How FAFSA Assesses Assets (Quick Primer)</h2>
+    <p>
+      The FAFSA (Free Application for Federal Student Aid) determines how much a family can afford to pay for college. Assets are classified by ownership:
+    </p>
+    <ul>
+      <li><strong>Parent assets:</strong> Assessed at a maximum of <strong>5.64%</strong> of their value per year</li>
+      <li><strong>Student assets:</strong> Assessed at up to <strong>20%</strong> of their value per year</li>
+      <li><strong>Not reported:</strong> Some assets (like retirement accounts in the parent's name, primary home equity) are excluded entirely</li>
+    </ul>
+    <p>
+      The higher the assessment rate, the more that account reduces your child's financial aid eligibility. Student assets are hit hardest at 20%.
+    </p>
+
+    <h2 id="comparison-matrix">FAFSA Impact Comparison Matrix</h2>
+  </div>
+
+  <div class="not-prose my-6 overflow-x-auto">
+    <table class="w-full border-collapse text-sm">
+      <thead>
+        <tr class="border-b border-surface-600 text-left">
+          <th class="py-3 pr-4 font-semibold text-gray-200">Account Type</th>
+          <th class="py-3 pr-4 font-semibold text-gray-200">FAFSA Classification</th>
+          <th class="py-3 pr-4 font-semibold text-gray-200">Assessment Rate</th>
+          <th class="py-3 pr-4 font-semibold text-gray-200">$100K Impact/Year</th>
+          <th class="py-3 font-semibold text-gray-200">Notes</th>
+        </tr>
+      </thead>
+      <tbody class="text-gray-300">
+        <tr class="border-b border-surface-700">
+          <td class="py-3 pr-4 font-medium text-gold-400">Trump Account (at 18)</td>
+          <td class="py-3 pr-4">Student asset (likely)</td>
+          <td class="py-3 pr-4 text-red-400">Up to 20%</td>
+          <td class="py-3 pr-4 text-red-400">-$20,000</td>
+          <td class="py-3 text-xs">Converts to child-owned IRA; pending guidance</td>
+        </tr>
+        <tr class="border-b border-surface-700 bg-surface-800">
+          <td class="py-3 pr-4 font-medium text-blue-400">Parent-owned 529</td>
+          <td class="py-3 pr-4">Parent asset</td>
+          <td class="py-3 pr-4 text-mint-400">Max 5.64%</td>
+          <td class="py-3 pr-4 text-mint-400">-$5,640</td>
+          <td class="py-3 text-xs">Best for education-earmarked savings</td>
+        </tr>
+        <tr class="border-b border-surface-700">
+          <td class="py-3 pr-4 font-medium text-blue-400">Grandparent-owned 529</td>
+          <td class="py-3 pr-4">Not reported</td>
+          <td class="py-3 pr-4 text-mint-400">0%</td>
+          <td class="py-3 pr-4 text-mint-400">$0</td>
+          <td class="py-3 text-xs">Post-2024 FAFSA simplification; no asset or income impact</td>
+        </tr>
+        <tr class="border-b border-surface-700 bg-surface-800">
+          <td class="py-3 pr-4 font-medium text-purple-400">Custodial account (UTMA/UGMA)</td>
+          <td class="py-3 pr-4">Student asset</td>
+          <td class="py-3 pr-4 text-red-400">Up to 20%</td>
+          <td class="py-3 pr-4 text-red-400">-$20,000</td>
+          <td class="py-3 text-xs">Child owns the assets; irrevocable gift</td>
+        </tr>
+        <tr class="border-b border-surface-700">
+          <td class="py-3 pr-4 font-medium text-purple-400">Custodial Roth IRA</td>
+          <td class="py-3 pr-4">Student asset</td>
+          <td class="py-3 pr-4 text-red-400">Up to 20%</td>
+          <td class="py-3 pr-4 text-red-400">-$20,000</td>
+          <td class="py-3 text-xs">Requires earned income; child-owned</td>
+        </tr>
+        <tr class="border-b border-surface-700 bg-surface-800">
+          <td class="py-3 pr-4 font-medium text-blue-400">Parent's Roth IRA</td>
+          <td class="py-3 pr-4">Not reported</td>
+          <td class="py-3 pr-4 text-mint-400">0%</td>
+          <td class="py-3 pr-4 text-mint-400">$0</td>
+          <td class="py-3 text-xs">Retirement assets excluded; withdrawals may count as income</td>
+        </tr>
+        <tr class="border-b border-surface-700">
+          <td class="py-3 pr-4 font-medium text-blue-400">Coverdell ESA (parent-owned)</td>
+          <td class="py-3 pr-4">Parent asset</td>
+          <td class="py-3 pr-4 text-mint-400">Max 5.64%</td>
+          <td class="py-3 pr-4 text-mint-400">-$5,640</td>
+          <td class="py-3 text-xs">$2,000/yr limit; expires at 30</td>
+        </tr>
+        <tr>
+          <td class="py-3 pr-4 font-medium text-blue-400">Parent's taxable brokerage</td>
+          <td class="py-3 pr-4">Parent asset</td>
+          <td class="py-3 pr-4 text-yellow-400">Max 5.64%</td>
+          <td class="py-3 pr-4 text-yellow-400">-$5,640</td>
+          <td class="py-3 text-xs">No restrictions but no tax advantages</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="prose">
+    <CalloutBox type="info" title="The $14,360 gap">
+      <p>
+        At a $100,000 balance, the difference between a <strong>parent-owned 529</strong> (-$5,640/year aid impact) and a <strong>Trump Account</strong> (-$20,000/year) is <strong>$14,360 per year</strong> in potential financial aid. Over four years of college, that's up to <strong>$57,440</strong> in reduced aid eligibility.
+      </p>
+    </CalloutBox>
+
+    <h2 id="rankings">FAFSA-Friendliness Rankings</h2>
+    <p>
+      From most FAFSA-friendly to least:
+    </p>
+    <ol>
+      <li><strong>Grandparent-owned 529</strong> — 0% impact (not reported at all)</li>
+      <li><strong>Parent's retirement accounts</strong> (401(k), Roth IRA, traditional IRA) — 0% impact (excluded from FAFSA)</li>
+      <li><strong>Parent-owned 529</strong> — 5.64% max (parent asset)</li>
+      <li><strong>Coverdell ESA</strong> (parent-owned) — 5.64% max (parent asset)</li>
+      <li><strong>Parent's taxable brokerage</strong> — 5.64% max (parent asset)</li>
+      <li><strong>Trump Account</strong> (at 18) — up to 20% (student asset)</li>
+      <li><strong>Custodial account</strong> (UTMA/UGMA) — up to 20% (student asset)</li>
+      <li><strong>Custodial Roth IRA</strong> — up to 20% (student asset)</li>
+    </ol>
+
+    <h2 id="dollar-impact">Dollar Impact at Different Balances</h2>
+    <p>
+      Here's what the annual FAFSA impact looks like across different account types and balances:
+    </p>
+  </div>
+
+  <div class="not-prose my-6 overflow-x-auto">
+    <table class="w-full border-collapse text-sm">
+      <thead>
+        <tr class="border-b border-surface-600 text-left">
+          <th class="py-3 pr-4 font-semibold text-gray-200">Balance</th>
+          <th class="py-3 pr-4 font-semibold text-gold-400">Trump Account (20%)</th>
+          <th class="py-3 pr-4 font-semibold text-blue-400">Parent 529 (5.64%)</th>
+          <th class="py-3 pr-4 font-semibold text-purple-400">Custodial (20%)</th>
+          <th class="py-3 font-semibold text-blue-400">Grandparent 529 (0%)</th>
+        </tr>
+      </thead>
+      <tbody class="text-gray-300">
+        <tr class="border-b border-surface-700">
+          <td class="py-3 pr-4 font-medium text-white">$25,000</td>
+          <td class="py-3 pr-4 text-red-400">-$5,000</td>
+          <td class="py-3 pr-4 text-yellow-400">-$1,410</td>
+          <td class="py-3 pr-4 text-red-400">-$5,000</td>
+          <td class="py-3 text-mint-400">$0</td>
+        </tr>
+        <tr class="border-b border-surface-700 bg-surface-800">
+          <td class="py-3 pr-4 font-medium text-white">$50,000</td>
+          <td class="py-3 pr-4 text-red-400">-$10,000</td>
+          <td class="py-3 pr-4 text-yellow-400">-$2,820</td>
+          <td class="py-3 pr-4 text-red-400">-$10,000</td>
+          <td class="py-3 text-mint-400">$0</td>
+        </tr>
+        <tr class="border-b border-surface-700">
+          <td class="py-3 pr-4 font-medium text-white">$100,000</td>
+          <td class="py-3 pr-4 text-red-400">-$20,000</td>
+          <td class="py-3 pr-4 text-yellow-400">-$5,640</td>
+          <td class="py-3 pr-4 text-red-400">-$20,000</td>
+          <td class="py-3 text-mint-400">$0</td>
+        </tr>
+        <tr>
+          <td class="py-3 pr-4 font-medium text-white">$150,000</td>
+          <td class="py-3 pr-4 text-red-400">-$30,000</td>
+          <td class="py-3 pr-4 text-yellow-400">-$8,460</td>
+          <td class="py-3 pr-4 text-red-400">-$30,000</td>
+          <td class="py-3 text-mint-400">$0</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="prose">
+    <h2 id="smart-strategy">The Smart Multi-Account Strategy</h2>
+    <p>
+      The optimal approach for families who expect to apply for financial aid:
+    </p>
+
+    <CalloutBox type="tip" title="Recommended account combination for college-bound families">
+      <p>
+        <strong>Step 1:</strong> Open a <strong>Trump Account</strong> — claim the free ${limits.pilotDeposit.toLocaleString()} deposit and any employer match. This money is too valuable to pass up.<br>
+        <strong>Step 2:</strong> Open a <strong>parent-owned 529</strong> for education-specific savings (5.64% assessment vs 20%).<br>
+        <strong>Step 3:</strong> If grandparents want to help, have them open a <strong>grandparent-owned 529</strong> (zero FAFSA impact).<br>
+        <strong>Step 4:</strong> At 18, <strong>convert the Trump Account IRA to a Roth</strong> during low-income years. Time large conversions after the FAFSA filing year.<br>
+        <strong>Step 5:</strong> Use 529 money for tuition first, preserving the Trump Account IRA for post-college needs (home, business, retirement).
+      </p>
+    </CalloutBox>
+
+    <h2 id="who-should-care">Who Needs to Worry About This?</h2>
+    <p>
+      The FAFSA impact matters most if your family:
+    </p>
+    <ul>
+      <li>Expects to qualify for <strong>need-based financial aid</strong> (Pell Grants, subsidized loans)</li>
+      <li>Is building <strong>$50,000+ in child-owned accounts</strong></li>
+      <li>Plans to attend schools that <strong>rely heavily on FAFSA</strong> for aid decisions</li>
+    </ul>
+    <p>
+      It does <strong>not</strong> matter if:
+    </p>
+    <ul>
+      <li>Your household income is too high to qualify for need-based aid</li>
+      <li>Your child plans to attend a school with merit-based (not need-based) scholarships</li>
+      <li>You're building a modest account ($10,000-$25,000) where the aid difference is small</li>
+    </ul>
+
+    <h2 id="common-mistakes">Common FAFSA Mistakes with Trump Accounts</h2>
+    <h3>1. Assuming IRAs are excluded from FAFSA</h3>
+    <p>
+      <strong>Parent-owned</strong> retirement accounts (IRAs, 401(k)s) are excluded from FAFSA. But a <strong>child-owned</strong> IRA — which is what the Trump Account becomes at 18 — is reported as a student asset. Don't confuse the two.
+    </p>
+
+    <h3>2. Thinking Roth conversion fixes the FAFSA problem</h3>
+    <p>
+      Converting from traditional IRA to Roth IRA does not change the asset classification. It's still a child-owned account, still assessed at up to 20%.
+    </p>
+
+    <h3>3. Ignoring the total-wealth perspective</h3>
+    <p>
+      A $100,000 Trump Account that reduces aid by $20,000/year still leaves your child <strong>$80,000+ ahead</strong> compared to having no account. Don't let FAFSA concerns prevent you from building real wealth.
+    </p>
+
+    <h2 id="bottom-line">The Bottom Line</h2>
+    <p>
+      Trump Accounts and custodial accounts are among the <strong>least FAFSA-friendly</strong> savings vehicles because they become child-owned assets assessed at up to 20%. Parent-owned 529 plans (5.64%) and grandparent-owned 529s (0%) are significantly better for families who expect to apply for need-based aid.
+    </p>
+    <p>
+      The best strategy is to <strong>use multiple account types</strong>: claim the free money in a Trump Account, save for education in a 529, and let grandparents contribute through their own 529s. For a deeper look at the Trump Account's FAFSA impact specifically, see our <a href="/blog/trump-account-fafsa-impact">FAFSA impact guide</a>.
+    </p>
+
+    <CalloutBox type="warning" title="Not financial or tax advice">
+      <p>
+        FAFSA rules change regularly. This comparison is for educational purposes only. Consult a financial aid advisor or qualified financial planner for advice specific to your family's situation.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>
