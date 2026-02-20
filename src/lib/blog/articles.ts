@@ -568,8 +568,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   },
   'trump-account-fafsa-impact': {
     slug: 'trump-account-fafsa-impact',
-    title: 'Trump Account and FAFSA: How It Affects Financial Aid (2026)',
-    description: 'Trump Account FAFSA impact: at 18 it becomes a student-owned IRA, assessed at up to 20%. Dollar impact table, 529 comparison, and strategies to minimize aid reduction.',
+    title: 'Will Trump Accounts Affect FAFSA? Financial Aid Impact (2026)',
+    description: 'At 18 a Trump Account becomes a student-owned IRA — assessed at up to 20% on FAFSA. Dollar impact table, 529 comparison, and 4 strategies to minimize aid loss.',
     category: 'Tax Questions',
     categorySlug: 'tax-questions',
     datePublished: '2026-02-12',
