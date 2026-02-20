@@ -1,6 +1,8 @@
 ---
 import BlogLayout from '../../layouts/BlogLayout.astro';
 import CalloutBox from '../../components/ui/CalloutBox.astro';
+import CalculatorCTA from '../../components/ui/CalculatorCTA.astro';
+import KeepReading from '../../components/ui/KeepReading.astro';
 import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
 import limits from '../../data/contribution-limits.json';
 
@@ -162,6 +164,8 @@ const faqs = [
       </p>
     </CalloutBox>
 
+    <CalculatorCTA calculator="eligibility" />
+
     <h2>The Dell Family Pledge</h2>
     <p>
       In addition to the federal ${limits.pilotDeposit.toLocaleString()} deposit, Michael and Susan Dell pledged <strong>$6.25 billion</strong> through their foundation. This pledge provides <strong>${limits.dellPledge.perChildAmount} per child</strong> who is under {limits.dellPledge.eligibleAge} and lives in a ZIP code with a median income below ${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}.
@@ -198,6 +202,8 @@ const faqs = [
     <p>
       Many families will benefit from opening <strong>both</strong> a Trump Account and a 529 plan. They serve different purposes and have different tax advantages.
     </p>
+
+    <KeepReading slugs={['how-to-open-step-by-step', 'contribution-limits-explained', 'how-much-at-age-18']} />
 
     <h2>The Bottom Line</h2>
     <p>

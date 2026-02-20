@@ -1,6 +1,8 @@
 ---
 import BlogLayout from '../../layouts/BlogLayout.astro';
 import CalloutBox from '../../components/ui/CalloutBox.astro';
+import CalculatorCTA from '../../components/ui/CalculatorCTA.astro';
+import KeepReading from '../../components/ui/KeepReading.astro';
 import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
 import limits from '../../data/contribution-limits.json';
 
@@ -153,6 +155,8 @@ const faqs = [
       For pure college savings, the <a href="/compare/trump-account-vs-529">529 wins on tax efficiency</a>. For flexibility, the Trump Account wins.
     </p>
 
+    <CalculatorCTA calculator="comparison" />
+
     <h2>FAFSA Impact: What to Watch For</h2>
     <p>
       At age 18, the Trump Account becomes a <strong>student-owned traditional IRA</strong>. On the FAFSA (Free Application for Federal Student Aid), student assets are assessed at up to <strong>20%</strong>. That means an $80,000 account could reduce financial aid eligibility by up to <strong>$16,000</strong>.
@@ -163,6 +167,8 @@ const faqs = [
     <p>
       Read our full <a href="/blog/trump-account-fafsa-impact">FAFSA impact guide</a> for strategies to minimize the effect on financial aid.
     </p>
+
+    <KeepReading slugs={['trump-account-vs-529-blog', 'trump-account-fafsa-impact', 'gains-taxation-explained']} />
 
     <CalloutBox type="tip" title="The best strategy: use both">
       <p>

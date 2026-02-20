@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import CalloutBox from '../../components/ui/CalloutBox.astro';
 import LastUpdated from '../../components/ui/LastUpdated.astro';
 import { breadcrumbSchema, faqSchema } from '../../lib/seo/schema';
+import RelatedBlogArticles from '../../components/ui/RelatedBlogArticles.astro';
 import limits from '../../data/contribution-limits.json';
 
 const siteUrl = 'https://trumpaccounts.guide';
@@ -45,8 +46,8 @@ const schemas = [
 ---
 
 <BaseLayout
-  title="Trump Account vs Custodial Account: Full Comparison (2026)"
-  description="Trump Account or custodial account for your child? Compare the free $1,000 deposit, employer match, taxes, FAFSA impact, and which families should pick each."
+  title="Trump Account vs Custodial Account (UTMA/UGMA) — 2026"
+  description="Trump Account vs UTMA custodial account — free $1,000 deposit, taxes, FAFSA impact, and which is better for your child. Side-by-side comparison table inside."
   schema={schemas}
 >
   <article class="mx-auto max-w-4xl px-4 py-12">
@@ -296,6 +297,8 @@ const schemas = [
         <p class="text-sm text-gray-400">Model your own contribution scenario</p>
       </a>
     </div>
+
+    <RelatedBlogArticles slugs={['who-controls-trump-account', 'gains-taxation-explained', 'trump-account-fafsa-comparison-matrix', 'best-accounts-for-kids-today']} title="Deep Dives on This Topic" />
 
     <p class="mt-10 text-xs text-gray-600">
       This is educational content, not tax or financial advice. Consult a qualified professional before making investment decisions.

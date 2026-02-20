@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Accordion from '../../components/ui/Accordion.astro';
 import LastUpdated from '../../components/ui/LastUpdated.astro';
+import RelatedBlogArticles from '../../components/ui/RelatedBlogArticles.astro';
 import { breadcrumbSchema, faqSchema } from '../../lib/seo/schema';
 
 const siteUrl = 'https://trumpaccounts.guide';
@@ -69,6 +70,8 @@ const schemas = [
         <p class="text-sm text-gray-400">FAFSA, Medicaid, gains, and withdrawal taxes</p>
       </a>
     </div>
+
+    <RelatedBlogArticles slugs={['who-qualifies-for-trump-account', 'adopted-children-trump-account', 'trump-account-for-older-kids', 'do-all-babies-qualify']} title="Deep Dives on Eligibility" />
 
     <p class="mt-10 text-xs text-gray-600">
       Educational content only, not tax or financial advice.

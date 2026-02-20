@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Accordion from '../../components/ui/Accordion.astro';
 import LastUpdated from '../../components/ui/LastUpdated.astro';
+import RelatedBlogArticles from '../../components/ui/RelatedBlogArticles.astro';
 import { breadcrumbSchema, faqSchema } from '../../lib/seo/schema';
 
 const siteUrl = 'https://trumpaccounts.guide';
@@ -67,6 +68,8 @@ const schemas = [
         <p class="text-sm text-gray-400">See how a Trump Account could grow over 18 years</p>
       </a>
     </div>
+
+    <RelatedBlogArticles slugs={['best-accounts-for-kids-today', 'trump-account-vs-529-blog', 'should-i-contribute-own-money', 'trump-account-fafsa-comparison-matrix']} title="Deep Dives on Comparisons" />
 
     <p class="mt-10 text-xs text-gray-600">
       Educational content only, not tax or financial advice.

@@ -1,0 +1,61 @@
+---
+/**
+ * Mid-article CTA banner that links to a calculator.
+ * Usage: <CalculatorCTA calculator="growth" />
+ * Supported calculators: growth, eligibility, employer, withdrawal, comparison
+ */
+interface Props {
+  calculator: 'growth' | 'eligibility' | 'employer' | 'withdrawal' | 'comparison';
+}
+
+const { calculator } = Astro.props;
+
+const ctaData: Record<string, { href: string; icon: string; title: string; description: string }> = {
+  growth: {
+    href: '/calculators/growth-calculator',
+    icon: '📈',
+    title: 'Try the Growth Calculator',
+    description: 'See how much your child\'s Trump Account could be worth at 18.',
+  },
+  eligibility: {
+    href: '/calculators/eligibility-checker',
+    icon: '✅',
+    title: 'Check Eligibility in 30 Seconds',
+    description: 'Answer 3 quick questions to see if your child qualifies.',
+  },
+  employer: {
+    href: '/calculators/employer-match',
+    icon: '🏢',
+    title: 'Employer Match Calculator',
+    description: 'See how much your employer\'s contribution adds over 18 years.',
+  },
+  withdrawal: {
+    href: '/calculators/withdrawal-simulator',
+    icon: '💰',
+    title: 'Withdrawal Tax Simulator',
+    description: 'Model the exact tax impact at any withdrawal age.',
+  },
+  comparison: {
+    href: '/compare',
+    icon: '⚖️',
+    title: 'Compare All Account Types',
+    description: 'Trump Account vs 529 vs Roth IRA vs UTMA — side by side.',
+  },
+};
+
+const cta = ctaData[calculator];
+---
+
+{cta && (
+  <a
+    href={cta.href}
+    class="not-prose my-8 flex items-center gap-4 rounded-xl border border-gold-400/30 bg-gradient-to-r from-gold-400/10 to-transparent p-5 no-underline transition-colors hover:border-gold-400/50 hover:from-gold-400/15"
+  >
+    <span class="text-2xl" role="img" aria-hidden="true">{cta.icon}</span>
+    <div>
+      <p class="font-semibold text-white">{cta.title}</p>
+      <p class="mt-0.5 text-sm text-gray-400">{cta.description}</p>
+    </div>
+    <span class="ml-auto text-gold-400">&rarr;</span>
+  </a>
+)}

@@ -1,6 +1,8 @@
 ---
 import BlogLayout from '../../layouts/BlogLayout.astro';
 import CalloutBox from '../../components/ui/CalloutBox.astro';
+import CalculatorCTA from '../../components/ui/CalculatorCTA.astro';
+import KeepReading from '../../components/ui/KeepReading.astro';
 import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
 import limits from '../../data/contribution-limits.json';
 
@@ -156,6 +158,8 @@ const faqs = [
       This is why <a href="/blog/should-i-wait-or-invest-now">starting early matters so much</a>. Every month of delay reduces the total. A child who starts at birth gets 18 full years of compounding. A child who starts at age 5 gets only 13 years — and the final number can be tens of thousands of dollars less.
     </p>
 
+    <CalculatorCTA calculator="growth" />
+
     <h2>What Happens at Age 18?</h2>
     <p>
       At age {limits.iraConversionAge}, the Trump Account <strong>converts to a traditional IRA</strong>. Your child takes full control. They can:
@@ -166,6 +170,8 @@ const faqs = [
       <li>Convert to a <a href="/blog/trump-account-roth-conversion-strategy">Roth IRA</a> for future tax-free growth</li>
       <li>Use the <a href="/blog/trump-account-for-first-home">first-time homebuyer exception</a> for up to $10,000 penalty-free</li>
     </ul>
+
+    <KeepReading slugs={['contribution-limits-explained', 'should-i-wait-or-invest-now', 'how-to-open-step-by-step']} />
 
     <h2>Run Your Own Numbers</h2>
     <p>

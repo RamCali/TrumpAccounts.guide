@@ -1,0 +1,36 @@
+---
+/**
+ * Reusable "Related Articles" grid for non-blog pages (compare, FAQ, guides).
+ * Pass an array of blog slugs and it renders linked cards.
+ */
+import { blogArticles, type BlogArticle } from '../../lib/blog/articles';
+
+interface Props {
+  slugs: string[];
+  title?: string;
+}
+
+const { slugs, title = 'Related Articles' } = Astro.props;
+
+const articles = slugs
+  .map(s => blogArticles[s])
+  .filter((a): a is BlogArticle => !!a);
+---
+
+{articles.length > 0 && (
+  <div class="mt-10">
+    <h2 class="mb-4 text-xl font-bold text-white">{title}</h2>
+    <div class="grid gap-3 sm:grid-cols-2">
+      {articles.map((a) => (
+        <a
+          href={`/blog/${a.slug}`}
+          class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5"
+        >
+          <h3 class="font-semibold text-white">{a.title}</h3>
+          <p class="mt-1 text-sm text-gray-400 line-clamp-2">{a.description}</p>
+          <span class="mt-2 inline-block text-xs text-gray-600">{a.readingTime}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+)}

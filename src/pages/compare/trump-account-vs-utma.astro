@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import CalloutBox from '../../components/ui/CalloutBox.astro';
 import LastUpdated from '../../components/ui/LastUpdated.astro';
 import { breadcrumbSchema, faqSchema } from '../../lib/seo/schema';
+import RelatedBlogArticles from '../../components/ui/RelatedBlogArticles.astro';
 
 const siteUrl = 'https://trumpaccounts.guide';
 
@@ -52,8 +53,8 @@ const schemas = [
 ---
 
 <BaseLayout
-  title="Trump Account vs Custodial Account (UTMA/UGMA) — 2026"
-  description="Trump Account or custodial account? Side-by-side comparison of taxes, capital gains, FAFSA impact, and free money. One clear winner for most families."
+  title="Trump Account vs UTMA: Tax Comparison & Capital Gains"
+  description="Is a UTMA better than a Trump Account for taxes? Capital gains (0-20%) vs ordinary income (10-37%). Kiddie tax, Roth conversion at 18, and when each wins."
   schema={schemas}
 >
   <article class="mx-auto max-w-4xl px-4 py-12">
@@ -497,6 +498,8 @@ const schemas = [
         <p class="text-sm text-gray-400">See the tax impact at different ages</p>
       </a>
     </div>
+
+    <RelatedBlogArticles slugs={['who-controls-trump-account', 'gains-taxation-explained', 'best-accounts-for-kids-today', 'trump-account-fafsa-comparison-matrix']} title="Deep Dives on This Topic" />
 
     <p class="mt-10 text-xs text-gray-600">
       This is educational content, not tax or financial advice. Consult a qualified professional before making investment decisions.

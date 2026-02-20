@@ -1,6 +1,8 @@
 ---
 import BlogLayout from '../../layouts/BlogLayout.astro';
 import CalloutBox from '../../components/ui/CalloutBox.astro';
+import CalculatorCTA from '../../components/ui/CalculatorCTA.astro';
+import KeepReading from '../../components/ui/KeepReading.astro';
 import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
 import limits from '../../data/contribution-limits.json';
 
@@ -146,6 +148,8 @@ const faqs = [
       The tax benefit comes later: growth inside the account is <strong>tax-deferred</strong>. You do not pay taxes on gains each year. At age 18, when the account converts to a traditional IRA, withdrawals are taxed as ordinary income. For more on the tax treatment, see <a href="/blog/are-trump-accounts-tax-deductible">Are Trump Accounts Tax-Deductible?</a>
     </p>
 
+    <CalculatorCTA calculator="growth" />
+
     <h2>Inflation Indexing After {limits.inflationIndexStartYear}</h2>
     <p>
       The ${limits.annualContributionLimit.toLocaleString()} annual limit is <strong>indexed for inflation starting after {limits.inflationIndexStartYear}</strong>. This means the IRS will periodically increase the limit to keep pace with rising costs.
@@ -213,6 +217,8 @@ const faqs = [
         </tbody>
       </table>
     </div>
+
+    <KeepReading slugs={['employer-match-trump-account', 'can-parents-grandparents-contribute', 'how-to-open-step-by-step']} />
 
     <p>
       Want to see how different contribution levels affect your child's account at age 18? Use the <a href="/calculators/growth-calculator"><strong>Growth Calculator</strong></a> to model scenarios. For the full story on employer contributions, visit our <a href="/blog/employer-match-trump-account">employer match guide</a>.

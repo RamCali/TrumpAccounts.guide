@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Accordion from '../../components/ui/Accordion.astro';
 import LastUpdated from '../../components/ui/LastUpdated.astro';
+import RelatedBlogArticles from '../../components/ui/RelatedBlogArticles.astro';
 import { breadcrumbSchema, faqSchema } from '../../lib/seo/schema';
 
 const siteUrl = 'https://trumpaccounts.guide';
@@ -68,6 +69,8 @@ const schemas = [
         <p class="text-sm text-gray-400">Calculate the impact of employer contributions</p>
       </a>
     </div>
+
+    <RelatedBlogArticles slugs={['contribution-limits-explained', 'employer-match-trump-account', 'can-parents-grandparents-contribute', 'how-much-money-trump-account']} title="Deep Dives on Contributions" />
 
     <p class="mt-10 text-xs text-gray-600">
       Educational content only, not tax or financial advice.

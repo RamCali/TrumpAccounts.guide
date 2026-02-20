@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Accordion from '../../components/ui/Accordion.astro';
 import LastUpdated from '../../components/ui/LastUpdated.astro';
+import RelatedBlogArticles from '../../components/ui/RelatedBlogArticles.astro';
 import { breadcrumbSchema, faqSchema } from '../../lib/seo/schema';
 
 const siteUrl = 'https://trumpaccounts.guide';
@@ -67,6 +68,8 @@ const schemas = [
         <p class="text-sm text-gray-400">Who qualifies, adopted children, income limits</p>
       </a>
     </div>
+
+    <RelatedBlogArticles slugs={['gains-taxation-explained', 'trump-account-fafsa-impact', 'trump-account-roth-conversion-strategy', 'trump-accounts-tax-benefits-guide']} title="Deep Dives on Taxes" />
 
     <p class="mt-10 text-xs text-gray-600">
       Educational content only, not tax or financial advice.

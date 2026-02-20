@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import CalloutBox from '../../components/ui/CalloutBox.astro';
 import LastUpdated from '../../components/ui/LastUpdated.astro';
 import ComparisonCheatSheet from '../../components/ComparisonCheatSheet';
+import RelatedBlogArticles from '../../components/ui/RelatedBlogArticles.astro';
 import { breadcrumbSchema, faqSchema } from '../../lib/seo/schema';
 
 const siteUrl = 'https://trumpaccounts.guide';
@@ -262,6 +263,8 @@ const schemas = [
         <p class="text-sm text-gray-400">Model your own contribution scenario</p>
       </a>
     </div>
+
+    <RelatedBlogArticles slugs={['trump-account-vs-529-blog', 'trump-account-for-college', 'best-accounts-for-kids-today', 'trump-account-fafsa-comparison-matrix']} title="Deep Dives on This Topic" />
 
     <p class="mt-10 text-xs text-gray-600">
       This is educational content, not tax or financial advice.

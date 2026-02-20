@@ -14,6 +14,7 @@ export interface BlogArticle {
   dateModified: string;
   readingTime: string;
   relatedSlugs: string[];
+  featured?: boolean;
 }
 
 export const blogArticles: Record<string, BlogArticle> = {
@@ -28,6 +29,7 @@ export const blogArticles: Record<string, BlogArticle> = {
     dateModified: '2026-02-12',
     readingTime: '8 min read',
     relatedSlugs: ['who-qualifies-for-trump-account', 'how-much-money-trump-account', 'when-do-trump-accounts-start', 'is-trump-account-automatic', 'eli5-trump-accounts', 'trump-account-myths-debunked'],
+    featured: true,
   },
   'trump-accounts-benefits': {
     slug: 'trump-accounts-benefits',
@@ -39,6 +41,7 @@ export const blogArticles: Record<string, BlogArticle> = {
     dateModified: '2026-02-12',
     readingTime: '7 min read',
     relatedSlugs: ['what-are-trump-accounts-guide', 'how-to-open-step-by-step', 'employer-match-trump-account', 'dell-pledge-explained', 'gains-taxation-explained'],
+    featured: true,
   },
   'who-qualifies-for-trump-account': {
     slug: 'who-qualifies-for-trump-account',
@@ -50,6 +53,7 @@ export const blogArticles: Record<string, BlogArticle> = {
     dateModified: '2026-02-12',
     readingTime: '5 min read',
     relatedSlugs: ['do-all-babies-qualify', 'adopted-children-trump-account', 'trump-account-age-cutoff', 'what-are-trump-accounts-guide'],
+    featured: true,
   },
   'when-do-trump-accounts-start': {
     slug: 'when-do-trump-accounts-start',
@@ -129,6 +133,7 @@ export const blogArticles: Record<string, BlogArticle> = {
     dateModified: '2026-02-12',
     readingTime: '6 min read',
     relatedSlugs: ['expected-returns-trump-account', 'build-50k-by-18', 'could-create-millionaires', 'contribution-limits-explained'],
+    featured: true,
   },
   'can-parents-grandparents-contribute': {
     slug: 'can-parents-grandparents-contribute',
@@ -151,6 +156,7 @@ export const blogArticles: Record<string, BlogArticle> = {
     dateModified: '2026-02-12',
     readingTime: '5 min read',
     relatedSlugs: ['can-parents-grandparents-contribute', 'employer-match-trump-account', 'how-much-money-trump-account'],
+    featured: true,
   },
   'are-trump-accounts-tax-deductible': {
     slug: 'are-trump-accounts-tax-deductible',
@@ -309,6 +315,7 @@ export const blogArticles: Record<string, BlogArticle> = {
     dateModified: '2026-02-12',
     readingTime: '5 min read',
     relatedSlugs: ['what-can-money-be-used-for', 'trump-account-fafsa-impact', 'gains-taxation-explained', 'trump-account-vs-529-blog', 'trump-account-fafsa-comparison-matrix'],
+    featured: true,
   },
   'trump-account-for-first-home': {
     slug: 'trump-account-for-first-home',
@@ -345,8 +352,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   },
   'trump-account-penalties': {
     slug: 'trump-account-penalties',
-    title: 'Trump Account Penalties: What Happens If You Withdraw (2026)',
-    description: '3 penalty phases: locked before 18, 10% + income tax from 18–59½, penalty-free after 59½. Key exceptions for home, education, and disability.',
+    title: 'Trump Account Early Withdrawal Penalties by Age (2026)',
+    description: 'What happens if you withdraw from a Trump Account? Locked before 18, 10% penalty + tax from 18–59½, penalty-free after. 8 exceptions that avoid the penalty.',
     category: 'Use of Funds',
     categorySlug: 'use-of-funds',
     datePublished: '2026-02-12',
@@ -546,6 +553,7 @@ export const blogArticles: Record<string, BlogArticle> = {
     dateModified: '2026-02-12',
     readingTime: '5 min read',
     relatedSlugs: ['is-growth-tax-free', 'trump-account-roth-conversion-strategy', 'trump-account-penalties'],
+    featured: true,
   },
   'is-growth-tax-free': {
     slug: 'is-growth-tax-free',
@@ -693,6 +701,7 @@ export const blogArticles: Record<string, BlogArticle> = {
     dateModified: '2026-02-12',
     readingTime: '6 min read',
     relatedSlugs: ['is-trump-account-automatic', 'when-do-trump-accounts-start', 'who-qualifies-for-trump-account'],
+    featured: true,
   },
   'should-i-wait-or-invest-now': {
     slug: 'should-i-wait-or-invest-now',
@@ -1303,4 +1312,21 @@ export function getArticle(slug: string): BlogArticle | undefined {
 /** Get total article count. */
 export function getArticleCount(): number {
   return Object.keys(blogArticles).length;
+}
+
+/** Get all featured/popular articles. */
+export function getFeaturedArticles(): BlogArticle[] {
+  return Object.values(blogArticles).filter(a => a.featured);
+}
+
+/** Get prev/next articles within the same category (by insertion order). */
+export function getPrevNextArticles(slug: string): { prev: BlogArticle | null; next: BlogArticle | null } {
+  const article = blogArticles[slug];
+  if (!article) return { prev: null, next: null };
+  const categoryArticles = getArticlesByCategory(article.categorySlug);
+  const idx = categoryArticles.findIndex(a => a.slug === slug);
+  return {
+    prev: idx > 0 ? categoryArticles[idx - 1] : null,
+    next: idx < categoryArticles.length - 1 ? categoryArticles[idx + 1] : null,
+  };
 }

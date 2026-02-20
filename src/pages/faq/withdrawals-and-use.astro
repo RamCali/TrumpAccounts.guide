@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Accordion from '../../components/ui/Accordion.astro';
 import LastUpdated from '../../components/ui/LastUpdated.astro';
+import RelatedBlogArticles from '../../components/ui/RelatedBlogArticles.astro';
 import { breadcrumbSchema, faqSchema } from '../../lib/seo/schema';
 
 const siteUrl = 'https://trumpaccounts.guide';
@@ -68,6 +69,8 @@ const schemas = [
         <p class="text-sm text-gray-400">FAFSA, Medicaid, Roth conversion tax details</p>
       </a>
     </div>
+
+    <RelatedBlogArticles slugs={['trump-account-withdrawal-exceptions', 'trump-account-penalties', 'what-can-money-be-used-for', 'early-withdrawal-before-18']} title="Deep Dives on Withdrawals" />
 
     <p class="mt-10 text-xs text-gray-600">
       Educational content only, not tax or financial advice.

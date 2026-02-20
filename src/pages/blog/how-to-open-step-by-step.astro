@@ -1,6 +1,8 @@
 ---
 import BlogLayout from '../../layouts/BlogLayout.astro';
 import CalloutBox from '../../components/ui/CalloutBox.astro';
+import CalculatorCTA from '../../components/ui/CalculatorCTA.astro';
+import KeepReading from '../../components/ui/KeepReading.astro';
 import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
 import limits from '../../data/contribution-limits.json';
 
@@ -192,6 +194,8 @@ const faqs = [
       Lower expense ratios mean more of your money stays invested. Over 18 years, even a small difference in fees adds up. SPLG and VOO are the cheapest options.
     </p>
 
+    <CalculatorCTA calculator="eligibility" />
+
     <h2>Step 6: Set Up Contributions</h2>
 
     <p>
@@ -209,6 +213,8 @@ const faqs = [
     <CalloutBox type="tip" title="Pro tip">
       Set up automatic monthly contributions. Contributing about $417/month maxes out the ${limits.annualContributionLimit.toLocaleString()} annual limit. Even $100 or $200/month makes a big difference over 18 years thanks to compounding.
     </CalloutBox>
+
+    <KeepReading slugs={['contribution-limits-explained', 'when-do-trump-accounts-start', 'what-are-trump-accounts-guide']} />
 
     <h2>What Happens Next?</h2>
 

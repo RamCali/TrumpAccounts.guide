@@ -1,0 +1,38 @@
+---
+/**
+ * Inline "Keep Reading" widget for mid-article placement.
+ * Shows 3 related articles in a compact format to reduce bounce.
+ * Usage: <KeepReading slugs={['slug-1', 'slug-2', 'slug-3']} />
+ */
+import { blogArticles, type BlogArticle } from '../../lib/blog/articles';
+
+interface Props {
+  slugs: string[];
+}
+
+const { slugs } = Astro.props;
+
+const articles = slugs
+  .map(s => blogArticles[s])
+  .filter((a): a is BlogArticle => !!a)
+  .slice(0, 3);
+---
+
+{articles.length > 0 && (
+  <aside class="not-prose my-10 rounded-xl border border-gold-400/20 bg-gold-400/5 p-5">
+    <p class="mb-3 text-sm font-semibold text-gold-400">Keep Reading</p>
+    <ul class="space-y-2">
+      {articles.map((a) => (
+        <li>
+          <a
+            href={`/blog/${a.slug}`}
+            class="group flex items-baseline gap-2 text-sm no-underline"
+          >
+            <span class="text-gold-400/60 group-hover:text-gold-400">&#9656;</span>
+            <span class="text-gray-300 group-hover:text-white transition-colors">{a.title}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </aside>
+)}

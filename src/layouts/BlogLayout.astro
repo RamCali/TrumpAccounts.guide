@@ -3,6 +3,7 @@ import BaseLayout from './BaseLayout.astro';
 import Accordion from '../components/ui/Accordion.astro';
 import LastUpdated from '../components/ui/LastUpdated.astro';
 import { articleSchema, breadcrumbSchema, faqSchema } from '../lib/seo/schema';
+import { getPrevNextArticles } from '../lib/blog/articles';
 
 interface Props {
   title: string;
@@ -61,6 +62,8 @@ const formattedDate = new Date(datePublished).toLocaleDateString('en-US', {
   month: 'long',
   day: 'numeric',
 });
+
+const { prev, next } = getPrevNextArticles(slug);
 ---
 
 <BaseLayout title={title} description={description} schema={schemas} ogType="article">
@@ -127,6 +130,24 @@ const formattedDate = new Date(datePublished).toLocaleDateString('en-US', {
           ))}
         </div>
       </div>
+    )}
+
+    <!-- Prev / Next in category -->
+    {(prev || next) && (
+      <nav aria-label="Previous and next articles" class="mt-12 grid gap-3 sm:grid-cols-2">
+        {prev ? (
+          <a href={`/blog/${prev.slug}`} class="group rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+            <span class="text-xs text-gray-500 group-hover:text-gold-400">&larr; Previous in {category}</span>
+            <p class="mt-1 font-semibold text-white line-clamp-2">{prev.title}</p>
+          </a>
+        ) : <div />}
+        {next && (
+          <a href={`/blog/${next.slug}`} class="group rounded-lg border border-surface-600 p-4 no-underline text-right transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+            <span class="text-xs text-gray-500 group-hover:text-gold-400">Next in {category} &rarr;</span>
+            <p class="mt-1 font-semibold text-white line-clamp-2">{next.title}</p>
+          </a>
+        )}
+      </nav>
     )}
 
     <!-- Disclaimer -->

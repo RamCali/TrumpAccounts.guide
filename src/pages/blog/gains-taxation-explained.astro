@@ -1,6 +1,8 @@
 ---
 import BlogLayout from '../../layouts/BlogLayout.astro';
 import CalloutBox from '../../components/ui/CalloutBox.astro';
+import CalculatorCTA from '../../components/ui/CalculatorCTA.astro';
+import KeepReading from '../../components/ui/KeepReading.astro';
 import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
 import limits from '../../data/contribution-limits.json';
 
@@ -86,6 +88,8 @@ const faqs = [
     <p>
       Tax-deferred compounding is powerful. In a regular taxable brokerage account, you would owe taxes each year on dividends and any realized gains. Those annual taxes reduce how much stays invested and growing. In a Trump Account, <strong>every dollar of growth stays invested</strong> and continues compounding.
     </p>
+
+    <CalculatorCTA calculator="withdrawal" />
 
     <h2>Phase 3: Withdrawals (Ordinary Income Tax)</h2>
     <p>
@@ -218,6 +222,8 @@ const faqs = [
         At age {limits.iraConversionAge}, your child can <a href="/blog/trump-account-roth-conversion-strategy">convert the traditional IRA to a Roth IRA</a>. They pay income tax on the converted amount, but all future growth becomes tax-free forever. This is especially powerful if they are in a low tax bracket during college years.
       </p>
     </CalloutBox>
+
+    <KeepReading slugs={['trump-account-roth-conversion-strategy', 'are-trump-accounts-tax-deductible', 'contribution-limits-explained']} />
 
     <h2>The Bottom Line</h2>
     <p>

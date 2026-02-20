@@ -1,6 +1,8 @@
 ---
 import BlogLayout from '../../layouts/BlogLayout.astro';
 import CalloutBox from '../../components/ui/CalloutBox.astro';
+import CalculatorCTA from '../../components/ui/CalculatorCTA.astro';
+import KeepReading from '../../components/ui/KeepReading.astro';
 import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
 import limits from '../../data/contribution-limits.json';
 
@@ -117,6 +119,8 @@ const faqs = [
       The tax-deferred advantage can add <strong>$12,000-$24,000</strong> to your child's account over {limits.growthPhaseEndAge} years at maximum contributions. For a full breakdown of how gains are taxed after age {limits.growthPhaseEndAge}, read <a href="/blog/gains-taxation-explained">our taxation guide</a>.
     </p>
 
+    <CalculatorCTA calculator="growth" />
+
     <h2>4. Employer Matching Up to ${limits.employerContributionLimit.toLocaleString()}/Year</h2>
     <p>
       Your employer can contribute up to <strong>${limits.employerContributionLimit.toLocaleString()} per year</strong> to your child's Trump Account, <strong>tax-free</strong> under IRC Section 128. This contribution:
@@ -177,6 +181,8 @@ const faqs = [
     <p>
       Low fees are one of the biggest predictors of long-term investment success. Over {limits.growthPhaseEndAge} years, even a 0.5% fee difference can cost thousands. Trump Accounts lock in some of the lowest fees available anywhere. See <a href="/blog/trump-account-fees-explained">our detailed fee breakdown</a>.
     </p>
+
+    <KeepReading slugs={['how-much-at-age-18', 'contribution-limits-explained', 'how-to-open-step-by-step']} />
 
     <h2>6. Flexible Use at Age {limits.growthPhaseEndAge}</h2>
     <p>
