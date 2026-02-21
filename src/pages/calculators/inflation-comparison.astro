@@ -1,6 +1,32 @@
 ---
 import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
 import InflationComparisonCalc from '../../components/calculators/InflationComparisonCalc';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import Accordion from '../../components/ui/Accordion.astro';
+import limits from '../../data/contribution-limits.json';
+
+const faqs = [
+  {
+    question: 'Does inflation affect Trump Account growth?',
+    answer: 'Yes, but Trump Accounts are invested in S&P 500 index funds, which historically outpace inflation by a wide margin. The S&P 500 has averaged roughly 10% annually, while inflation averages 2-3%. Your real (inflation-adjusted) return is around 7-8%.',
+  },
+  {
+    question: 'How much does inflation erode a savings account?',
+    answer: `At ${(limits.defaultInflationRate * 100).toFixed(1)}% average inflation, $1,000 in a savings account earning 4% APY is worth only about $1,300 in purchasing power after 18 years. The same $1,000 in a Trump Account at 8% returns could be worth roughly $3,000 in today's dollars.`,
+  },
+  {
+    question: 'What inflation rate does the calculator use?',
+    answer: `The default is ${(limits.defaultInflationRate * 100).toFixed(1)}% annual inflation, which is close to the Federal Reserve's target of 2%. You can adjust this in the calculator to see how different inflation scenarios affect the comparison.`,
+  },
+  {
+    question: 'Is a Trump Account better than a high-yield savings account?',
+    answer: 'Over 18 years, almost certainly yes. High-yield savings accounts currently offer 4-5% APY, but rates fluctuate. The S&P 500 has averaged roughly 10% over any 18-year period in its history. The trade-off is short-term volatility — stocks can drop in any given year, but over 18 years, equities have always outperformed savings accounts.',
+  },
+  {
+    question: 'What about years when the stock market is down?',
+    answer: 'The S&P 500 has negative years, but over any 18-year period in its history, total returns have always been positive. Trump Accounts benefit from dollar-cost averaging — contributing regularly means you buy more shares when prices are low and fewer when prices are high.',
+  },
+];
 ---
 
 <CalculatorLayout
@@ -10,5 +36,45 @@ import InflationComparisonCalc from '../../components/calculators/InflationCompa
   slug="inflation-comparison"
   abstract="Compares the purchasing power of a Section 530A Trump Account invested in U.S. equities against a traditional savings account after adjusting for inflation."
 >
+  <section class="mb-8">
+    <h2 class="mb-3 text-xl font-bold text-white">Savings Account vs Trump Account: The Inflation Gap</h2>
+    <p class="mb-4 text-gray-300">
+      A savings account feels safe, but inflation slowly eats away at your money. Over 18 years, a "high-yield" savings account at 4% APY barely keeps pace with inflation. A Trump Account invested in S&P 500 index funds historically grows <strong class="text-white">much faster than inflation</strong>.
+    </p>
+    <p class="mb-4 text-gray-300">
+      This calculator shows the real difference in <strong class="text-white">purchasing power</strong> — what your child's money can actually buy after accounting for rising prices. The gap between the two accounts widens dramatically over time.
+    </p>
+
+    <div class="mb-6 grid gap-3 sm:grid-cols-2">
+      <div class="rounded-lg border border-red-500/20 bg-red-500/5 p-4">
+        <p class="text-sm font-semibold text-red-400">Savings Account (4% APY)</p>
+        <p class="mt-1 text-gray-300">$1,000 → <strong class="text-white">~$1,300</strong> in purchasing power after 18 years</p>
+        <p class="text-xs text-gray-500">Barely beats {(limits.defaultInflationRate * 100).toFixed(1)}% inflation</p>
+      </div>
+      <div class="rounded-lg border border-mint-400/20 bg-mint-400/5 p-4">
+        <p class="text-sm font-semibold text-mint-400">Trump Account (8% avg return)</p>
+        <p class="mt-1 text-gray-300">$1,000 → <strong class="text-white">~$3,000</strong> in purchasing power after 18 years</p>
+        <p class="text-xs text-gray-500">Significantly outpaces inflation</p>
+      </div>
+    </div>
+
+    <CalloutBox type="info" title="Why this matters for your child">
+      <p>
+        A savings account earning 4% with {(limits.defaultInflationRate * 100).toFixed(1)}% inflation gives a real return of about 1.5%. A Trump Account at 8% gives a real return of about 5.5%. Over 18 years, that difference compounds into 2-3x more purchasing power.
+      </p>
+    </CalloutBox>
+  </section>
+
   <InflationComparisonCalc client:visible />
+
+  <section class="mt-10">
+    <h2 class="mb-4 text-xl font-bold text-white">Frequently Asked Questions</h2>
+    <Accordion items={faqs} />
+
+    <div class="mt-6">
+      <p class="text-sm text-gray-400">
+        See the full growth projection with the <a href="/calculators/growth-calculator" class="text-gold-400 hover:text-gold-300">growth calculator</a>, or compare Trump Accounts to other account types in our <a href="/compare/trump-account-vs-529" class="text-gold-400 hover:text-gold-300">comparison guide</a>.
+      </p>
+    </div>
+  </section>
 </CalculatorLayout>

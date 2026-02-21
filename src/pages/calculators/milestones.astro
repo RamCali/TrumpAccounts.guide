@@ -1,6 +1,32 @@
 ---
 import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
 import MilestonesCalculator from '../../components/calculators/MilestonesCalculator';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import Accordion from '../../components/ui/Accordion.astro';
+import limits from '../../data/contribution-limits.json';
+
+const faqs = [
+  {
+    question: 'Can a Trump Account reach $100,000 by age 18?',
+    answer: `Yes. Contributing $${limits.annualContributionLimit.toLocaleString()}/year (the maximum) from birth at an 8% average return, plus the $${limits.pilotDeposit.toLocaleString()} federal deposit, projects to roughly $200,000 by age 18. Even $250/month gets you near $100,000.`,
+  },
+  {
+    question: 'Can a Trump Account reach $1 million?',
+    answer: 'Not by age 18 with the $5,000/year contribution limit. But after the account converts to a traditional IRA at 18, continued contributions and decades of compounding can reach $1 million. A $200,000 balance at 18 growing at 8% for 20 more years reaches roughly $930,000 — without any additional contributions.',
+  },
+  {
+    question: 'How much do I need to contribute monthly to hit $50,000 by 18?',
+    answer: `At an 8% average annual return, contributing roughly $125/month from birth — plus the $${limits.pilotDeposit.toLocaleString()} federal deposit — projects to about $50,000 by age 18. Use the calculator above to model your exact scenario.`,
+  },
+  {
+    question: 'What return rate should I assume?',
+    answer: 'The S&P 500 has averaged roughly 10% annually over the past 50+ years. An 8% assumption is conservative and accounts for fees and inflation. Use 7-8% for realistic planning and 10% for optimistic projections.',
+  },
+  {
+    question: 'What happens after the milestone is reached?',
+    answer: 'The money keeps growing. Milestones are just reference points. At age 18, the entire balance converts to a traditional IRA. Your child can keep it invested, withdraw for major life expenses, or convert to a Roth IRA.',
+  },
+];
 ---
 
 <CalculatorLayout
@@ -10,5 +36,48 @@ import MilestonesCalculator from '../../components/calculators/MilestonesCalcula
   slug="milestones"
   abstract="Estimates the age at which a Section 530A Trump Account reaches key balance milestones like $10K, $50K, $100K, and $1 million based on contributions and returns."
 >
+  <section class="mb-8">
+    <h2 class="mb-3 text-xl font-bold text-white">When Will Your Child's Account Hit Key Milestones?</h2>
+    <p class="mb-4 text-gray-300">
+      How long until the Trump Account reaches $10,000? $50,000? $100,000? Enter your planned contributions below to see when each milestone is reached — and whether your child could be on track for even bigger numbers after the account converts to an IRA at age {limits.iraConversionAge}.
+    </p>
+
+    <div class="mb-6 grid gap-4 sm:grid-cols-4">
+      <div class="rounded-lg border border-surface-600 bg-surface-800 p-4 text-center">
+        <p class="text-2xl font-bold text-white">$10K</p>
+        <p class="text-xs text-gray-400">First major milestone</p>
+      </div>
+      <div class="rounded-lg border border-surface-600 bg-surface-800 p-4 text-center">
+        <p class="text-2xl font-bold text-gold-400">$50K</p>
+        <p class="text-xs text-gray-400">Solid foundation</p>
+      </div>
+      <div class="rounded-lg border border-surface-600 bg-surface-800 p-4 text-center">
+        <p class="text-2xl font-bold text-mint-400">$100K</p>
+        <p class="text-xs text-gray-400">Life-changing at 18</p>
+      </div>
+      <div class="rounded-lg border border-surface-600 bg-surface-800 p-4 text-center">
+        <p class="text-2xl font-bold text-amber-400">$1M</p>
+        <p class="text-xs text-gray-400">Long-term IRA goal</p>
+      </div>
+    </div>
+
+    <CalloutBox type="tip" title="Even the federal deposit alone hits milestones">
+      <p>
+        The $${limits.pilotDeposit.toLocaleString()} federal deposit with zero additional contributions is projected to reach $4,000 by age 18 at 8% returns. Keep it invested in the IRA, and it could hit $10,000 by age 30 and $100,000 by age 60 — all from a single $1,000 deposit.
+      </p>
+    </CalloutBox>
+  </section>
+
   <MilestonesCalculator client:visible />
+
+  <section class="mt-10">
+    <h2 class="mb-4 text-xl font-bold text-white">Frequently Asked Questions</h2>
+    <Accordion items={faqs} />
+
+    <div class="mt-6">
+      <p class="text-sm text-gray-400">
+        Want to see the full growth curve? Use the <a href="/calculators/growth-calculator" class="text-gold-400 hover:text-gold-300">growth calculator</a>. To understand taxes on withdrawals at these milestones, try the <a href="/calculators/withdrawal-simulator" class="text-gold-400 hover:text-gold-300">withdrawal simulator</a>.
+      </p>
+    </div>
+  </section>
 </CalculatorLayout>

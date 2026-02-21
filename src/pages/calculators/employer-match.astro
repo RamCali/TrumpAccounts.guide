@@ -1,6 +1,36 @@
 ---
 import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
 import EmployerContributionCalc from '../../components/calculators/EmployerContributionCalc';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import Accordion from '../../components/ui/Accordion.astro';
+import limits from '../../data/contribution-limits.json';
+
+const faqs = [
+  {
+    question: 'How much can my employer contribute to a Trump Account?',
+    answer: `Employers can contribute up to $${limits.employerContributionLimit.toLocaleString()} per year per employee under IRC Section 128. This contribution is tax-free for the employee and counts toward the $${limits.annualContributionLimit.toLocaleString()} annual cap.`,
+  },
+  {
+    question: 'Is the employer contribution per child or per employee?',
+    answer: `The $${limits.employerContributionLimit.toLocaleString()} limit is per employee, not per child. If you have three children with Trump Accounts, your employer's total annual contribution for all three combined cannot exceed $${limits.employerContributionLimit.toLocaleString()}.`,
+  },
+  {
+    question: 'Do I pay taxes on employer Trump Account contributions?',
+    answer: `No. Employer contributions under IRC §128 are excluded from the employee's gross income. This is similar to employer 401(k) matching — the money goes in tax-free and grows tax-deferred until your child withdraws it after age ${limits.iraConversionAge}.`,
+  },
+  {
+    question: 'Does the employer match count toward the $5,000 annual limit?',
+    answer: `Yes. The $${limits.employerContributionLimit.toLocaleString()} employer contribution counts toward the $${limits.annualContributionLimit.toLocaleString()} total annual limit. So if your employer contributes the full $${limits.employerContributionLimit.toLocaleString()}, you can add up to $${(limits.annualContributionLimit - limits.employerContributionLimit).toLocaleString()} in personal contributions for the year.`,
+  },
+  {
+    question: 'How do I ask my employer to offer Trump Account matching?',
+    answer: 'Start with your HR department or benefits team. Share our employer contribution guide at /for-employers. Many companies are adding Trump Account matching as a competitive benefit — it costs employers nothing in payroll taxes and helps with employee retention.',
+  },
+  {
+    question: 'What if my employer does not offer Trump Account matching?',
+    answer: `You can still contribute the full $${limits.annualContributionLimit.toLocaleString()}/year on your own. The employer match is a bonus, not a requirement. Consider sharing the employer guide with your HR department — many companies are adopting this benefit in 2026.`,
+  },
+];
 ---
 
 <CalculatorLayout
@@ -10,5 +40,47 @@ import EmployerContributionCalc from '../../components/calculators/EmployerContr
   slug="employer-match"
   abstract="Calculates the impact of employer contributions of up to $2,500 per year on a Section 530A Trump Account and projects total growth over the contribution period."
 >
+  <section class="mb-8">
+    <h2 class="mb-3 text-xl font-bold text-white">How Much Is Your Employer Match Worth?</h2>
+    <p class="mb-4 text-gray-300">
+      Under IRC §128, employers can contribute up to <strong class="text-white">${limits.employerContributionLimit.toLocaleString()} per year</strong> to an employee's child's Trump Account — completely tax-free to you. This is real, untaxed compensation that goes straight into your child's investment account.
+    </p>
+    <p class="mb-4 text-gray-300">
+      Use this calculator to see how employer matching accelerates your child's account growth. Even a partial match of $500-$1,000 per year adds up to tens of thousands of dollars over 18 years.
+    </p>
+
+    <div class="mb-6 grid gap-3 sm:grid-cols-3">
+      <div class="rounded-lg border border-surface-600 bg-surface-800 p-4 text-center">
+        <p class="text-2xl font-bold text-gold-400">${limits.employerContributionLimit.toLocaleString()}</p>
+        <p class="text-xs text-gray-400">Max employer contribution/year</p>
+      </div>
+      <div class="rounded-lg border border-surface-600 bg-surface-800 p-4 text-center">
+        <p class="text-2xl font-bold text-mint-400">$0</p>
+        <p class="text-xs text-gray-400">Tax on employer match (tax-free)</p>
+      </div>
+      <div class="rounded-lg border border-surface-600 bg-surface-800 p-4 text-center">
+        <p class="text-2xl font-bold text-white">$45K+</p>
+        <p class="text-xs text-gray-400">Potential value of max match over 18 years</p>
+      </div>
+    </div>
+
+    <CalloutBox type="tip" title="This is free money — like a 401(k) match for kids">
+      <p>
+        If your employer offers $${limits.employerContributionLimit.toLocaleString()}/year and you contribute $${(limits.annualContributionLimit - limits.employerContributionLimit).toLocaleString()}/year, you hit the $${limits.annualContributionLimit.toLocaleString()} annual cap with $${limits.employerContributionLimit.toLocaleString()} of it being tax-free. Over 18 years, the employer portion alone could grow to $90,000+ at 8% returns.
+      </p>
+    </CalloutBox>
+  </section>
+
   <EmployerContributionCalc client:visible />
+
+  <section class="mt-10">
+    <h2 class="mb-4 text-xl font-bold text-white">Frequently Asked Questions</h2>
+    <Accordion items={faqs} />
+
+    <div class="mt-6">
+      <p class="text-sm text-gray-400">
+        Are you an employer? See our <a href="/for-employers" class="text-gold-400 hover:text-gold-300">employer contribution guide</a> to learn how to set up matching. For full growth projections, use the <a href="/calculators/growth-calculator" class="text-gold-400 hover:text-gold-300">growth calculator</a>.
+      </p>
+    </div>
+  </section>
 </CalculatorLayout>

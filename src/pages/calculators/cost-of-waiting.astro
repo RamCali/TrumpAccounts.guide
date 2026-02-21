@@ -1,6 +1,32 @@
 ---
 import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
 import CostOfWaitingCalculator from '../../components/calculators/CostOfWaitingCalculator';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import Accordion from '../../components/ui/Accordion.astro';
+import limits from '../../data/contribution-limits.json';
+
+const faqs = [
+  {
+    question: 'How much does waiting one year cost?',
+    answer: `It depends on contributions and returns. At an 8% average return, waiting one year on just the $${limits.pilotDeposit.toLocaleString()} federal deposit costs roughly $80 in lost growth. With $${limits.annualContributionLimit.toLocaleString()}/year contributions, the cost of a one-year delay grows to $500-$800+ by age 18.`,
+  },
+  {
+    question: 'Why does delay matter so much for Trump Accounts?',
+    answer: 'Compound interest accelerates over time. The earlier money is invested, the more years it has to compound. A dollar invested at birth has 18 years of growth. A dollar invested at age 5 has only 13 years. That missing 5 years of compounding can mean 30-40% less money at age 18.',
+  },
+  {
+    question: 'Is it too late to open a Trump Account for my 10-year-old?',
+    answer: `No. Any U.S. citizen child under ${limits.growthPhaseEndAge} qualifies. While you have missed some compounding years, 8 years of tax-deferred growth in the S&P 500 is still valuable. Contributing $${limits.annualContributionLimit.toLocaleString()}/year for 8 years could still grow to $50,000+ by age 18.`,
+  },
+  {
+    question: 'Should I wait for the trumpaccounts.gov portal?',
+    answer: `The portal is expected in mid-2026. If you can file ${limits.form} with your 2025 tax return (due April 15, 2026), do that instead. Every month of delay costs your child compounding time. Use the calculator above to see exactly how much.`,
+  },
+  {
+    question: 'Does the $1,000 deposit grow even if I add nothing else?',
+    answer: `Yes. The $${limits.pilotDeposit.toLocaleString()} federal deposit is invested in S&P 500 index funds and grows on its own. At an 8% average return, it could grow to roughly $4,000 by age 18 with zero additional contributions. But the earlier the account is opened, the more time it has to compound.`,
+  },
+];
 ---
 
 <CalculatorLayout
@@ -10,5 +36,45 @@ import CostOfWaitingCalculator from '../../components/calculators/CostOfWaitingC
   slug="cost-of-waiting"
   abstract="Compares Section 530A Trump Account growth when opened at birth versus a later age to show the dollar cost of delaying contributions."
 >
+  <section class="mb-8">
+    <h2 class="mb-3 text-xl font-bold text-white">Every Year You Wait Costs Your Child Real Money</h2>
+    <p class="mb-4 text-gray-300">
+      Compound interest rewards patience — but it punishes delay. The earlier you open a Trump Account, the more time the money has to grow. This calculator shows you exactly how much your child loses by waiting.
+    </p>
+    <p class="mb-4 text-gray-300">
+      Compare starting at birth versus any other age. See the dollar difference side by side and understand why even a one-year delay matters when there are 18 years of tax-deferred compounding at stake.
+    </p>
+
+    <div class="mb-6 grid gap-3 sm:grid-cols-2">
+      <div class="rounded-lg border border-surface-600 bg-surface-800 p-4">
+        <p class="text-sm text-gray-400">Start at birth</p>
+        <p class="text-2xl font-bold text-mint-400">18 years</p>
+        <p class="text-xs text-gray-500">of tax-deferred compounding</p>
+      </div>
+      <div class="rounded-lg border border-surface-600 bg-surface-800 p-4">
+        <p class="text-sm text-gray-400">Start at age 5</p>
+        <p class="text-2xl font-bold text-amber-400">13 years</p>
+        <p class="text-xs text-gray-500">5 years of growth permanently lost</p>
+      </div>
+    </div>
+
+    <CalloutBox type="warning" title="Time is the biggest factor">
+      <p>
+        At an 8% average return, $${limits.annualContributionLimit.toLocaleString()}/year contributed from birth grows to roughly $200,000 by age 18. Starting at age 5 instead? About $130,000. That 5-year delay costs your child approximately $70,000.
+      </p>
+    </CalloutBox>
+  </section>
+
   <CostOfWaitingCalculator client:visible />
+
+  <section class="mt-10">
+    <h2 class="mb-4 text-xl font-bold text-white">Frequently Asked Questions</h2>
+    <Accordion items={faqs} />
+
+    <div class="mt-6">
+      <p class="text-sm text-gray-400">
+        Ready to stop waiting? See <a href="/how-to-open-trump-account" class="text-gold-400 hover:text-gold-300">how to open a Trump Account</a> in 15 minutes, or use the <a href="/calculators/growth-calculator" class="text-gold-400 hover:text-gold-300">growth calculator</a> to model your own scenario.
+      </p>
+    </div>
+  </section>
 </CalculatorLayout>

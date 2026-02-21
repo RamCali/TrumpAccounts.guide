@@ -1,6 +1,32 @@
 ---
 import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
 import GrantEligibilityChecker from '../../components/calculators/GrantEligibilityChecker';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import Accordion from '../../components/ui/Accordion.astro';
+import limits from '../../data/contribution-limits.json';
+
+const faqs = [
+  {
+    question: 'How do I know if my ZIP code qualifies for the Dell pledge?',
+    answer: `Your ZIP code qualifies if its median household income is below $${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}. Enter your ZIP code in the checker above to find out instantly. The data is based on U.S. Census Bureau income estimates.`,
+  },
+  {
+    question: 'How much is the Dell Foundation pledge per child?',
+    answer: `The Dell Foundation pledged $${limits.dellPledge.perChildAmount} per child who is ${limits.dellPledge.eligibleAge} and lives in a qualifying ZIP code. This is separate from the $${limits.pilotDeposit.toLocaleString()} federal pilot deposit — eligible children can receive both.`,
+  },
+  {
+    question: 'Is the Dell pledge the same as the federal $1,000 deposit?',
+    answer: `No. The $${limits.pilotDeposit.toLocaleString()} federal deposit comes from the government for children born ${limits.pilotDepositStartYear}-${limits.pilotDepositEndYear}. The Dell pledge is a private donation of $${limits.dellPledge.perChildAmount} per child from the Michael & Susan Dell Foundation. They are completely separate — qualifying children can receive both.`,
+  },
+  {
+    question: 'What age does my child need to be for the Dell pledge?',
+    answer: `Your child must be ${limits.dellPledge.eligibleAge} to qualify for the Dell Foundation pledge. There is no birth-year restriction like the federal pilot deposit.`,
+  },
+  {
+    question: 'Are there other grants besides the Dell pledge?',
+    answer: 'The Dell Foundation pledge is the largest private grant announced so far. Other organizations and employers may offer additional contributions. Check with your employer about Trump Account matching contributions of up to $2,500/year under IRC §128.',
+  },
+];
 ---
 
 <CalculatorLayout
@@ -9,5 +35,34 @@ import GrantEligibilityChecker from '../../components/calculators/GrantEligibili
   calculatorName="Grant Eligibility"
   slug="grant-eligibility"
 >
+  <section class="mb-8">
+    <h2 class="mb-3 text-xl font-bold text-white">Check If Your Child Qualifies for Extra Grant Money</h2>
+    <p class="mb-4 text-gray-300">
+      Beyond the <strong class="text-white">${limits.pilotDeposit.toLocaleString()} federal pilot deposit</strong>, your child may qualify for additional private grants based on where you live. The largest grant comes from the <strong class="text-white">Michael & Susan Dell Foundation</strong>, which pledged <strong class="text-white">$6.25 billion</strong> to fund Trump Accounts for children in lower-income ZIP codes.
+    </p>
+    <p class="mb-4 text-gray-300">
+      Enter your ZIP code below to see if your area qualifies. The Dell pledge provides <strong class="text-white">${limits.dellPledge.perChildAmount} per child</strong> who is {limits.dellPledge.eligibleAge} and lives in a ZIP code with a median household income below ${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}.
+    </p>
+
+    <CalloutBox type="tip" title="Stack the benefits">
+      <p>
+        An eligible child born in 2025-2028 in a qualifying ZIP code could receive the $1,000 federal deposit <strong>plus</strong> the $250 Dell pledge — $1,250 in free money before your family contributes a single dollar.
+      </p>
+    </CalloutBox>
+  </section>
+
   <GrantEligibilityChecker client:visible />
+
+  <section class="mt-10">
+    <h2 class="mb-3 text-xl font-bold text-white">How Grant Eligibility Works</h2>
+    <p class="mb-3 text-gray-300">
+      The Dell Foundation uses <strong class="text-white">U.S. Census Bureau data</strong> to determine which ZIP codes qualify. If the median household income in your ZIP code is below ${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}, your child is eligible for the $250 contribution — regardless of your individual family income.
+    </p>
+    <p class="mb-6 text-gray-300">
+      This means even higher-income families in qualifying ZIP codes can receive the grant. It is based on area income, not your personal tax return.
+    </p>
+
+    <h2 class="mb-4 text-xl font-bold text-white">Frequently Asked Questions</h2>
+    <Accordion items={faqs} />
+  </section>
 </CalculatorLayout>

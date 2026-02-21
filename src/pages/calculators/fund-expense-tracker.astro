@@ -1,6 +1,32 @@
 ---
 import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
 import FundExpenseTracker from '../../components/calculators/FundExpenseTracker';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import Accordion from '../../components/ui/Accordion.astro';
+import limits from '../../data/contribution-limits.json';
+
+const faqs = [
+  {
+    question: 'What is an expense ratio?',
+    answer: 'An expense ratio is the annual fee a fund charges to manage your money. It is expressed as a percentage. A 0.03% expense ratio means you pay $0.30 per year for every $1,000 invested. Lower is better — the fee comes directly out of your returns.',
+  },
+  {
+    question: 'What is the maximum expense ratio for Trump Account funds?',
+    answer: `Trump Account funds are capped at a ${(limits.maxExpenseRatio * 100).toFixed(1)}% expense ratio (10 basis points). This means you will never pay more than $1 per year per $1,000 invested. Most eligible S&P 500 ETFs charge far less than this cap.`,
+  },
+  {
+    question: 'Which funds are eligible for Trump Accounts?',
+    answer: `Trump Accounts must be invested in ${limits.investmentRequirement.toLowerCase()}. Popular options include Vanguard S&P 500 ETF (VOO), iShares Core S&P 500 ETF (IVV), and SPDR S&P 500 ETF (SPY). All have expense ratios well below the 0.1% cap.`,
+  },
+  {
+    question: 'How much do expense ratios cost over 18 years?',
+    answer: 'Even small differences add up. On a $5,000 annual contribution over 18 years, the difference between a 0.03% fund and a 0.09% fund can be $500-$1,000+ in lost growth. Use the calculator above to see the exact impact for your situation.',
+  },
+  {
+    question: 'Can I switch funds inside a Trump Account?',
+    answer: 'IRS Notice 2025-68 requires investments in S&P 500 or broad U.S. equity index funds. You can switch between eligible funds, but you cannot move money to individual stocks, bonds, or funds outside the approved categories.',
+  },
+];
 ---
 
 <CalculatorLayout
@@ -10,5 +36,41 @@ import FundExpenseTracker from '../../components/calculators/FundExpenseTracker'
   slug="fund-expense-tracker"
   abstract="Compares expense ratios of eligible S&P 500 ETFs and mutual funds for Section 530A Trump Accounts and shows how fees reduce growth over 18 years."
 >
+  <section class="mb-8">
+    <h2 class="mb-3 text-xl font-bold text-white">Compare Eligible Funds and Their Fees</h2>
+    <p class="mb-4 text-gray-300">
+      All Trump Account money must be invested in <strong class="text-white">{limits.investmentRequirement.toLowerCase()}</strong>. But not all index funds charge the same fees. Even a tiny difference in expense ratios compounds into real money over 18 years.
+    </p>
+    <p class="mb-4 text-gray-300">
+      Trump Account funds are capped at a <strong class="text-white">{(limits.maxExpenseRatio * 100).toFixed(1)}% expense ratio</strong> — but many eligible funds charge as little as 0.03%. Use this tracker to compare your options and see how fees affect your child's balance at age 18.
+    </p>
+
+    <div class="mb-6 grid gap-3 sm:grid-cols-3">
+      <div class="rounded-lg border border-surface-600 bg-surface-800 p-4 text-center">
+        <p class="text-2xl font-bold text-gold-400">0.03%</p>
+        <p class="text-xs text-gray-400">Lowest eligible fund fee (VOO/IVV)</p>
+      </div>
+      <div class="rounded-lg border border-surface-600 bg-surface-800 p-4 text-center">
+        <p class="text-2xl font-bold text-white">{(limits.maxExpenseRatio * 100).toFixed(1)}%</p>
+        <p class="text-xs text-gray-400">Maximum allowed expense ratio</p>
+      </div>
+      <div class="rounded-lg border border-surface-600 bg-surface-800 p-4 text-center">
+        <p class="text-2xl font-bold text-mint-400">$500+</p>
+        <p class="text-xs text-gray-400">Potential savings over 18 years</p>
+      </div>
+    </div>
+
+    <CalloutBox type="tip" title="Lower fees = more money for your child">
+      <p>
+        A 0.03% fund on $5,000/year for 18 years costs roughly $300 in total fees. A 0.09% fund costs roughly $900. That $600 difference stays in your child's account and keeps compounding.
+      </p>
+    </CalloutBox>
+  </section>
+
   <FundExpenseTracker client:visible />
+
+  <section class="mt-10">
+    <h2 class="mb-4 text-xl font-bold text-white">Frequently Asked Questions</h2>
+    <Accordion items={faqs} />
+  </section>
 </CalculatorLayout>
