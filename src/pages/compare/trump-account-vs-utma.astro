@@ -53,8 +53,8 @@ const schemas = [
 ---
 
 <BaseLayout
-  title="Trump Account vs UTMA: Tax Comparison & Capital Gains"
-  description="Is a UTMA better than a Trump Account for taxes? Capital gains (0-20%) vs ordinary income (10-37%). Kiddie tax, Roth conversion at 18, and when each wins."
+  title="Trump Account vs UTMA: 2026 Tax & Capital Gains Comparison"
+  description="Is a UTMA better than a Trump Account for taxes in 2026? Capital gains (0-20%) vs ordinary income (10-37%). Kiddie tax, Roth conversion at 18. Print or save as PDF."
   schema={schemas}
 >
   <article class="mx-auto max-w-4xl px-4 py-12">
@@ -99,7 +99,21 @@ const schemas = [
       <h2 id="comparison-table">Side-by-Side Comparison</h2>
     </div>
 
-    <div class="not-prose my-6 overflow-x-auto">
+    <div class="not-prose mb-3 flex items-center justify-between">
+      <p class="text-sm text-gray-400">Trump Account vs UTMA/UGMA — 2026</p>
+      <button
+        onclick="window.print()"
+        class="no-print flex items-center gap-2 rounded-lg border border-gold-400/40 bg-gold-400/10 px-4 py-2 text-sm font-medium text-gold-400 hover:bg-gold-400/20 transition-colors"
+        aria-label="Print or save this comparison as PDF"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+        </svg>
+        Print / Save as PDF
+      </button>
+    </div>
+
+    <div class="not-prose my-6 overflow-x-auto print:my-2">
       <table class="w-full text-sm">
         <thead>
           <tr class="border-b border-surface-600">
@@ -508,3 +522,31 @@ const schemas = [
     </p>
   </article>
 </BaseLayout>
+
+<style>
+  @media print {
+    header, footer, nav[aria-label="Breadcrumb"], .no-print {
+      display: none !important;
+    }
+    body {
+      background: white !important;
+      color: black !important;
+    }
+    table {
+      color: black !important;
+    }
+    table th, table td {
+      color: black !important;
+      border-color: #ccc !important;
+    }
+    article {
+      padding: 0 !important;
+      max-width: 100% !important;
+    }
+    h1::after {
+      content: " — TrumpAccounts.guide (2026)";
+      font-size: 0.6em;
+      color: #666;
+    }
+  }
+</style>
