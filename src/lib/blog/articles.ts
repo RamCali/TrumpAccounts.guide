@@ -352,8 +352,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   },
   'trump-account-penalties': {
     slug: 'trump-account-penalties',
-    title: 'Trump Account Early Withdrawal Penalties by Age (2026)',
-    description: 'What happens if you withdraw from a Trump Account? Locked before 18, 10% penalty + tax from 18–59½, penalty-free after. 8 exceptions that avoid the penalty.',
+    title: 'Trump Account Penalties: What Happens If You Withdraw?',
+    description: 'No withdrawals before 18. Ages 18–59½: income tax + 10% penalty. After 59½: tax only. Plus 8 penalty-free exceptions for first home, education & disability.',
     category: 'Use of Funds',
     categorySlug: 'use-of-funds',
     datePublished: '2026-02-12',

@@ -33,21 +33,29 @@ const faqs = [
     question: 'Which is better for college savings — a Trump Account or custodial account?',
     answer: 'Neither is specifically designed for college (a 529 plan is better for that). But if you\'re choosing between these two for general savings that might be used for college: a Trump Account may have a FAFSA advantage because it converts to an IRA at 18, and IRAs are generally not counted as assets on the FAFSA. Custodial accounts are counted as student assets, which can reduce aid by up to 20% of the balance.',
   },
+  {
+    question: 'What is the difference between UTMA and UGMA?',
+    answer: 'Both are custodial accounts for minors. UTMA (Uniform Transfers to Minors Act) allows a wider range of assets — including real estate and patents — while UGMA (Uniform Gifts to Minors Act) is limited to financial assets like stocks, bonds, and cash. UTMA also lets custodianship extend to age 21 or 25 in some states, while UGMA typically ends at 18. For most families choosing between a Trump Account and a custodial account, the practical differences between UTMA and UGMA are minimal.',
+  },
+  {
+    question: 'Is a Trump Account better than a UTMA for my newborn?',
+    answer: 'For children born 2025–2028, usually yes — because of the free $1,000 federal deposit and potential employer matching up to $2,500/year. The ideal strategy is to open a Trump Account first for the free money, then use a UTMA or UGMA for additional savings that need more flexibility or broader investment options.',
+  },
 ];
 
 const schemas = [
   breadcrumbSchema([
     { name: 'Home', url: siteUrl },
     { name: 'Compare', url: `${siteUrl}/compare` },
-    { name: 'Trump Account vs Custodial Account', url: `${siteUrl}/compare/trump-account-vs-custodial-account` },
+    { name: 'Trump Account vs UTMA/UGMA', url: `${siteUrl}/compare/trump-account-vs-custodial-account` },
   ]),
   faqSchema(faqs),
 ];
 ---
 
 <BaseLayout
-  title="Trump Account vs UTMA/UGMA: 2026 Comparison Chart (Printable)"
-  description="Download this 2026 Trump Account vs UTMA/UGMA comparison chart. Free $1,000 deposit, taxes, FAFSA, and flexibility compared side by side. Print or save as PDF."
+  title="Trump Account vs UTMA/UGMA: Key Differences (2026)"
+  description="Trump Account vs custodial account (UTMA/UGMA) compared. Free $1,000 deposit, taxes, FAFSA impact, and access before 18 — which is better for your child?"
   schema={schemas}
 >
   <article class="mx-auto max-w-4xl px-4 py-12">
@@ -58,18 +66,18 @@ const schemas = [
           <a href="/compare" class="no-underline hover:text-gold-400">Compare</a>
         </li>
         <li class="before:mr-2 before:content-['/']">
-          <span class="font-medium text-white">Trump Account vs Custodial Account</span>
+          <span class="font-medium text-white">Trump Account vs UTMA/UGMA</span>
         </li>
       </ol>
     </nav>
 
     <div class="prose">
-      <h1>Trump Account vs Custodial Account: Which Is Better for Your Kid?</h1>
+      <h1>Trump Account vs UTMA/UGMA: Which Is Better for Your Kid?</h1>
 
       <LastUpdated date="2026-02-19" />
 
       <p>
-        If you're trying to save money for your child's future, you've probably heard about two options: the new <strong>Trump Account</strong> (created by the One Big Beautiful Bill Act in 2025) and a traditional <strong>custodial account</strong>. Both let you invest money on behalf of your child — but they work very differently.
+        If you're trying to save money for your child's future, you've probably heard about two options: the new <strong>Trump Account</strong> (created by the One Big Beautiful Bill Act in 2025) and a traditional <strong>UTMA/UGMA custodial account</strong>. Both let you invest money on behalf of your child — but they work very differently.
       </p>
 
       <CalloutBox type="info" title="What is UTMA/UGMA?">
