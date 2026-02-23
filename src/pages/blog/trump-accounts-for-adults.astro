@@ -1,0 +1,181 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-accounts-for-adults')!;
+const related = getRelatedArticles('trump-accounts-for-adults');
+
+const faqs = [
+  {
+    question: 'Can adults get Trump Accounts?',
+    answer: `No. Trump Accounts are only for U.S. citizen children under age ${limits.growthPhaseEndAge}. Adults cannot open a Trump Account for themselves. The program was created under ${limits.legalBasis} specifically for minors.`,
+  },
+  {
+    question: 'Can a grandparent open a Trump Account?',
+    answer: `A grandparent can open a Trump Account for a qualifying grandchild — but not for themselves. The account belongs to the child. The grandparent acts as the authorized individual and can contribute up to $${limits.annualContributionLimit.toLocaleString()} per year (combined from all sources).`,
+  },
+  {
+    question: 'What is the adult alternative to a Trump Account?',
+    answer: 'The closest adult alternative is a Roth IRA. Both offer tax-advantaged growth and access to S&P 500 index funds. A Roth IRA lets you contribute after-tax dollars and withdraw earnings tax-free in retirement. Unlike Trump Accounts, Roth IRAs have income limits.',
+  },
+  {
+    question: 'Can I contribute to my child\'s Trump Account as an adult?',
+    answer: `Yes. Any adult — parents, grandparents, aunts, uncles, or family friends — can contribute to a child's Trump Account. The combined annual limit from all contributors is $${limits.annualContributionLimit.toLocaleString()}.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Trump Accounts are <strong class="text-white">only for children under {limits.growthPhaseEndAge}</strong>. Adults cannot open one for themselves.</li>
+        <li>Adults <strong class="text-white">can</strong> open and contribute to a Trump Account <strong class="text-white">for their child or grandchild</strong>.</li>
+        <li>Employers can contribute up to <strong class="text-white">${limits.employerContributionLimit.toLocaleString()}/year</strong> tax-free under IRC §128.</li>
+        <li>The best adult alternative for similar S&P 500 exposure is a <strong class="text-white">Roth IRA</strong>.</li>
+        <li>If you want the same strategy, buy <strong class="text-white">VOO, FXAIX, or SWPPX</strong> in a Roth IRA or taxable brokerage.</li>
+      </ul>
+    </div>
+
+    <p>
+      "Can adults get a Trump Account?" is one of the most common questions we receive. The short answer is <strong>no</strong>. Trump Accounts are designed exclusively for children. But there are still ways adults can benefit from the program — and great alternatives if you want similar investment exposure for yourself.
+    </p>
+
+    <h2>Trump Accounts Are Only for Children Under {limits.growthPhaseEndAge}</h2>
+    <p>
+      The {limits.legislation} created Trump Accounts under {limits.legalBasis}. The law is clear: only <strong>U.S. citizen children with a valid SSN who are under age {limits.growthPhaseEndAge}</strong> at the end of the election year qualify.
+    </p>
+    <p>
+      There is no version of this program for adults. No exceptions. No workarounds.
+    </p>
+    <p>
+      Children born between {limits.pilotDepositStartYear} and {limits.pilotDepositEndYear} also receive a <strong>${limits.pilotDeposit.toLocaleString()} federal deposit</strong>. Older children (born before 2025) can still open a Trump Account, but they do not receive the government deposit.
+    </p>
+
+    <CalloutBox type="info" title="Why only children?">
+      <p>
+        Trump Accounts are designed as a <strong>long-term wealth-building tool</strong>. The money must stay invested until age {limits.growthPhaseEndAge}, when it converts to a traditional IRA. The program's goal is to give every American child a financial head start — not to serve as another retirement vehicle for adults.
+      </p>
+    </CalloutBox>
+
+    <h2>What Adults CAN Do With Trump Accounts</h2>
+    <p>
+      Even though you cannot open one for yourself, adults play a central role in the program:
+    </p>
+    <ul>
+      <li><strong>Open an account for your child.</strong> Parents or legal guardians file {limits.form} to elect a Trump Account. <a href="/blog/how-to-open-step-by-step">See the step-by-step guide</a>.</li>
+      <li><strong>Contribute up to ${limits.annualContributionLimit.toLocaleString()}/year.</strong> Parents, grandparents, aunts, uncles, and anyone else can contribute. The ${limits.annualContributionLimit.toLocaleString()} limit is <a href="/blog/contribution-limits-explained">per account, not per contributor</a>.</li>
+      <li><strong>Benefit from employer contributions.</strong> Your employer can contribute up to ${limits.employerContributionLimit.toLocaleString()}/year tax-free under IRC §128. This counts toward the ${limits.annualContributionLimit.toLocaleString()} cap. <a href="/blog/employer-match-trump-account">Learn how employer match works</a>.</li>
+      <li><strong>Manage investments.</strong> The authorized individual (usually a parent) chooses which S&P 500 index fund to invest in during the growth phase.</li>
+    </ul>
+
+    <CalloutBox type="tip" title="Grandparents: this is for you">
+      <p>
+        <a href="/blog/can-parents-grandparents-contribute">Grandparents can contribute</a> to a grandchild's Trump Account. It is one of the best financial gifts you can give. A $1,000 contribution today could grow to <strong>$4,000+</strong> by the time the child turns 18. See our <a href="/blog/grandparent-gift-guide">grandparent gift guide</a> for contribution strategies.
+      </p>
+    </CalloutBox>
+
+    <h2>Best Alternatives for Adults</h2>
+    <p>
+      If you want the same type of low-cost, S&P 500 index fund investing that Trump Accounts offer, here are your options:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Account Type</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Tax Treatment</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Annual Limit (2025)</th>
+            <th class="py-3 text-gray-400 font-medium">S&P 500 Access</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Roth IRA</td>
+            <td class="py-3 pr-4">Tax-free growth & withdrawals</td>
+            <td class="py-3 pr-4">$7,000 ($8,000 if 50+)</td>
+            <td class="py-3">Yes (VOO, FXAIX, etc.)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Traditional IRA</td>
+            <td class="py-3 pr-4">Tax-deferred growth</td>
+            <td class="py-3 pr-4">$7,000 ($8,000 if 50+)</td>
+            <td class="py-3">Yes</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">401(k)</td>
+            <td class="py-3 pr-4">Tax-deferred (or Roth option)</td>
+            <td class="py-3 pr-4">$23,500</td>
+            <td class="py-3">Depends on plan</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">Taxable Brokerage</td>
+            <td class="py-3 pr-4">Capital gains tax on profits</td>
+            <td class="py-3 pr-4">No limit</td>
+            <td class="py-3">Yes (any fund)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>The Roth IRA: Closest Adult Alternative</h2>
+    <p>
+      A <strong>Roth IRA</strong> is the closest thing to a Trump Account for adults. Here is why:
+    </p>
+    <ul>
+      <li><strong>Same investments.</strong> You can buy VOO (Vanguard S&P 500 ETF), FXAIX (Fidelity 500 Index), or SWPPX (Schwab S&P 500 Index) — the exact same funds eligible in Trump Accounts.</li>
+      <li><strong>Better tax treatment.</strong> Roth IRA withdrawals are <strong>tax-free</strong> in retirement. Trump Account withdrawals are taxed as ordinary income (traditional IRA treatment).</li>
+      <li><strong>No age restriction.</strong> Anyone with earned income can contribute, regardless of age.</li>
+    </ul>
+    <p>
+      The main difference: Roth IRAs have income limits. In 2025, single filers earning above $150,000 (MAGI) and joint filers above $236,000 cannot contribute directly. Trump Accounts have <strong><a href="/trump-accounts-eligibility">no income restrictions</a></strong>.
+    </p>
+
+    <h2>If You Want S&P 500 Exposure Today</h2>
+    <p>
+      You do not need a Trump Account to invest in the S&P 500. Here is what to do:
+    </p>
+    <ol>
+      <li><strong>Open a Roth IRA</strong> at Fidelity, Schwab, or Vanguard (free, no minimums).</li>
+      <li><strong>Buy an S&P 500 index fund</strong> — VOO (0.03% expense ratio), FXAIX (0.015%), or SWPPX (0.02%).</li>
+      <li><strong>Contribute regularly</strong> — up to $7,000/year ($8,000 if you are 50 or older).</li>
+      <li><strong>Let it compound.</strong> The same market returns that make Trump Accounts powerful work for your Roth IRA too.</li>
+    </ol>
+
+    <CalloutBox type="tip" title="Do both">
+      <p>
+        The smart move for parents: open a <strong>Trump Account for your child</strong> and a <strong>Roth IRA for yourself</strong>. Both invest in the same S&P 500 funds. Both benefit from long-term compound growth. One builds your child's future; the other builds yours.
+      </p>
+    </CalloutBox>
+
+    <h2>The Roth Conversion Strategy at 18</h2>
+    <p>
+      Here is a bonus for adults who open Trump Accounts for their children: at age 18, the Trump Account converts to a <strong>traditional IRA</strong>. Your child can then do a <a href="/blog/trump-account-roth-conversion-strategy">Roth conversion</a> while in a low tax bracket (likely the 10% or 12% bracket as a college student). This means the money could eventually grow <strong>tax-free</strong> for decades.
+    </p>
+    <p>
+      That is a wealth-building strategy that adults help set in motion — even though they cannot hold the account themselves.
+    </p>
+
+    <p>
+      For more on who qualifies, see our <a href="/trump-accounts-eligibility">full eligibility guide</a> and <a href="/blog/who-qualifies-for-trump-account">who qualifies for a Trump Account</a>.
+    </p>
+
+    <CalloutBox type="warning" title="Educational content only">
+      <p>
+        This article is for informational purposes only. It is not tax or financial advice. Consult a qualified tax professional or financial advisor before making investment decisions. IRA contribution limits and income thresholds change annually — verify current limits at <a href="https://www.irs.gov" target="_blank" rel="noopener noreferrer">IRS.gov</a>.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

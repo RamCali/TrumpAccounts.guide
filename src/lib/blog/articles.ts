@@ -272,8 +272,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   },
   'trump-account-investment-rules': {
     slug: 'trump-account-investment-rules',
-    title: 'Trump Account Rules for Kids: Every Investment Rule (2026)',
-    description: 'Complete Trump Account rules for kids: eligible index funds, 0.1% expense ratio cap, no leverage, no cash or bonds. The definitive rules reference.',
+    title: 'Trump Account Rules: Contributions, Investments & Withdrawals (2026)',
+    description: 'Complete Trump Account rules: $5,000/yr limit, S&P 500 index funds only, 0.1% expense cap, no withdrawals before 18. The definitive rules reference.',
     category: 'Investment Structure',
     categorySlug: 'investment-structure',
     datePublished: '2026-02-13',
@@ -1063,8 +1063,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   // ─── Keyword Gap: Availability & Status ────────────────────
   'are-trump-accounts-available-now': {
     slug: 'are-trump-accounts-available-now',
-    title: 'Are Trump Accounts Available Now? 2026 Status & Timeline',
-    description: 'Yes, Trump Accounts are available now. File IRS Form 4547 with your 2025 tax return. The trumpaccounts.gov portal launches mid-2026. Full status and timeline.',
+    title: 'Are Trump Accounts Available Now? 2026 Status Update & Timeline',
+    description: 'Yes, Trump Accounts are available now. File IRS Form 4547 with your 2025 tax return. The trumpaccounts.gov portal launches mid-2026. Full status update.',
     category: 'Basics',
     categorySlug: 'basics',
     datePublished: '2026-02-15',
@@ -1272,7 +1272,59 @@ export const blogArticles: Record<string, BlogArticle> = {
     datePublished: '2026-02-15',
     dateModified: '2026-02-15',
     readingTime: '6 min read',
-    relatedSlugs: ['trump-accounts-at-fidelity', 'trump-accounts-at-schwab', 'trump-accounts-at-bank-of-america', 'trump-accounts-at-robinhood', 'how-to-open-step-by-step', 'trump-account-fees-explained', 'trump-account-rollover-guide'],
+    relatedSlugs: ['trump-accounts-at-fidelity', 'trump-accounts-at-schwab', 'trump-accounts-at-bank-of-america', 'trump-accounts-at-vanguard', 'trump-accounts-at-robinhood', 'how-to-open-step-by-step', 'trump-account-fees-explained', 'trump-account-rollover-guide'],
+  },
+
+  // ─── New: Vanguard Brokerage Guide ─────────────────────────
+  'trump-accounts-at-vanguard': {
+    slug: 'trump-accounts-at-vanguard',
+    title: 'Trump Account at Vanguard: Funds, Fees & How to Open (2026)',
+    description: 'Open a Trump Account at Vanguard: VOO at 0.03%, VFIAX at 0.04%. The original index fund company. Full guide to fees, funds, and how to get started.',
+    category: 'Brokerage Guides',
+    categorySlug: 'brokerage-guides',
+    datePublished: '2026-02-22',
+    dateModified: '2026-02-22',
+    readingTime: '7 min read',
+    relatedSlugs: ['where-to-open-trump-account', 'trump-accounts-at-fidelity', 'trump-accounts-at-schwab', 'trump-account-fees-explained', 'index-fund-requirements', 'how-to-open-step-by-step'],
+  },
+
+  // ─── New: Dell ZIP Code Lookup ─────────────────────────────
+  'dell-trump-accounts-zip-code-lookup': {
+    slug: 'dell-trump-accounts-zip-code-lookup',
+    title: 'Dell Trump Accounts ZIP Code Lookup: Does Your Child Qualify?',
+    description: 'Check if your ZIP code qualifies for Michael Dell\'s $250 Trump Account pledge. Median income threshold of $150,000 covers most U.S. neighborhoods.',
+    category: 'Policy & Economics',
+    categorySlug: 'policy-and-economics',
+    datePublished: '2026-02-22',
+    dateModified: '2026-02-22',
+    readingTime: '5 min read',
+    relatedSlugs: ['dell-pledge-explained', 'trump-accounts-for-newborns', 'who-qualifies-for-trump-account', 'inequality-reduction'],
+  },
+
+  // ─── New: Trump Accounts for Adults ────────────────────────
+  'trump-accounts-for-adults': {
+    slug: 'trump-accounts-for-adults',
+    title: 'Trump Accounts for Adults: Can You Open One? (No — Here\'s Why)',
+    description: 'Adults cannot open Trump Accounts for themselves. The program is for children under 18 only. Here are the best alternatives for adults.',
+    category: 'Eligibility',
+    categorySlug: 'eligibility',
+    datePublished: '2026-02-22',
+    dateModified: '2026-02-22',
+    readingTime: '4 min read',
+    relatedSlugs: ['who-qualifies-for-trump-account', 'can-parents-grandparents-contribute', 'trump-account-roth-conversion-strategy', 'trump-account-age-cutoff', 'best-accounts-for-kids-today'],
+  },
+
+  // ─── New: Gift Tax ─────────────────────────────────────────
+  'trump-accounts-gift-tax': {
+    slug: 'trump-accounts-gift-tax',
+    title: 'Trump Accounts and Gift Tax: Do Contributions Trigger It?',
+    description: 'Trump Account contributions are gifts, but the $5,000 limit is well under the annual exclusion. No gift tax return needed. Full explanation.',
+    category: 'Tax Questions',
+    categorySlug: 'tax-questions',
+    datePublished: '2026-02-22',
+    dateModified: '2026-02-22',
+    readingTime: '4 min read',
+    relatedSlugs: ['can-parents-grandparents-contribute', 'grandparent-gift-guide', 'contribution-limits-explained', 'gains-taxation-explained', 'are-trump-accounts-tax-deductible'],
   },
 };
 

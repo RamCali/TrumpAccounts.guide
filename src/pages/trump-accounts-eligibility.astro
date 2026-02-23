@@ -1,0 +1,283 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CalloutBox from '../components/ui/CalloutBox.astro';
+import LastUpdated from '../components/ui/LastUpdated.astro';
+import Accordion from '../components/ui/Accordion.astro';
+import { articleSchema, breadcrumbSchema, faqSchema } from '../lib/seo/schema';
+import limits from '../data/contribution-limits.json';
+
+const faqs = [
+  {
+    question: 'Can I open a Trump Account for a child born before 2025?',
+    answer: `Yes. Any U.S. citizen child under 18 with a valid SSN can have a Trump Account. However, only children born between January 1, ${limits.pilotDepositStartYear} and December 31, ${limits.pilotDepositEndYear} receive the $${limits.pilotDeposit.toLocaleString()} federal pilot deposit. Children born before ${limits.pilotDepositStartYear} can still contribute up to $${limits.annualContributionLimit.toLocaleString()}/year.`,
+  },
+  {
+    question: 'Is there an income limit for Trump Accounts?',
+    answer: 'No. There are <strong>zero income restrictions</strong> for Trump Accounts. Unlike Roth IRAs (which phase out at higher incomes), any family can open and contribute to a Trump Account regardless of how much they earn.',
+  },
+  {
+    question: 'Do adopted children qualify for a Trump Account?',
+    answer: 'Yes. Adopted children who are U.S. citizens with a valid SSN and under 18 qualify for a Trump Account. If they were born between 2025 and 2028, they also qualify for the $1,000 federal pilot deposit.',
+  },
+  {
+    question: 'What if my child turns 18 this year?',
+    answer: `The child must be <strong>under ${limits.growthPhaseEndAge}</strong> at the end of the election year. If your child turns ${limits.growthPhaseEndAge} before December 31 of the year you file, they are not eligible for a new Trump Account. If they already have one, it converts to a traditional IRA.`,
+  },
+  {
+    question: 'Can adults open a Trump Account for themselves?',
+    answer: `No. Trump Accounts are only for children under ${limits.growthPhaseEndAge}. Adults cannot open one for themselves. The account is established by a parent or guardian on behalf of an eligible child.`,
+  },
+  {
+    question: 'Does my child need a Social Security Number?',
+    answer: 'Yes. A valid Social Security Number (SSN) is required. Individual Taxpayer Identification Numbers (ITINs) do not qualify. You can apply for your child\'s SSN through the Social Security Administration.',
+  },
+  {
+    question: 'Can non-citizen children qualify for a Trump Account?',
+    answer: 'No. The child must be a <strong>U.S. citizen</strong>. Non-citizen children — including permanent residents (green card holders) — do not qualify under the current rules in IRC Section 530A.',
+  },
+  {
+    question: 'What about children born to U.S. citizens abroad?',
+    answer: 'Children born abroad to U.S. citizen parents are eligible, as long as they have U.S. citizenship and a valid SSN. The key requirement is citizenship, not where the child was born.',
+  },
+];
+
+const schemas = [
+  articleSchema({
+    title: 'Trump Accounts Eligibility: Who Qualifies?',
+    description: 'Trump accounts eligibility: U.S. citizen, SSN, under 18. No income limits. Who gets the $1,000 deposit, age cutoffs, and special cases explained.',
+    url: 'https://trumpaccounts.guide/trump-accounts-eligibility',
+    datePublished: '2026-02-01',
+    dateModified: '2026-02-22',
+    author: 'TrumpAccounts.guide Editorial Team',
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: 'https://trumpaccounts.guide' },
+    { name: 'Eligibility', url: 'https://trumpaccounts.guide/trump-accounts-eligibility' },
+  ]),
+  faqSchema(faqs),
+];
+---
+
+<BaseLayout
+  title="Trump Accounts Eligibility: Who Qualifies? Complete Guide (2026)"
+  description="Trump accounts eligibility: U.S. citizen, SSN, under 18. No income limits. Who gets the $1,000 deposit, age cutoffs, and special cases explained."
+  schema={schemas}
+  ogType="article"
+>
+  <article class="mx-auto max-w-3xl px-4 py-12">
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-slate-500">
+        <li><a href="/" class="hover:text-gold-400 no-underline">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="text-white font-medium">Trump Accounts Eligibility</span>
+        </li>
+      </ol>
+    </nav>
+
+    <LastUpdated date="February 2026" />
+
+    <div class="prose mt-4">
+      <h1>Trump Accounts Eligibility: Who Qualifies for a Trump Account?</h1>
+
+      <p>
+        Not sure if your child qualifies for a <strong>Trump Account</strong>? Good news: the rules are simple.
+        Most American kids are eligible. There are no income limits, no complicated formulas, and no waiting lists.
+        Here is everything you need to know about Trump Account eligibility under <strong>{limits.legalBasis}</strong>.
+      </p>
+
+      <!-- Key Takeaways -->
+      <div class="my-6 rounded-lg border-2 border-gold-400/60 bg-gold-400/5 p-5">
+        <p class="mt-0 mb-3 text-lg font-bold text-gold-400">Key Takeaways</p>
+        <ul class="mb-0 space-y-1">
+          <li>Any <strong>U.S. citizen child under {limits.growthPhaseEndAge}</strong> with a valid SSN qualifies</li>
+          <li><strong>NO income limits</strong> — any family can participate regardless of earnings</li>
+          <li>Born {limits.pilotDepositStartYear}–{limits.pilotDepositEndYear}: gets the <strong>${limits.pilotDeposit.toLocaleString()} federal pilot deposit</strong></li>
+          <li>Born before {limits.pilotDepositStartYear}: can still open an account, but no deposit</li>
+          <li>Born after {limits.pilotDepositEndYear}: can still open an account, but no deposit</li>
+          <li>Dell pledge: children {limits.dellPledge.eligibleAge} in qualifying ZIP codes get an extra <strong>${limits.dellPledge.perChildAmount}</strong></li>
+        </ul>
+      </div>
+
+      <h2>The Three Requirements</h2>
+
+      <p>To open a Trump Account, a child must meet <strong>all three</strong> of these requirements:</p>
+
+      <ol>
+        <li><strong>U.S. citizen.</strong> The child must be a citizen of the United States.</li>
+        <li><strong>Valid Social Security Number (SSN).</strong> An ITIN does not qualify. The child needs a real SSN.</li>
+        <li><strong>Under {limits.growthPhaseEndAge} at the end of the election year.</strong> If your child turns {limits.growthPhaseEndAge} before December 31 of the year you file, they are not eligible.</li>
+      </ol>
+
+      <p>That's it. Three requirements. No income test. No asset test. No complicated paperwork beyond <strong>{limits.form}</strong>.</p>
+
+      <h2>Who Gets the ${limits.pilotDeposit.toLocaleString()} Federal Deposit?</h2>
+
+      <p>
+        The <strong>${limits.pilotDeposit.toLocaleString()} federal pilot deposit</strong> is only for children born between
+        <strong>January 1, {limits.pilotDepositStartYear}</strong> and <strong>December 31, {limits.pilotDepositEndYear}</strong>.
+        This is the government's seed money to jumpstart the account.
+      </p>
+
+      <p>
+        Children born outside that window can still open a Trump Account. They just will not receive the deposit.
+        Families can still contribute up to <strong>${limits.annualContributionLimit.toLocaleString()}/year</strong>, and employers
+        can add up to <strong>${limits.employerContributionLimit.toLocaleString()}/year</strong> per employee.
+      </p>
+
+      <CalloutBox type="info" title="The deposit is automatic">
+        <p>You do not need to apply separately for the ${limits.pilotDeposit.toLocaleString()} deposit. When you file {limits.form} for an eligible child born {limits.pilotDepositStartYear}–{limits.pilotDepositEndYear}, the deposit is included automatically.</p>
+      </CalloutBox>
+
+      <h2>Age Eligibility Breakdown</h2>
+
+      <p>Here is a quick look at what each age group gets:</p>
+    </div>
+
+    <!-- Age Eligibility Table -->
+    <div class="my-6 overflow-x-auto">
+      <table class="w-full text-sm text-left border-collapse">
+        <thead>
+          <tr class="border-b border-surface-600 text-gold-400">
+            <th class="py-3 px-4 font-semibold">Age Group</th>
+            <th class="py-3 px-4 font-semibold">${limits.pilotDeposit.toLocaleString()} Deposit</th>
+            <th class="py-3 px-4 font-semibold">Family Contributions</th>
+            <th class="py-3 px-4 font-semibold">Dell Pledge</th>
+            <th class="py-3 px-4 font-semibold">Years to Grow</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 px-4 font-medium text-white">Newborns (born {limits.pilotDepositStartYear}–{limits.pilotDepositEndYear})</td>
+            <td class="py-3 px-4 text-mint-400">Yes</td>
+            <td class="py-3 px-4">Up to ${limits.annualContributionLimit.toLocaleString()}/yr</td>
+            <td class="py-3 px-4 text-mint-400">Yes (if qualifying ZIP)</td>
+            <td class="py-3 px-4">{limits.growthPhaseEndAge} years</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 px-4 font-medium text-white">Kids under 10 (born before {limits.pilotDepositStartYear})</td>
+            <td class="py-3 px-4 text-amber-400">No</td>
+            <td class="py-3 px-4">Up to ${limits.annualContributionLimit.toLocaleString()}/yr</td>
+            <td class="py-3 px-4 text-mint-400">Yes (if qualifying ZIP)</td>
+            <td class="py-3 px-4">8–{limits.growthPhaseEndAge} years</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 px-4 font-medium text-white">Kids 10–17</td>
+            <td class="py-3 px-4 text-amber-400">No</td>
+            <td class="py-3 px-4">Up to ${limits.annualContributionLimit.toLocaleString()}/yr</td>
+            <td class="py-3 px-4 text-amber-400">No</td>
+            <td class="py-3 px-4">1–8 years</td>
+          </tr>
+          <tr>
+            <td class="py-3 px-4 font-medium text-white">{limits.growthPhaseEndAge}+ (adults)</td>
+            <td class="py-3 px-4 text-red-400">Not eligible</td>
+            <td class="py-3 px-4 text-red-400">Not eligible</td>
+            <td class="py-3 px-4 text-red-400">Not eligible</td>
+            <td class="py-3 px-4">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="prose">
+      <h2>Children Born Before {limits.pilotDepositStartYear}</h2>
+
+      <p>
+        If your child was born before {limits.pilotDepositStartYear}, they <strong>can still open a Trump Account</strong>.
+        They will not receive the ${limits.pilotDeposit.toLocaleString()} federal deposit. But your family can contribute up to
+        <strong>${limits.annualContributionLimit.toLocaleString()} per year</strong> into S&P 500 index funds that grow tax-deferred
+        until the child turns {limits.growthPhaseEndAge}.
+      </p>
+
+      <p>
+        Even without the deposit, years of tax-deferred growth in the stock market can add up to a meaningful head start.
+        A 10-year-old who gets ${limits.annualContributionLimit.toLocaleString()}/year for 8 years could have a significant nest egg
+        by the time the account converts to a traditional IRA.
+      </p>
+
+      <p><a href="/blog/already-born-children">Read more: Trump Accounts for children born before 2025 &rarr;</a></p>
+
+      <h2>Special Situations</h2>
+
+      <p>Some families have questions about unique circumstances. Here are the most common special cases:</p>
+
+      <ul>
+        <li><strong>Adopted children:</strong> Adopted U.S. citizen children qualify under the same rules. <a href="/blog/adopted-children-trump-account">Full guide for adoptive parents &rarr;</a></li>
+        <li><strong>Born abroad to U.S. citizens:</strong> If the child has U.S. citizenship and an SSN, they qualify — regardless of where they were born. <a href="/blog/us-citizens-born-abroad-trump-account">Details for families abroad &rarr;</a></li>
+        <li><strong>Mixed-status families:</strong> The child must be a U.S. citizen with an SSN. The parent's citizenship status does not affect the child's eligibility. <a href="/blog/undocumented-families-trump-account">Guide for mixed-status families &rarr;</a></li>
+        <li><strong>Children with disabilities:</strong> There are no disability-related exclusions. All eligible children qualify equally. <a href="/blog/trump-account-disability">Disability considerations &rarr;</a></li>
+      </ul>
+
+      <h2>Who Does NOT Qualify?</h2>
+
+      <p>Some people are not eligible for a Trump Account:</p>
+
+      <ul>
+        <li><strong>Non-citizens without an SSN.</strong> The child must be a U.S. citizen with a valid Social Security Number. ITINs do not count. Green card holders do not qualify.</li>
+        <li><strong>Adults ({limits.growthPhaseEndAge}+).</strong> Trump Accounts are only for children. Adults cannot open one for themselves. <a href="/blog/trump-accounts-for-adults">Can adults get a Trump Account? &rarr;</a></li>
+        <li><strong>Children who turn {limits.growthPhaseEndAge} before the election year ends.</strong> The child must be under {limits.growthPhaseEndAge} on December 31 of the year you file the election.</li>
+      </ul>
+
+      <h2>Income Limits? There Are None</h2>
+
+      <CalloutBox type="tip" title="No income restrictions — period">
+        <p>Unlike Roth IRAs (which phase out above certain income levels), Trump Accounts have <strong>zero income limits</strong>. Whether your family earns $30,000 or $3,000,000, your child qualifies. This was a deliberate design choice in the {limits.legislation} to make the program universal.</p>
+      </CalloutBox>
+
+      <p>
+        This makes Trump Accounts one of the most accessible tax-advantaged accounts available.
+        No income test. No asset test. No phase-outs. If your child meets the three requirements above, they are in.
+      </p>
+
+      <CalloutBox type="info" title="Check eligibility in 30 seconds">
+        <p>Not sure if your child qualifies? Use our free <a href="/calculators/eligibility-checker"><strong>Eligibility Checker</strong></a> to find out instantly. Just answer a few quick questions.</p>
+      </CalloutBox>
+
+      <h2>Dell Pledge Eligibility</h2>
+
+      <p>
+        Michael and Susan Dell pledged <strong>${(limits.dellPledge.totalAmount / 1000000000).toFixed(2)} billion</strong> to fund
+        an extra <strong>${limits.dellPledge.perChildAmount} per child</strong> {limits.dellPledge.eligibleAge} who lives in a
+        ZIP code where the median household income is below <strong>${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}</strong>.
+      </p>
+
+      <p>This is separate from — and in addition to — the ${limits.pilotDeposit.toLocaleString()} federal pilot deposit. A qualifying newborn could receive up to <strong>${limits.pilotDeposit + limits.dellPledge.perChildAmount}</strong> before the family contributes a single dollar.</p>
+
+      <p><a href="/blog/dell-pledge-explained">Full breakdown of the Dell pledge &rarr;</a></p>
+
+      <h2>Frequently Asked Questions</h2>
+    </div>
+
+    <div class="mt-6">
+      <Accordion items={faqs} />
+    </div>
+
+    <div class="mt-8 prose">
+      <h2>Run the Numbers</h2>
+      <p>Use our free tools to check eligibility and project growth for your child:</p>
+    </div>
+
+    <div class="mt-4 grid gap-3 sm:grid-cols-2">
+      <a href="/calculators/eligibility-checker" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">Eligibility Checker</h3>
+        <p class="text-sm text-gray-400">Does your child qualify? Find out in seconds</p>
+      </a>
+      <a href="/calculators/growth-calculator" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">Growth Calculator</h3>
+        <p class="text-sm text-gray-400">See how much the account could grow by age 18</p>
+      </a>
+    </div>
+
+    <div class="mt-8 rounded-lg border border-surface-600 bg-surface-800 p-4 text-xs text-gray-500">
+      <p><strong class="text-gray-300">Sources:</strong></p>
+      <ul class="mt-1 space-y-0.5">
+        <li><a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf" target="_blank" rel="noopener noreferrer" class="text-gold-400 hover:text-gold-300">IRS Notice 2025-68</a></li>
+        <li>One Big Beautiful Bill Act (OBBBA), IRC Section 530A</li>
+        <li><a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer" class="text-gold-400 hover:text-gold-300">trumpaccounts.gov</a></li>
+      </ul>
+    </div>
+
+    <div class="mt-6 text-xs text-gray-600">
+      <p><em>This is educational content, not tax or financial advice. Consult a qualified professional for guidance specific to your situation.</em></p>
+    </div>
+  </article>
+</BaseLayout>

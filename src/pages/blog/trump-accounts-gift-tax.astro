@@ -1,0 +1,233 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-accounts-gift-tax')!;
+const related = getRelatedArticles('trump-accounts-gift-tax');
+
+const faqs = [
+  {
+    question: 'Do Trump Account contributions count as gifts?',
+    answer: `Technically, yes — contributions from anyone other than the account beneficiary are considered gifts under federal tax law. However, the $${limits.annualContributionLimit.toLocaleString()} annual Trump Account limit is well below the annual gift tax exclusion ($19,000 per recipient in 2025). So no gift tax is owed, and no gift tax return is needed.`,
+  },
+  {
+    question: 'Do I need to file a gift tax return for Trump Account contributions?',
+    answer: 'No — as long as your total gifts to that child (including Trump Account contributions) stay under the annual gift tax exclusion ($19,000 in 2025). You only file IRS Form 709 if your total gifts to any single recipient exceed the exclusion in a given year.',
+  },
+  {
+    question: 'What if grandparents also contribute?',
+    answer: `Each donor has their own annual gift tax exclusion. In 2025, each grandparent can give up to $19,000 per grandchild without triggering gift tax. Since the Trump Account limit is $${limits.annualContributionLimit.toLocaleString()}/year total, even maximum contributions from multiple family members stay well under each donor's exclusion.`,
+  },
+  {
+    question: 'Is the $1,000 federal deposit a taxable gift?',
+    answer: `No. The $${limits.pilotDeposit.toLocaleString()} federal deposit is a government program benefit, not a gift. It is not subject to gift tax, and it does not count toward any donor's annual gift tax exclusion.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Trump Account contributions are technically gifts, but <strong class="text-white">no gift tax is owed</strong> because the $${limits.annualContributionLimit.toLocaleString()} limit is far below the annual exclusion.</li>
+        <li>The annual gift tax exclusion is <strong class="text-white">$19,000 per recipient</strong> in 2025. Trump Account max is $${limits.annualContributionLimit.toLocaleString()}.</li>
+        <li><strong class="text-white">No Form 709</strong> (gift tax return) is needed for Trump Account contributions alone.</li>
+        <li>Each donor gets their own exclusion — grandparents, parents, and others <strong class="text-white">each have a separate $19,000 limit</strong>.</li>
+        <li>The $${limits.pilotDeposit.toLocaleString()} federal deposit and employer contributions are <strong class="text-white">not gifts</strong>.</li>
+      </ul>
+    </div>
+
+    <p>
+      One of the most common tax questions about Trump Accounts: <strong>do contributions trigger gift tax?</strong> The answer is simple. No. Not in any realistic scenario. Here is why.
+    </p>
+
+    <h2>The $${limits.annualContributionLimit.toLocaleString()} Limit Is Well Below the Gift Tax Exclusion</h2>
+    <p>
+      The IRS allows anyone to give up to a certain amount per year to any person without owing gift tax. This is called the <strong>annual gift tax exclusion</strong>:
+    </p>
+    <ul>
+      <li><strong>2024</strong>: $18,000 per recipient</li>
+      <li><strong>2025</strong>: $19,000 per recipient</li>
+    </ul>
+    <p>
+      The maximum Trump Account contribution is <strong>${limits.annualContributionLimit.toLocaleString()} per year</strong> — total from all sources combined. That is less than one-third of the 2025 gift tax exclusion.
+    </p>
+    <p>
+      Even if you max out a child's Trump Account at $${limits.annualContributionLimit.toLocaleString()}, you still have <strong>$14,000 of room</strong> under the gift tax exclusion for other gifts to that same child.
+    </p>
+
+    <CalloutBox type="tip" title="Bottom line">
+      <p>
+        If the only gift you give a child is a Trump Account contribution, you will <strong>never</strong> owe gift tax on it. The numbers do not get close.
+      </p>
+    </CalloutBox>
+
+    <h2>Each Donor Gets Their Own Exclusion</h2>
+    <p>
+      The annual gift tax exclusion applies <strong>per donor, per recipient</strong>. This is important for families where multiple people contribute.
+    </p>
+    <p>
+      Example: A child's Trump Account receives contributions from three people:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Donor</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Contribution</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Gift Tax Exclusion (2025)</th>
+            <th class="py-3 text-gray-400 font-medium">Gift Tax Owed?</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Mom</td>
+            <td class="py-3 pr-4">$2,000</td>
+            <td class="py-3 pr-4">$19,000</td>
+            <td class="py-3 font-medium text-green-400">No</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Dad</td>
+            <td class="py-3 pr-4">$1,500</td>
+            <td class="py-3 pr-4">$19,000</td>
+            <td class="py-3 font-medium text-green-400">No</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Grandma</td>
+            <td class="py-3 pr-4">$1,500</td>
+            <td class="py-3 pr-4">$19,000</td>
+            <td class="py-3 font-medium text-green-400">No</td>
+          </tr>
+          <tr class="border-t border-surface-500">
+            <td class="py-3 pr-4 font-bold text-white">Total</td>
+            <td class="py-3 pr-4 font-bold text-gold-400">$5,000 (limit reached)</td>
+            <td class="py-3 pr-4">—</td>
+            <td class="py-3 font-medium text-green-400">No</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Each person's contribution is evaluated against their <strong>own</strong> $19,000 exclusion. Since no single donor contributes more than $19,000 to this child, nobody owes gift tax. Nobody needs to file Form 709.
+    </p>
+
+    <h2>The $${limits.pilotDeposit.toLocaleString()} Federal Deposit Is NOT a Gift</h2>
+    <p>
+      The $${limits.pilotDeposit.toLocaleString()} federal deposit for children born {limits.pilotDepositStartYear}–{limits.pilotDepositEndYear} is a <strong>government program benefit</strong>. It is not a gift from one person to another.
+    </p>
+    <p>
+      Think of it like a tax credit or government stimulus payment. The IRS does not treat it as a taxable gift, and it does not count toward anyone's gift tax exclusion.
+    </p>
+
+    <h2>Employer Contributions Are NOT Gifts</h2>
+    <p>
+      Employer contributions of up to <strong>${limits.employerContributionLimit.toLocaleString()}/year</strong> per employee are tax-free under IRC §128. These are classified as <strong>employee benefits</strong>, not gifts.
+    </p>
+    <p>
+      They do not trigger gift tax for the employer. They do not count toward the employee's gift tax exclusion. And they do not create taxable income for the employee.
+    </p>
+
+    <CalloutBox type="info" title="Employer contributions count toward the cap">
+      <p>
+        While employer contributions are not gifts, they <strong>do</strong> count toward the $${limits.annualContributionLimit.toLocaleString()} annual contribution limit. If your employer contributes $${limits.employerContributionLimit.toLocaleString()}, you can only add $${(limits.annualContributionLimit - limits.employerContributionLimit).toLocaleString()} more from family contributions. See <a href="/blog/employer-match-trump-account">employer match details</a>.
+      </p>
+    </CalloutBox>
+
+    <h2>When Would Gift Tax Actually Apply?</h2>
+    <p>
+      Gift tax only becomes a concern if your <strong>total gifts</strong> to a single recipient exceed $19,000 in a year (2025). A Trump Account contribution alone cannot trigger this because the max is $${limits.annualContributionLimit.toLocaleString()}.
+    </p>
+    <p>
+      But if you contribute $${limits.annualContributionLimit.toLocaleString()} to a child's Trump Account <strong>and</strong> also give the same child $15,000 in other gifts, your total is $20,000. That exceeds the $19,000 exclusion by $1,000. In that case, you would need to file Form 709.
+    </p>
+    <p>
+      Even then, you likely would not owe actual gift tax. The $1,000 over the exclusion just reduces your <strong>lifetime estate and gift tax exemption</strong> ($13.61 million in 2024). Actual gift tax is rare unless you give away more than $13 million in your lifetime.
+    </p>
+
+    <h2>Gift Tax Rules for Married Couples</h2>
+    <p>
+      Married couples can <strong>"gift-split"</strong> — each spouse is treated as giving half of any gift. This effectively doubles the exclusion to $38,000 per recipient in 2025.
+    </p>
+    <p>
+      For Trump Accounts, gift-splitting is unnecessary because the $${limits.annualContributionLimit.toLocaleString()} limit is already so far below the individual exclusion. But it is useful to know if you are also making large gifts outside the Trump Account.
+    </p>
+
+    <h2>Multiple Grandchildren? No Problem</h2>
+    <p>
+      The gift tax exclusion applies <strong>per recipient</strong>. A grandparent with three grandchildren can contribute to each child's Trump Account without combining the totals.
+    </p>
+    <ul>
+      <li>Grandchild A: $${limits.annualContributionLimit.toLocaleString()} contribution — under $19,000 exclusion</li>
+      <li>Grandchild B: $${limits.annualContributionLimit.toLocaleString()} contribution — under $19,000 exclusion</li>
+      <li>Grandchild C: $${limits.annualContributionLimit.toLocaleString()} contribution — under $19,000 exclusion</li>
+    </ul>
+    <p>
+      Total: $15,000. No gift tax return needed. Each grandchild is a separate recipient with a separate exclusion.
+    </p>
+
+    <CalloutBox type="tip" title="Grandparents: a smart gifting strategy">
+      <p>
+        Instead of cash or toys, contributing to a grandchild's Trump Account is a tax-efficient way to transfer wealth. The money grows tax-deferred, stays below gift tax thresholds, and can compound for up to 18 years. See our <a href="/blog/grandparent-gift-guide">grandparent contribution guide</a> for more strategies.
+      </p>
+    </CalloutBox>
+
+    <h2>Summary: Gift Tax and Trump Accounts</h2>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Contribution Source</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Is It a Gift?</th>
+            <th class="py-3 text-gray-400 font-medium">Gift Tax Owed?</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Parent contribution</td>
+            <td class="py-3 pr-4">Technically yes</td>
+            <td class="py-3 font-medium text-green-400">No (under exclusion)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Grandparent contribution</td>
+            <td class="py-3 pr-4">Technically yes</td>
+            <td class="py-3 font-medium text-green-400">No (under exclusion)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Federal $${limits.pilotDeposit.toLocaleString()} deposit</td>
+            <td class="py-3 pr-4">No</td>
+            <td class="py-3 font-medium text-green-400">No</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">Employer contribution</td>
+            <td class="py-3 pr-4">No (employee benefit)</td>
+            <td class="py-3 font-medium text-green-400">No</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      For a deeper dive into Trump Account tax treatment, see our guides on <a href="/trump-accounts-taxes">Trump Account taxes</a> and <a href="/blog/can-parents-grandparents-contribute">who can contribute</a>.
+    </p>
+
+    <CalloutBox type="warning" title="Educational content only">
+      <p>
+        This article is for informational purposes only. It is not tax or financial advice. Gift tax rules change annually, and individual circumstances vary. Consult a qualified tax professional for advice specific to your situation. Annual exclusion amounts referenced are based on IRS guidance for 2024 and 2025.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

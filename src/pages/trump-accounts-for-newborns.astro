@@ -1,0 +1,388 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CalloutBox from '../components/ui/CalloutBox.astro';
+import LastUpdated from '../components/ui/LastUpdated.astro';
+import Accordion from '../components/ui/Accordion.astro';
+import { articleSchema, breadcrumbSchema, faqSchema, financialProductSchema, governmentServiceSchema } from '../lib/seo/schema';
+import limits from '../data/contribution-limits.json';
+
+const faqs = [
+  {
+    question: 'Do I need to open a Trump Account immediately after birth?',
+    answer: `No. You do not have to open the account the day your baby is born. You have until you file your tax return for the year your child was born. For example, a baby born in 2025 can be enrolled when you file your 2025 taxes (due April 15, 2026). You can also sign up later through <a href="https://${limits.portal}" target="_blank" rel="noopener noreferrer">${limits.portal}</a> once the portal launches in mid-2026.`,
+  },
+  {
+    question: 'What if my baby is born in 2029?',
+    answer: `A child born in 2029 can still have a Trump Account opened for them — any U.S. citizen child under ${limits.growthPhaseEndAge} qualifies. However, the $${limits.pilotDeposit.toLocaleString()} federal pilot deposit is <strong>only</strong> for children born between January 1, ${limits.pilotDepositStartYear} and December 31, ${limits.pilotDepositEndYear}. A 2029 baby would not receive the free deposit.`,
+  },
+  {
+    question: 'Do twins each get $1,000?',
+    answer: `Yes! Each eligible child receives their own $${limits.pilotDeposit.toLocaleString()} pilot deposit. Twins born in ${limits.pilotDepositStartYear}–${limits.pilotDepositEndYear} would each get $${limits.pilotDeposit.toLocaleString()}, for a total of $${(limits.pilotDeposit * 2).toLocaleString()} in federal deposits. Each child needs their own ${limits.form} filed.`,
+  },
+  {
+    question: 'Can I add money on top of the $1,000?',
+    answer: `Absolutely. Parents, grandparents, or anyone can contribute up to <strong>$${limits.annualContributionLimit.toLocaleString()} per year</strong> in after-tax dollars. This limit is indexed for inflation starting in ${limits.inflationIndexStartYear}. Employer contributions of up to $${limits.employerContributionLimit.toLocaleString()}/year count toward the $${limits.annualContributionLimit.toLocaleString()} cap.`,
+  },
+  {
+    question: 'What index fund should I pick for a newborn?',
+    answer: `All Trump Account funds must be invested in ${limits.investmentRequirement.toLowerCase()}. You cannot pick individual stocks, bonds, or crypto. The good news: expense ratios are capped at ${(limits.maxExpenseRatio * 100).toFixed(1)}%, so fees stay low. For a newborn with ${limits.growthPhaseEndAge} years of growth, a broad S&P 500 index fund is the standard choice.`,
+  },
+  {
+    question: 'Is the $1,000 deposit taxable when received?',
+    answer: `No. The $${limits.pilotDeposit.toLocaleString()} federal pilot deposit is <strong>not taxable</strong> when it goes into the account. The account grows tax-deferred. Taxes apply later — when your child makes withdrawals after age ${limits.growthPhaseEndAge}, earnings are taxed as ordinary income under traditional IRA rules.`,
+  },
+  {
+    question: 'Can grandparents contribute to a newborn\'s Trump Account?',
+    answer: `Yes. Anyone can contribute to a child's Trump Account — parents, grandparents, aunts, uncles, or family friends. All contributions share the same $${limits.annualContributionLimit.toLocaleString()}/year cap. There are no gift tax implications beyond standard gift tax rules.`,
+  },
+];
+
+const schemas = [
+  articleSchema({
+    title: 'Trump Accounts for Newborns: $1,000 Federal Deposit Guide',
+    description: 'Trump accounts for newborns: every baby born 2025-2028 gets a free $1,000 deposit. How to claim it, growth projections, and what parents need to know.',
+    url: 'https://trumpaccounts.guide/trump-accounts-for-newborns',
+    datePublished: '2026-02-01',
+    dateModified: '2026-02-22',
+    author: 'TrumpAccounts.guide Editorial Team',
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: 'https://trumpaccounts.guide' },
+    { name: 'Trump Accounts for Newborns', url: 'https://trumpaccounts.guide/trump-accounts-for-newborns' },
+  ]),
+  faqSchema(faqs),
+  financialProductSchema(),
+  governmentServiceSchema(),
+];
+---
+
+<BaseLayout
+  title="Trump Accounts for Newborns: $1,000 Federal Deposit Guide (2026)"
+  description="Trump accounts for newborns: every baby born 2025-2028 gets a free $1,000 deposit. How to claim it, growth projections, and what parents need to know."
+  schema={schemas}
+  ogType="article"
+>
+  <article class="mx-auto max-w-3xl px-4 py-12">
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-slate-500">
+        <li><a href="/" class="hover:text-gold-400 no-underline">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="text-white font-medium">Trump Accounts for Newborns</span>
+        </li>
+      </ol>
+    </nav>
+
+    <LastUpdated date="February 2026" />
+
+    <div class="prose mt-4">
+      <h1>Trump Accounts for Newborns: Everything Parents Need to Know</h1>
+
+      <!-- Key Takeaways -->
+      <div class="my-6 rounded-lg border-2 border-gold-400/50 bg-gold-400/5 p-5">
+        <p class="mt-0 mb-2 text-lg font-bold text-gold-400">Key Takeaways</p>
+        <ul class="mb-0 space-y-1 text-sm">
+          <li>Every baby born {limits.pilotDepositStartYear}–{limits.pilotDepositEndYear} can receive a <strong>free ${limits.pilotDeposit.toLocaleString()} federal deposit</strong> into a Trump Account.</li>
+          <li>Parents can add up to <strong>${limits.annualContributionLimit.toLocaleString()}/year</strong> on top of the government deposit.</li>
+          <li>Money is invested in <strong>S&P 500 index funds</strong> and grows tax-deferred until age {limits.growthPhaseEndAge}.</li>
+          <li>At age {limits.growthPhaseEndAge}, the account converts to a <strong>traditional IRA</strong> your child controls.</li>
+          <li>You must <strong>opt in</strong> — it is not automatic. File {limits.form} with your tax return or use <a href={`https://${limits.portal}`} target="_blank" rel="noopener noreferrer">{limits.portal}</a>.</li>
+          <li>There are <strong>no income limits</strong>. Every U.S. citizen newborn qualifies.</li>
+        </ul>
+      </div>
+
+      <p>
+        If you just had a baby — or you are expecting one — there is a brand-new federal program that could put
+        <strong>${limits.pilotDeposit.toLocaleString()} of free money</strong> into an investment account for your child. It is called a
+        <strong>Trump Account</strong>, created by the <a href="/what-are-trump-accounts">{limits.legislation}</a> and signed into law
+        on July 4, 2025. Here is everything you need to know as a new parent.
+      </p>
+
+      <h2 id="what-is-a-trump-account-for-newborns">What Is a Trump Account for Newborns?</h2>
+
+      <p>
+        A Trump Account is a <strong>federal investment account</strong> created under <strong>{limits.legalBasis}</strong> for
+        U.S. citizen children. Think of it like a starter retirement account — but for your baby.
+      </p>
+
+      <p>Here is how it works for newborns:</p>
+
+      <ol>
+        <li><strong>Free money from the government:</strong> Babies born between January 1, {limits.pilotDepositStartYear} and December 31, {limits.pilotDepositEndYear} get a one-time <strong>${limits.pilotDeposit.toLocaleString()} pilot deposit</strong> from the federal government.</li>
+        <li><strong>Invested in the stock market:</strong> That ${limits.pilotDeposit.toLocaleString()} goes straight into {limits.investmentRequirement.toLowerCase()}. Your baby's money rides the stock market from day one.</li>
+        <li><strong>Grows for {limits.growthPhaseEndAge} years:</strong> No one can touch the money until your child turns {limits.growthPhaseEndAge}. It grows tax-deferred the entire time.</li>
+        <li><strong>Becomes a traditional IRA:</strong> At age {limits.iraConversionAge}, the Trump Account automatically converts to a <strong>traditional IRA</strong> with standard IRA rules.</li>
+      </ol>
+
+      <p>
+        The best part? You can add up to <strong>${limits.annualContributionLimit.toLocaleString()} per year</strong> on top of the government deposit.
+        The contribution limit is indexed for inflation starting in {limits.inflationIndexStartYear}.
+      </p>
+
+      <h2 id="which-newborns-qualify">Which Newborns Qualify?</h2>
+
+      <p>Your newborn qualifies for a Trump Account if they meet <strong>all three</strong> of these requirements:</p>
+
+      <ul>
+        <li><strong>U.S. citizen</strong> — born in the U.S. or to U.S. citizen parents abroad</li>
+        <li><strong>Valid Social Security Number (SSN)</strong> — you will need to apply for one after birth</li>
+        <li><strong>Under {limits.growthPhaseEndAge}</strong> at the end of the election year</li>
+      </ul>
+
+      <p>
+        There are <strong>no income restrictions</strong>. It does not matter how much you earn. A family making $30,000 and a family
+        making $3 million both qualify. This is different from programs like the Child Tax Credit or Roth IRAs that have income phaseouts.
+      </p>
+
+      <p>
+        To get the <strong>${limits.pilotDeposit.toLocaleString()} pilot deposit</strong>, your baby must be born between
+        <strong>January 1, {limits.pilotDepositStartYear}</strong> and <strong>December 31, {limits.pilotDepositEndYear}</strong>.
+        Babies born outside this window can still open a Trump Account — they just will not receive the free deposit.
+      </p>
+
+      <p>
+        Not sure if your child qualifies? Use our <a href="/calculators/eligibility-checker">free eligibility checker</a> to find out in 30 seconds.
+      </p>
+
+      <CalloutBox type="tip" title="You must opt in — it is not automatic">
+        <p>
+          The government will <strong>not</strong> open a Trump Account for your baby automatically. You have to take action.
+          File {limits.form} with your tax return, use the <a href={`https://${limits.portal}`} target="_blank" rel="noopener noreferrer">{limits.portal}</a> portal,
+          or mail the form to the IRS. If you do nothing, your newborn misses out on the ${limits.pilotDeposit.toLocaleString()} deposit.
+        </p>
+      </CalloutBox>
+
+      <h2 id="how-to-claim-the-1000">How to Claim the ${limits.pilotDeposit.toLocaleString()} for Your Newborn</h2>
+
+      <p>There are <strong>three ways</strong> to open a Trump Account and claim the federal deposit:</p>
+
+      <h3>Method 1: With Your Tax Return (Available Now)</h3>
+      <p>
+        Include <strong>{limits.form}</strong> (Trump Account Election(s)) with your 2025 federal tax return. The deadline is
+        <strong>April 15, 2026</strong>. This is the fastest way to get started right now. See our
+        <a href="/blog/how-to-open-step-by-step">step-by-step filing guide</a> for a full walkthrough.
+      </p>
+
+      <h3>Method 2: Online Portal (Coming Mid-2026)</h3>
+      <p>
+        The IRS is building an online portal at <a href={`https://${limits.portal}`} target="_blank" rel="noopener noreferrer">{limits.portal}</a>.
+        It is expected to launch in mid-2026. Once live, you can sign up without filing a tax return first.
+      </p>
+
+      <h3>Method 3: By Mail</h3>
+      <p>
+        Download and print {limits.form}, fill it out, and mail it to the IRS. This takes the longest but works
+        if you prefer paper. See our <a href="/how-to-open-trump-account">complete guide to opening a Trump Account</a> for mailing instructions.
+      </p>
+
+      <h2 id="growth-projections">How Much Could ${limits.pilotDeposit.toLocaleString()} Grow Over {limits.growthPhaseEndAge} Years?</h2>
+
+      <p>
+        The magic of a Trump Account for newborns is <strong>time</strong>. Your baby has a full {limits.growthPhaseEndAge} years of
+        compound growth ahead. Even the ${limits.pilotDeposit.toLocaleString()} deposit alone — with zero extra contributions — can
+        grow significantly.
+      </p>
+
+      <p>Here is what ${limits.pilotDeposit.toLocaleString()} could become by age {limits.growthPhaseEndAge} at different average annual returns:</p>
+
+      <div class="overflow-x-auto">
+        <table>
+          <thead>
+            <tr>
+              <th>Average Annual Return</th>
+              <th>Value at Age {limits.growthPhaseEndAge}</th>
+              <th>Total Growth</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>6% (conservative)</td>
+              <td><strong>$2,854</strong></td>
+              <td>+$1,854</td>
+            </tr>
+            <tr>
+              <td>8% (moderate)</td>
+              <td><strong>$3,996</strong></td>
+              <td>+$2,996</td>
+            </tr>
+            <tr>
+              <td>10% (S&P 500 historical avg.)</td>
+              <td><strong>$5,560</strong></td>
+              <td>+$4,560</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        Now imagine you also contribute <strong>${limits.annualContributionLimit.toLocaleString()} per year</strong> on top of the deposit. At a
+        10% average return, your child could have over <strong>$250,000</strong> by age {limits.growthPhaseEndAge}. Use our
+        <a href="/calculators/growth-calculator">growth calculator</a> to run your own numbers.
+      </p>
+
+      <h2 id="dell-foundation-250">Can You Also Get the Dell Foundation $250?</h2>
+
+      <p>
+        Possibly. Michael and Susan Dell pledged <strong>${limits.dellPledge.totalAmount.toLocaleString()}</strong> to give
+        <strong>${limits.dellPledge.perChildAmount}</strong> to every child <strong>{limits.dellPledge.eligibleAge}</strong> in
+        ZIP codes where the median household income is below <strong>${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}</strong>.
+      </p>
+
+      <p>
+        If your newborn qualifies, they could receive <strong>${limits.pilotDeposit.toLocaleString()} + ${limits.dellPledge.perChildAmount} = ${(limits.pilotDeposit + limits.dellPledge.perChildAmount).toLocaleString()}</strong> before
+        you contribute a single dollar. That ${(limits.pilotDeposit + limits.dellPledge.perChildAmount).toLocaleString()} alone could grow to over <strong>$6,950</strong> by age {limits.growthPhaseEndAge}
+        at the S&P 500's historical average. Read our <a href="/blog/dell-pledge-explained">full Dell pledge breakdown</a> for details on eligibility.
+      </p>
+
+      <h2 id="what-happens-at-18">What Happens When Your Newborn Turns {limits.growthPhaseEndAge}?</h2>
+
+      <p>
+        When your child turns {limits.iraConversionAge}, the Trump Account <strong>automatically converts to a traditional IRA</strong>.
+        At that point, your child has several options:
+      </p>
+
+      <ul>
+        <li><strong>Keep it growing:</strong> Leave the money in the traditional IRA and let it keep compounding. No action needed.</li>
+        <li><strong>Withdraw some or all:</strong> Take money out, but earnings will be taxed as ordinary income. A 10% early withdrawal penalty applies before age 59&#189;.</li>
+        <li><strong>Convert to a Roth IRA:</strong> Roll it into a Roth IRA, pay taxes now, and enjoy tax-free growth going forward. This can be a smart move if your child is in a low tax bracket at {limits.growthPhaseEndAge}.</li>
+        <li><strong>Use it for anything:</strong> Unlike a 529, there are <strong>no restrictions</strong> on what the money can be used for — college, a first car, a down payment, or just long-term retirement savings.</li>
+      </ul>
+
+      <p>
+        The key thing: no one can touch the money before age {limits.growthPhaseEndAge}. Not you, not your child. It stays locked in
+        and growing. Learn more about <a href="/trump-accounts-rules">Trump Account rules</a>.
+      </p>
+
+      <h2 id="trump-account-vs-529">Trump Account vs 529 for Newborns</h2>
+
+      <p>
+        Many new parents wonder: should I open a Trump Account, a 529 plan, or both? Here is a quick side-by-side comparison:
+      </p>
+
+      <div class="overflow-x-auto">
+        <table>
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Trump Account</th>
+              <th>529 Plan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Free government money</strong></td>
+              <td>${limits.pilotDeposit.toLocaleString()} pilot deposit ({limits.pilotDepositStartYear}–{limits.pilotDepositEndYear} births)</td>
+              <td>No federal deposit</td>
+            </tr>
+            <tr>
+              <td><strong>Annual contribution limit</strong></td>
+              <td>${limits.annualContributionLimit.toLocaleString()}/year</td>
+              <td>Varies by state (often $300K+ lifetime)</td>
+            </tr>
+            <tr>
+              <td><strong>Investment options</strong></td>
+              <td>S&P 500 / broad U.S. equity index only</td>
+              <td>Multiple options (age-based, bonds, stocks)</td>
+            </tr>
+            <tr>
+              <td><strong>Tax treatment</strong></td>
+              <td>Tax-deferred; taxed on withdrawal</td>
+              <td>Tax-free for qualified education expenses</td>
+            </tr>
+            <tr>
+              <td><strong>What it can be used for</strong></td>
+              <td>Anything (after age {limits.growthPhaseEndAge})</td>
+              <td>Education expenses (penalties otherwise)</td>
+            </tr>
+            <tr>
+              <td><strong>Converts to</strong></td>
+              <td>Traditional IRA at age {limits.iraConversionAge}</td>
+              <td>Stays a 529 (or roll to Roth IRA under SECURE 2.0)</td>
+            </tr>
+            <tr>
+              <td><strong>Income limits</strong></td>
+              <td>None</td>
+              <td>None</td>
+            </tr>
+            <tr>
+              <td><strong>Early withdrawal</strong></td>
+              <td>Not allowed before age {limits.growthPhaseEndAge}</td>
+              <td>Allowed with penalty for non-education use</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        <strong>Our take:</strong> For most families, the answer is <strong>both</strong>. The Trump Account gives your newborn a
+        free ${limits.pilotDeposit.toLocaleString()} head start and flexible spending at {limits.growthPhaseEndAge}. A 529 gives tax-free growth
+        for college. They serve different purposes. Read our <a href="/compare/trump-account-vs-529">full Trump Account vs 529 comparison</a>.
+      </p>
+
+      <h2 id="baby-savings-account">Is a Trump Account the Same as a Baby Savings Account?</h2>
+
+      <p>
+        No. Despite what you may see online, a Trump Account is <strong>not a savings account</strong>. It is an
+        <strong>investment account</strong>. The money goes into S&P 500 index funds — not a bank account earning 4% interest.
+      </p>
+
+      <p>Why does this matter? Over {limits.growthPhaseEndAge} years, the difference is dramatic:</p>
+
+      <ul>
+        <li><strong>Bank savings account</strong> at 4% APY: ${limits.pilotDeposit.toLocaleString()} grows to about <strong>$2,026</strong></li>
+        <li><strong>Trump Account</strong> at the S&P 500 historical average (10%): ${limits.pilotDeposit.toLocaleString()} grows to about <strong>$5,560</strong></li>
+      </ul>
+
+      <p>
+        That is nearly <strong>3x more money</strong> by investing instead of saving. The tradeoff is that investments can lose value
+        in the short term. But with {limits.growthPhaseEndAge} years of runway, history strongly favors stocks. The S&P 500 has never
+        lost money over any {limits.growthPhaseEndAge}-year period in its history.
+      </p>
+
+      <p>
+        Check your newborn's <a href="/trump-accounts-eligibility">eligibility requirements</a> to make sure you qualify.
+      </p>
+
+      <CalloutBox type="warning" title="This is not tax or financial advice">
+        <p>
+          This article is for educational purposes only. It is not tax advice, financial advice, or legal advice.
+          Trump Account rules may change. Always consult a qualified tax professional or financial advisor before
+          making decisions about your child's account. Verify all details at
+          <a href={`https://${limits.portal}`} target="_blank" rel="noopener noreferrer">{limits.portal}</a> or in
+          <a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf" target="_blank" rel="noopener noreferrer">{limits.irsNotice}</a>.
+        </p>
+      </CalloutBox>
+
+      <h2>Frequently Asked Questions</h2>
+    </div>
+
+    <div class="mt-6">
+      <Accordion items={faqs} />
+    </div>
+
+    <div class="mt-8 prose">
+      <h2>Run the Numbers</h2>
+      <p>Use our free calculators to see how a Trump Account could work for your newborn:</p>
+    </div>
+
+    <div class="mt-4 grid gap-3 sm:grid-cols-2">
+      <a href="/calculators/eligibility-checker" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">Eligibility Checker</h3>
+        <p class="text-sm text-gray-400">See if your newborn qualifies</p>
+      </a>
+      <a href="/calculators/growth-calculator" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">Growth Calculator</h3>
+        <p class="text-sm text-gray-400">Project how much the $1,000 could grow</p>
+      </a>
+    </div>
+
+    <div class="mt-8 rounded-lg border border-surface-600 bg-surface-800 p-4 text-xs text-gray-500">
+      <p><strong class="text-gray-300">Sources:</strong></p>
+      <ul class="mt-1 space-y-0.5">
+        <li><a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf" target="_blank" rel="noopener noreferrer" class="text-gold-400 hover:text-gold-300">IRS Notice 2025-68</a> (published December 3, 2025)</li>
+        <li>One Big Beautiful Bill Act (OBBBA), IRC Section 530A</li>
+        <li><a href={`https://${limits.portal}`} target="_blank" rel="noopener noreferrer" class="text-gold-400 hover:text-gold-300">{limits.portal}</a> — Official IRS portal</li>
+        <li><a href="/what-are-trump-accounts" class="text-gold-400 hover:text-gold-300">What Are Trump Accounts? Complete Guide</a></li>
+      </ul>
+    </div>
+  </article>
+</BaseLayout>

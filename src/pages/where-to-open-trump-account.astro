@@ -1,0 +1,301 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CalloutBox from '../components/ui/CalloutBox.astro';
+import LastUpdated from '../components/ui/LastUpdated.astro';
+import Accordion from '../components/ui/Accordion.astro';
+import { articleSchema, breadcrumbSchema, faqSchema } from '../lib/seo/schema';
+import limits from '../data/contribution-limits.json';
+
+const faqs = [
+  {
+    question: 'Where can I open a Trump Account?',
+    answer: `You open a Trump Account by filing <strong>${limits.form}</strong> with the IRS — not at a brokerage. After the IRS activates the account, you choose an approved trustee (like Fidelity, Schwab, Vanguard, or Bank of America) to hold and invest the funds.`,
+  },
+  {
+    question: 'Which brokerage is best for a Trump Account?',
+    answer: 'For most families, <strong>Fidelity</strong> is the best choice. Its S&P 500 fund (FXAIX) has the lowest expense ratio at 0.015%, there is no minimum investment, and it offers $0 commissions with 200+ branch locations. Schwab is a close runner-up at 0.02%.',
+  },
+  {
+    question: 'Can I open a Trump Account at my bank?',
+    answer: 'It depends. If your bank is an approved Trump Account trustee, yes. <strong>Bank of America</strong> is the largest bank that committed to offering Trump Accounts. Most smaller banks and credit unions are not approved trustees — you would need to use a major brokerage instead.',
+  },
+  {
+    question: 'Can I switch brokerages after opening?',
+    answer: 'Yes. You can transfer (roll over) a Trump Account from one approved trustee to another without penalties. The process works like a standard IRA transfer — your new brokerage handles the paperwork.',
+  },
+  {
+    question: 'Does it cost anything to open a Trump Account?',
+    answer: 'No. All major brokerages charge <strong>$0 to open</strong> a Trump Account, <strong>$0 commissions</strong> on trades, and <strong>no annual account fees</strong>. The only cost is the fund expense ratio, which ranges from 0.015% to 0.04% depending on the brokerage.',
+  },
+  {
+    question: 'Can I open a Trump Account at Vanguard?',
+    answer: 'Yes. Vanguard committed to offering Trump Accounts at the January 2026 trustee summit. Their S&P 500 ETF (VOO) has a 0.03% expense ratio, and their mutual fund (VFIAX) charges 0.04% with a $3,000 minimum. The ETF has no minimum.',
+  },
+  {
+    question: 'What is an approved trustee?',
+    answer: `An approved trustee is a financial institution authorized by the IRS to hold Trump Account funds under <strong>${limits.legalBasis}</strong>. Trustees must offer mutual funds or ETFs tracking the S&P 500 or a broad U.S. equity index with expense ratios capped at 0.1%. Major brokerages like Fidelity, Schwab, Vanguard, and Bank of America are all approved trustees.`,
+  },
+];
+
+const schemas = [
+  articleSchema({
+    title: 'Where to Open a Trump Account: Best Brokerages Compared',
+    description: 'Where to open a Trump Account: compare Fidelity, Schwab, Vanguard, BofA & Robinhood. Fees, funds, minimums, and which brokerage is best for your child.',
+    url: 'https://trumpaccounts.guide/where-to-open-trump-account',
+    datePublished: '2026-02-01',
+    dateModified: '2026-02-22',
+    author: 'TrumpAccounts.guide Editorial Team',
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: 'https://trumpaccounts.guide' },
+    { name: 'Where to Open', url: 'https://trumpaccounts.guide/where-to-open-trump-account' },
+  ]),
+  faqSchema(faqs),
+];
+---
+
+<BaseLayout
+  title="Where to Open a Trump Account: Best Brokerages Compared (2026)"
+  description="Where to open a Trump Account: compare Fidelity, Schwab, Vanguard, BofA & Robinhood. Fees, funds, minimums, and which brokerage is best for your child."
+  schema={schemas}
+  ogType="article"
+>
+  <article class="mx-auto max-w-3xl px-4 py-12">
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-slate-500">
+        <li><a href="/" class="hover:text-gold-400 no-underline">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="text-white font-medium">Where to Open</span>
+        </li>
+      </ol>
+    </nav>
+
+    <LastUpdated date="February 2026" />
+
+    <div class="prose mt-4">
+      <h1>Where to Open a Trump Account: Best Brokerages Compared</h1>
+
+      <p>
+        Trying to figure out where to open a Trump Account for your child? You are not alone. With 27 companies signed up as approved trustees, choosing the right brokerage can feel overwhelming. This guide compares every major option so you can pick the best one in minutes.
+      </p>
+
+      <CalloutBox type="tip" title="Key takeaways">
+        <ul class="mt-1 mb-0 space-y-1">
+          <li>You do <strong>not</strong> open at a brokerage first — file {limits.form} with the IRS, then choose a trustee.</li>
+          <li>27 companies committed to offering Trump Accounts at the January 2026 trustee summit.</li>
+          <li>Lowest expense ratios: Fidelity (0.015%), Schwab (0.02%), BofA/Vanguard (0.03%).</li>
+          <li>All major brokerages charge <strong>$0 commissions</strong> and <strong>no account fees</strong>.</li>
+          <li>Pick the one with the lowest expense ratio and the experience you prefer.</li>
+        </ul>
+      </CalloutBox>
+
+      <h2>How the Process Works</h2>
+
+      <p>Opening a Trump Account is a two-step process: IRS first, brokerage second. Here is the full flow:</p>
+
+      <ol>
+        <li><strong>File {limits.form}:</strong> Include the Trump Account Election form with your 2025 tax return (due April 15, 2026), file through <a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer">trumpaccounts.gov</a>, or mail it to the IRS.</li>
+        <li><strong>IRS activates the account:</strong> The IRS processes your election and sets up the Trump Account under {limits.legalBasis}.</li>
+        <li><strong>Choose an approved trustee:</strong> Pick a brokerage (like Fidelity, Schwab, or Vanguard) to hold and invest the funds.</li>
+        <li><strong>Select your fund:</strong> Choose a mutual fund or ETF that tracks the S&P 500 or a broad U.S. equity index. Expense ratios are capped at 0.1%.</li>
+        <li><strong>Start contributing:</strong> Add up to <strong>${limits.annualContributionLimit.toLocaleString()}/year</strong> in after-tax dollars. Your employer can also contribute up to <strong>${limits.employerContributionLimit.toLocaleString()}/year</strong> tax-free.</li>
+      </ol>
+
+      <h2>Brokerage Comparison Table</h2>
+
+      <p>Here is how the major brokerages stack up for Trump Accounts:</p>
+    </div>
+
+    <!-- Comparison table — outside .prose for full-width control -->
+    <div class="mt-4 overflow-x-auto">
+      <table class="w-full text-sm text-left border border-surface-600 rounded-lg overflow-hidden">
+        <thead class="bg-surface-800 text-gray-300">
+          <tr>
+            <th class="px-3 py-2 font-semibold">Brokerage</th>
+            <th class="px-3 py-2 font-semibold">Cheapest Fund</th>
+            <th class="px-3 py-2 font-semibold">Expense Ratio</th>
+            <th class="px-3 py-2 font-semibold">Minimum</th>
+            <th class="px-3 py-2 font-semibold">Commissions</th>
+            <th class="px-3 py-2 font-semibold">Branches</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-t border-surface-700 bg-mint-400/5">
+            <td class="px-3 py-2 font-semibold text-white"><a href="/blog/trump-accounts-at-fidelity" class="text-gold-400 hover:text-gold-300">Fidelity</a></td>
+            <td class="px-3 py-2">FXAIX</td>
+            <td class="px-3 py-2 text-mint-300 font-semibold">0.015%</td>
+            <td class="px-3 py-2">None</td>
+            <td class="px-3 py-2">$0</td>
+            <td class="px-3 py-2">200+</td>
+          </tr>
+          <tr class="border-t border-surface-700">
+            <td class="px-3 py-2 font-semibold text-white"><a href="/blog/trump-accounts-at-schwab" class="text-gold-400 hover:text-gold-300">Schwab</a></td>
+            <td class="px-3 py-2">SWPPX</td>
+            <td class="px-3 py-2">0.02%</td>
+            <td class="px-3 py-2">None</td>
+            <td class="px-3 py-2">$0</td>
+            <td class="px-3 py-2">400+</td>
+          </tr>
+          <tr class="border-t border-surface-700">
+            <td class="px-3 py-2 font-semibold text-white"><a href="/blog/trump-accounts-at-bank-of-america" class="text-gold-400 hover:text-gold-300">Bank of America</a></td>
+            <td class="px-3 py-2">IVV (iShares)</td>
+            <td class="px-3 py-2">0.03%</td>
+            <td class="px-3 py-2">None (ETF)</td>
+            <td class="px-3 py-2">$0</td>
+            <td class="px-3 py-2">3,700+</td>
+          </tr>
+          <tr class="border-t border-surface-700">
+            <td class="px-3 py-2 font-semibold text-white"><a href="/blog/trump-accounts-at-vanguard" class="text-gold-400 hover:text-gold-300">Vanguard</a></td>
+            <td class="px-3 py-2">VOO / VFIAX</td>
+            <td class="px-3 py-2">0.03% / 0.04%</td>
+            <td class="px-3 py-2">None / $3,000</td>
+            <td class="px-3 py-2">$0</td>
+            <td class="px-3 py-2">Limited</td>
+          </tr>
+          <tr class="border-t border-surface-700">
+            <td class="px-3 py-2 font-semibold text-white"><a href="/blog/trump-accounts-at-robinhood" class="text-gold-400 hover:text-gold-300">Robinhood</a></td>
+            <td class="px-3 py-2">VOO / IVV</td>
+            <td class="px-3 py-2">0.03%</td>
+            <td class="px-3 py-2">None</td>
+            <td class="px-3 py-2">$0</td>
+            <td class="px-3 py-2">None</td>
+          </tr>
+          <tr class="border-t border-surface-700">
+            <td class="px-3 py-2 font-semibold text-white">SoFi</td>
+            <td class="px-3 py-2">VOO / IVV</td>
+            <td class="px-3 py-2">0.03%</td>
+            <td class="px-3 py-2">None</td>
+            <td class="px-3 py-2">$0</td>
+            <td class="px-3 py-2">None</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="prose mt-8">
+      <h2>Our Recommendation</h2>
+
+      <p>
+        <strong>Fidelity is the best choice for most families.</strong> Its S&P 500 fund (FXAIX) has the lowest expense ratio at just 0.015% — that is $1.50 per year on a $10,000 balance. There is no minimum investment, no commissions, and Fidelity has over 200 branches if you prefer in-person help.
+      </p>
+
+      <p>
+        <strong>Schwab is a strong runner-up</strong> at 0.02%, with the largest branch network among brokerages (400+ locations). If you already have a Schwab account, it may be simplest to keep everything in one place.
+      </p>
+
+      <p>
+        <strong>Bank of America works well if you already bank there.</strong> With 3,700+ branches, it is the most accessible option. The iShares IVV fund has a 0.03% expense ratio — slightly higher than Fidelity but still very low.
+      </p>
+
+      <CalloutBox type="tip" title="The fee difference is small — pick what's comfortable">
+        <p>The gap between the cheapest fund (Fidelity, 0.015%) and the most expensive on this list (Vanguard VFIAX, 0.04%) is just $2.50 per year on a $10,000 balance. Over 18 years, this adds up to under $100 in most cases. Pick the brokerage where you feel most comfortable — the expense ratio difference will not make or break your child's account.</p>
+      </CalloutBox>
+
+      <h2>All 27 Companies That Committed</h2>
+
+      <p>At the January 2026 Trump Account trustee summit, 27 companies committed to serving as approved trustees or supporting the program:</p>
+
+      <h3>Banks &amp; Brokerages</h3>
+      <ul>
+        <li>Fidelity Investments</li>
+        <li>Charles Schwab</li>
+        <li>Vanguard</li>
+        <li>Bank of America / Merrill</li>
+        <li>Robinhood</li>
+        <li>SoFi</li>
+        <li>JPMorgan Chase</li>
+        <li>Wells Fargo</li>
+        <li>Morgan Stanley / E*TRADE</li>
+        <li>Goldman Sachs</li>
+        <li>UBS</li>
+      </ul>
+
+      <h3>Payment Networks</h3>
+      <ul>
+        <li>Visa</li>
+        <li>Mastercard</li>
+        <li>PayPal / Venmo</li>
+        <li>Block (Cash App)</li>
+        <li>Stripe</li>
+      </ul>
+
+      <h3>Tech &amp; Other</h3>
+      <ul>
+        <li>Apple</li>
+        <li>Alphabet (Google)</li>
+        <li>Intuit (TurboTax)</li>
+        <li>H&R Block</li>
+        <li>Acorns</li>
+        <li>Betterment</li>
+        <li>Wealthfront</li>
+        <li>Public.com</li>
+        <li>Ally Financial</li>
+        <li>Interactive Brokers</li>
+        <li>Webull</li>
+      </ul>
+
+      <p>Not all 27 have launched Trump Account services yet. Check each company's website for current availability.</p>
+
+      <h2>What to Look For in a Trustee</h2>
+
+      <p>When choosing where to open your child's Trump Account, focus on these five factors:</p>
+
+      <ol>
+        <li><strong>Lowest expense ratio:</strong> This is the single biggest cost difference. Even small fractions of a percent add up over 18 years of compounding.</li>
+        <li><strong>No account fees:</strong> Avoid any brokerage that charges an annual maintenance fee or custodial fee. All major brokerages listed above charge $0.</li>
+        <li><strong>No minimum investment:</strong> Some funds (like Vanguard's VFIAX) require a $3,000 minimum. If you want to start small, pick a fund or ETF with no minimum.</li>
+        <li><strong>Good mobile app:</strong> You will check this account for 18 years. A clean, easy-to-use app matters — especially for monitoring contributions and growth.</li>
+        <li><strong>Branch access:</strong> If you like in-person help, Bank of America (3,700+) and Schwab (400+) have the most locations. If you are comfortable online-only, Robinhood and SoFi work fine.</li>
+      </ol>
+
+      <h2>Detailed Brokerage Guides</h2>
+
+      <p>Want a deep dive on a specific brokerage? Read our step-by-step guides:</p>
+    </div>
+
+    <div class="mt-4 grid gap-3 sm:grid-cols-2">
+      <a href="/blog/trump-accounts-at-fidelity" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">Trump Accounts at Fidelity</h3>
+        <p class="text-sm text-gray-400">FXAIX, 0.015% ER, no minimum</p>
+      </a>
+      <a href="/blog/trump-accounts-at-schwab" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">Trump Accounts at Schwab</h3>
+        <p class="text-sm text-gray-400">SWPPX, 0.02% ER, 400+ branches</p>
+      </a>
+      <a href="/blog/trump-accounts-at-bank-of-america" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">Trump Accounts at Bank of America</h3>
+        <p class="text-sm text-gray-400">IVV (iShares), 0.03% ER, 3,700+ branches</p>
+      </a>
+      <a href="/blog/trump-accounts-at-vanguard" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">Trump Accounts at Vanguard</h3>
+        <p class="text-sm text-gray-400">VOO, 0.03% ER, index fund pioneer</p>
+      </a>
+      <a href="/blog/trump-accounts-at-robinhood" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">Trump Accounts at Robinhood</h3>
+        <p class="text-sm text-gray-400">VOO/IVV, 0.03% ER, mobile-first</p>
+      </a>
+    </div>
+
+    <div class="prose mt-8">
+      <CalloutBox type="warning" title="This is educational content, not financial advice">
+        <p>This page is for informational purposes only and does not constitute tax, financial, or investment advice. Expense ratios, fund availability, and brokerage features may change. Always verify current details on each brokerage's website and consult a qualified professional before making financial decisions.</p>
+      </CalloutBox>
+
+      <h2>Frequently Asked Questions</h2>
+    </div>
+
+    <div class="mt-6">
+      <Accordion items={faqs} />
+    </div>
+
+    <div class="mt-8 rounded-lg border border-surface-600 bg-surface-800 p-4 text-xs text-gray-500">
+      <p><strong class="text-gray-300">Sources:</strong></p>
+      <ul class="mt-1 space-y-0.5">
+        <li><a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf" target="_blank" rel="noopener noreferrer" class="text-gold-400 hover:text-gold-300">IRS Notice 2025-68</a></li>
+        <li>One Big Beautiful Bill Act (OBBBA), IRC Section 530A</li>
+        <li><a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer" class="text-gold-400 hover:text-gold-300">trumpaccounts.gov</a></li>
+        <li>Fidelity, Schwab, Vanguard, Bank of America, and Robinhood official fund pages (expense ratios verified February 2026)</li>
+      </ul>
+    </div>
+  </article>
+</BaseLayout>

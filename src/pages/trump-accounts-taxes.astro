@@ -1,0 +1,384 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CalloutBox from '../components/ui/CalloutBox.astro';
+import LastUpdated from '../components/ui/LastUpdated.astro';
+import Accordion from '../components/ui/Accordion.astro';
+import { articleSchema, breadcrumbSchema, faqSchema } from '../lib/seo/schema';
+import limits from '../data/contribution-limits.json';
+
+const faqs = [
+  {
+    question: 'Are Trump Account contributions tax-deductible?',
+    answer: `No. Contributions are made with <strong>after-tax dollars</strong>. You do not get a tax deduction for contributing to a Trump Account. However, the growth is tax-deferred and employer contributions are tax-free under IRC §128.`,
+  },
+  {
+    question: 'Is the $1,000 federal deposit taxable?',
+    answer: `No. The <strong>$${limits.pilotDeposit.toLocaleString()} pilot deposit</strong> is not taxable income when received. It goes directly into the account and grows tax-deferred until withdrawal.`,
+  },
+  {
+    question: 'When do I pay taxes on a Trump Account?',
+    answer: `You pay taxes when money is <strong>withdrawn after age ${limits.growthPhaseEndAge}</strong>. At that point, the account has converted to a traditional IRA. Withdrawals of earnings are taxed as ordinary income. Before age 59&frac12;, there is also a 10% early withdrawal penalty (with certain exceptions).`,
+  },
+  {
+    question: 'Are Trump Accounts tax-free?',
+    answer: `No. Trump Accounts are <strong>tax-deferred</strong>, not tax-free. That means you do not pay taxes while the money grows, but you do pay ordinary income tax when you withdraw. This is the same treatment as a traditional IRA.`,
+  },
+  {
+    question: 'Do I owe gift tax when contributing to a Trump Account?',
+    answer: `Almost certainly not. The <strong>$${limits.annualContributionLimit.toLocaleString()}/year contribution limit</strong> is well below the annual gift tax exclusion ($18,000 in 2024, $19,000 in 2025). No gift tax return is needed for Trump Account contributions.`,
+  },
+  {
+    question: 'How is the employer contribution taxed?',
+    answer: `Employer contributions of up to <strong>$${limits.employerContributionLimit.toLocaleString()}/year per employee</strong> are tax-free to the employee under IRC §128. The employer can deduct them as a business expense. This is a genuine tax benefit similar to a 401(k) match.`,
+  },
+  {
+    question: 'Can I convert a Trump Account to a Roth IRA at 18?',
+    answer: `Yes. At age ${limits.growthPhaseEndAge}, the Trump Account converts to a traditional IRA. You can then do a <strong>Roth conversion</strong>. If the child has little or no income, the tax on conversion could be very low or even $0. This is widely considered the best tax optimization strategy for Trump Accounts.`,
+  },
+  {
+    question: 'Does a Trump Account affect FAFSA?',
+    answer: `Yes. At age ${limits.growthPhaseEndAge}, the account becomes a <strong>student-owned IRA</strong>, which FAFSA assesses at up to 20% of value for the expected family contribution. This is higher than the 5.64% rate for parent-owned assets. Plan ahead if college financial aid is important.`,
+  },
+];
+
+const schemas = [
+  articleSchema({
+    title: 'Trump Accounts Taxes: How They Work & What You Owe',
+    description: 'Trump accounts taxes explained: contributions are after-tax, growth is tax-deferred, withdrawals taxed as income. Complete tax guide for parents.',
+    url: 'https://trumpaccounts.guide/trump-accounts-taxes',
+    datePublished: '2026-02-01',
+    dateModified: '2026-02-22',
+    author: 'TrumpAccounts.guide Editorial Team',
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: 'https://trumpaccounts.guide' },
+    { name: 'Taxes', url: 'https://trumpaccounts.guide/trump-accounts-taxes' },
+  ]),
+  faqSchema(faqs),
+];
+---
+
+<BaseLayout
+  title="Trump Accounts Taxes: How They Work & What You Owe (2026)"
+  description="Trump accounts taxes explained: contributions are after-tax, growth is tax-deferred, withdrawals taxed as income. Complete tax guide for parents."
+  schema={schemas}
+  ogType="article"
+>
+  <article class="mx-auto max-w-3xl px-4 py-12">
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-slate-500">
+        <li><a href="/" class="hover:text-gold-400 no-underline">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="text-white font-medium">Trump Accounts Taxes</span>
+        </li>
+      </ol>
+    </nav>
+
+    <LastUpdated date="February 2026" />
+
+    <div class="prose mt-4">
+      <h1>Trump Accounts and Taxes: The Complete Guide for Parents</h1>
+
+      <p>
+        How are Trump Accounts taxed? It is the first question most parents ask.
+        The short answer: <strong>contributions are after-tax, growth is tax-deferred, and withdrawals are taxed as ordinary income.</strong>
+        This page breaks down every tax angle so you know exactly what to expect.
+      </p>
+
+      <!-- Key Takeaways -->
+      <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+        <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+        <ul class="space-y-2 text-sm text-gray-300">
+          <li>Contributions are made with <strong class="text-white">after-tax dollars</strong> (no deduction)</li>
+          <li>Growth is <strong class="text-white">tax-deferred</strong> — you pay nothing until withdrawal</li>
+          <li>Withdrawals after {limits.growthPhaseEndAge} are taxed as <strong class="text-white">ordinary income</strong> (traditional IRA rules)</li>
+          <li>Before age 59&frac12;, there is also a <strong class="text-white">10% early withdrawal penalty</strong> (with exceptions)</li>
+          <li>Employer contributions up to <strong class="text-white">${limits.employerContributionLimit.toLocaleString()}/yr are tax-free</strong> for the employee under IRC §128</li>
+          <li>The <strong class="text-white">${limits.pilotDeposit.toLocaleString()} federal deposit is NOT taxable</strong> when received</li>
+        </ul>
+      </div>
+
+      <!-- Tax Treatment at a Glance -->
+      <h2 id="tax-treatment-at-a-glance">The Tax Treatment at a Glance</h2>
+
+      <p>Trump Account taxes work in three simple phases:</p>
+    </div>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600">
+            <th class="px-4 py-3 text-left font-semibold text-gold-400">Phase</th>
+            <th class="px-4 py-3 text-left font-semibold text-gold-400">What Happens</th>
+            <th class="px-4 py-3 text-left font-semibold text-gold-400">Tax Impact</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">1. Contributions</td>
+            <td class="px-4 py-3">You put money in</td>
+            <td class="px-4 py-3"><strong class="text-amber-300">After-tax</strong> (no deduction)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">2. Growth (birth to {limits.growthPhaseEndAge})</td>
+            <td class="px-4 py-3">Money grows in S&P 500 funds</td>
+            <td class="px-4 py-3"><strong class="text-mint-300">Tax-deferred</strong> (no taxes owed)</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-medium text-white">3. Withdrawals (after {limits.growthPhaseEndAge})</td>
+            <td class="px-4 py-3">Account becomes a traditional IRA</td>
+            <td class="px-4 py-3"><strong class="text-amber-300">Ordinary income tax</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="prose">
+      <p>
+        Think of it like a traditional IRA for kids. No tax break going in. No taxes while it grows. Taxes when you take money out.
+      </p>
+
+      <!-- Are Contributions Tax-Deductible? -->
+      <h2 id="are-contributions-tax-deductible">Are Trump Account Contributions Tax-Deductible?</h2>
+
+      <p>
+        <strong>No.</strong> You do not get a tax deduction for contributing to a Trump Account.
+        Contributions of up to <strong>${limits.annualContributionLimit.toLocaleString()}/year</strong> are made with after-tax dollars.
+        This is different from a traditional IRA for adults, where you may get a deduction.
+      </p>
+
+      <p>But there are three real tax perks:</p>
+      <ol>
+        <li><strong>Tax-deferred growth</strong> — no capital gains or dividend taxes while the money compounds</li>
+        <li><strong>Tax-free employer contributions</strong> — up to ${limits.employerContributionLimit.toLocaleString()}/yr under IRC §128</li>
+        <li><strong>Roth conversion opportunity at {limits.growthPhaseEndAge}</strong> — potentially pay $0 in tax on the conversion</li>
+      </ol>
+
+      <p>
+        <a href="/blog/are-trump-accounts-tax-deductible">Read the full breakdown: Are Trump Accounts Tax-Deductible?</a>
+      </p>
+
+      <!-- Is Growth Tax-Free? -->
+      <h2 id="is-growth-tax-free">Is the Growth Tax-Free?</h2>
+
+      <p>
+        <strong>No.</strong> The growth is <strong>tax-deferred</strong>, not tax-free. This is a big difference.
+      </p>
+
+      <ul>
+        <li><strong>Tax-free</strong> means you never pay taxes on the gains (like a Roth IRA)</li>
+        <li><strong>Tax-deferred</strong> means you pay taxes later, when you withdraw</li>
+      </ul>
+
+      <p>
+        During the growth phase (birth to age {limits.growthPhaseEndAge}), your money compounds without
+        any drag from capital gains taxes or dividend taxes. This is a real advantage. But when the
+        money comes out, it is taxed as ordinary income.
+      </p>
+
+      <CalloutBox type="irs-quote" title="From IRS Notice 2025-68">
+        <p><em>"A Trump Account is treated as a traditional individual retirement plan... earnings are included in gross income upon distribution."</em></p>
+        <p class="mt-2"><strong>Plain English:</strong> The account works like a traditional IRA. Growth is not taxed now, but it is taxed when you withdraw the money.</p>
+      </CalloutBox>
+
+      <p>
+        <a href="/blog/is-growth-tax-free">Read more: Is Trump Account Growth Tax-Free?</a>
+      </p>
+
+      <!-- How Are Withdrawals Taxed? -->
+      <h2 id="how-are-withdrawals-taxed">How Are Withdrawals Taxed?</h2>
+
+      <p>
+        After age {limits.growthPhaseEndAge}, the Trump Account converts to a <strong>traditional IRA</strong>.
+        From that point, standard IRA rules apply:
+      </p>
+
+      <ul>
+        <li><strong>Earnings</strong> are taxed as <strong>ordinary income</strong> when withdrawn</li>
+        <li><strong>Before age 59&frac12;</strong>: an additional <strong>10% early withdrawal penalty</strong> applies</li>
+        <li><strong>After age 59&frac12;</strong>: ordinary income tax only, no penalty</li>
+      </ul>
+
+      <p>There are exceptions to the 10% penalty. These include:</p>
+      <ul>
+        <li>First-time home purchase (up to $10,000)</li>
+        <li>Qualified education expenses</li>
+        <li>Disability</li>
+        <li>Substantially equal periodic payments (72(t) distributions)</li>
+        <li>Unreimbursed medical expenses above a threshold</li>
+      </ul>
+
+      <CalloutBox type="info" title="After-tax contributions come out tax-free">
+        <p>Your original after-tax contributions are your <strong>basis</strong> in the account. That portion is not taxed again when withdrawn. Only the <strong>earnings</strong> (growth) are taxed. This is standard traditional IRA treatment.</p>
+      </CalloutBox>
+
+      <p>
+        <a href="/blog/gains-taxation-explained">Read more: How Trump Account Gains Are Taxed</a>
+      </p>
+
+      <!-- Employer Match Tax Benefit -->
+      <h2 id="employer-contribution-tax-benefit">The Employer Match Tax Benefit</h2>
+
+      <p>
+        This is one of the best tax perks of Trump Accounts. Employers can contribute up to
+        <strong>${limits.employerContributionLimit.toLocaleString()}/year per employee</strong>, and that money is
+        <strong>tax-free for the employee</strong> under IRC §128.
+      </p>
+
+      <ul>
+        <li>The employee does not pay income tax on the employer contribution</li>
+        <li>The employer can deduct it as a business expense</li>
+        <li>It counts toward the ${limits.annualContributionLimit.toLocaleString()} annual cap</li>
+        <li>The limit is per employee, <strong>not</strong> per dependent</li>
+      </ul>
+
+      <p>
+        Think of it like a 401(k) match, but for your child's investment account.
+        If your employer offers this, take it. It is free money that is also tax-free.
+      </p>
+
+      <CalloutBox type="tip" title="Ask your employer">
+        <p>Many employers are still setting up Trump Account contribution programs. Ask your HR department if they plan to offer it. It costs them nothing extra — employer contributions are tax-deductible as a business expense.</p>
+      </CalloutBox>
+
+      <p>
+        <a href="/blog/employer-match-trump-account">Read more: The Employer Match Explained</a>
+      </p>
+
+      <!-- Gift Tax -->
+      <h2 id="gift-tax">Gift Tax on Contributions</h2>
+
+      <p>
+        When you contribute to a child's Trump Account, the IRS considers it a <strong>gift</strong>.
+        This applies to parents, grandparents, aunts, uncles, or anyone else who contributes.
+      </p>
+
+      <p>But here is the good news: <strong>you almost certainly will not owe gift tax.</strong></p>
+
+      <ul>
+        <li>The annual contribution limit is <strong>${limits.annualContributionLimit.toLocaleString()}</strong></li>
+        <li>The annual gift tax exclusion is <strong>$18,000+</strong> per recipient (2024–2025)</li>
+        <li>Since ${limits.annualContributionLimit.toLocaleString()} is well below $18,000, no gift tax return is needed</li>
+        <li>Even if you give other gifts to the same child, you have a large buffer</li>
+      </ul>
+
+      <p>
+        The only scenario where gift tax could matter is if you are also making very large gifts
+        to the same child outside the Trump Account. For most families, this is a non-issue.
+      </p>
+
+      <p>
+        <a href="/blog/trump-accounts-gift-tax">Read more: Trump Accounts and Gift Tax</a>
+      </p>
+
+      <!-- Roth Conversion Strategy -->
+      <h2 id="roth-conversion-strategy">The Roth Conversion Strategy at 18</h2>
+
+      <p>
+        This is the <strong>single biggest tax optimization opportunity</strong> with Trump Accounts. Here is how it works:
+      </p>
+
+      <ol>
+        <li>At age {limits.growthPhaseEndAge}, the Trump Account converts to a <strong>traditional IRA</strong></li>
+        <li>Your child can then do a <strong>Roth conversion</strong> — move the money from the traditional IRA to a Roth IRA</li>
+        <li>They pay income tax on the converted amount at their <strong>current tax rate</strong></li>
+        <li>If they are 18 with little or no income, their tax rate could be <strong>very low or $0</strong></li>
+        <li>After conversion, all future growth is <strong>tax-free forever</strong></li>
+      </ol>
+
+      <CalloutBox type="tip" title="Why this matters so much">
+        <p>An 18-year-old with no job and a standard deduction of ~$15,000 could convert that much <strong>completely tax-free</strong>. Even larger amounts would be taxed at the lowest bracket (10%). Compare that to paying 22–37% tax in retirement. The savings are enormous over a lifetime.</p>
+      </CalloutBox>
+
+      <p>
+        <a href="/blog/trump-account-roth-conversion-strategy">Read the full strategy: Roth Conversion at 18</a>
+      </p>
+
+      <!-- FAFSA Impact -->
+      <h2 id="fafsa-impact">FAFSA and Financial Aid Impact</h2>
+
+      <p>
+        At age {limits.growthPhaseEndAge}, the Trump Account becomes a <strong>student-owned traditional IRA</strong>.
+        This has implications for college financial aid:
+      </p>
+
+      <ul>
+        <li><strong>Student-owned assets</strong> are assessed at up to <strong>20%</strong> on the FAFSA</li>
+        <li><strong>Parent-owned assets</strong> are assessed at only up to 5.64%</li>
+        <li>IRA withdrawals also count as <strong>student income</strong> on the following year's FAFSA</li>
+      </ul>
+
+      <p>
+        If your child plans to apply for need-based financial aid, plan ahead. Consider timing
+        withdrawals carefully or doing the Roth conversion before filing the FAFSA.
+      </p>
+
+      <p>
+        <a href="/blog/trump-account-fafsa-impact">Read more: Trump Accounts and FAFSA</a>
+      </p>
+
+      <!-- Deep Dive Cards -->
+      <h2 id="tax-deep-dives">Complete Tax Deep Dives</h2>
+
+      <p>Every tax question about Trump Accounts, answered in detail:</p>
+    </div>
+
+    <div class="mt-4 grid gap-3 sm:grid-cols-2">
+      <a href="/blog/are-trump-accounts-tax-deductible" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">Are They Tax-Deductible?</h3>
+        <p class="text-sm text-gray-400">Why contributions are after-tax and what perks you get instead</p>
+      </a>
+      <a href="/blog/is-growth-tax-free" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">Is Growth Tax-Free?</h3>
+        <p class="text-sm text-gray-400">Tax-deferred vs. tax-free — the difference that matters</p>
+      </a>
+      <a href="/blog/gains-taxation-explained" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">How Gains Are Taxed</h3>
+        <p class="text-sm text-gray-400">Ordinary income rates, penalties, and exceptions</p>
+      </a>
+      <a href="/blog/trump-account-roth-conversion-strategy" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">Roth Conversion Strategy</h3>
+        <p class="text-sm text-gray-400">The biggest tax hack — convert at 18 while taxes are low</p>
+      </a>
+      <a href="/blog/trump-account-family-tax-strategy" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">Family Tax Strategy</h3>
+        <p class="text-sm text-gray-400">Optimize contributions across your whole family</p>
+      </a>
+      <a href="/blog/trump-account-fafsa-impact" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">FAFSA Impact</h3>
+        <p class="text-sm text-gray-400">How Trump Accounts affect college financial aid</p>
+      </a>
+      <a href="/blog/trump-accounts-tax-benefits-guide" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">All Tax Benefits</h3>
+        <p class="text-sm text-gray-400">Every tax advantage in one place</p>
+      </a>
+      <a href="/blog/employer-match-trump-account" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">Employer Match Explained</h3>
+        <p class="text-sm text-gray-400">Tax-free contributions from your employer under IRC §128</p>
+      </a>
+    </div>
+
+    <div class="prose mt-8">
+      <CalloutBox type="warning" title="This is educational content, not tax advice">
+        <p>The information on this page is for educational purposes only. It is not tax advice or financial advice. Tax laws are complex and your situation is unique. Please consult a qualified tax professional or CPA before making decisions about your Trump Account.</p>
+      </CalloutBox>
+
+      <h2>Frequently Asked Questions</h2>
+    </div>
+
+    <div class="mt-6">
+      <Accordion items={faqs} />
+    </div>
+
+    <div class="mt-8 rounded-lg border border-surface-600 bg-surface-800 p-4 text-xs text-gray-500">
+      <p><strong class="text-gray-300">Sources:</strong></p>
+      <ul class="mt-1 space-y-0.5">
+        <li><a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf" target="_blank" rel="noopener noreferrer" class="text-gold-400 hover:text-gold-300">IRS Notice 2025-68</a> — Official Trump Account guidance (December 3, 2025)</li>
+        <li>One Big Beautiful Bill Act (OBBBA), <a href="https://www.congress.gov" target="_blank" rel="noopener noreferrer" class="text-gold-400 hover:text-gold-300">IRC Section 530A</a></li>
+        <li>IRC §128 — Employer contributions to Trump Accounts</li>
+        <li><a href="https://www.irs.gov/retirement-plans/traditional-iras" target="_blank" rel="noopener noreferrer" class="text-gold-400 hover:text-gold-300">IRS.gov — Traditional IRAs</a></li>
+        <li><a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer" class="text-gold-400 hover:text-gold-300">trumpaccounts.gov</a> — Official portal</li>
+      </ul>
+    </div>
+  </article>
+</BaseLayout>

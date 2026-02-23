@@ -1,0 +1,233 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('dell-trump-accounts-zip-code-lookup')!;
+const related = getRelatedArticles('dell-trump-accounts-zip-code-lookup');
+
+const faqs = [
+  {
+    question: 'How do I know if my ZIP code qualifies for the Dell pledge?',
+    answer: `Check your ZIP code's median household income using U.S. Census Bureau data (data.census.gov). Look up the American Community Survey (ACS) 5-year estimates for your ZIP code. If the median household income is below $${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}, your child likely qualifies.`,
+  },
+  {
+    question: 'What is the income threshold for the Dell Trump Accounts pledge?',
+    answer: `The threshold is based on your ZIP code's median household income, not your personal income. If the median household income in your ZIP code is below $${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}, children ${limits.dellPledge.eligibleAge} in that ZIP code qualify for the $${limits.dellPledge.perChildAmount} Dell deposit.`,
+  },
+  {
+    question: 'Is the Dell pledge per child or per family?',
+    answer: `Per qualifying child. Each child ${limits.dellPledge.eligibleAge} living in a qualifying ZIP code receives $${limits.dellPledge.perChildAmount}. A family with three qualifying children would receive $${limits.dellPledge.perChildAmount * 3} total.`,
+  },
+  {
+    question: 'Does the $250 Dell pledge count toward the $5,000 contribution limit?',
+    answer: `This is pending final IRS guidance. The Dell pledge is a private donation, and it will likely be treated as a contribution that counts toward the $${limits.annualContributionLimit.toLocaleString()} annual cap. We will update this page when the IRS clarifies.`,
+  },
+  {
+    question: 'When will Dell start making deposits?',
+    answer: 'The exact timeline has not been announced. Dell Foundation deposits are expected to begin after IRS-approved trustees are fully operational and the program infrastructure is in place. The Dell Foundation will likely publish details on timing and distribution.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Michael & Susan Dell pledged <strong class="text-white">${(limits.dellPledge.totalAmount / 1e9).toFixed(2)} billion</strong> — $${limits.dellPledge.perChildAmount} per child ${limits.dellPledge.eligibleAge} in qualifying ZIP codes.</li>
+        <li>Qualifying ZIP codes have a median household income <strong class="text-white">below $${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}</strong>.</li>
+        <li>This threshold covers roughly <strong class="text-white">85%+ of all U.S. ZIP codes</strong>. Most families qualify.</li>
+        <li>Check your ZIP code at <strong class="text-white">data.census.gov</strong> using ACS 5-year estimates.</li>
+        <li>The Dell Foundation is expected to publish an <strong class="text-white">official lookup tool</strong> once the program is operational.</li>
+      </ul>
+    </div>
+
+    <p>
+      Michael and Susan Dell pledged <strong>$${(limits.dellPledge.totalAmount / 1e9).toFixed(2)} billion</strong> to fund Trump Accounts for children in lower-income communities. Each qualifying child receives <strong>${limits.dellPledge.perChildAmount}</strong> deposited directly into their account. The key question: <strong>does your ZIP code qualify?</strong>
+    </p>
+
+    <CalloutBox type="tip" title="Most families qualify">
+      <p>
+        The $${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()} median income threshold covers roughly <strong>85% or more</strong> of U.S. ZIP codes. The national median household income is about $75,000. Only the wealthiest neighborhoods — with median incomes above $${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()} — are excluded. If you live in a typical American neighborhood, your child probably qualifies.
+      </p>
+    </CalloutBox>
+
+    <h2>How the Dell Pledge ZIP Code Eligibility Works</h2>
+    <p>
+      The Dell Foundation's pledge uses a simple formula:
+    </p>
+    <ul>
+      <li><strong>Child age</strong>: Must be ${limits.dellPledge.eligibleAge}</li>
+      <li><strong>ZIP code</strong>: The child must live in a ZIP code where the <strong>median household income</strong> is below $${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}</li>
+      <li><strong>Amount</strong>: $${limits.dellPledge.perChildAmount} per qualifying child</li>
+    </ul>
+    <p>
+      The income threshold is based on the <strong>ZIP code's median</strong>, not your family's income. A high-earning family in a modest ZIP code still qualifies. A lower-income family in a wealthy ZIP code does not.
+    </p>
+
+    <h2>How to Check Your ZIP Code Right Now</h2>
+    <p>
+      Until the Dell Foundation launches an official lookup tool, you can check your ZIP code's median household income using free Census data. Here is how:
+    </p>
+    <ol>
+      <li>Go to <a href="https://data.census.gov" target="_blank" rel="noopener noreferrer"><strong>data.census.gov</strong></a>.</li>
+      <li>In the search bar, type your ZIP code (e.g., "75201").</li>
+      <li>Look for the <strong>American Community Survey (ACS) 5-Year Estimates</strong>.</li>
+      <li>Find the table <strong>S1901: Income in the Past 12 Months</strong> or <strong>B19013: Median Household Income</strong>.</li>
+      <li>Check the <strong>median household income</strong> figure. If it is below $${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}, your ZIP code qualifies.</li>
+    </ol>
+
+    <CalloutBox type="info" title="Alternative: use Census QuickFacts">
+      <p>
+        A faster option: go to <a href="https://www.census.gov/quickfacts" target="_blank" rel="noopener noreferrer">census.gov/quickfacts</a>, enter your city or county, and look for "Median household income." This gives county-level data, which may differ slightly from ZIP-level data, but it is a good quick check.
+      </p>
+    </CalloutBox>
+
+    <h2>Why $${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()} Covers Most of America</h2>
+    <p>
+      The $${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()} threshold is generous. Here is how it compares to income across the country:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Area</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Median Household Income</th>
+            <th class="py-3 text-gray-400 font-medium">Qualifies?</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">U.S. national median</td>
+            <td class="py-3 pr-4">~$75,000</td>
+            <td class="py-3 font-medium text-green-400">Yes</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Typical suburban ZIP code</td>
+            <td class="py-3 pr-4">$60,000–$120,000</td>
+            <td class="py-3 font-medium text-green-400">Yes (most)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Urban center / mid-size city</td>
+            <td class="py-3 pr-4">$40,000–$90,000</td>
+            <td class="py-3 font-medium text-green-400">Yes</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Rural America</td>
+            <td class="py-3 pr-4">$35,000–$65,000</td>
+            <td class="py-3 font-medium text-green-400">Yes</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">Wealthy suburbs (e.g., Palo Alto, Greenwich)</td>
+            <td class="py-3 pr-4">$150,000–$300,000+</td>
+            <td class="py-3 font-medium text-red-400">No</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Only ZIP codes in affluent enclaves — think parts of Silicon Valley, Manhattan's Upper East Side, Fairfield County in Connecticut — exceed the $${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()} threshold. The vast majority of American neighborhoods are below it.
+    </p>
+
+    <h2>The Dell Pledge Is Per Child</h2>
+    <p>
+      The $${limits.dellPledge.perChildAmount} deposit applies to <strong>each qualifying child</strong>, not per family. A family with three children ${limits.dellPledge.eligibleAge} in a qualifying ZIP code would receive $${limits.dellPledge.perChildAmount * 3} total ($${limits.dellPledge.perChildAmount} per child).
+    </p>
+    <p>
+      Combined with the <strong>${limits.pilotDeposit.toLocaleString()} federal deposit</strong> (for children born {limits.pilotDepositStartYear}–{limits.pilotDepositEndYear}), each qualifying newborn could start with:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Source</th>
+            <th class="py-3 text-gray-400 font-medium">Amount</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Federal pilot deposit</td>
+            <td class="py-3 font-medium text-white">$${limits.pilotDeposit.toLocaleString()}</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Dell Foundation pledge</td>
+            <td class="py-3 font-medium text-white">$${limits.dellPledge.perChildAmount}</td>
+          </tr>
+          <tr class="border-t border-surface-500">
+            <td class="py-3 pr-4 font-bold text-white">Total starting balance</td>
+            <td class="py-3 font-bold text-gold-400">$${(limits.pilotDeposit + limits.dellPledge.perChildAmount).toLocaleString()}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Will There Be an Official Lookup Tool?</h2>
+    <p>
+      The Dell Foundation is expected to publish an <strong>official eligibility lookup tool</strong> once the program is fully operational. This will likely let you enter your ZIP code and immediately see if your child qualifies.
+    </p>
+    <p>
+      Until then, the Census Bureau data method described above is the most reliable way to check. The ACS 5-year estimates are the same data source the Dell Foundation will likely use to determine qualifying ZIP codes.
+    </p>
+
+    <h2>What if You Live on the Border?</h2>
+    <p>
+      ZIP code boundaries are not always obvious. If you live near the edge of two ZIP codes, check both. The qualifying one is the ZIP code on your <strong>mailing address</strong> — the one associated with your home address as reported on your tax return and {limits.form}.
+    </p>
+    <p>
+      If you recently moved, the address at the time of the Dell deposit distribution is what matters. Exact timing rules are still pending from the Dell Foundation.
+    </p>
+
+    <h2>Does the $${limits.dellPledge.perChildAmount} Count Toward the ${limits.annualContributionLimit.toLocaleString()} Limit?</h2>
+    <p>
+      This is still <strong>pending IRS guidance</strong>. The Dell pledge is a private donation, not a government deposit. It will likely be treated as a contribution that counts toward the $${limits.annualContributionLimit.toLocaleString()} annual contribution cap.
+    </p>
+    <p>
+      If it does count, families in qualifying ZIP codes would have $${(limits.annualContributionLimit - limits.dellPledge.perChildAmount).toLocaleString()} of room remaining for personal contributions in the year the Dell deposit is made.
+    </p>
+
+    <CalloutBox type="info" title="The $${limits.dellPledge.perChildAmount} still compounds powerfully">
+      <p>
+        Even $${limits.dellPledge.perChildAmount} matters over 18 years. At the S&P 500's historical average of about 10% per year, $${limits.dellPledge.perChildAmount} grows to roughly <strong>$1,390</strong> by age 18. That is free money with no effort from the family. For full projections, see our <a href="/blog/dell-pledge-explained">Dell pledge analysis</a>.
+      </p>
+    </CalloutBox>
+
+    <h2>Scale of the Dell Pledge</h2>
+    <p>
+      At <strong>$${(limits.dellPledge.totalAmount / 1e9).toFixed(2)} billion total</strong>, the Dell Foundation's pledge could reach roughly <strong>25 million children</strong> (${(limits.dellPledge.totalAmount / 1e9).toFixed(2)}B / $${limits.dellPledge.perChildAmount} per child). That represents a large share of America's children ${limits.dellPledge.eligibleAge}.
+    </p>
+    <p>
+      It is the largest known private commitment to the Trump Account program. For a full breakdown of the Dell pledge and other corporate commitments, see our <a href="/blog/dell-pledge-explained">Dell pledge explainer</a> and <a href="/blog/corporate-pledges-trump-accounts">corporate pledges overview</a>.
+    </p>
+
+    <h2>Next Steps</h2>
+    <ul>
+      <li><strong>Check your ZIP code</strong> at <a href="https://data.census.gov" target="_blank" rel="noopener noreferrer">data.census.gov</a> using the steps above.</li>
+      <li><strong>Open a Trump Account</strong> for your child if you have not already. <a href="/blog/how-to-open-step-by-step">Step-by-step guide here</a>.</li>
+      <li><strong>Bookmark this page</strong> — we will update it when the Dell Foundation launches its official lookup tool.</li>
+      <li><strong>Check eligibility requirements</strong> at our <a href="/trump-accounts-eligibility">full eligibility guide</a>.</li>
+    </ul>
+
+    <p>
+      For everything about the <a href="/grants">grants and deposits available</a> for Trump Accounts, including the federal deposit and corporate pledges, see our grants hub.
+    </p>
+
+    <CalloutBox type="warning" title="Educational content only">
+      <p>
+        This article is based on publicly announced details of the Dell Foundation's pledge. Distribution timelines, exact eligibility mechanics, and whether the $${limits.dellPledge.perChildAmount} counts toward the contribution cap may change pending IRS guidance. Check official sources for the latest information.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

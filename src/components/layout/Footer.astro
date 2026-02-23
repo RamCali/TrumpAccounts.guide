@@ -9,13 +9,25 @@ const lp = (path: string) => getLocalizedPath(path, locale);
 
 const footerNav = [
   {
-    heading: t('footer.guides'),
+    heading: t('footer.learn'),
     links: [
       { label: t('footer.whatAre'), href: lp('/what-are-trump-accounts') },
-      { label: t('footer.howToOpen'), href: lp('/how-to-open-trump-account') },
+      { label: t('footer.eligibilityGuide'), href: lp('/trump-accounts-eligibility') },
+      { label: t('footer.forNewborns'), href: lp('/trump-accounts-for-newborns') },
+      { label: t('footer.rules'), href: lp('/trump-accounts-rules') },
+      { label: t('footer.taxes'), href: lp('/trump-accounts-taxes') },
       { label: t('footer.irsNotice'), href: lp('/irs-notice-2025-68') },
+    ],
+  },
+  {
+    heading: t('footer.openAccount'),
+    links: [
+      { label: t('footer.howToOpen'), href: lp('/how-to-open-trump-account') },
+      { label: t('footer.whereToOpen'), href: lp('/where-to-open-trump-account') },
+      { label: t('footer.atFidelity'), href: lp('/blog/trump-accounts-at-fidelity') },
+      { label: t('footer.atSchwab'), href: lp('/blog/trump-accounts-at-schwab') },
+      { label: t('footer.atVanguard'), href: lp('/blog/trump-accounts-at-vanguard') },
       { label: t('footer.employers'), href: lp('/for-employers') },
-      { label: t('footer.blog'), href: lp('/blog') },
     ],
   },
   {
@@ -25,6 +37,7 @@ const footerNav = [
       { label: t('footer.eligibility'), href: lp('/calculators/eligibility-checker') },
       { label: t('footer.employerMatch'), href: lp('/calculators/employer-match') },
       { label: t('footer.withdrawal'), href: lp('/calculators/withdrawal-simulator') },
+      { label: t('footer.costOfWaiting'), href: lp('/calculators/cost-of-waiting') },
       { label: t('footer.fundExpense'), href: lp('/calculators/fund-expense-tracker') },
     ],
   },
@@ -43,6 +56,9 @@ const footerNav = [
     links: [
       { label: t('footer.faq'), href: lp('/faq') },
       { label: t('footer.glossary'), href: lp('/glossary') },
+      { label: t('footer.dellPledge'), href: lp('/blog/dell-pledge-explained') },
+      { label: t('footer.blog'), href: lp('/blog') },
+      { label: t('footer.enEspanol'), href: locale === 'es' ? '/' : '/es' },
       { label: t('footer.about'), href: lp('/about') },
     ],
   },
@@ -52,7 +68,7 @@ const footerNav = [
 <footer class="mt-16 border-t border-surface-700 bg-surface-800">
   <div class="mx-auto max-w-6xl px-4 py-10">
     <!-- Footer navigation grid -->
-    <nav aria-label="Footer navigation" class="grid grid-cols-2 gap-8 md:grid-cols-4">
+    <nav aria-label="Footer navigation" class="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-5">
       {footerNav.map((section) => (
         <div>
           <h3 class="mb-3 text-sm font-semibold text-gray-300">{section.heading}</h3>

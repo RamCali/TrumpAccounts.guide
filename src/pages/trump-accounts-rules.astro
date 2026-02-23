@@ -1,0 +1,342 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CalloutBox from '../components/ui/CalloutBox.astro';
+import LastUpdated from '../components/ui/LastUpdated.astro';
+import Accordion from '../components/ui/Accordion.astro';
+import { articleSchema, breadcrumbSchema, faqSchema } from '../lib/seo/schema';
+import limits from '../data/contribution-limits.json';
+
+const faqs = [
+  {
+    question: 'What is the annual contribution limit for a Trump Account?',
+    answer: `The annual limit is <strong>$${limits.annualContributionLimit.toLocaleString()}</strong> total from all sources combined — parents, grandparents, employers, and anyone else. This limit is indexed for inflation starting in ${limits.inflationIndexStartYear}.`,
+  },
+  {
+    question: 'Can employers contribute to a Trump Account?',
+    answer: `Yes. Employers can contribute up to <strong>$${limits.employerContributionLimit.toLocaleString()}/year per employee</strong>, tax-free under IRC §128. This counts toward the $${limits.annualContributionLimit.toLocaleString()} annual cap. The limit is per employee, not per dependent.`,
+  },
+  {
+    question: 'What can I invest in with a Trump Account?',
+    answer: `Trump Accounts must be invested in <strong>mutual funds or ETFs tracking the S&P 500 or a broad U.S. equity index</strong>. No individual stocks, bonds, crypto, or alternative investments are allowed. The fund's expense ratio must be at or below ${(limits.maxExpenseRatio * 100).toFixed(1)}%.`,
+  },
+  {
+    question: 'Can I withdraw from a Trump Account before age 18?',
+    answer: `No. Withdrawals before age ${limits.growthPhaseEndAge} are <strong>not permitted</strong> except in three narrow cases: rollover to another Trump Account, return of excess contributions, or death of the beneficiary.`,
+  },
+  {
+    question: 'What happens to a Trump Account at age 18?',
+    answer: `At age ${limits.iraConversionAge}, the Trump Account automatically converts to a <strong>traditional IRA</strong>. The child gains full control and can keep it invested, withdraw funds (taxed as ordinary income), or convert to a Roth IRA.`,
+  },
+  {
+    question: 'Is there an income limit for Trump Accounts?',
+    answer: 'No. There are <strong>no income restrictions</strong> whatsoever. Any U.S. citizen child under 18 with a valid SSN qualifies, regardless of family income.',
+  },
+  {
+    question: 'Can I choose any index fund for a Trump Account?',
+    answer: `Not quite. The fund must track the S&P 500 or a broad U.S. equity index, and its expense ratio must be at or below <strong>${(limits.maxExpenseRatio * 100).toFixed(1)}%</strong> (${Math.round(limits.maxExpenseRatio * 10000)} basis points). Most major S&P 500 index funds qualify.`,
+  },
+  {
+    question: 'Can I roll over a Trump Account to a different brokerage?',
+    answer: 'The IRS has not published detailed rollover guidance yet, but Trump Accounts are expected to follow <strong>standard IRA rollover rules</strong> once the account converts at age 18. During the growth phase, you can roll over to another Trump Account.',
+  },
+];
+
+const schemas = [
+  articleSchema({
+    title: 'Trump Account Rules: Contributions, Investments & Withdrawals',
+    description: `Every Trump Account rule in one place: $${limits.annualContributionLimit.toLocaleString()}/yr contribution limit, S&P 500 index funds only, no withdrawals before ${limits.growthPhaseEndAge}, IRA conversion at ${limits.iraConversionAge}.`,
+    url: 'https://trumpaccounts.guide/trump-accounts-rules',
+    datePublished: '2026-02-01',
+    dateModified: '2026-02-22',
+    author: 'TrumpAccounts.guide Editorial Team',
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: 'https://trumpaccounts.guide' },
+    { name: 'Rules', url: 'https://trumpaccounts.guide/trump-accounts-rules' },
+  ]),
+  faqSchema(faqs),
+];
+---
+
+<BaseLayout
+  title="Trump Account Rules: Contributions, Investments & Withdrawals (2026)"
+  description={`Every Trump Account rule in one place: $${limits.annualContributionLimit.toLocaleString()}/yr contribution limit, S&P 500 index funds only, no withdrawals before ${limits.growthPhaseEndAge}, IRA conversion at ${limits.iraConversionAge}.`}
+  schema={schemas}
+  ogType="article"
+>
+  <article class="mx-auto max-w-3xl px-4 py-12">
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-slate-500">
+        <li><a href="/" class="hover:text-gold-400 no-underline">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="text-white font-medium">Trump Account Rules</span>
+        </li>
+      </ol>
+    </nav>
+
+    <LastUpdated date="February 2026" />
+
+    <div class="prose mt-4">
+      <h1>Trump Account Rules: The Complete Reference Guide</h1>
+
+      <p>
+        Trump Accounts come with clear rules set by <strong>{limits.legalBasis}</strong> and
+        <strong>{limits.irsNotice}</strong>. This page covers every rule in one place — contributions,
+        investments, withdrawals, and the age {limits.iraConversionAge} conversion.
+      </p>
+
+      <!-- Key Takeaways -->
+      <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+        <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+        <ul class="space-y-2 text-sm text-gray-300">
+          <li>Annual contribution limit: <strong class="text-white">${limits.annualContributionLimit.toLocaleString()}</strong> (after-tax, indexed for inflation after {limits.inflationIndexStartYear})</li>
+          <li>Employer contributions: up to <strong class="text-white">${limits.employerContributionLimit.toLocaleString()}/yr per employee</strong> (counts toward ${limits.annualContributionLimit.toLocaleString()} cap)</li>
+          <li>Investments: must be <strong class="text-white">S&P 500 or broad U.S. equity index funds</strong> (expense ratio ≤ {(limits.maxExpenseRatio * 100).toFixed(1)}%)</li>
+          <li>No withdrawals before age <strong class="text-white">{limits.growthPhaseEndAge}</strong> (except rollovers, excess contributions, or death)</li>
+          <li>At {limits.iraConversionAge}: converts to a <strong class="text-white">traditional IRA</strong> with standard IRA rules</li>
+          <li>No income limits — <strong class="text-white">any family can participate</strong></li>
+        </ul>
+      </div>
+
+      <!-- Contribution Rules -->
+      <h2 id="contribution-rules">Contribution Rules</h2>
+
+      <p>
+        The annual contribution limit is <strong>${limits.annualContributionLimit.toLocaleString()}</strong> per child, per year.
+        This is the total from all sources combined — parents, grandparents, relatives, friends, and employers.
+      </p>
+
+      <ul>
+        <li><strong>${limits.annualContributionLimit.toLocaleString()}/year total</strong> from all sources combined</li>
+        <li>Contributions are made with <strong>after-tax dollars</strong> (no tax deduction)</li>
+        <li>Employers can contribute up to <strong>${limits.employerContributionLimit.toLocaleString()}/year per employee</strong>, tax-free under IRC §128. This limit is per employee, NOT per dependent</li>
+        <li>Indexed for inflation starting {limits.inflationIndexStartYear}</li>
+        <li>The federal <strong>${limits.pilotDeposit.toLocaleString()} pilot deposit</strong> does NOT count toward the ${limits.annualContributionLimit.toLocaleString()} limit</li>
+        <li><strong>Anyone can contribute</strong> — parents, grandparents, relatives, friends</li>
+      </ul>
+
+      <CalloutBox type="tip" title="The $1,000 deposit is separate">
+        <p>The ${limits.pilotDeposit.toLocaleString()} federal pilot deposit (for children born {limits.pilotDepositStartYear}–{limits.pilotDepositEndYear}) does not count toward your ${limits.annualContributionLimit.toLocaleString()} annual limit. You can contribute the full ${limits.annualContributionLimit.toLocaleString()} on top of it.</p>
+      </CalloutBox>
+
+      <p>
+        <a href="/blog/contribution-limits-explained">Read the full contribution limits guide</a>
+      </p>
+
+      <!-- Investment Rules -->
+      <h2 id="investment-rules">Investment Rules</h2>
+
+      <p>
+        Trump Accounts have strict investment rules. All funds must go into
+        <strong>{limits.investmentRequirement.toLowerCase()}</strong>.
+      </p>
+
+      <ul>
+        <li>Must invest in <strong>mutual funds or ETFs</strong> tracking the S&P 500 or a broad U.S. equity index</li>
+        <li>Expense ratio capped at <strong>{(limits.maxExpenseRatio * 100).toFixed(1)}%</strong> ({Math.round(limits.maxExpenseRatio * 10000)} basis points)</li>
+        <li><strong>No</strong> individual stocks, bonds, crypto, or alternative investments</li>
+        <li>Parents can switch between eligible funds at any time</li>
+      </ul>
+
+      <CalloutBox type="info" title="Why index funds only?">
+        <p>Congress chose low-cost index funds to keep fees low and returns consistent. The S&P 500 has averaged roughly 10% annual returns over the long term. Over {limits.growthPhaseEndAge} years, low expense ratios make a big difference.</p>
+      </CalloutBox>
+
+      <p>
+        <a href="/blog/trump-account-investment-rules">See which funds qualify</a> |
+        <a href="/blog/index-fund-requirements">Index fund requirements explained</a>
+      </p>
+
+      <!-- Withdrawal Rules -->
+      <h2 id="withdrawal-rules">Withdrawal Rules</h2>
+
+      <h3>Before Age {limits.growthPhaseEndAge}</h3>
+
+      <p>
+        Withdrawals before age {limits.growthPhaseEndAge} are <strong>not allowed</strong>. There are only three exceptions:
+      </p>
+
+      <ol>
+        <li><strong>Rollover</strong> to another Trump Account</li>
+        <li><strong>Return of excess contributions</strong> (if you contributed more than ${limits.annualContributionLimit.toLocaleString()})</li>
+        <li><strong>Death</strong> of the beneficiary</li>
+      </ol>
+
+      <CalloutBox type="warning" title="No hardship withdrawals">
+        <p>Unlike a 401(k), there is no hardship withdrawal option during the growth phase. The money is locked until the child turns {limits.growthPhaseEndAge}.</p>
+      </CalloutBox>
+
+      <h3>After Age {limits.iraConversionAge} (Traditional IRA)</h3>
+
+      <p>
+        Once the account converts to a traditional IRA at age {limits.iraConversionAge}, the child can withdraw for any purpose.
+        Withdrawals are taxed as <strong>ordinary income</strong>. Before age 59½, a
+        <strong>10% early withdrawal penalty</strong> applies — unless an exception applies.
+      </p>
+
+      <p><strong>Penalty-free exceptions include:</strong></p>
+      <ul>
+        <li>First-time home purchase (up to $10,000)</li>
+        <li>Qualified education expenses</li>
+        <li>Disability</li>
+        <li>Birth or adoption expenses</li>
+        <li>Unreimbursed medical expenses above 7.5% of AGI</li>
+      </ul>
+
+      <p>
+        <a href="/blog/trump-account-withdrawal-exceptions">Full list of withdrawal exceptions</a> |
+        <a href="/blog/early-withdrawal-before-18">What if I need the money before 18?</a>
+      </p>
+
+      <!-- Age 18 Conversion -->
+      <h2 id="age-18-conversion">The Age {limits.iraConversionAge} Conversion</h2>
+
+      <p>
+        When the child turns {limits.iraConversionAge}, the Trump Account automatically converts to a
+        <strong>traditional IRA</strong>. The child gains full control of the account.
+      </p>
+
+      <p>At that point, they have three main options:</p>
+
+      <ol>
+        <li><strong>Keep it invested</strong> — let it grow for retirement</li>
+        <li><strong>Withdraw some or all</strong> — taxed as ordinary income, plus 10% penalty before 59½</li>
+        <li><strong>Convert to a Roth IRA</strong> — pay taxes now for tax-free growth later</li>
+      </ol>
+
+      <CalloutBox type="tip" title="The Roth conversion strategy">
+        <p>If your child is 18 and earning little income, converting to a Roth IRA could mean paying very low taxes now — and tax-free growth for decades. Talk to a tax professional about whether this makes sense.</p>
+      </CalloutBox>
+
+      <p>
+        <a href="/blog/trump-account-retirement-conversion">Age 18 conversion guide</a>
+      </p>
+
+      <!-- Who Controls the Account -->
+      <h2 id="account-control">Who Controls the Account?</h2>
+
+      <ul>
+        <li>The <strong>parent or guardian</strong> is the "authorized individual" until the child turns {limits.growthPhaseEndAge}</li>
+        <li>They choose the trustee (financial institution) and the fund</li>
+        <li>They <strong>cannot withdraw</strong> the money — even as the account manager</li>
+        <li>At age {limits.iraConversionAge}, <strong>full control transfers to the child</strong></li>
+      </ul>
+
+      <p>
+        <a href="/blog/who-controls-trump-account">Who controls a Trump Account? Full breakdown</a>
+      </p>
+
+      <!-- Rules Quick Reference Table -->
+      <h2 id="quick-reference">Rules Quick Reference Table</h2>
+    </div>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-surface-600">
+            <th class="px-4 py-3 text-left font-semibold text-gold-400">Rule</th>
+            <th class="px-4 py-3 text-left font-semibold text-gold-400">Details</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Annual limit</td>
+            <td class="px-4 py-3">${limits.annualContributionLimit.toLocaleString()}</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Employer limit</td>
+            <td class="px-4 py-3">${limits.employerContributionLimit.toLocaleString()}/yr per employee</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Federal deposit</td>
+            <td class="px-4 py-3">${limits.pilotDeposit.toLocaleString()} ({limits.pilotDepositStartYear}–{limits.pilotDepositEndYear} births)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Investment type</td>
+            <td class="px-4 py-3">S&P 500 / broad U.S. equity index funds</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Max expense ratio</td>
+            <td class="px-4 py-3">{(limits.maxExpenseRatio * 100).toFixed(1)}%</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Withdrawals before {limits.growthPhaseEndAge}</td>
+            <td class="px-4 py-3">Not allowed (3 exceptions)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Conversion age</td>
+            <td class="px-4 py-3">{limits.iraConversionAge} (to traditional IRA)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="px-4 py-3 font-medium text-white">Income limits</td>
+            <td class="px-4 py-3">None</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-3 font-medium text-white">Election form</td>
+            <td class="px-4 py-3">{limits.form}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Deep Dive Guides -->
+    <div class="prose mt-8">
+      <h2>Deep Dive Guides</h2>
+      <p>Dig into the details on any rule:</p>
+    </div>
+
+    <div class="mt-4 grid gap-3 sm:grid-cols-2">
+      <a href="/blog/contribution-limits-explained" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Contribution Limits Explained</h3>
+        <p class="text-sm text-gray-400">Everything about the ${limits.annualContributionLimit.toLocaleString()}/yr cap</p>
+      </a>
+      <a href="/blog/trump-account-investment-rules" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Investment Rules</h3>
+        <p class="text-sm text-gray-400">Which index funds qualify and why</p>
+      </a>
+      <a href="/blog/trump-account-withdrawal-exceptions" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Withdrawal Exceptions</h3>
+        <p class="text-sm text-gray-400">The 3 exceptions before age {limits.growthPhaseEndAge}</p>
+      </a>
+      <a href="/blog/trump-account-dos-and-donts" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Do's and Don'ts</h3>
+        <p class="text-sm text-gray-400">Common mistakes to avoid</p>
+      </a>
+      <a href="/blog/trump-account-retirement-conversion" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Age {limits.iraConversionAge} IRA Conversion</h3>
+        <p class="text-sm text-gray-400">What happens when it converts</p>
+      </a>
+      <a href="/blog/trump-account-rollover-guide" class="rounded-lg border border-surface-600 p-4 no-underline transition-colors hover:border-gold-400/30 hover:bg-gold-400/5">
+        <h3 class="font-semibold text-white">Rollover Guide</h3>
+        <p class="text-sm text-gray-400">How to move between trustees</p>
+      </a>
+    </div>
+
+    <!-- Disclaimer -->
+    <div class="mt-10">
+      <CalloutBox type="warning" title="Not tax or financial advice">
+        <p>This is educational content, not tax or financial advice. Trump Account rules are based on {limits.legalBasis} and {limits.irsNotice}. Consult a qualified tax professional for advice specific to your situation.</p>
+      </CalloutBox>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="prose mt-8">
+      <h2>Frequently Asked Questions</h2>
+    </div>
+
+    <div class="mt-6">
+      <Accordion items={faqs} />
+    </div>
+
+    <!-- Sources -->
+    <div class="mt-8 rounded-lg border border-surface-600 bg-surface-800 p-4 text-xs text-gray-500">
+      <p><strong class="text-gray-300">Sources:</strong></p>
+      <ul class="mt-1 space-y-0.5">
+        <li><a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf" target="_blank" rel="noopener noreferrer" class="text-gold-400 hover:text-gold-300">{limits.irsNotice}</a> (published {limits.irsNoticeDate})</li>
+        <li>{limits.legislation}, {limits.legalBasis}</li>
+        <li><a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer" class="text-gold-400 hover:text-gold-300">{limits.portal}</a></li>
+        <li><a href="https://www.irs.gov/forms-pubs/about-form-4547" target="_blank" rel="noopener noreferrer" class="text-gold-400 hover:text-gold-300">{limits.form}</a></li>
+      </ul>
+    </div>
+  </article>
+</BaseLayout>

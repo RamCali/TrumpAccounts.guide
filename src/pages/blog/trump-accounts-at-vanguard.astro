@@ -1,0 +1,245 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-accounts-at-vanguard')!;
+const related = getRelatedArticles('trump-accounts-at-vanguard');
+
+const faqs = [
+  {
+    question: 'Can I open a Trump Account at Vanguard?',
+    answer: 'Vanguard has committed to supporting Trump Accounts. Once the IRS publishes the approved trustee list through trumpaccounts.gov, you will be able to select Vanguard as your trustee after filing IRS Form 4547.',
+  },
+  {
+    question: 'What is the cheapest Vanguard fund for a Trump Account?',
+    answer: 'VOO (Vanguard S&P 500 ETF) has an expense ratio of just 0.03%. It is an ETF with no minimum investment. On a $10,000 balance, you would pay just $3 per year in fees.',
+  },
+  {
+    question: 'Is Vanguard better than Fidelity for Trump Accounts?',
+    answer: 'Fidelity has a lower expense ratio (0.015% for FXAIX vs 0.03% for VOO) and more branch locations. Vanguard is an excellent choice if you already have a Vanguard account or prefer their investor-owned structure. Both are strong options.',
+  },
+  {
+    question: 'Can I use VTI instead of VOO in a Trump Account?',
+    answer: 'VTI tracks the total U.S. stock market, which qualifies as a "broad U.S. equity index" under IRC Section 530A. Both VOO and VTI should be eligible Trump Account investments.',
+  },
+  {
+    question: 'Does Vanguard charge account fees?',
+    answer: 'Vanguard does not charge annual account fees for brokerage accounts. There are no trading commissions on ETFs or Vanguard mutual funds. The only ongoing cost is the fund expense ratio, which is as low as 0.03% for VOO.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <p>
+      <strong>Yes, Vanguard is expected to be an approved Trump Account (Section 530A) trustee.</strong> Vanguard pioneered index investing. Jack Bogle founded the company and created the first index fund for individual investors. If you are looking for "Vanguard Trump Account," "530A account Vanguard," or wondering how to open a Trump Account at Vanguard — this guide covers everything. You will need to file {limits.form} with the IRS first, then select Vanguard as your trustee.
+    </p>
+
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Vanguard <strong class="text-white">pioneered index investing</strong> — Jack Bogle created the first index fund for individual investors.</li>
+        <li>VOO (S&P 500 ETF): <strong class="text-white">0.03% expense ratio</strong>, no minimum investment.</li>
+        <li>VFIAX (S&P 500 mutual fund): <strong class="text-white">0.04% expense ratio</strong>, $3,000 minimum investment.</li>
+        <li><strong class="text-white">$0 commissions</strong> on all ETFs and Vanguard mutual funds.</li>
+        <li>Limited branch locations — primarily <strong class="text-white">online and phone support</strong>.</li>
+        <li>Great choice if you <strong class="text-white">already have a Vanguard account</strong>.</li>
+      </ul>
+    </div>
+
+    <CalloutBox type="info" title="Trustee List Not Yet Final">
+      <p>
+        The IRS has not yet published the final list of approved Trump Account trustees. Vanguard is widely expected to participate based on their role as one of the largest asset managers in the world. The official trustee list will be available at <a href="https://trumpaccounts.gov">{limits.portal}</a> when the portal launches in mid-2026. We will update this page as soon as the IRS confirms approved custodians.
+      </p>
+    </CalloutBox>
+
+    <h2>Why Choose Vanguard for a Trump Account?</h2>
+    <p>
+      Vanguard invented index investing. In 1976, Jack Bogle launched the first index fund available to everyday investors. That fund became VFIAX. Its ETF counterpart is VOO. Together, they hold trillions of dollars in assets.
+    </p>
+    <p>
+      What makes Vanguard different is their ownership structure. Vanguard is owned by its funds. The funds are owned by their shareholders. That means you, the investor, are the owner. There are no outside shareholders pushing for higher fees. This structure keeps costs low over time.
+    </p>
+    <p>
+      For a Trump Account that will grow for up to {limits.growthPhaseEndAge} years, that commitment to low costs matters. Every basis point saved is more money compounding for your child.
+    </p>
+    <p>
+      If you already have a Vanguard IRA, brokerage account, or 529 plan, adding your child's Trump Account to the same platform keeps everything in one place. One login. One dashboard.
+    </p>
+
+    <h2>Vanguard Fund Options</h2>
+    <p>
+      Trump Accounts must be invested in mutual funds or ETFs that track the S&P 500 or a broad U.S. equity index. Expense ratios must be at or below {limits.maxExpenseRatio * 100}%. Vanguard offers four strong options:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Fund</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Type</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Expense Ratio</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Minimum</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Tracks</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">VOO</td>
+            <td class="py-3 pr-4">ETF</td>
+            <td class="py-3 pr-4 text-mint-400 font-bold">0.03%</td>
+            <td class="py-3 pr-4">None (ETF)</td>
+            <td class="py-3 pr-4">S&P 500</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">VFIAX</td>
+            <td class="py-3 pr-4">Mutual Fund</td>
+            <td class="py-3 pr-4 text-mint-400">0.04%</td>
+            <td class="py-3 pr-4">$3,000</td>
+            <td class="py-3 pr-4">S&P 500</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">VTI</td>
+            <td class="py-3 pr-4">ETF</td>
+            <td class="py-3 pr-4 text-mint-400 font-bold">0.03%</td>
+            <td class="py-3 pr-4">None (ETF)</td>
+            <td class="py-3 pr-4">Total U.S. Stock Market</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">VTSAX</td>
+            <td class="py-3 pr-4">Mutual Fund</td>
+            <td class="py-3 pr-4 text-mint-400">0.04%</td>
+            <td class="py-3 pr-4">$3,000</td>
+            <td class="py-3 pr-4">Total U.S. Stock Market</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      All four funds are well below the {limits.maxExpenseRatio * 100}% expense ratio cap. VOO and VTI are the cheapest at 0.03%. VFIAX and VTSAX cost slightly more at 0.04% but let you buy fractional shares easily through automatic investing.
+    </p>
+    <p>
+      For a deeper look at eligible funds, see <a href="/blog/index-fund-requirements">Trump Account Index Fund Requirements</a>.
+    </p>
+
+    <h2>VOO vs VFIAX: Which to Pick?</h2>
+    <p>
+      Both track the S&P 500. Both are from Vanguard. The difference comes down to minimums and how you invest.
+    </p>
+    <p>
+      <strong>Choose VOO if you are starting small.</strong> VOO is an ETF. There is no minimum investment beyond the price of one share (or a fractional share if your brokerage supports it). The expense ratio is 0.03%. This is the better option for most new Trump Account contributors.
+    </p>
+    <p>
+      <strong>Choose VFIAX if you can invest $3,000 or more.</strong> VFIAX is a mutual fund. You need $3,000 to open a position. But once you are in, you can invest any dollar amount — $50, $100, $500 — without worrying about share prices. Automatic investing is seamless with mutual funds.
+    </p>
+    <p>
+      Both are excellent. The 0.01% difference in expense ratio is negligible. On a $10,000 balance, that is $1 per year. Pick the one that fits how you plan to contribute.
+    </p>
+
+    <CalloutBox type="tip" title="Starting Small? Go With VOO">
+      <p>
+        If you are making smaller monthly contributions to your child's Trump Account, VOO is the easier choice. No $3,000 minimum. Same S&P 500 index. Slightly lower expense ratio. You can always switch to VFIAX later once your balance grows.
+      </p>
+    </CalloutBox>
+
+    <h2>How to Open a Trump Account at Vanguard</h2>
+    <p>
+      You cannot go to Vanguard and open a Trump Account directly. The process starts with the IRS. Here are the steps:
+    </p>
+    <ol>
+      <li><strong>File {limits.form} with the IRS.</strong> Include it with your 2025 tax return (due April 15, 2026). You can also file through {limits.portal} when the portal launches mid-2026, or by mail.</li>
+      <li><strong>Wait for IRS activation.</strong> The IRS will process your election and activate the Trump Account. You will receive confirmation.</li>
+      <li><strong>Select Vanguard as your trustee.</strong> Once the approved trustee list is published and your account is active, designate Vanguard as your custodian.</li>
+      <li><strong>Choose your fund.</strong> Pick VOO, VFIAX, VTI, or VTSAX — whichever fits your investment style.</li>
+      <li><strong>Start contributing.</strong> You can contribute up to ${limits.annualContributionLimit.toLocaleString()} per year. If your child was born between {limits.pilotDepositStartYear} and {limits.pilotDepositEndYear}, the ${limits.pilotDeposit.toLocaleString()} federal pilot deposit will also be deposited into the account.</li>
+    </ol>
+    <p>
+      For the complete walkthrough with tips, see our <a href="/how-to-open-trump-account">step-by-step guide to opening a Trump Account</a>.
+    </p>
+
+    <h2>Vanguard vs Fidelity vs Schwab</h2>
+    <p>
+      All three major brokerages are expected to offer Trump Accounts. Here is a quick comparison of their lowest-cost S&P 500 options:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Brokerage</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Cheapest S&P 500 Fund</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Expense Ratio</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Minimum</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Branch Locations</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Vanguard</td>
+            <td class="py-3 pr-4 text-gold-400">VOO</td>
+            <td class="py-3 pr-4 text-mint-400">0.03%</td>
+            <td class="py-3 pr-4">None (ETF)</td>
+            <td class="py-3 pr-4">Limited</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Fidelity</td>
+            <td class="py-3 pr-4 text-gold-400">FXAIX</td>
+            <td class="py-3 pr-4 text-mint-400 font-bold">0.015%</td>
+            <td class="py-3 pr-4">None</td>
+            <td class="py-3 pr-4">200+</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-white font-medium">Schwab</td>
+            <td class="py-3 pr-4 text-gold-400">SWPPX</td>
+            <td class="py-3 pr-4 text-mint-400">0.02%</td>
+            <td class="py-3 pr-4">None</td>
+            <td class="py-3 pr-4">400+</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      <strong>Fidelity wins on fees.</strong> FXAIX at 0.015% is half the cost of VOO. Over {limits.growthPhaseEndAge} years of compounding, that adds up — though the absolute difference is still small.
+    </p>
+    <p>
+      <strong>Schwab wins on branches.</strong> With 400+ locations, Schwab gives you the most in-person support options. If you want face-to-face help, Schwab is hard to beat.
+    </p>
+    <p>
+      <strong>Vanguard wins on heritage and trust.</strong> They invented index investing. Their investor-owned structure means they are not trying to maximize profits from you. For many long-term investors, that philosophy matters.
+    </p>
+    <p>
+      The fee differences between all three are tiny. On a $10,000 balance, the difference between Fidelity (0.015%) and Vanguard (0.03%) is $1.50 per year. All three are excellent choices. Pick the one you trust most or already use.
+    </p>
+    <p>
+      For detailed comparisons, see <a href="/blog/trump-accounts-at-fidelity">Trump Accounts at Fidelity</a> and <a href="/blog/trump-accounts-at-schwab">Trump Accounts at Schwab</a>. For a broader overview, visit <a href="/where-to-open-trump-account">Where to Open a Trump Account</a>.
+    </p>
+
+    <CalloutBox type="tip" title="Already Have a Vanguard Account?">
+      <p>
+        If you already invest with Vanguard, keeping your child's Trump Account there makes everything simpler. One login. One dashboard. You know the platform. And Vanguard's investor-owned structure means their interests are aligned with yours. File {limits.form} to get started, then select Vanguard as your trustee once the account is activated.
+      </p>
+    </CalloutBox>
+
+    <CalloutBox type="warning" title="Not Financial Advice">
+      <p>
+        This is educational content, not tax or financial advice. We are not recommending any specific brokerage or fund. Consult a qualified financial advisor or tax professional before making investment decisions for your child's Trump Account.
+      </p>
+    </CalloutBox>
+
+    <p>
+      For more on how fees affect your child's long-term balance, see our <a href="/blog/trump-account-fees-explained">Trump Account fees guide</a>. To estimate growth over {limits.growthPhaseEndAge} years, try the <a href="/calculators/fund-expense-tracker">fund expense tracker</a>.
+    </p>
+  </div>
+</BlogLayout>
