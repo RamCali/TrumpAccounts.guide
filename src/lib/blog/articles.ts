@@ -1314,6 +1314,20 @@ export const blogArticles: Record<string, BlogArticle> = {
     relatedSlugs: ['who-qualifies-for-trump-account', 'can-parents-grandparents-contribute', 'trump-account-roth-conversion-strategy', 'trump-account-age-cutoff', 'best-accounts-for-kids-today'],
   },
 
+  // ─── New: Roth Conversion Deep Dive ────────────────────────
+  'trump-account-to-roth-ira-zero-tax': {
+    slug: 'trump-account-to-roth-ira-zero-tax',
+    title: 'How $60,000 Becomes an $8.8M Tax-Free Roth IRA',
+    description: 'The Trump Account Roth conversion strategy: contribute $60K, convert to Roth at 18 with zero tax using the pro rata rule. $8.8M tax-free at 65.',
+    category: 'Strategies',
+    categorySlug: 'strategies',
+    datePublished: '2026-02-23',
+    dateModified: '2026-02-23',
+    readingTime: '10 min read',
+    relatedSlugs: ['trump-account-roth-conversion-strategy', 'gains-taxation-explained', 'is-growth-tax-free', 'trump-account-retirement-conversion', 'trump-account-investment-strategies', 'trump-account-hacks'],
+    featured: true,
+  },
+
   // ─── New: Gift Tax ─────────────────────────────────────────
   'trump-accounts-gift-tax': {
     slug: 'trump-accounts-gift-tax',

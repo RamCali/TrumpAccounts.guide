@@ -1,0 +1,94 @@
+---
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import RothConversionCalculator from '../../components/calculators/RothConversionCalculator';
+---
+
+<CalculatorLayout
+  title="Roth Conversion Calculator for Trump Accounts"
+  description="Model the pro rata rule, standard deduction chunking, and multi-year Roth conversion strategy. See how much tax you'll owe — and how much you'll save."
+  calculatorName="Roth Conversion Calculator"
+  slug="roth-conversion"
+  abstract="Calculate the optimal Roth IRA conversion strategy for a Trump Account that converts to a traditional IRA at age 18. Models the pro rata rule for nondeductible basis, standard deduction sheltering, multi-year conversion chunking, and lifetime Roth growth projections."
+>
+  <section class="mb-8">
+    <h2 class="mb-3 text-xl font-bold text-white">Why This Calculator Matters</h2>
+    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+      When your child's Trump Account becomes a traditional IRA at age 18, you have a once-in-a-lifetime
+      opportunity: convert to a Roth IRA while they're in the <strong class="text-white">lowest tax bracket of their life</strong>.
+      Because Trump Account contributions are after-tax (nondeductible), only the growth portion is taxed on
+      conversion — the pro rata rule works in your favor.
+    </p>
+    <div class="grid gap-3 sm:grid-cols-3 mb-6">
+      <div class="rounded-lg border border-surface-600 bg-surface-800 p-3 text-center">
+        <p class="text-xs text-gray-500">Step 1</p>
+        <p class="text-sm font-medium text-white mt-1">Trump Account</p>
+        <p class="text-xs text-gray-400">Ages 0–17</p>
+      </div>
+      <div class="rounded-lg border border-surface-600 bg-surface-800 p-3 text-center">
+        <p class="text-xs text-gray-500">Step 2</p>
+        <p class="text-sm font-medium text-white mt-1">Traditional IRA</p>
+        <p class="text-xs text-gray-400">Converts at 18</p>
+      </div>
+      <div class="rounded-lg border border-gold-400/30 bg-gold-400/5 p-3 text-center">
+        <p class="text-xs text-gold-400">Step 3</p>
+        <p class="text-sm font-bold text-gold-400 mt-1">Roth IRA</p>
+        <p class="text-xs text-gray-400">Convert strategically</p>
+      </div>
+    </div>
+  </section>
+
+  <div id="calculator">
+    <RothConversionCalculator client:visible />
+  </div>
+
+  <section class="mt-10">
+    <h2 class="mb-3 text-xl font-bold text-white">How the Pro Rata Rule Works</h2>
+    <div class="prose prose-sm text-gray-400">
+      <p>
+        Trump Account contributions are made with <strong class="text-white">after-tax dollars</strong> — you don't get a tax deduction.
+        This creates <strong class="text-white">nondeductible basis</strong> in the account. When you convert to a Roth IRA,
+        the IRS uses the pro rata rule to determine how much of each converted dollar is taxable:
+      </p>
+      <ul class="text-gray-300">
+        <li><strong class="text-white">Basis percentage</strong> = Total contributions ÷ Account balance</li>
+        <li><strong class="text-white">Taxable percentage</strong> = 1 − Basis percentage</li>
+        <li>Each dollar converted = (basis %) tax-free + (taxable %) ordinary income</li>
+      </ul>
+      <p>
+        <strong class="text-white">Example:</strong> If you contributed $60,000 and the account grew to $100,000,
+        your basis is 60%. For every $1 you convert, $0.60 is tax-free and $0.40 is taxable.
+        The IRS does not let you cherry-pick which dollars to convert — it must be proportional.
+      </p>
+    </div>
+  </section>
+
+  <section class="mt-8">
+    <h2 class="mb-3 text-xl font-bold text-white">The Standard Deduction Chunking Strategy</h2>
+    <div class="prose prose-sm text-gray-400">
+      <p>
+        The key to a <strong class="text-white">zero-tax conversion</strong> is keeping the taxable portion of each
+        year's conversion under the standard deduction. If your child has no other income, they can convert
+        enough each year so the taxable portion equals the standard deduction — and owe <strong class="text-white">$0 in federal tax</strong>.
+      </p>
+      <p>
+        For larger accounts, spread the conversion over 2–4 college years when income is low.
+        Even if your child has a part-time job, they're likely in the 10% or 12% bracket — far lower
+        than the 22%+ they'll pay later in their career.
+      </p>
+    </div>
+  </section>
+
+  <section class="mt-8">
+    <h2 class="mb-3 text-xl font-bold text-white">Related Resources</h2>
+    <div class="grid gap-3 sm:grid-cols-2">
+      <a href="/trump-account-roth-conversion-strategy" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">Roth Conversion Strategy Guide</h3>
+        <p class="text-sm text-gray-400">The complete pillar guide to converting Trump Accounts to Roth IRAs</p>
+      </a>
+      <a href="/blog/trump-account-to-roth-ira-zero-tax" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">How $60K Becomes an $8.8M Roth IRA</h3>
+        <p class="text-sm text-gray-400">The step-by-step breakdown with real numbers</p>
+      </a>
+    </div>
+  </section>
+</CalculatorLayout>

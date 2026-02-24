@@ -1,0 +1,478 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CalloutBox from '../components/ui/CalloutBox.astro';
+import LastUpdated from '../components/ui/LastUpdated.astro';
+import Accordion from '../components/ui/Accordion.astro';
+import { articleSchema, breadcrumbSchema, faqSchema, financialProductSchema } from '../lib/seo/schema';
+import limits from '../data/contribution-limits.json';
+
+const faqs = [
+  {
+    question: 'Can you convert a Trump Account to a Roth IRA?',
+    answer: 'Yes. At age 18, the Trump Account becomes a traditional IRA under standard IRA rules. You can convert any or all of the traditional IRA balance to a Roth IRA. You pay ordinary income tax on the taxable portion of the conversion in the year you convert, but all future growth is tax-free.',
+  },
+  {
+    question: 'What is the pro rata rule and how does it apply to Trump Accounts?',
+    answer: 'The pro rata rule (IRS Form 8606) says you cannot pick which dollars to convert — each conversion is a proportional mix of taxable and non-taxable dollars. Because Trump Account contributions are after-tax (nondeductible), they create basis. If you contributed $60,000 and the account grew to $100,000, 60% of each dollar converted is tax-free (return of basis) and 40% is taxable (growth).',
+  },
+  {
+    question: 'How much can I convert to a Roth IRA with zero tax?',
+    answer: 'It depends on your basis percentage and the standard deduction. If 60% of the account is basis and the standard deduction is $15,000, you can convert up to $37,500 per year with zero federal tax ($37,500 × 40% taxable = $15,000, which is fully sheltered by the standard deduction). More basis = more you can convert tax-free.',
+  },
+  {
+    question: 'Does my child need earned income to do a Roth conversion?',
+    answer: 'No. Roth conversions do not require earned income. Earned income is only required for Roth IRA contributions. A conversion from a traditional IRA to a Roth IRA can be done at any time regardless of income type.',
+  },
+  {
+    question: 'What happens if my child has a part-time job during conversion years?',
+    answer: 'Earned income from a job uses up some of the standard deduction, reducing the amount you can convert tax-free. Calculate based on total income (earned + conversion) to stay in the lowest brackets. Even with a $15,000 part-time job, the conversion can still be done at very low tax rates.',
+  },
+  {
+    question: 'Can you undo a Roth conversion?',
+    answer: 'No. Since 2018, the IRS eliminated "recharacterizations" (undos) for Roth conversions. Once converted, the tax is owed. Plan carefully before executing.',
+  },
+  {
+    question: 'Is this the same as a backdoor Roth IRA?',
+    answer: 'Similar concept, different source. A backdoor Roth involves making nondeductible IRA contributions and converting them. The Trump Account strategy is similar because the contributions are also nondeductible (after-tax). The pro rata rule applies the same way in both cases.',
+  },
+  {
+    question: 'Should I convert the entire Trump Account to Roth in one year?',
+    answer: 'Usually no. Converting too much in one year pushes your child into higher tax brackets. Spreading the conversion over 2-4 low-income years (college years are ideal) keeps the effective tax rate as low as possible. For accounts under about $37,000, a single-year conversion may still result in zero tax.',
+  },
+];
+
+const schemas = [
+  articleSchema({
+    title: 'Trump Account Roth Conversion Strategy: The Complete Guide',
+    description: 'How to convert a Trump Account to a Roth IRA at 18 with minimal or zero tax. Pro rata rule, standard deduction chunking, and the $60K to $8.8M example.',
+    url: 'https://trumpaccounts.guide/trump-account-roth-conversion-strategy',
+    datePublished: '2026-02-23',
+    dateModified: '2026-02-23',
+    author: 'TrumpAccounts.guide Editorial Team',
+    wordCount: 3500,
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: 'https://trumpaccounts.guide' },
+    { name: 'Roth Conversion Strategy', url: 'https://trumpaccounts.guide/trump-account-roth-conversion-strategy' },
+  ]),
+  faqSchema(faqs),
+  financialProductSchema(),
+];
+---
+
+<BaseLayout
+  title="Trump Account Roth Conversion Strategy: Zero-Tax Guide (2026)"
+  description="How to convert a Trump Account to a Roth IRA at 18 with minimal or zero tax. Pro rata rule, standard deduction chunking, and the $60K to $8.8M example."
+  schema={schemas}
+  ogType="article"
+>
+  <article class="mx-auto max-w-3xl px-4 py-12">
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-sm text-slate-500">
+        <li><a href="/" class="hover:text-gold-400 no-underline">Home</a></li>
+        <li class="before:mr-2 before:content-['/']">
+          <span class="text-white font-medium">Roth Conversion Strategy</span>
+        </li>
+      </ol>
+    </nav>
+
+    <LastUpdated date="February 2026" />
+
+    <div class="prose mt-4">
+      <h1>Trump Account Roth Conversion Strategy: The Complete Guide</h1>
+
+      <p>
+        The single most important thing you can do with a Trump Account has nothing to do with putting money in. It's what you do when the account converts to a traditional IRA at age {limits.iraConversionAge}: <strong>convert it to a Roth IRA while your child is in the lowest tax bracket of their life</strong>.
+      </p>
+      <p>
+        Done right, this strategy can turn $60,000 in contributions into an <strong>$8.8 million tax-free Roth IRA</strong> at age 65 — with zero or near-zero tax on the conversion.
+      </p>
+
+      <CalloutBox type="tip" title="Why this is the #1 Trump Account strategy">
+        <p>
+          Trump Account contributions are <strong>after-tax</strong> (no deduction). The account grows <strong>tax-deferred</strong>. At 18, it becomes a <strong>traditional IRA</strong> — taxed on withdrawals. Without the Roth conversion, you get the worst of both worlds: no deduction going in, tax coming out. The Roth conversion fixes this entirely.
+        </p>
+      </CalloutBox>
+
+      <!-- ────────────────────────────────────────────── -->
+      <h2>The Problem With Trump Accounts (and the Fix)</h2>
+
+      <p>Here is why a Trump Account by itself is not ideal:</p>
+      <ul>
+        <li><strong>No tax deduction</strong> when you contribute (unlike a traditional IRA)</li>
+        <li><strong>Taxed on withdrawal</strong> as ordinary income (like a traditional IRA)</li>
+        <li><strong>10% penalty</strong> if withdrawn before age 59½</li>
+      </ul>
+      <p>
+        That is the worst of a traditional IRA (taxed on the way out) combined with the worst of a Roth IRA (no deduction going in). But there is a fix: <strong>convert to a Roth IRA at 18</strong>, and the money grows and comes out <strong>completely tax-free</strong>.
+      </p>
+
+      <!-- ────────────────────────────────────────────── -->
+      <h2>How the Roth Conversion Works</h2>
+
+      <ol>
+        <li><strong>Ages 0–17:</strong> Contribute up to ${limits.annualContributionLimit.toLocaleString()}/year to the Trump Account. Money grows tax-deferred in S&P 500 index funds.</li>
+        <li><strong>Age 18:</strong> Trump Account automatically converts to a <strong>traditional IRA</strong>.</li>
+        <li><strong>Ages 18–22 (the golden window):</strong> Convert from the traditional IRA to a <strong>Roth IRA</strong> while your child has little or no income.</li>
+        <li><strong>Ages 22–65+:</strong> Roth IRA grows <strong>tax-free forever</strong>. No tax on qualified withdrawals. No required minimum distributions.</li>
+      </ol>
+
+      <CalloutBox type="info" title="No earned income required">
+        <p>
+          Roth IRA <em>contributions</em> require earned income, but Roth <em>conversions</em> do not. Your child does not need a job to convert a traditional IRA to a Roth IRA. Anyone can convert at any time.
+        </p>
+      </CalloutBox>
+
+      <!-- ────────────────────────────────────────────── -->
+      <h2>The Pro Rata Rule: Why Only Growth Is Taxed</h2>
+
+      <p>
+        This is the key insight that makes Trump Account Roth conversions so powerful. When you do a Roth conversion, the IRS uses the <strong>pro rata rule</strong> (Form 8606) to determine how much is taxable.
+      </p>
+
+      <p>Here is how it works:</p>
+      <ul>
+        <li>Trump Account contributions are <strong>after-tax</strong> — you already paid tax on that money. This creates <strong>nondeductible basis</strong>.</li>
+        <li>Growth and earnings have <strong>never been taxed</strong>. This is the taxable portion.</li>
+        <li>The IRS does <strong>not</strong> let you pick which dollars to convert. Each conversion must be a <strong>proportional mix</strong> of basis (tax-free) and growth (taxable).</li>
+      </ul>
+
+      <h3>The Pro Rata Formula</h3>
+
+      <div class="not-prose my-6 rounded-xl border border-gold-400/20 bg-gold-400/5 p-5">
+        <p class="text-sm text-gray-300 mb-3">For every dollar you convert:</p>
+        <div class="space-y-2 text-sm">
+          <div class="flex items-center gap-2">
+            <span class="inline-block h-3 w-3 rounded-full bg-mint-400"></span>
+            <span class="text-gray-300"><strong class="text-white">Basis %</strong> = Total Contributions ÷ Account Balance = <strong class="text-mint-400">not taxed</strong></span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="inline-block h-3 w-3 rounded-full bg-amber-400"></span>
+            <span class="text-gray-300"><strong class="text-white">Growth %</strong> = (Balance − Contributions) ÷ Account Balance = <strong class="text-amber-400">taxed as ordinary income</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <h3>Example: $60,000 Contributions, $100,000 Balance</h3>
+      <p>
+        You put in $5,000/year for 12 years = $60,000 in contributions. The account grew to $100,000 ($40,000 in growth).
+      </p>
+
+      <div class="not-prose my-6 overflow-x-auto">
+        <table class="w-full border-collapse text-sm">
+          <thead>
+            <tr class="border-b border-surface-600 text-left">
+              <th class="py-3 pr-4 text-gray-400 font-medium">Component</th>
+              <th class="py-3 pr-4 text-gray-400 font-medium">Amount</th>
+              <th class="py-3 text-gray-400 font-medium">% of Account</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-300">
+            <tr class="border-b border-surface-700">
+              <td class="py-3 pr-4">After-tax contributions (basis)</td>
+              <td class="py-3 pr-4 text-mint-400 font-medium">$60,000</td>
+              <td class="py-3 text-mint-400">60% — not taxed</td>
+            </tr>
+            <tr class="border-b border-surface-700">
+              <td class="py-3 pr-4">Growth & earnings</td>
+              <td class="py-3 pr-4 text-amber-400 font-medium">$40,000</td>
+              <td class="py-3 text-amber-400">40% — taxed</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4 font-medium text-white">Total balance</td>
+              <td class="py-3 pr-4 font-medium text-white">$100,000</td>
+              <td class="py-3">100%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        If you convert $10,000, the IRS says: $6,000 is tax-free (return of basis) and $4,000 is taxable (growth). You <strong>cannot</strong> choose to convert just the $60,000 basis tax-free — the pro rata rule forces a proportional split.
+      </p>
+
+      <!-- ────────────────────────────────────────────── -->
+      <h2>The Standard Deduction Chunking Strategy</h2>
+
+      <p>
+        Here is where it gets powerful. The <strong>standard deduction</strong> means the first chunk of income every year is taxed at <strong>0%</strong>. For a single filer in 2025, that is $15,000 (projected to rise to about $20,000 by 2035).
+      </p>
+      <p>
+        The strategy: convert just enough each year so the <strong>taxable portion</strong> stays under the standard deduction. Result: <strong>$0 in federal income tax</strong>.
+      </p>
+
+      <h3>How Much Can You Convert for Zero Tax?</h3>
+
+      <div class="not-prose my-6 rounded-xl border border-surface-600 bg-surface-800 p-5">
+        <p class="text-sm text-gray-300 mb-3">Using the 60% basis / 40% growth example:</p>
+        <div class="space-y-2 text-sm text-gray-300">
+          <p>Standard deduction (projected ~2035): <strong class="text-white">$20,000</strong></p>
+          <p>Taxable per dollar converted: <strong class="text-white">40%</strong></p>
+          <p>Max zero-tax conversion: $20,000 ÷ 0.40 = <strong class="text-gold-400 text-lg">$50,000/year</strong></p>
+        </div>
+      </div>
+
+      <p>
+        That means your child can convert <strong>$50,000 per year</strong> and owe <strong>zero federal income tax</strong>. Of that $50,000, $30,000 is a return of basis (tax-free) and $20,000 is growth (sheltered by the standard deduction).
+      </p>
+
+      <h3>Converting $100,000 Over 2 Years — Zero Tax</h3>
+
+      <div class="not-prose my-6 overflow-x-auto">
+        <table class="w-full border-collapse text-sm">
+          <thead>
+            <tr class="border-b border-surface-600 text-left">
+              <th class="py-3 pr-4 text-gray-400 font-medium">Year</th>
+              <th class="py-3 pr-4 text-gray-400 font-medium">Age</th>
+              <th class="py-3 pr-4 text-gray-400 font-medium">Convert</th>
+              <th class="py-3 pr-4 text-gray-400 font-medium">Non-Taxable (60%)</th>
+              <th class="py-3 pr-4 text-gray-400 font-medium">Taxable (40%)</th>
+              <th class="py-3 text-gray-400 font-medium">Tax Owed</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-300">
+            <tr class="border-b border-surface-700">
+              <td class="py-3 pr-4">1</td>
+              <td class="py-3 pr-4">18</td>
+              <td class="py-3 pr-4 text-white font-medium">$50,000</td>
+              <td class="py-3 pr-4 text-mint-400">$30,000</td>
+              <td class="py-3 pr-4 text-amber-400">$20,000</td>
+              <td class="py-3 text-mint-400 font-bold">$0</td>
+            </tr>
+            <tr class="border-b border-surface-700">
+              <td class="py-3 pr-4">2</td>
+              <td class="py-3 pr-4">19</td>
+              <td class="py-3 pr-4 text-white font-medium">$50,000</td>
+              <td class="py-3 pr-4 text-mint-400">$30,000</td>
+              <td class="py-3 pr-4 text-amber-400">$20,000</td>
+              <td class="py-3 text-mint-400 font-bold">$0</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4 font-medium text-white" colspan="2">Total</td>
+              <td class="py-3 pr-4 font-medium text-white">$100,000</td>
+              <td class="py-3 pr-4 text-mint-400">$60,000</td>
+              <td class="py-3 pr-4 text-amber-400">$40,000</td>
+              <td class="py-3 text-mint-400 font-bold">$0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        <strong>$100,000 converted to a Roth IRA. $0 in federal income tax.</strong> Your child now has a fully funded Roth IRA that will never be taxed again.
+      </p>
+
+      <CalloutBox type="warning" title="State taxes may apply">
+        <p>
+          Most states follow the federal standard deduction, but not all. Check your state's standard deduction amount. Some states have no income tax at all, making this strategy even better.
+        </p>
+      </CalloutBox>
+
+      <!-- ────────────────────────────────────────────── -->
+      <h2>The $60,000 to $8.8 Million Example</h2>
+
+      <p>Let's trace the full lifecycle:</p>
+
+      <div class="not-prose my-6 overflow-x-auto">
+        <table class="w-full border-collapse text-sm">
+          <thead>
+            <tr class="border-b border-surface-600 text-left">
+              <th class="py-3 pr-4 text-gray-400 font-medium">Phase</th>
+              <th class="py-3 pr-4 text-gray-400 font-medium">Ages</th>
+              <th class="py-3 text-gray-400 font-medium">What Happens</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-300">
+            <tr class="border-b border-surface-700">
+              <td class="py-3 pr-4 text-white font-medium">1. Contribute</td>
+              <td class="py-3 pr-4">5–17</td>
+              <td class="py-3">$5,000/year × 12 years = <strong class="text-white">$60,000</strong> in after-tax contributions</td>
+            </tr>
+            <tr class="border-b border-surface-700">
+              <td class="py-3 pr-4 text-white font-medium">2. Grow</td>
+              <td class="py-3 pr-4">5–17</td>
+              <td class="py-3">$60,000 grows to <strong class="text-white">$100,000</strong> in S&P 500 index funds (~10% avg return)</td>
+            </tr>
+            <tr class="border-b border-surface-700">
+              <td class="py-3 pr-4 text-white font-medium">3. Convert</td>
+              <td class="py-3 pr-4">18–19</td>
+              <td class="py-3">Convert $100,000 to Roth IRA over 2 years. Tax: <strong class="text-mint-400">$0</strong> (pro rata + standard deduction)</td>
+            </tr>
+            <tr class="border-b border-surface-700">
+              <td class="py-3 pr-4 text-white font-medium">4. Hands off</td>
+              <td class="py-3 pr-4">20–64</td>
+              <td class="py-3">Roth IRA grows untouched at ~10% annually. No additional contributions needed.</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4 text-gold-400 font-bold">5. Retire</td>
+              <td class="py-3 pr-4">65</td>
+              <td class="py-3 text-gold-400 font-bold">$8.8 million in a Roth IRA — 100% tax-free</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        Without the Roth conversion, that $8.8 million would be in a traditional IRA. At a 22% effective tax rate, your child would owe roughly <strong>$1.9 million in taxes</strong>, keeping only $6.9 million. The Roth conversion saves nearly <strong>$2 million in taxes</strong> — and it was free to execute.
+      </p>
+
+      <CalloutBox type="tip" title="The 10% return assumption">
+        <p>
+          The S&P 500 has averaged roughly 10% annual returns over the last 20+ years. This is a historical average, not a guarantee. At a more conservative 8%, the Roth IRA would still be worth about <strong>$4.7 million</strong> — still entirely tax-free.
+        </p>
+      </CalloutBox>
+
+      <!-- ────────────────────────────────────────────── -->
+      <h2>What If My Child Has Income?</h2>
+
+      <p>
+        Even if your child has a part-time job or summer income, the strategy still works — you just convert less each year.
+      </p>
+
+      <div class="not-prose my-6 overflow-x-auto">
+        <table class="w-full border-collapse text-sm">
+          <thead>
+            <tr class="border-b border-surface-600 text-left">
+              <th class="py-3 pr-4 text-gray-400 font-medium">Child's Earned Income</th>
+              <th class="py-3 pr-4 text-gray-400 font-medium">Zero-Tax Conversion (60% basis)</th>
+              <th class="py-3 text-gray-400 font-medium">Years to Convert $100K</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-300">
+            <tr class="border-b border-surface-700">
+              <td class="py-3 pr-4">$0</td>
+              <td class="py-3 pr-4 text-white font-medium">$50,000/year</td>
+              <td class="py-3">2 years</td>
+            </tr>
+            <tr class="border-b border-surface-700">
+              <td class="py-3 pr-4">$5,000</td>
+              <td class="py-3 pr-4 text-white font-medium">$37,500/year</td>
+              <td class="py-3">3 years</td>
+            </tr>
+            <tr class="border-b border-surface-700">
+              <td class="py-3 pr-4">$10,000</td>
+              <td class="py-3 pr-4 text-white font-medium">$25,000/year</td>
+              <td class="py-3">4 years</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4">$15,000</td>
+              <td class="py-3 pr-4 text-white font-medium">$12,500/year</td>
+              <td class="py-3">8 years</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>
+        Even with a $40,000 or $50,000 salary, converting is still worth it. Your child will be in the 12% bracket or lower — far less than the 22–24% they'll pay in their prime earning years. A small tax bill now saves a massive tax bill later.
+      </p>
+
+      <!-- ────────────────────────────────────────────── -->
+      <h2>Why This Works for Everyone (No Earned Income Needed)</h2>
+
+      <p>
+        Unlike a Roth IRA <em>contribution</em> (which requires earned income), a Roth <em>conversion</em> has <strong>no earned income requirement</strong>. A child with zero income can convert from a traditional IRA to a Roth IRA at any time. This makes the Trump Account strategy available to every family — not just those whose kids have jobs.
+      </p>
+
+      <!-- ────────────────────────────────────────────── -->
+      <h2>This Is NOT an Education Strategy</h2>
+
+      <p>
+        Do not use a Trump Account to save for college. Use a 529 plan for that. The Trump Account Roth conversion strategy is a <strong>long-term wealth-building play</strong>. The entire point is to let the Roth IRA compound untouched for 40+ years. Withdrawing at 18–22 for tuition defeats the purpose.
+      </p>
+      <p>
+        Yes, once it is a traditional IRA, your child can use the education expense exception to avoid the 10% penalty. But they would still owe ordinary income tax on the withdrawal, and they'd lose decades of tax-free compounding.
+      </p>
+
+      <CalloutBox type="warning" title="Don't raid the Roth for college">
+        <p>
+          A $100,000 Roth IRA at 18 becomes $8.8 million tax-free at 65. Pulling $50,000 out for tuition means losing roughly <strong>$4.4 million</strong> in future tax-free growth. Fund college separately with a 529, and let the Roth compound.
+        </p>
+      </CalloutBox>
+
+      <!-- ────────────────────────────────────────────── -->
+      <h2>Trump Account vs. Kids Roth IRA</h2>
+
+      <p>
+        If your child has earned income, you might also set up a <strong>Kids Roth IRA</strong>. These are separate strategies and can be done simultaneously:
+      </p>
+      <ul>
+        <li><strong>Trump Account:</strong> No earned income required. Anyone can contribute. Limited to S&P 500 funds. Converts to traditional IRA at 18 (then Roth convert).</li>
+        <li><strong>Kids Roth IRA:</strong> Requires earned income. Money goes directly into a Roth (no conversion needed). Can invest in anything. More flexible, but only for kids with jobs.</li>
+      </ul>
+      <p>
+        The Trump Account is the <strong>first</strong> strategy every parent should use because there is no income requirement. Add a Kids Roth IRA on top if your child has earned income.
+      </p>
+
+      <!-- ────────────────────────────────────────────── -->
+      <h2>Once It Is a Roth IRA: What Changes</h2>
+
+      <p>After conversion, your child can:</p>
+      <ul>
+        <li><strong>Invest in anything</strong> — real estate, crypto, private companies, individual stocks. No longer restricted to S&P 500 funds.</li>
+        <li><strong>Never pay tax again</strong> on qualified withdrawals after age 59½ (with the account open 5+ years).</li>
+        <li><strong>Skip required minimum distributions</strong> — unlike traditional IRAs, Roth IRAs have no forced withdrawals at 73+.</li>
+        <li><strong>Withdraw converted amounts</strong> penalty-free after each conversion's 5-year clock (growth must wait until 59½).</li>
+      </ul>
+
+      <!-- ────────────────────────────────────────────── -->
+      <h2>Step-by-Step: How to Execute</h2>
+
+      <ol>
+        <li><strong>Ages 0–17:</strong> Open a Trump Account. Contribute up to ${limits.annualContributionLimit.toLocaleString()}/year. Invest in a low-cost S&P 500 fund.</li>
+        <li><strong>Age 18:</strong> Account automatically becomes a traditional IRA. Estimate your child's total income for the year.</li>
+        <li><strong>Calculate the optimal conversion:</strong> Use the <a href="/calculators/roth-conversion">Roth Conversion Calculator</a> to find the max zero-tax or low-tax amount.</li>
+        <li><strong>Open a Roth IRA</strong> at the same brokerage (simplest) or a different one.</li>
+        <li><strong>Request a Roth conversion</strong> — this is typically a simple online form.</li>
+        <li><strong>Complete before December 31</strong> of the tax year. Conversions cannot be done retroactively.</li>
+        <li><strong>Report on Form 8606</strong> with the annual tax return to track basis correctly.</li>
+        <li><strong>Repeat each year</strong> until the traditional IRA is fully converted.</li>
+      </ol>
+
+      <!-- ────────────────────────────────────────────── -->
+      <h2>Run the Numbers for Your Family</h2>
+      <p>
+        Use our free <a href="/calculators/roth-conversion">Roth Conversion Calculator</a> to model the pro rata rule, standard deduction chunking, and see year-by-year tax projections for your specific situation.
+      </p>
+    </div>
+
+    <div class="mt-4 grid gap-3 sm:grid-cols-2">
+      <a href="/calculators/roth-conversion" class="rounded-lg border border-gold-400/30 bg-gold-400/5 p-4 no-underline hover:bg-gold-400/10 transition-colors">
+        <h3 class="font-semibold text-gold-400">Roth Conversion Calculator</h3>
+        <p class="text-sm text-gray-400">Model the pro rata rule and see your tax bill</p>
+      </a>
+      <a href="/calculators/growth-calculator" class="rounded-lg border border-surface-600 p-4 no-underline hover:border-gold-400/30 hover:bg-gold-400/5 transition-colors">
+        <h3 class="font-semibold text-white">Growth Calculator</h3>
+        <p class="text-sm text-gray-400">Project how much the account will be worth at 18</p>
+      </a>
+    </div>
+
+    <div class="prose mt-8">
+      <h2>Frequently Asked Questions</h2>
+    </div>
+
+    <div class="mt-4">
+      <Accordion items={faqs} />
+    </div>
+
+    <!-- Disclaimer -->
+    <div class="mt-10 rounded-lg border border-amber-500/30 bg-amber-500/10 p-4">
+      <p class="text-sm text-amber-300">
+        <strong class="text-amber-200">Disclaimer:</strong> This is educational content, not tax or financial advice.
+        Tax situations vary by individual, and tax laws change frequently. Roth conversions have permanent consequences.
+        Consult a qualified tax professional or CPA before executing any Roth conversion strategy.
+      </p>
+    </div>
+
+    <!-- Sources -->
+    <div class="mt-6 rounded-lg border border-surface-600 bg-surface-800 p-4 text-xs text-gray-500">
+      <p><strong class="text-gray-300">Sources:</strong></p>
+      <ul class="mt-1 space-y-0.5">
+        <li><a href="https://www.irs.gov/pub/irs-drop/n-25-68.pdf" target="_blank" rel="noopener noreferrer" class="text-gold-400 hover:text-gold-300">IRS Notice 2025-68</a></li>
+        <li><a href="https://trumpaccounts.gov" target="_blank" rel="noopener noreferrer" class="text-gold-400 hover:text-gold-300">trumpaccounts.gov</a></li>
+        <li>One Big Beautiful Bill Act (OBBBA), IRC Section 530A</li>
+        <li><a href="https://www.irs.gov/forms-pubs/about-form-8606" target="_blank" rel="noopener noreferrer" class="text-gold-400 hover:text-gold-300">IRS Form 8606 — Nondeductible IRAs</a></li>
+      </ul>
+    </div>
+  </article>
+</BaseLayout>
