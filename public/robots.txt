@@ -7,7 +7,8 @@ Disallow: /_astro/
 # Sitemap
 Sitemap: https://trumpaccounts.guide/sitemap-index.xml
 
-# LLMs
+# AI & LLM Resources
 # See https://llmstxt.org for spec
-# llms.txt — concise site overview for LLMs
-# llms-full.txt — detailed reference with all content and facts
+# llms.txt — Q&A-first knowledge base for AI assistants (concise)
+# llms-full.txt — complete reference with 80+ FAQs, comparisons, and facts
+# api/trump-accounts.json — machine-readable structured data (JSON)
