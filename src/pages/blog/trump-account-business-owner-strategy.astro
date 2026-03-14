@@ -1,0 +1,321 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-business-owner-strategy')!;
+const related = getRelatedArticles('trump-account-business-owner-strategy');
+
+const faqs = [
+  {
+    question: 'Can I deduct Trump Account contributions as a business expense?',
+    answer: 'Not directly. Trump Account contributions are made with after-tax dollars. But if you pay your child a reasonable wage from your business, that wage is a deductible business expense. Your child then uses their earnings to fund the Trump Account personally. The net effect: a tax deduction funds the account.',
+  },
+  {
+    question: 'What age can my child start working in my business?',
+    answer: 'There is no federal minimum age for children working in a parent-owned business (with the exception of mining and manufacturing). However, the work must be legitimate, the pay must be reasonable for the tasks performed, and you should document everything. Many families start children at age 7-10 with simple tasks like filing, cleaning, or organizing inventory.',
+  },
+  {
+    question: 'Does my rental property count as a business for this strategy?',
+    answer: 'Yes. A rental property is a business activity. Your children can perform legitimate tasks like yard work, cleaning between tenants, painting, organizing files, or helping with showings. Pay them a reasonable wage for the work performed and deduct it as a rental expense.',
+  },
+  {
+    question: 'How much can I pay my child from my business?',
+    answer: `Pay must be reasonable for the work performed. The IRS does not set a specific dollar limit, but the compensation must match what you would pay a non-family member for the same work. Many families pay $5,000-$15,000/year depending on the child's age and hours. The first $14,600 (2026 standard deduction) is tax-free to the child.`,
+  },
+  {
+    question: 'Can my child fund both a Roth IRA and a Trump Account?',
+    answer: `Yes. If your child has earned income, they can contribute to a Kids Roth IRA (up to $7,000 or their earned income, whichever is less) AND fund a Trump Account (up to $${limits.annualContributionLimit.toLocaleString()}/year). These are separate accounts with separate limits. This is the core of the stacking strategy.`,
+  },
+  {
+    question: 'Do I need to withhold payroll taxes when paying my child?',
+    answer: 'If your business is a sole proprietorship or a spousal partnership (not an LLC taxed as an S-corp or C-corp), and your child is under 18, you do NOT owe FICA (Social Security and Medicare taxes) on their wages. You also do not owe FUTA if they are under 21. This makes paying your child even more tax-efficient.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+  ogImage="/blogpost/TrumpAccounts_ Business Owner's Strategy_TrumpAccounts.guide.png"
+  sources={[
+    { name: 'IRS Notice 2025-68', url: 'https://www.irs.gov/pub/irs-drop/n-25-68.pdf' },
+    { name: 'IRS Publication 929 — Tax Rules for Children', url: 'https://www.irs.gov/publications/p929' },
+    { name: 'IRC §530A — Trump Accounts', url: 'https://www.congress.gov' },
+  ]}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Pay your children from your business → they fund a Trump Account with their earnings → you get a <strong class="text-white">tax deduction</strong>.</li>
+        <li>The child's first <strong class="text-white">$14,600</strong> (2026 standard deduction) is <strong class="text-white">tax-free</strong> to them.</li>
+        <li>Sole proprietors with kids under 18 owe <strong class="text-white">zero FICA taxes</strong> on the child's wages.</li>
+        <li><strong class="text-white">Rental properties count</strong> — your kids can do real work on your rentals.</li>
+        <li>Stack it: <strong class="text-white">Kids Roth IRA + Trump Account + Coverdell</strong> in the same year for maximum tax advantage.</li>
+      </ul>
+    </div>
+
+    <p>
+      If you own a business — even a single rental property — you have a tax advantage that W-2 employees do not. You can pay your children a reasonable wage, deduct it as a business expense, and your kids use that money to fund their Trump Account. The net effect is an <strong>indirect tax deduction for Trump Account contributions</strong>.
+    </p>
+    <p>
+      This strategy has been used by tax-savvy families for decades with Roth IRAs. Trump Accounts make it even more powerful because there are <strong>no income restrictions</strong> and you can later convert to a Roth IRA at age {limits.iraConversionAge}.
+    </p>
+
+    <CalloutBox type="tip" title="This is not a loophole">
+      <p>
+        Paying children for legitimate work in a family business is explicitly allowed by the IRS. The key requirements: the work must be real, the pay must be reasonable, and you must document everything. Tax professionals have recommended this strategy for years.
+      </p>
+    </CalloutBox>
+
+    <h2>How the Strategy Works (Step by Step)</h2>
+
+    <ol>
+      <li><strong>Your child does real work</strong> in your business — filing, cleaning, data entry, social media, yard work on rentals, etc.</li>
+      <li><strong>You pay them a reasonable wage</strong> — what you would pay any non-family worker for the same tasks.</li>
+      <li><strong>You deduct the wages</strong> as a business expense on your Schedule C, E, or corporate return.</li>
+      <li><strong>Your child files their own return</strong> (or you file for them) — the first $14,600 is tax-free under the standard deduction.</li>
+      <li><strong>Your child contributes to a Trump Account</strong> — up to ${limits.annualContributionLimit.toLocaleString()}/year.</li>
+      <li><strong>Optional: they also fund a Kids Roth IRA</strong> — up to $7,000/year (or earned income, whichever is less).</li>
+    </ol>
+
+    <h3>The Math: A Family Saving $12,000/Year</h3>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Item</th>
+            <th class="py-3 text-gray-400 font-medium">Amount</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Child's wages from business</td>
+            <td class="py-3 text-white font-medium">$12,000/year</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Parent's tax deduction (24% bracket)</td>
+            <td class="py-3 text-mint-400 font-medium">$2,880 saved</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Child's income tax (under standard deduction)</td>
+            <td class="py-3 text-mint-400 font-medium">$0</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">FICA taxes (sole prop, child under 18)</td>
+            <td class="py-3 text-mint-400 font-medium">$0</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">→ Child funds Trump Account</td>
+            <td class="py-3 text-white font-medium">$5,000</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">→ Child funds Kids Roth IRA</td>
+            <td class="py-3 text-white font-medium">$7,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      The parent <strong>saves $2,880 in taxes</strong>. The child pays <strong>$0 in taxes</strong>. And <strong>$12,000 flows into tax-advantaged accounts</strong> — $5,000 in a Trump Account and $7,000 in a Roth IRA. Do this for 10 years and the child could have <strong>$200,000+ in tax-advantaged savings</strong> before they turn 18.
+    </p>
+
+    <h2>Yes, Rental Properties Count</h2>
+
+    <p>
+      This is the point many families miss. You do not need an LLC or a storefront. <strong>A rental property is a business activity.</strong> If you own even one rental, your children can do legitimate work on it:
+    </p>
+
+    <ul>
+      <li><strong>Yard work and landscaping</strong> at the rental property</li>
+      <li><strong>Cleaning between tenants</strong></li>
+      <li><strong>Painting, minor repairs, organizing</strong></li>
+      <li><strong>Administrative tasks</strong> — filing paperwork, entering expenses into a spreadsheet</li>
+      <li><strong>Photography for listings</strong></li>
+      <li><strong>Helping with showings</strong> (older teens)</li>
+    </ul>
+
+    <CalloutBox type="warning" title="Document everything">
+      <p>
+        Keep time sheets, job descriptions, and pay records. Take photos of the work your child does. If the IRS questions the arrangement, you need to prove the work was real and the pay was reasonable. A neighbor kid doing the same work for the same pay is a good benchmark.
+      </p>
+    </CalloutBox>
+
+    <p>
+      The wages you pay are deducted on <strong>Schedule E</strong> as a rental expense. If you are not currently deducting them (because of the passive loss rules), the deductions accumulate as a <strong>passive loss carryforward</strong> — you get to use them when you eventually sell the property. So even if the deduction is delayed, it is not lost.
+    </p>
+
+    <h2>The FICA Exemption: Why Sole Proprietors Win</h2>
+
+    <p>
+      If your business is a <strong>sole proprietorship</strong> (or a spousal partnership) and your child is under 18, wages you pay them are exempt from FICA taxes — no Social Security tax, no Medicare tax. This saves an additional <strong>15.3%</strong> compared to hiring a non-family employee.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Business Type</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">FICA Exempt?</th>
+            <th class="py-3 text-gray-400 font-medium">Notes</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Sole proprietorship</td>
+            <td class="py-3 pr-4 text-mint-400 font-medium">Yes</td>
+            <td class="py-3">Child under 18, exempt from FICA and FUTA (under 21)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Spousal partnership (husband-wife)</td>
+            <td class="py-3 pr-4 text-mint-400 font-medium">Yes</td>
+            <td class="py-3">Same rules as sole proprietorship</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Single-member LLC (Schedule C)</td>
+            <td class="py-3 pr-4 text-mint-400 font-medium">Yes</td>
+            <td class="py-3">Disregarded entity, treated as sole prop</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">S-Corporation</td>
+            <td class="py-3 pr-4 text-red-400 font-medium">No</td>
+            <td class="py-3">FICA applies — the corporation is the employer, not the parent</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">C-Corporation</td>
+            <td class="py-3 pr-4 text-red-400 font-medium">No</td>
+            <td class="py-3">FICA applies — same reason as S-Corp</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <CalloutBox type="tip" title="S-Corp workaround">
+      <p>
+        If you have an S-Corp, some families create a separate sole proprietorship (like a management company) that employs the child. The sole prop provides services to the S-Corp. This preserves the FICA exemption. Talk to your tax advisor about whether this makes sense for your situation.
+      </p>
+    </CalloutBox>
+
+    <h2>The Stacking Playbook for Business Owners</h2>
+
+    <p>
+      Business owners are uniquely positioned to stack multiple tax-advantaged accounts in the same year. Here is the priority order:
+    </p>
+
+    <h3>Priority 1: Kids Roth IRA ($7,000/year)</h3>
+    <p>
+      Your child needs earned income to contribute. If they work in your business, they qualify. The Roth IRA gives <strong>total investment control</strong> — stocks, real estate, crypto, private companies. Growth and withdrawals are <strong>tax-free</strong>. Contributions can be pulled out anytime for college or a first home. This is the most flexible account.
+    </p>
+
+    <h3>Priority 2: Coverdell ESA ($2,000/year)</h3>
+    <p>
+      If college or trade school is a priority, the Coverdell is unmatched. <strong>Self-directed</strong> (invest in anything), <strong>tax-free withdrawals for education</strong>, and you can use it for K-12 private school too. The limit is only $2,000/year, but it compounds. Income phaseouts apply ($110K single / $220K married), but business owners can often manage AGI to stay under.
+    </p>
+
+    <h3>Priority 3: Trump Account ($5,000/year)</h3>
+    <p>
+      No income restrictions. No earned income requirement. Tax-deferred growth. Converts to a traditional IRA at {limits.iraConversionAge}, then you can do a Roth conversion during your child's low-income years. The downside: limited to S&P 500 index funds. The upside: no income limits and no phase-outs.
+    </p>
+
+    <h3>Priority 4: 529 Plan (varies by state)</h3>
+    <p>
+      Best for grandparents or high earners who have maxed everything else. High contribution limits (often $300K+ lifetime), state tax deductions in many states, and the SECURE 2.0 provision allows converting up to $35,000 to a Roth IRA after 15 years. Less flexible, but powerful for college savings.
+    </p>
+
+    <h3>What This Looks Like in Practice</h3>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Account</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Annual Max</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Tax on Growth</th>
+            <th class="py-3 text-gray-400 font-medium">Best For</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Kids Roth IRA</td>
+            <td class="py-3 pr-4">$7,000</td>
+            <td class="py-3 pr-4 text-mint-400">Tax-free</td>
+            <td class="py-3">Flexibility, self-directed investing</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Coverdell ESA</td>
+            <td class="py-3 pr-4">$2,000</td>
+            <td class="py-3 pr-4 text-mint-400">Tax-free (education)</td>
+            <td class="py-3">College, trade school, K-12</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Trump Account</td>
+            <td class="py-3 pr-4">$5,000</td>
+            <td class="py-3 pr-4 text-yellow-400">Tax-deferred</td>
+            <td class="py-3">Long-term wealth, Roth conversion at 18</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">529 Plan</td>
+            <td class="py-3 pr-4">Varies</td>
+            <td class="py-3 pr-4 text-mint-400">Tax-free (education)</td>
+            <td class="py-3">High earners, grandparents, college focus</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      A business-owner family paying their child $14,000/year could fund <strong>all four accounts</strong> — $7,000 Roth + $2,000 Coverdell + $5,000 Trump Account — for a total of $14,000 in tax-advantaged savings. The parent gets a <strong>$14,000 business deduction</strong>. The child pays <strong>$0 in income tax</strong> (under the standard deduction) and <strong>$0 in FICA</strong> (sole prop exemption).
+    </p>
+
+    <h2>Real Example: The Landscaper With Two Rentals</h2>
+
+    <p>
+      Meet Sarah. She runs a landscaping business (sole prop) and owns two rental properties. Her 14-year-old son helps mow lawns on the weekend and cleans the rentals between tenants.
+    </p>
+
+    <ul>
+      <li><strong>Son earns $12,000/year</strong> — $8,000 from the landscaping business, $4,000 from rental work.</li>
+      <li><strong>Sarah deducts $12,000</strong> — $8,000 on Schedule C, $4,000 on Schedule E.</li>
+      <li><strong>Son's tax bill:</strong> $0 (under standard deduction). <strong>FICA:</strong> $0 (sole prop exemption).</li>
+      <li><strong>Son contributes $5,000 to Trump Account</strong> and <strong>$7,000 to a Kids Roth IRA</strong>.</li>
+    </ul>
+
+    <p>
+      At Sarah's 24% tax bracket, the $12,000 deduction saves her <strong>$2,880 in income taxes</strong> plus <strong>$1,836 in self-employment taxes</strong> (15.3%). Total tax savings: <strong>$4,716/year</strong>. Meanwhile, her son is building two tax-advantaged accounts that could be worth <strong>hundreds of thousands</strong> by the time he is 30.
+    </p>
+
+    <h2>Common Mistakes to Avoid</h2>
+
+    <ul>
+      <li><strong>Paying unreasonable wages.</strong> Do not pay your 8-year-old $50/hour to sweep the floor. Pay what the work is actually worth. $10-$20/hour for age-appropriate tasks is defensible.</li>
+      <li><strong>No documentation.</strong> Keep time sheets, job descriptions, and pay records. The IRS wants to see that the work is real.</li>
+      <li><strong>Paying in cash with no paper trail.</strong> Use checks, Venmo, or direct deposit. Document every payment.</li>
+      <li><strong>Forgetting to file the child's tax return.</strong> Even if they owe $0, file a return to establish the earned income on record.</li>
+      <li><strong>Skipping the Trump Account election.</strong> You still need to file {limits.form} to open the Trump Account. Paying your child does not automatically create one.</li>
+    </ul>
+
+    <CalloutBox type="warning" title="Not tax or financial advice">
+      <p>
+        This article is for educational purposes only. The "hire your kids" strategy has specific IRS rules that vary by business structure, state, and family situation. Consult a qualified CPA or tax attorney before implementing this strategy.
+      </p>
+    </CalloutBox>
+
+    <h2>The Bottom Line</h2>
+
+    <p>
+      Business owners — including rental property owners — have a unique advantage. By paying your children for legitimate work, you create a tax-deductible pathway to fund their Trump Account, Kids Roth IRA, and Coverdell ESA. The parent gets a deduction. The child pays no tax. And the money compounds in tax-advantaged accounts for decades.
+    </p>
+    <p>
+      This is not a new trick. Families have used the "hire your kids" strategy for years with Roth IRAs. Trump Accounts just add another $5,000/year of tax-advantaged space to the stack — with no income restrictions and a built-in Roth conversion at age {limits.iraConversionAge}.
+    </p>
+  </div>
+</BlogLayout>

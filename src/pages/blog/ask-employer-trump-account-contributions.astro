@@ -1,0 +1,286 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('ask-employer-trump-account-contributions')!;
+const related = getRelatedArticles('ask-employer-trump-account-contributions');
+
+const faqs = [
+  {
+    question: 'Are employers required to offer Trump Account contributions?',
+    answer: `No. Employer contributions to Trump Accounts are completely voluntary. There is no federal mandate. You are asking your employer to add a new benefit — not demanding something they owe you.`,
+  },
+  {
+    question: 'How much can my employer contribute?',
+    answer: `Up to $${limits.employerContributionLimit.toLocaleString()} per year per employee under IRC Section 128. The contribution is tax-free to you and tax-deductible for the employer. It counts toward your child's $${limits.annualContributionLimit.toLocaleString()} annual cap.`,
+  },
+  {
+    question: 'What if my employer says no?',
+    answer: 'That is their right. Do not push back aggressively. You planted a seed. If enough employees ask, the benefit becomes harder to ignore. In the meantime, your family can still contribute up to the full $5,000/year on your own.',
+  },
+  {
+    question: 'Can small businesses offer Trump Account contributions?',
+    answer: 'Yes. There is no minimum company size. A sole proprietor with one employee can set up employer contributions. The employer gets a tax deduction, and the employee receives the contribution tax-free.',
+  },
+  {
+    question: 'Should I talk to HR or my manager?',
+    answer: 'Start with HR or your benefits team if you have one. They handle benefit decisions. If your company is small and has no HR, go to the owner or manager directly. Frame it as a benefits suggestion, not a complaint.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Employer contributions are <strong class="text-white">voluntary</strong> &mdash; you are making a benefits suggestion, not a demand.</li>
+        <li>Employers get a <strong class="text-white">tax deduction</strong> for every dollar contributed. It costs them less than a raise.</li>
+        <li>The benefit is <strong class="text-white">tax-free to you</strong> &mdash; $2,500 in contributions saves you $300&ndash;$800 in taxes depending on your bracket.</li>
+        <li>Frame it as a <strong class="text-white">recruiting and retention tool</strong>. Companies are competing for parent talent.</li>
+        <li>Even if they say no now, <strong class="text-white">you planted a seed</strong>. Ask again in 6 months.</li>
+      </ul>
+    </div>
+
+    <p>
+      Your employer can put up to <strong>${limits.employerContributionLimit.toLocaleString()} per year</strong> into your child's Trump Account &mdash; tax-free to you, tax-deductible for them. But most employers will not offer this benefit unless employees ask.
+    </p>
+    <p>
+      Here is exactly how to make the case &mdash; whether you work at a Fortune 500 company or a 10-person startup.
+    </p>
+
+    <h2>Why Employers Should Care</h2>
+    <p>
+      Before you walk into HR, understand the employer's perspective. They are not doing this as a favor. There are real business reasons to offer Trump Account contributions.
+    </p>
+
+    <h3>1. It is tax-deductible</h3>
+    <p>
+      Employer contributions to Trump Accounts are deductible as a business expense, just like 401(k) matching contributions. A company contributing $2,500 per employee in the 21% corporate tax bracket effectively pays <strong>$1,975 after the deduction</strong>. That is less than a $2,500 raise, which costs the employer more after payroll taxes.
+    </p>
+
+    <h3>2. It attracts and retains parent employees</h3>
+    <p>
+      Working parents &mdash; especially millennials and Gen Z &mdash; actively seek employers that support their families. A Trump Account contribution program signals that the company invests in employees' children, not just their retirement.
+    </p>
+
+    <h3>3. It is cheaper than most benefits</h3>
+    <p>
+      At $2,500 per employee per year, Trump Account contributions cost less than many existing benefits. For comparison:
+    </p>
+    <ul>
+      <li>Average employer health insurance contribution: ~$16,000/year</li>
+      <li>Average 401(k) match: ~$4,000&ndash;$5,000/year</li>
+      <li>Trump Account contribution: <strong>$2,500/year</strong> (and not every employee has eligible children)</li>
+    </ul>
+
+    <h3>4. Major companies are already doing it</h3>
+    <p>
+      At the <a href="/blog/trump-accounts-summit">Trump Accounts Summit</a> in January 2026, 27 companies pledged support for Trump Accounts. Companies that wait risk falling behind in the competition for talent.
+    </p>
+
+    <h2>How to Bring It Up: The Conversation Script</h2>
+    <p>
+      Here is a professional, non-confrontational way to raise the topic. Adapt it to your workplace culture.
+    </p>
+
+    <CalloutBox type="info" title="Email template you can copy">
+      <p>
+        Subject: Benefits suggestion &mdash; Trump Account employer contributions
+      </p>
+      <p>
+        Hi [Name],
+      </p>
+      <p>
+        I wanted to flag a new employee benefit that some companies are starting to offer: employer contributions to Trump Accounts under IRC Section 128.
+      </p>
+      <p>
+        The quick version: employers can contribute up to $2,500/year per employee toward their child's Trump Account. The contribution is tax-deductible for the company and tax-free to the employee. Several major companies announced support at the January 2026 Trump Accounts Summit.
+      </p>
+      <p>
+        I think this could be a strong recruiting and retention tool, especially for working parents on the team. I would be happy to share more details if the benefits team wants to evaluate it.
+      </p>
+      <p>
+        Here is a resource with the full breakdown for employers: trumpaccounts.guide/for-employers
+      </p>
+      <p>
+        Thanks for considering it.
+      </p>
+    </CalloutBox>
+
+    <h2>The Numbers That Convince Decision-Makers</h2>
+    <p>
+      If your employer asks "what does this cost us?" &mdash; here are the numbers.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Company Size</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Eligible Employees*</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Gross Cost/Year</th>
+            <th class="py-3 text-gray-400 font-medium">After Tax Deduction (21%)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">25 employees</td>
+            <td class="py-3 pr-4">10</td>
+            <td class="py-3 pr-4">$25,000</td>
+            <td class="py-3 text-mint-400">$19,750</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">100 employees</td>
+            <td class="py-3 pr-4">40</td>
+            <td class="py-3 pr-4">$100,000</td>
+            <td class="py-3 text-mint-400">$79,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">500 employees</td>
+            <td class="py-3 pr-4">200</td>
+            <td class="py-3 pr-4">$500,000</td>
+            <td class="py-3 text-mint-400">$395,000</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">1,000 employees</td>
+            <td class="py-3 pr-4">400</td>
+            <td class="py-3 pr-4">$1,000,000</td>
+            <td class="py-3 text-mint-400">$790,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="text-sm text-gray-400">
+      *Assumes ~40% of employees have children under 18 with Trump Accounts, and the employer contributes the full $2,500 per eligible employee.
+    </p>
+
+    <CalloutBox type="tip" title="Employers can start small">
+      <p>
+        There is no requirement to contribute the full $2,500. An employer can offer $500 or $1,000 per employee and still provide a meaningful benefit. Starting smaller makes the budget easier to approve and leaves room to increase later.
+      </p>
+    </CalloutBox>
+
+    <h2>What the Employee Gets</h2>
+    <p>
+      Here is the value from <em>your</em> side. Use these numbers to show coworkers why they should ask too.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Your Tax Bracket</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Employer Puts In</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Tax You Save</th>
+            <th class="py-3 text-gray-400 font-medium">Value at Child's Age 18 (8%)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">12%</td>
+            <td class="py-3 pr-4">$2,500/year</td>
+            <td class="py-3 pr-4">$300/year</td>
+            <td class="py-3 text-mint-400">$93,400</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">22%</td>
+            <td class="py-3 pr-4">$2,500/year</td>
+            <td class="py-3 pr-4">$550/year</td>
+            <td class="py-3 text-mint-400">$93,400</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">32%</td>
+            <td class="py-3 pr-4">$2,500/year</td>
+            <td class="py-3 pr-4">$800/year</td>
+            <td class="py-3 text-mint-400">$93,400</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      If your employer contributes $2,500 every year from birth to age 18 at 8% average returns, that is <strong>$93,400 in your child's account</strong> &mdash; from money that was tax-free to you and cost your employer less than a salary increase.
+    </p>
+
+    <h2>Common Objections (and How to Respond)</h2>
+
+    <h3>"We can't afford it."</h3>
+    <p>
+      "The tax deduction reduces the net cost by 21%. Contributing $1,000 per employee instead of $2,500 is still meaningful. And not every employee will enroll &mdash; many do not have children under 18."
+    </p>
+
+    <h3>"It's too complicated to set up."</h3>
+    <p>
+      "The employer works with an existing Trump Account custodian (Fidelity, Schwab, etc.) to establish a contribution program. Most major brokerages are already building employer contribution workflows. It is similar to setting up a 401(k) match."
+    </p>
+
+    <h3>"We already offer a 401(k) match."</h3>
+    <p>
+      "A 401(k) match helps the employee's retirement. Trump Account contributions help their child's future. These are complementary benefits that serve different needs. Parents value both."
+    </p>
+
+    <h3>"Let's wait and see how it plays out."</h3>
+    <p>
+      "That is reasonable. But early adopters will have a recruiting advantage, especially for parent candidates. Could we revisit this in Q3 or Q4?"
+    </p>
+
+    <h2>Strength in Numbers</h2>
+    <p>
+      One employee asking carries some weight. Five employees asking carries a lot more. If you know other parents at your company who would benefit, coordinate your requests.
+    </p>
+    <ul>
+      <li>Share this article with coworkers who have kids under 18</li>
+      <li>Mention it in team meetings or company suggestion channels</li>
+      <li>If your company runs benefits surveys, write it in</li>
+      <li>Point to our <a href="/for-employers">employer guide</a> as a resource for the HR team</li>
+    </ul>
+
+    <h2>If Your Employer Says Yes</h2>
+    <p>
+      Here is what to expect next:
+    </p>
+    <ol>
+      <li>HR sets up a contribution program with a Trump Account custodian</li>
+      <li>You provide your child's Trump Account details to HR</li>
+      <li>The employer contributes directly to the child's account (not through your paycheck)</li>
+      <li>The contribution does not appear as taxable income on your W-2</li>
+      <li>Coordinate with family contributions to stay within the <a href="/blog/contribution-limits-explained">${limits.annualContributionLimit.toLocaleString()} annual cap</a></li>
+    </ol>
+
+    <h2>If Your Employer Says No</h2>
+    <p>
+      Do not be discouraged. You planted a seed. As more companies adopt this benefit and more employees ask, the pressure builds. In the meantime:
+    </p>
+    <ul>
+      <li>Your family can still contribute the full <strong>${limits.annualContributionLimit.toLocaleString()}/year</strong> on your own</li>
+      <li>Grandparents and other relatives can contribute too (&mdash; see our <a href="/blog/grandparent-gift-guide">grandparent gift guide</a>)</li>
+      <li>Ask again in 6 months when more companies have launched programs</li>
+    </ul>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      Employer Trump Account contributions are tax-free money for your child's future. But they will not happen unless employees ask. A professional, fact-based request costs you nothing and could be worth <strong>$93,000+ over 18 years</strong>.
+    </p>
+    <p>
+      Use our <a href="/calculators/employer-match"><strong>Employer Contribution Calculator</strong></a> to see the exact impact on your child's account. And share the <a href="/for-employers"><strong>employer guide</strong></a> with your HR team to make their evaluation easier.
+    </p>
+
+    <CalloutBox type="warning" title="Not financial advice">
+      <p>
+        This is educational content, not financial or employment advice. Employer benefit decisions depend on company-specific factors. The tax implications described are general and may vary. Consult a qualified professional for guidance specific to your situation.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

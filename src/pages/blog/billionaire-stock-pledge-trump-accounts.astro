@@ -1,0 +1,212 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import CalculatorCTA from '../../components/ui/CalculatorCTA.astro';
+import KeepReading from '../../components/ui/KeepReading.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('billionaire-stock-pledge-trump-accounts')!;
+const related = getRelatedArticles('billionaire-stock-pledge-trump-accounts');
+
+const faqs = [
+  {
+    question: 'Can billionaires donate stock directly to Trump Accounts?',
+    answer: `The mechanism for direct stock donations into Trump Accounts is being developed. Brad Gerstner hinted at "banger announcements" before July 4th. Currently, cash donations are the primary model, as demonstrated by the Dell Foundation's $6.25 billion pledge of $${limits.dellPledge.perChildAmount} per qualifying child.`,
+  },
+  {
+    question: 'Has anyone already pledged money to Trump Accounts?',
+    answer: `Yes. Michael and Susan Dell pledged $6.25 billion — $${limits.dellPledge.perChildAmount} per child ${limits.dellPledge.eligibleAge} in ZIP codes with median income below $${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}. At the Trump Accounts Summit in January 2026, 27 companies committed support including Dell, Visa, Nvidia, and Robinhood.`,
+  },
+  {
+    question: 'How would a stock pledge work for Trump Accounts?',
+    answer: `A billionaire could pledge a percentage of their shares to be distributed across kids' accounts over time. For example, if a founder pledged 5% of shares worth $10 billion, that is $500 billion worth of stock flowing into children's investment accounts over years — dwarfing any government deposit.`,
+  },
+  {
+    question: 'Would stock pledges replace the government deposit?',
+    answer: `No. Stock pledges would be in addition to the $${limits.pilotDeposit.toLocaleString()} federal deposit and the $${limits.dellPledge.perChildAmount} Dell bonus. They would stack on top, increasing the total starting balance for every child.`,
+  },
+  {
+    question: 'What companies could participate in an equity pledge?',
+    answer: 'Any publicly traded company could participate. The All-In Podcast discussion specifically mentioned the idea of tech founders like Larry Page, Sergey Brin, or Mark Zuckerberg pledging a percentage of their shares. Even fractional shares — a thousandth of a share — would be meaningful at scale across millions of children.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  ogImage="/blogpost/billionaire-stock-pledge-trump-accounts.png"
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>A new idea is gaining traction: <strong class="text-white">billionaires pledging stock shares</strong> directly into kids' Trump Accounts.</li>
+        <li>The <strong class="text-white">Dell Foundation already proved the model</strong> with a $6.25 billion cash pledge.</li>
+        <li>Even <strong class="text-white">fractional shares</strong> (a thousandth of a share) would be meaningful across millions of children.</li>
+        <li>Brad Gerstner hinted at <strong class="text-white">"banger announcements"</strong> before July 4th.</li>
+        <li>An equity giving pledge could <strong class="text-white">dwarf government deposits</strong> and transform wealth building for an entire generation.</li>
+      </ul>
+    </div>
+
+    <p>
+      What if the richest people in America pledged a fraction of their stock to every child's Trump Account?
+    </p>
+    <p>
+      That question was raised on the All-In Podcast, and the answer from Brad Gerstner — one of the architects of the program — was telling: <em>"It's come up. Stay tuned. We're going to have some banger announcements as we head toward July 4th."</em>
+    </p>
+    <p>
+      Here is why this idea could change everything.
+    </p>
+
+    <h2>The Dell Pledge: Proof of Concept</h2>
+    <p>
+      We already have a model for how this works. Michael and Susan Dell pledged <strong>$6.25 billion</strong> to add <strong>${limits.dellPledge.perChildAmount}</strong> to the Trump Account of every qualifying child — those <strong>{limits.dellPledge.eligibleAge}</strong> living in ZIP codes with median household income below <strong>${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}</strong>.
+    </p>
+    <p>
+      That is the largest private philanthropic commitment to children's investment accounts in history. It proved three things:
+    </p>
+    <ol>
+      <li><strong>The infrastructure works.</strong> Money can flow from private donors into individual Trump Accounts at scale.</li>
+      <li><strong>The public loves it.</strong> The Dell pledge was one of the most talked-about announcements at the Trump Accounts Summit.</li>
+      <li><strong>It compounds.</strong> That ${limits.dellPledge.perChildAmount} — combined with the ${limits.pilotDeposit.toLocaleString()} federal deposit — means a qualifying newborn starts with $1,250. At 10% historical S&P 500 returns, that $1,250 alone grows to nearly <strong>$7,000</strong> by age 18.</li>
+    </ol>
+
+    <h2>The Big Idea: An Equity Giving Pledge</h2>
+    <p>
+      On the All-In Podcast, the concept of a <strong>voluntary giving pledge around equities</strong> was floated. The idea is simple:
+    </p>
+
+    <CalloutBox type="info" title="The proposal">
+      <p>
+        Tech founders and billionaires could opt into a pledge to donate a percentage of their shares — say 5% — into children's Trump Accounts over 20 years. They do not have to. It is voluntary. But if someone like Larry Page, Sergey Brin, or Mark Zuckerberg said "I want to pledge 5% of my shares to go into kids' accounts," it could be transformational.
+      </p>
+    </CalloutBox>
+
+    <p>
+      Let's put numbers on this to show why it matters.
+    </p>
+
+    <h2>The Math: What Would a 5% Pledge Look Like?</h2>
+    <p>
+      Consider a hypothetical tech founder worth $100 billion in stock. A 5% pledge over 20 years would mean $5 billion in shares flowing into children's Trump Accounts.
+    </p>
+    <p>
+      With roughly 73 million children under 18 in the United States, here is what different pledge levels could mean per child:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Pledge Size</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Total Over 20 Years</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Per Child (73M kids)</th>
+            <th class="py-3 text-gray-400 font-medium">Value at 18 (at 10%)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">1 founder ($100B)</td>
+            <td class="py-3 pr-4">$5 billion</td>
+            <td class="py-3 pr-4">~$68</td>
+            <td class="py-3">~$380</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">10 founders ($1T total)</td>
+            <td class="py-3 pr-4">$50 billion</td>
+            <td class="py-3 pr-4">~$685</td>
+            <td class="py-3">~$3,800</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-gold-400">25 founders ($3T total)</td>
+            <td class="py-3 pr-4 font-medium text-gold-400">$150 billion</td>
+            <td class="py-3 pr-4 font-medium text-gold-400">~$2,050</td>
+            <td class="py-3 font-medium text-gold-400">~$11,400</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      If 25 of America's wealthiest founders each pledged 5% of their stock holdings, every child in America could receive over <strong>$2,000</strong> in their Trump Account — on top of the government deposit and Dell bonus. Compounded over 18 years, that could add <strong>$11,000+</strong> to every child's account.
+    </p>
+
+    <CalloutBox type="tip" title="Even fractional shares matter">
+      <p>
+        As discussed on the podcast: "What an amazing, beautiful thing that could be... to get a tenth of a share, a hundredth of a share, a thousandth of a share of whatever company." At scale, even tiny fractional shares across 73 million children add up to transformational wealth building.
+      </p>
+    </CalloutBox>
+
+    <h2>Why Billionaires Would Do This</h2>
+    <p>
+      The cynical response is "they wouldn't." But consider the incentives:
+    </p>
+    <ul>
+      <li><strong>Tax benefits.</strong> Stock donations to qualified programs are typically tax-deductible, and the donor avoids capital gains taxes on appreciated shares.</li>
+      <li><strong>Public goodwill.</strong> In an era of growing resentment toward billionaires, pledging stock to children's accounts is the ultimate reputation investment.</li>
+      <li><strong>Market stability.</strong> More Americans owning index funds means more long-term holders and less speculative trading. That benefits everyone, including the companies whose stock is being pledged.</li>
+      <li><strong>The Giving Pledge precedent.</strong> Bill Gates and Warren Buffett's Giving Pledge already has 240+ signatories committing to give away most of their wealth. An equity pledge for children's accounts is a natural extension.</li>
+    </ul>
+
+    <h2>How It Could Work</h2>
+    <p>
+      The mechanics are not trivial, but they are solvable. Here is a plausible framework:
+    </p>
+    <ol>
+      <li><strong>Founders pledge a percentage of shares</strong> over a defined period (e.g., 5% over 20 years)</li>
+      <li><strong>Shares are donated to a nonprofit intermediary</strong> (similar to how the Dell Foundation operates)</li>
+      <li><strong>The intermediary sells shares and distributes cash</strong> into children's Trump Accounts at designated brokerages</li>
+      <li><strong>Alternatively, shares could transfer directly</strong> if Trump Account rules expand to allow individual company stock alongside index funds</li>
+    </ol>
+    <p>
+      The infrastructure already exists. The Dell pledge proved that private money can flow into Trump Accounts at scale. The question is how many billionaires sign up.
+    </p>
+
+    <h2>Companies Already in the Game</h2>
+    <p>
+      The <a href="/blog/trump-accounts-summit">Trump Accounts Summit</a> in January 2026 saw <strong>27 companies</strong> commit to supporting the program. Key pledges include:
+    </p>
+    <ul>
+      <li><strong>Dell Foundation</strong> — $6.25B ($250/child in qualifying ZIP codes)</li>
+      <li><strong>Visa</strong> — Credit card rewards directed into Trump Accounts</li>
+      <li><strong>Nvidia</strong> — Corporate support commitment</li>
+      <li><strong>Robinhood</strong> — Platform support for Trump Account management</li>
+    </ul>
+    <p>
+      Gerstner's hint — "some banger announcements as we head toward July 4th" — suggests more pledges are imminent. The momentum is building.
+    </p>
+
+    <h2>What This Means for Your Child</h2>
+    <p>
+      Right now, a qualifying newborn starts with:
+    </p>
+    <ul>
+      <li><strong>${limits.pilotDeposit.toLocaleString()}</strong> federal deposit</li>
+      <li><strong>${limits.dellPledge.perChildAmount}</strong> Dell Foundation bonus (in qualifying ZIP codes)</li>
+      <li><strong>${limits.annualContributionLimit.toLocaleString()}/year</strong> in possible family + employer contributions</li>
+    </ul>
+    <p>
+      If an equity giving pledge materializes, those numbers could grow substantially — potentially adding thousands more to every child's starting balance without costing families a dime.
+    </p>
+    <p>
+      The first step is making sure your child has a Trump Account open and ready to receive these contributions. Do not wait for the announcements — <a href="/blog/how-to-open-step-by-step">open an account now</a> so your child is positioned to benefit from whatever comes next.
+    </p>
+
+    <CalculatorCTA calculator="growth" />
+
+    <KeepReading slugs={['claim-dell-250-trump-account', 'corporate-pledges-trump-accounts', 'trump-account-signups-exploding']} />
+
+    <CalloutBox type="warning" title="Not tax or financial advice">
+      <p>
+        This article is educational content based on IRC Section 530A and IRS Notice 2025-68. It is not tax or financial advice. The equity giving pledge concept discussed in this article is speculative and has not been formally announced. Consult a qualified tax professional or financial advisor before making decisions about your child's account.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

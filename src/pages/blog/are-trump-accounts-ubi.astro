@@ -1,0 +1,211 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import CalculatorCTA from '../../components/ui/CalculatorCTA.astro';
+import KeepReading from '../../components/ui/KeepReading.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('are-trump-accounts-ubi')!;
+const related = getRelatedArticles('are-trump-accounts-ubi');
+
+const faqs = [
+  {
+    question: 'Are Trump Accounts a form of Universal Basic Income?',
+    answer: 'No. UBI gives cash to spend now. Trump Accounts are locked investment accounts that cannot be touched until age 18. They are designed to build wealth over time, not provide immediate income. The two programs have fundamentally different goals.',
+  },
+  {
+    question: 'Why do people compare Trump Accounts to UBI?',
+    answer: `Both programs give money to everyone regardless of income. The $${limits.pilotDeposit.toLocaleString()} federal deposit goes to every eligible child with no means testing. That universal aspect is what triggers the UBI comparison. But the similarity ends there.`,
+  },
+  {
+    question: 'Do Trump Accounts help with wealth inequality?',
+    answer: 'Yes, but through ownership, not redistribution. Trump Accounts give every child a stake in the stock market — something only about 58% of American households currently have. Over 18 years of compound growth, even the $1,000 deposit could help narrow the wealth gap between families who invest and families who do not.',
+  },
+  {
+    question: 'Is the $1,000 deposit free money?',
+    answer: `Yes, for families. The $${limits.pilotDeposit.toLocaleString()} federal pilot deposit for children born ${limits.pilotDepositStartYear}-${limits.pilotDepositEndYear} costs parents nothing. It is funded by the federal government. But unlike UBI, you cannot spend it — it must stay invested in S&P 500 index funds until the child turns ${limits.growthPhaseEndAge}.`,
+  },
+  {
+    question: 'Could Trump Accounts replace UBI?',
+    answer: 'No. They solve different problems. UBI addresses immediate income needs. Trump Accounts address long-term wealth building. A family that cannot pay rent this month needs income, not an investment account their child can access in 18 years. The two ideas are complementary, not substitutes.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  ogImage="/blogpost/are-trump-accounts-ubi.png"
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Trump Accounts are <strong class="text-white">not UBI</strong> — different goals, different mechanics.</li>
+        <li>UBI = <strong class="text-white">cash to spend now</strong>. Trump Accounts = <strong class="text-white">forced long-term investing</strong>.</li>
+        <li>The similarity: both are <strong class="text-white">universal with no income restrictions</strong>.</li>
+        <li>Trump Accounts address <strong class="text-white">wealth inequality through ownership</strong>, not redistribution.</li>
+        <li>You <strong class="text-white">cannot access the money until age {limits.growthPhaseEndAge}</strong> — this is a feature, not a bug.</li>
+        <li>The two ideas are <strong class="text-white">complementary, not substitutes</strong>.</li>
+      </ul>
+    </div>
+
+    <p>
+      On the All-In Podcast, someone told Brad Gerstner: <em>"I really like these Trump Accounts because it's like the start of UBI."</em>
+    </p>
+    <p>
+      Gerstner's response: <em>"That's not exactly the intention, but I get it."</em>
+    </p>
+    <p>
+      He gets it because the comparison is understandable — but wrong. Here is why Trump Accounts and Universal Basic Income are fundamentally different programs, even though they share one important feature.
+    </p>
+
+    <h2>The One Thing They Share: Universality</h2>
+    <p>
+      The reason people make the UBI comparison is simple: <strong>both programs give money to everyone</strong>.
+    </p>
+    <p>
+      Trump Accounts have <strong>no income restrictions</strong>. A billionaire's child and a minimum-wage worker's child both get the same ${limits.pilotDeposit.toLocaleString()} deposit. Both families can contribute up to ${limits.annualContributionLimit.toLocaleString()}/year. Both kids get 18 years of tax-deferred growth in S&P 500 index funds.
+    </p>
+    <p>
+      That universality is rare in government programs. Most have income phase-outs, means testing, or eligibility restrictions. Trump Accounts do not. In that one respect, they do look like UBI.
+    </p>
+    <p>
+      But that is where the similarity ends.
+    </p>
+
+    <h2>Five Ways Trump Accounts Differ from UBI</h2>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Feature</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">UBI</th>
+            <th class="py-3 text-gray-400 font-medium">Trump Accounts</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Purpose</td>
+            <td class="py-3 pr-4">Cover basic needs now</td>
+            <td class="py-3">Build long-term wealth</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Access to funds</td>
+            <td class="py-3 pr-4">Immediate — spend on anything</td>
+            <td class="py-3">Locked until age {limits.growthPhaseEndAge}</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Payment type</td>
+            <td class="py-3 pr-4">Recurring cash (monthly)</td>
+            <td class="py-3">One-time deposit + voluntary contributions</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">What it buys</td>
+            <td class="py-3 pr-4">Groceries, rent, anything</td>
+            <td class="py-3">S&P 500 index fund shares only</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">Economic philosophy</td>
+            <td class="py-3 pr-4">Income redistribution</td>
+            <td class="py-3">Ownership participation</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>1. Consumption vs. Investment</h3>
+    <p>
+      UBI is designed for <strong>consumption</strong>. You get cash. You spend it on rent, food, healthcare, or whatever you need. The money flows through the economy immediately.
+    </p>
+    <p>
+      Trump Accounts are designed for <strong>investment</strong>. The ${limits.pilotDeposit.toLocaleString()} deposit goes into S&P 500 index funds. You cannot touch it. You cannot spend it on groceries. It sits and compounds for 18 years.
+    </p>
+    <p>
+      This is not a subtle difference. It is the fundamental design choice. Trump Accounts deliberately prevent spending because the goal is <strong>forced savings</strong>, not immediate relief.
+    </p>
+
+    <h3>2. Recurring vs. One-Time</h3>
+    <p>
+      UBI proposals typically involve <strong>monthly payments</strong> — $500, $1,000, or $2,000 per month, every month, indefinitely. The ongoing cost is enormous.
+    </p>
+    <p>
+      Trump Accounts provide a <strong>one-time ${limits.pilotDeposit.toLocaleString()} deposit</strong> (for {limits.pilotDepositStartYear}-{limits.pilotDepositEndYear} births). After that, additional money comes from family contributions and employer matches — not the government. The ongoing federal cost is dramatically lower.
+    </p>
+
+    <h3>3. Adults vs. Children</h3>
+    <p>
+      UBI goes to <strong>adults</strong> who can make their own spending decisions. Trump Accounts go to <strong>children</strong> whose parents manage the account. The child does not gain access until age {limits.growthPhaseEndAge}, when the account converts to a <a href="/blog/what-happens-child-turns-18">traditional IRA</a>.
+    </p>
+
+    <h3>4. Cash vs. Equity</h3>
+    <p>
+      UBI gives you <strong>dollars</strong>. Trump Accounts give you <strong>ownership</strong> — shares in the 500 largest American companies.
+    </p>
+    <p>
+      This distinction matters philosophically. UBI says: <em>here is money to survive.</em> Trump Accounts say: <em>here is a stake in the economy, so you benefit when it grows.</em> One is a safety net. The other is a ladder.
+    </p>
+
+    <h3>5. Cost to Taxpayers</h3>
+    <p>
+      A UBI program paying $1,000/month to every American adult would cost roughly <strong>$3 trillion per year</strong>. That is more than the entire federal discretionary budget.
+    </p>
+    <p>
+      Trump Accounts' federal cost is the ${limits.pilotDeposit.toLocaleString()} deposit for each child born {limits.pilotDepositStartYear}-{limits.pilotDepositEndYear}. At roughly 3.6 million births per year, that is about <strong>$3.6 billion per year</strong> for four years — less than 0.1% of the federal budget. It is not even in the same universe as UBI's price tag.
+    </p>
+
+    <h2>The Real Goal: Ownership, Not Income</h2>
+    <p>
+      Gerstner described the vision clearly on the All-In Podcast: getting <strong>"everybody, Main Street America, into the game of capitalism"</strong> by having every child <strong>"directly owning the great companies in America."</strong>
+    </p>
+    <p>
+      This is an ownership program, not an income program. The bet is that if you give every child a piece of the stock market at birth, you change the trajectory of wealth inequality over a generation — not by redistributing income, but by making everyone a capitalist.
+    </p>
+
+    <CalloutBox type="info" title="The wealth gap in numbers">
+      <p>
+        About 58% of American households own stock (including retirement accounts). For the bottom 50% by income, stock ownership is much lower. Trump Accounts guarantee that <strong>every child</strong> starts as a stock market participant. Over 18 years of compound growth, that early ownership stake could meaningfully narrow the wealth gap.
+      </p>
+    </CalloutBox>
+
+    <h2>Could They Work Together?</h2>
+    <p>
+      Trump Accounts and UBI are not competing ideas. They solve different problems on different timelines:
+    </p>
+    <ul>
+      <li><strong>UBI</strong> addresses <strong>today's</strong> income needs — food, rent, healthcare</li>
+      <li><strong>Trump Accounts</strong> address <strong>tomorrow's</strong> wealth gap — giving every child a financial head start</li>
+    </ul>
+    <p>
+      A family that cannot pay rent this month needs income, not an investment account their toddler can access in 16 years. But that same family's child benefits enormously from having ${limits.pilotDeposit.toLocaleString()} (or $1,250 with the Dell bonus) growing in the stock market for nearly two decades.
+    </p>
+    <p>
+      The two ideas are complementary. One is a short-term floor. The other is a long-term launch pad.
+    </p>
+
+    <h2>What Trump Accounts Actually Are</h2>
+    <p>
+      If you need a one-line summary: Trump Accounts are <strong>universal child investment accounts</strong>. Not UBI. Not welfare. Not a handout. An investment — in index funds, in the market, and in the next generation.
+    </p>
+    <p>
+      To learn more about how they work, read our <a href="/blog/what-are-trump-accounts-guide">complete guide to Trump Accounts</a>. To see what the ${limits.pilotDeposit.toLocaleString()} deposit could grow to, try the <a href="/calculators/growth-calculator">Growth Calculator</a>.
+    </p>
+
+    <CalculatorCTA calculator="growth" />
+
+    <KeepReading slugs={['what-are-trump-accounts-guide', 'trump-accounts-benefits', 'billionaire-stock-pledge-trump-accounts']} />
+
+    <CalloutBox type="warning" title="Not tax or financial advice">
+      <p>
+        This article is educational content based on IRC Section 530A and IRS Notice 2025-68. It is not tax or financial advice. Consult a qualified tax professional or financial advisor before making decisions about your child's account.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

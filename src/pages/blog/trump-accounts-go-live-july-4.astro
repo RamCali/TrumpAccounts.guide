@@ -1,0 +1,227 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import CalculatorCTA from '../../components/ui/CalculatorCTA.astro';
+import KeepReading from '../../components/ui/KeepReading.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-accounts-go-live-july-4')!;
+const related = getRelatedArticles('trump-accounts-go-live-july-4');
+
+const faqs = [
+  {
+    question: 'What does "go live" mean for Trump Accounts on July 4th?',
+    answer: `"Go live" means the $${limits.pilotDeposit.toLocaleString()} federal pilot deposits land in verified accounts and get invested in S&P 500 index funds for the first time. Before July 4th, you are signing up and filing paperwork. After July 4th, your child's money is in the market.`,
+  },
+  {
+    question: 'Can I sign up for a Trump Account before July 4th?',
+    answer: `Yes. You can file ${limits.form} with your 2025 tax return right now (due April 15, 2026). You should sign up before July 4th so your child's account is verified and ready to receive the deposit on day one.`,
+  },
+  {
+    question: 'What happens to my money between now and July 4th?',
+    answer: 'Between now and July 4th, no money is invested. The IRS is processing Form 4547 filings, verifying identities, and setting up accounts. The authentication process begins in May 2026. Once verified, accounts are ready to receive the deposit on July 4th.',
+  },
+  {
+    question: 'What if I miss the July 4th date?',
+    answer: `You do not lose eligibility. Any U.S. citizen child under ${limits.growthPhaseEndAge} can open a Trump Account at any time. However, you will miss out on having your money invested from day one. The earlier you start, the more time compound growth has to work.`,
+  },
+  {
+    question: 'When does the trumpaccounts.gov portal launch?',
+    answer: `The ${limits.portal} portal is expected to launch in mid-2026. It will offer an alternative to filing ${limits.form} with your tax return, allowing parents to sign up directly online.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  ogImage="/blogpost/trump-accounts-go-live-july-4.png"
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Trump Accounts <strong class="text-white">go live July 4, 2026</strong> — that is when money hits the market.</li>
+        <li>The <strong class="text-white">"sign-up" phase is happening now</strong>. File {limits.form} with your 2025 tax return.</li>
+        <li><strong class="text-white">Authentication begins May 2026</strong> — IRS verifies identities and sets up accounts.</li>
+        <li>The <strong class="text-white">${limits.pilotDeposit.toLocaleString()} federal deposit</strong> lands on July 4th for verified accounts.</li>
+        <li>First <strong class="text-white">market investment happens July 6, 2026</strong> (first business day after the holiday).</li>
+        <li>The <strong class="text-white">{limits.portal} portal</strong> launches mid-2026 as an alternative sign-up method.</li>
+      </ul>
+    </div>
+
+    <p>
+      You keep hearing "Trump Accounts go live on July 4th." But what does that actually mean? Can you use the account now? Is your money already invested? When should you sign up?
+    </p>
+    <p>
+      Here is a clear, no-jargon breakdown of what is happening right now, what happens on July 4th, and exactly what you should do at each stage.
+    </p>
+
+    <h2>The Three Phases of Trump Accounts</h2>
+    <p>
+      Think of Trump Accounts in three phases. We are currently in Phase 1.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Phase</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">When</th>
+            <th class="py-3 text-gray-400 font-medium">What Happens</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-gold-400">1. Sign-Up</td>
+            <td class="py-3 pr-4">Now through April 15, 2026</td>
+            <td class="py-3">Parents file {limits.form} with their tax return to elect a Trump Account for their child.</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-gold-400">2. Authentication</td>
+            <td class="py-3 pr-4">May 2026</td>
+            <td class="py-3">IRS verifies identities, processes elections, and sets up accounts with designated brokerages.</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-gold-400">3. Go Live</td>
+            <td class="py-3 pr-4">July 4, 2026</td>
+            <td class="py-3">${limits.pilotDeposit.toLocaleString()} federal deposits land. Money gets invested in S&P 500 index funds starting July 6.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Phase 1: Sign-Up (Now Through April 15, 2026)</h2>
+    <p>
+      This is where we are right now. The sign-up phase is simple: you file <strong>{limits.form}</strong> (Trump Account Election) with your 2025 federal tax return.
+    </p>
+    <p>
+      Over 100,000 kids are signing up per day. Millions have already claimed their accounts. But the money is not invested yet. During this phase, the IRS is simply collecting elections and building its list of eligible children.
+    </p>
+
+    <CalloutBox type="tip" title="Don't wait until April 15th">
+      <p>
+        File your tax return and {limits.form} as soon as possible. Early filers give the IRS more time to process and verify their election, reducing the risk of delays on July 4th. If you have already filed your 2025 return without {limits.form}, you can file an amended return.
+      </p>
+    </CalloutBox>
+
+    <h2>Phase 2: Authentication (May 2026)</h2>
+    <p>
+      Starting in May 2026, the IRS begins <strong>verifying identities</strong> for filed elections. This includes:
+    </p>
+    <ul>
+      <li>Confirming the child is a U.S. citizen with a valid SSN</li>
+      <li>Confirming the child is under {limits.growthPhaseEndAge} at the end of the election year</li>
+      <li>Matching the election to the parent or guardian's tax return</li>
+      <li>Setting up the account with the designated brokerage</li>
+    </ul>
+    <p>
+      If there are issues with your filing — a mismatched SSN, a missing form, or an identity verification problem — you will be notified during this phase.
+    </p>
+
+    <h2>Phase 3: Go Live (July 4, 2026)</h2>
+    <p>
+      This is the date everyone is talking about. On <strong>July 4, 2026</strong>:
+    </p>
+    <ul>
+      <li>The <strong>${limits.pilotDeposit.toLocaleString()} federal pilot deposit</strong> lands in verified Trump Accounts (for children born {limits.pilotDepositStartYear}-{limits.pilotDepositEndYear})</li>
+      <li>The <strong>Dell Foundation ${limits.dellPledge.perChildAmount} bonus</strong> is deposited for qualifying children</li>
+      <li>On <strong>July 6, 2026</strong> (the first business day after the holiday), money gets invested in S&P 500 or broad U.S. equity index funds for the first time</li>
+    </ul>
+    <p>
+      That is when the 18-year compound growth clock truly starts ticking.
+    </p>
+
+    <CalloutBox type="info" title="Why July 4th?">
+      <p>
+        The One Big Beautiful Bill Act ({limits.legislation}) was signed on July 4, 2025. The one-year anniversary was chosen as the go-live date. It is both symbolic and practical — it gives the IRS a full year to build infrastructure and process elections.
+      </p>
+    </CalloutBox>
+
+    <h2>The Complete Timeline</h2>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Date</th>
+            <th class="py-3 text-gray-400 font-medium">Milestone</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">July 4, 2025</td>
+            <td class="py-3">{limits.legislation} signed into law, creating IRC Section 530A</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Dec 3, 2025</td>
+            <td class="py-3">IRS publishes {limits.irsNotice} with detailed guidance</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Jan 28, 2026</td>
+            <td class="py-3">Trump Accounts Summit — 27 corporate pledges announced</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-gold-400">Now</td>
+            <td class="py-3 font-medium text-gold-400">Sign-up phase — 100,000+ kids per day filing {limits.form}</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">April 15, 2026</td>
+            <td class="py-3">Tax return deadline (last day to file {limits.form} with your 2025 return)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">May 2026</td>
+            <td class="py-3">Authentication phase begins — IRS verifies identities</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Mid-2026</td>
+            <td class="py-3">{limits.portal} portal launches for online sign-ups</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-gold-400">July 4, 2026</td>
+            <td class="py-3 font-medium text-gold-400">${limits.pilotDeposit.toLocaleString()} deposits land — ACCOUNTS GO LIVE</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">July 6, 2026</td>
+            <td class="py-3">First market investment — money goes into index funds</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>What Should You Do Right Now?</h2>
+    <p>
+      If you have not signed up yet, here is your action plan:
+    </p>
+    <ol>
+      <li><strong>File {limits.form} with your 2025 tax return.</strong> This is the fastest path. Our <a href="/blog/form-4547-guide">Form 4547 guide</a> walks you through every line.</li>
+      <li><strong>Check Dell eligibility.</strong> Your child may qualify for an extra ${limits.dellPledge.perChildAmount}. Use our <a href="/blog/dell-trump-accounts-zip-code-lookup">ZIP code lookup</a>.</li>
+      <li><strong>Choose a brokerage.</strong> You will need to designate where your account is held. Compare options in our <a href="/blog/where-to-open-trump-account">brokerage guide</a>.</li>
+      <li><strong>Plan your contributions.</strong> The ${limits.pilotDeposit.toLocaleString()} deposit is just the start. You can add up to ${limits.annualContributionLimit.toLocaleString()}/year. Use the <a href="/calculators/growth-calculator">Growth Calculator</a> to see what your contributions could become.</li>
+    </ol>
+
+    <CalculatorCTA calculator="growth" />
+
+    <h2>What If You Miss July 4th?</h2>
+    <p>
+      You do not lose eligibility. Trump Accounts are available to any U.S. citizen child under {limits.growthPhaseEndAge}. You can file after the deadline and open an account later through the {limits.portal} portal.
+    </p>
+    <p>
+      But there is a real cost to waiting. Every month of delay is a month of lost compound growth. A child who starts on July 4th gets the full benefit of 18 years of compounding. A child who starts six months later has already lost ground. Our <a href="/blog/cost-of-waiting-calculator">cost of waiting calculator</a> shows the exact dollar impact.
+    </p>
+
+    <KeepReading slugs={['how-to-open-step-by-step', 'trump-account-signups-exploding', 'claim-dell-250-trump-account']} />
+
+    <CalloutBox type="warning" title="Not tax or financial advice">
+      <p>
+        This article is educational content based on IRC Section 530A and IRS Notice 2025-68. It is not tax or financial advice. Consult a qualified tax professional or financial advisor before making decisions about your child's account.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

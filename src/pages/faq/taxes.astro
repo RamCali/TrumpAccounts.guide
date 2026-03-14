@@ -19,6 +19,10 @@ const questions = [
   { q: 'Is there a penalty for withdrawing at 18?', a: 'At age 18, the account converts to a traditional IRA. Withdrawals before age 59½ are subject to a 10% early withdrawal penalty plus ordinary income tax. Some exceptions apply (first-time home purchase up to $10,000, qualified education expenses, etc.).' },
   { q: 'Are employer contributions taxed?', a: 'No — that\'s the benefit. Under IRC §128, employer contributions to Trump Accounts (up to $2,500/year per employee) are excluded from the employee\'s gross income. You don\'t pay income tax or payroll tax on them.' },
   { q: 'Can I do a Roth conversion at 18?', a: 'Yes. When the Trump Account converts to a traditional IRA at age 18, your child can convert it to a Roth IRA. They\'d pay income tax on the converted amount that year, but then all future growth and withdrawals would be tax-free. This is often a smart move if they\'re in a low tax bracket at 18.' },
+  { q: 'Do I need to track pre-tax vs after-tax contributions?', a: 'Yes — this is critical. Trump Accounts contain both pre-tax money (the $1,000 federal deposit, employer contributions, charitable gifts) and after-tax money (parent/family contributions). If you do not track which is which over 18 years, your child could pay taxes twice on the after-tax contributions. Keep a simple log of every contribution, its source, and its tax status.' },
+  { q: 'Does the gift tax annual exclusion apply to Trump Account contributions?', a: 'This is an unresolved question. The $5,000 annual contribution limit is well below the $19,000 annual gift tax exclusion (2025). However, some tax experts argue Trump Account contributions are "future interest" gifts — because the child cannot access the money until age 18 — and therefore may not qualify for the annual exclusion. If that view is correct, even small contributions could require filing Form 709. The IRS has not issued definitive guidance on this point. Consult a tax professional.' },
+  { q: 'Can I get a tax deduction by paying my kids from my business and having them fund a Trump Account?', a: 'Indirectly, yes. If you own a business (including a rental property), you can pay your child a reasonable wage for legitimate work. That wage is a deductible business expense. Your child then uses their earnings to fund a Trump Account. The child pays no income tax if earnings are below the standard deduction ($14,600 in 2026). Sole proprietors with children under 18 also owe zero FICA taxes on the child\'s wages. See our business owner strategy guide for the full walkthrough.' },
+  { q: 'How does the pro-rata rule work on Trump Account Roth conversions?', a: 'When converting a Trump Account (now a traditional IRA at age 18) to a Roth IRA, the IRS requires pro-rata treatment. If 60% of your account is after-tax contributions and 40% is earnings, every dollar you convert is treated as 60% tax-free and 40% taxable. You cannot convert only the contribution portion first. Example: converting $10,000 means $6,000 is tax-free (contributions) and $4,000 is taxable (earnings). If the child has no other income, the taxable portion may be covered by the standard deduction — resulting in $0 tax.' },
 ];
 
 const schemas = [
@@ -52,7 +56,7 @@ const schemas = [
     <h1 class="mb-2 text-3xl font-extrabold text-white md:text-4xl">Trump Account Tax Questions</h1>
     <p class="mb-8 text-lg text-gray-400">Tax treatment, FAFSA impact, withdrawal penalties, and Roth conversions explained.</p>
 
-    <LastUpdated date="2026-02-12" />
+    <LastUpdated date="2026-02-24" />
 
     <div class="mt-8">
       <Accordion items={questions.map(q => ({ question: q.q, answer: q.a }))} />
@@ -69,7 +73,7 @@ const schemas = [
       </a>
     </div>
 
-    <RelatedBlogArticles slugs={['gains-taxation-explained', 'trump-account-fafsa-impact', 'trump-account-roth-conversion-strategy', 'trump-accounts-tax-benefits-guide']} title="Deep Dives on Taxes" />
+    <RelatedBlogArticles slugs={['gains-taxation-explained', 'trump-account-pretax-vs-after-tax', 'trump-accounts-gift-tax', 'trump-account-fafsa-impact', 'trump-account-roth-conversion-strategy', 'trump-accounts-tax-benefits-guide']} title="Deep Dives on Taxes" />
 
     <p class="mt-10 text-xs text-gray-600">
       Educational content only, not tax or financial advice.

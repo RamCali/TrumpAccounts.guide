@@ -19,6 +19,7 @@ interface Props {
   relatedArticles?: { href: string; title: string; description: string }[];
   sources?: { name: string; url: string }[];
   canonical?: string;
+  ogImage?: string;
 }
 
 const {
@@ -38,6 +39,7 @@ const {
     { name: 'trumpaccounts.gov', url: 'https://trumpaccounts.gov' },
   ],
   canonical,
+  ogImage,
 } = Astro.props;
 
 const siteUrl = 'https://trumpaccounts.guide';
@@ -68,7 +70,7 @@ const formattedDate = new Date(datePublished).toLocaleDateString('en-US', {
 const { prev, next } = getPrevNextArticles(slug);
 ---
 
-<BaseLayout title={title} description={description} schema={schemas} ogType="article" canonical={canonical}>
+<BaseLayout title={title} description={description} schema={schemas} ogType="article" ogImage={ogImage} canonical={canonical}>
   <article class="mx-auto max-w-3xl px-4 py-12">
     <!-- Breadcrumb -->
     <nav aria-label="Breadcrumb" class="mb-6">

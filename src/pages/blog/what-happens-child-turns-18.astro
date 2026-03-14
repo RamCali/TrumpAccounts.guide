@@ -1,0 +1,353 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('what-happens-child-turns-18')!;
+const related = getRelatedArticles('what-happens-child-turns-18');
+
+const faqs = [
+  {
+    question: 'Does my child have to do anything when they turn 18?',
+    answer: 'No. The Trump Account automatically converts to a traditional IRA on the calendar year the child turns 18. No forms, no action required. Your child simply becomes the owner of a traditional IRA.',
+  },
+  {
+    question: 'Can my child lose the money at 18?',
+    answer: `No. The money belongs to your child. At 18, they gain full control of the account. Nobody — not a parent, not the government — can take it away. They can withdraw it, convert it to a Roth IRA, keep investing, or roll it into a future employer's 401(k).`,
+  },
+  {
+    question: 'What if my child withdraws everything at 18?',
+    answer: 'They can, but it is expensive. The entire withdrawal is taxed as ordinary income, and any amount withdrawn before age 59.5 faces an additional 10% early withdrawal penalty. On a $100,000 balance, that could mean $30,000+ in taxes and penalties.',
+  },
+  {
+    question: 'Can my child still invest in S&P 500 index funds after 18?',
+    answer: 'Yes, plus much more. Before 18, investments are limited to S&P 500 and broad U.S. equity index funds. After 18, the traditional IRA allows the full range of IRA-eligible investments: individual stocks, bonds, international funds, REITs, and more.',
+  },
+  {
+    question: 'Do parents lose all control at 18?',
+    answer: 'Yes. At 18, the child is the sole owner and decision-maker. Parents have no legal authority over the account. This is why having conversations about money before 18 matters — your influence shifts from control to guidance.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>At 18, the Trump Account <strong class="text-white">automatically becomes a traditional IRA</strong>. No action needed.</li>
+        <li>Your child becomes the <strong class="text-white">sole owner</strong> with full control over the money.</li>
+        <li>Investment options <strong class="text-white">expand beyond S&P 500 index funds</strong> to anything IRA-eligible.</li>
+        <li>Your child can <strong class="text-white">convert to a Roth IRA</strong>, withdraw, keep investing, or roll into a 401(k).</li>
+        <li>The <strong class="text-white">smartest move for most 18-year-olds</strong> is a Roth conversion while in a low tax bracket.</li>
+      </ul>
+    </div>
+
+    <p>
+      Your child's 18th birthday is a milestone for more than just adulthood. It is the day their Trump Account transforms. Everything changes &mdash; who controls the money, how it can be invested, and what your child can do with it.
+    </p>
+    <p>
+      Here is a complete walkthrough of what happens, what choices your child faces, and how to prepare for each one.
+    </p>
+
+    <h2>Step 1: The Automatic Conversion</h2>
+    <p>
+      In the calendar year your child turns 18, the Trump Account <strong>automatically converts to a traditional IRA</strong>. No paperwork. No phone calls. No action from you or your child.
+    </p>
+    <p>
+      The money stays at the same brokerage (Fidelity, Schwab, Vanguard, etc.) in the same investments. The only thing that changes is the account type &mdash; and who controls it.
+    </p>
+
+    <CalloutBox type="info" title="What 'converts to a traditional IRA' means">
+      <p>
+        Before 18: the account is a Section 530A Trump Account with special rules (no withdrawals, S&P 500 only, parent controls). After 18: it is a standard traditional IRA governed by the same rules as any other IRA in America. Your child's brokerage handles the conversion automatically.
+      </p>
+    </CalloutBox>
+
+    <h2>Step 2: Your Child Takes Full Control</h2>
+    <p>
+      Before 18, you (the "authorized individual") managed the account. At 18, control transfers entirely to your child. They can:
+    </p>
+    <ul>
+      <li>Log in and manage the account themselves</li>
+      <li>Change investments</li>
+      <li>Withdraw money</li>
+      <li>Convert to a Roth IRA</li>
+      <li>Roll the balance into a future employer 401(k)</li>
+      <li>Name their own beneficiaries</li>
+    </ul>
+    <p>
+      You have no legal authority over the account after 18. This is why <strong>financial conversations before 18 matter</strong> &mdash; your parental influence shifts from control to guidance.
+    </p>
+
+    <h2>Step 3: Investment Options Expand</h2>
+    <p>
+      Before 18, Trump Account investments are limited to mutual funds or ETFs tracking the S&P 500 or a broad U.S. equity index. After 18, the traditional IRA opens up the full universe of IRA-eligible investments:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Before 18 (Trump Account)</th>
+            <th class="py-3 text-gray-400 font-medium">After 18 (Traditional IRA)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">S&P 500 index funds</td>
+            <td class="py-3">S&P 500 index funds</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Broad U.S. equity index funds</td>
+            <td class="py-3">Total market, international, bond funds</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-red-400">No individual stocks</td>
+            <td class="py-3 text-mint-400">Individual stocks allowed</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-red-400">No bonds</td>
+            <td class="py-3 text-mint-400">Bond funds and individual bonds</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-red-400">No international funds</td>
+            <td class="py-3 text-mint-400">International and emerging market funds</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 text-red-400">No REITs or alternatives</td>
+            <td class="py-3 text-mint-400">REITs, commodities, target-date funds</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Most financial advisors recommend keeping a large stock allocation at 18, since your child has decades of growth ahead. Diversifying beyond the S&P 500 is an option, not a requirement.
+    </p>
+
+    <h2>Step 4: Your Child's Four Options</h2>
+    <p>
+      At 18, your child faces one of the most consequential financial decisions of their young life. Here are the four paths forward.
+    </p>
+
+    <h3>Option A: Keep the Traditional IRA (Do Nothing)</h3>
+    <p>
+      The simplest path. The money stays invested, grows tax-deferred, and your child can contribute up to <strong>$7,000/year</strong> (current IRA limit) as long as they have earned income.
+    </p>
+    <ul>
+      <li><strong>Withdrawals:</strong> taxed as ordinary income + 10% penalty before 59&frac12;</li>
+      <li><strong>RMDs:</strong> required starting at age 73</li>
+      <li><strong>Best for:</strong> kids who expect to be in a higher tax bracket at 18 than in retirement (uncommon)</li>
+    </ul>
+
+    <h3>Option B: Convert to a Roth IRA</h3>
+    <p>
+      This is the move financial planners get excited about. Pay income tax on the balance <em>now</em> &mdash; while your child is likely in the <strong>10% or 12% bracket</strong> &mdash; and the money grows <strong>tax-free forever</strong>.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Balance at 18</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Tax at 12%</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">In Roth After</th>
+            <th class="py-3 text-gray-400 font-medium">Tax-Free at 65 (8%)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">$25,000</td>
+            <td class="py-3 pr-4 text-amber-300">$3,000</td>
+            <td class="py-3 pr-4">$25,000</td>
+            <td class="py-3 text-mint-400">$875,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">$50,000</td>
+            <td class="py-3 pr-4 text-amber-300">$6,000</td>
+            <td class="py-3 pr-4">$50,000</td>
+            <td class="py-3 text-mint-400">$1.75M</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">$100,000</td>
+            <td class="py-3 pr-4 text-amber-300">$12,000</td>
+            <td class="py-3 pr-4">$100,000</td>
+            <td class="py-3 text-mint-400">$3.5M</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">$163,000</td>
+            <td class="py-3 pr-4 text-amber-300">$19,560</td>
+            <td class="py-3 pr-4">$163,000</td>
+            <td class="py-3 text-mint-400">$5.7M</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      The catch: your child needs <strong>cash from another source</strong> to pay the tax bill. Do not withdraw from the IRA to pay taxes &mdash; that triggers the 10% early withdrawal penalty on the amount withdrawn.
+    </p>
+
+    <CalloutBox type="tip" title="The Roth conversion is the power move">
+      <p>
+        Most 18-year-olds have low income. That means low tax brackets. Paying $12,000 in taxes now to shield $3.5 million from taxes later is one of the best financial trades in existence. Read the full <a href="/blog/trump-account-roth-conversion-strategy">Roth conversion strategy guide</a>.
+      </p>
+    </CalloutBox>
+
+    <h3>Option C: Withdraw Some or All</h3>
+    <p>
+      Your child can withdraw money at 18 for any purpose &mdash; college, a car, a gap year, a business. But withdrawals come with costs:
+    </p>
+    <ul>
+      <li><strong>Ordinary income tax</strong> on the full amount withdrawn</li>
+      <li><strong>10% early withdrawal penalty</strong> if under 59&frac12; (with some exceptions)</li>
+      <li>Penalty-free exceptions include: <a href="/blog/trump-account-for-first-home">first home purchase</a> ($10K), <a href="/blog/trump-account-for-college">higher education expenses</a>, disability, and more</li>
+    </ul>
+    <p>
+      On a $100,000 withdrawal at the 22% tax bracket: $22,000 in income tax + $10,000 penalty = <strong>$32,000 gone</strong>. Your child keeps $68,000.
+    </p>
+
+    <CalloutBox type="warning" title="The hidden cost of cashing out">
+      <p>
+        Withdrawing $100,000 at 18 means losing not just $32,000 in taxes and penalties, but the <strong>decades of compounding</strong> that money would have produced. At 8% returns, that $100,000 left invested would have grown to $3.5 million by age 65. Cashing out at 18 is almost always the most expensive option.
+      </p>
+    </CalloutBox>
+
+    <h3>Option D: Roll Into an Employer 401(k)</h3>
+    <p>
+      Once your child starts working, they can roll the traditional IRA into their employer's 401(k) plan, if the plan accepts incoming rollovers. Reasons to consider this:
+    </p>
+    <ul>
+      <li><strong>Consolidation</strong> &mdash; one account instead of two</li>
+      <li><strong>Loan access</strong> &mdash; some 401(k) plans allow loans; IRAs do not</li>
+      <li><strong>Creditor protection</strong> &mdash; 401(k) plans have stronger protections in most states</li>
+      <li><strong>Backdoor Roth strategy</strong> &mdash; moving pre-tax IRA money to a 401(k) simplifies future Roth conversions</li>
+    </ul>
+
+    <h2>Contribution Rules Change at 18</h2>
+    <p>
+      The rules for adding money to the account shift significantly at 18.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Rule</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Before 18</th>
+            <th class="py-3 text-gray-400 font-medium">After 18</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Annual limit</td>
+            <td class="py-3 pr-4">${limits.annualContributionLimit.toLocaleString()}/year</td>
+            <td class="py-3">$7,000/year (standard IRA limit)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Who can contribute</td>
+            <td class="py-3 pr-4">Anyone (parents, grandparents, friends)</td>
+            <td class="py-3">Only the account owner</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Income required</td>
+            <td class="py-3 pr-4">No</td>
+            <td class="py-3">Yes &mdash; must have earned income</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Employer match</td>
+            <td class="py-3 pr-4">${limits.employerContributionLimit.toLocaleString()}/year (tax-free)</td>
+            <td class="py-3">Not applicable to personal IRA</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">Withdrawals</td>
+            <td class="py-3 pr-4 text-red-400">Not allowed (3 exceptions)</td>
+            <td class="py-3 text-mint-400">Allowed (taxed + possible penalty)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      The biggest change: <strong>your child needs earned income to contribute</strong> after 18. A part-time job, freelance work, or summer internship qualifies. Money from parents or grandparents does not.
+    </p>
+
+    <h2>A Timeline for the 18th Birthday Year</h2>
+    <p>
+      Here is a practical checklist for families approaching the transition.
+    </p>
+
+    <h3>6&ndash;12 months before turning 18</h3>
+    <ul>
+      <li>Talk to your child about the account, its value, and their options</li>
+      <li>Gather records of after-tax vs pre-tax contributions (for the <a href="/blog/trump-account-pretax-vs-after-tax">pro rata rule</a>)</li>
+      <li>Research Roth conversion math at your child's expected income level</li>
+      <li>Consult a tax professional about conversion timing and tax impact</li>
+    </ul>
+
+    <h3>The year they turn 18</h3>
+    <ul>
+      <li>Account automatically converts to a traditional IRA</li>
+      <li>Confirm your child has online access to the brokerage account</li>
+      <li>Decide: Roth conversion, keep as traditional, or partial conversion</li>
+      <li>If converting to Roth, set aside cash for the tax bill</li>
+    </ul>
+
+    <h3>After 18</h3>
+    <ul>
+      <li>File taxes reflecting any Roth conversion or withdrawals</li>
+      <li>Start annual IRA contributions if your child has earned income</li>
+      <li>Review and potentially diversify investments beyond S&P 500</li>
+    </ul>
+
+    <CalloutBox type="tip" title="The college years are prime conversion years">
+      <p>
+        Ages 18&ndash;22, when most young adults are in college with little income, are often the <strong>lowest tax bracket years of their entire life</strong>. Converting to a Roth IRA during these years locks in the lowest possible tax rate. A <a href="/blog/trump-account-retirement-conversion">partial conversion strategy</a> can spread the tax bill across multiple low-income years.
+      </p>
+    </CalloutBox>
+
+    <h2>How to Prepare Your Child</h2>
+    <p>
+      The biggest risk at 18 is not taxes or market crashes. It is an <strong>18-year-old cashing out the entire account</strong> because nobody taught them what it was for.
+    </p>
+    <p>
+      Start the conversation early. Here are age-appropriate milestones:
+    </p>
+    <ul>
+      <li><strong>Age 8&ndash;10:</strong> "You have a special account that is growing for your future."</li>
+      <li><strong>Age 12&ndash;14:</strong> Show them the balance. Explain what the stock market is. Explain compounding.</li>
+      <li><strong>Age 15&ndash;16:</strong> Walk through the math of what happens if they leave it vs. cash it out.</li>
+      <li><strong>Age 17:</strong> Review the four options together. Introduce the concept of Roth conversion. Consult a financial advisor.</li>
+    </ul>
+    <p>
+      The goal: by 18, your child understands that <strong>$100,000 left invested is worth far more than $68,000 in cash</strong>.
+    </p>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      Turning 18 is not the end of the Trump Account story. It is the beginning of the next chapter. Your child inherits a traditional IRA &mdash; potentially worth six figures &mdash; with the flexibility to convert it to a tax-free Roth, keep investing, or use it for life's big expenses.
+    </p>
+    <p>
+      The families who prepare for this transition will help their children make decisions worth hundreds of thousands of dollars. The families who do not may watch that money disappear to taxes, penalties, and impulse spending.
+    </p>
+    <p>
+      Start planning now. Use our <a href="/calculators/growth-calculator"><strong>Growth Calculator</strong></a> to see what the account could be worth at 18. Then read the full <a href="/blog/trump-account-roth-conversion-strategy"><strong>Roth Conversion Strategy</strong></a> to understand the most powerful move your child can make the day they take control.
+    </p>
+
+    <CalloutBox type="warning" title="Not financial advice">
+      <p>
+        This is educational content, not tax or financial advice. Tax rules are complex and depend on individual circumstances. Roth conversions, withdrawals, and rollovers all have significant tax implications. Consult a qualified tax professional before making decisions.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

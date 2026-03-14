@@ -13,12 +13,20 @@ const faqs = [
     answer: `You can file ${limits.form} with your 2025 federal tax return. The 2025 tax filing season opens in early 2026, with a deadline of April 15, 2026. If you file an extension, you have until October 15, 2026.`,
   },
   {
+    question: 'When does the $1,000 deposit arrive?',
+    answer: `The $${limits.pilotDeposit.toLocaleString()} federal deposit is expected to arrive on July 4, 2026 — one year after the law was signed. An authentication process beginning around May 2026 must be completed first.`,
+  },
+  {
     question: 'When does the trumpaccounts.gov portal launch?',
     answer: `The ${limits.portal} online portal is expected to launch in mid-2026. The exact date has not been announced. Until then, you can file through your tax return or by mail.`,
   },
   {
-    question: 'Can I open a Trump Account right now?',
-    answer: `Not yet as a standalone action. The first opportunity to open a Trump Account is when you file your 2025 tax return (starting early 2026). Include ${limits.form} with your return. The online portal will follow in mid-2026.`,
+    question: 'When is the money first invested in the market?',
+    answer: 'Monday, July 6, 2026 is expected to be the first day that Trump Account money is invested in the stock market. The accounts invest in S&P 500 or broad U.S. equity index funds.',
+  },
+  {
+    question: 'How many people have signed up so far?',
+    answer: 'Treasury Secretary Scott Bessent has announced that nearly 2 million forms have been filed, covering about 3 million children. The program is seeing strong early adoption.',
   },
   {
     question: 'What if I miss the April 15, 2026 deadline?',
@@ -44,8 +52,9 @@ const faqs = [
         <li>The law (<strong class="text-white">OBBBA</strong>) was signed on <strong class="text-white">July 4, 2025</strong>.</li>
         <li>IRS guidance (<strong class="text-white">{limits.irsNotice}</strong>) was published on <strong class="text-white">December 3, 2025</strong>.</li>
         <li>File <strong class="text-white">{limits.form}</strong> with your 2025 tax return by <strong class="text-white">April 15, 2026</strong>.</li>
-        <li>The <strong class="text-white">{limits.portal}</strong> online portal launches <strong class="text-white">mid-2026</strong>.</li>
-        <li>Filing early means more compounding time for your child's money.</li>
+        <li>Account <strong class="text-white">authentication begins ~May 2026</strong>. The $1,000 deposit is expected <strong class="text-white">July 4, 2026</strong>.</li>
+        <li>First day money enters the stock market: <strong class="text-white">Monday, July 6, 2026</strong>.</li>
+        <li>Nearly <strong class="text-white">2 million forms filed</strong> so far, covering about <strong class="text-white">3 million children</strong>.</li>
       </ul>
     </div>
 
@@ -98,6 +107,41 @@ const faqs = [
     <p>
       If you need more time to file your taxes, you can request an extension. With an extension, your deadline moves to <strong>October 15, 2026</strong>. But remember: an extension to file is not an extension to pay. And more importantly, every month you wait is a month your child's money is not growing.
     </p>
+
+    <h3>May 2026 — Authentication Process Begins</h3>
+    <p>
+      After you file {limits.form}, there is an <strong>authentication and verification process</strong> before the account is fully active. This process is expected to begin around May 2026. The Treasury will verify your child's eligibility — U.S. citizenship, valid SSN, and age requirements.
+    </p>
+    <p>
+      Once authentication is complete, the account is ready to receive the federal deposit and contributions.
+    </p>
+
+    <h3>July 4, 2026 — $${limits.pilotDeposit.toLocaleString()} Federal Deposit Arrives</h3>
+    <p>
+      The <strong>${limits.pilotDeposit.toLocaleString()} pilot contribution</strong> from the federal government is expected to arrive on <strong>July 4, 2026</strong> — exactly one year after the law was signed. This is the free money that every eligible child receives.
+    </p>
+    <p>
+      Additional deposits may arrive around the same time from other sources:
+    </p>
+    <ul>
+      <li><strong>Charitable organizations</strong> — such as the <a href="/blog/dell-pledge-explained">Dell Foundation's $250 pledge</a></li>
+      <li><strong>State governments</strong> — Connecticut is leading the way with state-level add-on funding. The administration has suggested all 50 states may eventually contribute, but no formal announcements have been made.</li>
+      <li><strong>Employer matching</strong> — several employers have pledged to match the Treasury's seed money, though the timing of those contributions is still unclear.</li>
+    </ul>
+
+    <h3>July 6, 2026 — First Market Investment Day</h3>
+    <p>
+      <strong>Monday, July 6</strong> is the first day that money from Trump Accounts is invested in the stock market. This is when the $${limits.pilotDeposit.toLocaleString()} deposits and any early contributions are put to work in S&P 500 or broad U.S. equity index funds.
+    </p>
+    <p>
+      From this point on, your child's money is growing through market returns. The 18-year compounding clock has officially started.
+    </p>
+
+    <CalloutBox type="info" title="Enrollment so far">
+      <p>
+        Treasury Secretary Scott Bessent has announced that nearly <strong>2 million forms</strong> have been filed for Trump Accounts, representing accounts for about <strong>3 million children</strong>. The program is seeing strong early adoption.
+      </p>
+    </CalloutBox>
 
     <h3>Mid-2026 — Online Portal Launches</h3>
     <p>

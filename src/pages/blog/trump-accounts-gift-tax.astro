@@ -10,15 +10,19 @@ const related = getRelatedArticles('trump-accounts-gift-tax');
 const faqs = [
   {
     question: 'Do Trump Account contributions count as gifts?',
-    answer: `Technically, yes — contributions from anyone other than the account beneficiary are considered gifts under federal tax law. However, the $${limits.annualContributionLimit.toLocaleString()} annual Trump Account limit is well below the annual gift tax exclusion ($19,000 per recipient in 2025). So no gift tax is owed, and no gift tax return is needed.`,
+    answer: `Technically, yes — contributions from anyone other than the account beneficiary are considered gifts under federal tax law. The $${limits.annualContributionLimit.toLocaleString()} annual Trump Account limit is well below the $19,000 annual gift tax exclusion (2025). However, there is an unresolved question about whether these contributions qualify as "present interest" gifts. See the section on the present interest debate below.`,
   },
   {
     question: 'Do I need to file a gift tax return for Trump Account contributions?',
-    answer: 'No — as long as your total gifts to that child (including Trump Account contributions) stay under the annual gift tax exclusion ($19,000 in 2025). You only file IRS Form 709 if your total gifts to any single recipient exceed the exclusion in a given year.',
+    answer: 'Probably not — but it depends on how the IRS resolves the "present interest" question. If Trump Account contributions are considered present interest gifts, no Form 709 is needed (the amount is well under the annual exclusion). If they are NOT present interest, a gift tax return may technically be required even for small contributions. The IRS has not yet issued definitive guidance on this point. Consult a tax professional.',
+  },
+  {
+    question: 'What is the "present interest" issue with Trump Accounts?',
+    answer: 'To qualify for the annual gift tax exclusion ($19,000 in 2025), a gift must be a "present interest" gift — meaning the recipient can access and use it immediately. Trump Account funds are locked until age 18. Some tax experts argue this means contributions are "future interest" gifts that do NOT qualify for the annual exclusion, potentially requiring a gift tax return (Form 709) even for small contributions.',
   },
   {
     question: 'What if grandparents also contribute?',
-    answer: `Each donor has their own annual gift tax exclusion. In 2025, each grandparent can give up to $19,000 per grandchild without triggering gift tax. Since the Trump Account limit is $${limits.annualContributionLimit.toLocaleString()}/year total, even maximum contributions from multiple family members stay well under each donor's exclusion.`,
+    answer: `Each donor has their own annual gift tax exclusion. In 2025, each grandparent can give up to $19,000 per grandchild without triggering gift tax. Since the Trump Account limit is $${limits.annualContributionLimit.toLocaleString()}/year total, contributions stay well under each donor's exclusion — assuming the present interest question is resolved in favor of taxpayers.`,
   },
   {
     question: 'Is the $1,000 federal deposit a taxable gift?',
@@ -40,16 +44,16 @@ const faqs = [
     <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
       <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
       <ul class="space-y-2 text-sm text-gray-300">
-        <li>Trump Account contributions are technically gifts, but <strong class="text-white">no gift tax is owed</strong> because the $${limits.annualContributionLimit.toLocaleString()} limit is far below the annual exclusion.</li>
-        <li>The annual gift tax exclusion is <strong class="text-white">$19,000 per recipient</strong> in 2025. Trump Account max is $${limits.annualContributionLimit.toLocaleString()}.</li>
-        <li><strong class="text-white">No Form 709</strong> (gift tax return) is needed for Trump Account contributions alone.</li>
+        <li>Trump Account contributions are technically gifts, but the $${limits.annualContributionLimit.toLocaleString()} limit is <strong class="text-white">far below the $19,000 annual exclusion</strong> (2025).</li>
         <li>Each donor gets their own exclusion — grandparents, parents, and others <strong class="text-white">each have a separate $19,000 limit</strong>.</li>
+        <li><strong class="text-white text-amber-400">Unresolved issue:</strong> Some experts argue Trump Account gifts are <strong class="text-white">"future interest"</strong> (locked until 18), which may not qualify for the annual exclusion — potentially requiring Form 709 even for small contributions.</li>
         <li>The $${limits.pilotDeposit.toLocaleString()} federal deposit and employer contributions are <strong class="text-white">not gifts</strong>.</li>
+        <li><strong class="text-white">Consult a tax professional</strong> until the IRS clarifies the present interest question.</li>
       </ul>
     </div>
 
     <p>
-      One of the most common tax questions about Trump Accounts: <strong>do contributions trigger gift tax?</strong> The answer is simple. No. Not in any realistic scenario. Here is why.
+      One of the most common tax questions about Trump Accounts: <strong>do contributions trigger gift tax?</strong> On the surface, no — the $${limits.annualContributionLimit.toLocaleString()} contribution limit is well below the annual exclusion. But there is a wrinkle that tax professionals are debating. Here is what you need to know.
     </p>
 
     <h2>The $${limits.annualContributionLimit.toLocaleString()} Limit Is Well Below the Gift Tax Exclusion</h2>
@@ -123,6 +127,42 @@ const faqs = [
     <p>
       Each person's contribution is evaluated against their <strong>own</strong> $19,000 exclusion. Since no single donor contributes more than $19,000 to this child, nobody owes gift tax. Nobody needs to file Form 709.
     </p>
+
+    <h2>The "Present Interest" Question (Unresolved)</h2>
+    <p>
+      Here is where it gets complicated. To qualify for the annual gift tax exclusion, a gift must be a <strong>"present interest" gift</strong>. That means the recipient must be able to <strong>access and use the gift immediately</strong>.
+    </p>
+    <p>
+      Trump Account contributions are locked until age 18. The child cannot touch the money. Some tax experts argue this makes Trump Account contributions <strong>"future interest" gifts</strong> — and future interest gifts do <strong>not</strong> qualify for the annual exclusion.
+    </p>
+
+    <CalloutBox type="irs-quote" title="The legal question">
+      <p>
+        The annual gift tax exclusion under IRC §2503(b) applies only to gifts of "present interest" — defined as an unrestricted right to the immediate use, possession, or enjoyment of the property. Because Trump Account funds cannot be withdrawn before age 18, some practitioners believe contributions fail this test.
+      </p>
+    </CalloutBox>
+
+    <h3>What This Could Mean for Families</h3>
+    <p>
+      If Trump Account contributions are <strong>not</strong> present interest gifts, the $19,000 annual exclusion would not apply. That means <strong>any contribution to a grandchild's account</strong> — even $500 — could technically require filing a gift tax return (Form 709).
+    </p>
+    <p>
+      You still would not owe any actual gift tax. The contribution would simply count against your <strong>lifetime estate and gift tax exemption</strong> ($13.61 million in 2024). But the paperwork burden could be unexpected, especially for grandparents who assumed small contributions were exempt.
+    </p>
+
+    <h3>The Other Side</h3>
+    <p>
+      Other experts argue Trump Account contributions <strong>do</strong> qualify as present interest. Their reasoning: the child has a vested, non-forfeitable interest in the account from day one. The money belongs to the child — it is just restricted. Congress may also have intended these contributions to be treated as present interest gifts, similar to how contributions to other custodial accounts are treated.
+    </p>
+    <p>
+      The IRS has not issued definitive guidance on this specific question. Until they do, this remains an open debate.
+    </p>
+
+    <CalloutBox type="warning" title="Ask your tax professional">
+      <p>
+        If you are a grandparent, relative, or anyone other than the parent contributing to a Trump Account, ask your CPA or tax attorney about the present interest question. The IRS may clarify this in future guidance. Until then, some advisors recommend filing Form 709 to be safe — even if no tax is owed.
+      </p>
+    </CalloutBox>
 
     <h2>The $${limits.pilotDeposit.toLocaleString()} Federal Deposit Is NOT a Gift</h2>
     <p>

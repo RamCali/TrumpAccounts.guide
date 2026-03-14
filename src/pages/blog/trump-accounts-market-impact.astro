@@ -1,0 +1,167 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import KeepReading from '../../components/ui/KeepReading.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-accounts-market-impact')!;
+const related = getRelatedArticles('trump-accounts-market-impact');
+
+const faqs = [
+  {
+    question: 'Will Trump Accounts cause a stock market spike?',
+    answer: 'No. Even with high participation rates, the initial cash injection represents a very small fraction of overall market trading volume. Market researchers do not anticipate a meaningful short-term impact on index fund prices or the broader market.',
+  },
+  {
+    question: 'When does Trump Account money enter the market?',
+    answer: 'Monday, July 6, 2026 is expected to be the first day that Trump Account funds are invested in the stock market. The $1,000 federal deposits are expected to arrive on July 4, 2026 (a Saturday), with market investment beginning the following Monday.',
+  },
+  {
+    question: 'How much money is flowing into Trump Accounts?',
+    answer: 'As of early 2026, nearly 2 million forms have been filed covering about 3 million children. At $1,000 per child, that is roughly $3 billion in initial federal deposits alone — before any family or employer contributions.',
+  },
+  {
+    question: 'Will Trump Accounts be profitable for the government?',
+    answer: 'Potentially. While the upfront cost of the $1,000 deposits is significant, when account holders withdraw money after age 18, they pay ordinary income tax on the full amount. Over decades, the tax revenue from withdrawals could exceed the initial cost of the program.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+  sources={[
+    { name: 'IRS Notice 2025-68', url: 'https://www.irs.gov/pub/irs-drop/n-25-68.pdf' },
+    { name: 'Treasury Department Announcements', url: 'https://home.treasury.gov' },
+  ]}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Trump Account money enters the market on <strong class="text-white">Monday, July 6, 2026</strong>.</li>
+        <li>Even with millions of accounts, the initial inflow is <strong class="text-white">too small to meaningfully move</strong> the stock market.</li>
+        <li>Only <strong class="text-white">62% of Americans</strong> currently own stocks. Trump Accounts aim to change that.</li>
+        <li>The <strong class="text-white">long-term impact</strong> — millions more Americans investing in equities — is far more significant than the short-term dollar amount.</li>
+        <li>The government expects Trump Accounts to eventually be <strong class="text-white">revenue-positive</strong> through tax collections on withdrawals.</li>
+      </ul>
+    </div>
+
+    <p>
+      Nearly 2 million families have already filed for Trump Accounts, covering about 3 million children. When those accounts are funded and invested starting July 2026, will it move the stock market? The short answer: <strong>no</strong>. Here is why — and why the long-term impact matters much more.
+    </p>
+
+    <h2>The Numbers: A Drop in the Bucket</h2>
+    <p>
+      Let us put the dollar amounts in perspective.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Metric</th>
+            <th class="py-3 text-gray-400 font-medium">Amount</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Initial federal deposits (~3M children x $${limits.pilotDeposit.toLocaleString()})</td>
+            <td class="py-3 font-medium text-gold-400">~$3 billion</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Average daily S&P 500 trading volume</td>
+            <td class="py-3">$300–500+ billion</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Total U.S. stock market capitalization</td>
+            <td class="py-3">~$55 trillion</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">Trump Account inflow as % of daily volume</td>
+            <td class="py-3 font-medium text-mint-400">&lt; 1%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Even if every single account were pre-funded and all the money invested on the same trading day, it would represent <strong>less than 1% of a single day's trading volume</strong> in index funds — and an even smaller fraction of the overall market.
+    </p>
+
+    <CalloutBox type="info" title="What market researchers say">
+      <p>
+        Market analysts agree: even with high participation rates, the Trump Account cash injection is unlikely to move the needle in the short term. The dollar amount is simply too small relative to the massive daily trading flows in U.S. equity markets.
+      </p>
+    </CalloutBox>
+
+    <h2>Why 62% Matters More Than $3 Billion</h2>
+    <p>
+      Here is the bigger story. Only about <strong>62% of Americans currently own stocks</strong>. That means roughly 38% of families are not participating in the stock market at all — and consistently miss out on wealth-building opportunities.
+    </p>
+    <p>
+      Trump Accounts aim to change that. By giving every eligible child an investment account, the program brings millions of families into the stock market for the first time. The goal is to give everybody access to the upside of the American economic engine.
+    </p>
+    <p>
+      This is not just about the $${limits.pilotDeposit.toLocaleString()} deposit. It is about:
+    </p>
+    <ul>
+      <li><strong>Financial literacy</strong> — Parents tracking an account learn about investing, compound interest, and index funds.</li>
+      <li><strong>Wealth-building habits</strong> — Families who start saving for children often continue saving for themselves.</li>
+      <li><strong>Generational wealth</strong> — Children who grow up with investment accounts are more likely to invest as adults.</li>
+      <li><strong>Economic participation</strong> — More Americans investing means a broader base of stakeholders in the economy.</li>
+    </ul>
+
+    <h2>The Long-Term Market Effect</h2>
+    <p>
+      While the short-term market impact is negligible, the long-term effect could be meaningful — but over decades, not days.
+    </p>
+    <p>
+      If Trump Accounts succeed in their goal of universal participation, here is what changes:
+    </p>
+    <ul>
+      <li><strong>Annual inflows grow</strong> — As families contribute up to $${limits.annualContributionLimit.toLocaleString()}/year and employers add up to $${limits.employerContributionLimit.toLocaleString()}, recurring inflows into index funds increase steadily each year.</li>
+      <li><strong>Millions of new investors</strong> — Children who turn 18 with an IRA are more likely to keep investing, adding to long-term market participation.</li>
+      <li><strong>More Americans invested in equities</strong> — Over a generation, stock ownership could rise significantly from the current 62%.</li>
+    </ul>
+
+    <CalloutBox type="tip" title="The compound effect">
+      <p>
+        The real market story is not July 6, 2026. It is 2044, when the first wave of Trump Account children turns 18 with tens of thousands of dollars in index funds — and many of them keep investing. That is when the participation effect starts to compound.
+      </p>
+    </CalloutBox>
+
+    <h2>Will Trump Accounts Cost or Make Money for the Government?</h2>
+    <p>
+      There is an upfront cost. The federal $${limits.pilotDeposit.toLocaleString()} deposits for millions of children require billions in government spending. But the full picture is more nuanced.
+    </p>
+    <p>
+      When account holders withdraw money after age 18, they pay <strong>ordinary income tax</strong> on the full pre-tax amount. If the $${limits.pilotDeposit.toLocaleString()} deposit grows to $5,000 or more over 18 years, the government collects taxes on every dollar withdrawn. Over the lifetime of these accounts, the tax revenue from withdrawals could exceed the initial cost of the deposits.
+    </p>
+    <p>
+      Administration officials have argued that from a profit-and-loss perspective — not just a budgeting perspective — Trump Accounts will ultimately be <strong>revenue-generating</strong> for the government. The upfront cost is relatively modest compared to the overall federal budget, particularly when factoring in the economic benefits for lower and middle-class families.
+    </p>
+
+    <KeepReading slugs={['economic-impact', 'cost-to-taxpayers', 'wealth-creation-potential']} />
+
+    <h2>The Bottom Line</h2>
+    <p>
+      Trump Accounts will not cause a market spike in July 2026. The initial dollar amounts are too small relative to the enormous daily trading volumes in U.S. equity markets. But the program's real impact is not measured in trading volume — it is measured in how many Americans participate in the stock market over the next generation.
+    </p>
+    <p>
+      More Americans investing intelligently in long-term equities is good for the economy. And over decades, the compound effect of millions of new investors could have a far greater impact than any single day's inflow.
+    </p>
+
+    <CalloutBox type="warning" title="Not investment advice">
+      <p>
+        This article is for educational purposes only. It does not constitute investment or financial advice. Market performance is not guaranteed, and past returns do not predict future results. Consult a qualified financial advisor for investment decisions.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

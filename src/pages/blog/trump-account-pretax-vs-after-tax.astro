@@ -1,0 +1,277 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import CalculatorCTA from '../../components/ui/CalculatorCTA.astro';
+import KeepReading from '../../components/ui/KeepReading.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-pretax-vs-after-tax')!;
+const related = getRelatedArticles('trump-account-pretax-vs-after-tax');
+
+const faqs = [
+  {
+    question: 'What happens if I don\'t track pre-tax vs after-tax contributions?',
+    answer: 'You risk paying taxes twice on your own after-tax contributions. When your child withdraws money after age 18, the IRS taxes the full withdrawal as ordinary income unless you can prove which portion was already taxed. Without records, the entire amount may be treated as pre-tax.',
+  },
+  {
+    question: 'Is the $1,000 federal deposit pre-tax or after-tax?',
+    answer: `The $${limits.pilotDeposit.toLocaleString()} federal deposit is pre-tax. It is not included in your income in the year you receive it. The deposit and its growth are taxed as ordinary income when withdrawn after age 18.`,
+  },
+  {
+    question: 'Are employer contributions pre-tax or after-tax?',
+    answer: `Employer contributions (up to $${limits.employerContributionLimit.toLocaleString()}/year) are pre-tax. They are excluded from the employee's gross income under IRC §128. Both the contribution and its growth are taxed as ordinary income on withdrawal.`,
+  },
+  {
+    question: 'Are parent contributions pre-tax or after-tax?',
+    answer: 'Parent and family contributions are after-tax. You already paid income tax on the money before contributing it. When your child withdraws, only the growth on these contributions is taxable — not the original contribution amount.',
+  },
+  {
+    question: 'Do I need to track contributions every year?',
+    answer: 'Yes. Keep a simple log each year showing: the date, the source (parent, employer, grandparent, federal deposit), the amount, and whether it was pre-tax or after-tax. This record will be critical when your child starts withdrawing money after age 18.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+  sources={[
+    { name: 'IRS Notice 2025-68', url: 'https://www.irs.gov/pub/irs-drop/n-25-68.pdf' },
+    { name: 'IRC Section 530A (OBBBA)', url: 'https://www.congress.gov' },
+    { name: 'IRC Section 128 — Employer Contributions', url: 'https://www.congress.gov' },
+  ]}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Trump Accounts have <strong class="text-white">two types of money</strong>: pre-tax (seed deposit, employer contributions) and after-tax (parent/family contributions).</li>
+        <li>If you do not track which is which, your child could <strong class="text-white">pay taxes twice</strong> on the after-tax portion.</li>
+        <li>The $${limits.pilotDeposit.toLocaleString()} federal deposit and employer contributions are <strong class="text-white">pre-tax</strong> — fully taxable on withdrawal.</li>
+        <li>Parent and family contributions are <strong class="text-white">after-tax</strong> — only the growth is taxable on withdrawal.</li>
+        <li>Keep a <strong class="text-white">simple yearly log</strong> of every contribution, its source, and its tax status.</li>
+      </ul>
+    </div>
+
+    <p>
+      This is one of the trickiest things about Trump Accounts. Your child's account will contain money from different sources — and each source has different tax treatment. If you do not keep track over 18 years, your child could end up paying taxes on money that was already taxed.
+    </p>
+
+    <h2>The Two Types of Money in a Trump Account</h2>
+    <p>
+      Every dollar in a Trump Account falls into one of two categories:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Contribution Source</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Tax Status</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Taxed When Contributed?</th>
+            <th class="py-3 text-gray-400 font-medium">Taxed on Withdrawal?</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Federal $${limits.pilotDeposit.toLocaleString()} deposit</td>
+            <td class="py-3 pr-4 font-medium text-amber-400">Pre-tax</td>
+            <td class="py-3 pr-4">No</td>
+            <td class="py-3">Yes — full amount + growth</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Employer contributions</td>
+            <td class="py-3 pr-4 font-medium text-amber-400">Pre-tax</td>
+            <td class="py-3 pr-4">No (excluded under §128)</td>
+            <td class="py-3">Yes — full amount + growth</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Charitable / philanthropic gifts</td>
+            <td class="py-3 pr-4 font-medium text-amber-400">Pre-tax</td>
+            <td class="py-3 pr-4">No</td>
+            <td class="py-3">Yes — full amount + growth</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">Parent / family contributions</td>
+            <td class="py-3 pr-4 font-medium text-mint-400">After-tax</td>
+            <td class="py-3 pr-4">Yes (your paycheck)</td>
+            <td class="py-3">Only the growth</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      The distinction matters because <strong>after-tax contributions should not be taxed again</strong> when withdrawn. You already paid income tax on that money. Only the growth on those contributions is taxable. But pre-tax money — the seed deposit, employer contributions, and charitable gifts — has never been taxed. The full amount plus growth is taxable on withdrawal.
+    </p>
+
+    <CalloutBox type="info" title="Think of it like a 401(k)">
+      <p>
+        If you have ever had a 401(k) with both pre-tax and Roth (after-tax) contributions, the concept is the same. You need to know how much is pre-tax and how much is after-tax to calculate the correct tax on withdrawals. Trump Accounts work the same way.
+      </p>
+    </CalloutBox>
+
+    <h2>What Happens If You Do Not Track</h2>
+    <p>
+      Here is a real-world example of why this matters:
+    </p>
+
+    <h3>The Double-Tax Scenario</h3>
+    <p>
+      A family contributes $3,000/year of their own after-tax money for 18 years. The employer adds $1,500/year pre-tax. The federal deposit of $${limits.pilotDeposit.toLocaleString()} was pre-tax. At age 18, the account holds <strong>$180,000</strong>.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Source</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Total Contributed</th>
+            <th class="py-3 text-gray-400 font-medium">Tax Status</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Parent contributions (18 years)</td>
+            <td class="py-3 pr-4">$54,000</td>
+            <td class="py-3 font-medium text-mint-400">After-tax</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Employer contributions (18 years)</td>
+            <td class="py-3 pr-4">$27,000</td>
+            <td class="py-3 font-medium text-amber-400">Pre-tax</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Federal deposit</td>
+            <td class="py-3 pr-4">$${limits.pilotDeposit.toLocaleString()}</td>
+            <td class="py-3 font-medium text-amber-400">Pre-tax</td>
+          </tr>
+          <tr class="border-t border-surface-500">
+            <td class="py-3 pr-4 font-bold text-white">Total contributed</td>
+            <td class="py-3 pr-4 font-bold text-white">$82,000</td>
+            <td class="py-3">—</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-bold text-white">Investment growth</td>
+            <td class="py-3 pr-4 font-bold text-gold-400">$98,000</td>
+            <td class="py-3 font-medium text-amber-400">Taxable</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      <strong>With records:</strong> On a $20,000 withdrawal, the child can show that a proportion came from after-tax parent contributions. The tax bill is lower because those original contributions are not taxed again.
+    </p>
+    <p>
+      <strong>Without records:</strong> The IRS may treat the entire withdrawal as taxable income. The child pays tax on money that was already taxed — effectively <strong>double taxation</strong> on the parent's contributions.
+    </p>
+
+    <CalloutBox type="warning" title="18 years is a long time">
+      <p>
+        Your baby born in 2026 will not access this money until 2044 at the earliest. Can you find a financial record from 18 years ago? Most people cannot. Start tracking now while the information is fresh.
+      </p>
+    </CalloutBox>
+
+    <h2>How to Track Your Contributions</h2>
+    <p>
+      You do not need fancy software. A simple spreadsheet or even a notebook works. Record these four things each time a contribution is made:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Date</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Source</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Amount</th>
+            <th class="py-3 text-gray-400 font-medium">Pre-Tax or After-Tax</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">July 4, 2026</td>
+            <td class="py-3 pr-4">Federal deposit</td>
+            <td class="py-3 pr-4">$${limits.pilotDeposit.toLocaleString()}</td>
+            <td class="py-3 font-medium text-amber-400">Pre-tax</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Aug 2026</td>
+            <td class="py-3 pr-4">Employer (Mom's job)</td>
+            <td class="py-3 pr-4">$1,250</td>
+            <td class="py-3 font-medium text-amber-400">Pre-tax</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Aug 2026</td>
+            <td class="py-3 pr-4">Parent contribution</td>
+            <td class="py-3 pr-4">$500</td>
+            <td class="py-3 font-medium text-mint-400">After-tax</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">Dec 2026</td>
+            <td class="py-3 pr-4">Grandma (holiday gift)</td>
+            <td class="py-3 pr-4">$500</td>
+            <td class="py-3 font-medium text-mint-400">After-tax</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      At the end of each year, tally two numbers: <strong>total after-tax contributions</strong> and <strong>total pre-tax contributions</strong>. Keep a running cumulative total. This is the number your child (or their tax preparer) will need when they start withdrawing money.
+    </p>
+
+    <CalloutBox type="tip" title="Save contribution statements">
+      <p>
+        Keep any confirmation emails, bank transfer receipts, or employer benefit statements that show contributions. Digital copies are fine. Store them in a folder labeled with your child's name and the year.
+      </p>
+    </CalloutBox>
+
+    <CalculatorCTA calculator="withdrawal" />
+
+    <h2>Withdrawals Increase Your AGI</h2>
+    <p>
+      There is another tax wrinkle. When your child withdraws money after age 18, the taxable portion is added to their <strong>adjusted gross income (AGI)</strong> for that year. A higher AGI can trigger other consequences:
+    </p>
+    <ul>
+      <li>Higher income tax bracket on all other income</li>
+      <li>Reduced eligibility for income-based tax credits</li>
+      <li>Impact on financial aid (FAFSA uses AGI)</li>
+      <li>Potential <a href="/blog/trump-account-medicaid-impact">Medicaid eligibility effects</a></li>
+      <li>Higher Medicare premiums (for much later in life)</li>
+    </ul>
+    <p>
+      This is why <strong>strategic withdrawals</strong> matter. Taking out a large lump sum in one year pushes AGI up dramatically. Spreading withdrawals over multiple years keeps AGI lower and the tax rate more favorable.
+    </p>
+
+    <KeepReading slugs={['gains-taxation-explained', 'trump-account-roth-conversion-strategy', 'trump-account-family-tax-strategy']} />
+
+    <h2>The Roth Conversion Advantage</h2>
+    <p>
+      One way to simplify all of this is a <a href="/blog/trump-account-roth-conversion-strategy">Roth conversion at age 18</a>. When your child converts the traditional IRA to a Roth IRA, they pay tax on the taxable portion once — and then all future growth is tax-free forever. No more tracking needed after that.
+    </p>
+    <p>
+      This is especially powerful if your child is in a low tax bracket at 18. They pay a small amount of tax now to avoid a much larger tax bill decades later.
+    </p>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      Trump Accounts mix pre-tax and after-tax money in a single account. Over 18 years, it is easy to lose track of which is which. But the difference could mean <strong>thousands of dollars in unnecessary taxes</strong>.
+    </p>
+    <p>
+      Start a simple log today. Record every contribution, its source, and whether it was pre-tax or after-tax. Your child will thank you in 2044.
+    </p>
+
+    <CalloutBox type="warning" title="Not tax or financial advice">
+      <p>
+        This article is for educational purposes only. Tax treatment of Trump Account contributions and withdrawals may depend on future IRS guidance. Consult a qualified tax professional or CPA for advice specific to your situation.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

@@ -1,0 +1,356 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('contribution-limit-projections')!;
+const related = getRelatedArticles('contribution-limit-projections');
+
+// Projection calculations at different inflation rates
+const baseLimit = limits.annualContributionLimit;
+const baseEmployerLimit = limits.employerContributionLimit;
+const indexStartYear = limits.inflationIndexStartYear;
+
+// IRS rounds to nearest $100 for IRA-type limits
+function projectLimit(base: number, years: number, rate: number): number {
+  const raw = base * Math.pow(1 + rate, years);
+  return Math.round(raw / 100) * 100;
+}
+
+const faqs = [
+  {
+    question: 'What does "indexed for inflation" mean?',
+    answer: `It means the IRS adjusts the contribution limit each year to keep pace with rising prices. If a gallon of milk costs more next year, the amount you can contribute should grow too. The $${limits.annualContributionLimit.toLocaleString()} limit is fixed for 2025-${limits.inflationIndexStartYear}. Starting in ${limits.inflationIndexStartYear + 1}, the IRS will announce an adjusted limit each year based on a cost-of-living formula.`,
+  },
+  {
+    question: 'How does the IRS calculate the indexed limit?',
+    answer: 'The IRS uses the Consumer Price Index for All Urban Consumers (CPI-U) to measure inflation. The exact formula mirrors how traditional IRA and 401(k) limits are adjusted. Limits are typically rounded to the nearest $100 or $500 increment.',
+  },
+  {
+    question: 'Does the employer contribution limit also get indexed?',
+    answer: `The legislation indexes the $${limits.annualContributionLimit.toLocaleString()} total annual cap. Since employer contributions count toward that cap, the effective room for employer contributions grows as the cap increases. Whether the $${limits.employerContributionLimit.toLocaleString()} employer-specific limit is independently indexed is subject to future IRS guidance.`,
+  },
+  {
+    question: 'What if inflation is higher than expected?',
+    answer: 'Higher inflation means faster limit increases. At 4% inflation, the limit reaches $7,400 by 2035 instead of $6,400 at 2.5%. This is good news for savers — you can put in more. The trade-off is that the purchasing power of those dollars is lower.',
+  },
+  {
+    question: 'Are the projections in this article guaranteed?',
+    answer: 'No. These are projections based on historical inflation rates. The actual indexed limits will be set by the IRS each year based on real inflation data. The IRS will publish the adjusted limits in the fall for the following tax year.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>The <strong class="text-white">${limits.annualContributionLimit.toLocaleString()}/year limit is fixed through {limits.inflationIndexStartYear}</strong>. Indexing begins in {limits.inflationIndexStartYear + 1}.</li>
+        <li>At 2.5% inflation, the limit reaches roughly <strong class="text-white">$6,400 by 2035</strong> and <strong class="text-white">$8,200 by 2043</strong>.</li>
+        <li>Over 18 years of contributions, indexing could add <strong class="text-white">$15,000&ndash;$25,000 in extra contribution capacity</strong>.</li>
+        <li>Higher inflation = higher limits = <strong class="text-white">more money you can put in</strong>.</li>
+        <li>The IRS announces each year's limit in the fall. <strong class="text-white">These are projections, not guarantees</strong>.</li>
+      </ul>
+    </div>
+
+    <p>
+      The $5,000 annual contribution limit for Trump Accounts will not stay at $5,000 forever. Starting after {limits.inflationIndexStartYear}, the IRS will index this limit for inflation &mdash; just like they do for IRA and 401(k) limits.
+    </p>
+    <p>
+      But what does that actually mean in dollars? Here are the projections at three inflation rates &mdash; so you can plan your family's contribution strategy for the next 18 years.
+    </p>
+
+    <h2>How Inflation Indexing Works</h2>
+    <p>
+      "Indexed for inflation" means the IRS adjusts the contribution limit annually to keep pace with rising costs. If you could put in $5,000 in 2027, and prices go up 2.5% that year, the 2028 limit increases to maintain the same purchasing power.
+    </p>
+    <p>
+      The IRS uses the <strong>Consumer Price Index for All Urban Consumers (CPI-U)</strong> to measure inflation. This is the same method used to adjust:
+    </p>
+    <ul>
+      <li>Traditional and Roth IRA limits ($7,000 in 2025)</li>
+      <li>401(k) contribution limits ($23,500 in 2025)</li>
+      <li>Standard deduction amounts</li>
+      <li>Tax bracket thresholds</li>
+    </ul>
+    <p>
+      The IRS typically rounds limits to the nearest <strong>$100</strong> increment. So the limit might jump from $5,000 to $5,100, then to $5,200, and so on. It does not increase by pennies.
+    </p>
+
+    <CalloutBox type="info" title="When does indexing start?">
+      <p>
+        The $5,000 limit is fixed for tax years 2025 through {limits.inflationIndexStartYear}. The first indexed adjustment applies to tax year {limits.inflationIndexStartYear + 1}. The IRS will announce the {limits.inflationIndexStartYear + 1} limit in the fall of {limits.inflationIndexStartYear}.
+      </p>
+    </CalloutBox>
+
+    <h2>Projected Limits: Three Scenarios</h2>
+    <p>
+      Nobody knows what future inflation will be. Here are projections at three rates:
+    </p>
+    <ul>
+      <li><strong>2.0% (low):</strong> The Federal Reserve's target rate</li>
+      <li><strong>2.5% (moderate):</strong> Slightly above the Fed target, close to recent averages</li>
+      <li><strong>4.0% (elevated):</strong> Higher inflation similar to 2023&ndash;2024 levels</li>
+    </ul>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Year</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">At 2.0%</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">At 2.5%</th>
+            <th class="py-3 text-gray-400 font-medium">At 4.0%</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">2025&ndash;2027</td>
+            <td class="py-3 pr-4">$5,000</td>
+            <td class="py-3 pr-4">$5,000</td>
+            <td class="py-3">$5,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">2028</td>
+            <td class="py-3 pr-4">$5,100</td>
+            <td class="py-3 pr-4">$5,100</td>
+            <td class="py-3">$5,200</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">2030</td>
+            <td class="py-3 pr-4">$5,300</td>
+            <td class="py-3 pr-4">$5,400</td>
+            <td class="py-3">$5,600</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">2033</td>
+            <td class="py-3 pr-4">$5,600</td>
+            <td class="py-3 pr-4">$5,800</td>
+            <td class="py-3">$6,400</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">2035</td>
+            <td class="py-3 pr-4">$5,900</td>
+            <td class="py-3 pr-4">$6,100</td>
+            <td class="py-3">$7,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">2038</td>
+            <td class="py-3 pr-4">$6,300</td>
+            <td class="py-3 pr-4">$6,600</td>
+            <td class="py-3">$7,900</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">2040</td>
+            <td class="py-3 pr-4">$6,500</td>
+            <td class="py-3 pr-4">$6,900</td>
+            <td class="py-3">$8,600</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">2043</td>
+            <td class="py-3 pr-4">$6,900</td>
+            <td class="py-3 pr-4">$7,500</td>
+            <td class="py-3">$9,700</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      By 2043 &mdash; when a child born in 2025 turns 18 &mdash; the annual limit could be anywhere from <strong>$6,900 to $9,700</strong> depending on inflation. That is 38% to 94% higher than today's $5,000.
+    </p>
+
+    <h2>What This Means for Total Contribution Capacity</h2>
+    <p>
+      The real question: how much <em>total</em> money can you put into a Trump Account over 18 years? Here is the cumulative math.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Scenario</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Total Contributions (18 years)</th>
+            <th class="py-3 text-gray-400 font-medium">Extra vs. No Indexing</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">No indexing (flat $5,000)</td>
+            <td class="py-3 pr-4">$90,000</td>
+            <td class="py-3">&mdash;</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">2.0% inflation</td>
+            <td class="py-3 pr-4 text-mint-400">$105,700</td>
+            <td class="py-3 text-mint-400">+$15,700</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">2.5% inflation</td>
+            <td class="py-3 pr-4 text-mint-400">$109,100</td>
+            <td class="py-3 text-mint-400">+$19,100</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">4.0% inflation</td>
+            <td class="py-3 pr-4 text-mint-400">$118,500</td>
+            <td class="py-3 text-mint-400">+$28,500</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Even at moderate 2.5% inflation, indexing adds roughly <strong>$19,100 in extra contribution room</strong> over 18 years. That extra $19,100, invested and compounding, could be worth $25,000&ndash;$35,000 at age 18.
+    </p>
+
+    <CalloutBox type="tip" title="Max out every year the limit increases">
+      <p>
+        Each time the limit increases, that is a new opportunity to contribute more. If you are already contributing the maximum, set a reminder each fall to check the IRS announcement and adjust your contribution plan for the following year.
+      </p>
+    </CalloutBox>
+
+    <h2>How Indexing Affects Growth Projections</h2>
+    <p>
+      Most growth calculators assume a flat $5,000/year contribution. Here is what happens when you account for rising limits.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Scenario</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Balance at 18 (8%)</th>
+            <th class="py-3 text-gray-400 font-medium">Balance at 18 (10%)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Flat $5,000/year (no indexing)</td>
+            <td class="py-3 pr-4">$197,000</td>
+            <td class="py-3">$232,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Indexed at 2.5%</td>
+            <td class="py-3 pr-4 text-mint-400">$216,000</td>
+            <td class="py-3 text-mint-400">$255,000</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">Indexed at 4.0%</td>
+            <td class="py-3 pr-4 text-mint-400">$238,000</td>
+            <td class="py-3 text-mint-400">$282,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      At 2.5% inflation and 8% returns, indexing boosts the age-18 balance from $197,000 to <strong>$216,000</strong> &mdash; an extra $19,000 just from contributing the higher indexed amounts each year.
+    </p>
+
+    <p>
+      These projections include the ${limits.pilotDeposit.toLocaleString()} federal deposit and assume the family contributes the maximum each year.
+    </p>
+
+    <h2>The Employer Contribution Angle</h2>
+    <p>
+      Employer contributions count toward the annual cap. As the cap rises with inflation, the room for employer contributions grows too.
+    </p>
+    <p>
+      Today, if your employer contributes the full $2,500, your family can add $2,500 more. By 2035, if the cap reaches $6,100, your family could contribute <strong>$3,600</strong> on top of the employer's $2,500. That is $1,100 more per year in family contribution room.
+    </p>
+
+    <CalloutBox type="info" title="Employer limit may also be indexed">
+      <p>
+        Whether the $2,500 employer-specific limit is independently indexed is pending future IRS guidance. If both limits are indexed, the total contribution capacity grows even faster. We will update this article when the IRS clarifies.
+      </p>
+    </CalloutBox>
+
+    <h2>Planning Strategy: Build for the Ratchet</h2>
+    <p>
+      Contribution limits only go up. They never decrease (even in low-inflation years, the IRS holds limits steady rather than lowering them). This creates what financial planners call a <strong>ratchet effect</strong>.
+    </p>
+    <p>
+      Here is how to plan around it:
+    </p>
+    <ol>
+      <li><strong>Max out every year you can.</strong> Once a year passes, you cannot go back and make up missed contributions.</li>
+      <li><strong>Check the new limit each fall.</strong> The IRS publishes next year's limits in October/November. Adjust your automatic contributions accordingly.</li>
+      <li><strong>Coordinate with employer contributions.</strong> If your employer increases their match, reduce your family contribution proportionally &mdash; or use the rising cap to contribute even more.</li>
+      <li><strong>Use our <a href="/calculators/growth-calculator">Growth Calculator</a></strong> to model different contribution amounts and see the impact of contributing more as limits rise.</li>
+    </ol>
+
+    <h2>Historical Context: How Fast Do IRS Limits Rise?</h2>
+    <p>
+      For reference, here is how other IRS limits have increased over the past decade.
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Limit Type</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">2015</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">2020</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">2025</th>
+            <th class="py-3 text-gray-400 font-medium">10-Year Increase</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">IRA contribution</td>
+            <td class="py-3 pr-4">$5,500</td>
+            <td class="py-3 pr-4">$6,000</td>
+            <td class="py-3 pr-4">$7,000</td>
+            <td class="py-3">+27%</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">401(k) contribution</td>
+            <td class="py-3 pr-4">$18,000</td>
+            <td class="py-3 pr-4">$19,500</td>
+            <td class="py-3 pr-4">$23,500</td>
+            <td class="py-3">+31%</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">Standard deduction (single)</td>
+            <td class="py-3 pr-4">$6,300</td>
+            <td class="py-3 pr-4">$12,400</td>
+            <td class="py-3 pr-4">$15,000</td>
+            <td class="py-3">+138%*</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="text-sm text-gray-400">
+      *The standard deduction jump includes the 2017 TCJA doubling. Pure inflation-based increases are smaller.
+    </p>
+
+    <p>
+      IRA limits increased about 27% over 10 years, or roughly 2.4% annually. This is a reasonable baseline for Trump Account limit growth.
+    </p>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      Inflation indexing is good news for savers. The <strong>${limits.annualContributionLimit.toLocaleString()} limit will grow every year</strong> after {limits.inflationIndexStartYear}, letting you put more money into your child's account as prices rise. At moderate inflation, you could contribute <strong>$109,000+ over 18 years</strong> instead of $90,000 &mdash; and that extra money compounds for decades.
+    </p>
+    <p>
+      The key: <strong>max out each year's limit when you can.</strong> You cannot go back. Use our <a href="/calculators/growth-calculator"><strong>Growth Calculator</strong></a> to project your child's balance at different contribution levels, and check back each fall for the IRS's official announcement of next year's limit.
+    </p>
+
+    <CalloutBox type="warning" title="Not financial advice">
+      <p>
+        This is educational content based on inflation projections and IRS indexing methodology. It is not financial advice or a guarantee of future limits. Actual indexed limits will be determined by the IRS each year. Consult a qualified professional for personal guidance.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

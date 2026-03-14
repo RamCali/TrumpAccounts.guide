@@ -1,0 +1,409 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('529-vs-trump-account-roth-conversion')!;
+const related = getRelatedArticles('529-vs-trump-account-roth-conversion');
+
+const faqs = [
+  {
+    question: 'Can you convert a 529 plan to a Roth IRA?',
+    answer: 'Yes, starting in 2024 under the SECURE 2.0 Act. You can convert up to $35,000 lifetime from a 529 to a Roth IRA for the beneficiary. The 529 must have been open for at least 15 years. Annual conversions are limited to the Roth IRA contribution limit ($7,000 in 2026). No income tax is owed on the conversion.',
+  },
+  {
+    question: 'Can you convert a Trump Account to a Roth IRA?',
+    answer: `Yes. At age ${limits.iraConversionAge}, the Trump Account automatically becomes a traditional IRA. You can then convert any amount to a Roth IRA. You pay ordinary income tax on the earnings and growth portion. After-tax contributions (the money you put in) are not taxed again on conversion.`,
+  },
+  {
+    question: 'Which Roth conversion path pays less in taxes?',
+    answer: 'The 529 → Roth conversion pays zero tax but is capped at $35,000 lifetime. The Trump Account → Roth conversion has no dollar cap but you pay tax on the earnings portion. If you are converting more than $35,000, the Trump Account path is the only option. For amounts under $35,000, the 529 path is tax-free.',
+  },
+  {
+    question: 'Can you do both conversions for the same child?',
+    answer: 'Yes. The 529 → Roth and Trump Account → Roth are completely independent pathways with separate rules. You can convert $35,000 from the 529 (tax-free) AND convert any amount from the Trump Account (taxed on earnings). Doing both maximizes the total Roth IRA balance.',
+  },
+  {
+    question: 'Does the 529 Roth conversion count as a contribution for the year?',
+    answer: 'Yes. The annual 529 → Roth conversion is limited to the Roth IRA contribution limit for that year ($7,000 in 2026). It counts toward the annual Roth contribution limit. If the child also contributes to a Roth IRA directly, the combined total cannot exceed the annual limit.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+  ogImage="/blogpost/TrumpAccounts_ 529 vs trump account roth conversion_TrumpAccounts.guide.png"
+  sources={[
+    { name: 'IRS Notice 2025-68', url: 'https://www.irs.gov/pub/irs-drop/n-25-68.pdf' },
+    { name: 'SECURE 2.0 Act — Section 126', url: 'https://www.congress.gov' },
+    { name: 'IRS — Roth IRA Conversions', url: 'https://www.irs.gov/retirement-plans/roth-iras' },
+  ]}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><strong class="text-white">529 → Roth:</strong> Up to $35,000 lifetime, zero tax, but 529 must be open 15+ years. Annual cap of $7,000.</li>
+        <li><strong class="text-white">Trump Account → Roth:</strong> No dollar cap. Tax on earnings only — contributions convert tax-free. Available at age 18.</li>
+        <li><strong class="text-white">You can do both</strong> — they are independent pathways. Combined, they maximize the Roth balance.</li>
+        <li>The 529 path is better for <strong class="text-white">small amounts</strong> (zero tax). The Trump Account path is better for <strong class="text-white">large balances</strong> (no cap).</li>
+        <li>Smart families <strong class="text-white">open both accounts early</strong> to start the 15-year 529 clock and maximize Trump Account compounding.</li>
+      </ul>
+    </div>
+
+    <p>
+      There are now two ways to get money into a Roth IRA for your child without them ever needing earned income to contribute. The 529 → Roth conversion (SECURE 2.0) and the Trump Account → Roth conversion (IRC §530A) are completely separate pathways with different rules, limits, and tax treatment.
+    </p>
+    <p>
+      This guide compares them head-to-head so you can plan the optimal strategy for your child.
+    </p>
+
+    <h2>Path 1: 529 → Roth IRA (SECURE 2.0)</h2>
+
+    <p>
+      Starting in 2024, the SECURE 2.0 Act allows beneficiaries of 529 plans to roll unused funds into a Roth IRA. This is designed for families who over-saved for college or whose child earned scholarships.
+    </p>
+
+    <h3>The Rules</h3>
+    <ul>
+      <li><strong>Lifetime cap:</strong> $35,000 total can be converted from 529 to Roth IRA per beneficiary.</li>
+      <li><strong>15-year requirement:</strong> The 529 account must have been open for at least 15 years before conversions begin.</li>
+      <li><strong>Annual limit:</strong> Each year, you can only convert up to the Roth IRA contribution limit ($7,000 in 2026).</li>
+      <li><strong>Contribution seasoning:</strong> Contributions made in the last 5 years (and their earnings) are not eligible for conversion.</li>
+      <li><strong>Tax treatment:</strong> <strong>Zero income tax</strong> on the conversion. Zero penalty.</li>
+      <li><strong>Earned income NOT required.</strong> The beneficiary does not need earned income for a 529 → Roth rollover.</li>
+    </ul>
+
+    <CalloutBox type="tip" title="Start the 15-year clock now">
+      <p>
+        The 15-year requirement is based on when the 529 was opened, not when money was contributed. Open a 529 with even $50 today to start the clock. If your child is a newborn, the clock expires when they are 15 — three years before the Trump Account converts to an IRA.
+      </p>
+    </CalloutBox>
+
+    <h3>529 → Roth: The Math</h3>
+    <p>
+      At $7,000/year, it takes <strong>5 years to convert the full $35,000</strong>. Here is a typical scenario:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Year</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Child's Age</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">529 → Roth</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Tax Owed</th>
+            <th class="py-3 text-gray-400 font-medium">Cumulative in Roth</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">1</td>
+            <td class="py-3 pr-4">18</td>
+            <td class="py-3 pr-4">$7,000</td>
+            <td class="py-3 pr-4 text-mint-400">$0</td>
+            <td class="py-3">$7,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">2</td>
+            <td class="py-3 pr-4">19</td>
+            <td class="py-3 pr-4">$7,000</td>
+            <td class="py-3 pr-4 text-mint-400">$0</td>
+            <td class="py-3">$14,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">3</td>
+            <td class="py-3 pr-4">20</td>
+            <td class="py-3 pr-4">$7,000</td>
+            <td class="py-3 pr-4 text-mint-400">$0</td>
+            <td class="py-3">$21,000</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">4</td>
+            <td class="py-3 pr-4">21</td>
+            <td class="py-3 pr-4">$7,000</td>
+            <td class="py-3 pr-4 text-mint-400">$0</td>
+            <td class="py-3">$28,000</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">5</td>
+            <td class="py-3 pr-4">22</td>
+            <td class="py-3 pr-4">$7,000</td>
+            <td class="py-3 pr-4 text-mint-400">$0</td>
+            <td class="py-3 font-bold text-white">$35,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      <strong>$35,000 into a Roth IRA. Zero taxes paid.</strong> If that $35,000 grows at 8% for 43 more years (to age 65), it becomes approximately <strong>$970,000 in tax-free retirement money</strong>.
+    </p>
+
+    <h2>Path 2: Trump Account → Roth IRA</h2>
+
+    <p>
+      At age {limits.iraConversionAge}, the Trump Account automatically converts to a traditional IRA. From there, standard IRA rules apply — including the right to convert to a Roth IRA.
+    </p>
+
+    <h3>The Rules</h3>
+    <ul>
+      <li><strong>No dollar cap:</strong> You can convert any amount. There is no $35,000 lifetime limit.</li>
+      <li><strong>Available at age {limits.iraConversionAge}</strong> — when the Trump Account becomes a traditional IRA.</li>
+      <li><strong>Tax treatment:</strong> You pay ordinary income tax on the <strong>earnings and growth</strong> portion. Your after-tax contributions are NOT taxed again.</li>
+      <li><strong>Pro-rata rule applies:</strong> You cannot cherry-pick which dollars to convert. Each conversion is a proportional mix of contributions (tax-free) and earnings (taxable).</li>
+      <li><strong>Earned income NOT required.</strong> A Roth conversion is not a contribution — no earned income needed.</li>
+    </ul>
+
+    <h3>Trump Account → Roth: The Math</h3>
+    <p>
+      Let's say you contributed $5,000/year for 12 years ($60,000 total). At 10% annual returns, the account is worth <strong>$100,000 at age 18</strong>. That is 60% contributions and 40% earnings.
+    </p>
+
+    <CalloutBox type="tip" title="The pro-rata rule in plain English">
+      <p>
+        Your Trump Account is 60% contributions (after-tax money you put in) and 40% earnings (growth). When you convert $10,000, the IRS treats it as 60% contributions ($6,000 — not taxed) and 40% earnings ($4,000 — taxed as income). You cannot convert only the contribution portion first.
+      </p>
+    </CalloutBox>
+
+    <p>
+      Here is a gradual conversion over 4 years during college, assuming no other income:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Year</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Converted</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Taxable (40%)</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Tax-Free (60%)</th>
+            <th class="py-3 text-gray-400 font-medium">Tax Owed</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Age 18</td>
+            <td class="py-3 pr-4">$25,000</td>
+            <td class="py-3 pr-4">$10,000</td>
+            <td class="py-3 pr-4 text-mint-400">$15,000</td>
+            <td class="py-3">~$0*</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Age 19</td>
+            <td class="py-3 pr-4">$25,000</td>
+            <td class="py-3 pr-4">$10,000</td>
+            <td class="py-3 pr-4 text-mint-400">$15,000</td>
+            <td class="py-3">~$0*</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Age 20</td>
+            <td class="py-3 pr-4">$25,000</td>
+            <td class="py-3 pr-4">$10,000</td>
+            <td class="py-3 pr-4 text-mint-400">$15,000</td>
+            <td class="py-3">~$0*</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">Age 21</td>
+            <td class="py-3 pr-4">$25,000</td>
+            <td class="py-3 pr-4">$10,000</td>
+            <td class="py-3 pr-4 text-mint-400">$15,000</td>
+            <td class="py-3">~$0*</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="text-sm text-gray-400">
+      *With no other income, the $10,000 taxable portion is under the standard deduction ($14,600 in 2026), resulting in $0 tax. This works as long as total income (earned + conversion) stays below the standard deduction.
+    </p>
+
+    <p>
+      <strong>$100,000 converted to Roth. Approximately $0 in total taxes</strong> — if the child has no other income and converts $25,000/year over 4 years. The key is that only 40% of each conversion is taxable, and that 40% ($10,000) is sheltered by the standard deduction.
+    </p>
+
+    <h2>Head-to-Head Comparison</h2>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Feature</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">529 → Roth</th>
+            <th class="py-3 text-gray-400 font-medium">Trump Account → Roth</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Maximum amount</td>
+            <td class="py-3 pr-4">$35,000 lifetime</td>
+            <td class="py-3 text-mint-400 font-medium">No limit</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Tax on conversion</td>
+            <td class="py-3 pr-4 text-mint-400 font-medium">$0</td>
+            <td class="py-3">Tax on earnings (pro-rata)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Waiting period</td>
+            <td class="py-3 pr-4">529 open 15+ years</td>
+            <td class="py-3">Child reaches age {limits.iraConversionAge}</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Annual conversion limit</td>
+            <td class="py-3 pr-4">$7,000 (Roth IRA limit)</td>
+            <td class="py-3 text-mint-400 font-medium">Unlimited</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Years to convert $100K</td>
+            <td class="py-3 pr-4 text-red-400">N/A (capped at $35K)</td>
+            <td class="py-3">3-5 years</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Earned income needed?</td>
+            <td class="py-3 pr-4 text-mint-400">No</td>
+            <td class="py-3 text-mint-400">No</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Counts toward Roth limit?</td>
+            <td class="py-3 pr-4 text-red-400">Yes</td>
+            <td class="py-3 text-mint-400">No (conversions are separate)</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">Can do both?</td>
+            <td class="py-3 pr-4 text-mint-400 font-bold" colspan="2">Yes — they are completely independent</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>The Combined Strategy: Both Paths Together</h2>
+
+    <p>
+      The most powerful approach is running both conversion paths simultaneously. Here is what that looks like for a child turning 18 with a $100,000 Trump Account and a 529 that has been open for 15+ years:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Age</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">529 → Roth</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Trump → Roth</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Total to Roth</th>
+            <th class="py-3 text-gray-400 font-medium">Total Tax</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">18</td>
+            <td class="py-3 pr-4">$7,000</td>
+            <td class="py-3 pr-4">$25,000</td>
+            <td class="py-3 pr-4 font-medium text-white">$32,000</td>
+            <td class="py-3 text-mint-400">~$0</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">19</td>
+            <td class="py-3 pr-4">$7,000</td>
+            <td class="py-3 pr-4">$25,000</td>
+            <td class="py-3 pr-4 font-medium text-white">$32,000</td>
+            <td class="py-3 text-mint-400">~$0</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">20</td>
+            <td class="py-3 pr-4">$7,000</td>
+            <td class="py-3 pr-4">$25,000</td>
+            <td class="py-3 pr-4 font-medium text-white">$32,000</td>
+            <td class="py-3 text-mint-400">~$0</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">21</td>
+            <td class="py-3 pr-4">$7,000</td>
+            <td class="py-3 pr-4">$25,000</td>
+            <td class="py-3 pr-4 font-medium text-white">$32,000</td>
+            <td class="py-3 text-mint-400">~$0</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">22</td>
+            <td class="py-3 pr-4">$7,000</td>
+            <td class="py-3 pr-4">—</td>
+            <td class="py-3 pr-4 font-medium text-white">$7,000</td>
+            <td class="py-3 text-mint-400">$0</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      Over 5 years: <strong>$35,000 from the 529</strong> (tax-free) + <strong>$100,000 from the Trump Account</strong> (near-zero tax with strategic timing) = <strong>$135,000 in a Roth IRA by age 22</strong>.
+    </p>
+
+    <p>
+      If that $135,000 grows at 8% for 43 years (to age 65), it becomes approximately <strong>$3.7 million in tax-free retirement money</strong>.
+    </p>
+
+    <CalloutBox type="tip" title="The 529 conversion does NOT count against the Trump Account conversion">
+      <p>
+        A 529 → Roth rollover counts toward the <strong>annual Roth contribution limit</strong> ($7,000). A Trump Account → Roth conversion is a <strong>Roth conversion</strong>, which has no annual dollar limit and does not count against the contribution limit. They are legally distinct actions. This is why you can do both in the same year.
+      </p>
+    </CalloutBox>
+
+    <h2>When Each Path Wins</h2>
+
+    <h3>529 → Roth is better when:</h3>
+    <ul>
+      <li>You have <strong>leftover 529 money</strong> after college expenses.</li>
+      <li>You want <strong>zero tax</strong> on the conversion.</li>
+      <li>The amount is <strong>$35,000 or less</strong>.</li>
+      <li>The 529 has been open for <strong>15+ years</strong> (plan ahead for this).</li>
+    </ul>
+
+    <h3>Trump Account → Roth is better when:</h3>
+    <ul>
+      <li>The balance is <strong>large</strong> ($50,000+). No dollar cap on conversions.</li>
+      <li>The child is in a <strong>low or zero tax bracket</strong> at 18 (college years).</li>
+      <li>A significant portion is <strong>after-tax contributions</strong> (only earnings are taxed).</li>
+      <li>You want to move <strong>everything to Roth quickly</strong> (no $7,000/year limit).</li>
+    </ul>
+
+    <h3>Both together is best when:</h3>
+    <ul>
+      <li>You have the resources to fund <strong>both a 529 and a Trump Account</strong>.</li>
+      <li>You want to <strong>maximize the total Roth IRA balance</strong> by age 22.</li>
+      <li>You started early enough for the <strong>15-year 529 clock</strong> to be satisfied.</li>
+    </ul>
+
+    <h2>Action Steps for Parents</h2>
+
+    <ol>
+      <li><strong>Open a 529 now</strong> (even with $50) to start the 15-year clock. Every year you wait is a year you lose.</li>
+      <li><strong>File {limits.form}</strong> to open a Trump Account and claim the ${limits.pilotDeposit.toLocaleString()} deposit (for 2025-2028 births).</li>
+      <li><strong>Contribute to both accounts annually</strong> — prioritize based on your income tier (see our <a href="/blog/which-savings-account-first-for-kids">account priority guide</a>).</li>
+      <li><strong>When your child turns 18:</strong> Execute the Trump Account → Roth conversion during low-income years.</li>
+      <li><strong>When the 529 hits 15 years:</strong> Begin the $7,000/year 529 → Roth rollover.</li>
+      <li><strong>By age 22-23:</strong> Your child could have $100,000+ in a Roth IRA with minimal taxes paid.</li>
+    </ol>
+
+    <h2>The Bottom Line</h2>
+
+    <p>
+      The 529 → Roth and Trump Account → Roth conversions are not competing strategies. They are <strong>complementary pathways</strong> that work together to maximize your child's Roth IRA balance. The 529 path gives you $35,000 tax-free. The Trump Account path gives you unlimited conversions taxed only on earnings. Together, they can put <strong>$100,000+ into a Roth IRA by the early 20s</strong> — setting up millions in tax-free retirement wealth.
+    </p>
+    <p>
+      The only requirement is planning ahead. Open both accounts early, contribute consistently, and execute the conversions during your child's low-income years.
+    </p>
+
+    <CalloutBox type="warning" title="Not tax or financial advice">
+      <p>
+        This article is for educational purposes only. Roth conversions, 529 rollovers, and the pro-rata rule involve complex tax calculations that vary by individual. Consult a qualified CPA or tax professional before executing any conversion strategy.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

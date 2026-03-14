@@ -18,6 +18,11 @@
   "signedDate": "2025-07-04",
   "irsNotice": "Notice 2025-68",
   "irsNoticeDate": "2025-12-03",
+  "authenticationStartDate": "2026-05",
+  "pilotDepositDate": "2026-07-04",
+  "firstMarketInvestmentDate": "2026-07-06",
+  "formsFiledApprox": 2000000,
+  "childrenCoveredApprox": 3000000,
   "dellPledge": {
     "totalAmount": 6250000000,
     "perChildAmount": 250,

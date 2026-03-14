@@ -1,0 +1,291 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import CalculatorCTA from '../../components/ui/CalculatorCTA.astro';
+import KeepReading from '../../components/ui/KeepReading.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('claim-dell-250-trump-account')!;
+const related = getRelatedArticles('claim-dell-250-trump-account');
+
+const faqs = [
+  {
+    question: 'How do I claim the $250 Dell pledge for my child?',
+    answer: `Open a Trump Account by filing ${limits.form} with your 2025 tax return. If your child is ${limits.dellPledge.eligibleAge} and lives in a qualifying ZIP code (median income below $${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}), the $${limits.dellPledge.perChildAmount} Dell bonus will be deposited into their account automatically. There is no separate application.`,
+  },
+  {
+    question: 'How do I know if my ZIP code qualifies for the Dell $250?',
+    answer: `Your ZIP code qualifies if the median household income is below $${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}. This covers the vast majority of American neighborhoods. Use our ZIP code lookup tool or check with the ${limits.portal} portal when it launches.`,
+  },
+  {
+    question: 'What age does my child need to be for the Dell pledge?',
+    answer: `Your child must be ${limits.dellPledge.eligibleAge} to qualify for the Dell Foundation's $${limits.dellPledge.perChildAmount} bonus. There is no minimum age — newborns qualify.`,
+  },
+  {
+    question: 'Is the Dell $250 in addition to the $1,000 government deposit?',
+    answer: `Yes. The $${limits.dellPledge.perChildAmount} Dell pledge is separate from and in addition to the $${limits.pilotDeposit.toLocaleString()} federal pilot deposit. A qualifying newborn born ${limits.pilotDepositStartYear}-${limits.pilotDepositEndYear} receives both — a total of $1,250 before any family contributions.`,
+  },
+  {
+    question: 'Is there a deadline to claim the Dell $250?',
+    answer: 'The Dell Foundation has not announced a formal deadline, but the pledge is designed to launch alongside Trump Accounts on July 4, 2026. Open your child\'s account as soon as possible to ensure they are verified and ready to receive the bonus on day one.',
+  },
+  {
+    question: 'Do I need to apply separately for the Dell pledge?',
+    answer: `No. There is no separate application. When you open a Trump Account by filing ${limits.form}, the IRS and the Dell Foundation will verify eligibility based on your child's age and ZIP code. If your child qualifies, the $${limits.dellPledge.perChildAmount} is deposited automatically.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  ogImage="/blogpost/claim-dell-250-trump-account.png"
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>The Dell Foundation is giving <strong class="text-white">${limits.dellPledge.perChildAmount} per child</strong> — free, no strings attached.</li>
+        <li>Your child qualifies if they are <strong class="text-white">{limits.dellPledge.eligibleAge}</strong> and in a qualifying ZIP code.</li>
+        <li>The income threshold is <strong class="text-white">${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()} median household income</strong> — most neighborhoods qualify.</li>
+        <li>Nearly <strong class="text-white">30 million kids</strong> are eligible but have not claimed it yet.</li>
+        <li><strong class="text-white">No separate application</strong> — just open a Trump Account and the bonus comes automatically.</li>
+        <li>Combined with the federal deposit, your newborn starts with <strong class="text-white">$1,250</strong>.</li>
+      </ul>
+    </div>
+
+    <p>
+      Nearly <strong>30 million children</strong> in America are eligible for a free $250 from the Dell Foundation. Most have not claimed it. If your child is {limits.dellPledge.eligibleAge}, you might be leaving money on the table right now.
+    </p>
+    <p>
+      Here is exactly how to claim it — step by step.
+    </p>
+
+    <h2>What Is the Dell Pledge?</h2>
+    <p>
+      Michael and Susan Dell pledged <strong>$6.25 billion</strong> to add ${limits.dellPledge.perChildAmount} to the Trump Account of every qualifying child in America. It is the largest private philanthropic commitment to children's investment accounts in history.
+    </p>
+    <p>
+      This is not a loan. Not a tax credit. Not a rebate. It is <strong>free money deposited directly into your child's investment account</strong>, where it grows tax-deferred in S&P 500 index funds until they turn {limits.growthPhaseEndAge}.
+    </p>
+
+    <h2>Does Your Child Qualify?</h2>
+    <p>
+      Your child qualifies for the ${limits.dellPledge.perChildAmount} Dell bonus if they meet <strong>two simple criteria</strong>:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Requirement</th>
+            <th class="py-3 text-gray-400 font-medium">Details</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Age</td>
+            <td class="py-3">{limits.dellPledge.eligibleAge} (at time of deposit)</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">ZIP code</td>
+            <td class="py-3">Median household income below ${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <CalloutBox type="tip" title="Most neighborhoods qualify">
+      <p>
+        The $${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()} median income threshold covers the <strong>vast majority of American ZIP codes</strong>. This is based on your neighborhood's median income, not your personal income. Even if your household earns more than $${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}, your ZIP code may still qualify if the overall area's median is below that threshold.
+      </p>
+    </CalloutBox>
+
+    <p>
+      Use our <a href="/blog/dell-trump-accounts-zip-code-lookup"><strong>Dell pledge ZIP code lookup</strong></a> to check your address.
+    </p>
+
+    <h2>How to Claim It: Step by Step</h2>
+    <p>
+      The good news: there is <strong>no separate application</strong> for the Dell pledge. You just need to open a Trump Account. Here is how:
+    </p>
+
+    <h3>Step 1: Gather Your Documents</h3>
+    <p>
+      You will need:
+    </p>
+    <ul>
+      <li>Your child's <strong>Social Security Number (SSN)</strong></li>
+      <li>Your <strong>2025 federal tax return</strong> (Form 1040)</li>
+      <li><strong>{limits.form}</strong> (Trump Account Election) — available at <a href="https://www.irs.gov">IRS.gov</a></li>
+    </ul>
+
+    <h3>Step 2: File {limits.form} with Your Tax Return</h3>
+    <p>
+      Include {limits.form} when you file your 2025 tax return. This is the form that elects a Trump Account for your child. Key fields:
+    </p>
+    <ul>
+      <li>Child's name and SSN</li>
+      <li>Parent/guardian information</li>
+      <li>Designated brokerage (where you want the account held)</li>
+    </ul>
+    <p>
+      Need help with the form? Read our <a href="/blog/form-4547-guide">complete Form 4547 guide</a>.
+    </p>
+
+    <h3>Step 3: Wait for Verification (May 2026)</h3>
+    <p>
+      Starting in May 2026, the IRS verifies your filing. They confirm:
+    </p>
+    <ul>
+      <li>Your child is a U.S. citizen with a valid SSN</li>
+      <li>Your child is under {limits.growthPhaseEndAge}</li>
+      <li>The form was filed correctly</li>
+    </ul>
+
+    <h3>Step 4: Receive the Deposits (July 4, 2026)</h3>
+    <p>
+      On July 4, 2026, verified accounts receive:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Deposit</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Amount</th>
+            <th class="py-3 text-gray-400 font-medium">Who Gets It</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Federal pilot deposit</td>
+            <td class="py-3 pr-4 font-medium text-gold-400">${limits.pilotDeposit.toLocaleString()}</td>
+            <td class="py-3">Children born {limits.pilotDepositStartYear}-{limits.pilotDepositEndYear}</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Dell Foundation bonus</td>
+            <td class="py-3 pr-4 font-medium text-gold-400">${limits.dellPledge.perChildAmount}</td>
+            <td class="py-3">Children {limits.dellPledge.eligibleAge} in qualifying ZIP codes</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">Total (if both apply)</td>
+            <td class="py-3 pr-4 font-medium text-gold-400">$1,250</td>
+            <td class="py-3">Newborns in qualifying ZIP codes</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      On July 6, 2026 (the first business day after the holiday), this money gets invested in S&P 500 or broad U.S. equity index funds. The compound growth clock starts.
+    </p>
+
+    <h2>What Does $250 Actually Become?</h2>
+    <p>
+      Two hundred fifty dollars might not sound like much. But invested in the S&P 500 for 18 years, it grows:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Starting Amount</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">At 7% (after inflation)</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">At 8%</th>
+            <th class="py-3 text-gray-400 font-medium">At 10% (historical avg)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">$250 (Dell only)</td>
+            <td class="py-3 pr-4">$845</td>
+            <td class="py-3 pr-4">$999</td>
+            <td class="py-3">$1,390</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">$1,250 (Dell + federal)</td>
+            <td class="py-3 pr-4">$4,225</td>
+            <td class="py-3 pr-4">$4,995</td>
+            <td class="py-3 font-medium text-gold-400">$6,950</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">$1,250 + $100/mo</td>
+            <td class="py-3 pr-4">$43,100</td>
+            <td class="py-3 pr-4">$53,400</td>
+            <td class="py-3 font-medium text-gold-400">$67,200</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      That free $250, combined with the federal deposit and even modest monthly contributions, can grow into <strong>tens of thousands of dollars</strong> by the time your child turns 18.
+    </p>
+
+    <CalculatorCTA calculator="growth" />
+
+    <h2>Common Mistakes to Avoid</h2>
+    <p>
+      Do not make these errors when claiming the Dell pledge:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Mistake</th>
+            <th class="py-3 text-gray-400 font-medium">What to Do Instead</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Waiting for a separate Dell application</td>
+            <td class="py-3">There is none. Just open a Trump Account.</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Assuming your ZIP code does not qualify</td>
+            <td class="py-3">Check — the $150K threshold covers most neighborhoods.</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Thinking your income disqualifies you</td>
+            <td class="py-3">It is based on ZIP code median, not your personal income.</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Forgetting to file {limits.form}</td>
+            <td class="py-3">No form = no account = no Dell bonus.</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">Filing too late for July 4th</td>
+            <td class="py-3">File before April 15, 2026 for the best chance of verification by July 4th.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>The Bottom Line</h2>
+    <p>
+      The Dell Foundation is offering <strong>free money for your child's future</strong>. No application. No strings. No catch. You just need to open a Trump Account.
+    </p>
+    <p>
+      Thirty million kids are eligible. Most have not claimed it. Do not be one of the families that leaves ${limits.dellPledge.perChildAmount} on the table.
+    </p>
+    <p>
+      <strong>Next step:</strong> <a href="/blog/how-to-open-step-by-step">Open a Trump Account in 15 minutes</a>.
+    </p>
+
+    <KeepReading slugs={['dell-trump-accounts-zip-code-lookup', 'how-to-open-step-by-step', 'trump-account-signups-exploding']} />
+
+    <CalloutBox type="warning" title="Not tax or financial advice">
+      <p>
+        This article is educational content based on IRC Section 530A, IRS Notice 2025-68, and publicly announced Dell Foundation commitments. It is not tax or financial advice. Details of the Dell pledge may be updated as the program launches. Consult a qualified tax professional or financial advisor before making decisions about your child's account.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

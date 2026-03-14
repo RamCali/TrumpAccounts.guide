@@ -1,0 +1,180 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import CalculatorCTA from '../../components/ui/CalculatorCTA.astro';
+import KeepReading from '../../components/ui/KeepReading.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('trump-account-signups-exploding')!;
+const related = getRelatedArticles('trump-account-signups-exploding');
+
+const faqs = [
+  {
+    question: 'How many kids have signed up for Trump Accounts?',
+    answer: `Millions of children have already claimed their Trump Account. Sign-ups are running at over 100,000 kids per day, according to Brad Gerstner, one of the architects of the program. The IRS has received over ${limits.formsFiledApprox.toLocaleString()} Form 4547 filings covering approximately ${limits.childrenCoveredApprox.toLocaleString()} children.`,
+  },
+  {
+    question: 'How many kids are still eligible for the $250 Dell pledge?',
+    answer: `Nearly 30 million children in America are eligible for at least $${limits.dellPledge.perChildAmount} from the Dell Foundation if they claim their Trump Account. The pledge covers children ${limits.dellPledge.eligibleAge} in ZIP codes with median household income below $${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}.`,
+  },
+  {
+    question: 'Is it too late to sign up for a Trump Account?',
+    answer: `No. Any U.S. citizen child under ${limits.growthPhaseEndAge} can open a Trump Account. The $${limits.pilotDeposit.toLocaleString()} federal deposit is available for children born ${limits.pilotDepositStartYear}-${limits.pilotDepositEndYear}. File ${limits.form} with your tax return or through ${limits.portal}.`,
+  },
+  {
+    question: 'Why are sign-ups accelerating?',
+    answer: 'Sign-ups accelerated after the State of the Union address, where the president highlighted Trump Accounts as a way to get Main Street America into the game of capitalism. Media coverage, corporate pledges, and word-of-mouth are also driving adoption.',
+  },
+  {
+    question: 'When do Trump Accounts go live?',
+    answer: `Trump Accounts go live on July 4, ${limits.pilotDepositDate.split('-')[0]}. That is when the $${limits.pilotDeposit.toLocaleString()} federal deposits hit accounts and money gets invested in the market for the first time.`,
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  ogImage="/blogpost/trump-account-signups-exploding.png"
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li>Over <strong class="text-white">100,000 kids are signing up per day</strong> for Trump Accounts.</li>
+        <li><strong class="text-white">Millions of children</strong> have already claimed their account.</li>
+        <li>Nearly <strong class="text-white">30 million kids</strong> are still eligible for at least <strong class="text-white">${limits.dellPledge.perChildAmount}</strong> from the Dell Foundation.</li>
+        <li>Sign-ups <strong class="text-white">accelerated after the State of the Union</strong> address.</li>
+        <li>Accounts <strong class="text-white">go live July 4, 2026</strong> — the clock is ticking.</li>
+        <li>Don't leave <strong class="text-white">free money on the table</strong> — <a href="/blog/how-to-open-step-by-step" class="text-gold-400 hover:text-gold-300">here's how to claim yours</a>.</li>
+      </ul>
+    </div>
+
+    <p>
+      Trump Accounts are not a niche program anymore. They are a movement.
+    </p>
+    <p>
+      According to Brad Gerstner — the Altimeter Capital founder who helped architect the Invest America program that became Trump Accounts — <strong>over 100,000 kids are signing up every single day</strong>. Millions have already claimed their accounts. And nearly 30 million children are still eligible for at least ${limits.dellPledge.perChildAmount} if their parents just go through the simple sign-up process.
+    </p>
+
+    <h2>The Numbers Are Staggering</h2>
+    <p>
+      Here is where things stand right now:
+    </p>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Metric</th>
+            <th class="py-3 text-gray-400 font-medium">Number</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Daily sign-ups</td>
+            <td class="py-3 font-medium text-gold-400">100,000+ kids per day</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Total accounts claimed</td>
+            <td class="py-3">Millions</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Forms filed with IRS</td>
+            <td class="py-3">{limits.formsFiledApprox.toLocaleString()}+</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Children covered</td>
+            <td class="py-3">{limits.childrenCoveredApprox.toLocaleString()}+</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">Still eligible for Dell $250</td>
+            <td class="py-3 font-medium text-gold-400">~30 million kids</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      These are not projections. These are real families opting in right now.
+    </p>
+
+    <h2>Why Sign-Ups Accelerated After the State of the Union</h2>
+    <p>
+      Sign-up velocity jumped after the president's State of the Union address, where he highlighted Trump Accounts as a way to <strong>get every American into the game of capitalism</strong> — directly owning shares in the great companies of America.
+    </p>
+    <p>
+      That message resonated. For millions of families, the stock market has always felt like something for other people. Trump Accounts change that. Every child gets a piece of the S&P 500. No gatekeepers. No minimum net worth. No complicated application.
+    </p>
+
+    <CalloutBox type="info" title="The vision behind the numbers">
+      <p>
+        Brad Gerstner described the core idea on the All-In Podcast: getting "Main Street America into the game of capitalism" by having every child directly own shares in America's greatest companies. That is what makes this different from a savings account — it is an <strong>ownership stake</strong> in the economy.
+      </p>
+    </CalloutBox>
+
+    <h2>30 Million Kids Are Leaving Money on the Table</h2>
+    <p>
+      Here is the part that should worry every parent: <strong>nearly 30 million children are eligible for at least ${limits.dellPledge.perChildAmount} from the Dell Foundation</strong> — and most have not claimed it yet.
+    </p>
+    <p>
+      Michael and Susan Dell pledged <strong>$6.25 billion</strong> to add ${limits.dellPledge.perChildAmount} to the Trump Account of every qualifying child. Your child qualifies if they are <strong>{limits.dellPledge.eligibleAge}</strong> and live in a ZIP code where the median household income is below <strong>${limits.dellPledge.zipCodeMedianIncomeThreshold.toLocaleString()}</strong>. That covers the vast majority of American neighborhoods.
+    </p>
+    <p>
+      Combined with the <strong>${limits.pilotDeposit.toLocaleString()} federal deposit</strong> (for {limits.pilotDepositStartYear}-{limits.pilotDepositEndYear} births), a qualifying newborn starts with <strong>$1,250</strong> before the family contributes a single dollar.
+    </p>
+    <p>
+      Check if your child qualifies with our <a href="/blog/dell-trump-accounts-zip-code-lookup">Dell pledge ZIP code lookup</a>.
+    </p>
+
+    <h2>What Is Driving This Surge?</h2>
+    <p>
+      Several factors are fueling the rapid adoption:
+    </p>
+    <ul>
+      <li><strong>Free money.</strong> The ${limits.pilotDeposit.toLocaleString()} deposit and ${limits.dellPledge.perChildAmount} Dell bonus cost families nothing.</li>
+      <li><strong>Presidential spotlight.</strong> The State of the Union gave the program prime-time visibility.</li>
+      <li><strong>Corporate pledges.</strong> Dell, Visa, Robinhood, and others have committed support, building trust and awareness.</li>
+      <li><strong>Word of mouth.</strong> Parents are telling other parents. The pitch is simple: free money for your kid's future.</li>
+      <li><strong>Tax season momentum.</strong> Families are already filing taxes, and adding {limits.form} is a small extra step.</li>
+      <li><strong>July 4th deadline pressure.</strong> Accounts go live on July 4th. Parents want to be ready.</li>
+    </ul>
+
+    <h2>More Announcements Coming Before July 4th</h2>
+    <p>
+      Gerstner hinted at more to come. On the All-In Podcast, he said: <strong>"Stay tuned. We're going to have some banger announcements as we head toward July 4th."</strong>
+    </p>
+    <p>
+      This likely means additional corporate pledges, possible new features on the <a href="https://trumpaccounts.gov">{limits.portal}</a> portal, and further expansion of the program. The <a href="/blog/trump-accounts-summit">Trump Accounts Summit</a> in January already secured 27 corporate pledges. More are expected.
+    </p>
+
+    <h2>Have You Signed Up Yet?</h2>
+    <p>
+      If you have not claimed your child's Trump Account, you are leaving free money on the table. Here is what to do right now:
+    </p>
+    <ol>
+      <li><strong>File {limits.form}</strong> with your 2025 tax return (due April 15, 2026)</li>
+      <li><strong>Or register at</strong> <a href="https://trumpaccounts.gov">{limits.portal}</a> when the portal launches mid-2026</li>
+      <li><strong>Check Dell eligibility</strong> — your child may qualify for an extra ${limits.dellPledge.perChildAmount}</li>
+    </ol>
+    <p>
+      The sign-up process takes minutes. The compounding lasts 18 years. Read our <a href="/blog/how-to-open-step-by-step"><strong>step-by-step opening guide</strong></a> for the full walkthrough.
+    </p>
+
+    <CalculatorCTA calculator="growth" />
+
+    <KeepReading slugs={['claim-dell-250-trump-account', 'trump-accounts-go-live-july-4', 'how-to-open-step-by-step']} />
+
+    <CalloutBox type="warning" title="Not tax or financial advice">
+      <p>
+        This article is educational content based on IRC Section 530A and IRS Notice 2025-68. It is not tax or financial advice. Consult a qualified tax professional or financial advisor before making decisions about your child's account.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>

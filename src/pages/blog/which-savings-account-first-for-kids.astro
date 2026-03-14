@@ -1,0 +1,342 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import CalloutBox from '../../components/ui/CalloutBox.astro';
+import { getArticle, getRelatedArticles } from '../../lib/blog/articles';
+import limits from '../../data/contribution-limits.json';
+
+const article = getArticle('which-savings-account-first-for-kids')!;
+const related = getRelatedArticles('which-savings-account-first-for-kids');
+
+const faqs = [
+  {
+    question: 'What is the best savings account for kids in 2026?',
+    answer: `It depends on your income and goals. For most families on a tight budget, start with the free $1,000 Trump Account deposit (file ${limits.form}). If you are a business owner, a Kids Roth IRA is the most flexible. If college is the priority, a Coverdell ESA gives you the most control. Ideally, you use a combination of accounts.`,
+  },
+  {
+    question: 'Should I open a 529 or Trump Account first?',
+    answer: 'If your primary goal is college savings, the 529 is better — tax-free withdrawals for education, higher contribution limits, and state tax deductions in many states. If your goal is long-term wealth building and retirement head start, the Trump Account is better — converts to a Roth IRA at 18. Most families benefit from both.',
+  },
+  {
+    question: 'Can I open all four accounts for the same child?',
+    answer: `Yes. A Coverdell ESA ($2,000/year), Kids Roth IRA ($7,000/year with earned income), Trump Account ($${limits.annualContributionLimit.toLocaleString()}/year), and 529 plan (varies) all have separate limits and rules. There is no restriction on having multiple accounts for the same child.`,
+  },
+  {
+    question: 'What if I can only afford $100 per month?',
+    answer: `Start with the free Trump Account deposit — file ${limits.form} to claim the $${limits.pilotDeposit.toLocaleString()} federal deposit at zero cost. Then put your $100/month ($1,200/year) into a single account. If college is the priority, choose a 529 or Coverdell. If long-term wealth is the priority, choose the Trump Account. Every dollar counts.`,
+  },
+  {
+    question: 'Do I need earned income for a Trump Account?',
+    answer: 'No. Unlike a Roth IRA, Trump Accounts do not require the child to have earned income. Any family with a U.S. citizen child under 18 can open and contribute to a Trump Account, regardless of income level.',
+  },
+];
+---
+
+<BlogLayout
+  {...article}
+  faqs={faqs}
+  relatedArticles={related.map(a => ({
+    href: `/blog/${a.slug}`,
+    title: a.title,
+    description: a.description,
+  }))}
+  ogImage="/blogpost/TrumpAccounts_ which savings account first__TrumpAccounts.guide.png"
+  sources={[
+    { name: 'IRS Notice 2025-68', url: 'https://www.irs.gov/pub/irs-drop/n-25-68.pdf' },
+    { name: 'IRS — Coverdell ESA', url: 'https://www.irs.gov/taxtopics/tc310' },
+    { name: 'IRS — Roth IRA Contributions', url: 'https://www.irs.gov/retirement-plans/roth-iras' },
+    { name: 'SECURE 2.0 Act — 529 to Roth', url: 'https://www.congress.gov' },
+  ]}
+>
+  <div class="prose">
+    <div class="not-prose my-6 rounded-xl border border-gold-400/30 bg-gold-400/5 p-6">
+      <h2 class="mb-3 text-lg font-bold text-gold-400">Key Takeaways</h2>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li><strong class="text-white">Tight budget?</strong> Claim the free $1,000 Trump Account deposit first. It costs nothing.</li>
+        <li><strong class="text-white">Business owner?</strong> Fund a Kids Roth IRA first — maximum flexibility and tax-free growth.</li>
+        <li><strong class="text-white">College is the priority?</strong> Coverdell ESA or 529 plan — tax-free withdrawals for education.</li>
+        <li><strong class="text-white">Doing well financially?</strong> Stack Trump Account + Roth + Coverdell in the same year.</li>
+        <li><strong class="text-white">Wealthy grandparents?</strong> Add a 529 plan — highest contribution limits, sibling rollover option.</li>
+      </ul>
+    </div>
+
+    <p>
+      There are four major tax-advantaged accounts for children: the Trump Account, the Kids Roth IRA, the Coverdell ESA, and the 529 plan. They all have different rules, limits, and strengths. The question everyone asks is: <strong>which one should I open first?</strong>
+    </p>
+    <p>
+      The answer depends on your income, whether you own a business, and what you are saving for. Here is the priority order for every situation.
+    </p>
+
+    <h2>The Quick Decision Framework</h2>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Your Situation</th>
+            <th class="py-3 text-gray-400 font-medium">Open These (In Order)</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Tight budget, every dollar counts</td>
+            <td class="py-3 text-white">1. Trump Account (free $1,000) → 2. Coverdell ($2K/yr)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Business owner / self-employed</td>
+            <td class="py-3 text-white">1. Kids Roth IRA → 2. Trump Account → 3. Coverdell</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">Middle income, college is #1 goal</td>
+            <td class="py-3 text-white">1. Trump Account (free $1,000) → 2. Coverdell → 3. 529</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4">High earner, already saving well</td>
+            <td class="py-3 text-white">1. Kids Roth → 2. Trump Account → 3. Coverdell → 4. 529</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4">Grandparent wanting to help</td>
+            <td class="py-3 text-white">1. Trump Account (gift) → 2. 529 (highest limits)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <CalloutBox type="tip" title="Always claim the free deposit">
+      <p>
+        No matter your income, file {limits.form} to claim the ${limits.pilotDeposit.toLocaleString()} federal deposit for children born 2025-2028. It is free money. You do not have to contribute anything else. Even if you open other accounts first, get this deposit working for your child.
+      </p>
+    </CalloutBox>
+
+    <h2>Tier 1: Tight Budget (Under $75K Family Income)</h2>
+
+    <p>
+      When money is tight, every dollar needs to count. Here is the order:
+    </p>
+
+    <h3>Step 1: Claim the Free Trump Account Deposit</h3>
+    <p>
+      File {limits.form} with your 2025 tax return. Your child gets a <strong>${limits.pilotDeposit.toLocaleString()} government deposit</strong> invested in S&P 500 index funds. You do not need to add any of your own money. If your child is born 2025-2028, this is free. If they are older, you skip to Step 2.
+    </p>
+
+    <h3>Step 2: Coverdell ESA ($2,000/year)</h3>
+    <p>
+      The Coverdell Education Savings Account is the most underutilized account for families. Key benefits:
+    </p>
+    <ul>
+      <li><strong>Tax-free withdrawals</strong> for education (college, trade school, even K-12 private school).</li>
+      <li><strong>Self-directed</strong> — you choose the investments. You are not stuck in index funds.</li>
+      <li><strong>Low annual limit</strong> ($2,000/year) — but that is actually a feature for tight budgets. It is achievable.</li>
+    </ul>
+    <p>
+      At $167/month, you max out a Coverdell. Over 18 years at 8% returns, that $36,000 in contributions could grow to <strong>$80,000+</strong> — all tax-free for education expenses.
+    </p>
+
+    <CalloutBox type="warning" title="Coverdell income limits">
+      <p>
+        The Coverdell has income phaseouts: $110,000 (single) / $220,000 (married). If your income is above these limits, you cannot contribute directly. This is why it is best suited for middle-income families.
+      </p>
+    </CalloutBox>
+
+    <h3>Step 3: Add Trump Account Contributions (if budget allows)</h3>
+    <p>
+      After maxing the Coverdell, put any remaining savings into the Trump Account. The ${limits.annualContributionLimit.toLocaleString()}/year limit is the total cap. At age {limits.iraConversionAge}, your child can convert to a Roth IRA during their low-income years.
+    </p>
+
+    <h2>Tier 2: Business Owners & Self-Employed</h2>
+
+    <p>
+      If you own a business — including a rental property — you have a superpower: you can <strong>pay your kids for real work</strong> and deduct it as a business expense. This changes the entire priority order.
+    </p>
+
+    <h3>Step 1: Kids Roth IRA (up to $7,000/year)</h3>
+    <p>
+      Your child earns income from your business. They (or you, on their behalf) open a Roth IRA. The Roth IRA is the single most powerful account for kids because:
+    </p>
+    <ul>
+      <li><strong>Tax-free growth forever</strong> — no taxes on gains, ever.</li>
+      <li><strong>Full investment control</strong> — you are not limited to index funds. Stocks, real estate, crypto, private companies.</li>
+      <li><strong>Contributions can be withdrawn anytime</strong> — for college, a first home, or anything else. No penalty on contributions.</li>
+      <li><strong>No conversion needed</strong> — it is already a Roth. No tax event at 18.</li>
+    </ul>
+
+    <p>
+      For business owners who can pay their kids, <strong>the Kids Roth IRA beats the Trump Account</strong> on flexibility, investment options, and tax treatment. Fund this first.
+    </p>
+
+    <h3>Step 2: Trump Account ($5,000/year)</h3>
+    <p>
+      After maxing the Roth IRA, add the Trump Account. Your child can use their remaining earnings (or you can gift it) to fund the ${limits.annualContributionLimit.toLocaleString()}/year limit. At {limits.iraConversionAge}, they convert it to a Roth IRA during college years when they are in a low tax bracket.
+    </p>
+
+    <h3>Step 3: Coverdell ESA ($2,000/year)</h3>
+    <p>
+      If college is also a concern, layer on the Coverdell for tax-free education withdrawals.
+    </p>
+
+    <p>
+      <strong>Total tax-advantaged savings: up to $14,000/year</strong> ($7,000 Roth + $5,000 Trump + $2,000 Coverdell). If you are in the 24% tax bracket and paying your child from a sole proprietorship, the tax savings on wages alone is <strong>$3,000-$5,000/year</strong>. See our <a href="/blog/trump-account-business-owner-strategy">business owner's playbook</a> for the full walkthrough.
+    </p>
+
+    <h2>Tier 3: High Earners Already Saving</h2>
+
+    <p>
+      If your household income is $200K+ and you are already maxing your own 401(k) and Roth IRA, you have the capacity to run the full playbook for your kids.
+    </p>
+
+    <h3>The Full Stack</h3>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Priority</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Account</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Annual Max</th>
+            <th class="py-3 text-gray-400 font-medium">Why This Order</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-gold-400 font-bold">1</td>
+            <td class="py-3 pr-4 font-medium text-white">Kids Roth IRA</td>
+            <td class="py-3 pr-4">$7,000</td>
+            <td class="py-3">Tax-free forever, full control, no conversion needed</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-gold-400 font-bold">2</td>
+            <td class="py-3 pr-4 font-medium text-white">Trump Account</td>
+            <td class="py-3 pr-4">$5,000</td>
+            <td class="py-3">No income limits, Roth conversion at 18</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 text-gold-400 font-bold">3</td>
+            <td class="py-3 pr-4 font-medium text-white">Coverdell ESA</td>
+            <td class="py-3 pr-4">$2,000</td>
+            <td class="py-3">Tax-free for education, self-directed</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 text-gold-400 font-bold">4</td>
+            <td class="py-3 pr-4 font-medium text-white">529 Plan</td>
+            <td class="py-3 pr-4">$19,000+</td>
+            <td class="py-3">Highest limits, state deductions, grandparent-friendly</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      At the full stack, you are putting away <strong>$14,000+ per year per child</strong> in tax-advantaged accounts — before the 529. Over 18 years, that is <strong>$252,000+ in contributions</strong> that could grow to <strong>$500,000-$700,000</strong> depending on returns.
+    </p>
+
+    <h2>Tier 4: Grandparents Who Want to Help</h2>
+
+    <p>
+      Grandparents have different priorities: they want to give generously, they want tax efficiency, and they may want the option to redirect funds if one grandchild does not need them.
+    </p>
+
+    <h3>Best Option: 529 Plan</h3>
+    <p>
+      The 529 is built for grandparents. Contribution limits are the highest of any child account (often $300,000+ lifetime per beneficiary). You can superfund up to $95,000 at once (5-year gift tax election). If one grandchild does not use the money, you can transfer it to a sibling, cousin, or even convert up to $35,000 to a Roth IRA after 15 years.
+    </p>
+
+    <h3>Supplemental: Trump Account Contributions</h3>
+    <p>
+      Grandparents can also contribute to a grandchild's Trump Account (up to the ${limits.annualContributionLimit.toLocaleString()} combined annual limit). This is a great birthday or holiday gift that builds long-term wealth.
+    </p>
+
+    <CalloutBox type="tip" title="The gift tax question">
+      <p>
+        Trump Account contributions may raise gift tax questions because the child cannot access the money until 18 (a "future interest" gift). Contributions are well under the $19,000 annual gift tax exclusion, but consult a tax advisor about whether Form 709 is required. See our <a href="/blog/trump-accounts-gift-tax">gift tax guide</a> for the full breakdown.
+      </p>
+    </CalloutBox>
+
+    <h2>Side-by-Side Comparison</h2>
+
+    <div class="not-prose my-6 overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-surface-600 text-left">
+            <th class="py-3 pr-4 text-gray-400 font-medium">Feature</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Trump Account</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Kids Roth IRA</th>
+            <th class="py-3 pr-4 text-gray-400 font-medium">Coverdell ESA</th>
+            <th class="py-3 text-gray-400 font-medium">529 Plan</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-300">
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Annual limit</td>
+            <td class="py-3 pr-4">$5,000</td>
+            <td class="py-3 pr-4">$7,000</td>
+            <td class="py-3 pr-4">$2,000</td>
+            <td class="py-3">Varies ($19K+ gift)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Earned income needed?</td>
+            <td class="py-3 pr-4 text-mint-400">No</td>
+            <td class="py-3 pr-4 text-red-400">Yes</td>
+            <td class="py-3 pr-4 text-mint-400">No</td>
+            <td class="py-3 text-mint-400">No</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Income limits?</td>
+            <td class="py-3 pr-4 text-mint-400">None</td>
+            <td class="py-3 pr-4 text-mint-400">None</td>
+            <td class="py-3 pr-4 text-red-400">$110K/$220K</td>
+            <td class="py-3 text-mint-400">None</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Tax on growth</td>
+            <td class="py-3 pr-4">Deferred</td>
+            <td class="py-3 pr-4 text-mint-400">Tax-free</td>
+            <td class="py-3 pr-4 text-mint-400">Tax-free (education)</td>
+            <td class="py-3 text-mint-400">Tax-free (education)</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">Investment flexibility</td>
+            <td class="py-3 pr-4 text-red-400">S&P 500 only</td>
+            <td class="py-3 pr-4 text-mint-400">Anything</td>
+            <td class="py-3 pr-4 text-mint-400">Anything</td>
+            <td class="py-3 text-yellow-400">State plan menu</td>
+          </tr>
+          <tr class="border-b border-surface-700">
+            <td class="py-3 pr-4 font-medium text-white">College withdrawals</td>
+            <td class="py-3 pr-4 text-yellow-400">Penalty-free, taxed</td>
+            <td class="py-3 pr-4 text-mint-400">Contributions tax-free</td>
+            <td class="py-3 pr-4 text-mint-400">Fully tax-free</td>
+            <td class="py-3 text-mint-400">Fully tax-free</td>
+          </tr>
+          <tr>
+            <td class="py-3 pr-4 font-medium text-white">Roth conversion path</td>
+            <td class="py-3 pr-4 text-mint-400">At age 18</td>
+            <td class="py-3 pr-4">Already Roth</td>
+            <td class="py-3 pr-4 text-red-400">No</td>
+            <td class="py-3 text-yellow-400">$35K after 15 yrs</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>The Bottom Line</h2>
+
+    <p>
+      There is no single best account for every family. The right priority depends on your income, whether you own a business, and what you are saving for. But the general rule is:
+    </p>
+    <ol>
+      <li><strong>Claim every free dollar first</strong> — Trump Account deposit, employer match, Dell pledge.</li>
+      <li><strong>If you can hire your kids</strong> — Kids Roth IRA is king. Tax-free, flexible, self-directed.</li>
+      <li><strong>If college is the priority</strong> — Coverdell or 529 for tax-free education withdrawals.</li>
+      <li><strong>For long-term wealth</strong> — Trump Account + Roth conversion at 18 is powerful.</li>
+      <li><strong>If you can afford it</strong> — stack multiple accounts for maximum tax advantage.</li>
+    </ol>
+    <p>
+      The best strategy is not choosing one account. It is <strong>using the right combination</strong> for your family's situation and building from there as your income grows.
+    </p>
+
+    <CalloutBox type="warning" title="Not tax or financial advice">
+      <p>
+        This article is for educational purposes only. Account rules, contribution limits, and tax treatment can change. Consult a qualified tax professional or financial advisor before opening accounts or implementing a multi-account strategy.
+      </p>
+    </CalloutBox>
+  </div>
+</BlogLayout>
