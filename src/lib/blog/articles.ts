@@ -160,8 +160,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   },
   'are-trump-accounts-tax-deductible': {
     slug: 'are-trump-accounts-tax-deductible',
-    title: 'Are Trump Accounts Tax-Deductible? No — But 3 Tax Perks',
-    description: 'No deduction for contributions. But Trump Accounts still offer tax-deferred growth, tax-free employer match, and a Roth conversion option at 18.',
+    title: 'Are Trump Account Contributions Tax-Deductible? (No)',
+    description: 'Trump Account contributions are NOT deductible. But you still get tax-deferred growth, tax-free employer match ($2,500/yr), and a Roth conversion option at 18.',
     category: 'Money & Growth',
     categorySlug: 'money-and-growth',
     datePublished: '2026-02-12',
@@ -217,8 +217,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   },
   'expected-returns-trump-account': {
     slug: 'expected-returns-trump-account',
-    title: 'Expected Returns for Trump Accounts',
-    description: 'Historical S&P 500 returns average 10% annually (7% after inflation). See 18-year projections at conservative, moderate, and optimistic rates.',
+    title: 'Trump Account Returns: How Much Will $1,000 Grow?',
+    description: 'The $1,000 deposit could grow to $4,000–$5,500 by age 18. S&P 500 averages 10%/year. See best-case, worst-case, and average 18-year projections.',
     category: 'Investment Structure',
     categorySlug: 'investment-structure',
     datePublished: '2026-02-12',
@@ -352,8 +352,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   },
   'trump-account-penalties': {
     slug: 'trump-account-penalties',
-    title: 'Trump Account Penalties: What Happens If You Withdraw?',
-    description: 'No withdrawals before 18. Ages 18–59½: income tax + 10% penalty. After 59½: tax only. Plus 8 penalty-free exceptions for first home, education & disability.',
+    title: 'Trump Account Penalties: Full Breakdown by Age (2026)',
+    description: 'Locked before 18. Ages 18–59½: income tax + 10% penalty (8 exceptions). After 59½: tax only, no penalty. Complete penalty rules and how to avoid them.',
     category: 'Use of Funds',
     categorySlug: 'use-of-funds',
     datePublished: '2026-02-12',
@@ -385,8 +385,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   },
   'trump-account-withdrawal-exceptions': {
     slug: 'trump-account-withdrawal-exceptions',
-    title: 'Can You Withdraw from a Trump Account? Exceptions Flowchart',
-    description: 'Complete list of Trump Account withdrawal exceptions before and after 18. Visual flowchart, first home, education, disability, birth/adoption, and 8 more penalty-free IRA exceptions.',
+    title: 'Trump Account Withdrawal Exceptions: Before & After 18',
+    description: 'Before 18: almost no exceptions. After 18: penalty-free for first home ($10K), college, disability & more. Full list of withdrawal rules with flowchart.',
     category: 'Use of Funds',
     categorySlug: 'use-of-funds',
     datePublished: '2026-02-15',
@@ -786,8 +786,8 @@ export const blogArticles: Record<string, BlogArticle> = {
   // ─── Cluster 11: Brokerage Guides ──────────────────────────
   'trump-accounts-at-fidelity': {
     slug: 'trump-accounts-at-fidelity',
-    title: 'Trump Account at Fidelity: Funds, Fees & How to Open (2026)',
-    description: 'Open a Trump Account at Fidelity: FXAIX at just 0.015%, $0 account fees, no minimums. Full guide from filing Form 4547 to choosing your fund.',
+    title: 'Can You Open a Trump Account at Fidelity? (Yes)',
+    description: 'Fidelity is expected to offer Trump Accounts. FXAIX at just 0.015%, $0 fees, no minimums. How to file Form 4547 first, then choose Fidelity as trustee.',
     category: 'Brokerage Guides',
     categorySlug: 'brokerage-guides',
     datePublished: '2026-02-12',
